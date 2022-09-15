@@ -62,7 +62,10 @@ public abstract class VueTool extends AbstractAction
     
     /** Short-cut key-code to temporarily active this tool while this key is held down */
     protected int mActiveWhileDownKeyCode = 0;
-    
+
+    /** Short-cut key-code to temporarily active this tool while this key is held down */
+    protected int mActiveWhileDownMouseButton = 0;
+
     /** A cursor to use with this tool */
     protected java.awt.Cursor mCursor;
     
@@ -313,6 +316,13 @@ public abstract class VueTool extends AbstractAction
         return mActiveWhileDownKeyCode;
     }
     
+
+    public void setActiveWhileDownMouseButton(int mouseButton) {
+        mActiveWhileDownMouseButton = mouseButton;
+    }
+    public int getActiveWhileDownMouseButton() {
+        return mActiveWhileDownMouseButton;
+    }
 
     /** if this returns non-null, only objects of the given type will be selected
       * by the dragged selector */

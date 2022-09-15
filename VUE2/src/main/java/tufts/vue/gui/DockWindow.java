@@ -372,8 +372,10 @@ public class DockWindow
             // Still required on the Mac (at least Leopard)
             // DockWindow's will still go behind the working full-screen window otherwise,
             // or create some other wierd unacceptable behaviour.
-            //_peer = new WindowPeer(VUE.getApplicationFrame());
-            _peer = new DialogPeer(VUE.getApplicationFrame(), title, !ON_TOP, true);
+            if (VueUtil.isMacPlatform())
+                _peer = new DialogPeer(VUE.getApplicationFrame(), title, !ON_TOP, true);
+            else
+                _peer = new WindowPeer(owner == null ? getHiddenFrame() : owner);
             
         } else {
             
@@ -3460,7 +3462,7 @@ public class DockWindow
     
     
 
-    /** @param e should be the MOUSE_RELEASED event where the window was dropped*/
+    /** @param MouseEvent should be the MOUSE_RELEASED event where the window was dropped*/
     private void dropWindow(MouseEvent e)
     {
         if (DEBUG.DOCK) out("dropWindow: curBounds " + getBounds());

@@ -286,6 +286,7 @@ public class ShortcutsAction extends tufts.vue.VueAction
                 continue;
 
             final char downKey = (char) t.getActiveWhileDownKeyCode();
+            final char downMouseButton = (char) t.getActiveWhileDownMouseButton();
 
             addRow(row++);
                 

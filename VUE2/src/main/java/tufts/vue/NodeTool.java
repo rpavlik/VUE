@@ -333,7 +333,7 @@ public class NodeTool extends VueTool
             viewer.getFocal().addChild(node);
             VUE.getUndoManager().mark("New Node");
             VUE.getSelection().setTo(node);
-            viewer.activateLabelEdit(node);
+            viewer.activateLabelEdit(node, true);
             //creationNodeCurrent = false;
             return true;
         }

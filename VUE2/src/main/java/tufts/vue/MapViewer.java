@@ -4371,6 +4371,10 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
      */
     
     void activateLabelEdit(LWComponent lwc) {
+        activateLabelEdit(lwc, false);
+    }
+
+    void activateLabelEdit(LWComponent lwc, Boolean selectAll) {
 
         if (activeTextEdit != null && activeTextEdit.getLWC() == lwc)
             return;
@@ -4454,14 +4458,14 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         {
             activeRichTextEdit.setLocation(screenX,screenY);            
             add(activeRichTextEdit);
-            activeRichTextEdit.selectAll();
+            if (selectAll) activeRichTextEdit.selectAll();
             VUE.getFormattingPanel().getTextPropsPane().getFontEditorPanel().updateFormatControlsTB(activeRichTextEdit);
           
         }
         else
         {
-            activeTextEdit.setLocation(screenX, screenY);        
-            activeTextEdit.selectAll();
+            activeTextEdit.setLocation(screenX, screenY);
+            if (selectAll) activeTextEdit.selectAll();
             add(activeTextEdit);
         }
 
@@ -6035,6 +6039,10 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     private void clearMouse() {
         mouseWasDragged = false;
         mouseDragInitiated = false;
+
+        // HACK not even sure why needed here, but clears the temporary middleclick HandTool of the other hack up there
+        if (hackPreviousTool != null) activeTool = hackPreviousTool;
+        hackPreviousTool = null;
     }
     
         
@@ -6191,7 +6199,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 case KeyEvent.VK_RIGHT:
 
                     if (!getSelection().isEmpty() 
-                    		&& getSelection().size() == 1
+                    		//&& getSelection().size() == 1 // why restrict to 1 ?
                     		&& activeTool.supportsSelection()
                     	)
                     {
@@ -6621,6 +6629,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
     private boolean activeToolAteMousePress = false;
     private boolean mouseConsumed = false;
+
+    private VueTool hackPreviousTool = null;
     
     // TODO: if APPLE (Command) down when drag starts, do NOT select the object,
     // so can drag copies off map into slide viewer more easily (if it selects
@@ -6632,7 +6642,18 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             final boolean wasFocusOwner;
          
             clearRollover();
-            
+
+            // HACK override with the hand tool
+            // TODO do this properly some other way like activewhenkeydown
+            if (GUI.isMiddleClick(e)){
+
+                if (hackPreviousTool == null) hackPreviousTool = activeTool;
+                activeTool = HandTool;
+            } else {
+                if (hackPreviousTool != null) activeTool = hackPreviousTool;
+                hackPreviousTool = null;
+            }
+
             if (activeTool == ToolPresentation) {
 
                 // If presentation tool, it's worth risking the below bug to make

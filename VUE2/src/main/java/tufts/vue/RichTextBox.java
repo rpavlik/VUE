@@ -144,7 +144,6 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 
     RichTextBox(LWComponent lwc, String text)
     {
-    
         if (DEBUG.TEXT && DEBUG.LAYOUT) tufts.Util.printClassTrace("tufts.vue.", "NEW RichTextBox, txt=" + text);
         if (TestDebug||DEBUG.TEXT) out("NEW [" + text + "] " + lwc);
       //  vueHighlighter = new RichTextHighlighter(this);
@@ -153,13 +152,13 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 		 //kit.resetStyleSheet();
 		setEditorKit(kit);
         this.lwc = lwc;
-        
+
         setDragEnabled(false);
         setBorder(null);
-    	
+
         if (text != null)
             setText(text);
-        
+
         setMargin(null);
         setOpaque(false); // don't bother to paint background
         setVisible(true);
@@ -167,14 +166,14 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         addKeyListener(this);
         addFocusListener(this);
         getDocument().addDocumentListener(this);
-      
+
         if (VueUtil.isWindowsPlatform() && SelectionColor != null)
             setSelectionColor(SelectionColor);
         if (VueUtil.isWindowsPlatform() && SelectionColor != null)
         	setSelectedTextColor(Color.black);
         mBounds.x = Float.NaN; // mark as uninitialized
         mBounds.y = Float.NaN; // mark as uninitialized
-        
+
         if (TestDebug||DEBUG.TEXT) out("constructed " + getSize());
     }
 
@@ -205,7 +204,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         mUnchangedText = getText();
         mUnchangedSize = getSize();
     }
-    
+
     /** deprecated */
     void saveCurrentText() {
         saveCurrentState();
@@ -215,37 +214,37 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     	java.awt.Container parent = getParent();
         double zoom = ((MapViewer)parent).getZoomFactor();
         zoom *= lwc.getMapScale();
-          
+
     	return getWidth() * zoom;
     }
-    
+
     public double getScaledHeight()
     {
     	java.awt.Container parent = getParent();
         double zoom = ((MapViewer)parent).getZoomFactor();
         zoom *= lwc.getMapScale();
-         
+
     	return  getHeight() * zoom;
     }
-    
+
     public double getUnscaledWidth()
     {
     	java.awt.Container parent = getParent();
         double zoom = ((MapViewer)parent).getZoomFactor();
         zoom *= lwc.getMapScale();
-    	
+
         return getSize().width / zoom;
     }
-    
+
     public double getUnscaledHeight()
     {
     	java.awt.Container parent = getParent();
         double zoom = ((MapViewer)parent).getZoomFactor();
         zoom *= lwc.getMapScale();
-         
+
     	return getSize().height / zoom;
     }
-    
+
     Dimension preAddDimension= null;
     @Override
     public void addNotify()
@@ -260,24 +259,24 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
       java.awt.Container parent = getParent();
       double zoom = ((MapViewer)parent).getZoomFactor();
       zoom *= lwc.getMapScale();
-      
+
       ((SHTMLDocument)getDocument()).setZoomFactor(zoom);
-    
-        super.addNotify();                         
+
+        super.addNotify();
         preAddDimension= new Dimension((int)getWidth(),(int)getHeight());
        // System.out.println(preAddDimension.toString());
        // System.out.println(getPreferredSize().toString());
- 
+
         this.setSize(new Dimension((int)getScaledWidth(),(int)getScaledHeight()));
-        
+
         wasOpaque = isOpaque();
         Color background = lwc.getRenderFillColor(null);
         //if (c == null && lwc.getParent() != null && lwc.getParent() instanceof LWNode)
         final LWContainer nodeParent = lwc.getParent();
-        
+
         if (background == null && nodeParent != null)
         {
-            background = nodeParent.getRenderFillColor(null); // todo: only handles 1 level transparent embed!         
+            background = nodeParent.getRenderFillColor(null); // todo: only handles 1 level transparent embed!
         }
         // todo: could also consider using map background if the node itself
         // is transpatent (has no fill color)
@@ -294,7 +293,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         // TODO: the *selection* color always appears to be gray in for edits
         // in the slide viewer on the mac, even if we manually set the selection
         // color (which works in the main MapViewer) -- this is an oddity...
-        
+
         if (background != null) {
             // note that if we set opaque to false, interaction speed is
             // noticably slowed down in edit mode because it has to consider
@@ -308,7 +307,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
   ////      setSize(getPreferredSize());
 
     }
-   
+
     /*
      * Return to the regular transparent state.
      */
@@ -316,7 +315,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     public void removeNotify()
     {
         if (TestDebug||DEBUG.TEXT) out("*** REMOVENOTIFY ***");
-        
+
         //------------------------------------------------------------------
         // We need to clear any text selection here as a workaround
         // for an obscure bug where sometimes if the focus change is
@@ -325,28 +324,28 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         // background.
         clearSelection();
         //------------------------------------------------------------------
-      
+
         super.removeNotify();
         ((SHTMLDocument)getDocument()).setEditing(false);
-        
+
         java.awt.Container parent = getParent();
         double zoom = ((MapViewer)parent).getZoomFactor();
         zoom *= lwc.getMapScale();
-        
+
         ((SHTMLDocument)getDocument()).setZoomFactor(zoom);
-   
-      
-        
+
+
+
       //  System.out.println("pref Height : " + getHeight());
        // System.out.println("pref : " + getHeight()/zoomFactor);
-     
+
         preAddDimension.height = (int)(getHeight() / zoom);
-       
+
         preAddDimension.width = (int)(getWidth() / zoom);
-        
-        	
+
+
        this.setSize(preAddDimension);
-       
+
         if (mFirstAfterAddNotify == false) {
             // if cleared, it was used
             out("restoring expanded width");
@@ -354,7 +353,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             //out("SKPPING restoring expanded width");
         } else
             mFirstAfterAddNotify = false;
-        
+
         setBorder(null);
         if (preZoomFont != null) {
             setDocumentFont(preZoomFont);
@@ -371,7 +370,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         ////        setSize(getPreferredSize());
            // }
         }
-        
+
         if (wasOpaque != isOpaque())
             setOpaque(wasOpaque);
         if (TestDebug||DEBUG.TEXT) out("*** REMOVENOTIFY end: insets="+getInsets());
@@ -388,48 +387,48 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     public void setText(String text)
     {
         super.setText(text);
-     
-        
+
+
    ////     setSize(getPreferredSize());
        //
     	if (lwc.getParent() !=null)
     		lwc.getParent().layoutChildren();
         //setSize(getPreferredSize());
-    	
+
     }
-    
+
     public void setXMLText(String text)
     {
-        super.setText(text);	
+        super.setText(text);
     }
 
 
     private void setDocumentFont(Font f)
     {
-        
+
     }
 
     private void setDocumentColor(Color c)
     {
-        
+
     }
 
 
     private static void setFontAttributes(MutableAttributeSet a, Font f)
     {
-       
+
     }
 
     /***********
      *******NOTES FROM FONT EDITOR PANEL TO HELP WITH COPY/PASTE OF STYLES.
         globalSizeListener = new ActionListener(){
-        
-        	public void actionPerformed(ActionEvent fe) 
+
+        	public void actionPerformed(ActionEvent fe)
         	{
-        		
+
         		if (suspendItemListeners)
         			return;
-        		
+
         		if (lwtext == null)
         			return;
 
@@ -441,26 +440,26 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             				 textSize);
                 set.addAttribute(HTML.Attribute.SIZE, textSize);
                 lwtext.richLabelBox.applyAttributes(set, false);
-                
+
         		lwtext.richLabelBox.select(0,0);
         		//lwtext.setLabel0(lwtext.richLabelBox.getRichText(), false);
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
+        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
          		   if (lwtext.getParent() !=null)
-         	    		lwtext.getParent().layout();         		           		           		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);            		   
-         		
-         		
+         	    		lwtext.getParent().layout();
+
+         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
+
+
         	}
          };
-            		   
-          globalFaceListener = new ActionListener(){ 
-          	public void actionPerformed(ActionEvent fe) 
-          	{          		
+
+          globalFaceListener = new ActionListener(){
+          	public void actionPerformed(ActionEvent fe)
+          	{
           		if (suspendItemListeners)
         			return;
-        		
+
           		if (lwtext == null)
         			return;
           		lwtext.richLabelBox.selectAll();
@@ -470,69 +469,69 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             				 mFontCombo.getSelectedItem().toString());
                 set.addAttribute(HTML.Attribute.FACE, mFontCombo.getSelectedItem().toString());
                 lwtext.richLabelBox.applyAttributes(set, false);
-                
+
         		lwtext.richLabelBox.select(0,0);
-       
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
+
+        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
          		   if (lwtext.getParent() !=null)
          	    		lwtext.getParent().layout();
-         		  
-         		  
-         		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint); 
+
+
+
+
+         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
           	}
            };
-           
+
              private final PropertyChangeListener RichTextColorChangeListener =
         new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
 
                 if (e instanceof LWPropertyChangeEvent == false)
                     return;
-                
+
                 final RichTextBox activeRTB = (RichTextBox) VUE.getActive(RichTextBox.class);
-                
-                
+
+
                 if (activeRTB == null && lwtext == null) {
                     // no problem: just ignore if there's no active edit
                     //tufts.Util.printStackTrace("FEP propertyChange: no active RichTextBox: " + e);
                     return;
                 }
-                
+
                 if (lwtext !=null)
                 	lwtext.richLabelBox.selectAll();
-                
-               
+
+
                 final Color color = (Color) e.getNewValue();
                 final SimpleAttributeSet set = new SimpleAttributeSet();
                 final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
                 toggleBulletsAction.setColor(colorString);
                 toggleNumbersAction.setColor(colorString);
                 Util.styleSheet().addCSSAttribute(set, CSS.Attribute.COLOR, colorString);
-                
+
                 set.addAttribute(HTML.Attribute.COLOR, colorString);
                 if (activeRTB != null)
                 	activeRTB.applyAttributes(set, false);
                 else
                 	lwtext.richLabelBox.applyAttributes(set, false);
-                
+
                 if (lwtext !=null)
                 {
                 	lwtext.richLabelBox.select(0,0);
-                    
+
                 	lwtext.richLabelBox.select(0,0);
             		//lwtext.setLabel0(lwtext.richLabelBox.getRichText(), false);
-            		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-             		
+            		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
              		   if (lwtext.getParent() !=null)
              	    		lwtext.getParent().layout();
-             		  
-             		  
-             		 
-          	        
-             		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint); 
+
+
+
+
+             		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
                 }
             }
         };
@@ -541,37 +540,37 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     // the font style encoded in our owning LWComponent
     void copyStyle(LWComponent c)
     {
-    	 if (DEBUG.TEXT) 
+    	 if (DEBUG.TEXT)
     		 out("copyStyle " + c);
-    	
+
     	//Basic Setup
         LWText srcText = (LWText)c;
-    	RichTextBox srcBox = srcText.getRichLabelBox();   	 
+    	RichTextBox srcBox = srcText.getRichLabelBox();
     	selectAll();
-    	SHTMLDocument srcDoc = (SHTMLDocument)srcBox.getDocument();  
+    	SHTMLDocument srcDoc = (SHTMLDocument)srcBox.getDocument();
     	SHTMLDocument doc = (SHTMLDocument)getDocument();
   		SimpleAttributeSet set = new SimpleAttributeSet();
   		SimpleAttributeSet alignSet = new SimpleAttributeSet();
     	//Gather source information
 
     	Element paragraphElement = srcDoc.getParagraphElement(1);
-		
+
 		if (paragraphElement.getName().equals("p-implied")) //we're in a list item
 			paragraphElement = paragraphElement.getParentElement();
-	    
+
 		AttributeSet paragraphAttributeSet = paragraphElement.getAttributes();
-		
+
 		Element charElem = srcDoc.getCharacterElement(1);
 	    AttributeSet charSet = charElem.getAttributes();
 	    Enumeration characterAttributeEnum = charSet.getAttributeNames();
 	    Enumeration elementEnum = paragraphAttributeSet.getAttributeNames();
-	    
+
     	//Apply some attributes
 	   // System.out.println(paragraphElement.toString());
 	    while (elementEnum.hasMoreElements())
-	    {	
+	    {
 	    	Object o = elementEnum.nextElement();
-	    
+
 	    	boolean isAlignSet = false;
 	    	//System.out.println("P :: " +o.toString());
 	       	if (o.toString().equals("text-align") && paragraphAttributeSet.getAttribute(o).toString().equals("left") && !isAlignSet)
@@ -592,73 +591,73 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 	       		Util.styleSheet().addCSSAttribute(alignSet, CSS.Attribute.TEXT_ALIGN, paragraphAttributeSet.getAttribute(o).toString());
         		alignSet.addAttribute(HTML.Attribute.ALIGN, paragraphAttributeSet.getAttribute(o).toString());
 	       	}
-	       	
+
 	       	if ((o.toString().equals("font-size")) ||(o.toString().equals("size")))
 	       	{
 	       		//Font Size
 	       		Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_SIZE, paragraphAttributeSet.getAttribute(o).toString());
         		set.addAttribute(HTML.Attribute.SIZE, paragraphAttributeSet.getAttribute(o).toString());
 	       	}
-	        			
+
 	       	else if ((o.toString().equals("font-family")) || (o.toString().equals("font-face")) || (o.toString().equals("face")))
 	       	{
 	       		//Font Face
         		Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_FAMILY, paragraphAttributeSet.getAttribute(o).toString());
         		set.addAttribute(HTML.Attribute.FACE, paragraphAttributeSet.getAttribute(o).toString());
 
-	       	}	       		       	 	        
+	       	}
 	    }
-	    
-	
+
+
 	    boolean isBold = false;
 	    boolean isItalic = false;
 	    boolean isUnderline = false;
-		
+
 	    while (characterAttributeEnum.hasMoreElements())
 	    {
 
 	      	Object o = characterAttributeEnum.nextElement();
 	    	//System.out.println("C :: " +o.toString() + "XXX " + charSet.getAttribute(o).toString());
 	      	//System.out.println("Character element : " + o.toString() + " , " + charSet.getAttribute(o));
-        	if ((o.toString().equals("color")))        
+        	if ((o.toString().equals("color")))
         	{
         		//Color
         		Util.styleSheet().addCSSAttribute(set, CSS.Attribute.COLOR, charSet.getAttribute(o).toString());
         		set.addAttribute(HTML.Attribute.COLOR, charSet.getAttribute(o).toString());
         	}
-     
+
         	if ((o.toString().equals("font-size")) ||(o.toString().equals("size")))
         	{
         		//Font Size
         		Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_SIZE, charSet.getAttribute(o).toString());
         		set.addAttribute(HTML.Attribute.SIZE, charSet.getAttribute(o).toString());
-        	}        		
-	        			
+        	}
+
         	if ((o.toString().equals("font-family")) || (o.toString().equals("font-face")) || (o.toString().equals("face")))
         	{
         		//Font Face
         		Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_FAMILY, charSet.getAttribute(o).toString());
         		set.addAttribute(HTML.Attribute.FACE, charSet.getAttribute(o).toString());
         	}
-        	
+
         	if ((o.toString().equals("font-weight") && charSet.getAttribute(o).toString().equals("bold")) || o.toString().equals("b"))
-        	{	
+        	{
         		Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_WEIGHT,charSet.getAttribute(o).toString());
-        	}		
-	        if ((o.toString().equals("font-style") && charSet.getAttribute(o).toString().equals("italic")) || o.toString().equals("i"))	       
+        	}
+	        if ((o.toString().equals("font-style") && charSet.getAttribute(o).toString().equals("italic")) || o.toString().equals("i"))
 	        {
 	        	Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_STYLE,charSet.getAttribute(o).toString());
 	        }
-	        if ((o.toString().equals("text-decoration") && charSet.getAttribute(o).toString().equals("underline")) || o.toString().equals("u"))	        		        
+	        if ((o.toString().equals("text-decoration") && charSet.getAttribute(o).toString().equals("underline")) || o.toString().equals("u"))
 	        {
 	        	Util.styleSheet().addCSSAttribute(set,CSS.Attribute.TEXT_DECORATION,charSet.getAttribute(o).toString());
 	        }
-        }//done looking at character attributes	        	   	        	        	      
-	
-	
-  
-  	
-  	
+        }//done looking at character attributes
+
+
+
+
+
         applyAttributes(set, false);
         lwc.notify(this, LWKey.Repaint);
         applyAttributes(alignSet, true);
@@ -673,28 +672,28 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         toggleBulletsAction.setColor(colorString);
         toggleNumbersAction.setColor(colorString);
         Util.styleSheet().addCSSAttribute(set, CSS.Attribute.COLOR, colorString);
-        
+
         set.addAttribute(HTML.Attribute.COLOR, colorString);
         if (activeRTB != null)
         	activeRTB.applyAttributes(set, false);
         else
         	lwtext.richLabelBox.applyAttributes(set, false);
-        
+
         if (lwtext !=null)
         {
         	lwtext.richLabelBox.select(0,0);
-            
+
         	lwtext.richLabelBox.select(0,0);
     		//lwtext.setLabel0(lwtext.richLabelBox.getRichText(), false);
-    		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-     		
+    		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
      		   if (lwtext.getParent() !=null)
      	    		lwtext.getParent().layout();
-     		  
-     		  
-     		 
-  	        
-     		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint); 
+
+
+
+
+     		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
         }*/
     }
 
@@ -711,10 +710,10 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             // temporarily flash bigger on every update.
             if (TestDebug || DEBUG.LAYOUT) out("doLayout w/adjustSizeDynamically");
             Dimension d = getPreferredSize();
-          
+
           setSize(d);
           //  super.doLayout();
-            
+
         } else {
             if (!TestHarness)
                 new Throwable(this + " UNPARENTED doLayout").printStackTrace();
@@ -722,8 +721,8 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     }
 
     private boolean mFirstAfterAddNotify = false;
-    
-    
+
+
     public void keyReleased(KeyEvent e) { e.consume(); }
     public void keyTyped(KeyEvent e) {
         // todo: would be nice if centered labels stayed center as you typed them
@@ -756,7 +755,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             out("FAILED TO FIND PARENT ATTEMPTING TO REMOVE SELF");
         return parent;
     }
-    
+
     public void keyPressed(KeyEvent e)
     {
         if (DEBUG.KEYS) out(e.toString());
@@ -765,7 +764,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         //if (VueUtil.isAbortKey(e)) // check for ESCAPE for CTRL-Z or OPTION-Z if on mac
         if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             e.consume();
-       
+
        //     System.out.println(mUnchangedText);
             //setText(mUnchangedText);
             revert = true;
@@ -790,24 +789,24 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
        // Dimension d = preAddDimension;
        // d.height = this.getPreferredSize().height;
        // setSize(getPreferredSize());
-        
+
         // action keys will be ignored if we consume this here!
         // (e.g., "enter" does nothing)
-        //e.consume();   
+        //e.consume();
     }
-    
+
     /**
      * This is what triggers the final save of the new text value to the LWComponent,
      * and notify's the UndoManager that a user action was completed.
      */
     public void focusLost(FocusEvent e)
     {
-    
-	    
-	   
+
+
+
     	final java.awt.Component opposite = e.getOppositeComponent();
-      
-        
+
+
     	if (opposite != null) {
     		if ((opposite.getName() != null && opposite.getName().equals(FontEditorPanel.SIZE_FIELD_NAME)) ||
     		opposite.getClass() == ColorMenuButton.class)
@@ -821,15 +820,15 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
                      (opposite.getName() != null && opposite.getName().equals("dialog0")))
             {
             	//Earlier i was just returning here, but this creates a problem
-            	//because the component has already lost the focus...and so it doesn't 
+            	//because the component has already lost the focus...and so it doesn't
             	//get another focusLost the next time....so re-request the focus if you've lost
             	//it so that we get the event again when we really want to get rid of the focus
             	//so we can properly remove the edit control.
-            	            	
+
             	requestFocus();
             	return;
             }
-    		
+
         }
     	else if (opposite == null)
     	{
@@ -838,7 +837,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     		requestFocus();
         	return;
     	}
-    	
+
     	//System.out.println(e.getComponent().toString());
     	//System.out.println(e.getOppositeComponent().toString());
         if (TestDebug||DEBUG.FOCUS)
@@ -860,7 +859,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             //	setText(text);
             }
             lwc.setLabel0(text, false);
-            
+
             VUE.getUndoManager().mark();
         }
 ////        setSize(getPreferredSize());
@@ -896,11 +895,11 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         return s;
     }
 */
-    
+
     /*
      *    Style  style = ((HTMLDocument) getDocument()).getStyleSheet().getStyle("body");
     	Object a = style.getAttribute(javax.swing.text.html.CSS.Attribute.FONT_SIZE);
-    	
+
     	if (a !=null)
     	{	if (DEBUG.TEXT)
     			out("got style");
@@ -910,36 +909,36 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     		minS.height = minS.height - diff;
     	}
      */
-    public Dimension getPreferredSize() 
+    public Dimension getPreferredSize()
     {
     	Dimension s = null;
    	//	Dimension s = super.getPreferredSize();
-   	
+
         Dimension minS = getMinimumSize();
-              
-     
+
+
         //System.out.println(javax.swing.SwingUtilities.getLocalBounds(this));
         //if (TestDebug||DEBUG.TEXT) out("getPrefer", s);
-        
+
         // System.out.println("GetPrefSize : " +  mBounds.width + " "+ s.width);
         //    System.out.println("Required Lines : " + s.width/mBounds.width);
         Caret c = this.getCaret();
         Point position = c.getMagicCaretPosition();
         //    if (position != null)
         //    	System.out.println("magic caret : " + position.getX());
-        
+
         //HTMLDocument builds a hierarchical Element structure where each Element
         //represents a structural block of HTML, and not just a line of text. so I'm not sure
         //how to figure out what line you're on.
-       
+
         Dimension min = new Dimension();
     	final Dimension text = getMinimumSize();
         min.width = text.width;
-    	
+
         int EdgePadY = 0; // Was 3 in VUE 1.5
         int LabelPadLeft = 8; // Was 6 in VUE 1.5; fixed
-        
-	
+
+
 		//System.out.println("Text.height : " + text.height);
 		// *** set icon Y position in all cases to a centered vertical
 		// position, but never such that baseline is below bottom of
@@ -947,7 +946,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 		// down a bit to be centered with the label!
 
 		min.width += LabelPadLeft;
-		
+
 		min.width = Math.max(min.width,minS.width);
 		/*
 		System.out.println("Min.Width =" + min.width);
@@ -963,7 +962,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 		System.out.println("Get super width : " + super.getWidth());
 		System.out.println("Selection Eend : " + this.getSelectionEnd());
 		System.out.println("Selection Start : " + 		this.getSelectionStart());
-		System.out.println("Bounds Box Width : " +this.getBoxBounds().getBounds().width);		
+		System.out.println("Bounds Box Width : " +this.getBoxBounds().getBounds().width);
 		System.out.println("Visible Rect : " +this.getVisibleRect().width);*/
 //**		Rectangle p2 = null;
 		//if (this.getGraphics() != null)
@@ -972,18 +971,18 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 		//	if (this.getGraphics().getClipBounds() != null)
 		//	System.out.println("GRAPHICS : " + this.getGraphics().getClipBounds().width);
 		//	this.getPreferredScrollableViewportSize().width
-		//	
-		//	
-	
+		//
+		//
+
 	     View ui = getUI().getRootView(this);
 	     ui = ui.createFragment(this.getSelectionStart(), this.getSelectionEnd());
 	     //System.out.println("min span: " + ui.getMinimumSpan(View.X_AXIS));
-	    
+
 //**	     int start = getSelectionStart();
 //**	     int end = getSelectionEnd();
 //**	    float f = ui.getPreferredSpan(View.X_AXIS);
 	    //System.out.println("Preferred span : " + f);
-	    	    
+
 //**	    f = ui.getPreferredSpan(View.Y_AXIS);
 	    //System.out.println("Preferred span y : " + f);
 //**	    f = ui.getPreferredSpan(View.X_AXIS);
@@ -995,35 +994,35 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 	  //  System.out.println("RESIZE WEIGHTY : " + ui.getResizeWeight(View.Y_AXIS));
 //**	    float align = ui.getAlignment(View.X_AXIS);
 	  //  System.out.println("align span : " + align);
-		
-	    
+
+
 //**		try {
 //**			p2 = this.modelToView(this.getSelectionEnd());
-//**			
-//**		} catch (BadLocationException e) {			
+//**
+//**		} catch (BadLocationException e) {
 //**			//Nothing we can do really.
 //**		}
 //**		//if (p2 != null)
 //**			//System.out.println("Selection end rect : " + p2.x);
-//**		
+//**
     if (mBounds.width > 0)
         {
 //**        	if (p2 != null && p2.x > mBounds.width)
 //**        		mBounds.width = p2.x;
-    
+
         	//int height = 48;
         	/*if (getFont() != null &&this.getFontMetrics(getFont())!=null)
         	{
         	System.out.println("A:"+this.getFontMetrics(getFont()).getMaxAscent());
         	System.out.println("B:"+this.getFontMetrics(getFont()).getMaxDescent());
         	}*/
-        	
-                	
+
+
         int		height = super.getPreferredSize().height;//s.height;//Math.max(s.height, 48);
-        
+
         Style  style = ((HTMLDocument) getDocument()).getStyleSheet().getStyle("body");
        	Object a = style.getAttribute(javax.swing.text.html.CSS.Attribute.FONT_SIZE);
-       	
+
        	if (a !=null)
        	{	if (DEBUG.TEXT)
        			out("got style");
@@ -1043,16 +1042,16 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
        			  zoom = VUE.getActiveViewer().getZoomFactor();
        		  }
        	      zoom *= lwc.getMapScale();
-       	      
+
        			diff *= zoom;
        		}
        			height = height - diff;
        	}
-        	
-      
+
+
         	if (position !=null)
         	{
-        		
+
         		float minSpan = ui.getMinimumSpan(View.X_AXIS);
         		float mins2 = Math.max(minSpan,(float)position.getX());
         		s = new Dimension((int)(mBounds.width > mins2 ? mBounds.width : mins2),(int)height);
@@ -1066,15 +1065,15 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
        	//	float heightRatio =((float)s.height/(float)lwc.height);
        /* 	if ((widthRatio > 0) && (heightRatio > 0) && (widthRatio != heightRatio))
        		{
-       			
+
        			s.height = (int)(lwc.height * widthRatio);
        		//	System.out.print("NEW SHEIGHT : " + s.height);
        		//	prevDim = s;
-       			//   			
+       			//
        		}
         	System.out.println("width ratio : " + widthRatio);
        		System.out.println("height ratio : " + heightRatio);
-       	*/	
+       	*/
        	/*if (this.getGraphics() != null)
         	System.out.println("FONT HEIGHT : " +this.getGraphics().getFontMetrics().getMaxAscent());
         	System.out.println("===================================");
@@ -1105,36 +1104,36 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 					e.printStackTrace();
 				}
         	}*/
-        	
+
         }
        // s.width = (int)(s.width * VUE.getActiveViewer().getZoomFactor());
      //   s.height = (int)(s.height * VUE.getActiveViewer().getZoomFactor());
     //	s.height=(int) this.getBoxBounds().getHeight();
-    
+
    if (this.getBoxBounds() !=null && s.height < this.getBoxBounds().getHeight())
    {
     	s.height = (int)this.getBoxBounds().getHeight();
-   
+
    }
-   
+
 	return s;
     }
 
     public void setSize(Size s) {
         setSize(s.dim());
-        
+
     }
 
     public void setSize(Dimension s) {
         if (TestDebug||DEBUG.TEXT) out("setSize", s);
-        
-       
+
+
         mBounds.width = s.width;
         mBounds.height = s.height;
-        
-    	super.setSize(s);	
+
+    	super.setSize(s);
     }
-   
+
 
     /**
      * Set the size to the given size, increasing or decreasing height as
@@ -1149,12 +1148,12 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         //------------------------------------------------------------------
 
         setSize(newSize);
-        
+
         //------------------------------------------------------------------
         // Now adjust our height to the new preferred height, which should
         // just contain our text.
         //------------------------------------------------------------------
-        
+
         final Dimension s = getPreferredSize();
         s.width = getWidth();
         if (TestDebug||DEBUG.TEXT) out("flexHeigt", s);
@@ -1168,7 +1167,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     public void setPreferredSize(float w, float h) {
         setPreferredSize(new Dimension((int)w, (int)h));
     }
-   
+
     public Dimension getSize() {
         Dimension s = super.getSize();
         //s.width = (int) lwc.getWidth();
@@ -1191,11 +1190,11 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     }
     public Dimension getMinimumSize() {
         Dimension s = super.getMinimumSize();
-    
-		
+
+
     	Style  style = ((HTMLDocument) getDocument()).getStyleSheet().getStyle("body");
     	Object a = style.getAttribute(javax.swing.text.html.CSS.Attribute.FONT_SIZE);
-    	
+
    	if (a !=null)
     	{	if (DEBUG.TEXT)
     			out("got style");
@@ -1204,29 +1203,29 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     		diff = i;
     		if (VUE.getActiveViewer()!=null)
     		{
-    			  java.awt.Container parent = getParent();    			      			  
+    			  java.awt.Container parent = getParent();
     			  double zoom = 1.0;
-    			  
+
     			 // System.out.println("SHEIGHT : " + s.height);
     			  if (parent !=null)
     			  {
     				  zoom = ((MapViewer)parent).getZoomFactor();
     				  zoom *= lwc.getMapScale();
     				  diff *= zoom;
-    				  
+
     				//  System.out.println("if ::: " + diff);
     			  }
     			  else
     			  {
     				  if (VUE.getActiveViewer()!=null)
     		    			diff *= VUE.getActiveViewer().getZoomFactor();
-    		    	
+
     				  diff *=lwc.getMapScale();
     				//  System.out.println("else ::: " + diff);
-    			  
+
     			  }
-    			  
-    			
+
+
     		}
 
     	/*if (a !=null)
@@ -1237,16 +1236,16 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     		diff = i.intValue();
     		if (VUE.getActiveViewer()!=null)
     			diff *= VUE.getActiveViewer().getZoomFactor();
-    	
-    			
+
+
     		s.height = s.height - diff;
     	}*/
-		
-	
+
+
     		s.height = s.height - diff;
     }
-		
-	
+
+
 		if (TestDebug||DEBUG.TEXT) out("getMinimumSize", s);
         return s;
     }
@@ -1282,7 +1281,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             && x <= mBounds.x + mBounds.width
             && y <= mBounds.y + mBounds.height;
     }
-    
+
     public boolean boxIntersects(Rectangle2D rect)
     {
         return rect.intersects(mBounds);
@@ -1293,7 +1292,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         mBounds.x = x;
         mBounds.y = y;
     }
-    
+
     public void setBoxLocation(Point2D p)
     {
         setBoxLocation((float) p.getX(), (float) p.getY());
@@ -1303,8 +1302,8 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         setBoxLocation(x - getBoxWidth() / 2,
                        y - getBoxHeight() / 2);
     }
-    
-    
+
+
     public Point2D.Float getBoxPoint()
     {
         return new Point2D.Float(mBounds.x, mBounds.y);
@@ -1316,7 +1315,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     public float getBoxX() { return mBounds.x; }
 
     public float getBoxY() { return mBounds.y; }
-    
+
     /*
     void resizeToWidth(float w)
     {
@@ -1335,15 +1334,15 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         g.setColor(Color.gray);
         g.setClip(null);
         g.drawRect(0,0, getWidth(), getHeight());
-        
+
     }
-    
+
    /* public Rectangle modelToView(int pos)
     throws BadLocationException {
 	    SHTMLDocument doc = (SHTMLDocument)getDocument();
 	    double zoomFactor = doc.getZoomFactor();
 	    Rectangle alloc;
-	    
+
 	    Rectangle s = super.modelToView(pos);
 	    alloc = s.getBounds();
 	    alloc.x*=zoomFactor;
@@ -1358,8 +1357,8 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 public int viewToModel(Point p) {
     SHTMLDocument doc = (SHTMLDocument)getDocument();
     double zoomFactor = doc.getZoomFactor();
- 
-	
+
+
 
    Point alloc = p;
    alloc.x/=zoomFactor;
@@ -1386,15 +1385,20 @@ return super.viewToModel(new Point(alloc));
         Graphics2D g2d = (Graphics2D)g;
         if (viewer != null)
         {
+            double zoom = ((MapViewer)getParent()).getZoomFactor();
+            zoom *= lwc.getMapScale();
+
             g2d.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING, viewer.AA_ON);
+            // VALUE_FRACTIONALMETRICS_ON is necessary but won't align cursor and text perfectly
+            // but we can at least make it display proper at 100% zoom
             g2d.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS,
-                    RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+                (Math.abs(zoom - 1.0) < 0.01 ? RenderingHints.VALUE_FRACTIONALMETRICS_OFF : RenderingHints.VALUE_FRACTIONALMETRICS_ON));
 
         }
         // turn on anti-aliasing -- the cursor repaint loop doesn't
         // set anti-aliasing, so text goes jiggy around cursor/in selection if we don't do this
       ////  g.clipRect(0, 0,getWidth(), getAdjustedHeight());
-       
+
 	   super.paintComponent(g2d);
 	
         //super.paintComponent(g);

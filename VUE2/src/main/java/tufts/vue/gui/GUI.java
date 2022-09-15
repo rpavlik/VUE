@@ -1889,14 +1889,19 @@ public class GUI
             ;
     }
     
-    /** @return true if 1 click, button 2 or 3 pressed, button 1 not already down & ctrl not down */
+    /** @return true if 1 click, button 3 pressed, button 1 not already down & ctrl not down */
     public static boolean isRightClick(MouseEvent e) {
         return e.getClickCount() == 1
-            && (e.getButton() == MouseEvent.BUTTON3 ||
-                e.getButton() == MouseEvent.BUTTON2)
+            //&& (e.getButton() == MouseEvent.BUTTON3)
+            && SwingUtilities.isRightMouseButton(e)
             && (e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) == 0
             && !e.isControlDown() // is used for context-menu pop-up on Mac OS X
             ;
+    }
+
+    /** @return true if 1 click, button 2 pressed, button 1 not already down & ctrl not down */
+    public static boolean isMiddleClick(MouseEvent e) {
+        return SwingUtilities.isMiddleMouseButton(e);
     }
 
 //     /** single click count and isRightClick is true */

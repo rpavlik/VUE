@@ -4230,12 +4230,7 @@ public class Actions implements VueConstants
             if (newItem.supportsUserLabel()) {
                 // Just in case, do this later:
                 GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    viewer.activateLabelEdit(newItem);
-                    newItem.clearSelection();
-                    	// Apollia's note, Jan. 23, 2017, 1:51 PM.
-                    	// The line that gets rid of the label's highlighting.
-                    	// In this case, when that's done,
-                    	// the caret is placed at the end of the bubble label.
+                    viewer.activateLabelEdit(newItem, true);
                 }});
             }
 
@@ -4461,7 +4456,7 @@ public class Actions implements VueConstants
             if (newItem.supportsUserLabel()) {
                 // Just in case, do this later:
                 GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    viewer.activateLabelEdit(newItem);
+                    viewer.activateLabelEdit(newItem, true);
                 }});
             }
 
