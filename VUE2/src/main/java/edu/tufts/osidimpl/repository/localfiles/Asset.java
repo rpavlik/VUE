@@ -18,8 +18,6 @@ package edu.tufts.osidimpl.repository.localfiles;
 import osid.filing.*;
 import tufts.oki.remoteFiling.*;
 import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
-import tufts.vue.*;
 
 public class Asset
 implements org.osid.repository.Asset
@@ -35,8 +33,6 @@ implements org.osid.repository.Asset
     private String content = null;
 	
 	private CabinetEntry cabinetEntry = null;
-	private String home = VUE.getSystemProperty("user.home");
-	private int homeLength = home.length() + 1;
 	private String volume = null;
 	private int volumeLength = 0;
 		
@@ -55,12 +51,18 @@ implements org.osid.repository.Asset
 				this.volume = "/mnt/";
 				this.volumeLength = 5;
 			}
-
+            String homeString;
+            try {
+                homeString = System.getProperty("user.home");
+            } catch (java.security.AccessControlException e) {
+                System.err.println(e);
+                homeString = null;
+            }
 			if (this.displayName.startsWith(".")) {
 				// do nothing, but maybe we want to type these differently;
-			} else if (displayName.startsWith(this.home)) {
+			} else if (homeString != null && displayName.startsWith(homeString)) {
 				try {
-					this.displayName = displayName.substring(this.homeLength);
+					this.displayName = displayName.substring(homeString.length() + 1);
 				} catch (Exception ex) {
 				}
 			} else if (displayName.startsWith(this.volume)) {
