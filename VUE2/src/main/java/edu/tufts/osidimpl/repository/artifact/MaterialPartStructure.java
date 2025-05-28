@@ -19,14 +19,14 @@ public class MaterialPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id materialPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","material","Material");
-    private String displayName = "Material";
-    private String description = "Material";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static MaterialPartStructure materialPartStructure = new MaterialPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "material", "Material");
+    private final String displayName = "Material";
+    private final String description = "Material";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final MaterialPartStructure materialPartStructure = new MaterialPartStructure();
+
 	protected static MaterialPartStructure getInstance()
 	{
 		return materialPartStructure;

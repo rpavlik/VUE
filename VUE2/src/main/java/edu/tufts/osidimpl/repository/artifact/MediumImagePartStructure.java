@@ -19,14 +19,14 @@ public class MediumImagePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id MEDIUM_IMAGE_PART_STRUCTURE_ID = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","mediumImage","Medium Image");
-    private String displayName = "Medium Image";
-    private String description = "Medium sized image";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static MediumImagePartStructure mediumImagePartStructure = new MediumImagePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "mediumImage", "Medium Image");
+    private final String displayName = "Medium Image";
+    private final String description = "Medium sized image";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final MediumImagePartStructure mediumImagePartStructure = new MediumImagePartStructure();
+
 	protected static MediumImagePartStructure getInstance()
 	{
 		return mediumImagePartStructure;

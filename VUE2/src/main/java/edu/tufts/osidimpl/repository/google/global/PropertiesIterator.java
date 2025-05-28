@@ -36,7 +36,7 @@ implements org.osid.shared.PropertiesIterator
     throws org.osid.shared.SharedException
     {
 		try {
-			return (org.osid.shared.Properties)iterator.next();
+			return iterator.next();
 		} catch (Throwable t) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NO_MORE_ITERATOR_ELEMENTS);
 		}

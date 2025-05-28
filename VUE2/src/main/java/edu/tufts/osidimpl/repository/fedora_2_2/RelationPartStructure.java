@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class RelationPartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Relation";
-    private String description = "http://purl.org/dc/elements/1.1/#Relation";
-    private String idString = "Relation.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Relation";
+    private final String description = "http://purl.org/dc/elements/1.1/#Relation";
+    private final String idString = "Relation.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","relation","Relation");
-	private static RelationPartStructure relationPartStructure = new RelationPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "relation", "Relation");
+    private static final RelationPartStructure relationPartStructure = new RelationPartStructure();
+
 	public static RelationPartStructure getInstance()
 	{
 		return relationPartStructure;

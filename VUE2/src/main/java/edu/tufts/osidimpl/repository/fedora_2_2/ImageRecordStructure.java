@@ -15,21 +15,21 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class ImageRecordStructure
-        implements org.osid.repository.RecordStructure {
-    public static final String MEDIUM_RES = "bdef:TuftsImage/getMediumRes/";
-    public static final String THUMBNAIL = "bdef:TuftsImage/getThumbnail/";
-    public static final String FULLVIEW = "bdef:AssetDef/getFullView/";
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private String displayName = "Image Specific Data";
-    private String description = "Provides information about and image (thumbnail and view URLs)";
-    private org.osid.shared.Id id = null;
-    private String schema = null;
-    private String format = "Plain Text";
-    private org.osid.shared.Type type = new Type("mit.edu","recordStructure","image");
-    private org.osid.repository.PartStructure sThumbnailPartStructure = null;
-    private org.osid.repository.PartStructure sURLPartStructure = null;
-    private org.osid.repository.PartStructure sMediumImagePartStructure = null;
-    
+		implements org.osid.repository.RecordStructure {
+	public static final String MEDIUM_RES = "bdef:TuftsImage/getMediumRes/";
+	public static final String THUMBNAIL = "bdef:TuftsImage/getThumbnail/";
+	public static final String FULLVIEW = "bdef:AssetDef/getFullView/";
+	private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+	private final String displayName = "Image Specific Data";
+	private final String description = "Provides information about and image (thumbnail and view URLs)";
+	private org.osid.shared.Id id = null;
+	private final String schema = null;
+	private final String format = "Plain Text";
+	private final org.osid.shared.Type type = new Type("mit.edu", "recordStructure", "image");
+	private org.osid.repository.PartStructure sThumbnailPartStructure = null;
+	private org.osid.repository.PartStructure sURLPartStructure = null;
+	private org.osid.repository.PartStructure sMediumImagePartStructure = null;
+
     protected ImageRecordStructure(Repository repository)
     throws org.osid.repository.RepositoryException {
         try {

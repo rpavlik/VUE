@@ -19,17 +19,18 @@ import java.io.Serializable;
 
 public class Asset
         implements org.osid.repository.Asset {
-    private org.osid.shared.Type assetType = new Type("edu.tufts","asset","file","File");
-    private org.osid.shared.Type folderType = new Type("edu.tufts","asset","favoriteFolder","A Favorites Folder");
-    private org.osid.shared.Type resourceType = new Type("edu.tufts","asset","resource","Resource");
-    private org.osid.shared.Id id = null;
+    private final org.osid.shared.Type assetType = new Type("edu.tufts", "asset", "file", "File");
+    private final org.osid.shared.Type folderType = new Type("edu.tufts", "asset", "favoriteFolder",
+            "A Favorites Folder");
+    private final org.osid.shared.Type resourceType = new Type("edu.tufts", "asset", "resource", "Resource");
+    private final org.osid.shared.Id id = null;
     private org.osid.shared.Id repositoryId = null;
-    private String idString = null;
+    private final String idString = null;
     private String displayName = null;
     private String description = null;
-    private java.util.Vector<org.osid.repository.Record> recordVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.repository.Record> recordVector = new java.util.Vector<>();
     private String content = null;
-    
+
     protected Asset(org.osid.shared.Id repositoryId,String displayName, String description) {
         this.displayName = displayName;
         this.description = description;
@@ -140,7 +141,7 @@ public class Asset
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 if (record.getId().isEqual(recordId)) {
                     this.recordVector.removeElementAt(i);
                     return;
@@ -195,7 +196,7 @@ public class Asset
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 if (record.getId().isEqual(recordId)) {
                     return record;
                 }
@@ -214,7 +215,7 @@ public class Asset
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 org.osid.repository.PartIterator partIterator = record.getParts();
                 while (partIterator.hasNextPart()) {
                     org.osid.repository.Part part = partIterator.nextPart();
@@ -244,7 +245,7 @@ public class Asset
         try {
             java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 org.osid.repository.PartIterator partIterator = record.getParts();
                 while (partIterator.hasNextPart()) {
                     org.osid.repository.Part part = partIterator.nextPart();
@@ -348,7 +349,7 @@ public class Asset
         
         java.util.Vector<org.osid.repository.Record> results = new java.util.Vector<>();
         for (int i=0, size = this.recordVector.size(); i < size; i++) {
-            org.osid.repository.Record r = (org.osid.repository.Record)this.recordVector.elementAt(i);
+            org.osid.repository.Record r = this.recordVector.elementAt(i);
             if (r.getRecordStructure().getType().isEqual(recordStructureType)) {
                 results.addElement(r);
             }

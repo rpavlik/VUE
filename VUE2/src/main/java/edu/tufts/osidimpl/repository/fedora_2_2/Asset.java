@@ -33,21 +33,21 @@ import org.osid.repository.*;
 
 
 
-public class Asset implements org.osid.repository.Asset{
+public class Asset implements org.osid.repository.Asset {
     private PID pid;
-    private org.osid.shared.Type  assetType;
+    private org.osid.shared.Type assetType;
     private String location;
-    private java.util.Vector recordStructures = new java.util.Vector();
+    private final java.util.Vector recordStructures = new java.util.Vector();
     private Repository repository;
     private String displayName;
-    private String description ="Fedora Repository";
+    private String description = "Fedora Repository";
     // private BehaviorIterator behaviorIterator;
     java.util.Vector recordVector = new java.util.Vector();
     java.util.Vector recordStructureVector = new java.util.Vector();
     java.util.Vector mandatoryInfoStructureVector = new java.util.Vector();
-    private long effectiveDate = 0;
-    private long expirationDate = 0;
-    
+    private final long effectiveDate = 0;
+    private final long expirationDate = 0;
+
     private java.util.Properties ppt;
     
     /** Creates a new instance of FedoraObject */
@@ -62,10 +62,10 @@ public class Asset implements org.osid.repository.Asset{
         this.repository = repository;
     }
     
-    public Asset(Repository repository,String displayName,org.osid.shared.Type assetType)  throws org.osid.repository.RepositoryException,org.osid.shared.SharedException{
+    public Asset(Repository repository,String displayName,org.osid.shared.Type assetType)  throws org.osid.shared.SharedException{
     }
     
-    public Asset(Repository repository, String id, String displayName,org.osid.shared.Type assetType)  throws org.osid.repository.RepositoryException,org.osid.shared.SharedException{
+    public Asset(Repository repository, String id, String displayName,org.osid.shared.Type assetType)  throws org.osid.shared.SharedException{
         this.repository = repository;
         this.displayName = displayName;
         this.assetType = assetType;
@@ -264,7 +264,7 @@ public class Asset implements org.osid.repository.Asset{
             }
         }
         
-        return (org.osid.repository.RecordIterator) (new RecordIterator(result));
+        return new RecordIterator(result);
     }
     
     /**     Get all the InfoStructures for this Asset.  InfoStructures are used to categorize information about Assets.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.
@@ -272,7 +272,7 @@ public class Asset implements org.osid.repository.Asset{
      *     @throws RepositoryException if there is a general failure
      */
     public org.osid.repository.RecordStructureIterator getRecordStructures() throws org.osid.repository.RepositoryException {
-        return (org.osid.repository.RecordStructureIterator) new RecordStructureIterator(recordStructures);
+        return new RecordStructureIterator(recordStructures);
     }
     
     /**     Add the specified InfoStructure and all the related Records from the specified asset.  The current and future content of the specified Record is synchronized automatically.

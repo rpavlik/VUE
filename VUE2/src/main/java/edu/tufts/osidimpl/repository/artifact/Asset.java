@@ -20,14 +20,15 @@ import java.io.Serializable;
 public class Asset
 implements org.osid.repository.Asset
 {
-    private org.osid.shared.Type assetType = new Type("tufts.edu","asset","artifact","Artifact");
-    private org.osid.shared.Type recordStructureType = new Type("tufts.edu","recordStructure","artifact","Artifact Record");
+    private final org.osid.shared.Type assetType = new Type("tufts.edu", "asset", "artifact", "Artifact");
+    private final org.osid.shared.Type recordStructureType = new Type("tufts.edu", "recordStructure", "artifact",
+            "Artifact Record");
     private org.osid.shared.Id id = null;
     private org.osid.shared.Id repositoryId = null;
-    private String idString = null;
+    private final String idString = null;
     private String displayName = null;
     private String description = null;
-    private java.util.Vector<org.osid.repository.Record> recordVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.repository.Record> recordVector = new java.util.Vector<>();
     private String content = null;
 
     protected Asset(String displayName,
@@ -168,7 +169,7 @@ implements org.osid.repository.Asset
         {
             for (int i=0, size = this.recordVector.size(); i < size; i++)
             {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 if (record.getId().isEqual(recordId))
                 {
                     this.recordVector.removeElementAt(i);
@@ -239,7 +240,7 @@ implements org.osid.repository.Asset
         {
             for (int i=0, size = this.recordVector.size(); i < size; i++)
             {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 if (record.getId().isEqual(recordId))
                 {
                     return record;
@@ -265,7 +266,7 @@ implements org.osid.repository.Asset
         {
             for (int i=0, size = this.recordVector.size(); i < size; i++)
             {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 org.osid.repository.PartIterator partIterator = record.getParts();
                 while (partIterator.hasNextPart())
                 {
@@ -304,7 +305,7 @@ implements org.osid.repository.Asset
             java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
             for (int i=0, size = this.recordVector.size(); i < size; i++)
             {
-                org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
+                org.osid.repository.Record record = this.recordVector.elementAt(i);
                 org.osid.repository.PartIterator partIterator = record.getParts();
                 while (partIterator.hasNextPart())
                 {
@@ -442,7 +443,7 @@ implements org.osid.repository.Asset
         java.util.Vector<org.osid.repository.Record> results = new java.util.Vector<>();
         for (int i=0, size = this.recordVector.size(); i < size; i++)
         {
-            org.osid.repository.Record r = (org.osid.repository.Record)this.recordVector.elementAt(i);
+            org.osid.repository.Record r = this.recordVector.elementAt(i);
             if (r.getRecordStructure().getType().isEqual(recordStructureType))
             {
                 results.addElement(r);

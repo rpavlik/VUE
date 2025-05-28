@@ -29,18 +29,18 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
  *
  * @author AKumar03
  */
-public class MetadataElementPartStructure implements org.osid.repository.PartStructure{
-    
-   private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "Part structure for metadata elements";
-    private String description = "Stores metadata elements";
+public class MetadataElementPartStructure implements org.osid.repository.PartStructure {
+
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "Part structure for metadata elements";
+    private final String description = "Stores metadata elements";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = false;
-    private boolean mandatory = false;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("tufts.edu","partStructure","metadataElement");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure)disseminationRecordStructure;
+    private final boolean populatedByRepository = false;
+    private final boolean mandatory = false;
+    private final boolean repeatable = false;
+    private org.osid.shared.Type type = new Type("tufts.edu", "partStructure", "metadataElement");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
 
     protected MetadataElementPartStructure(org.osid.repository.RecordStructure recordStructure
                                         , Repository repository)

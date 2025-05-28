@@ -17,16 +17,16 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 public class URLPartStructure
 implements org.osid.repository.PartStructure
 {
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure imageRecordStructure = null;
-    private String displayName = "URL";
-    private String description = "Image URL to be display alongside others";
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure imageRecordStructure = null;
+    private final String displayName = "URL";
+    private final String description = "Image URL to be display alongside others";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","URL");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure) imageRecordStructure;
+    private final boolean populatedByRepository = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("mit.edu","partStructure","URL");
+    private org.osid.repository.RecordStructure recordStructure = imageRecordStructure;
 
     protected URLPartStructure(org.osid.repository.RecordStructure recordStructure
                               , Repository repository)

@@ -17,13 +17,13 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 public class FormatPartStructure
 implements org.osid.repository.PartStructure
 {
-    private String displayName = "Format";
-    private String description = "http://purl.org/dc/elements/1.1/#Format";
-    private String idString = "Format.PartStructureId";
+    private final String displayName = "Format";
+    private final String description = "http://purl.org/dc/elements/1.1/#Format";
+    private final String idString = "Format.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","format","Format");
-	private static FormatPartStructure formatPartStructure = new FormatPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "format", "Format");
+    private static final FormatPartStructure formatPartStructure = new FormatPartStructure();
+
 	public static FormatPartStructure getInstance()
 	{
 		return formatPartStructure;

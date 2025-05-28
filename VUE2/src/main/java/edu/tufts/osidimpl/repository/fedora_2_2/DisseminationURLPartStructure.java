@@ -16,19 +16,18 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 
 public class DisseminationURLPartStructure
-implements org.osid.repository.PartStructure
-{
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "Dissemination URL";
-    private String description = "A URL to get the dissemination of Fedora Object";
-    private String ID = "fedora.disseminationURL";
+        implements org.osid.repository.PartStructure {
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "Dissemination URL";
+    private final String description = "A URL to get the dissemination of Fedora Object";
+    private final String ID = "fedora.disseminationURL";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("tufts.edu","partStructure","disseminationURL");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure) disseminationRecordStructure;
+    private final boolean populatedByRepository = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("tufts.edu", "partStructure", "disseminationURL");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
 
     protected DisseminationURLPartStructure(org.osid.repository.RecordStructure recordStructure
                                           , Repository repository)

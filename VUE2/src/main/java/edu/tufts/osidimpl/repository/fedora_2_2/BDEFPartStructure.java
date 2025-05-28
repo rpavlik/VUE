@@ -15,19 +15,18 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class BDEFPartStructure
-implements org.osid.repository.PartStructure
-{
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "BDEF";
-    private String description = "Behavior Definiton of Fedora Object";
-    private String ID = "fedora.BDEF";
+        implements org.osid.repository.PartStructure {
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "BDEF";
+    private final String description = "Behavior Definiton of Fedora Object";
+    private final String ID = "fedora.BDEF";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("tufts.edu","partStructure","BDEF");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure) disseminationRecordStructure;
+    private final boolean populatedByRepository = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("tufts.edu", "partStructure", "BDEF");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
 
     protected BDEFPartStructure(org.osid.repository.RecordStructure recordStructure
                               , Repository repository)

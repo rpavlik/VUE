@@ -18,16 +18,16 @@ package edu.tufts.osidimpl.repository.artifact;
 public class RecordStructure
 implements org.osid.repository.RecordStructure
 {
-    private String idString = "ArtifactRecordStructureId";
-    private String displayName = "Artifact Content";
-    private String description = "Holds metadata for an Artifact asset";
-    private String format = "";
-    private String schema = "";
-    private org.osid.shared.Type type = new Type("tufts.edu","recordStructure","artifact");
-    private boolean repeatable = false;
-	private static RecordStructure recordStructure = new RecordStructure();
+    private final String idString = "ArtifactRecordStructureId";
+    private final String displayName = "Artifact Content";
+    private final String description = "Holds metadata for an Artifact asset";
+    private final String format = "";
+    private final String schema = "";
+    private final org.osid.shared.Type type = new Type("tufts.edu", "recordStructure", "artifact");
+    private final boolean repeatable = false;
+    private static final RecordStructure recordStructure = new RecordStructure();
     private org.osid.shared.Id id = null;
-	
+
 	protected static RecordStructure getInstance()
 	{
 		return recordStructure;

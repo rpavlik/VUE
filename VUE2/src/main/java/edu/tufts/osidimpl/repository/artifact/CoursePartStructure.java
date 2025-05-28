@@ -19,14 +19,14 @@ public class CoursePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id coursePartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","course","Course");
-    private String displayName = "Course";
-    private String description = "Course";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static CoursePartStructure coursePartStructure = new CoursePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "course", "Course");
+    private final String displayName = "Course";
+    private final String description = "Course";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final CoursePartStructure coursePartStructure = new CoursePartStructure();
+
 	protected static CoursePartStructure getInstance()
 	{
 		return coursePartStructure;

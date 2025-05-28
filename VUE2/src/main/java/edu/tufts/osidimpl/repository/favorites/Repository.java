@@ -21,12 +21,11 @@ public class Repository
         implements org.osid.repository.Repository {
     private org.osid.shared.Id repositoryId = null;
     private org.osid.shared.Type repositoryType = null;
-    private org.osid.shared.Type assetType = new Type("edu.tufts","favorites","Asset");
+    private final org.osid.shared.Type assetType = new Type("edu.tufts", "favorites", "Asset");
     private String displayName = null;
     private String description = null;
     private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
     private java.util.Vector<org.osid.repository.Asset> assetVector = null;
-    
     
     protected Repository(String displayName,
             String description,
@@ -216,7 +215,7 @@ public class Repository
         
         boolean knownType = false;
         for (int searchTypeNum = 0, size = this.searchTypeVector.size(); searchTypeNum < size; searchTypeNum++) {
-            org.osid.shared.Type type = (org.osid.shared.Type)(this.searchTypeVector.elementAt(searchTypeNum));
+            org.osid.shared.Type type = this.searchTypeVector.elementAt(searchTypeNum);
             if (type.isEqual(searchType)) {
                 knownType = true;
             }

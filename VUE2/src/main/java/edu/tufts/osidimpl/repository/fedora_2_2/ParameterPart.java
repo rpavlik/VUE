@@ -15,13 +15,12 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class ParameterPart
-implements org.osid.repository.Part
-{
-    private java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure recordStructure = null;
-    private org.osid.shared.Id id = null;
+        implements org.osid.repository.Part {
+    private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure recordStructure = null;
+    private final org.osid.shared.Id id = null;
     private java.io.Serializable value = null;
-    private org.osid.repository.PartStructure partStructure = null;
+    private final org.osid.repository.PartStructure partStructure = null;
 
     protected ParameterPart(org.osid.shared.Id id
                           , java.io.Serializable value)
@@ -85,7 +84,7 @@ implements org.osid.repository.Part
     public void updateValue(java.io.Serializable value)
     throws org.osid.repository.RepositoryException
     {
-        this.value = (String)value;
+        this.value = value;
     }
 
     public org.osid.repository.PartStructure getPartStructure()

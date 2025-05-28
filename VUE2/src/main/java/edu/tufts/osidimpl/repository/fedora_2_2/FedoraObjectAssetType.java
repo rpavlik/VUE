@@ -28,14 +28,14 @@ import java.util.*;
  */
 
 public class FedoraObjectAssetType extends org.osid.shared.Type {
-    private Vector recordStructures = new Vector();
-    private Repository repository;
-    private String id;
-    private String type ="tufts/image/archival";
+    private final Vector recordStructures = new Vector();
+    private final Repository repository;
+    private final String id;
+    private String type = "tufts/image/archival";
     private org.osid.repository.RecordStructure disseminationRecordStructure = null;
     private org.osid.repository.RecordStructure sImageRecordStructure = null;
     private org.osid.repository.RecordStructure sDefaultRecordStructure = null;
-    
+
     /** Creates a new instance of FedoraObjectAssetType */
     public FedoraObjectAssetType(Repository repository,String type) throws org.osid.repository.RepositoryException {
         super("tufts.edu","asset",type);
@@ -51,7 +51,7 @@ public class FedoraObjectAssetType extends org.osid.shared.Type {
     
     public org.osid.repository.RecordStructureIterator getRecordStructures()
     throws org.osid.repository.RepositoryException {
-        return (org.osid.repository.RecordStructureIterator) new RecordStructureIterator(recordStructures);
+        return new RecordStructureIterator(recordStructures);
     }
     
     public org.osid.repository.RecordStructure getDissemiationRecordStructure()  throws org.osid.repository.RepositoryException  {

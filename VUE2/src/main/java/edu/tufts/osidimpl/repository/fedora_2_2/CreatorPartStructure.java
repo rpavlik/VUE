@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class CreatorPartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Creator";
-    private String description = "http://purl.org/dc/elements/1.1/#Creator";
-    private String idString = "Creator.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Creator";
+    private final String description = "http://purl.org/dc/elements/1.1/#Creator";
+    private final String idString = "Creator.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","creator","Creator");
-	private static CreatorPartStructure creatorPartStructure = new CreatorPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "creator", "Creator");
+    private static final CreatorPartStructure creatorPartStructure = new CreatorPartStructure();
+
 	public static CreatorPartStructure getInstance()
 	{
 		return creatorPartStructure;

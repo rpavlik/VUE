@@ -19,14 +19,14 @@ public class SubjectPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id subjectPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","subject","Subject");
-    private String displayName = "Subject";
-    private String description = "Subject";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static SubjectPartStructure subjectPartStructure = new SubjectPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "subject", "Subject");
+    private final String displayName = "Subject";
+    private final String description = "Subject";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final SubjectPartStructure subjectPartStructure = new SubjectPartStructure();
+
 	protected static SubjectPartStructure getInstance()
 	{
 		return subjectPartStructure;

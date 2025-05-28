@@ -17,13 +17,13 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 public class IdentifierPartStructure
 implements org.osid.repository.PartStructure
 {
-    private String displayName = "Identifier";
-    private String description = "http://purl.org/dc/elements/1.1/#Identifier";
-    private String idString = "Identifier.PartStructureId";
+    private final String displayName = "Identifier";
+    private final String description = "http://purl.org/dc/elements/1.1/#Identifier";
+    private final String idString = "Identifier.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","identifier","Identifier");
-	private static IdentifierPartStructure identifierPartStructure = new IdentifierPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "identifier", "Identifier");
+    private static final IdentifierPartStructure identifierPartStructure = new IdentifierPartStructure();
+
 	public static IdentifierPartStructure getInstance()
 	{
 		return identifierPartStructure;

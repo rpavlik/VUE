@@ -20,20 +20,20 @@ package edu.tufts.osidimpl.repository.artifact;
 public class RepositoryManager
 implements org.osid.repository.RepositoryManager
 {
-	public static final String NAME = "Artifact";
-	public static final String DESCRIPTION = "Tufts University Libraries Artifact Content";
-	public static final String DEFAULT_ADDRESS = "http://artifact.tufts.edu/vue_xml/search2.asp?";
-	public static final String DEFAULT_MAX_RETURN = "10";
-	private static final String REPOSITORY_ID_STRING = "6D6ABA4C-3B1F-4326-BBCD-A3417CCE4687-EC497099";
-    
+    public static final String NAME = "Artifact";
+    public static final String DESCRIPTION = "Tufts University Libraries Artifact Content";
+    public static final String DEFAULT_ADDRESS = "http://artifact.tufts.edu/vue_xml/search2.asp?";
+    public static final String DEFAULT_MAX_RETURN = "10";
+    private static final String REPOSITORY_ID_STRING = "6D6ABA4C-3B1F-4326-BBCD-A3417CCE4687-EC497099";
+
     private org.osid.OsidContext context = null;
     private java.util.Properties configuration = null;
     private org.osid.repository.Repository repository = null;
-	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Id repositoryId = null;
+    private org.osid.shared.Type repositoryType = null;
+    private org.osid.shared.Id repositoryId = null;
     private java.util.Vector<org.osid.repository.Repository> repositoryVector = new java.util.Vector<>();
-    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
-	
+    private final java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
+
     public void osidVersion_2_0()
 		throws org.osid.repository.RepositoryException
     {
@@ -89,8 +89,8 @@ implements org.osid.repository.RepositoryManager
 //					this.searchTypeVector.addElement(new Type("tufts.edu","search","artifact"));
 					this.repository = new Repository("Artifact",
 							"Tufts University Libraries Artifact Content",
-							(String) configuration.getProperty("address"),
-							(String) configuration.getProperty("maxReturn"),
+                            configuration.getProperty("address"),
+                            configuration.getProperty("maxReturn"),
 							this.repositoryId,
 							this.repositoryType,
 							this.searchTypeVector);
@@ -262,7 +262,7 @@ implements org.osid.repository.RepositoryManager
                 org.osid.shared.LongValueIterator longValueIterator = nextRepository.getAssetDates(assetId);
                 while (longValueIterator.hasNextLongValue())
                 {
-                    result.addElement(new Long(longValueIterator.nextLongValue()));
+                    result.addElement(longValueIterator.nextLongValue());
                 }
             }
             return new LongValueIterator(result);

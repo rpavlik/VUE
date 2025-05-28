@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class CoveragePartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Coverage";
-    private String description = "http://purl.org/dc/elements/1.1/#Coverage";
-    private String idString = "Coverage.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Coverage";
+    private final String description = "http://purl.org/dc/elements/1.1/#Coverage";
+    private final String idString = "Coverage.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","coverage","Coverage");
-	private static CoveragePartStructure coveragePartStructure = new CoveragePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "coverage", "Coverage");
+    private static final CoveragePartStructure coveragePartStructure = new CoveragePartStructure();
+
 	public static CoveragePartStructure getInstance()
 	{
 		return coveragePartStructure;

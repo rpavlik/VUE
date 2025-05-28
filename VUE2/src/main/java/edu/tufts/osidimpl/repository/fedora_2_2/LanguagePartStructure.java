@@ -19,13 +19,13 @@ import tufts.vue.VueResources;
 public class LanguagePartStructure
 implements org.osid.repository.PartStructure
 {
-    private String displayName = VueResources.getString("prefernces.language.title");
-    private String description = "http://purl.org/dc/elements/1.1/#Language";
-    private String idString = "Language.PartStructureId";
+    private final String displayName = VueResources.getString("prefernces.language.title");
+    private final String description = "http://purl.org/dc/elements/1.1/#Language";
+    private final String idString = "Language.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","language","Language");
-	private static LanguagePartStructure languagePartStructure = new LanguagePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "language", "Language");
+    private static final LanguagePartStructure languagePartStructure = new LanguagePartStructure();
+
 	public static LanguagePartStructure getInstance()
 	{
 		return languagePartStructure;

@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class ContributorPartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Contributor";
-    private String description = "http://purl.org/dc/elements/1.1/#Contributor";
-    private String idString = "Contributor.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Contributor";
+    private final String description = "http://purl.org/dc/elements/1.1/#Contributor";
+    private final String idString = "Contributor.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","contributor","Contributor");
-	private static ContributorPartStructure contributorPartStructure = new ContributorPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "contributor", "Contributor");
+    private static final ContributorPartStructure contributorPartStructure = new ContributorPartStructure();
+
 	public static ContributorPartStructure getInstance()
 	{
 		return contributorPartStructure;

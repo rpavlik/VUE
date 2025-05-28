@@ -15,19 +15,18 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class ParameterPartStructure
-implements org.osid.repository.PartStructure
-{
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "Parameter PartStructure";
-    private String description = "Used to set parameters of disemmination. Parameters are optional in Dissemination and they can be single or multivalued.";
-    private String ID = "fedora.parameter";
+        implements org.osid.repository.PartStructure {
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "Parameter PartStructure";
+    private final String description = "Used to set parameters of disemmination. Parameters are optional in Dissemination and they can be single or multivalued.";
+    private final String ID = "fedora.parameter";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = false;
-    private boolean mandatory = false;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("tufts.edu","partStructure","parameter");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure) disseminationRecordStructure;
+    private final boolean populatedByRepository = false;
+    private final boolean mandatory = false;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("tufts.edu", "partStructure", "parameter");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
 
     protected ParameterPartStructure(org.osid.repository.RecordStructure recordStructure
                                    , Repository repository)

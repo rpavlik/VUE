@@ -19,14 +19,14 @@ public class LargeImagePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id LARGE_IMAGE_PART_STRUCTURE_ID = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","largeImage","Large Image");
-    private String displayName = "Large Image";
-    private String description = "Large image";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static LargeImagePartStructure largeImagePartStructure = new LargeImagePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "largeImage", "Large Image");
+    private final String displayName = "Large Image";
+    private final String description = "Large image";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final LargeImagePartStructure largeImagePartStructure = new LargeImagePartStructure();
+
 	protected static LargeImagePartStructure getInstance()
 	{
 		return largeImagePartStructure;

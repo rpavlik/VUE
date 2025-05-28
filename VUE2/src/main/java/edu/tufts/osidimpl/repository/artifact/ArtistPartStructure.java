@@ -19,13 +19,13 @@ public class ArtistPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id artistrPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","artist","Artist");
-    private String displayName = "Artist";
-    private String description = "Typically, the name of a Artist should be used to indicate the entity.";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static ArtistPartStructure artistPartStructure = new ArtistPartStructure();
+    private final org.osid.shared.Type type = new Type("mit.edu","partStructure","artist","Artist");
+    private final String displayName = "Artist";
+    private final String description = "Typically, the name of a Artist should be used to indicate the entity.";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+	private static final ArtistPartStructure artistPartStructure = new ArtistPartStructure();
 	
 	protected static ArtistPartStructure getInstance()
 	{

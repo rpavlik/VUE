@@ -15,9 +15,8 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class Part
-implements org.osid.repository.Part
-{
-    private java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
+        implements org.osid.repository.Part {
+    private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
     private org.osid.repository.RecordStructure recordStructure = null;
     private org.osid.shared.Id id = null;
     private java.io.Serializable value = null;

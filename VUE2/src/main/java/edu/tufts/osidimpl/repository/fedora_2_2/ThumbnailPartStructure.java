@@ -16,17 +16,17 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class ThumbnailPartStructure
         implements org.osid.repository.PartStructure {
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "Thumbnail";
-    private String description = "Image thumbnail to be display alongside others";
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "Thumbnail";
+    private final String description = "Image thumbnail to be display alongside others";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","thumbnail");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure) disseminationRecordStructure;
-    
+    private final boolean populatedByRepository = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "thumbnail");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
+
     protected ThumbnailPartStructure(org.osid.repository.RecordStructure recordStructure
             , Repository repository)
             throws org.osid.repository.RepositoryException {

@@ -23,8 +23,8 @@ implements org.osid.repository.RepositoryManager
     private org.osid.repository.Repository repository = null;
 	private org.osid.shared.Type repositoryType = null;
 	private org.osid.shared.Id repositoryId = null;
-    private java.util.Vector<org.osid.repository.Repository> repositoryVector = new java.util.Vector<>();
-    private java.util.Vector<edu.tufts.osidimpl.repository.google.global.Type> searchTypeVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.repository.Repository> repositoryVector = new java.util.Vector<>();
+    private final java.util.Vector<edu.tufts.osidimpl.repository.google.global.Type> searchTypeVector = new java.util.Vector<>();
 	private boolean firstTime = true;
 	
     public void osidVersion_2_0()
@@ -250,7 +250,7 @@ implements org.osid.repository.RepositoryManager
                 org.osid.shared.LongValueIterator longValueIterator = nextRepository.getAssetDates(assetId);
                 while (longValueIterator.hasNextLongValue())
                 {
-                    result.addElement(new Long(longValueIterator.nextLongValue()));
+                    result.addElement(longValueIterator.nextLongValue());
                 }
             }
             return new LongValueIterator(result);

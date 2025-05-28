@@ -19,14 +19,14 @@ public class PeriodPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id periodPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","period","Period");
-    private String displayName = "Period";
-    private String description = "Period";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static PeriodPartStructure periodPartStructure = new PeriodPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "period", "Period");
+    private final String displayName = "Period";
+    private final String description = "Period";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final PeriodPartStructure periodPartStructure = new PeriodPartStructure();
+
 	protected static PeriodPartStructure getInstance()
 	{
 		return periodPartStructure;

@@ -18,10 +18,10 @@ package edu.tufts.osidimpl.repository.favorites;
 public class Part
 implements org.osid.repository.Part
 {
-    private org.osid.repository.PartStructure partStructure = null;
+    private final org.osid.repository.PartStructure partStructure = null;
     private org.osid.shared.Id partStructureId = null;
     private java.io.Serializable value = null;
-    private String displayName = null;
+    private final String displayName = null;
     private org.osid.shared.Id id = null;
 
     public String getDisplayName()

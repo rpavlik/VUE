@@ -25,7 +25,7 @@ implements org.osid.authentication.AuthenticationManager
     private org.osid.logging.WritableLog log = null;
     private org.osid.OsidContext context = null;
     private java.util.Properties configuration = null;
-    private org.osid.shared.Type authenticationType = new Type("sakaiproject.org","authentication","sakai");
+    private final org.osid.shared.Type authenticationType = new Type("sakaiproject.org","authentication","sakai");
 
 	private String sessionId = "none";
 	
@@ -72,7 +72,7 @@ implements org.osid.authentication.AuthenticationManager
 		// show web services errors?
 		String debugString = this.configuration.getProperty("sakaiAuthenticationDebug");
 		if (debugString != null) {
-			this.debug = (debugString.trim().toLowerCase().equals("true"));
+			this.debug = (debugString.trim().equalsIgnoreCase("true"));
 		}
 		
 		//System.out.println("username " + this.username);

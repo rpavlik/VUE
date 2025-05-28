@@ -24,24 +24,26 @@ import java.util.Properties;
 public class Repository
 implements org.osid.repository.Repository
 {
-	public static final String DISPLAY_NAME = "Artifact";
+    public static final String DISPLAY_NAME = "Artifact";
     private org.osid.shared.Id repositoryId = null;
-	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Type assetType = new Type("tufts.edu","asset","artifact");
-	private org.osid.shared.Type artifactSearchType = new Type("tufts.edu","search","artifact");
-        private org.osid.shared.Type keywordSearchType = new Type("mit.edu","search","keyword");
-        private org.osid.shared.Type artifactMultiFieldSearchType = new Type("tufts.edu","search","artifact-multifield");
-    private String displayName =  DISPLAY_NAME;
+    private org.osid.shared.Type repositoryType = null;
+    private final org.osid.shared.Type assetType = new Type("tufts.edu", "asset", "artifact");
+    private final org.osid.shared.Type artifactSearchType = new Type("tufts.edu", "search", "artifact");
+    private final org.osid.shared.Type keywordSearchType = new Type("mit.edu", "search", "keyword");
+    private final org.osid.shared.Type artifactMultiFieldSearchType = new Type("tufts.edu", "search",
+            "artifact-multifield");
+    private String displayName = DISPLAY_NAME;
     private String description = null;
     private String address = null;
     private String searchKeywordTypePrefix = "searchType=Any";
     private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
     private java.util.Properties configuration;
     private static final String DEFAULT_ADDRESS = "http://artifact.tufts.edu/";
-	private static final String SEARCH_URL_PREFIX = DEFAULT_ADDRESS+"vue_xml/search2.asp?searchType=Any&max_return=10&query=";
-	private static final String SEARCH_URL_SUFFIX = "&Submit=Submit";
-	private static final String QUESTION = "?";
-	private int maxReturn = 10;
+    private static final String SEARCH_URL_PREFIX = DEFAULT_ADDRESS
+            + "vue_xml/search2.asp?searchType=Any&max_return=10&query=";
+    private static final String SEARCH_URL_SUFFIX = "&Submit=Submit";
+    private static final String QUESTION = "?";
+    private final int maxReturn = 10;
     protected Repository(String displayName,
 						 String description,
 						 String address,
@@ -271,7 +273,7 @@ implements org.osid.repository.Repository
         boolean knownType = false;
 		for (int searchTypeNum = 0, size = this.searchTypeVector.size(); searchTypeNum < size; searchTypeNum++)
 		{
-			org.osid.shared.Type type = (org.osid.shared.Type)(this.searchTypeVector.elementAt(searchTypeNum));
+			org.osid.shared.Type type = this.searchTypeVector.elementAt(searchTypeNum);
 			if (type.isEqual(searchType))
 			{
 				knownType = true;

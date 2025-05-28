@@ -19,14 +19,14 @@ public class ViewPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id viewPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","view","View");
-    private String displayName = "View";
-    private String description = "View";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static ViewPartStructure viewPartStructure = new ViewPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "view", "View");
+    private final String displayName = "View";
+    private final String description = "View";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final ViewPartStructure viewPartStructure = new ViewPartStructure();
+
 	protected static ViewPartStructure getInstance()
 	{
 		return viewPartStructure;

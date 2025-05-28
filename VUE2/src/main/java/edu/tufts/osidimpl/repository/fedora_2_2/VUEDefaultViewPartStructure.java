@@ -17,16 +17,16 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 public class VUEDefaultViewPartStructure
 implements org.osid.repository.PartStructure
 {
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private org.osid.repository.RecordStructure disseminationRecordStructure = null;
-    private String displayName = "VUE Default View Part Structure";
-    private String description = "Store URL for VUE to view the object";
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final org.osid.repository.RecordStructure disseminationRecordStructure = null;
+    private final String displayName = "VUE Default View Part Structure";
+    private final String description = "Store URL for VUE to view the object";
     private org.osid.shared.Id id = null;
-    private boolean populatedByRepository = false;
-    private boolean mandatory = false;
-    private boolean repeatable = false;
-    private org.osid.shared.Type type = new Type("tufts.edu","partStructure","defaultView");
-    private org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure)disseminationRecordStructure;
+    private final boolean populatedByRepository = false;
+    private final boolean mandatory = false;
+    private final boolean repeatable = false;
+    private final org.osid.shared.Type type = new Type("tufts.edu","partStructure","defaultView");
+    private org.osid.repository.RecordStructure recordStructure = disseminationRecordStructure;
 
     protected VUEDefaultViewPartStructure(org.osid.repository.RecordStructure recordStructure
                                         , Repository repository)

@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class RightsPartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Rights";
-    private String description = "http://purl.org/dc/elements/1.1/#Rights";
-    private String idString = "Rights.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Rights";
+    private final String description = "http://purl.org/dc/elements/1.1/#Rights";
+    private final String idString = "Rights.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","rights","Rights");
-	private static RightsPartStructure rightsPartStructure = new RightsPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "rights", "Rights");
+    private static final RightsPartStructure rightsPartStructure = new RightsPartStructure();
+
 	public static RightsPartStructure getInstance()
 	{
 		return rightsPartStructure;

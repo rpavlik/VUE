@@ -19,14 +19,14 @@ public class ThumbnailPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id THUMBNAIL_PART_STRUCTURE_ID = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","thumbnail","Preview or thumbnail");
-    private String displayName = "Thumbnail";
-    private String description = "Preview or thumbnail image";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static ThumbnailPartStructure thumbnailPartStructure = new ThumbnailPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "thumbnail", "Preview or thumbnail");
+    private final String displayName = "Thumbnail";
+    private final String description = "Preview or thumbnail image";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final ThumbnailPartStructure thumbnailPartStructure = new ThumbnailPartStructure();
+
 	protected static ThumbnailPartStructure getInstance()
 	{
 		return thumbnailPartStructure;

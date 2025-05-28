@@ -17,7 +17,7 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 public class RecordStructure
 implements org.osid.repository.RecordStructure
 {
-    private org.osid.shared.Id id = null;
+    private final org.osid.shared.Id id = null;
 
     protected RecordStructure()
     throws org.osid.repository.RepositoryException

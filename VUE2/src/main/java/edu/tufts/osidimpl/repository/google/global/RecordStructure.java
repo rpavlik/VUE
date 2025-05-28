@@ -16,18 +16,17 @@
 package edu.tufts.osidimpl.repository.google.global;
 
 public class RecordStructure
-implements org.osid.repository.RecordStructure
-{
-    private String idString = "GoogleResultRecordStructureId";
-    private String displayName = "Result from Google";
-    private String description = "Holds metadata for a Google result";
-    private String format = "";
-    private String schema = "";
-    private org.osid.shared.Type type = new Type("edu.tufts","recordStructure","localFile");
-    private boolean repeatable = false;
-	private static RecordStructure recordStructure = new RecordStructure();
+        implements org.osid.repository.RecordStructure {
+    private final String idString = "GoogleResultRecordStructureId";
+    private final String displayName = "Result from Google";
+    private final String description = "Holds metadata for a Google result";
+    private final String format = "";
+    private final String schema = "";
+    private final org.osid.shared.Type type = new Type("edu.tufts", "recordStructure", "localFile");
+    private final boolean repeatable = false;
+    private static final RecordStructure recordStructure = new RecordStructure();
     private org.osid.shared.Id id = null;
-	
+
 	protected static RecordStructure getInstance()
 	{
 		return recordStructure;

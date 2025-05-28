@@ -16,9 +16,9 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class Record  implements org.osid.repository.Record {
     private org.osid.shared.Id id = null;
-    private java.io.Serializable value = null;
+    private final java.io.Serializable value = null;
     private org.osid.repository.RecordStructure recordStructure = null;
-    private java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
     
     protected Record(org.osid.shared.Id id
             , org.osid.repository.RecordStructure recordStructure)

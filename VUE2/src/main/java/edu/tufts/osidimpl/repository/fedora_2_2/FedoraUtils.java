@@ -51,34 +51,30 @@ public class FedoraUtils {
     }
     
     public static Preferences getPreferences(Repository repository)
-    throws java.io.FileNotFoundException, java.io.IOException, java.util.prefs.InvalidPreferencesFormatException {
-		//if(repository.getPrefernces() != null) {
-//			return repository.getPrefernces();
-//		} else {
-			String conf = repository.getConf();
-			Preferences prefs = (Preferences) prefsCache.get(conf);
-			if (prefs != null)
-				return prefs;
-			Class clazz = FedoraUtils.class;
-			prefs = Preferences.userNodeForPackage(clazz);
-			//System.out.println("trying to find preferences " + conf);
-			InputStream stream = null;
-			try {
-				stream = new FileInputStream(conf);
-			} catch (java.io.FileNotFoundException fex) {
-				String path = null;
-				try {
-					edu.tufts.vue.dsm.OsidFactory factory = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance();
-					path = factory.getResourcePath(conf);
-				} catch (Throwable t) {
-				}
-				stream = new FileInputStream(path);
-			}
-			Preferences.importPreferences(stream);
-			prefsCache.put(conf, prefs);
-			stream.close();
+            throws java.io.IOException, java.util.prefs.InvalidPreferencesFormatException {
+		String conf = repository.getConf();
+		Preferences prefs = prefsCache.get(conf);
+		if (prefs != null)
 			return prefs;
-//		}
+		Class clazz = FedoraUtils.class;
+		prefs = Preferences.userNodeForPackage(clazz);
+		//System.out.println("trying to find preferences " + conf);
+		InputStream stream = null;
+		try {
+			stream = new FileInputStream(conf);
+		} catch (java.io.FileNotFoundException fex) {
+			String path = null;
+			try {
+				edu.tufts.vue.dsm.OsidFactory factory = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance();
+				path = factory.getResourcePath(conf);
+			} catch (Throwable t) {
+			}
+			stream = new FileInputStream(path);
+		}
+		Preferences.importPreferences(stream);
+		prefsCache.put(conf, prefs);
+		stream.close();
+		return prefs;
     }
     public static  String processId(String pid ) {
         java.util.StringTokenizer st = new java.util.StringTokenizer(pid,":");

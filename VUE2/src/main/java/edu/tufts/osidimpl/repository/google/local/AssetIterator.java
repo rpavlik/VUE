@@ -19,6 +19,8 @@ import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.mapping.Mapping;
 import java.io.*;
 import java.net.*;
+import java.util.Collections;
+
 import tufts.Util;
 import tufts.vue.*;
 import org.xml.sax.InputSource;
@@ -26,7 +28,7 @@ import org.xml.sax.InputSource;
 public class AssetIterator
 implements org.osid.repository.AssetIterator
 {
-    private java.util.Iterator<org.osid.repository.Asset> iterator = new java.util.Vector<org.osid.repository.Asset>().iterator();
+    private java.util.Iterator<org.osid.repository.Asset> iterator = Collections.emptyIterator();
 	private int currentIndex = 0;
 	private String searchURL = null;
 	private String criteria = null;
@@ -93,7 +95,7 @@ implements org.osid.repository.AssetIterator
     {
 		try {
 			if (hasNextAsset()) {
-				return (org.osid.repository.Asset)this.iterator.next();
+				return this.iterator.next();
 			}
 		} catch (Throwable t) {
 		}
@@ -104,7 +106,7 @@ implements org.osid.repository.AssetIterator
 	{
 		try {
 			if (this.currentIndex > 100) {
-				this.iterator = (new java.util.Vector<org.osid.repository.Asset>()).iterator();
+				this.iterator = Collections.emptyIterator();
 			} else {
 				url = new URL(this.searchURL+"&num=10&start="+this.currentIndex+"&q="+this.criteria);
 				//System.out.println("Google search = " + url);
@@ -124,12 +126,12 @@ implements org.osid.repository.AssetIterator
 				java.util.Vector<org.osid.repository.Asset> resultVector = new java.util.Vector<>();
 				
 				while(i.hasNext()) {
-					Result r = (Result)i.next();
+					Result r = i.next();
 					Resource resource = Resource.getFactory().get(r.getUrl());
 					if (r.getTitle() != null) 
                                             resource.setTitle(r.getTitle().replaceAll("</*[a-zA-Z]>",""));
                                         else 
-                                            resource.setTitle(r.getUrl().toString());
+                                            resource.setTitle(r.getUrl());
 					 resultVector.add(new Asset(r.getTitle(),"",r.getUrl()));
 					 //System.out.println(r.getTitle()+" "+r.getUrl());
 				}

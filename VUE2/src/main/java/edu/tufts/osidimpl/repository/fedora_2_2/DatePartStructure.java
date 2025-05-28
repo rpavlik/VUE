@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class DatePartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Date";
-    private String description = "http://purl.org/dc/elements/1.1/#Date";
-    private String idString = "Date.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Date";
+    private final String description = "http://purl.org/dc/elements/1.1/#Date";
+    private final String idString = "Date.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","date","Date");
-	private static DatePartStructure datePartStructure = new DatePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "date", "Date");
+    private static final DatePartStructure datePartStructure = new DatePartStructure();
+
 	public static DatePartStructure getInstance()
 	{
 		return datePartStructure;

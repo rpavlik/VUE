@@ -25,13 +25,13 @@ public class VUERecordStructure   implements org.osid.repository.RecordStructure
     public static final String[] dcFields = {"title","creator","subject","date","type","format","identifier","collection","coverage"};
     public static final String  DC_NAMESPACE = "dc:";
     
-    private java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
-    private String displayName = "VUE Specific Data";
-    private String description = "Provides information to be used by VUE";
+    private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
+    private final String displayName = "VUE Specific Data";
+    private final String description = "Provides information to be used by VUE";
     private org.osid.shared.Id id = null;
-    private String schema = null;
-    private String format = "Plain Text";
-    private org.osid.shared.Type type = new Type("tufts.edu","recordStructure","vue");
+    private final String schema = null;
+    private final String format = "Plain Text";
+    private final org.osid.shared.Type type = new Type("tufts.edu","recordStructure","vue");
     private org.osid.repository.PartStructure sVUEDefaultViewPartStructure = null;
     
     protected VUERecordStructure(Repository repository)

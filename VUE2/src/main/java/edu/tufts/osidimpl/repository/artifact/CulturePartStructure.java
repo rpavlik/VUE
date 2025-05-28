@@ -19,14 +19,14 @@ public class CulturePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id culturePartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","culture","Culture");
-    private String displayName = "Culture";
-    private String description = "Culture";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static CulturePartStructure culturePartStructure = new CulturePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "culture", "Culture");
+    private final String displayName = "Culture";
+    private final String description = "Culture";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final CulturePartStructure culturePartStructure = new CulturePartStructure();
+
 	protected static CulturePartStructure getInstance()
 	{
 		return culturePartStructure;

@@ -40,7 +40,7 @@ public class Repository implements org.osid.repository.Repository {
     public static final String FEDORA_URL = "/fedora/";
     public static final String BDEF="fedora:BDEF";
     public static final String BMECH="fedora:BMECH";
-    private Preferences prefs = null;
+    private final Preferences prefs = null;
     private String displayName = "";
     private String description = "";
     private String address = null;
@@ -76,7 +76,7 @@ public class Repository implements org.osid.repository.Repository {
 			this.displayName = displayName;
 			this.description = description;
 			setAddress(address);
-			this.port = new Integer(port);
+			this.port = Integer.parseInt(port);
 			this.userName = userName;
 			this.password = password;
 			this.conf = conf;
@@ -98,7 +98,7 @@ public class Repository implements org.osid.repository.Repository {
                 String address = configuration.getProperty("fedora22Address");
                 if(address != null) setAddress(address);
 		String port = configuration.getProperty("fedora22Port");
-                if(port !=null) this.port = new Integer(port);
+                if(port !=null) this.port = Integer.parseInt(port);
                 String userName = configuration.getProperty("fedora22UserName");
                 if(userName != null ) this.userName = userName;
                 String  password = configuration.getProperty("fedora22Password");
@@ -176,8 +176,8 @@ public class Repository implements org.osid.repository.Repository {
         FedoraObjectAssetType fedoraObjectAssetType = new FedoraObjectAssetType(this,type);
         org.osid.repository.RecordStructureIterator iter =  fedoraObjectAssetType.getRecordStructures();
         while(iter.hasNextRecordStructure()) {
-            org.osid.repository.RecordStructure recordStructure = (org.osid.repository.RecordStructure)iter.nextRecordStructure();
-            if(recordStructures.indexOf(recordStructure) < 0)
+            org.osid.repository.RecordStructure recordStructure = iter.nextRecordStructure();
+            if(!recordStructures.contains(recordStructure))
                 recordStructures.add(recordStructure);
         }
         assetTypes.add(fedoraObjectAssetType);
@@ -271,7 +271,7 @@ public class Repository implements org.osid.repository.Repository {
         } catch(Throwable t) {
             throw new RepositoryException(t.getMessage());
         }
-        return (org.osid.repository.AssetIterator) new AssetIterator(assetVector);
+        return new AssetIterator(assetVector);
     }
     
     /**     Get all the Assets of the specified AssetType in this Repository.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.
@@ -309,7 +309,7 @@ public class Repository implements org.osid.repository.Repository {
      *     @throws RepositoryException if there is a general failure
      */
     public org.osid.repository.RecordStructureIterator getRecordStructures() throws org.osid.repository.RepositoryException {
-        return (org.osid.repository.RecordStructureIterator) new RecordStructureIterator(recordStructures);
+        return new RecordStructureIterator(recordStructures);
     }
     
     /**     Get the InfoStructures that this AssetType must support.  InfoStructures are used to categorize information about Assets.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.

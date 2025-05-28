@@ -57,10 +57,7 @@ public class PID extends tufts.oki.id.Id {
             st.nextToken();
             count++;
         }
-        if(count == 2) 
-            return true;
-        else
-            return false;
+        return count == 2;
     }
     
     public String processId() throws SharedException{

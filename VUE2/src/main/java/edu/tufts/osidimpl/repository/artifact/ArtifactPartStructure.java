@@ -19,14 +19,14 @@ public class ArtifactPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id artifactrPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","artifact","Artifact");
-    private String displayName = "Artifact";
-    private String description = "Typically, the name of a Artifact should be used to indicate the entity.";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static ArtifactPartStructure artifactPartStructure = new ArtifactPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "artifact", "Artifact");
+    private final String displayName = "Artifact";
+    private final String description = "Typically, the name of a Artifact should be used to indicate the entity.";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final ArtifactPartStructure artifactPartStructure = new ArtifactPartStructure();
+
 	protected static ArtifactPartStructure getInstance()
 	{
 		return artifactPartStructure;

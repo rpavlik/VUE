@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class TitlePartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Title";
-    private String description = "http://purl.org/dc/elements/1.1/#Title";
-    private String idString = "Title.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Title";
+    private final String description = "http://purl.org/dc/elements/1.1/#Title";
+    private final String idString = "Title.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","title","Title");
-	private static TitlePartStructure titlePartStructure = new TitlePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "title", "Title");
+    private static final TitlePartStructure titlePartStructure = new TitlePartStructure();
+
 	public static TitlePartStructure getInstance()
 	{
 		return titlePartStructure;

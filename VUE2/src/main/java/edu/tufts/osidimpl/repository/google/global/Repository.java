@@ -18,16 +18,15 @@ package edu.tufts.osidimpl.repository.google.global;
 import com.google.soap.search.*;
 
 public class Repository
-implements org.osid.repository.Repository
-{
+        implements org.osid.repository.Repository {
     private org.osid.shared.Id repositoryId = null;
-	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Type assetType = new Type("com.google","asset","googleResult");
+    private org.osid.shared.Type repositoryType = null;
+    private final org.osid.shared.Type assetType = new Type("com.google", "asset", "googleResult");
     private String displayName = null;
     private String description = null;
     private java.util.Vector searchTypeVector = null;
-	private String googleKey = null;
-	
+    private String googleKey = null;
+
     protected Repository(String displayName,
 						 String description,
 						 org.osid.shared.Id repositoryId,

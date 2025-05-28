@@ -19,14 +19,14 @@ public class OriginPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id originPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","origin","Origin");
-    private String displayName = "Origin";
-    private String description = "Origin";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static OriginPartStructure originPartStructure = new OriginPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "origin", "Origin");
+    private final String displayName = "Origin";
+    private final String description = "Origin";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final OriginPartStructure originPartStructure = new OriginPartStructure();
+
 	protected static OriginPartStructure getInstance()
 	{
 		return originPartStructure;

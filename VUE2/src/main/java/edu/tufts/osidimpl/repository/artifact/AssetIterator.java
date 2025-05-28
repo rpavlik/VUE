@@ -28,7 +28,7 @@ implements org.osid.repository.AssetIterator
     private java.util.Vector<org.osid.repository.Asset> vector = new java.util.Vector<>();
 	private int arrayCount = 0;
     public static final String CASTOR_MAPPING = "artifact.xml";
-	private org.osid.shared.Id recordStructureId = RecordStructure.getInstance().getId();
+	private final org.osid.shared.Id recordStructureId = RecordStructure.getInstance().getId();
 
     protected AssetIterator(java.util.Vector<org.osid.repository.Asset> vector)
     throws org.osid.repository.RepositoryException
@@ -49,7 +49,7 @@ implements org.osid.repository.AssetIterator
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NO_MORE_ITERATOR_ELEMENTS);
         }
-        return (org.osid.repository.Asset)vector.elementAt(arrayCount++);
+        return vector.elementAt(arrayCount++);
     }
 
 	protected AssetIterator(String query, org.osid.shared.Id repositoryId)

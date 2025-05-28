@@ -22,15 +22,15 @@ public class AssetIterator
         implements org.osid.repository.AssetIterator {
     private Iterator<org.osid.repository.Asset> iterator = null;
     private SearchCriteria lSearchCriteria = null;
-    private String numberToAskForString = "100";
-    private int numberToAskFor = 100;
+    private final String numberToAskForString = "100";
+    private final int numberToAskFor = 100;
     private int numberAskedFor = 0;
     private org.osid.shared.Type searchType = null;
-    private org.osid.shared.Type keywordSearchType = new Type("mit.edu","search","keyword");
-    private org.osid.shared.Type multiFieldSearchType = new Type("mit.edu","search","multiField");
+    private final org.osid.shared.Type keywordSearchType = new Type("mit.edu", "search", "keyword");
+    private final org.osid.shared.Type multiFieldSearchType = new Type("mit.edu", "search", "multiField");
     private Repository repository = null;
-    private int resultsCounter = 1;
-    
+    private final int resultsCounter = 1;
+
     // allow for an empty iterator
    // public AssetIterator(java.util.Vector vector)
    // throws org.osid.repository.RepositoryException {
@@ -67,7 +67,7 @@ public class AssetIterator
                 // parse criteria to get the field-value pairs
                 java.util.List<Condition> conditions = getConditions((String)searchCriteria);
                 
-                lSearchCriteria.setConditions((fedora.server.types.gen.Condition[])conditions.toArray(new Condition[0]));
+                lSearchCriteria.setConditions(conditions.toArray(new Condition[0]));
                 lSearchCriteria.setMaxReturns(numberToAskForString);
                 lSearchCriteria.setSearchOperation(SearchCriteria.FIND_OBJECTS);
                 lSearchCriteria.setResults(0);
@@ -77,7 +77,7 @@ public class AssetIterator
                 while (ai.hasNextAsset()) v.addElement(ai.nextAsset());
                 this.iterator = v.iterator();
             } else {
-                this.iterator = new java.util.Vector<org.osid.repository.Asset>().iterator();
+                this.iterator = Collections.emptyIterator();
             }
         } catch (Exception ex) {
             Utilities.log(ex);
@@ -98,7 +98,7 @@ public class AssetIterator
             
             dbf = javax.xml.parsers.DocumentBuilderFactory.newInstance();
             db = dbf.newDocumentBuilder();
-            document = db.parse(new java.io.ByteArrayInputStream(xml.toString().getBytes()));
+            document = db.parse(new java.io.ByteArrayInputStream(xml.getBytes()));
             
             // for each DOC (maps 1-to-1 with Asset)
             org.w3c.dom.NodeList fields = document.getElementsByTagName("field");
@@ -187,7 +187,7 @@ public class AssetIterator
     throws org.osid.repository.RepositoryException {
         if (this.iterator.hasNext()) {
             numberAskedFor++;
-            return (org.osid.repository.Asset)this.iterator.next();
+            return this.iterator.next();
         } else {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NO_MORE_ITERATOR_ELEMENTS);
         }

@@ -19,14 +19,14 @@ public class URLPartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id URL_PART_STRUCTURE_ID = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","URL","URL");
-    private String displayName = "URL";
-    private String description = "Link to content";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static URLPartStructure urlPartStructure = new URLPartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "URL", "URL");
+    private final String displayName = "URL";
+    private final String description = "Link to content";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final URLPartStructure urlPartStructure = new URLPartStructure();
+
 	protected static URLPartStructure getInstance()
 	{
 		return urlPartStructure;

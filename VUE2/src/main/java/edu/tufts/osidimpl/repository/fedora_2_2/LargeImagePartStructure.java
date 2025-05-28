@@ -15,15 +15,14 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 public class LargeImagePartStructure
-implements org.osid.repository.PartStructure
-{
-    private String displayName = "Large Image";
-    private String description = "Large Image";
-    private String idString = "LargeImage.PartStructureId";
+        implements org.osid.repository.PartStructure {
+    private final String displayName = "Large Image";
+    private final String description = "Large Image";
+    private final String idString = "LargeImage.PartStructureId";
     private org.osid.shared.Id id = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","largeImage","Large Image");
-	private static LargeImagePartStructure largeImagePartStructure = new LargeImagePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "largeImage", "Large Image");
+    private static final LargeImagePartStructure largeImagePartStructure = new LargeImagePartStructure();
+
 	public static LargeImagePartStructure getInstance()
 	{
 		return largeImagePartStructure;
