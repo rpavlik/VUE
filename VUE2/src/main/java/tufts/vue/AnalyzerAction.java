@@ -32,7 +32,6 @@ import edu.tufts.vue.layout.*;
 import edu.tufts.vue.mbs.AnalyzerResult;
 import edu.tufts.vue.mbs.LWComponentAnalyzer;
 import edu.tufts.vue.mbs.OpenCalaisAnalyzer;
-import edu.tufts.vue.mbs.YahooAnalyzer;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -244,7 +243,6 @@ public class AnalyzerAction extends Actions.LWCAction {
     }
     
     // random layout. scatters nodes at random
-   // public static final AnalyzerAction yahoo = new AnalyzerAction(new YahooAnalyzer(),VueResources.getString("analyzeaction.yahoocontent"),null);
     public static final AnalyzerAction calais = new AnalyzerAction(new OpenCalaisAnalyzer(),VueResources.getString("analyzeaction.usingopencalais"),null);
     public static final AutoTaggerAction calaisAutoTagger = new AutoTaggerAction(new OpenCalaisAnalyzer(),VueResources.getString("analyzeaction.usingopencalais"),null);
 	public static final SemanticMapAction calaisMapAction = new SemanticMapAction(new OpenCalaisAnalyzer(),VueResources.getString("analyzeaction.usingopencalais"),null);
