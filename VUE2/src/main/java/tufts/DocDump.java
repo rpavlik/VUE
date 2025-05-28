@@ -43,7 +43,7 @@ import org.xml.sax.SAXParseException;
 
 public class DocDump {
   public static void dump(Document doc) {
-    dumpLoop((Node) doc, "");
+    dumpLoop(doc, "");
   }
   public static void dump(Node node) {
     dumpLoop(node, "");

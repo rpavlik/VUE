@@ -41,7 +41,7 @@ public class WindowDisplayAction extends javax.swing.AbstractAction
     
     private AbstractButton mLinkedButton;
     private Window mWindow;
-    private Object mObject;
+    private final Object mObject;
     private String mTitle;
     private boolean firstDisplay = true;
     private static final boolean showActionLabel = false;

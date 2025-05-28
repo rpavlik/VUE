@@ -33,7 +33,7 @@ import javax.swing.event.ChangeListener;
 public abstract class GenericSliderPreference extends BasePref implements ChangeListener {
 	private static final boolean DEBUG = false;
 	private String message;
-	private JSlider slider = new JSlider();
+	private final JSlider slider = new JSlider();
 	private Object previousValue = null;
 
 	public GenericSliderPreference() {

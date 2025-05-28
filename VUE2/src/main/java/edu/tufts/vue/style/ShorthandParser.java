@@ -39,7 +39,7 @@ public class ShorthandParser {
         if(f != null) {
              return f;
         } else {
-             return new Float(fv);
+             return fv;
         }
     }
     
@@ -73,7 +73,7 @@ public class ShorthandParser {
         } else  {
             fv = Float.parseFloat(value);
         }
-        Float f = new Float(fv);
+        Float f = fv;
         return f;
     }
 }

@@ -16,14 +16,14 @@ package edu.tufts.vue.util;
 
 public class Utilities
 {
-	private static String DATE_FORMAT = tufts.vue.VueResources.getString("dataSourceProviderDataFormat");
-	private static java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
-	private static String INSTALL_DIRECTORY_TOP_LEVEL = "/Library";
-	private static String INSTALL_DIRECTORY_ROOT = "/Library/OSID";
-	private static String INSTALL_DIRECTORY_UPLOADS = "/Library/OSID Uploads";
-	private static String INSTALL_DIRECTORY_DOWNLOADS = "/Library/OSID Downloads";
-	private static String INSTALL_DIRECTORY_COMMON = "/Library/OSID/Common";
-	private static String INSTALL_DIRECTORY_RESOURCES = "/Library/OSID/Resources";
+	private static final String DATE_FORMAT = tufts.vue.VueResources.getString("dataSourceProviderDataFormat");
+	private static final java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(DATE_FORMAT);
+	private static final String INSTALL_DIRECTORY_TOP_LEVEL = "/Library";
+	private static final String INSTALL_DIRECTORY_ROOT = "/Library/OSID";
+	private static final String INSTALL_DIRECTORY_UPLOADS = "/Library/OSID Uploads";
+	private static final String INSTALL_DIRECTORY_DOWNLOADS = "/Library/OSID Downloads";
+	private static final String INSTALL_DIRECTORY_COMMON = "/Library/OSID/Common";
+	private static final String INSTALL_DIRECTORY_RESOURCES = "/Library/OSID/Resources";
 	
 	public static org.osid.shared.Id getRepositoryIdFromLoadKey(String loadKey) {
 		try {

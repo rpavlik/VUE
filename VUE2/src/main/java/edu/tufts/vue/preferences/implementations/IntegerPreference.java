@@ -24,13 +24,13 @@ import edu.tufts.vue.preferences.interfaces.VuePreference;
 public class IntegerPreference extends BasePref
 {
 
-	private String category;
-	private String name;
-	private String key;
-	private String description;
-	private Integer defaultValue;
+	private final String category;
+	private final String name;
+	private final String key;
+	private final String description;
+	private final Integer defaultValue;
 	private Integer previousValue;
-	private Preferences p = Preferences.userNodeForPackage(getPrefRoot());
+	private final Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 	
 	public static IntegerPreference create(String category, String key, String name, String desc, Integer defaultValue, boolean showInUI)
 	{

@@ -19,12 +19,12 @@ import edu.tufts.vue.preferences.interfaces.VuePreference;
 public class BooleanPreference extends edu.tufts.vue.preferences.generics.GenericBooleanPreference
 {
 
-	private String category;
-	private String name;
-	private String key;
-	private String description;
-	private String message;
-	private Boolean defaultValue;
+	private final String category;
+	private final String name;
+	private final String key;
+	private final String description;
+	private final String message;
+	private final Boolean defaultValue;
 
 	public static BooleanPreference create
             (String category,

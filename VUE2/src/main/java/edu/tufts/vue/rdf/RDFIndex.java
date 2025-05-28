@@ -15,6 +15,7 @@
 
 package edu.tufts.vue.rdf;
 
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.io.*;
 import java.net.*;
@@ -590,10 +591,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
             return false;
         else if (!stmt1.getObject().toString().equals(stmt2.getObject().toString()))
             return false;
-        else if (!stmt1.getPredicate().toString().equals(stmt2.getPredicate().toString()))
-            return false;
-        else
-            return true;
+        else return stmt1.getPredicate().toString().equals(stmt2.getPredicate().toString());
     }
 
     /** This is overriden to add debugging only */
@@ -612,7 +610,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
                                       Util.tags(localName), // note need extra padding for escape codes here:
                                       propName,
                                       System.identityHashCode(property),
-                                      property.toString()));
+                    property));
         }
         return property;
     }
@@ -678,26 +676,21 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
     public static String getEncodedKey(final String key)
     {
         String encodedKey = key;
-       
-        try {
-            final int ontEnd = key.indexOf(ONT_SEPARATOR);
-            if (ontEnd != -1) {    
-                final String prefix = key.substring(0, ontEnd + 1);
-                final String name = key.substring(ontEnd + 1, key.length());
-                final String encodedName = java.net.URLEncoder.encode(name, "UTF-8");
-                if (name != encodedName) {
-                    encodedKey = prefix + encodedName;
-                    if (DEBUG.RDF) Log.debug("encoded " + Util.tags(key) + " to " + Util.tags(encodedKey));
-                }
-            } else {
-                encodedKey = java.net.URLEncoder.encode(key, "UTF-8");
-                if (DEBUG.RDF && encodedKey != key) Log.debug("encoded " + Util.tags(key) + " to " + Util.tags(encodedKey));
+
+        final int ontEnd = key.indexOf(ONT_SEPARATOR);
+        if (ontEnd != -1) {
+            final String prefix = key.substring(0, ontEnd + 1);
+            final String name = key.substring(ontEnd + 1, key.length());
+            final String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8);
+            if (name != encodedName) {
+                encodedKey = prefix + encodedName;
+                if (DEBUG.RDF) Log.debug("encoded " + Util.tags(key) + " to " + Util.tags(encodedKey));
             }
+        } else {
+            encodedKey = URLEncoder.encode(key, StandardCharsets.UTF_8);
+            if (DEBUG.RDF && encodedKey != key) Log.debug("encoded " + Util.tags(key) + " to " + Util.tags(encodedKey));
         }
-        catch (java.io.UnsupportedEncodingException e) {
-            Log.warn("encoding key " + Util.tags(key), e);  
-        }
-        
+
         return encodedKey;
     }
     

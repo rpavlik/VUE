@@ -60,9 +60,7 @@ public abstract class Style {
     }
     
     public void setAttribute(String key,String value) {
-        if(this.attributes.containsKey(key)){
-            this.attributes.remove(key);
-        }
+        this.attributes.remove(key);
         this.attributes.put(key,value);
     }
     
@@ -97,7 +95,7 @@ public abstract class Style {
         }
     }
     public  String toCSS() {
-        String s = new String();
+        String s = "";
         s += name+OPEN+"\n";
         Set<String> keys= attributes.keySet();
         for(String key: keys) {
@@ -109,7 +107,7 @@ public abstract class Style {
     
     public static String colorToHex(Color color) {
         
-        String colorstr = new String("#");
+        String colorstr = "#";
         
         // Red
         String str = Integer.toHexString(color.getRed());

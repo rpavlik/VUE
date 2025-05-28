@@ -60,13 +60,13 @@ public class WindowPropertiesPreference extends StringPreference implements Item
 	private static final String Y_POS_KEY = "Y_POS_KEY";
 	private static final String ROLLEDUP_KEY = "ROLLEDUP_KEY";
 	private static final String defval = "true,false,-1,-1,-1,-1,false";
-	private Preferences p2 = Preferences.userNodeForPackage(getPrefRoot());
+	private final Preferences p2 = Preferences.userNodeForPackage(getPrefRoot());
 	private static String defaultEnabledVal = "true";
-	private String value;
-	private static JCheckBox checkValue = new JCheckBox();
-	private JButton resetButton = new JButton(VueResources.getString("button.reset.label"));
-	private JPanel resetPanel = new JPanel();
-	private JPanel panel = null; 
+	private final String value;
+	private static final JCheckBox checkValue = new JCheckBox();
+	private final JButton resetButton = new JButton(VueResources.getString("button.reset.label"));
+	private final JPanel resetPanel = new JPanel();
+	private JPanel panel = null;
 
 	/**
 	 * The first parameter in the string used to store the window position was originally intended 
@@ -106,26 +106,22 @@ public class WindowPropertiesPreference extends StringPreference implements Item
 		finally {
 			getCheckBox().setSelected(isEnabled());
 		}
-		return;
-	}
+    }
 
 	public boolean isAllValuesDefaults() {
-		if (	this.isEnabled() && 
-				!this.isWindowVisible() && 
-				this.getWindowSize().getHeight() == -1 && 
-				this.getWindowSize().getWidth() == -1 &&
-				this.getWindowLocationOnScreen().getX() == -1.0 &&
-				this.getWindowLocationOnScreen().getY() == -1.0) {
-			return true;
-		} else
-			return false;
+        return this.isEnabled() &&
+                !this.isWindowVisible() &&
+                this.getWindowSize().getHeight() == -1 &&
+                this.getWindowSize().getWidth() == -1 &&
+                this.getWindowLocationOnScreen().getX() == -1.0 &&
+                this.getWindowLocationOnScreen().getY() == -1.0;
 	}
 
 	public void itemStateChanged(ItemEvent e) {
 		JCheckBox box = (JCheckBox)e.getSource();
 
 		//System.out.println("ITEM STATE CHANGED");
-		defaultEnabledVal = (new Boolean(box.isSelected()).toString());
+		defaultEnabledVal = (Boolean.valueOf(box.isSelected()).toString());
 		
 		if (p2.get("enabledWinPos", "null").equals("null"))
 			p2.put("enabledWinPos", defaultEnabledVal);
@@ -168,15 +164,15 @@ public class WindowPropertiesPreference extends StringPreference implements Item
 			p2.put("enabledWinPos", "true");
 		}
 
-		return new Boolean(set);//Boolean.valueOf((String)table.get(ENABLED_KEY));
+		return Boolean.parseBoolean(set);//Boolean.valueOf((String)table.get(ENABLED_KEY));
 	}
 
 	public boolean isWindowVisible() {
-		return Boolean.valueOf((String)table.get(VISIBLE_KEY));
+		return Boolean.parseBoolean((String)table.get(VISIBLE_KEY));
 	}
 
 	public Dimension getWindowSize() {
-		return new Dimension(Integer.valueOf((String)table.get(WIDTH_KEY)),Integer.valueOf((String)table.get(HEIGHT_KEY)));
+		return new Dimension(Integer.parseInt((String)table.get(WIDTH_KEY)),Integer.parseInt((String)table.get(HEIGHT_KEY)));
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -274,11 +270,7 @@ public class WindowPropertiesPreference extends StringPreference implements Item
 	}
 
 	private void configureResetPanel() {
-		if ( p2.get("enabledWinPos", "true").equals("true") || p2.get("enabledWinPos", "true").equals("reset")) {
-			resetPanel.setVisible(true);
-		} else {
-			resetPanel.setVisible(false);
-		}
+        resetPanel.setVisible(p2.get("enabledWinPos", "true").equals("true") || p2.get("enabledWinPos", "true").equals("reset"));
 	}
 
 	private static JCheckBox getCheckBox() {
@@ -286,11 +278,11 @@ public class WindowPropertiesPreference extends StringPreference implements Item
 	}
 
 	public Point getWindowLocationOnScreen() {
-		return new Point(Integer.valueOf((String)table.get(X_POS_KEY)),Integer.valueOf((String)table.get(Y_POS_KEY)));
+		return new Point(Integer.parseInt((String)table.get(X_POS_KEY)),Integer.parseInt((String)table.get(Y_POS_KEY)));
 	}
 
 	public boolean isRolledUp() {
-		return Boolean.valueOf((String)table.get(ROLLEDUP_KEY));
+		return Boolean.parseBoolean((String)table.get(ROLLEDUP_KEY));
 	}
 
 	public void updateWindowProperties(boolean visible, int width, int height, int x, int y, boolean rolled) {

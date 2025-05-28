@@ -27,8 +27,8 @@ import java.util.Arrays;
 /** a globally unique 32-byte number (allegedly) */
 public class GUID implements Serializable
 {
-    private static SecureRandom s_secureRandom=new SecureRandom();
-    private static int s_hash=System.identityHashCode(s_secureRandom);
+    private static final SecureRandom s_secureRandom=new SecureRandom();
+    private static final int s_hash=System.identityHashCode(s_secureRandom);
     private static byte[] s_addr;
  
     /** get the ip adress. if fails, generate a random one */

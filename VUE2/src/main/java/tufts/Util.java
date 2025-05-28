@@ -91,7 +91,7 @@ public class Util
     private static boolean DEBUG = false;
 
     private static String PlatformEncoding;
-    private static boolean JVM_is_64_bit;
+    private static final boolean JVM_is_64_bit;
     
     static {
 
@@ -105,10 +105,7 @@ public class Util
 
         final String bits = System.getProperty("sun.arch.data.model");
 
-        if (bits.equals("64"))
-            JVM_is_64_bit = true;
-        else
-            JVM_is_64_bit = false;
+        JVM_is_64_bit = bits.equals("64");
 
         PlatformName = osName + " " + OSVersion + " " + osArch;
 
@@ -151,10 +148,8 @@ public class Util
             Util.MacOSXVersion = osVersionNumber;
 
             if (DEBUG) out("Mac OS X major version number (float): " + osVersionNumber);
-            if (osVersionNumber >= 10.5) // Really this is a "leopard or later" flag
-                OSisMacLeopard = true;
-            else
-                OSisMacLeopard = false;
+            // Really this is a "leopard or later" flag
+            OSisMacLeopard = osVersionNumber >= 10.5;
                 // OSisMacLeopard = // Really this is a "leopard (10.5) or later" flag
                 //     OSVersion.startsWith("10.5") || // Leopard
                 //     OSVersion.startsWith("10.6") || // Snow Leopard
@@ -401,7 +396,7 @@ public class Util
     public static boolean isMacAquaLookAndFeel()
     {
         // we can't set this at static init time because the LAF can be set after that
-        if (MacAquaLAF_set == false) {
+        if (!MacAquaLAF_set) {
             MacAquaLAF =
                 isMacPlatform() &&
                         javax.swing.UIManager.getLookAndFeel().getName().toLowerCase().contains("aqua");
@@ -716,7 +711,7 @@ public class Util
     
     public static String encodeURLData(String url) {
         try {
-            url = URLEncoder.encode(url, "UTF-8");
+            url = URLEncoder.encode(url, StandardCharsets.UTF_8);
             url = url.replaceAll("\\+", "%20"); // Mail clients don't understand '+' as space
         } catch (Throwable t) {
             // should never happen:
@@ -841,11 +836,11 @@ public class Util
         if (url.indexOf('%') >= 0) {
             // DECODE it, in case there are already any encodings,
             // we don't want to double-encode.
-            url = java.net.URLDecoder.decode(url, "UTF-8");
+            url = java.net.URLDecoder.decode(url, StandardCharsets.UTF_8);
             if (DEBUG) System.err.println("  DECODE UTF [" + url + "]");
         }
 
-        url = java.net.URLEncoder.encode(url, "UTF-8"); // URLEncoder is way overzealous...
+        url = java.net.URLEncoder.encode(url, StandardCharsets.UTF_8); // URLEncoder is way overzealous...
         if (DEBUG) System.err.println("  ENCODE UTF [" + url + "]");
 
         // now decode the over-coded stuff -- these are all crucial characters
@@ -883,7 +878,7 @@ public class Util
                 try {
                     Class macFileManager = Class.forName("com.apple.eio.FileManager");
                     //Class macFileManager = ClassLoader.getSystemClassLoader().loadClass("com.apple.eio.FileManager");
-                    macOpenURL_Method = macFileManager.getMethod("openURL", new Class[] { String.class });
+                    macOpenURL_Method = macFileManager.getMethod("openURL", String.class);
                 } catch (Exception e) {
                     System.err.println("Failed to find Mac FileManager or openURL method: will not be able to display URL content.");
                     e.printStackTrace();
@@ -893,7 +888,7 @@ public class Util
             
             if (macOpenURL_Method != null) {
                 try {
-                    macOpenURL_Method.invoke(null, new Object[] { url });
+                    macOpenURL_Method.invoke(null, url);
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new UnsupportedOperationException("com.apple.eio.FileManager.openURL " + e);
@@ -1145,7 +1140,7 @@ public class Util
         final int len = s.length();
         final StringBuilder buf = new StringBuilder(len);
         // copy in everything we've skipped in the original string up to now
-        buf.append(s.substring(0, i));
+        buf.append(s, 0, i);
         //System.out.println("DECODE START " + buf);
         for ( ; i < len; i++) {
             final char c = s.charAt(i);
@@ -2296,8 +2291,7 @@ public class Util
         if (l == null)
             return "<null Line2D>";
         else
-            return ""
-                + (float)l.getX1() + "," + (float)l.getY1()
+            return (float)l.getX1() + "," + (float)l.getY1()
                 + " -> "
                 + (float)l.getX2() + "," + (float)l.getY2()
                 ;
@@ -2322,9 +2316,9 @@ public class Util
     public static String oneDigitDecimal(double x) {
         int tenX = (int) Math.round(x * 10);
         if ((tenX / 10) * 10 == tenX)
-            return new Integer(tenX / 10).toString();
+            return Integer.valueOf(tenX / 10).toString();
         else
-            return new Float( ((float)tenX) / 10f ).toString();
+            return Float.toString(((float) tenX) / 10f);
     }
 
     /** @return a friendly looking string to represent the given number of bytes: e.g.: 120k, or 3.8M.
@@ -2632,7 +2626,7 @@ public class Util
 
         //return quote((String) o);
         //return TERM_RED + quote((String)s) + TERM_CLEAR;
-        return TERM_BOLD + quote((String)s) + TERM_CLEAR;
+        return TERM_BOLD + quote(s) + TERM_CLEAR;
     }
     
     /**
@@ -2649,7 +2643,7 @@ public class Util
         }
         if (o instanceof java.lang.Number) {
             // special case for strings: we dont care about hashCode / type -- just return quoted
-            return o.toString() + " (" + o.getClass().getSimpleName() + ")";
+            return o + " (" + o.getClass().getSimpleName() + ")";
             //return TERM_RED + '"' + o.toString() + '"' + TERM_CLEAR;
         }
         
@@ -2772,7 +2766,7 @@ public class Util
             return s;
         int pad = wide - s.length();
         StringBuilder buf = new StringBuilder(wide);
-        if (alignRight == false)
+        if (!alignRight)
             buf.append(s);
         while (pad-- > 0)
             buf.append(c);
@@ -2790,16 +2784,15 @@ public class Util
 
     @SuppressWarnings("PointlessBitwiseExpression")
     public static String toBase2(byte b) {
-        StringBuilder buf = new StringBuilder(8);
-        buf.append((b & (1<<7)) == 0 ? '0' : '1');
-        buf.append((b & (1<<6)) == 0 ? '0' : '1');
-        buf.append((b & (1<<5)) == 0 ? '0' : '1');
-        buf.append((b & (1<<4)) == 0 ? '0' : '1');
-        buf.append((b & (1<<3)) == 0 ? '0' : '1');
-        buf.append((b & (1<<2)) == 0 ? '0' : '1');
-        buf.append((b & (1<<1)) == 0 ? '0' : '1');
-        buf.append((b & (1<<0)) == 0 ? '0' : '1');
-	return buf.toString();
+        String buf = String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
+                ((b & (1 << 6)) == 0 ? '0' : '1') +
+                ((b & (1 << 5)) == 0 ? '0' : '1') +
+                ((b & (1 << 4)) == 0 ? '0' : '1') +
+                ((b & (1 << 3)) == 0 ? '0' : '1') +
+                ((b & (1 << 2)) == 0 ? '0' : '1') +
+                ((b & (1 << 1)) == 0 ? '0' : '1') +
+                ((b & (1 << 0)) == 0 ? '0' : '1');
+	return buf;
     }
     
     
@@ -2900,7 +2893,7 @@ public class Util
 
         //System.err.println("ServerSocket: " + new ServerSocket(0)); // not sensitive to network availability
       
-       if (false && args.length > 0 && args[0].startsWith("-")) {
+       if (false) {
             String host = args[0].substring(1);
             InetAddress[] ips = InetAddress.getAllByName(host);
             System.out.println(host + " IP's: " + Arrays.asList(ips));

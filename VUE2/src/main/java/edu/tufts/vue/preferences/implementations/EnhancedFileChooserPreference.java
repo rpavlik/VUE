@@ -60,12 +60,12 @@ public class EnhancedFileChooserPreference extends GenericBooleanPreference {
 	}
 	public String getTitle()
 	{
-		return new String(VueResources.getString("preference.enhancedfilechooser.title"));
+		return VueResources.getString("preference.enhancedfilechooser.title");
 	}
 	
 	public String getDescription()
 	{
-		return new String(VueResources.getString("preference.enhancedfilechooser.message"));
+		return VueResources.getString("preference.enhancedfilechooser.message");
 	}
 	
 	public String getPrefName()

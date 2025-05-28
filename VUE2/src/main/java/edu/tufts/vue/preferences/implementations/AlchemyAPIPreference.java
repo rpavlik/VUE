@@ -21,7 +21,7 @@ private static AlchemyAPIPreference _instance;
 				  "data.AlchemyAPIKey",
 				  "AlchemyAPI Key",
 				  "Set your AlchemyAPI Key:",
-				  (Object)(new String("")),
+               "",
 				  true								  
 				  );	   
 

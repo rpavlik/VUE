@@ -39,7 +39,7 @@ import org.osid.shared.SharedException;
 
 public class AgentManager implements org.osid.agent.AgentManager {
     public static final String SERIALIZED_FILE_NAME = "c:/java/serialized/org_osid_agent_manager.sid";
-    private Vector ids = null;
+    private final Vector ids = null;
     private Vector agents = null;
     private Vector groups = null;
 	private org.osid.OsidContext context = null;

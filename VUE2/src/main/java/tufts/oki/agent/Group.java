@@ -40,10 +40,10 @@ public class Group extends Agent implements org.osid.agent.Group {
     private String group_description = null;    //  Description of this group.
     private Vector agents = null;               //  Agents included in this group.
     private Vector subgroups = null;            //  Subgroups of this group.
-    private org.osid.shared.Id ag_id = null;                        //  The unique ID of this Agent.
-    private String ag_name = "unknown";             //  This display name of this Agent.
+    private final org.osid.shared.Id ag_id = null;                        //  The unique ID of this Agent.
+    private final String ag_name = "unknown";             //  This display name of this Agent.
     private org.osid.shared.Type ag_type;               //  The type of this Agent.
-    private Vector ag_props = null;                 //  A list of properties for this agent.
+    private final Vector ag_props = null;                 //  A list of properties for this agent.
     
     
     /** 

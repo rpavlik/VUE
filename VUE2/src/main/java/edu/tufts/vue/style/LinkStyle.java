@@ -21,7 +21,7 @@
 package edu.tufts.vue.style;
 
 public class LinkStyle extends Style implements java.io.Serializable {
-     public static final Style DEFAULT_LINK_STYLE= new LinkStyle(new String("Default"));
+     public static final Style DEFAULT_LINK_STYLE= new LinkStyle("Default");
    
     public static final String[] DEFAULT_KEYS = {"stroke-width","font-size"};
     public static final String[] DEFAULT_VALUES = {"1px","8px"};

@@ -38,21 +38,21 @@ import edu.tufts.vue.preferences.generics.BasePref;
 
 public class MetadataSchemaPreference extends BasePref implements ItemListener
 {
-	private String category;
-	private String name;
-	private String description;
+	private final String category;
+	private final String name;
+	private final String description;
 
 	private Object previousVraValue = null;
 	private Object previousDublinCoreValue = null;
 
-	private JCheckBox dublinCoreCheckbox = new JCheckBox();		
-	private JCheckBox vraCheckbox = new JCheckBox();
+	private final JCheckBox dublinCoreCheckbox = new JCheckBox();
+	private final JCheckBox vraCheckbox = new JCheckBox();
 
-	private String dublinCoreName = "dublinCore";
-	private String vraName = "vra";
+	private final String dublinCoreName = "dublinCore";
+	private final String vraName = "vra";
 
-	private boolean dublinCoreDefault = true;
-	private boolean vraDefault = false;
+	private final boolean dublinCoreDefault = true;
+	private final boolean vraDefault = false;
 	private boolean defaultValue = true;
 
 	private static final MetadataSchemaPreference metadataSchemaPrefernece = new MetadataSchemaPreference();
@@ -147,7 +147,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 		//Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 		//p.putBoolean(getPrefName(), box.isSelected());
 		if (box.equals(dublinCoreCheckbox)) {
-			setValue(dublinCoreName,Boolean.valueOf(box.isSelected()));
+			setValue(dublinCoreName, box.isSelected());
 
 			edu.tufts.vue.metadata.CategoryModel cats = tufts.vue.VUE.getCategoryModel();
 
@@ -159,7 +159,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 			}
 		}
 		else if (box.equals(vraCheckbox)) {
-			setValue(vraName,Boolean.valueOf(box.isSelected()));
+			setValue(vraName, box.isSelected());
 
 			edu.tufts.vue.metadata.CategoryModel cats = tufts.vue.VUE.getCategoryModel();
 
@@ -177,9 +177,9 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 	
 	public void setValue(String prefName, Object b) {
 		if (prefName.equals(dublinCoreName))
-			previousDublinCoreValue = Boolean.valueOf(dublinCoreCheckbox.isSelected());
+			previousDublinCoreValue = dublinCoreCheckbox.isSelected();
 		else if (prefName.equals(vraName))
-			previousVraValue = Boolean.valueOf(vraCheckbox.isSelected());
+			previousVraValue = vraCheckbox.isSelected();
 
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 		p.putBoolean(getPrefName(prefName), (Boolean) b);
@@ -188,7 +188,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 
 	public Object getValue(String prefName) {
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
-		Boolean b = Boolean.valueOf(p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName)));
+		Boolean b = p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName));
 		return b;
 	}
 
@@ -198,7 +198,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 		else if (prefName.equals(vraName))
 			return (previousVraValue == null) ? getDefaultValue(prefName) : previousVraValue;
 		else
-			return new Boolean(true);
+			return Boolean.TRUE;
 	}
 
 	public Object getDefaultValue(String prefName) {
@@ -207,7 +207,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 		else if (prefName.equals(vraName))
 			return vraDefault;		
 		else
-			return new Boolean(true);
+			return Boolean.TRUE;
 	}
 	
 	protected synchronized void _fireVuePrefEvent(String prefName) {
@@ -240,7 +240,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 
 	public Object getDefaultValue() {
 		// TODO Auto-generated method stub
-		return new Boolean("true");
+		return Boolean.TRUE;
 	}
 
 	public String getPrefName() {
@@ -250,7 +250,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 
 	public Object getValue() {
 		// TODO Auto-generated method stub
-		return new Boolean("true");
+		return Boolean.TRUE;
 	}
 
 	public void setValue(Object i) {

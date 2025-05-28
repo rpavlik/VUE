@@ -45,7 +45,7 @@ public abstract class GenericBooleanPreference extends BasePref<Boolean> impleme
         return getBoolean(prefName, defaultValue) ? Boolean.TRUE : Boolean.FALSE;
     }
     
-    private JCheckBox value = new JCheckBox();
+    private final JCheckBox value = new JCheckBox();
     private Boolean previousValue = null;
 
     // getValue is slow -- these may be checked constantly -- we locally
@@ -78,7 +78,7 @@ public abstract class GenericBooleanPreference extends BasePref<Boolean> impleme
 	
     /** interface VuePreference */
     public void setValue(Boolean b) {
-        previousValue = Boolean.valueOf(value.isSelected()); // better to use cachedValue?
+        previousValue = value.isSelected(); // better to use cachedValue?
         cachedValue = b;
         Preferences p = Preferences.userNodeForPackage(getPrefRoot());
         p.putBoolean(getPrefName(), cachedValue);
@@ -95,7 +95,7 @@ public abstract class GenericBooleanPreference extends BasePref<Boolean> impleme
     public Boolean getPreviousValue()
     {
         if (previousValue == null)
-            return (Boolean) getDefaultValue();
+            return getDefaultValue();
         else
             return previousValue;
     }
@@ -109,7 +109,7 @@ public abstract class GenericBooleanPreference extends BasePref<Boolean> impleme
         JCheckBox box = (JCheckBox)e.getSource();
         Preferences p = Preferences.userNodeForPackage(getPrefRoot());
         //p.putBoolean(getPrefName(), box.isSelected());
-        setValue(Boolean.valueOf(box.isSelected()));
+        setValue(box.isSelected());
     }
 	
     public JCheckBox getCheckBox()
@@ -172,7 +172,7 @@ public abstract class GenericBooleanPreference extends BasePref<Boolean> impleme
         // message.setForeground(Color.black);
         // booleanPanel.add(message);
         getCheckBox().addItemListener(this);
-        getCheckBox().setSelected((Boolean) getValue());
+        getCheckBox().setSelected(getValue());
         panel.add(booleanPanel, gbConstraints);
 	return panel;
     }

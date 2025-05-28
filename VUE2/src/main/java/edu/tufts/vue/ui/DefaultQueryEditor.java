@@ -29,18 +29,18 @@ public class DefaultQueryEditor extends javax.swing.JPanel
 implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelection.Listener
 {
 	//private edu.tufts.vue.fsm.FederatedSearchManager fsm = edu.tufts.vue.fsm.impl.VueFederatedSearchManager.getInstance();
-	private edu.tufts.vue.fsm.SourcesAndTypesManager sourcesAndTypesManager = edu.tufts.vue.fsm.impl.VueSourcesAndTypesManager.getInstance();
+	private final edu.tufts.vue.fsm.SourcesAndTypesManager sourcesAndTypesManager = edu.tufts.vue.fsm.impl.VueSourcesAndTypesManager.getInstance();
 	
-	private java.awt.GridBagLayout gbLayout = new java.awt.GridBagLayout();
-	private java.awt.GridBagConstraints gbConstraints = new java.awt.GridBagConstraints();
+	private final java.awt.GridBagLayout gbLayout = new java.awt.GridBagLayout();
+	private final java.awt.GridBagConstraints gbConstraints = new java.awt.GridBagConstraints();
 	
-	private static javax.swing.JTextField field = new javax.swing.JTextField(15);
+	private static final javax.swing.JTextField field = new javax.swing.JTextField(15);
 	private java.io.Serializable criteria = null;
 	private org.osid.shared.Properties searchProperties = null;
 	private org.osid.shared.Type searchType = null;
 	
-	private org.osid.shared.Type keywordSearchType = new edu.tufts.vue.util.Type("mit.edu","search","keyword");
-	private org.osid.shared.Type multiFieldSearchType = new edu.tufts.vue.util.Type("mit.edu","search","multiField");
+	private final org.osid.shared.Type keywordSearchType = new edu.tufts.vue.util.Type("mit.edu","search","keyword");
+	private final org.osid.shared.Type multiFieldSearchType = new edu.tufts.vue.util.Type("mit.edu","search","multiField");
 	
 	protected javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
 	
@@ -56,15 +56,15 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 	//private static final String NO_MESSAGE = "";
     private final javax.swing.JLabel selectMessage = new javax.swing.JLabel(SELECT_A_LIBRARY, javax.swing.JLabel.CENTER);
 	
-	private javax.swing.JButton moreOptionsButton = new tufts.vue.gui.VueButton("advancedSearchMore");
+	private final javax.swing.JButton moreOptionsButton = new tufts.vue.gui.VueButton("advancedSearchMore");
 	//private static final String MORE_OPTIONS = "";
 	//private javax.swing.JLabel moreOptionsLabel = new javax.swing.JLabel(MORE_OPTIONS);
-	private javax.swing.JPanel moreOptionsButtonPanel = new javax.swing.JPanel();
+	private final javax.swing.JPanel moreOptionsButtonPanel = new javax.swing.JPanel();
 
-	private javax.swing.JButton fewerOptionsButton = new tufts.vue.gui.VueButton("advancedSearchLess");
+	private final javax.swing.JButton fewerOptionsButton = new tufts.vue.gui.VueButton("advancedSearchLess");
 	//private static final String FEWER_OPTIONS = "";
 	//private javax.swing.JLabel fewerOptionsLabel = new javax.swing.JLabel(FEWER_OPTIONS);
-	private javax.swing.JPanel fewerOptionsButtonPanel = new javax.swing.JPanel();
+	private final javax.swing.JPanel fewerOptionsButtonPanel = new javax.swing.JPanel();
 	//private javax.swing.JPanel moreFewerPanel = new javax.swing.JPanel();
 	
 	private static final int NOTHING_SELECTED = 0;
@@ -77,8 +77,8 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 	private java.util.Vector<String> typesVector = null;
 	
 	// advanced search universe of types
-	private java.util.Vector<String> advancedSearchUniverseOfTypeStringsVector = new java.util.Vector<>();
-	private java.util.Vector<String> advancedSearchPromptsVector = new java.util.Vector<>();
+	private final java.util.Vector<String> advancedSearchUniverseOfTypeStringsVector = new java.util.Vector<>();
+	private final java.util.Vector<String> advancedSearchPromptsVector = new java.util.Vector<>();
 	
 	// maintain a vector for current values
 	private String[] advancedSearchFieldsText = null;
@@ -109,8 +109,8 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 			searchButton2.setEnabled(false);
 			field.addKeyListener(new KeyAdapter(){
 			      public void keyReleased(KeyEvent ke){
-			          searchButton1.setEnabled(field.getText().equals("")==false);
-			          searchButton2.setEnabled(field.getText().equals("")==false);
+			          searchButton1.setEnabled(!field.getText().equals(""));
+			          searchButton2.setEnabled(!field.getText().equals(""));
 			        }
 			      });
 			moreOptionsButtonPanelgbConstraints.gridx = 0;
@@ -141,7 +141,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 			fewerOptionsButtonPanelgbConstraints.anchor= java.awt.GridBagConstraints.EAST;
 			fewerOptionsButtonPanelgbConstraints.ipadx=20;
 			fewerOptionsButtonPanelgbConstraints.weightx = 1;
-			fewerOptionsButtonPanel.add(this.searchButton2,fewerOptionsButtonPanelgbConstraints);
+			fewerOptionsButtonPanel.add(searchButton2,fewerOptionsButtonPanelgbConstraints);
 			
 			searchButton1.addActionListener(this);
 			searchButton2.addActionListener(this);
@@ -345,7 +345,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 			 int len = advancedFields.length;
 			 int sum = 0;
 			 for (javax.swing.JTextField advancedField : advancedFields) {
-				 sum += ((String) (advancedField.getText())).replaceAll(" ", "").length();
+				 sum += advancedField.getText().replaceAll(" ", "").length();
 			 }
 		         searchButton2.setEnabled(sum > 0);
 		         searchButton1.setEnabled(sum > 0);
@@ -370,7 +370,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 			for (int i=0; i < size; i++) {
 				gbConstraints.fill = java.awt.GridBagConstraints.NONE;
 				gbConstraints.weightx = 0;
-				String prompt = (String)typesVector.elementAt(i);//+":";
+				String prompt = typesVector.elementAt(i);//+":";
 				add(new javax.swing.JLabel(prompt +":"),gbConstraints);
 				gbConstraints.gridx = 1;
 				gbConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -378,7 +378,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 				advancedFields[i] = new javax.swing.JTextField(8);
 				advancedFields[i].addKeyListener(advancedKeyListener);
 				if (prompt.equals("Keyword")) {
-					advancedFields[i].setText(this.field.getText());
+					advancedFields[i].setText(field.getText());
 				} else {
 					int index = advancedSearchPromptsVector.indexOf(prompt);
 					advancedFields[i].setText(this.advancedSearchFieldsText[index]);
@@ -458,7 +458,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 				// make sure keywords is sticky, and so are other fields
 				int size = this.typesVector.size();
 				for (int i=0; i < size; i++) {
-					String prompt = (String)this.typesVector.elementAt(i);
+					String prompt = this.typesVector.elementAt(i);
 					if (prompt.equals("Keyword")) {
 						field.setText(advancedFields[i].getText());
 					} else {						
@@ -469,7 +469,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 				}
 			}
 		} else {
-			if (this.mapBasedSearchCheckBox.isSelected())
+			if (mapBasedSearchCheckBox.isSelected())
 			{
 
 		        if (searchButton1.getText() == StopLabel) {
@@ -622,7 +622,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 
 								int index = advancedSearchUniverseOfTypeStringsVector.indexOf(nextTypeString);
 								if (index != -1) {
-									String prompt = (String) advancedSearchPromptsVector.elementAt(index);
+									String prompt = advancedSearchPromptsVector.elementAt(index);
 									if (!union.contains(prompt)) {
 										union.addElement(prompt);
 									}
@@ -690,7 +690,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 								int index = advancedSearchUniverseOfTypeStringsVector.indexOf(nextTypeString);
 //								System.out.println("QueryEditor(PartType): Respository:"+repositories[i].getDisplayName()+" part type:"+nextTypeString+" index: "+index);
 								if (index != -1) {
-									String prompt = (String) advancedSearchPromptsVector.elementAt(index);
+									String prompt = advancedSearchPromptsVector.elementAt(index);
 									if (!intersection.contains(prompt)) {
 										intersection.addElement(prompt);
 									}
@@ -716,7 +716,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 
 					int numCandidates = intersection.size();
 					for (int k=0; k < numCandidates; k++) {
-						String nextType = (String)intersection.elementAt(k);
+						String nextType = intersection.elementAt(k);
 						if (nextIntersection.contains(nextType)) {
 							newIntersection.addElement(nextType);
 						}
@@ -797,13 +797,13 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 				buffer.append("<field><type>");
 				
 				// determine type
-				String prompt = (String)typesVector.elementAt(i);
+				String prompt = typesVector.elementAt(i);
 				String typeString = null;
 				int index = advancedSearchPromptsVector.indexOf(prompt);
 				if (index == -1) {
 					typeString = "partStructure/keywords@mit.edu";
 				} else {
-					typeString = (String)advancedSearchUniverseOfTypeStringsVector.elementAt(index);
+					typeString = advancedSearchUniverseOfTypeStringsVector.elementAt(index);
 				}
 				
 				// append elements
@@ -820,14 +820,14 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 
 	public void selectionChanged(LWSelection selection) {
 		if (mapBasedSearchCheckBox.isSelected() && !(selection.size() == 1 && selection.get(0) instanceof tufts.vue.LWNode))
-		{	this.searchButton1.setEnabled(false);
+		{	searchButton1.setEnabled(false);
 			field.setText(VueResources.getString("analyzeraction.selectnode"));
 		}
 		else if (mapBasedSearchCheckBox.isSelected())
 		{
 			 if (searchButton1.getText() != StopLabel) 
 			 {
-				 this.searchButton1.setEnabled(true);
+				 searchButton1.setEnabled(true);
 				 field.setText("");
 			 }
 		}

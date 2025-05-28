@@ -18,6 +18,7 @@ package edu.tufts.vue.preferences.implementations;
 import java.io.File;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.TreeSet;
@@ -80,7 +81,7 @@ public class LanguagePreference extends edu.tufts.vue.preferences.generics.Gener
 					URL					url = loader.getResource("tufts/vue/");
 
 					if (url != null) {
-						filename = URLDecoder.decode(url.getFile(), "UTF-8");
+						filename = URLDecoder.decode(url.getFile(), StandardCharsets.UTF_8);
 						filename = filename.substring(filename.indexOf("/"), filename.lastIndexOf("!"));
 
 						File			file = new File(filename);

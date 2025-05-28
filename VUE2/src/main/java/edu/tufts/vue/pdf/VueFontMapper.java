@@ -44,10 +44,10 @@ public class VueFontMapper implements FontMapper {
     
     /** Maps aliases to names.
      */    
-    private HashMap aliases = new HashMap();
+    private final HashMap aliases = new HashMap();
     /** Maps names to BaseFont parameters.
      */    
-    private HashMap mapper = new HashMap();
+    private final HashMap mapper = new HashMap();
     /**
      * Returns a BaseFont which can be used to represent the given AWT Font
      *

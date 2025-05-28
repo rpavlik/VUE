@@ -61,7 +61,7 @@ public class PreferencesDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
-	private GridBagConstraints gbConstraints = new GridBagConstraints();
+	private final GridBagConstraints gbConstraints = new GridBagConstraints();
 
 	private JTree prefTree;
 
@@ -83,8 +83,8 @@ public class PreferencesDialog extends JDialog {
 		createSplitPane();
 		createButtonPanel();
 		String[] array = new String[2];
-		array[0] = new String(VueResources.getString("preferencedailog.vuepreference"));
-		array[1] = new String(VueResources.getString("preferences.category.mapdisplay"));
+		array[0] = VueResources.getString("preferencedailog.vuepreference");
+		array[1] = VueResources.getString("preferences.category.mapdisplay");
 		//array[2] = new String(VueResources.getString("preferencedailog.images"));
 //		array[2] = new String("Metadata:");
 	//	array[3] = new String("Windows:");
@@ -283,7 +283,7 @@ public class PreferencesDialog extends JDialog {
                 DefaultMutableTreeNode n = (DefaultMutableTreeNode) nodes
                         .nextElement();
                 if ((n instanceof PrefCategoryTreeNode)
-                        && (((PrefCategoryTreeNode) n).toString().equals(PreferencesManager.mapCategoryKeyToName(vp
+                        && (n.toString().equals(PreferencesManager.mapCategoryKeyToName(vp
                         .getCategoryKey())))) {
                     try {
                         n.add(new PrefTreeNode(vp));

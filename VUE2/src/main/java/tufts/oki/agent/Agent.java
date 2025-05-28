@@ -38,7 +38,7 @@ import java.io.*;
 public class Agent implements org.osid.agent.Agent{
     private org.osid.shared.Id ag_id = null;                        //  The unique ID of this Agent.
     private String ag_name = "unknown";             //  This display name of this Agent.
-    private org.osid.shared.Type ag_type;               //  The type of this Agent.
+    private final org.osid.shared.Type ag_type;               //  The type of this Agent.
     private Vector ag_props = null;                 //  A list of properties for this agent.
     
     /**
@@ -79,7 +79,7 @@ public class Agent implements org.osid.agent.Agent{
      *  @return  The unique ID object for this Agent.
      */
     public org.osid.shared.Id getId() {
-        return (org.osid.shared.Id) ag_id;
+        return ag_id;
     }
     
     /**

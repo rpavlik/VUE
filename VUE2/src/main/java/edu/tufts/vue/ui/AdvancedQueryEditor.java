@@ -22,25 +22,23 @@ extends javax.swing.JPanel
 implements edu.tufts.vue.fsm.QueryEditor,
 java.awt.event.ActionListener
 {
-	private javax.swing.JTextField partField = new javax.swing.JTextField(12);
-	private javax.swing.JTextField valueField = new javax.swing.JTextField(20);
+	private final javax.swing.JTextField partField = new javax.swing.JTextField(12);
+	private final javax.swing.JTextField valueField = new javax.swing.JTextField(20);
 	private java.io.Serializable criteria = null;
 	private org.osid.shared.Properties searchProperties = null;
-	private javax.swing.JPanel AdvancedSearch = new javax.swing.JPanel(new java.awt.BorderLayout());
-	private ConditionsTableModel m_model=new ConditionsTableModel();
-	private javax.swing.JTable conditionsTable = new javax.swing.JTable(m_model);
-	private javax.swing.JComboBox endusersComboBox;
-    private javax.swing.CellEditor defaultCellEditor;
-	private javax.swing.JComboBox maxReturnsAdvancedSearch;  // combobox for advanced search.
-    private String[] maxReturnItems = {"10","20",};
-	protected javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
+	private final javax.swing.JPanel AdvancedSearch = new javax.swing.JPanel(new java.awt.BorderLayout());
+	private final ConditionsTableModel m_model=new ConditionsTableModel();
+	private final javax.swing.JTable conditionsTable = new javax.swing.JTable(m_model);
+    private javax.swing.JComboBox maxReturnsAdvancedSearch;  // combobox for advanced search.
+    protected javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
 	private org.osid.shared.Type searchType = null;
 	
 	public AdvancedQueryEditor()
 	{
  		try {
-			searchProperties = new edu.tufts.vue.util.SharedProperties();		
-			maxReturnsAdvancedSearch = new javax.swing.JComboBox(maxReturnItems);
+			searchProperties = new edu.tufts.vue.util.SharedProperties();
+            String[] maxReturnItems = {"10", "20",};
+            maxReturnsAdvancedSearch = new javax.swing.JComboBox(maxReturnItems);
 			maxReturnsAdvancedSearch.setEditable(true);
 		} catch (Throwable t) {
 		}
@@ -88,12 +86,12 @@ java.awt.event.ActionListener
             
             javax.swing.JComboBox fieldsComboBox = new javax.swing.JComboBox(fields);
             fieldsComboBox.addActionListener(this);
-            this.endusersComboBox = new javax.swing.JComboBox(endusers);
+            javax.swing.JComboBox endusersComboBox = new javax.swing.JComboBox(endusers);
             javax.swing.JComboBox operatorsComboBox = new javax.swing.JComboBox(operators);
             
             conditionsTable.getColumnModel().getColumn(0).setCellEditor(new javax.swing.DefaultCellEditor(fieldsComboBox));
             conditionsTable.getColumnModel().getColumn(1).setCellEditor(new javax.swing.DefaultCellEditor(operatorsComboBox));
-            this.defaultCellEditor = conditionsTable.getColumnModel().getColumn(2).getCellEditor();
+            javax.swing.CellEditor defaultCellEditor = conditionsTable.getColumnModel().getColumn(2).getCellEditor();
         } catch(Exception ex) {
             System.out.println("Can't set the editors"+ex);
         }
@@ -217,10 +215,10 @@ java.awt.event.ActionListener
 	
 	public class ConditionsTableModel extends javax.swing.table.AbstractTableModel {
         
-        java.util.List m_conditions;
+        java.util.List<Condition> m_conditions;
         
         public ConditionsTableModel() {
-            m_conditions=new java.util.ArrayList();
+            m_conditions=new java.util.ArrayList<>();
             Condition cond = new Condition();
             cond.setProperty("");
             cond.setOperator(ComparisonOperator.eq);
@@ -228,11 +226,11 @@ java.awt.event.ActionListener
             m_conditions.add(cond);
         }
         
-        public ConditionsTableModel(java.util.List conditions) {
+        public ConditionsTableModel(java.util.List<Condition> conditions) {
             m_conditions=conditions;
         }
         
-        public java.util.List getConditions() {
+        public java.util.List<Condition> getConditions() {
             return m_conditions;
         }
         
@@ -326,7 +324,7 @@ java.awt.event.ActionListener
     
     public class ConditionSelectionListener  implements javax.swing.event.ListSelectionListener {
         private int m_selectedRow;
-        private javax.swing.JButton m_deleteButton;
+        private final javax.swing.JButton m_deleteButton;
         
         public ConditionSelectionListener(javax.swing.JButton deleteButton, int selectedRow) {
             m_selectedRow=selectedRow;
@@ -352,18 +350,14 @@ java.awt.event.ActionListener
         }
         
         private void updateButtons() {
-            if (getSelectedRow()==-1) {
-                m_deleteButton.setEnabled(false);
-            } else {
-                m_deleteButton.setEnabled(true);
-            }
+            m_deleteButton.setEnabled(getSelectedRow() != -1);
         }
     }
     
     public class AddConditionButtonListener
 		implements java.awt.event.ActionListener {
 			
-			private ConditionsTableModel m_model;
+			private final ConditionsTableModel m_model;
 			
 			public AddConditionButtonListener(ConditionsTableModel model) {
 				m_model=model;
@@ -390,8 +384,8 @@ java.awt.event.ActionListener
     public class DeleteConditionButtonListener
 		implements java.awt.event.ActionListener {
 			
-			private ConditionsTableModel m_model;
-			private ConditionSelectionListener m_sListener;
+			private final ConditionsTableModel m_model;
+			private final ConditionSelectionListener m_sListener;
 			
 			public DeleteConditionButtonListener(ConditionsTableModel model,
 												 ConditionSelectionListener sListener) {

@@ -66,7 +66,7 @@ public class AutoZoomPreference extends GenericBooleanPreference {
 	
 	public String getDescription()
 	{
-		return new String("Enables zooming when rolling over a node");
+		return "Enables zooming when rolling over a node";
 	}
 	
 	public String getPrefName()

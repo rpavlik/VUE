@@ -31,8 +31,8 @@ import edu.tufts.vue.preferences.interfaces.VuePreference;
 public class PreferencesManager {
 
 	  private static PreferencesManager ref;
-	  private static List preferences = new ArrayList();
-	  private static Vector categories = new Vector();
+	  private static final List preferences = new ArrayList();
+	  private static final Vector categories = new Vector();
 	
 	  static
 	  {
@@ -61,8 +61,7 @@ public class PreferencesManager {
 	  public static void registerPreference(Class pref)
 	  {
 		  preferences.add(pref);
-		  return;
-	  }
+      }
 	  
 	  public static Vector getCategories()
 	  {

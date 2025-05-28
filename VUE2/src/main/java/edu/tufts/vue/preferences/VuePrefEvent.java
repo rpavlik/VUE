@@ -18,8 +18,8 @@ import javax.swing.event.ChangeEvent;
 
 public class VuePrefEvent extends ChangeEvent {
 
-	private Object oldValue;
-	private Object newValue;
+	private final Object oldValue;
+	private final Object newValue;
 	private static final long serialVersionUID = 1L;
 	
 	public VuePrefEvent(Object arg0, Object oldValue, Object newValue) {

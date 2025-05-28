@@ -185,7 +185,7 @@ public class WidgetStack extends Widget
             mGridBag.add(widgetPanel, _gbc);
             */
         } else {
-            if (false && Widget.wantsScroller(widget)) {
+            if (false) {
                 // Would need to handle seeing up through the contained
                 // widget for property changes: e.g. hidden would
                 // need to hide the scroller, not the widget.
@@ -347,11 +347,7 @@ public class WidgetStack extends Widget
 
     private void updateDefaultExpander() {    	
         //System.out.println("EXPANDERS OPEN: " + mExpandersOpen);
-        if (mExpandersOpen == 0){        	
-            mDefaultExpander.setVisible(true);
-        }
-        else
-            mDefaultExpander.setVisible(false);
+        mDefaultExpander.setVisible(mExpandersOpen == 0);
     }
 
     private void updateLockingState() {
@@ -398,7 +394,7 @@ public class WidgetStack extends Widget
 
     //private static final char Chevron = 0xBB; // unicode "right-pointing double angle quotation mark"
 
-    private boolean _forcePrefSize = false;
+    private final boolean _forcePrefSize = false;
     @Override
     public Dimension getSize() {
         if (DEBUG.WIDGET) {
@@ -724,7 +720,7 @@ public class WidgetStack extends Widget
         public void propertyChange(java.beans.PropertyChangeEvent e) {
             final String key = e.getPropertyName();
         
-            if (DEBUG.WIDGET && (true || !key.equals("ancestor")))
+            if (DEBUG.WIDGET)
                 out(GUI.name(e.getSource()) + " property \"" + key + "\" newValue=[" + GUI.name(e.getNewValue()) + "]");
 
             if (key == EXPANSION_KEY) {
@@ -755,7 +751,7 @@ public class WidgetStack extends Widget
                 Component src = (Component) e.getSource();
             
                 if (DEBUG.WIDGET) GUI.dumpSizes(src);
-                if (true||DEBUG.WIDGET) out("revalidate on size property change");
+                if (true) out("revalidate on size property change");
                 revalidate();
                 if (DEBUG.WIDGET) GUI.dumpSizes(src);
             }
@@ -872,7 +868,7 @@ public class WidgetStack extends Widget
         private void paintGradient(Graphics2D g)
         {
         	//System.out.println("paint gradient " + mGradient.toString());
-            if (false && mEmbeddedStack)
+            if (false)
                 g.setPaint(GradientEmbedded);
             else
                 g.setPaint(mGradient);
@@ -1042,7 +1038,6 @@ public class WidgetStack extends Widget
             if (text == null) {
             	this.setToolTipText(null);
                 setVisible(false);
-                return;
             }
             else
             {
@@ -1109,7 +1104,6 @@ public class WidgetStack extends Widget
 
             if (action == null) {
                 setVisible(false);
-                return;
             }
             else
             {            	
@@ -1181,7 +1175,6 @@ public class WidgetStack extends Widget
 
             if (action == null) {
                 setVisible(false);
-                return;
             }
             else
             {            	

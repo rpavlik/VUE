@@ -65,7 +65,7 @@ public class StyleMap {
     }
     
     public static String printStyles() {
-        String s  = new String();
+        String s  = "";
         Collection<Style> c = m.values();
         for (Style style : c) {
             s += style.toString();
@@ -74,7 +74,7 @@ public class StyleMap {
     }
     
     public static String styleToCSS() {
-        String s = new String();
+        String s = "";
         Collection<Style> c = m.values();
         for(Style style: c) {
             s +=  style.toCSS();

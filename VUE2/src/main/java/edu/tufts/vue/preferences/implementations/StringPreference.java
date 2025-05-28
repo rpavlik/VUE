@@ -47,22 +47,22 @@ import edu.tufts.vue.preferences.ui.PreferencesDialog;
 public class StringPreference extends BasePref implements ActionListener
 {
 
-	private JPanel		panel = null;
-	private JLabel		titleLabel = null;
-	private JTextArea		messageArea = null;
-	private JTextField field = new JTextField(30);
+	private JPanel panel = null;
+	private JLabel titleLabel = null;
+	private JTextArea messageArea = null;
+	private final JTextField field = new JTextField(30);
 	private JPanel innerPanel = null;
-	private JButton resetButton =null;// new JButton(VueResources.getString("button.reset.label"));
-	private JButton saveButton = null;//new JButton(VueResources.getString("button.save.label"));
+	private JButton resetButton = null;// new JButton(VueResources.getString("button.reset.label"));
+	private JButton saveButton = null;// new JButton(VueResources.getString("button.save.label"));
 
-	private String category;
-	private String name;
-	private String key;
-	private String description;
-	private Object defaultValue;
+	private final String category;
+	private final String name;
+	private final String key;
+	private final String description;
+	private final Object defaultValue;
 	private Object previousValue;
-	private Preferences p = Preferences.userNodeForPackage(getPrefRoot());
-	
+	private final Preferences p = Preferences.userNodeForPackage(getPrefRoot());
+
 	public static StringPreference create(String category, String key, String name, String desc, Object defaultValue, boolean showInUI)
 	{
 		return new StringPreference(category,key,name,desc,defaultValue,showInUI);
@@ -176,7 +176,7 @@ public class StringPreference extends BasePref implements ActionListener
 	}
 
 	public Object getValue(){
-		String s = (String)(p.get(getPrefName(), (String)getDefaultValue()));
+		String s = p.get(getPrefName(), (String)getDefaultValue());
 		return s;
 	
 	}

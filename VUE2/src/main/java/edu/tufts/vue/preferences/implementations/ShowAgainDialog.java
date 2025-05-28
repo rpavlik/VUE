@@ -31,13 +31,13 @@ import tufts.vue.VueUtil;
 
 public class ShowAgainDialog  extends JDialog implements ActionListener, KeyListener
 {
-    private JButton okButton, cancelButton;       
+    private JButton okButton, cancelButton;
     private boolean okCancel = true;
-    //private JLabel showAgain = new JLabel("don't show again ");
-    private JCheckBox showAgainBox = new JCheckBox();
-    private BooleanPreference showAgainPref = null; 
-    private String okLabel;
-    private String cancelLabel;
+    // private JLabel showAgain = new JLabel("don't show again ");
+    private final JCheckBox showAgainBox = new JCheckBox();
+    private BooleanPreference showAgainPref = null;
+    private final String okLabel;
+    private final String cancelLabel;
     public ShowAgainDialog(Frame parentFrame, String prefName, String title, String okLabel, String cancelLabel)
     {
     	super(parentFrame, title, true);
@@ -62,11 +62,12 @@ public class ShowAgainDialog  extends JDialog implements ActionListener, KeyList
     {
     	   setUpUI(contentPanel);	
     }
-    public boolean showAgain()
-    {
-    	return ((Boolean) showAgainPref.getValue());
+    public boolean showAgain() {
+        return showAgainPref.getValue();
     }
-    private static int newcnt = 1;
+
+    private static final int newcnt = 1;
+
     private void setUpUI(JPanel panel)
     {
         okButton = new JButton(okLabel);
@@ -155,18 +156,16 @@ public class ShowAgainDialog  extends JDialog implements ActionListener, KeyList
                     this.dispose();
                 }catch (Throwable t) { t.printStackTrace();}
         	}else{
-        		okCancel = true;
-        		showAgainPref.setValue(new Boolean(!showAgainBox.isSelected()));
-        		dispose();
-        	}
-        }
-        else if (e.getSource() == cancelButton)
-        { 
-        	if(cancelLabel.equals("Close Window")){ 
-        		showAgainPref.setValue(new Boolean(!showAgainBox.isSelected()));
-        	}
-        	   okCancel = false;
-               dispose();          
+                okCancel = true;
+                showAgainPref.setValue(!showAgainBox.isSelected());
+                dispose();
+            }
+        } else if (e.getSource() == cancelButton) {
+            if (cancelLabel.equals("Close Window")) {
+                showAgainPref.setValue(!showAgainBox.isSelected());
+            }
+            okCancel = false;
+            dispose();
         }
     }
         //key events for the dialog box
@@ -180,7 +179,7 @@ public class ShowAgainDialog  extends JDialog implements ActionListener, KeyList
         	
             if (okButton.isFocusOwner()) {
             	okCancel = true;
-            	showAgainPref.setValue(new Boolean(!showAgainBox.isSelected()));
+            	showAgainPref.setValue(!showAgainBox.isSelected());
                 dispose();             
             } else if (cancelButton.isFocusOwner()) {
                 //else if the cancel button has the focus, just aborts it

@@ -71,7 +71,7 @@ public class ImageSizePreference extends GenericSliderPreference {
 	 
 	 public Object getDefaultValue()
 	 {
-		 return new Integer(75);
+		 return 75;
 	
 	 }
 	 
@@ -81,19 +81,18 @@ public class ImageSizePreference extends GenericSliderPreference {
 		setDefaultValueMappedToSlider();		
         //Create the label table
         Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
-        labelTable.put( new Integer( HASHMARK_0 ), new JLabel(VueResources.getString("jlabel.off")) );
-        labelTable.put( new Integer( HASHMARK_1 ), new JLabel("16x16") );
-        labelTable.put( new Integer( HASHMARK_2 ), new JLabel("32x32") );
-        labelTable.put( new Integer( HASHMARK_3 ), new JLabel("64x64") );
-        labelTable.put( new Integer( HASHMARK_4 ), new JLabel("128x128") );
-        labelTable.put( new Integer( HASHMARK_5 ), new JLabel("256x256") );
-        labelTable.put( new Integer( HASHMARK_6 ), new JLabel("512x512") );        
+        labelTable.put(HASHMARK_0, new JLabel(VueResources.getString("jlabel.off")) );
+        labelTable.put(HASHMARK_1, new JLabel("16x16") );
+        labelTable.put(HASHMARK_2, new JLabel("32x32") );
+        labelTable.put(HASHMARK_3, new JLabel("64x64") );
+        labelTable.put(HASHMARK_4, new JLabel("128x128") );
+        labelTable.put(HASHMARK_5, new JLabel("256x256") );
+        labelTable.put(HASHMARK_6, new JLabel("512x512") );
         slider.setLabelTable( labelTable );
         
         slider.setPaintLabels(true);
         getSlider().addChangeListener(this);
-        return;
-	}
+    }
 	
 	/*
 	 * Lots of mapping back and forth between the linear scale of the Slider and the
@@ -130,9 +129,8 @@ public class ImageSizePreference extends GenericSliderPreference {
 				slider.setValue(HASHMARK_6);
 				break;			
 		}
-		
-		return;
-	}	
+
+    }
 	
 	public int getSliderValueMappedToPref()
 	{
@@ -167,7 +165,7 @@ public class ImageSizePreference extends GenericSliderPreference {
 	
 	public String getDescription()
 	{
-		return new String(VueResources.getString("preference.imagesize.description"));
+		return VueResources.getString("preference.imagesize.description");
 	}
 	
 	public String getPrefName()
@@ -183,7 +181,7 @@ public class ImageSizePreference extends GenericSliderPreference {
 	{
 		JSlider source = (JSlider)e.getSource();
 	    if (!source.getValueIsAdjusting()) {
-	    	setValue(Integer.valueOf(getSliderValueMappedToPref()));
+	    	setValue(getSliderValueMappedToPref());
 	    }
 	}
 	

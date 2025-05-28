@@ -38,39 +38,39 @@ import edu.tufts.vue.preferences.generics.BasePref;
 public class ShowIconsPreference extends BasePref implements ItemListener
 {
 	private static final boolean DEBUG = false;
-	private String category;
-	private String name;
-	private String description;
-	
-	private Object defaultValue;
-	
+	private final String category;
+	private final String name;
+	private final String description;
+
+	private final Object defaultValue;
+
 	private Object previousResourceValue = null;
-	//private Object previousBehaviorValue = null;
+	// private Object previousBehaviorValue = null;
 	private Object previousNotesValue = null;
 	private Object previousPathwayValue = null;
 	private Object previousMetaDataValue = null;
 	private Object previousHierarchyValue = null;
-	
-	private JCheckBox resourceCheckbox = new JCheckBox();	
-	//private JCheckBox behaviorCheckbox = new JCheckBox();
-	private JCheckBox notesCheckbox = new JCheckBox();
-	private JCheckBox pathwayCheckbox = new JCheckBox();
-	private JCheckBox metaDataCheckbox = new JCheckBox();
-	private JCheckBox hierarchyCheckbox = new JCheckBox();
-	
-	private String resourceIconName = "resourceIcon";
-	//private String behaviorIconName = "behaviorIcon";
-	private String notesIconName = "notesIcon";
-	private String pathwayIconName = "pathwayIcon";
-	private String metaDataIconName = "metaDataIcon";
-	private String hierarchyIconName = "hierarchyIcon";
 
-	private boolean resourceIconDefault = true;
-	//private boolean behaviorIconDefault = true;
-	private boolean notesIconDefault = true;
-	private boolean pathwayIconDefault = true;
-	private boolean metaDataIconDefault = true;
-	private boolean hierarchyIconDefault = true;
+	private final JCheckBox resourceCheckbox = new JCheckBox();
+	// private JCheckBox behaviorCheckbox = new JCheckBox();
+	private final JCheckBox notesCheckbox = new JCheckBox();
+	private final JCheckBox pathwayCheckbox = new JCheckBox();
+	private final JCheckBox metaDataCheckbox = new JCheckBox();
+	private final JCheckBox hierarchyCheckbox = new JCheckBox();
+
+	private final String resourceIconName = "resourceIcon";
+	// private String behaviorIconName = "behaviorIcon";
+	private final String notesIconName = "notesIcon";
+	private final String pathwayIconName = "pathwayIcon";
+	private final String metaDataIconName = "metaDataIcon";
+	private final String hierarchyIconName = "hierarchyIcon";
+
+	private final boolean resourceIconDefault = true;
+	// private boolean behaviorIconDefault = true;
+	private final boolean notesIconDefault = true;
+	private final boolean pathwayIconDefault = true;
+	private final boolean metaDataIconDefault = true;
+	private final boolean hierarchyIconDefault = true;
 
 	public ShowIconsPreference()
 	{
@@ -219,22 +219,22 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	}
 	
 	public void itemStateChanged(ItemEvent e) {
-		JCheckBox box = (JCheckBox)e.getSource();
-		//Preferences p = Preferences.userNodeForPackage(getPrefRoot());
-		//p.putBoolean(getPrefName(), box.isSelected());
+		JCheckBox box = (JCheckBox) e.getSource();
+		// Preferences p = Preferences.userNodeForPackage(getPrefRoot());
+		// p.putBoolean(getPrefName(), box.isSelected());
 		if (box.equals(resourceCheckbox))
-			setValue(resourceIconName,Boolean.valueOf(box.isSelected()));
-		//else if (box.equals(behaviorCheckbox))
-		//	setValue(behaviorIconName,Boolean.valueOf(box.isSelected()));
+			setValue(resourceIconName, box.isSelected());
+		// else if (box.equals(behaviorCheckbox))
+		// setValue(behaviorIconName,Boolean.valueOf(box.isSelected()));
 		else if (box.equals(notesCheckbox))
-			setValue(notesIconName,Boolean.valueOf(box.isSelected()));
+			setValue(notesIconName, box.isSelected());
 		else if (box.equals(pathwayCheckbox))
-			setValue(pathwayIconName,Boolean.valueOf(box.isSelected()));
+			setValue(pathwayIconName, box.isSelected());
 		else if (box.equals(metaDataCheckbox))
-			setValue(metaDataIconName,Boolean.valueOf(box.isSelected()));
+			setValue(metaDataIconName, box.isSelected());
 		else if (box.equals(hierarchyCheckbox))
-			setValue(hierarchyIconName,Boolean.valueOf(box.isSelected()));
-		
+			setValue(hierarchyIconName, box.isSelected());
+
 	}
 	
 	public JCheckBox getCheckBox()
@@ -245,18 +245,18 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	public void setValue(String prefName, Object b)
 	{
 		if (prefName.equals(resourceIconName))
-			previousResourceValue = Boolean.valueOf(resourceCheckbox.isSelected());
-		//else if (prefName.equals(behaviorIconName))
-		//	previousBehaviorValue = Boolean.valueOf(behaviorCheckbox.isSelected());
+			previousResourceValue = resourceCheckbox.isSelected();
+		// else if (prefName.equals(behaviorIconName))
+		// previousBehaviorValue = Boolean.valueOf(behaviorCheckbox.isSelected());
 		else if (prefName.equals(notesIconName))
-			previousNotesValue = Boolean.valueOf(notesCheckbox.isSelected());
+			previousNotesValue = notesCheckbox.isSelected();
 		else if (prefName.equals(pathwayIconName))
-			previousPathwayValue = Boolean.valueOf(pathwayCheckbox.isSelected());
+			previousPathwayValue = pathwayCheckbox.isSelected();
 		else if (prefName.equals(metaDataIconName))
-			previousMetaDataValue = Boolean.valueOf(metaDataCheckbox.isSelected());
-		else if (prefName.equals(hierarchyIconName))	
-			previousHierarchyValue = Boolean.valueOf(hierarchyCheckbox.isSelected());		
-		
+			previousMetaDataValue = metaDataCheckbox.isSelected();
+		else if (prefName.equals(hierarchyIconName))
+			previousHierarchyValue = hierarchyCheckbox.isSelected();
+
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 		p.putBoolean(getPrefName(prefName), (Boolean) b);
 		_fireVuePrefEvent(prefName);
@@ -264,7 +264,7 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	
 	public Object getValue(String prefName){
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
-		Boolean b = Boolean.valueOf(p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName)));
+		Boolean b = p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName));
 		return b;
 	
 	}
@@ -284,7 +284,7 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 		else if (prefName.equals(hierarchyIconName))	
 			return (previousHierarchyValue == null) ? getDefaultValue(prefName) : previousHierarchyValue;
 		else
-			return new Boolean(true);
+			return Boolean.TRUE;
 	}
 
 	public Object getDefaultValue(String prefName)
@@ -302,7 +302,7 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 		else if (prefName.equals(hierarchyIconName))	
 			return hierarchyIconDefault;
 		else
-			return new Boolean(true);
+			return Boolean.TRUE;
 	}
 
 	protected synchronized void _fireVuePrefEvent(String prefName) {
@@ -334,7 +334,7 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	}
 
 	public Object getDefaultValue() {
-		return new Boolean("true");
+		return Boolean.TRUE;
 	}
 
 	public String getPrefName() {
@@ -342,7 +342,7 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	}
 
 	public Object getValue() {
-		return new Boolean("true");
+		return Boolean.TRUE;
 	}
 
 	public void setValue(Object i) {

@@ -71,7 +71,7 @@ public class CSSParser {
     /** The read ahead character. */
     private int            pushedChar;
     /** Temporary place to hold identifiers. */
-    private StringBuffer   unitBuffer;
+    private final StringBuffer   unitBuffer;
     /** Used to indicate blocks. */
     private int[]          unitStack;
     /** Number of valid blocks. */
@@ -392,7 +392,7 @@ public class CSSParser {
         int escapeCount = 0;
         int escapeChar = 0;
         int nextChar;
-        int intStopChar = (int)stopChar;
+        int intStopChar = stopChar;
         // 1 for '\', 2 for valid escape char [0-9a-fA-F], 3 for
         // stop character (white space, ()[]{}) 0 otherwise
         short type;
@@ -504,7 +504,7 @@ public class CSSParser {
         int escapeChar = 0;
         int nextChar;
         boolean done = false;
-        int intStopChar = (int)stopChar;
+        int intStopChar = stopChar;
         // 1 for '\', 2 for valid escape char [0-9a-fA-F], 0 otherwise
         short type;
         int escapeOffset = 0;
@@ -709,7 +709,7 @@ public class CSSParser {
     }
     
     private static String charToString(char[] crs) {
-        String s = new String();
+        String s = "";
         for (char cr : crs) {
             s += cr;
         }

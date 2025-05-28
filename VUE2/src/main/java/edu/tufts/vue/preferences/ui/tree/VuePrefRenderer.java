@@ -32,7 +32,7 @@ import tufts.vue.gui.GUI;
 public class VuePrefRenderer extends DefaultTreeCellRenderer {
 	
 	
-    private JLabel mLabel = new DefaultTreeCellRenderer();
+    private final JLabel mLabel = new DefaultTreeCellRenderer();
     
 	public VuePrefRenderer() {
 	    setLeafIcon(null);		    

@@ -25,13 +25,13 @@ import edu.tufts.vue.preferences.interfaces.VuePreference;
 public class ColorPreference extends BasePref
 {
 
-	private String category;
-	private String name;
-	private String key;
-	private String description;
-	private Object defaultValue;
+	private final String category;
+	private final String name;
+	private final String key;
+	private final String description;
+	private final Object defaultValue;
 	private Object previousValue;
-	private Preferences p = Preferences.userNodeForPackage(getPrefRoot());
+	private final Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 	
 	public static ColorPreference create(String category, String key, String name, String desc, Color defaultValue, boolean showInUI)
 	{
@@ -151,7 +151,7 @@ public class ColorPreference extends BasePref
 	}
 	
 	public Object getValue(){
-		String s = (String)(p.get(getPrefName(), (String)getDefaultValue()));
+		String s = p.get(getPrefName(), (String)getDefaultValue());
 		return convertStringToColor(s);			
 	}
 

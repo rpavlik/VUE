@@ -36,8 +36,8 @@ import tufts.vue.gui.GUI;
  */
 public class VueTreeUI extends MetalTreeUI{
 	
-	private GridBagConstraints gbc = new GridBagConstraints();
-	private JPanel p;
+	private final GridBagConstraints gbc = new GridBagConstraints();
+	private final JPanel p;
 	public VueTreeUI()
 	{
 		p = new JPanel();

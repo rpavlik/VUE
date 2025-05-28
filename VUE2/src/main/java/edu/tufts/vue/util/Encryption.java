@@ -36,11 +36,11 @@ import java.io.*;
 
 public class Encryption {
     
-    private static String algorithm = "DESede";
+    private static final String algorithm = "DESede";
     private static final String KEY_FILE = "vue.key";
     private static Key key = null;
     private static Cipher cipher = null;
-    private static Hex hex = new Hex();
+    private static final Hex hex = new Hex();
     
     public static String encrypt(String input)    {
         try {

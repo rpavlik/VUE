@@ -68,7 +68,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
     private final Vector<String> titleVector = new java.util.Vector<>();
     private final Vector<Integer> uiVector = new java.util.Vector<>();
     private final java.util.Vector fieldVector = new java.util.Vector();
-    private final java.util.Vector valuesVector = new java.util.Vector();
+    private final java.util.Vector<Vector<String>> valuesVector = new java.util.Vector<>();
     
     private final java.awt.GridBagLayout gbLayout = new java.awt.GridBagLayout();
     private final java.awt.GridBagConstraints gbConstraints = new java.awt.GridBagConstraints();
@@ -155,7 +155,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
                 }
                 nodeList = field.getElementsByTagName(VALUE_TAG);
                 int length = nodeList.getLength();
-                Vector itemVector = new Vector();
+                Vector<String> itemVector = new Vector<>();
                 for (int val=0; val< length; val++)
                 {
                 	
@@ -185,27 +185,27 @@ public class ConfigurationUI extends javax.swing.JPanel {
                                  ui must be a numeral 0-7, inclusive
                                  */
                 
-                if ( (key == null) || (key.trim().length() == 0) ) {
+                if ( (key == null) || (key.trim().isEmpty()) ) {
                     this.errorMessage = "Key must be non-null";
                     return;
                 }
-                if ( (title == null) || (title.trim().length() == 0) ) {
+                if ( (title == null) || (title.trim().isEmpty()) ) {
                     this.errorMessage = "Title must be non-null";
                     return;
                 }
-                Boolean isMandatory = true;
+                boolean isMandatory = true;
                 try {
-                    isMandatory = Boolean.valueOf(mandatory);
+                    isMandatory = Boolean.parseBoolean(mandatory);
                 } catch (Exception ex) {
                     this.errorMessage = "Mandatory must be true or false";
                     return;
                 }
                 
                 //Integer numChars = new Integer(15);
-                Integer numChars = 0; // default 0 (no limit)
+                int numChars = 0; // default 0 (no limit)
                 if (maxChars != null) {
                     try {
-                        numChars = Integer.valueOf(maxChars);
+                        numChars = Integer.parseInt(maxChars);
                         if (numChars < 0) {
                             this.errorMessage = "Number of characters must be a positive integer";
                             return;
@@ -225,9 +225,9 @@ public class ConfigurationUI extends javax.swing.JPanel {
 //                         numChars = 8;
 //                 }
                 
-                Integer uiCode = 0;
+                int uiCode = 0;
                 try {
-                    uiCode = Integer.valueOf(ui);
+                    uiCode = Integer.parseInt(ui);
                     int n = uiCode;
                     if ( (n < 0) || (n > MAX_CONTROL_CODE) ) {
                         this.errorMessage = "Invalid UI control code: " + n;
@@ -352,15 +352,15 @@ public class ConfigurationUI extends javax.swing.JPanel {
                     case COMBO_BOX_CONTROL:
                         final javax.swing.JComboBox comboBox;
                         
-                        Vector extraValues = this.extraValuesByKey.get(key);
+                        Vector<Vector> extraValues = this.extraValuesByKey.get(key);
                         
-                        if (extraValues == null || extraValues.size() == 0)
+                        if (extraValues == null || extraValues.isEmpty())
                         {
                         	//this is a real <configuration> file get the data some other way, its' not a dataset.
                         	if (extraValues == null)
-                        		extraValues = new Vector();
+                        		extraValues = new Vector<>();
                         	
-                        	if (valuesVector !=null && valuesVector.size() > i)
+                        	if (valuesVector != null && valuesVector.size() > i)
                         		extraValues.addAll((Vector) valuesVector.elementAt(i));
                         }
                         Log.info(String.format("creating JComboBox: default=[%s]; extra fields for key [%s]: %s",
@@ -422,7 +422,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
                     case BOOLEAN_CONTROL:
                         String[] items = new String[2];
                         boolean b = (defaultValue != null)
-                                ? Boolean.valueOf(defaultValue) // validated earlier
+                                ? Boolean.parseBoolean(defaultValue) // validated earlier
                                 : true;
                         items[0] = Boolean.toString(b);
                         items[1] = Boolean.toString(!b);

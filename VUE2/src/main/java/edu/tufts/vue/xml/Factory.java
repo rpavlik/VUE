@@ -46,7 +46,7 @@ public class Factory
 	        
 	        Object result;
 	        try {
-	            result = providerConstructor.newInstance(new Object[] {});
+	            result = providerConstructor.newInstance();
 	        }
 	        catch (InvocationTargetException ite) {
 	            throw new RuntimeException("cannot invoke the constructor a InferenceService!", ite);
