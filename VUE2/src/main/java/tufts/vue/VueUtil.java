@@ -22,7 +22,6 @@ import java.util.*;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Line2D;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.PathIterator;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -35,7 +34,6 @@ import java.awt.event.ActionListener;
 
 import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
-import tufts.vue.VueResources;
 import tufts.vue.LWComponent.ChildKind;
 
 /**

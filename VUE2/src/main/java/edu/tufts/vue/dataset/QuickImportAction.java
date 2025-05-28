@@ -13,7 +13,6 @@ import java.io.File;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -21,10 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.Timer;
-
-import edu.tufts.vue.layout.RelRandomLayout;
-import edu.tufts.vue.ontology.ui.TypeList;
-import edu.tufts.vue.rss.RSSDataSource;
 
 import tufts.vue.LWMap;
 import tufts.vue.VUE;
@@ -34,8 +29,6 @@ import tufts.vue.action.RDFOpenAction;
 import tufts.vue.gui.VueFileChooser;
 
 import edu.tufts.vue.ontology.ui.OntologyBrowser;
-import edu.tufts.vue.ontology.ui.TypeList;
-
 import java.net.URL;
 
 

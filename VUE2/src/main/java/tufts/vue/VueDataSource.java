@@ -37,7 +37,6 @@ package tufts.vue;
  * @author  sfraize
  */
 
-import tufts.vue.DEBUG;
 
 import javax.swing.JComponent;
 

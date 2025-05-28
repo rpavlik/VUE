@@ -24,7 +24,6 @@ import javax.swing.JPanel;
 import javax.swing.Scrollable;
 
 import tufts.vue.DEBUG;
-import tufts.vue.VUE;
 import tufts.vue.gui.GUI;
 
 /**

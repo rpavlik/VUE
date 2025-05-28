@@ -15,7 +15,6 @@
 
 package tufts.vue;
 
-import tufts.Util;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.TextRow;
 
@@ -27,17 +26,10 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.BasicStroke;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.font.TextAttribute;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
@@ -48,7 +40,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextPane;
-import javax.swing.TransferHandler;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.*;

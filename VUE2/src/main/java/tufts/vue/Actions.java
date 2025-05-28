@@ -17,7 +17,6 @@ package tufts.vue;
 
 import java.awt.Component;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.Point;
@@ -32,7 +31,6 @@ import java.awt.geom.RectangularShape;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,13 +38,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-
-import org.apache.commons.lang.ArrayUtils;
 
 import tufts.Util;
 import tufts.vue.LWComponent.ChildKind;
@@ -58,8 +53,6 @@ import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.FullScreen;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.VueFileChooser;
-import tufts.vue.gui.renderer.SearchResultTableModel;
-import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.preferences.ui.PreferencesDialog;
 
 /**

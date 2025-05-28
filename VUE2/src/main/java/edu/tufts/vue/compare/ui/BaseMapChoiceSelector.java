@@ -23,13 +23,6 @@ package edu.tufts.vue.compare.ui;
  * @author dhelle01
  */
 
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 import javax.swing.event.ListDataListener;
 import tufts.vue.LWMap;
 

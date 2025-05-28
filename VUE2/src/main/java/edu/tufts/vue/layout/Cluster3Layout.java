@@ -23,11 +23,7 @@
  */
 package edu.tufts.vue.layout;
 
-import java.io.*;
-import java.net.*;
 import java.util.*;
-import java.awt.geom.Point2D;
-
 import tufts.vue.*;
 import edu.tufts.vue.dataset.*;
 

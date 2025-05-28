@@ -4,7 +4,6 @@ import java.util.*;
 
 import tufts.vue.LWComponent;
 import tufts.vue.LWLink;
-import tufts.vue.LWMap;
 import tufts.vue.LWNode;
 import tufts.vue.LWSelection;
 
