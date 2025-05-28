@@ -2,24 +2,19 @@ plugins {
 
     id "name.remal.check-dependency-updates" version "1.1.4"
 
-    // Apply Shadow so we can make a bundled jar
-    id 'com.github.johnrengelman.shadow' version '6.1.0'
-
-    // For Windows .exe files
-    id "edu.sc.seis.launch4j" version "2.4.9"
-
     // Apply the java plugin to add support for Java - explicit so that Shadow works
     id "java"
 
     // Apply the application plugin to add support for building an application
     id "application"
 
+    // Apply Shadow so we can make a bundled jar
+    id 'com.gradleup.shadow' version '8.3.6'
+
+    // For Windows .exe files
+    id "edu.sc.seis.launch4j" version "3.0.6"
+
 //    id "com.github.spotbugs" version "4.6.0"
-}
-
-
-repositories {
-    mavenCentral()
 }
 
 group = "edu.tufts.vue"
@@ -59,7 +54,7 @@ jar {
 launch4j {
     mainClassName = project.mainClassName
     copyConfigurable = project.tasks.shadowJar.outputs.files
-    jar = "lib/" + project.tasks.shadowJar.archiveName
+    jarTask = project.tasks.shadowJar
     downloadUrl = 'https://adoptium.net/'
     icon = "${projectDir}/Nullsoft-Installer/VUE.ico"
     if (hasProperty("console")) {
@@ -90,10 +85,11 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
     runtimeOnly 'org.glassfish.jaxb:jaxb-runtime:2.3.+'
 
-    implementation 'javax.xml:jax-qname:1.1'
+    // jar went missing ?
+    // implementation 'javax.xml:jax-qname:1.1'
 
     implementation 'javax.xml.soap:saaj-api:1.3.5' // now included, but deprecated in java 9
-    runtimeOnly 'com.sun.xml.messaging.saaj:saaj-impl:1.3.+'
+    // runtimeOnly 'com.sun.xml.messaging.saaj:saaj-impl:1.3.+'
 
     // Castor data-binding framework
     implementation 'org.codehaus.castor:castor-xml:1.4.1'
@@ -182,10 +178,10 @@ dependencies {
     implementation 'net.java.dev.jgoodies:looks:2.1.4'
     implementation 'net.java.linoleum:jlfgr:1_0'
     implementation 'org.beanshell:bsh-core:2.0b4'
-    implementation 'org.netbeans.external:jakarta-oro-2.0.8:RELEASE69'
+    // implementation 'org.netbeans.external:jakarta-oro-2.0.8:RELEASE69'
     implementation 'org.twitter4j:twitter4j-core:2.1.+'
     implementation 'urbanophile:java-getopt:1.0.9'
-    
+
     // TODO upgrade to https://mvnrepository.com/artifact/com.rometools/rome
     implementation 'rome:rome:0.9'
 

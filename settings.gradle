@@ -2,3 +2,16 @@ include ':VUE'
 
 project(':VUE').projectDir = file('VUE2')
 rootProject.name = 'VUE-root'
+
+dependencyResolutionManagement {
+    // repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            // Successor to the old official netbeans repo
+            // see https://netbeans.apache.org/front/main/about/oracle-transition/
+            url = uri("https://netbeans.apidesign.org/maven2/")
+        }
+    }
+}
