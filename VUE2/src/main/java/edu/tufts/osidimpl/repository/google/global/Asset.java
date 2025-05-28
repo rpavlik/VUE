@@ -15,12 +15,6 @@
 
 package edu.tufts.osidimpl.repository.google.global;
 
-import osid.filing.*;
-import tufts.oki.remoteFiling.*;
-import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
-import tufts.vue.*;
-
 public class Asset
 implements org.osid.repository.Asset
 {

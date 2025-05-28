@@ -27,9 +27,6 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 import org.osid.repository.*;
-import java.net.*;
-import java.io.*;
-import java.util.Iterator;
 
 
 

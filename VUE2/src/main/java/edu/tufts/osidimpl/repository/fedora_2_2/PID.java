@@ -19,10 +19,9 @@
  * Created on April 7, 2006 11:18 AM
  */
  
- package  edu.tufts.osidimpl.repository.fedora_2_2;
+package edu.tufts.osidimpl.repository.fedora_2_2;
 
 
-import org.osid.shared.Id;
 import org.osid.shared.SharedException;
 import java.util.StringTokenizer;
 
@@ -35,11 +34,11 @@ public class PID extends tufts.oki.id.Id {
 
     
     /** Creates a new instance of PID */
-    public PID()  throws org.osid.shared.SharedException {
+    public PID()  throws SharedException {
         super();
     }
     
-    public PID(String pid)  throws org.osid.shared.SharedException { 
+    public PID(String pid)  throws SharedException { 
         super(pid);
     }     
          
@@ -50,7 +49,7 @@ public class PID extends tufts.oki.id.Id {
      *@return true if id is valid
      *
      **/
-    public boolean isValid()  throws org.osid.shared.SharedException{
+    public boolean isValid()  throws SharedException{
         // needs to be implemented.
         StringTokenizer st  = new StringTokenizer(getIdString(),":");
         int count = 0;
@@ -64,7 +63,7 @@ public class PID extends tufts.oki.id.Id {
             return false;
     }
     
-    public String processId() throws org.osid.shared.SharedException{
+    public String processId() throws SharedException{
         StringTokenizer st = new StringTokenizer(getIdString(),":");
         String processString = "";
         while(st.hasMoreTokens()) {

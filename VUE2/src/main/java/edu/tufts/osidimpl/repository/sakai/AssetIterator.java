@@ -14,10 +14,6 @@
  */
 package edu.tufts.osidimpl.repository.sakai;
 
-import org.apache.axis.client.Call;
-import org.apache.axis.client.Service;
-import javax.xml.namespace.QName;
-
 public class AssetIterator
 implements org.osid.repository.AssetIterator
 {

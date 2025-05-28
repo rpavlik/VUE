@@ -22,7 +22,6 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 import java.io.*;
 import java.net.*;
 import java.util.prefs.Preferences;
-import java.util.ResourceBundle;
 import javax.swing.AbstractAction;
 
 public class FedoraUtils {

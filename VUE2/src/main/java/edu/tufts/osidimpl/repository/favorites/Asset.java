@@ -16,11 +16,6 @@
 package edu.tufts.osidimpl.repository.favorites;
 
 import java.io.Serializable;
-import osid.filing.*;
-import tufts.oki.remoteFiling.*;
-import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
-import tufts.vue.*;
 
 public class Asset
         implements org.osid.repository.Asset {
@@ -99,7 +94,7 @@ public class Asset
     
     public org.osid.repository.AssetIterator getAssets()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<Asset> result = new java.util.Vector<Asset>();
         return new AssetIterator(result);
     }
     
@@ -108,7 +103,7 @@ public class Asset
         if (assetType == null) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        return new AssetIterator(new java.util.Vector());
+        return new AssetIterator(new java.util.Vector<Asset>());
     }
     
     public org.osid.repository.Record createRecord(org.osid.shared.Id recordStructureId)

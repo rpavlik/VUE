@@ -27,42 +27,9 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 
 import org.osid.repository.*;
-import tufts.oki.shared.TypeIterator;
-
-
 import java.util.prefs.Preferences;
 import java.util.*;
-import java.net.*;
-import java.io.*;
-import javax.swing.JOptionPane;
-
-import org.exolab.castor.xml.Marshaller;
-import org.exolab.castor.xml.Unmarshaller;
-import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
-import java.io.OutputStreamWriter;
-import org.xml.sax.InputSource;
-
-// these classses are required for soap implementation of
-import javax.xml.namespace.QName;
-
 import fedora.server.types.gen.*;
-import fedora.server.utilities.DateUtility;
-
-//axis files
-import org.apache.axis.encoding.ser.*;
-import org.apache.axis.types.NonNegativeInteger;
-import org.apache.axis.client.Service;
-//import org.apache.axis.client.Call;
-import javax.xml.rpc.ServiceException;
-import java.rmi.RemoteException ;
-
-// for FTP
-import org.apache.commons.net.ftp.*;
-
-// APIM
-import fedora.server.management.FedoraAPIM;
-import fedora.server.utilities.StreamUtility;
 
 
 public class Repository implements org.osid.repository.Repository {
@@ -179,7 +146,7 @@ public class Repository implements org.osid.repository.Repository {
     private void loadFedoraObjectAssetTypes() {
         try {
 //			System.out.println("fedora types " + fedoraProperties.getProperty("fedora.types"));
-            Vector fedoraTypesVector = FedoraUtils.stringToVector(fedoraProperties.getProperty("fedora.types"));
+            Vector<String> fedoraTypesVector = FedoraUtils.stringToVector(fedoraProperties.getProperty("fedora.types"));
             for (Object o : fedoraTypesVector) {
                 createFedoraObjectAssetType((String) o);
             }

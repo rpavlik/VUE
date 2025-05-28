@@ -15,9 +15,7 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Text;
 import org.w3c.dom.NodeList;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URL;
 import java.io.*;
