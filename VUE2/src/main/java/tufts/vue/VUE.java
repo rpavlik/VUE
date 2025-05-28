@@ -2800,25 +2800,15 @@ public class VUE
                     //Util.printStackTrace("splitPane.addNotify");
                     super.addNotify();
                     try {
-                    
-                        // Util.printStackTrace("addNotify");
-                        //AbstractButton jumpLeft = (AbstractButton) divider.getComponent(0);
-                        
-                        AbstractButton jumpRight = (AbstractButton) divider.getComponent(1);
-                        //System.err.println("child0 " + jumpLeft);
-                        //System.err.println("child1 " + jumpRight);
-                        
-                        //System.err.println(Arrays.asList(jumpLeft.getActionListeners()));
-                        //System.err.println(Arrays.asList(jumpRight.getActionListeners()));
-                        
-                        // todo: as long as we're grabbing this out, add a short-cut key
-                        // to activate it: the arrow buttons are so damn tiny!
+                        if (divider != null && divider.getComponentCount() >= 2) {
 
-                        SplitPaneRightButtonOneTouchActionHandler
-                            = jumpRight.getActionListeners()[0];
+                            AbstractButton jumpRight = (AbstractButton) divider.getComponent(1);
 
-                        // BTW: can't call action listener now: must wait till after validation
-                        
+                            SplitPaneRightButtonOneTouchActionHandler
+                                = jumpRight.getActionListeners()[0];
+
+                            // BTW: can't call action listener now: must wait till after validation
+                        }
                     } catch (Throwable t) {
                         Util.printStackTrace(t);
                     }
