@@ -1,5 +1,6 @@
 package edu.tufts.vue.mbs;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -202,7 +203,7 @@ public class AlchemyAnalyzer implements LWComponentAnalyzer {
                     type = getElementValue(child);
                 else if ("text".equals(child.getNodeName()))
                     try {
-                        value = URLDecoder.decode(getElementValue(child), "UTF-8");
+                        value = URLDecoder.decode(getElementValue(child), StandardCharsets.UTF_8);
                     }
                     catch(Exception e) {
                         value = null;
@@ -211,9 +212,9 @@ public class AlchemyAnalyzer implements LWComponentAnalyzer {
                     disambiguatedNode = (Element)child;
                 else try {
                     if ("relevance".equals(child.getNodeName()))
-                        relevance = Double.valueOf(getElementValue(child));
+                        relevance = Double.parseDouble(getElementValue(child));
                     else if ("count".equals(child.getNodeName()))
-                        count = Integer.valueOf(getElementValue(child));
+                        count = Integer.parseInt(getElementValue(child));
                 } catch (NumberFormatException ex) {}
             }
         }

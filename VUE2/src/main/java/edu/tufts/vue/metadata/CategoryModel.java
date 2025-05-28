@@ -185,8 +185,8 @@ public class CategoryModel extends ArrayList<edu.tufts.vue.ontology.Ontology>
         OntType ontType = new OntType();
         ontType.setLabel(name);
         ontType.setBase(customOntology.getBase());
-        ontType.setId(customOntology.getBase()+name);
-        if (customOntology.getOntTypes().indexOf(value) > -1)
+        ontType.setId(customOntology.getBase() + name);
+        if (customOntology.getOntTypes().contains(value))
             customOntology.getOntTypes().set(customOntology.getOntTypes().indexOf(value),ontType);  
         //customOntology.getOntTypes().add(ontType);
         return ontType;

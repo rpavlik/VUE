@@ -36,7 +36,7 @@ import tufts.vue.VueResources;
  */
 public class AddFedoraOntology extends VueAction{
     
-    private OntologyBrowser browser;
+    private final OntologyBrowser browser;
     
     public AddFedoraOntology(OntologyBrowser browser) 
     {

@@ -92,19 +92,20 @@ public class OntologyList extends javax.swing.JList implements OntologySelection
         
     }
     
-    public static class OntologyListRenderer extends javax.swing.DefaultListCellRenderer
-    {
-        private Border dividerBorder = new tufts.vue.gui.DashBorder(java.awt.Color.LIGHT_GRAY,false,true,false,false);
-        private Border emptyBorder = javax.swing.BorderFactory.createEmptyBorder();
+    public static class OntologyListRenderer extends javax.swing.DefaultListCellRenderer {
+        private final Border dividerBorder = new tufts.vue.gui.DashBorder(java.awt.Color.LIGHT_GRAY, false, true, false,
+                false);
+        private final Border emptyBorder = javax.swing.BorderFactory.createEmptyBorder();
 
-       //currently disabled as per VUE-815 
-       //private javax.swing.JLabel importLabel = new javax.swing.JLabel("Add Style Sheet");
-        
-        private CheckBoxRenderer mCheckBox = new CheckBoxRenderer();
-        
-        private JPanel renderer;
-        private JLabel label;
-        
+        // currently disabled as per VUE-815
+        // private javax.swing.JLabel importLabel = new javax.swing.JLabel("Add Style
+        // Sheet");
+
+        private final CheckBoxRenderer mCheckBox = new CheckBoxRenderer();
+
+        private final JPanel renderer;
+        private final JLabel label;
+
         public OntologyListRenderer()
         {
             renderer = new JPanel()

@@ -47,12 +47,12 @@ public class OntologyBrowser extends JPanel {
 
     JPanel ontologiesPanel = new Widget(VueResources.getString("dockWindow.ontologies.title"));
 
-    private HashMap<OntologyBrowserKey,Widget> widgetMap = new HashMap<>();
+    private final HashMap<OntologyBrowserKey,Widget> widgetMap = new HashMap<>();
 
     DockWindow typeDock;
     private static boolean initialized = false;
 
-    private ArrayList<OntologySelectionListener> ontologySelectionListenerList = new ArrayList<>();
+    private final ArrayList<OntologySelectionListener> ontologySelectionListenerList = new ArrayList<>();
 
     private OntologyViewer ontologyViewer;
 
@@ -68,7 +68,7 @@ public class OntologyBrowser extends JPanel {
         }
     };
 
-    private WidgetStack resultsStack = new WidgetStack("types stack");
+    private final WidgetStack resultsStack = new WidgetStack("types stack");
 
     private static TypeList selectedOntology = null;
 
@@ -152,7 +152,7 @@ public class OntologyBrowser extends JPanel {
         typeDock = null;
     }
 
-    private OntologyOpenAction ontologyOpenAction = new edu.tufts.vue.ontology.action.OntologyOpenAction(VueResources.getString("ontology.openaction"), this);
+    private final OntologyOpenAction ontologyOpenAction = new edu.tufts.vue.ontology.action.OntologyOpenAction(VueResources.getString("ontology.openaction"), this);
 
     protected tufts.vue.VueAction removeOntology = new tufts.vue.VueAction() {
     	public static final long	serialVersionUID = 1;
@@ -176,7 +176,7 @@ public class OntologyBrowser extends JPanel {
                 System.out.println("TypeList remove w from key: " + w);
               }
 
-              resultsStack.setHidden(w, true);
+              Widget.setHidden(w, true);
               resultsStack.remove(w);
               widgetMap.remove(w);
 
@@ -396,8 +396,8 @@ public class OntologyBrowser extends JPanel {
     // note: plan is that eventually user will be able to change display name
     public class OntologyBrowserKey
     {
-        private String displayName;
-        private URL identifyingURL;
+        private final String displayName;
+        private final URL identifyingURL;
 
         public OntologyBrowserKey(String displayName, URL identifyingURL)
         {

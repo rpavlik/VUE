@@ -65,26 +65,23 @@ public class CategoryEditor extends JPanel
     
     public final static int BUTTON_COL_WIDTH = 35;
     
-    //private JTable metadataSetTable;
-    private JTable customCategoryTable;
-    
-    //private JPanel setPanel;
-    private JPanel customPanel;
-    
-    private JPanel buttonPanel;
+    private final JTable customCategoryTable;
+
+    private final JPanel customPanel;
+
+    private final JPanel buttonPanel;
     private JButton cancelButton;
-    private JButton doneButton;
-    
+    private final JButton doneButton;
+
     private boolean newCategoryRequested;
-    
-    private JDialog dialog;
-    
-    public CategoryEditor(JDialog dialog,final JComboBox categories,
-                          final MetadataEditor metadataEditor,
-                          final tufts.vue.LWComponent current,
-                          final int row,
-                          final int col) 
-    {
+
+    private final JDialog dialog;
+
+    public CategoryEditor(JDialog dialog, final JComboBox categories,
+            final MetadataEditor metadataEditor,
+            final tufts.vue.LWComponent current,
+            final int row,
+            final int col) {
         this.dialog = dialog;
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
         //setPanel = new JPanel();
@@ -602,7 +599,7 @@ public class CategoryEditor extends JPanel
     class MetadataCategoryTableModel extends AbstractTableModel
     {
         
-        private CategoryModel vueCategoryModel = tufts.vue.VUE.getCategoryModel();
+        private final CategoryModel vueCategoryModel = tufts.vue.VUE.getCategoryModel();
         
         /**
          *

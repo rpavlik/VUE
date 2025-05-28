@@ -75,11 +75,10 @@ public class OntType implements java.io.Serializable {
     }
 
     public String getAsKey() {
-        final StringBuilder b = new StringBuilder(baseURL.length() + 2 + label.length());
-        b.append(baseURL);
-        b.append('#');
-        b.append(label);
-        return b.toString();
+        String b = baseURL +
+                '#' +
+                label;
+        return b;
     }
     
 

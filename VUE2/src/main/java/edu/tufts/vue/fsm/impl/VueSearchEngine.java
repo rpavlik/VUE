@@ -34,9 +34,9 @@ implements edu.tufts.vue.fsm.SearchEngine
 	private static long[] durations = null;
 	private static org.osid.repository.AssetIterator[] assetIterators = null;
 	private static java.util.Vector foreignIdStringVector = null;
-	
-	private static edu.tufts.vue.fsm.SearchEngine searchEngine = new VueSearchEngine();
-	
+
+	private static final edu.tufts.vue.fsm.SearchEngine searchEngine = new VueSearchEngine();
+
 	public static edu.tufts.vue.fsm.SearchEngine getInstance()
 	{
 		return searchEngine;
@@ -115,12 +115,12 @@ implements edu.tufts.vue.fsm.SearchEngine
 
     public long getStartTime()
     {
-        return this.startTime;
+        return startTime;
     }
 	
     public long getEndTime()
     {
-        return this.endTime;
+        return endTime;
     }
 	
     public long getDuration(int index)

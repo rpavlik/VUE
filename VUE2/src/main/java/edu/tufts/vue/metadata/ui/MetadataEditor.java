@@ -130,7 +130,7 @@ public class MetadataEditor extends JPanel
     /** table-column: these are convenience comparitors: they will change when the structure changes (BC_BUTTON should always == buttonColumn) */
     private int TC_BUTTON, TC_TEXT, TC_COMBO;
     
-    private static boolean DisplayChangesDuringEdit = true;
+    private static final boolean DisplayChangesDuringEdit = true;
         
     
     /**
@@ -1021,7 +1021,7 @@ public class MetadataEditor extends JPanel
         {
             final Object selected = catCombo.getSelectedItem();
 
-            if (selected instanceof OntType == false) {
+            if (!(selected instanceof OntType)) {
                 // assume coming from selectKnownCategory, having picked a divider or something
                 return;
             }
@@ -1288,7 +1288,7 @@ public class MetadataEditor extends JPanel
         {
             if (object == EDIT_REQUEST)
                 return true;
-            else if (object instanceof MouseEvent == false) {
+            else if (!(object instanceof MouseEvent)) {
                 if (DEBUG.Enabled) Log.debug("unexpected event input for isCellEditable: " + Util.tags(object));
                 return false;
             }

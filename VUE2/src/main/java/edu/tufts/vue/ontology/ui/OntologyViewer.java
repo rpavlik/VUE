@@ -71,8 +71,7 @@ public class OntologyViewer extends javax.swing.JPanel implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		  if (e.getClickCount() == 2) {
 			  //Dan: Open an about this Ontology window when one exists.. -MK
-             return;
-          } 
+          }
 		
 	}
 
@@ -127,16 +126,15 @@ public class OntologyViewer extends javax.swing.JPanel implements MouseListener{
             	else
                 {
             		  VueToolbarController.getController().showOntologicalTools();
-                          if(!(OntologyBrowser.getBrowser().getSelectedOntology() == null))
-                          {
-                            edu.tufts.vue.metadata.ui.OntologicalMembershipPane
+                      OntologyBrowser.getBrowser();
+                      if (!(OntologyBrowser.getSelectedOntology() == null)) {
+                          edu.tufts.vue.metadata.ui.OntologicalMembershipPane
                                   .getGlobal().disableOrEnableAddButton(true);
-                          }
+                      }
                 }
                 w.validate();
             	ontologyList.repaint();
             }
-            return;
         }
 
 		

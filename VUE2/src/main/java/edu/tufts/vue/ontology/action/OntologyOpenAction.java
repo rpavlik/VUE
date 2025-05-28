@@ -29,7 +29,7 @@ import edu.tufts.vue.ontology.ui.OntologyChooser2;
  */
 public class OntologyOpenAction extends tufts.vue.VueAction {
     
-    private OntologyBrowser browser;
+    private final OntologyBrowser browser;
     
     public OntologyOpenAction(String label,OntologyBrowser browser) 
     {

@@ -240,7 +240,7 @@ public class SearchAction extends AbstractAction
             // [DAN] query.addCriteria(criteria.getKey(),criteria.getValue());
             // [SMF] final String[] statement = (String[])(criteria.getObject());
 
-            if (setBasic != true) {  
+            if (!setBasic) {
                 if (DEBUG.SEARCH) {    
                     Log.debug("query setBasic != true -- more than simple label-contains");
                     Log.debug("RDFIndex.VUE_ONTOLOGY+none=[" + RDFIndex.VUE_ONTOLOGY+"none]");
@@ -778,7 +778,7 @@ public class SearchAction extends AbstractAction
             // will handle child nodes/images correctly in non image nodes)
             c.setFiltered(true);
         }
-        map.setClientData(RevertableState, Integer.valueOf(toHide.size()));
+        map.setClientData(RevertableState, toHide.size());
     }
 
     private static void revertPreviouslyHiddenToVisible(boolean repaint)

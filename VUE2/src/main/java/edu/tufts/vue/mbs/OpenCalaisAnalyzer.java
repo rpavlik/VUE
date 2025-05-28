@@ -94,7 +94,7 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 
 		try {
 			is = new java.io.ByteArrayInputStream(resp_simple.getBytes(StandardCharsets.UTF_8));
-			doc = factory.newDocumentBuilder().parse((InputStream) is);
+			doc = factory.newDocumentBuilder().parse(is);
 		} catch (ParserConfigurationException | IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -151,7 +151,7 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 
 		try {
 			is = new java.io.ByteArrayInputStream(resp_simple.getBytes(StandardCharsets.UTF_8));
-			doc = factory.newDocumentBuilder().parse((InputStream) is);
+			doc = factory.newDocumentBuilder().parse(is);
 		} catch (ParserConfigurationException | IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -241,7 +241,7 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 
 		try {
 			is = new java.io.ByteArrayInputStream(resp_simple.getBytes(StandardCharsets.UTF_8));
-			doc = factory.newDocumentBuilder().parse((InputStream) is);
+			doc = factory.newDocumentBuilder().parse(is);
 		} catch (ParserConfigurationException | IOException | SAXException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -275,13 +275,11 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 				continue;
 			if (n.getFirstChild() == null)
 				skip = true;
-			else if (n.getFirstChild().getNodeValue() == null
-					|| (n.getFirstChild().getNodeValue() != null && n
-							.getFirstChild().getNodeValue().trim().equals("")))
-				skip = true;
 			else
-				skip = false;
-			
+				skip = n.getFirstChild().getNodeValue() == null
+						|| (n.getFirstChild().getNodeValue() != null && n
+								.getFirstChild().getNodeValue().trim().equals(""));
+
 			if (!skip) {
 				CalaisEntity entity = new CalaisEntity();
 				entity.setType(n.getNodeName());
@@ -296,7 +294,7 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 					if (cString == null)
 						cString = "1";
 				}
-				entity.setCount(Integer.valueOf(cString));
+				entity.setCount(Integer.parseInt(cString));
 				Node doubleNode = nnm.getNamedItem("relevance");
 				try {
 					cString = doubleNode.getNodeValue();
@@ -306,7 +304,7 @@ public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 						cString = "0.0";
 				}
 
-				entity.setRelevance((Double.valueOf(cString)));
+				entity.setRelevance((Double.parseDouble(cString)));
 				entity.setName(n.getFirstChild().getNodeValue());
 				m_entities.add(entity);
 			}

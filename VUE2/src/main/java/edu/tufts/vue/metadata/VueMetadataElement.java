@@ -214,7 +214,7 @@ public class VueMetadataElement implements tufts.vue.XMLUnmarshalListener
                 if (key != null && key.contains("file") && key.contains("custom.rdfs")) {
                     if (key.contains("#")) {
                         Log.info("patching key in: " + key + "=" + value);
-                        this.key = "http://vue.tufts.edu/custom.rdfs" + key.substring(key.indexOf("#"), key.length());
+                        this.key = "http://vue.tufts.edu/custom.rdfs" + key.substring(key.indexOf("#"));
                         Log.info(" patched key to: " + key + "=" + value);
                     }
                 }

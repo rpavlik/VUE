@@ -44,12 +44,12 @@ import edu.tufts.vue.ontology.ui.*;
 public class OntologicalMembershipPane extends javax.swing.JPanel implements ActiveListener,OntologySelectionListener {
     
     private static OntologicalMembershipPane global;
-    
+
     private LWComponent current;
-    private javax.swing.JList list;
-    
-    private JButton addSelectedTerm;
-    
+    private final javax.swing.JList list;
+
+    private final JButton addSelectedTerm;
+
     public static OntologicalMembershipPane getGlobal()
     {
         return global;
@@ -77,7 +77,7 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         //setPreferredSize(new Dimension(200,100));
         list.addMouseListener(new java.awt.event.MouseAdapter() {
             
-            int selected = 0;
+            final int selected = 0;
             
             
             public void mousePressed(java.awt.event.MouseEvent e)
@@ -113,9 +113,9 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         addSelectedTerm.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent e)
            {
-               TypeList selectedList = OntologyBrowser.getBrowser().getSelectedList();
-               if(selectedList !=null)
-               {
+                OntologyBrowser.getBrowser();
+                TypeList selectedList = OntologyBrowser.getSelectedList();
+                if (selectedList != null) {
                    Object type = selectedList.getSelectedValue();
                    if(type != null)
                    {
@@ -158,16 +158,9 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         repaint();
     }
     
-    public void ontologySelected(OntologySelectionEvent ose)
-    {
-        if(OntologyBrowser.getBrowser().getSelectedOntology() == null)
-        {
-            addSelectedTerm.setEnabled(false);
-        }
-        else
-        {
-            addSelectedTerm.setEnabled(true);
-        }
+    public void ontologySelected(OntologySelectionEvent ose) {
+        OntologyBrowser.getBrowser();
+        addSelectedTerm.setEnabled(OntologyBrowser.getSelectedOntology() != null);
     }
     
     public LWComponent getCurrent()
@@ -200,22 +193,14 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         adjustVisibility();   
     }
     
-    static public void adjustVisibility()
-    {
-            if(getGlobal().getCurrent().getMetadataList().hasOntologicalMetadata())
-            {
-              Widget.setHidden(getGlobal(),false);
-            }
-            else
-            {
-              Widget.setHidden(getGlobal(),true);
-            }
+    static public void adjustVisibility() {
+        Widget.setHidden(getGlobal(), !getGlobal().getCurrent().getMetadataList().hasOntologicalMetadata());
     }
     
     class OntologyTypeListRenderer extends javax.swing.DefaultListCellRenderer
     {
-        private javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.BorderLayout());
-        private javax.swing.JLabel deleteButton = new JLabel(); //= new javax.swing.JButton("-");
+        private final javax.swing.JPanel panel = new javax.swing.JPanel(new java.awt.BorderLayout());
+        private final javax.swing.JLabel deleteButton = new JLabel(); //= new javax.swing.JButton("-");
         
         public OntologyTypeListRenderer()
         {
@@ -237,7 +222,7 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
             String ontValue = ((edu.tufts.vue.metadata.VueMetadataElement)value).getValue();
             if(ontValue == null)
                 return panel;
-            String label = ontValue.substring(ontValue.indexOf("#")+1,ontValue.length());
+            String label = ontValue.substring(ontValue.indexOf("#") + 1);
             setText(label);
             panel.add(this);
             panel.add(deleteButton,java.awt.BorderLayout.EAST);

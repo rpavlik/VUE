@@ -46,7 +46,7 @@ public class OntologyControlsOpenAction extends tufts.vue.VueAction {
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         browser = OntologyBrowser.getBrowser();
-        if(browser.isInitialized())
+        if(OntologyBrowser.isInitialized())
         {
           ontologyDock = OntologyBrowser.getBrowser().getDockWindow();
         }

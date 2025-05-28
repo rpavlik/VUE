@@ -71,11 +71,6 @@ public class OntManager
         } else if(type.isEqual(OntologyType.OWL_TYPE)) {
             OWLLOntology.populateExistingOWLOntology(ontUrl,cssUrl,(OWLLOntology)ontology);
         }
-        else
-        {
-            //ontList.remove(ontology);
-            return;
-        }
     }
             
  
@@ -106,11 +101,6 @@ public class OntManager
             RDFSOntology.populateExistingRDFSOntology(ontUrl,(RDFSOntology)ontology);
         } else if(type.isEqual(OntologyType.OWL_TYPE)) {
             OWLLOntology.populateExistingOWLOntology(ontUrl,(OWLLOntology)ontology);
-        }
-        else
-        {
-           // ontList.remove(ontology);
-            return;
         }
     }
     

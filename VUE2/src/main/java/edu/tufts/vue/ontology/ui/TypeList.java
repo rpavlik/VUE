@@ -83,12 +83,12 @@ public class TypeList extends JList implements MouseListener,ActionListener {
     private LWSelection selection;
     
     private Ontology ontology;
-    
-    private java.util.HashMap typeCache = new java.util.HashMap();
-    private java.util.HashMap typeNoLabelCache = new java.util.HashMap();
-    
+
+    private final java.util.HashMap typeCache = new java.util.HashMap();
+    private final java.util.HashMap typeNoLabelCache = new java.util.HashMap();
+
     private String cssURL;
-    
+
     public void setCSSURL(String cssURL)
     {
         this.cssURL = cssURL;
@@ -106,13 +106,13 @@ public class TypeList extends JList implements MouseListener,ActionListener {
             {
                 comp = createLWComponent(getSelectedValue());
                 OntologyBrowser browser = OntologyBrowser.getBrowser();
-                TypeList oldSelection = browser.getSelectedList();
+                TypeList oldSelection = OntologyBrowser.getSelectedList();
                 if(oldSelection !=null && oldSelection != TypeList.this)
                 {
                     oldSelection.clearSelection();
                     oldSelection.repaint();
                 }
-                browser.setSelectedList(TypeList.this);
+                OntologyBrowser.setSelectedList(TypeList.this);
             }
         });
         
@@ -219,7 +219,7 @@ public class TypeList extends JList implements MouseListener,ActionListener {
               
               cssURL = ontology.getCssFileName();
               
-              if(image != null && (relative == false || cssURL != null))
+              if(image != null && (!relative || cssURL != null))
               {
                  //if(DEBUG_LOCAL)
                  //{    
@@ -276,7 +276,7 @@ public class TypeList extends JList implements MouseListener,ActionListener {
                    {    
                      java.util.ArrayList cl = new java.util.ArrayList();
                   // cl.add(im);
-                     ((LWNode)compFor).addChildren(cl);
+                     compFor.addChildren(cl);
                    }
                    
                    if(useRawImage)
@@ -468,7 +468,7 @@ public class TypeList extends JList implements MouseListener,ActionListener {
                   if(icon == null && cssURL != null && !(s.getAttribute("background-image-relative") == null))
                   {
                       icon = cssURL.substring(0,cssURL.lastIndexOf("/"));
-                      icon = icon.substring(icon.indexOf(":")+1,icon.length());
+                      icon = icon.substring(icon.indexOf(":") + 1);
                       icon = icon + System.getProperty("file.separator") + s.getAttribute("background-image-relative");
                                     
                       if(DEBUG_LOCAL)
@@ -494,7 +494,7 @@ public class TypeList extends JList implements MouseListener,ActionListener {
     { 
         //private JLabel label = new JLabel();
         
-        private LWComponentView lwcv = new LWComponentView();
+        private final LWComponentView lwcv = new LWComponentView();
         
         public java.awt.Component getListCellRendererComponent(JList jList, Object value, int i, boolean isSelected, boolean hasFocus) 
         {            
@@ -645,9 +645,9 @@ public class TypeList extends JList implements MouseListener,ActionListener {
           }
                     
           setModel(new OntologyTypeListModel(ontology));
-          
-          widget.setName(widget.getName().substring(7,widget.getName().length()));
-          
+
+          widget.setName(widget.getName().substring(7));
+
           widget.remove(loadingLabel);
           //repaint();
           //browser.addTypeList(TypeList.this,ontologyURL.getFile());
@@ -794,7 +794,7 @@ public class TypeList extends JList implements MouseListener,ActionListener {
     
     public static class OntologyTypeListModel implements ListModel
     {
-        private Ontology ontology;
+        private final Ontology ontology;
              
         public OntologyTypeListModel(Ontology ontology)
         {
@@ -1027,16 +1027,8 @@ public class TypeList extends JList implements MouseListener,ActionListener {
 
 		LWSelection sel = VUE.getActiveViewer().getSelection();
 		LWComponent c = sel.only();
-		
-		if (c != null && c instanceof LWNode)
-		{
-			addToNode.setEnabled(true);
-			
-		}
-		else
-		{
-			addToNode.setEnabled(false);
-		}
+
+        addToNode.setEnabled(c != null && c instanceof LWNode);
 
 		return m;
 	}
@@ -1128,9 +1120,9 @@ public class TypeList extends JList implements MouseListener,ActionListener {
                         LWMap active = VUE.getActiveMap();
                         
 			if (o instanceof LWNode)
-				active.add((LWNode)o);
+				active.add(o);
 			else if (o instanceof LWLink)
-				active.add((LWLink)o);
+				active.add(o);
                         
                         // should be outside ontology panel default location
                         // but inside map

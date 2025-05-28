@@ -122,7 +122,7 @@ public class TabularLayout extends Layout {
         double x = minX;
         double y = minY;
         if (!STRICT_COL_COUNT)
-        	mod = (int) Math.ceil(Math.sqrt((double) total));
+        	mod = (int) Math.ceil(Math.sqrt(total));
 
         for (LWComponent node : toLayout) {
             total++;

@@ -21,11 +21,12 @@ package edu.tufts.vue.fsm.impl;
  */
 
 public class VueFederatedSearchManager
-implements edu.tufts.vue.fsm.FederatedSearchManager
-{
-	private edu.tufts.vue.fsm.SourcesAndTypesManager sourcesAndTypesManager = VueSourcesAndTypesManager.getInstance();
-    private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(VueFederatedSearchManager.class);
-	
+		implements edu.tufts.vue.fsm.FederatedSearchManager {
+	private final edu.tufts.vue.fsm.SourcesAndTypesManager sourcesAndTypesManager = VueSourcesAndTypesManager
+			.getInstance();
+	private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger
+			.getLogger(VueFederatedSearchManager.class);
+
 	private static final String FILE_NOT_FOUND_MESSAGE = "Cannot find or open ";
 	private static final String EXTENSIONS_TAG = "extensions";
 	private static final String QUERY_EDITORS_TAG = "queryeditors";
@@ -44,16 +45,15 @@ implements edu.tufts.vue.fsm.FederatedSearchManager
 
 	private static final String ARTIFACT_SEARCH_TYPE = "search/artifact@tufts.edu";
 	private static final String ARTIFACT_CLASS_NAME = "edu.tufts.artifact.ui.ArtifactQueryEditor";
-	
-	
-	private static edu.tufts.vue.fsm.FederatedSearchManager federatedSearchManager = new VueFederatedSearchManager();
-	
-	private java.util.Vector queryEditorTypeVector = new java.util.Vector();
-	private java.util.Vector queryEditorClassNameVector = new java.util.Vector();
-	private java.util.Vector queryAdjusterRepositoryIdStringVector = new java.util.Vector();
-	private java.util.Vector queryAdjusterClassNameVector = new java.util.Vector();
-	private java.util.Vector assetViewerTypeVector = new java.util.Vector();
-	private java.util.Vector assetViewerClassNameVector = new java.util.Vector();
+
+	private static final edu.tufts.vue.fsm.FederatedSearchManager federatedSearchManager = new VueFederatedSearchManager();
+
+	private final java.util.Vector queryEditorTypeVector = new java.util.Vector();
+	private final java.util.Vector queryEditorClassNameVector = new java.util.Vector();
+	private final java.util.Vector queryAdjusterRepositoryIdStringVector = new java.util.Vector();
+	private final java.util.Vector queryAdjusterClassNameVector = new java.util.Vector();
+	private final java.util.Vector assetViewerTypeVector = new java.util.Vector();
+	private final java.util.Vector assetViewerClassNameVector = new java.util.Vector();
 
 	private static String xmlFilename = null;
 
@@ -119,8 +119,8 @@ implements edu.tufts.vue.fsm.FederatedSearchManager
 			if (!userFolder.exists()) {
 				userFolder.mkdir();
 			}
-			this.xmlFilename = userFolder.getAbsolutePath() + "/" + tufts.vue.VueResources.getString("extensionsSaveToXmlFilename");
-			java.io.File file = new java.io.File(this.xmlFilename);
+			xmlFilename = userFolder.getAbsolutePath() + "/" + tufts.vue.VueResources.getString("extensionsSaveToXmlFilename");
+			java.io.File file = new java.io.File(xmlFilename);
             if (!file.exists()) {
 				// make a minmal one
 				document = db.newDocument();				
@@ -155,9 +155,9 @@ implements edu.tufts.vue.fsm.FederatedSearchManager
 				properties.put("indent","yes");
 				transformer.setOutputProperties(properties);
 				javax.xml.transform.dom.DOMSource domSource = new javax.xml.transform.dom.DOMSource(document);
-				javax.xml.transform.stream.StreamResult result = 
-					new javax.xml.transform.stream.StreamResult (this.xmlFilename);
-				transformer.transform(domSource,result);
+				javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(
+						xmlFilename);
+				transformer.transform(domSource, result);
             }
 			
 			String[] files = getXMLFilenames();
@@ -259,7 +259,7 @@ implements edu.tufts.vue.fsm.FederatedSearchManager
                 }
             }
 		} catch (Throwable t) {
-			edu.tufts.vue.util.Logger.log(t,"parsing " + this.xmlFilename);
+			edu.tufts.vue.util.Logger.log(t,"parsing " + xmlFilename);
 		}
 	}
 	

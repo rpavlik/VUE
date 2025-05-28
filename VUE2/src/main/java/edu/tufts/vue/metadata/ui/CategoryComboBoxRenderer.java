@@ -61,7 +61,7 @@ public class CategoryComboBoxRenderer extends DefaultListCellRenderer {
                 
                 if(value instanceof edu.tufts.vue.metadata.gui.EditCategoryItem)
                 {
-                    if(tufts.vue.VUE.getCategoryModel().isLoaded() == false)
+                    if (!tufts.vue.VUE.getCategoryModel().isLoaded())
                     {
                         setText(VueResources.getString("addLibrary.loading.label"));
                     }

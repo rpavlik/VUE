@@ -25,9 +25,9 @@ package edu.tufts.vue.ontology.ui;
  */
 public class OntologySelectionEvent
 {
-    
-    private TypeList list;
-    
+
+    private final TypeList list;
+
     public OntologySelectionEvent(TypeList list)
     {
         this.list = list;

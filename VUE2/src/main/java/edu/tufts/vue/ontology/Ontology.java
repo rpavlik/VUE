@@ -176,7 +176,7 @@ abstract public class Ontology {
             return cssUrl.toString();
     }
     public String toString() {
-        String s = new String();
+        String s = "";
         s = "Base: "+base;
         for(OntType o: types) {
             s += o;
@@ -192,12 +192,8 @@ abstract public class Ontology {
                 return false;
             if(ontology.getBase() == null || ontology.getLabel() == null)
                 return false;*/
-            
-            if(this.base.equals(ontology.getBase()) && this.label.equals(ontology.getLabel())) {
-                return true;
-            } else {
-                return false;
-            }
+
+            return this.base.equals(ontology.getBase()) && this.label.equals(ontology.getLabel());
         }else {
             return false;
         }

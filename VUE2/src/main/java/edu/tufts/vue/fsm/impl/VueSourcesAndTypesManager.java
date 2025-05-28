@@ -23,9 +23,10 @@ package edu.tufts.vue.fsm.impl;
 public class VueSourcesAndTypesManager
 implements edu.tufts.vue.fsm.SourcesAndTypesManager
 {
-	private edu.tufts.vue.dsm.DataSourceManager dataSourceManager = edu.tufts.vue.dsm.impl.VueDataSourceManager.getInstance();
-	private static edu.tufts.vue.fsm.SourcesAndTypesManager vueSourcesAndTypesManager= new edu.tufts.vue.fsm.impl.VueSourcesAndTypesManager();
-	
+	private final edu.tufts.vue.dsm.DataSourceManager dataSourceManager = edu.tufts.vue.dsm.impl.VueDataSourceManager
+			.getInstance();
+	private static final edu.tufts.vue.fsm.SourcesAndTypesManager vueSourcesAndTypesManager = new edu.tufts.vue.fsm.impl.VueSourcesAndTypesManager();
+
 	public static edu.tufts.vue.fsm.SourcesAndTypesManager getInstance() {
 		return vueSourcesAndTypesManager;
 	}

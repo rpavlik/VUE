@@ -21,13 +21,13 @@ package edu.tufts.vue.fsm.impl;
 public class VueResultSetManager
 implements edu.tufts.vue.fsm.ResultSetManager
 {
-	//TO DO: how do we handle searches in progress
+	// TODO: how do we handle searches in progress
 	private edu.tufts.vue.fsm.SearchEngine searchEngine = null;
-	private org.osid.repository.AssetIterator assetIterator = null;
-	
-	private java.util.Vector assetVector = new java.util.Vector();
-	private java.util.Vector assetIdStringVector = new java.util.Vector();
-	
+	private final org.osid.repository.AssetIterator assetIterator = null;
+
+	private final java.util.Vector assetVector = new java.util.Vector();
+	private final java.util.Vector assetIdStringVector = new java.util.Vector();
+
 	private AddingAssetIterator ai = null;
 	
 	protected VueResultSetManager(edu.tufts.vue.fsm.SearchEngine searchEngine)

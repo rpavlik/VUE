@@ -78,7 +78,7 @@ public class OntologyChooser2 extends javax.swing.JDialog implements java.awt.ev
     private JButton nextButton = null;
     private JButton cssBrowseButton = null;
     private JButton ontBrowseButton = null;
-    private JLabel ontologyLabel = null;
+    private final JLabel ontologyLabel = null;
     private JLabel ontLabel = null;
     private JLabel cssLabel = null;
     private JTextField ontBrowseFileField = null;
@@ -96,8 +96,8 @@ public class OntologyChooser2 extends javax.swing.JDialog implements java.awt.ev
     private URL ontURL;
     private URL cssURL;
     
-    private JComboBox ontChoice;
-    private JComboBox cssChoice;
+    private final JComboBox ontChoice;
+    private final JComboBox cssChoice;
     
     private GridBagLayout gridBag;
     private GridBagConstraints c;

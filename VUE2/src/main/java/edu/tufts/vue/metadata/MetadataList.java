@@ -205,7 +205,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
         addElement(new VueMetadataElement(key, value));
     }
     public void addElement(VueMetadataElement element) {
-        if (true||DEBUG_LOCAL) Log.debug("addElement " + Util.tags(element));
+        if (true) Log.debug("addElement " + Util.tags(element));
         dataList.add(element);
         fireListChanged("addElement");
     }
@@ -372,7 +372,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     {
         try {
             if(getCategoryListSize() > 0 && index < dataList.size())
-                return dataList.get(index+((CategoryFirstList)dataList).getResourceEndIndex());
+                return dataList.get(index + dataList.getResourceEndIndex());
           //else
             //return new VueMetadataElement(); // SMF?
         }
@@ -404,20 +404,16 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
             dataList.set(index, vme);
         } catch(Exception e) {
             Log.warn("setCategoryListElement " + i + ", real=" + index + "; " + vme, e);
-            return;
         }
     }
     /*hide*/ private void setResourceListElement(int index, VueMetadataElement ele)
     {
-        try {        
-            if(getResourceListSize() > 0 && index < dataList.size())
-                dataList.set(index,ele);
-            else
-                return;
-        }
-        catch(Exception e) {
+        try {  
+            if (getResourceListSize() > 0 && index < dataList.size())
+                dataList.set(index, ele);
+
+        } catch (Exception e) {
             Log.warn("setResourceListElement " + index + "; " + ele, e);
-            return;
         }
     }
     
@@ -426,16 +422,15 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
         return (getOntologyListSize() > 0);
     }
     // See OntologicalMembershipPane
-    /*public*/ public VueMetadataElement getOntologyListElement(int i)
-    {
-        CategoryFirstList cf = ((CategoryFirstList)dataList);
-        int index = i+cf.getCategoryEndIndex();
+    /*public*/ public VueMetadataElement getOntologyListElement(int i) {
+        CategoryFirstList cf = dataList;
+        int index = i + cf.getCategoryEndIndex();
         try
         {        
           if(getOntologyListSize() > 0 && index < dataList.size())
-            return dataList.get(index);
-          else
-            return new VueMetadataElement();
+              return dataList.get(index);
+
+          return new VueMetadataElement();
         }
         catch(Exception e)
         {
@@ -458,24 +453,19 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     }
     /*hide*/ private void setOntologyListElement(int i,VueMetadataElement ele)
     {
-        CategoryFirstList cf = ((CategoryFirstList)dataList);
+        CategoryFirstList cf = dataList;
         int index = i+cf.getCategoryEndIndex();
-        try
-        {        
-          if(getOntologyListSize() > 0 && index < dataList.size())
-            dataList.set(index,ele);
-          else
-            return;
-        }
-        catch(Exception e)
-        {
-            return;
+        try {
+            if (getOntologyListSize() > 0 && index < dataList.size())
+                dataList.set(index, ele);
+
+        } catch (Exception e) {
         }
     }
     
     /*hide*/ private VueMetadataElement getOtherListElement(int i)
     {
-        int index = i+((CategoryFirstList)dataList).getOntologyEndIndex();
+        int index = i+ dataList.getOntologyEndIndex();
         try
         {        
           if(getOtherListSize() > 0 && index < dataList.size())
@@ -491,17 +481,14 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     
     /*hide*/ private void setOtherListElement(int i,VueMetadataElement ele)
     {
-        int index = i+((CategoryFirstList)dataList).getOntologyEndIndex();
+        int index = i+ dataList.getOntologyEndIndex();
         try
         {        
           if(getOtherListSize() > 0 && index < dataList.size())
             dataList.set(index,ele);
-          else
-            return;
         }
         catch(Exception e)
         {
-            return;
         }
     }
     
@@ -577,7 +564,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
                 b.append("<font color=red>");
                 b.append('"');
                 if (val.length() > 64)
-                    b.append(val.substring(0,64)) .append("\"...x") .append(val.length());
+                    b.append(val, 0, 64) .append("\"...x") .append(val.length());
                 else
                     b.append(val) .append('"');
             }
@@ -920,7 +907,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
         }
         
         public void add(VueMetadataElement vme) {
-            ((CategoryFirstList)getMetadata()).add(vme);
+            getMetadata().add(vme);
         }
         
         public int size() { return sizeForType(type); }

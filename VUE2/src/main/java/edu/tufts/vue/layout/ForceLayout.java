@@ -63,10 +63,11 @@ public class ForceLayout extends Layout {
             if (c.isManagedLocation())
                 continue; 
             if(c instanceof LWNode) {
-                LWNode node = (LWNode)c;
-                minX = node.getLocation().getX()<minX?node.getLocation().getX():minX;
-                minY =node.getLocation().getY()<minY?node.getLocation().getY():minY;
-                if(!repeatMap.containsKey(node)) repeatMap.put(node, new Integer(0));
+                LWNode node = (LWNode) c;
+                minX = node.getLocation().getX() < minX ? node.getLocation().getX() : minX;
+                minY = node.getLocation().getY() < minY ? node.getLocation().getY() : minY;
+                if (!repeatMap.containsKey(node))
+                    repeatMap.put(node, 0);
                 total++;
             }
             
@@ -84,12 +85,12 @@ public class ForceLayout extends Layout {
                 LWComponent tail = link.getTail();
                 if(repeatMap.containsKey( head)) {
                     int nc= repeatMap.get(head);
-                    repeatMap.put(head,new Integer(nc+1));
+                    repeatMap.put(head, nc + 1);
                     
                 }
                 if(repeatMap.containsKey(tail)) {
                     int nc= repeatMap.get(tail);
-                    repeatMap.put(tail,new Integer(nc+1));
+                    repeatMap.put(tail, nc + 1);
                 }
             }
         }
