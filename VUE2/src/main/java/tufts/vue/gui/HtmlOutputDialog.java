@@ -31,20 +31,20 @@ htmloutput.heigh=Height
 htmloutput.pixels=Pixels
  */
 	private static final String TITLE = VueResources.getString("htmloutput.title");
-	private JLabel heightPixels = new JLabel(VueResources.getString("htmloutput.pixels"));
-	private JLabel widthPixels = new JLabel(VueResources.getString("htmloutput.pixels"));
-	private JButton okButton = new JButton(VueResources.getString("htmloutput.ok"));
-	private JButton cancelButton = new JButton(VueResources.getString("htmloutput.cancel"));
-	private JLabel widthLabel = new JLabel(VueResources.getString("htmloutput.width"));
-	private JLabel heightLabel = new JLabel(VueResources.getString("htmloutput.height"));
-	private JLabel formatLabel = new JLabel(VueResources.getString("htmloutput.format"));
-	private JComboBox formatBox = new JComboBox();
-	private JTextField widthField = new JTextField();
-	private JTextField heightField = new JTextField();
-	private double widthRatio;
-	private double heightRatio;
-	private double width;
-	private double height;
+	private final JLabel heightPixels = new JLabel(VueResources.getString("htmloutput.pixels"));
+	private final JLabel widthPixels = new JLabel(VueResources.getString("htmloutput.pixels"));
+	private final JButton okButton = new JButton(VueResources.getString("htmloutput.ok"));
+	private final JButton cancelButton = new JButton(VueResources.getString("htmloutput.cancel"));
+	private final JLabel widthLabel = new JLabel(VueResources.getString("htmloutput.width"));
+	private final JLabel heightLabel = new JLabel(VueResources.getString("htmloutput.height"));
+	private final JLabel formatLabel = new JLabel(VueResources.getString("htmloutput.format"));
+	private final JComboBox formatBox = new JComboBox();
+	private final JTextField widthField = new JTextField();
+	private final JTextField heightField = new JTextField();
+	private final double widthRatio;
+	private final double heightRatio;
+	private final double width;
+	private final double height;
 	private int returnVal = -1;
 
 	public HtmlOutputDialog()
@@ -56,10 +56,10 @@ htmloutput.pixels=Pixels
          setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
          width = VUE.getActiveMap().getPaintBounds().getWidth();
          height = VUE.getActiveMap().getPaintBounds().getHeight();
-         widthField.setText((new Integer((int)width)).toString());
-         heightField.setText((new Integer((int)height)).toString());
-         widthRatio = (double)((double)width/(double)height);
-         heightRatio = (double)((double)height/(double)width);
+         widthField.setText((Integer.valueOf((int) width)).toString());
+         heightField.setText((Integer.valueOf((int) height)).toString());
+         widthRatio = width / height;
+         heightRatio = height / width;
         // System.out.println("w;"+width + " h;" + height + " widthRatio;" + widthRatio+" heightRatio;"+heightRatio);
          addListeners();
          Dimension screenSize =
@@ -144,15 +144,15 @@ htmloutput.pixels=Pixels
 			
 			try
 			{
-				i = new Integer(s);
+				i = Integer.valueOf(s);
 			}
 			catch(Exception e2)
 			{
-				i = new Integer((int)width);
+				i = (int) width;
 			}
 			//System.out.println(i.intValue());
 			int newHeight = (int)(i * heightRatio);
-			heightField.setText((new Integer(newHeight)).toString());
+			heightField.setText((Integer.valueOf(newHeight)).toString());
 		}
 		else if (e.getSource().equals(heightField))
 		{
@@ -161,15 +161,15 @@ htmloutput.pixels=Pixels
 			
 			try
 			{
-				i = new Integer(s);
+				i = Integer.valueOf(s);
 			}
 			catch(Exception e2)
 			{
-				i = new Integer((int)height);
+				i = (int) height;
 			}
 			//System.out.println(i.intValue());
 			int newWidth = (int)(i * widthRatio);
-			widthField.setText((new Integer(newWidth)).toString());
+			widthField.setText((Integer.valueOf(newWidth)).toString());
 		}
 	}
 

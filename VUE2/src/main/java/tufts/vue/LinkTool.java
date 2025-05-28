@@ -721,7 +721,7 @@ public class LinkTool extends VueTool
                 setterAction = new Actions.LWCAction(getToolName(), getIcon()) {
                         void act(LWLink c) { c.setControlCount(curveCount); }
                     };
-                setterAction.putValue("property.value", new Integer(curveCount)); // this may be handy
+                setterAction.putValue("property.value", curveCount); // this may be handy
                 setterAction.putValue(Action.SMALL_ICON, this.getRawIcon());
                 // key is from: MenuButton.ValueKey
             }

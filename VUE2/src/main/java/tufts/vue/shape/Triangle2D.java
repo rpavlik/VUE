@@ -45,12 +45,10 @@ public class Triangle2D extends RectangularShape
     public boolean contains(double px, double py)
     {
         // first, do a simple bounds check
-        if (px < x || py < y || px > x + width || py > y + height)
-            return false;
+        return !(px < x) && !(py < y) && !(px > x + width) && !(py > y + height);
         //for each segment:if CCW < 0 for all segments (and all segments ordered "clockwise")
         // then point is in this polygon
         //Line2D.relativeCCW(x1, y1, x2, y2, px, py);
-        return true;
     }
 
     /** does shape entirely contain rectangle? */

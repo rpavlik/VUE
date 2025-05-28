@@ -72,7 +72,7 @@ public class LWSlide extends LWContainer
     /** always just return child list -- slides never have extra picks (e.g., slide icons) */
     @Override
     public List<LWComponent> getPickList(PickContext pc, List<LWComponent> stored) {
-        return (List) getChildren();
+        return getChildren();
     }
 
     @Override
@@ -163,7 +163,7 @@ public class LWSlide extends LWContainer
     
     @Override
     public boolean isMoveable() {
-        return isPathwayOwned() == false;
+        return !isPathwayOwned();
     }
 
     /** @return false */
@@ -213,7 +213,7 @@ public class LWSlide extends LWContainer
     @Override
     protected void setParent(LWContainer parent) {
         super.setParent(parent);
-        if (mEntry == null && parent instanceof LWPathway == false) { // parent will be pathway for master slides
+        if (mEntry == null && !(parent instanceof LWPathway)) { // parent will be pathway for master slides
             // if no longer a slide icon (is directly part of a map), set a fill if we didn't have one
             if (getFillColor() == null)
                 setFillColor(Color.gray);
@@ -299,7 +299,7 @@ public class LWSlide extends LWContainer
 
         @Override
         public boolean acceptChildren(LWComponent c) {
-            return c instanceof LWGroup == false && c.hasChildren();
+            return !(c instanceof LWGroup) && c.hasChildren();
         }
 
         @Override
@@ -309,7 +309,7 @@ public class LWSlide extends LWContainer
         
         @Override
         public boolean accept(LWComponent c) {
-            return c instanceof LWGroup == false && c instanceof LWSlide == false;
+            return !(c instanceof LWGroup) && !(c instanceof LWSlide);
         }
 
         abstract public void visit(LWComponent c);
@@ -357,7 +357,7 @@ public class LWSlide extends LWContainer
      * on a slide (or cut/pasting from a slide in the same pathway), as
      * it can look unexpectedly different.
      */
-    private static boolean KEEP_DIVERGENT_STYLES_ON_DUPLICATE = false;
+    private static final boolean KEEP_DIVERGENT_STYLES_ON_DUPLICATE = false;
             
     private static void applyMasterStyle(MasterSlide master, LWComponent c, boolean resetStyle) {
         if (master == null) {

@@ -56,9 +56,9 @@ public class ArrowToolPanel extends ToolPanel
     	      
     		imageIcons = new Icon[1];
     		if (isHead)
-                    imageIcons[0] = new GUI.ProxyEnabledIcon((Icon) VueResources.getIcon("leftarrow.raw"), this);
+                    imageIcons[0] = new GUI.ProxyEnabledIcon(VueResources.getIcon("leftarrow.raw"), this);
     		else
-                    imageIcons[0] = new GUI.ProxyEnabledIcon((Icon) VueResources.getIcon("rightarrow.raw"), this);
+                    imageIcons[0] = new GUI.ProxyEnabledIcon(VueResources.getIcon("rightarrow.raw"), this);
             //imageIcons[2] = (ImageIcon) VueResources.getIcon("botharrow.raw");                                               		
     		this.setMaximumRowCount(10);
         }
@@ -136,8 +136,8 @@ public class ArrowToolPanel extends ToolPanel
         };
         
         Integer[] i = new Integer[2];
-		i[0]= new Integer(0);
-		i[1]= new Integer(1);
+		i[0]= 0;
+		i[1]= 1;
 		
 		final ArrowStyleButton arrowHeadCombo = new ArrowStyleButton(i,true);
 		final ArrowStyleButton arrowTailCombo = new ArrowStyleButton(i,false);

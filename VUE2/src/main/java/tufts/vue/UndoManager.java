@@ -48,15 +48,15 @@ public class UndoManager
     private boolean mCleanupUnderway = false;
 
     /** The list of undo actions (named groups of property changes) */
-    private UndoActionList UndoList = new UndoActionList(VueResources.getString("menu.edit.undo")); 
+    private final UndoActionList UndoList = new UndoActionList(VueResources.getString("menu.edit.undo"));
     /** The list of redo actions (named groups of property changes generated from Undo's) */
-    private UndoActionList RedoList = new UndoActionList(VueResources.getString("menu.edit.redo")); 
+    private final UndoActionList RedoList = new UndoActionList(VueResources.getString("menu.edit.redo"));
     
     /** The map who's modifications we're tracking. */
     protected LWMap mMap; 
     
     /** All recorded changes since last mark, mapped by component (for detecting & ignoring repeats) */
-    private Map mComponentChanges = new HashMap();
+    private final Map mComponentChanges = new HashMap();
     /** All recorded changes since last mark, marked for sequential processing */
     //private List mUndoSequence = new ArrayList(); 
     /** The last LWCEvent we didn't ignore since last mark -- used for guessing at good Undo action title names */
@@ -71,7 +71,7 @@ public class UndoManager
     private UndoAction mCurrentUndo;
 
     /** map of threads currently attched to a particular undo mark */
-    private Map<Thread,UndoMark> mThreadsWithMark = Collections.synchronizedMap(new HashMap());
+    private final Map<Thread,UndoMark> mThreadsWithMark = Collections.synchronizedMap(new HashMap());
 
     ///** map of threads currently attched to no undo manager (events to discard) */
     //private static Map ThreadsToIgnore = Collections.synchronizedMap(new HashMap());
@@ -98,7 +98,7 @@ public class UndoManager
      */
     private static class UndoAction {
         private String name = null;
-        private List undoSequence; // list of UndoItem's -- will be sorted by sequence index before first use
+        private final List undoSequence; // list of UndoItem's -- will be sorted by sequence index before first use
         /** The total number of recorded or compressed changes that happened on our watch (will be >= undoSequence.size()) */
         private int eventCount = 0;
         private boolean sorted = false;
@@ -379,7 +379,7 @@ public class UndoManager
             Float value;
             
             for (int i = 1; i < segments+1; i++) {
-                value = new Float(curValue.intValue() + inc * i);
+                value = curValue.intValue() + inc * i;
                 component.setProperty(propKey, value);
                 repaint();
             }
@@ -390,7 +390,7 @@ public class UndoManager
             Double value;
             
             for (int i = 1; i < segments+1; i++) {
-                value = new Double(curValue.intValue() + inc * i);
+                value = curValue.intValue() + inc * i;
                 component.setProperty(propKey, value);
                 repaint();
             }
@@ -401,7 +401,7 @@ public class UndoManager
             Integer value;
             
             for (int i = 1; i < segments+1; i++) {
-                value = Integer.valueOf((int) (curValue + inc * i));
+                value = (int) (curValue + inc * i);
                 component.setProperty(propKey, value);
                 repaint();
             }
@@ -1402,7 +1402,7 @@ public class UndoManager
             // context.
             //-----------------------------------------------------------------------------
             
-            final UndoMark mark = (UndoMark) mThreadsWithMark.get(thread);
+            final UndoMark mark = mThreadsWithMark.get(thread);
             if (DEBUG.UNDO || DEBUG.THREAD)
                 Log.debug("FOUND MARK FOR CURRENT THREAD " + thread
                                    + "\n\t mark: " + mark

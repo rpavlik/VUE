@@ -200,7 +200,7 @@ public class GUI
         
         if (isMacAqua) {
             //if (true) return new ColorUIResource(Color.red);
-            if (false && isMacAquaBrushedMetal) {
+            if (false) {
                 // FYI/BUG: Mac OS X 10.4+ Java 1.5: applying SystemColor.window is no longer 
                 // working for some components (e.g., palette button menu's (a JPopupMenu))
                 return new ColorUIResource(SystemColor.window);
@@ -417,7 +417,7 @@ public class GUI
     {
         // an experiment in overriding ScrollPane control keys
         
-        if (DEBUG.Enabled) UIManager.put("ScrollBar.width", new Integer(64)); // just to know we've taken effect
+        if (DEBUG.Enabled) UIManager.put("ScrollBar.width", 64); // just to know we've taken effect
 
         // We override scroll-pane input map to turn off arrow keys, so
         // the can be used for VUE actions (e.g., Nudge)
@@ -863,8 +863,8 @@ public class GUI
 
         if (Util.isMacPlatform() && !VUE.isApplet()) {
 
-            if (false && Util.isMacLeopard() && Util.getJavaVersion() > 1.5) {
-                ; // ShellFolder/FileSystemView method still doesn't work
+            if (false) {
+                // ShellFolder/FileSystemView method still doesn't work
             } else {
                 if (Util.isMacCocoaSupported())
                     return tufts.macosx.MacOSX.getIconForExtension(ext, sizeRequest);
@@ -924,7 +924,7 @@ public class GUI
             {
             	if (sizeRequest <= 24) {
             		//false
-            		sf = getShellFolderMethod().invoke(null, new Object[]{file});
+            		sf = getShellFolderMethod().invoke(null, file);
             		image = (Image) getIconMethod().invoke(sf, new Object[]{Boolean.FALSE});//shellFolder.getIcon(SMALL_ICON);
                 
             		small = image;
@@ -932,7 +932,7 @@ public class GUI
                 
             	} else {
             		//true
-            		sf = getShellFolderMethod().invoke(null, new Object[]{file});
+            		sf = getShellFolderMethod().invoke(null, file);
             		image = (Image) getIconMethod().invoke(sf, new Object[]{Boolean.TRUE});//shellFolder.getIcon(LARGE_ICON);
                 
             		small = sf;//shellFolder;  // can be fetched later
@@ -994,9 +994,9 @@ public class GUI
        if (iconMethod == null)           
  	   {
 			try {
-			    iconMethod = cShellFolder.getDeclaredMethod("getIcon", new Class[]{Boolean.TYPE});
+			    iconMethod = cShellFolder.getDeclaredMethod("getIcon", Boolean.TYPE);
 			} catch (SecurityException | NoSuchMethodException e) {
-				Log.info(e.toString() + "while trying to invoke ShellFolder, possibly non-sun JVM");
+				Log.info(e + "while trying to invoke ShellFolder, possibly non-sun JVM");
 			} catch (IllegalArgumentException e) {
 			}
  	   }
@@ -1008,9 +1008,9 @@ public class GUI
        if (getShellFolder == null)           
  	   { 		  
 			try {
-				getShellFolder = cShellFolder.getDeclaredMethod("getShellFolder", new Class[]{File.class});			
+				getShellFolder = cShellFolder.getDeclaredMethod("getShellFolder", File.class);
 			} catch (SecurityException | NoSuchMethodException e) {
-				Log.info(e.toString() + "while trying to invoke ShellFolder, possibly non-sun JVM");
+				Log.info(e + "while trying to invoke ShellFolder, possibly non-sun JVM");
 			} catch (IllegalArgumentException e) {
 			}
  	   }
@@ -1025,7 +1025,7 @@ public class GUI
 			try {
 				cShellFolder = Class.forName("sun.awt.shell.ShellFolder");
 			} catch (ClassNotFoundException e1) {
-				Log.info(e1.toString() + "while trying to load ShellFolder, possibly non-sun JVM");
+				Log.info(e1 + "while trying to load ShellFolder, possibly non-sun JVM");
 			}
     	   }
     	   
@@ -1035,10 +1035,10 @@ public class GUI
         	   
         	   Image i = null;
         	   try {
-    			   sf = getShellFolderMethod().invoke(null, new Object[]{file});
+    			   sf = getShellFolderMethod().invoke(null, file);
         		   i = (Image) getIconMethod().invoke(sf, new Object[]{Boolean.FALSE});
         	   } catch (IllegalArgumentException | InvocationTargetException | IllegalAccessException e) {
-        		   Log.info(e.toString() + "while trying to load ShellFolder, possibly non-sun JVM");
+        		   Log.info(e + "while trying to load ShellFolder, possibly non-sun JVM");
         	   }
                return i;
            	
@@ -1283,7 +1283,7 @@ public class GUI
     }
     */
     
-    private static Map CursorMap = new HashMap();
+    private static final Map CursorMap = new HashMap();
     private static boolean WaitCursorActive = false;
     private static Component ViewerWithWaitCursor;
     
@@ -1708,7 +1708,7 @@ public class GUI
             return "null";
 
         if (c instanceof Boolean)
-            return "bool:" + (Boolean) c;
+            return "bool:" + c;
 
         if (c instanceof String)
             return c.toString();
@@ -1996,7 +1996,7 @@ public class GUI
     //-----------------------------------------------------------------------------
     
     private static class LocalData extends DataFlavor {
-        private Class clazz;
+        private final Class clazz;
         LocalData(Class clazz) throws ClassNotFoundException {
             super(DataFlavor.javaJVMLocalObjectMimeType
                   + "; class=" + clazz.getName()
@@ -2268,7 +2268,7 @@ public class GUI
         implements javax.swing.event.PopupMenuListener
     {
         private long mLastHidden;
-        private JPopupMenu mMenu;
+        private final JPopupMenu mMenu;
         
         public PopupMenuHandler(Component trigger, JPopupMenu menu)
         {
@@ -2334,9 +2334,9 @@ public class GUI
     public static class IconicLabel extends JLabel implements Icon {
         
         private final Dimension mSize;
-	private char icon;
+	private final char icon;
         public IconicLabel(char iconChar, int pointSize, Color color, int width, int height) {
-            super(new String(new char[] { iconChar }), JLabel.CENTER);
+            super(String.valueOf(iconChar), JLabel.CENTER);
 	    icon = iconChar;
             setFont(getUnicodeGlyphFont(pointSize));
             
@@ -2442,7 +2442,7 @@ public class GUI
     public static class PopupMenuButton extends JLabel {
         private JPopupMenu popMenu;
         private long lastHidden;
-        private boolean doRollover = false;
+        private final boolean doRollover = false;
 
         //static final char chevron = 0xBB; // unicode "right-pointing double angle quotation mark"
         //final Color inactiveColor = isMacAqua ? Color.darkGray : Color.lightGray;
@@ -2721,9 +2721,9 @@ public class GUI
 
     // todo: move to DELAYED-init block for GUI called at end of main during caching runs
     private static final int DragSize = 128;
-    private static BufferedImage DragImage = new BufferedImage(DragSize, DragSize, BufferedImage.TYPE_INT_ARGB);
-    private static Graphics2D DragGraphicsBuf = (Graphics2D) DragImage.getGraphics();
-    private static AlphaComposite DragAlpha = AlphaComposite.getInstance(AlphaComposite.SRC, .667f);
+    private static final BufferedImage DragImage = new BufferedImage(DragSize, DragSize, BufferedImage.TYPE_INT_ARGB);
+    private static final Graphics2D DragGraphicsBuf = (Graphics2D) DragImage.getGraphics();
+    private static final AlphaComposite DragAlpha = AlphaComposite.getInstance(AlphaComposite.SRC, .667f);
     public static final Color TransparentColor = new Color(0,0,0,0);
     
     public static boolean dragImagesSupported()
@@ -2802,7 +2802,7 @@ public class GUI
             DragGraphicsBuf.setColor(TransparentColor);
             DragGraphicsBuf.fillRect(0,0, DragSize,DragSize);
             
-            c.drawImage(DragGraphicsBuf, 0.667, new Dimension(DragSize,DragSize), (Color) null, 1.0);
+            c.drawImage(DragGraphicsBuf, 0.667, new Dimension(DragSize,DragSize), null, 1.0);
             
             startSystemDrag(source, mouseEvent, DragImage, transfer);
         }
@@ -3047,7 +3047,7 @@ public class GUI
                 // may be against the published API).
                 Object o = content.get(0);
                 if (o instanceof java.io.File) {
-                    result = ((java.io.File)o).toString();
+                    result = o.toString();
                 } else if (o instanceof Resource) {
                     // todo: Resource.getReference?  Returns URL if there is one, local package content otherwise
                     java.io.File file = ((Resource)o).getActiveDataFile();
@@ -3165,7 +3165,7 @@ public class GUI
 
     private static class DefaultMetalTheme extends javax.swing.plaf.metal.DefaultMetalTheme
     {
-        private CommonMetalTheme common;
+        private final CommonMetalTheme common;
         
         DefaultMetalTheme(CommonMetalTheme common) { this.common = common; }
         

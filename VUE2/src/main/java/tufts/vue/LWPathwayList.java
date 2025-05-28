@@ -33,11 +33,11 @@ public class LWPathwayList implements LWComponent.Listener, Iterable<LWPathway>
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(LWPathwayList.class);
 
-    private List<LWPathway> mPathways = new java.util.ArrayList();
+    private final List<LWPathway> mPathways = new java.util.ArrayList();
     private LWMap mMap = null;
     private LWPathway mActive = null;
     private LWPathway mRevealer = null; // currently active "revealer" pathway, if any
-    private LWChangeSupport mChangeSupport = new LWChangeSupport(this);
+    private final LWChangeSupport mChangeSupport = new LWChangeSupport(this);
 
     public LWPathwayList(LWMap map) {
         setMap(map);

@@ -30,6 +30,7 @@ import java.awt.Shape;
 import java.awt.Point;
 import java.awt.Image;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -624,7 +625,7 @@ public class MapDropTarget
                 if (DEBUG.DND) out("dropTarget hit location: " + Util.fmt(hitLocation));
             } else {
                 // drop target is null
-                if (mViewer.getFocal() instanceof LWMap == false) {
+                if (!(mViewer.getFocal() instanceof LWMap)) {
                     // this prevents drops on MapSlides, and off-slide when real slides are the focal
                     if (DEBUG.DND) out("warning: drop to non-map focal " + mViewer.getFocal());
                     hitLocation = mapToLocalLocation(mapLocation, mViewer.getFocal());
@@ -1311,7 +1312,7 @@ public class MapDropTarget
         return createNode(drop, resource, Collections.EMPTY_MAP, where, false);
     }
     
-    private static int MaxNodeTitleLen = VueResources.getInt("node.title.maxDefaultChars", 50);
+    private static final int MaxNodeTitleLen = VueResources.getInt("node.title.maxDefaultChars", 50);
     
     private LWComponent createNode(DropContext drop,
                                           Resource resource,
@@ -1578,7 +1579,7 @@ public class MapDropTarget
         for (int i = 0; i < dataFlavors.length; i++) {
             DataFlavor flavor = dataFlavors[i];
             String name = flavor.getHumanPresentableName();
-            if (flavor.getMimeType().toString().startsWith(name + ";"))
+            if (flavor.getMimeType().startsWith(name + ";"))
                 name = "";
             else
                 name = "\"" + name + "\"";
@@ -1820,7 +1821,7 @@ public class MapDropTarget
     
     private Point2D.Float dropToFocalLocation(int x, int y)
     {
-        final Point2D.Float mapLoc = (Point2D.Float) mViewer.screenToFocalPoint(x, y);
+        final Point2D.Float mapLoc = mViewer.screenToFocalPoint(x, y);
         //if (DEBUG.DND) out("dropToMapLocation " + x + "," + y + " = " + mapLoc);
         return mapLoc;
     }
@@ -2129,7 +2130,7 @@ public class MapDropTarget
             
         try {
             uri = file.toURI();
-            nameUTF = java.net.URLEncoder.encode(file.getName(), "UTF-8");
+            nameUTF = java.net.URLEncoder.encode(file.getName(), StandardCharsets.UTF_8);
             nameMac = java.net.URLEncoder.encode(file.getName(), "MacRoman");
             //nameUNI = java.nio.charset.Charset.defaultCharset().decode(file.getName().getBytes());
             fileUTF = new File(file.getParent(), nameUTF);

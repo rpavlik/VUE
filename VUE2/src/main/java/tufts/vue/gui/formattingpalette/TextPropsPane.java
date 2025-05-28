@@ -88,24 +88,24 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 	private TextBox textBox;
 
 	// private boolean bulletMode = false;
-	private Toggle boldButton = new VueButton.Toggle("font.button.bold");
+	private final Toggle boldButton = new VueButton.Toggle("font.button.bold");
 
-	private Toggle italicButton = new VueButton.Toggle("font.button.italic");
+	private final Toggle italicButton = new VueButton.Toggle("font.button.italic");
 
-	private Toggle underlineButton = new VueButton.Toggle(
+	private final Toggle underlineButton = new VueButton.Toggle(
 			"font.button.underline");
 
-	private AlignmentDropDown alignmentButton = new AlignmentDropDown();
+	private final AlignmentDropDown alignmentButton = new AlignmentDropDown();
 
-	private JComboBox sizeField = new JComboBox(sizes);
+	private final JComboBox sizeField = new JComboBox(sizes);
 
-	private AbstractButton orderedListButton = new VueButton(
+	private final AbstractButton orderedListButton = new VueButton(
 			"list.button.ordered");
 
-	private AbstractButton unorderedListButton = new VueButton(
+	private final AbstractButton unorderedListButton = new VueButton(
 			"list.button.unordered");
 
-	private JComboBox field = new JComboBox(getFontFaces());
+	private final JComboBox field = new JComboBox(getFontFaces());
 	// private final String START_UNORDEREDLIST_STRING = "\u2022 ";
 	// private final String INDENT_STRING = " ";
 	// private final String BULLET="\u2022";
@@ -113,9 +113,9 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 	// private String previousRow = "";
 	// private int indentNext;
 	// private int listDepth =0;
-	//private PaletteButton button = null;
-	private VueColorButton colorButton = new VueColorButton(new Dimension(18, 18));		
-	
+	// private PaletteButton button = null;
+	private final VueColorButton colorButton = new VueColorButton(new Dimension(18, 18));
+
 	public TextPropsPane() {
 		this.setFocusable(false);
 		addComponents();
@@ -130,13 +130,10 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 
 		textBox = box;
 
-		if (textBox !=null)
+		if (textBox != null)
 			textBox.addCaretListener(this);
-		
-		if (textBox == null)
-			activateAll(false);
-		else
-			activateAll(true);
+
+		activateAll(textBox != null);
 	}
 
 	private void activateAll(boolean b)
@@ -150,9 +147,8 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 		unorderedListButton.setEnabled(b);
 		field.setEnabled(b);
 		colorButton.setEnabled(b);
-		
-		return;
-	}
+
+    }
 	
 	private Vector getFontFaces() {
 		GraphicsEnvironment ge = GraphicsEnvironment
@@ -290,8 +286,8 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 		JLabel fontColorLabel = new JLabel(VueResources
 				.getString("formatting.text.color.label"));		
 
-		field.setSelectedItem(new String("Arial"));
-		sizeField.setSelectedItem(new String("14"));
+		field.setSelectedItem("Arial");
+		sizeField.setSelectedItem("14");
 		GridBagConstraints c = new GridBagConstraints();
 		colorButton.setColor(Color.black);
 
@@ -564,7 +560,7 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 			
 			if (size > 0)
 			{
-				sizeField.setSelectedItem(new Integer(size).toString());
+				sizeField.setSelectedItem(Integer.valueOf(size).toString());
 			}
 			
 			String face =((String)attsSet.getAttribute(StyleConstants.FontFamily));

@@ -108,7 +108,7 @@ public class ZoomTool extends VueTool
     @Override
     public boolean supportsDraggedSelector(MapMouseEvent e)
     {
-        if (false && e.getPicked() != null) // is causing a pick traversal for ever mouse drag event: too slow
+        if (false) // is causing a pick traversal for ever mouse drag event: too slow
             return false;
         
         // todo: if zoom level on viewer == MaxZoom, return false
@@ -271,7 +271,7 @@ public class ZoomTool extends VueTool
                     
                     oldFocal = viewer.getFocal();
                     
-                    viewer.loadFocal((LWSlide) zoomedTo);
+                    viewer.loadFocal(zoomedTo);
                 } else {
                 	
                 	//System.out.println("zoomTo : " + zoomedTo);
@@ -1066,7 +1066,7 @@ public class ZoomTool extends VueTool
             return String.format("%.1f%%", zoomPct);
             //return VueUtil.oneDigitDecimal(zoomPct) + "%";
         } else if (zoom >= 100) {
-            return Integer.valueOf((int) (zoom + 0.5)) + "x";
+            return (int) (zoom + 0.5) + "x";
         } else if (zoom >= 10) {
             return String.format("%.1fx", zoom);
         } else {

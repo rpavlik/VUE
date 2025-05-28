@@ -39,8 +39,8 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
     boolean multipleParents = false;
     boolean recursion = true;
     
-    private HashMap map;
-    private Vector availableTypes;
+    private final HashMap map;
+    private final Vector availableTypes;
     private DefaultTreeModel treeModel;
     
     private int nextID = 1;
@@ -205,7 +205,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
               throw new osid.hierarchy.HierarchyException("the parent node is null");
             
             map.put(nodeId.getIdString(), node);
-            return (osid.hierarchy.Node)node;
+            return node;
         }
         
         catch (osid.shared.SharedException se)
@@ -240,7 +240,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
         
         treeModel = new DefaultTreeModel(rootTreeNode);
         
-        return (osid.hierarchy.Node)rootNode;
+        return rootNode;
     }
     
     /**A method that deletes the node with the given ID*/
@@ -275,9 +275,9 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
     {
         Vector list = new Vector();
 
-        for (Object o : map.values()) list.add((osid.hierarchy.Node) o);
+        for (Object o : map.values()) list.add(o);
         
-        return (osid.hierarchy.NodeIterator)(new HierarchyNodeIterator(list));
+        return new HierarchyNodeIterator(list);
     }
     
     /**A method that returns the description of the model*/
@@ -322,7 +322,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
     /**A method that retrieves nodes types of the model*/
     public osid.shared.TypeIterator getNodeTypes() throws osid.hierarchy.HierarchyException 
     {
-        return (osid.shared.TypeIterator) (new tufts.oki.shared.TypeIterator(availableTypes));
+        return new tufts.oki.shared.TypeIterator(availableTypes);
     }
     
     /**A method that returns an iterator of root nodes*/
@@ -337,7 +337,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
                 rootNodes.add(nextNode);
         }
         
-        return (osid.hierarchy.NodeIterator)(new HierarchyNodeIterator(rootNodes));
+        return new HierarchyNodeIterator(rootNodes);
     }
     
     public osid.hierarchy.TraversalInfoIterator traverse(osid.shared.Id startId, int mode, int direction, int levels) throws osid.hierarchy.HierarchyException 
@@ -388,9 +388,9 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
                         break;
 
                     osid.hierarchy.Node node = (osid.hierarchy.Node)nextNode.getUserObject();
-                    traversalInfoList.add((osid.hierarchy.TraversalInfo) (new HierarchyTraversalInfo(
+                    traversalInfoList.add(new HierarchyTraversalInfo(
                         node.getId(), node.getDisplayName(),
-                        currentLevel - startLevel)));
+                        currentLevel - startLevel));
                 }
             }
             
@@ -423,9 +423,9 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
                     if (nextNode.getLevel() >= startLevel) 
                     {
                         osid.hierarchy.Node node = (osid.hierarchy.Node)nextNode.getUserObject();
-                        traversalInfoList.add((osid.hierarchy.TraversalInfo) (new HierarchyTraversalInfo(
+                        traversalInfoList.add(new HierarchyTraversalInfo(
                             node.getId(), node.getDisplayName(),
-                            currentLevel + startLevel)));
+                            currentLevel + startLevel));
                     }
 
                     if (nextNode == startingTreeNode) 
@@ -442,7 +442,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
         }
         
         HierarchyTraversalInfoIterator iterator = new HierarchyTraversalInfoIterator(traversalInfoList);
-        return (osid.hierarchy.TraversalInfoIterator)iterator;
+        return iterator;
     }
      
     /*

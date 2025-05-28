@@ -38,7 +38,7 @@ public class LWChangeSupport
     private static int sEventDepth = 0;
     
     private List listeners;
-    private Object mClient;
+    private final Object mClient;
     private boolean mEventsDisabled = false;
     private int mEventSuspensions = 0;
     
@@ -257,7 +257,7 @@ public class LWChangeSupport
         }
         
         if (listeners != null && listeners.size() > 0) {
-            if (DEBUG.EVENTS && DEBUG.META) eoutln(e + " dispatching for client " + client + " to listeners " + Arrays.asList(listeners));
+            if (DEBUG.EVENTS && DEBUG.META) eoutln(e + " dispatching for client " + client + " to listeners " + List.of(listeners));
             dispatchLWCEvent(client, listeners, e);
         } else {
             //if (DEBUG.EVENTS && DEBUG.THREAD && (DEBUG.META || DEBUG.CONTAINMENT))

@@ -53,17 +53,17 @@ public class FedoraObject implements osid.dr.Asset{
     private PID pid;
     private osid.shared.Type  assetType;
     private String location;
-    private java.util.Vector infoStructures = new java.util.Vector();
+    private final java.util.Vector infoStructures = new java.util.Vector();
     private DR dr;
     private String displayName;
     private String description ="Fedora Repository";
-    private String content = "";
+    private final String content = "";
     // private BehaviorIterator behaviorIterator;
     java.util.Vector infoRecordVector = new java.util.Vector();
     java.util.Vector infoStructureVector = new java.util.Vector();
     java.util.Vector mandatoryInfoStructureVector = new java.util.Vector();
-    private java.util.Calendar effectiveDate = null;
-    private java.util.Calendar expirationDate = null;
+    private final java.util.Calendar effectiveDate = null;
+    private final java.util.Calendar expirationDate = null;
     
     private java.util.Properties ppt;
     
@@ -259,7 +259,7 @@ public class FedoraObject implements osid.dr.Asset{
             }
         }
         
-        return (osid.dr.InfoRecordIterator) (new InfoRecordIterator(result));
+        return new InfoRecordIterator(result);
     }
     
     /**     Get all the InfoStructures for this Asset.  InfoStructures are used to categorize information about Assets.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.
@@ -267,7 +267,7 @@ public class FedoraObject implements osid.dr.Asset{
      *     @throws DigitalRepositoryException if there is a general failure
      */
     public osid.dr.InfoStructureIterator getInfoStructures() throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoStructureIterator) new InfoStructureIterator(infoStructures);
+        return new InfoStructureIterator(infoStructures);
     }
     
     /**     Add the specified InfoStructure and all the related InfoRecords from the specified asset.  The current and future content of the specified InfoRecord is synchronized automatically.

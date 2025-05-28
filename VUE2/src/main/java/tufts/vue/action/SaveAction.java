@@ -193,9 +193,9 @@ public class SaveAction extends VueAction
                                 String spec = resource.getSpec();
                                 System.out.println(resource.getSpec());
                                 Vector row = new Vector();
-                                row.add(new Boolean(true));
+                                row.add(Boolean.TRUE);
                                 row.add(resource);
-                                row.add(new Long(file.length()));
+                                row.add(file.length());
                                 row.add("Ready");
                                 resourceVector.add(row);
                             }

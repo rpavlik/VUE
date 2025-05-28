@@ -31,7 +31,7 @@ import tufts.vue.DEBUG;
 public class MenuProxyIcon implements Icon {
     private static final int arrowWidth = 5; // make sure is odd #
     private static final int arrowGap = 3;
-    private Icon src;
+    private final Icon src;
     
     public MenuProxyIcon(Icon src) {
         this.src = src;

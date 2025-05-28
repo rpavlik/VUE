@@ -62,7 +62,7 @@ public class MapInspectorPanel extends JPanel
     //private PathwayPane mPathPanel = null;
 
     /** description panel **/
-    private NotePanel mDescriptionPanel = new NotePanel("map", false);
+    private final NotePanel mDescriptionPanel = new NotePanel("map", false);
     
     /** filter panel **/
     //private FilterApplyPanel mFilterApplyPanel = null;

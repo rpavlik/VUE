@@ -166,7 +166,7 @@ public class LocalFilingTest2 {
         }
     }
     
-    public static void test2 () throws java.io.IOException, osid.filing.FilingException, osid.shared.SharedException, osid.OsidException  {
+    public static void test2 () throws java.io.IOException, osid.OsidException  {
         System.out.println ("Test 2:  TBD.\n");
     }
 
@@ -188,7 +188,7 @@ public class LocalFilingTest2 {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws java.io.IOException, osid.filing.FilingException, osid.shared.SharedException, osid.OsidException {
+    public static void main(String[] args) throws java.io.IOException, osid.OsidException {
         int testNo = Integer.parseInt(args[0]);
         
         System.out.println ("Local Filing System Test");

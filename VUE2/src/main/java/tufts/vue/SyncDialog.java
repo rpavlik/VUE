@@ -24,7 +24,7 @@ import java.awt.*;
 public class SyncDialog extends JDialog implements ActionListener, KeyListener
 {
     private JButton okButton, cancelButton;
-    private static int newcnt = 1;
+    private static final int newcnt = 1;
     private final JRadioButton nodeToSlideButton = new JRadioButton(VueResources.getString("jbutton.nodetoslide.label"));
     private final JRadioButton slideToNodeButton = new JRadioButton(VueResources.getString("jbutton.slidetonode.label"));
     private final JRadioButton syncAllButton = new JRadioButton(VueResources.getString("jbutton.bothways.label"));    

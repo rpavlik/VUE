@@ -40,8 +40,8 @@ import java.util.*;
  */
 public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.ByteStore {
     protected static final FTPFileListParser __fileListParser = new DefaultFTPFileListParser();
-    private int used = 0;                   //  Bytes written to the buffer.
-    private String mime_type = null;    //  The mime type of this byte store.
+    private final int used = 0;                   //  Bytes written to the buffer.
+    private final String mime_type = null;    //  The mime type of this byte store.
     private boolean writable = true;    //  Is it writable?
     private boolean readable = true;    //  Is it readable?
     private boolean appendable = true;  //  Is it appendable?
@@ -91,7 +91,7 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
     /*
      *  The mime types suffix table.
      */
-    private static java.util.Hashtable mimeTypesSuffixTable = new java.util.Hashtable();
+    private static final java.util.Hashtable mimeTypesSuffixTable = new java.util.Hashtable();
     static {
         mimeTypesSuffixTable.put("doc", "application/msword");
         mimeTypesSuffixTable.put("pdf", "application/pdf");
@@ -138,7 +138,7 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
     /*
      *  The mime types table.
      */
-    private static java.util.Hashtable mimeTypesTable = new java.util.Hashtable();
+    private static final java.util.Hashtable mimeTypesTable = new java.util.Hashtable();
     static {
         mimeTypesTable.put("application/msword","doc");
         mimeTypesTable.put("application/pdf","pdf");
@@ -398,7 +398,7 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
     public osid.shared.ByteValueIterator read(java.util.Calendar version) throws osid.filing.FilingException {
         byte[] buf = getBytes();
         
-        osid.shared.ByteValueIterator it = (osid.shared.ByteValueIterator) new ByteValueIterator(buf);
+        osid.shared.ByteValueIterator it = new ByteValueIterator(buf);
         return it;
     }
     

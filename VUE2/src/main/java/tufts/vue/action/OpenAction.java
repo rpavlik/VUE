@@ -170,9 +170,8 @@ public class OpenAction extends VueAction
     }
 
     private static LWMap doLoadMap(String filename)
-        throws java.io.FileNotFoundException,
-               java.util.zip.ZipException,
-               java.io.IOException
+        throws
+            java.io.IOException
     {
         if (DEBUG.CASTOR || DEBUG.IO) Log.debug("doLoadMap: name=" + filename);
         File file = new File(filename);
@@ -461,7 +460,7 @@ public class OpenAction extends VueAction
             // we can still see the file that failed.
             //Log.error(String.format("@@@Free: %4.1fm; Loaded: %-60s from @@@ %s\n",
             System.err.format("@@@Free: %5.1fm; Loaded: %-60s from @@@ [%s]\n",
-                              (float) (Runtime.getRuntime().freeMemory() / (float) (1024*1024)),
+                    Runtime.getRuntime().freeMemory() / (float) (1024*1024),
                               result, arg);
             //System.err.println("@@@ARG[" + arg + "]");
 

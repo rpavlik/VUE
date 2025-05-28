@@ -35,8 +35,8 @@ public class ScrollableGrid extends JPanel implements Scrollable
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(ScrollableGrid.class);
     
-    private JComponent delegate;
-    private int vertScrollUnit;
+    private final JComponent delegate;
+    private final int vertScrollUnit;
 
     // hack till scroll-pane updating can be made saner:
     // if value > 0, don't paint

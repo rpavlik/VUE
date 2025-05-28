@@ -222,7 +222,7 @@ public class PresentationNotes {
                 }
                 
                 try {
-                    if (DEBUG.Enabled) dc.clearDebug();
+                    if (DEBUG.Enabled) DrawContext.clearDebug();
                     toDraw.drawFit(dc, 0);
                 } catch (Throwable t) {
                     Log.error("exception drawing " + toDraw, t);
@@ -233,7 +233,7 @@ public class PresentationNotes {
                     if (DEBUG.Enabled) Log.debug("painted " + DrawContext.getDebug() + " to " + dc);
 
                     if (DEBUG.PDF) {
-                        final String dcDesc = dc.toString() + String.format(" scale=%.1f%%", dc.g.getTransform().getScaleX() * 100);
+                        final String dcDesc = dc + String.format(" scale=%.1f%%", dc.g.getTransform().getScaleX() * 100);
                         dc.setRawDrawing();
                         dc.g.setColor(Color.red);
                         dc.g.setFont(VueConstants.FixedSmallFont);
@@ -432,7 +432,7 @@ public class PresentationNotes {
 			e.printStackTrace();
 		}
         cb.beginText();
-	     cb.showTextAligned(Element.ALIGN_CENTER, new Integer(seq).toString()+".", x, y, 0f);
+	     cb.showTextAligned(Element.ALIGN_CENTER, seq +".", x, y, 0f);
 	     cb.endText();
 	     cb.stroke();
         

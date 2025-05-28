@@ -150,7 +150,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
         });
         nodeFilterTable.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if(nodeFilterTable.getSelectedRow() == (nodeFilterTable.getRowCount()-1) && e.getKeyCode() == e.VK_ENTER){
+                if(nodeFilterTable.getSelectedRow() == (nodeFilterTable.getRowCount()-1) && e.getKeyCode() == KeyEvent.VK_ENTER){
                     addButtonListener.addStatement();
                 }
             }
@@ -217,13 +217,13 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
             for (Object o : v) {
                 addElement(o);
             }
-            addElement(new String(ADD_ELEMENT)) ;
+            addElement(ADD_ELEMENT) ;
             fireContentsChanged(this,0,v.size()+1);
         }
     }
 
     public class AddButtonListener implements ActionListener {
-        private  NodeFilter model;
+        private final NodeFilter model;
         public AddButtonListener(NodeFilter model) {
             this.model=model;
         }
@@ -267,7 +267,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
             TableModel tableModel = table.getModel();
             if (tableModel instanceof NodeFilter) {
                 NodeFilter nodeFilter  = (NodeFilter) tableModel;
-                editor =  new JComboBox((Vector)((Statement)(nodeFilter.get(row))).getKey().getType().getSettableOperators());
+                editor =  new JComboBox((Vector) nodeFilter.get(row).getKey().getType().getSettableOperators());
                 return editor;
             }
             return (new JComboBox());
@@ -290,7 +290,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             TableModel tableModel = table.getModel();
             if (tableModel instanceof NodeFilter) {
-                editor = new JComboBox((Vector)tufts.vue.VUE.getActiveMap().getMapFilterModel().getKeyVector());
+                editor = new JComboBox(tufts.vue.VUE.getActiveMap().getMapFilterModel().getKeyVector());
                 return editor;
             }
             return (new JComboBox());// if no editor present
@@ -430,7 +430,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
 
     public class NodeFilterSelectionListener  implements ListSelectionListener {
         private int m_selectedRow;
-        private JButton m_deleteButton;
+        private final JButton m_deleteButton;
 
         public NodeFilterSelectionListener(JButton deleteButton, int selectedRow) {
             m_selectedRow=selectedRow;
@@ -459,17 +459,13 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
             this.m_selectedRow = row;
         }
         private void updateButtons() {
-            if (getSelectedRow()==-1) {
-                m_deleteButton.setEnabled(false);
-            } else {
-                m_deleteButton.setEnabled(true);
-            }
+            m_deleteButton.setEnabled(getSelectedRow() != -1);
         }
     }
 
     public class DeleteButtonListener implements ActionListener {
-        private JTable table;
-        private NodeFilterSelectionListener m_sListener;
+        private final JTable table;
+        private final NodeFilterSelectionListener m_sListener;
 
         public DeleteButtonListener(JTable table,NodeFilterSelectionListener sListener) {
             this.table = table;

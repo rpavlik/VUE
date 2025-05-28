@@ -38,11 +38,11 @@ public class Key {
         this.type = type;
         this.sKey = key;
         if(type.getDisplayName().equals(Type.INTEGER_TYPE))
-            defaultValue = new Integer(0);
+            defaultValue = 0;
         else if(type.getDisplayName().equals(Type.BOOLEAN_TYPE))
-            defaultValue = new Boolean(true);
+            defaultValue = Boolean.TRUE;
         else
-            defaultValue = new String("");
+            defaultValue = "";
     }
 
     public void setType(Type type) {

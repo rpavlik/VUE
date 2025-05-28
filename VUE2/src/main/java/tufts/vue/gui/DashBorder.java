@@ -29,7 +29,10 @@ public class DashBorder extends AbstractBorder {
  
 	private Color colorBG = null;
     
-	private boolean bottom,top,left,right;
+	private final boolean bottom;
+    private final boolean top;
+    private final boolean left;
+    private final boolean right;
   
 	public DashBorder(Color fg) {
 		this(1,  fg, null,true,true,true,true);

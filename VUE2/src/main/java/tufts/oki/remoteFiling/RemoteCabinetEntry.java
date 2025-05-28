@@ -46,11 +46,11 @@ import osid.OsidException;
 public class RemoteCabinetEntry implements osid.filing.CabinetEntry {
     private osid.shared.Id id;
     private String display_name;
-    private osid.shared.Agent agent_owner;
-    private java.util.Date created_time;
+    private final osid.shared.Agent agent_owner;
+    private final java.util.Date created_time;
     private java.util.Date modified_time;
-    private java.util.Date accessed_time;
-    private Vector modified_times;
+    private final java.util.Date accessed_time;
+    private final Vector modified_times;
     private osid.filing.Cabinet parent = null;
     protected RemoteClient rc;
     /**
@@ -89,7 +89,7 @@ public class RemoteCabinetEntry implements osid.filing.CabinetEntry {
      *  @return The id of this CabinetEntry.
      */
     public osid.shared.Id getId() throws osid.filing.FilingException {
-        return (osid.shared.Id) id;
+        return id;
     }
     
     /**

@@ -116,7 +116,8 @@ public class ExitAction extends AbstractAction
                         ft.setRootVisible(true);
                         tufts.vue.SaveVueJTree sfavtree = new tufts.vue.SaveVueJTree(ft);
                         File favf  = new File(VueUtil.getDefaultUserFolder().getAbsolutePath()+File.separatorChar+ds.getDisplayName()+VueResources.getString("save.favorites"));
-                        ((FavoritesWindow)ds.getResourceViewer()).marshallFavorites(favf,sfavtree);
+                        ds.getResourceViewer();
+                        FavoritesWindow.marshallFavorites(favf,sfavtree);
                     }
                 }
             }

@@ -113,7 +113,7 @@ public class TextBox extends JTextPane
     private static boolean TestDebug = false;
     private static boolean TestHarness = false;
     
-    private LWComponent lwc;
+    private final LWComponent lwc;
     /** bounds: generally used by the component as local coordinates (relative to the coordinate 0,0)
      * The width/height are set here in TextBox */
     private final Rectangle2D.Float mBounds = new Rectangle2D.Float();
@@ -252,7 +252,7 @@ public class TextBox extends JTextPane
         Dimension size = getSize();
         super.addNotify();
         // note: we get a a flash/move if we add the border before the super.addNotify()
-        if (false && TestDebug)
+        if (false)
             ; //setBorder(javax.swing.BorderFactory.createLineBorder(Color.green));
         else {
             // ADDING THIS BORDER INCREASES THE PREFERRED SIZE
@@ -331,10 +331,7 @@ public class TextBox extends JTextPane
 
         Dimension preferred = getPreferredSize();
         int w = getWidth() + 1;
-        if (w < preferred.width)
-            mKeepTextWidth = true;
-        else
-            mKeepTextWidth = false;
+        mKeepTextWidth = w < preferred.width;
         if (TestDebug||DEBUG.TEXT) out("width+1=" + w + " < preferred.width=" + preferred.width + " fixedWidth=" + mKeepTextWidth);
         
         if (TestDebug||DEBUG.TEXT) out("addNotify end: insets="+getInsets());
@@ -360,7 +357,7 @@ public class TextBox extends JTextPane
         
         super.removeNotify();
 
-        if (mFirstAfterAddNotify == false) {
+        if (!mFirstAfterAddNotify) {
             // if cleared, it was used
             out("restoring expanded width");
             setSize(new Dimension(getWidth()-1, getHeight()));
@@ -460,11 +457,7 @@ public class TextBox extends JTextPane
        if (c !=null)
        {
     	   String s =  c.mFontUnderline.get();
-    	   if (s.equals("underline"))
-    	   	   StyleConstants.setUnderline(a, true);
-    	   
-    	   else
-    		   StyleConstants.setUnderline(a, false);
+           StyleConstants.setUnderline(a, s.equals("underline"));
     	   
        }
     }
@@ -477,7 +470,7 @@ public class TextBox extends JTextPane
         if (DEBUG.TEXT) 
         	out("copyStyle " + c);
         SimpleAttributeSet a = new SimpleAttributeSet();
-        if (TestHarness || c instanceof LWNode && ((LWNode)c).isTextNode())
+        if (TestHarness || c instanceof LWNode && c.isTextNode())
             StyleConstants.setAlignment(a, StyleConstants.ALIGN_LEFT);
         else
             StyleConstants.setAlignment(a, StyleConstants.ALIGN_CENTER);
@@ -679,11 +672,10 @@ public class TextBox extends JTextPane
         // with any modifier down except a shift alone (in case of
         // caps lock) complete the edit.
         return e.getKeyCode() == KeyEvent.VK_ENTER &&
-            (
-             e.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD ||
-             (e.getModifiersEx() != 0 && !e.isShiftDown())
-             )
-            == true;
+                (
+                        e.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD ||
+                                (e.getModifiersEx() != 0 && !e.isShiftDown())
+                );
         //== false; // reversed logic of below description
     }
 
@@ -733,7 +725,7 @@ public class TextBox extends JTextPane
     public void focusLost(FocusEvent e)
     {
         if (TestDebug||DEBUG.FOCUS) outc("focusLost to " + e.getOppositeComponent());
-        if (TestHarness == false && getParent() != null)
+        if (!TestHarness && getParent() != null)
             getParent().remove(this);
         if (keyWasPressed) { // TODO: as per VueTextField, need to handle drag & drop detect
             // only do this if they typed something (so we don't wind up with "label"
@@ -755,7 +747,7 @@ public class TextBox extends JTextPane
     /** do not use, or won't be able to get out actual text height */
     @Override
     public void setPreferredSize(Dimension preferredSize) {
-        if (true||TestDebug) out("setPreferred " + preferredSize);
+        if (true) out("setPreferred " + preferredSize);
         super.setPreferredSize(preferredSize);
     }
     
@@ -856,7 +848,7 @@ public class TextBox extends JTextPane
         return s;
     }
     public void setMaximumSize(Dimension s) {
-        if (true||TestDebug) out("setMaximumSize", s);
+        if (true) out("setMaximumSize", s);
         super.setMaximumSize(s);
     }
     public Dimension getMaximumSize() {
@@ -865,7 +857,7 @@ public class TextBox extends JTextPane
         return s;
     }
     public void setMinimumSize(Dimension s) {
-        if (true||TestDebug) out("setMinimumSize", s);
+        if (true) out("setMinimumSize", s);
         super.setMinimumSize(s);
     }
     public Dimension getMinimumSize() {
@@ -1198,8 +1190,7 @@ public class TextBox extends JTextPane
 			 if (GUI.isMenuPopup(e))
 			 {
 				 displayContextMenu(e);
-				 return;
-			 }		
+             }
 	}
 	
 	private void displayContextMenu(MouseEvent e) {

@@ -45,7 +45,7 @@ final RecentlyOpenedUrlManager roum = RecentlyOpenedUrlManager.getInstance();
 	GridBagConstraints fGBC = new GridBagConstraints();
 	JButton fButtonOK;
 	JButton fButtonCancel;
-	private static String url = new String();
+	private static String url = "";
 	
 	
 	public GetUrlDialog() {

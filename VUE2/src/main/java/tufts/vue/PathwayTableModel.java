@@ -158,9 +158,8 @@ public class PathwayTableModel extends DefaultTableModel
     	//final LWPathway activePathway = VUE.getActivePathway();    	
         pathway.moveEntry(start, to);
         fireTableDataChanged();
-    	 return;
-    
-    	
+
+
     }
     void fireChanged(Object invoker) {
         fireTableChanged(new DataEvent(invoker));
@@ -468,7 +467,7 @@ public class PathwayTableModel extends DefaultTableModel
 
 
     private class DataEvent extends javax.swing.event.TableModelEvent {
-        private Object invoker;
+        private final Object invoker;
         DataEvent(Object invoker) {
             super(PathwayTableModel.this);
             this.invoker = invoker;

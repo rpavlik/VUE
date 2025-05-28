@@ -56,7 +56,7 @@ public class LWPathway extends LWContainer
     
     private int mCurrentIndex = -1;
     private MasterSlide mMasterSlide;
-    private boolean mRevealer = false;
+    private final boolean mRevealer = false;
     /** For PathwayTable: does this pathway currently show it's entries in the list? */
     private transient boolean mOpen = true;
 
@@ -66,9 +66,9 @@ public class LWPathway extends LWContainer
     private java.util.List<Entry> mSecureEntries = java.util.Collections.unmodifiableList(mEntries);
 
     /** for backward compat with old style saved pathways -- the ordered list of member node ID's */
-    private transient java.util.List<String> mOldStyleMemberIDList = new java.util.ArrayList();
+    private final transient java.util.List<String> mOldStyleMemberIDList = new java.util.ArrayList();
     /** for backward compat with old style saved pathways (pre Feb/March 2006) */
-    private ArrayList<LWPathwayElementProperty> mOldStyleProperties = new ArrayList<>();
+    private final ArrayList<LWPathwayElementProperty> mOldStyleProperties = new ArrayList<>();
 
     // todo: encapsulating the preference with the code that needs it is nice, but it's
     // actually a very bad idea, as this means the order of the preferences in the
@@ -185,7 +185,7 @@ public class LWPathway extends LWContainer
         }
         
         private void syncNodeEntryRef() {
-            if (node != null && node instanceof LWPathway == false)
+            if (node != null && !(node instanceof LWPathway))
                 node.addEntryRef(this);
         }
 
@@ -455,7 +455,7 @@ public class LWPathway extends LWContainer
         }
         
         public void setNotes(String s) {
-            if (notes == s || (notes != null && notes.equals(s)))
+            if (Objects.equals(notes, s))
                 return;
             final String oldNotes = notes;
             notes = s;
@@ -495,7 +495,7 @@ public class LWPathway extends LWContainer
 			DataFlavor[] list = new DataFlavor[1];
 			try
 			{
-				list[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+				list[0] = new DataFlavor(java.awt.datatransfer.DataFlavor.javaJVMLocalObjectMimeType);
 			}
 			catch(ClassNotFoundException cnf)
 			{
@@ -505,10 +505,7 @@ public class LWPathway extends LWContainer
 		}
 
 		public boolean isDataFlavorSupported(java.awt.datatransfer.DataFlavor arg0) {
-			if (arg0.isFlavorRemoteObjectType())
-				return true;
-			else
-				return false;
+            return arg0.isFlavorRemoteObjectType();
 		}
     }
 
@@ -743,7 +740,7 @@ public class LWPathway extends LWContainer
         */
     }
 
-    private static Color[] ColorTable = {
+    private static final Color[] ColorTable = {
         new Color(153, 51, 51),
         new Color(204, 51, 204),
         new Color(51, 204, 51),
@@ -945,17 +942,14 @@ public class LWPathway extends LWContainer
 
     /** @return true if the given component can be added to a pathway */
     public static boolean isPathwayAllowed(LWComponent c) {
-        if (c instanceof LWPathway ||
-            c instanceof LWMap ||       // just in case
-            c instanceof LWLink ||      // no longer allowed -- decided in staff 2007-08-29 -- SMF
-            //c instanceof LWText ||      // disallowed 2008-04-25 SMF: usually can't see them
-            c.isPathwayOwned() ||       // e.g.: slides appearing as slide icons
-            !c.isMoveable() ||          // just in case, don't allow any non-moveables
-            (c instanceof LWImage && ((LWImage)c).isNodeIcon()) ||
-            c.hasAncestorOfType(LWSlide.class))
-            return false;
-        else
-            return true;
+        return !(c instanceof LWPathway) &&
+                !(c instanceof LWMap) &&       // just in case
+                !(c instanceof LWLink) &&      // no longer allowed -- decided in staff 2007-08-29 -- SMF
+                //c instanceof LWText ||      // disallowed 2008-04-25 SMF: usually can't see them
+                !c.isPathwayOwned() &&       // e.g.: slides appearing as slide icons
+                c.isMoveable() &&          // just in case, don't allow any non-moveables
+                (!(c instanceof LWImage) || !((LWImage) c).isNodeIcon()) &&
+                !c.hasAncestorOfType(LWSlide.class);
     }
 
     /**

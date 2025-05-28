@@ -93,8 +93,8 @@ public class DataSourceViewer extends ContentViewer
     org.osid.shared.Type searchType = new edu.tufts.vue.util.Type("mit.edu","search","keyword");
     org.osid.shared.Type thumbnailType = new edu.tufts.vue.util.Type("mit.edu","partStructure","thumbnail");
     ImageIcon noImageIcon;
-    private JPanel dummyPanel = new JPanel();
-    private org.osid.OsidContext context = new org.osid.OsidContext();
+    private final JPanel dummyPanel = new JPanel();
+    private final org.osid.OsidContext context = new org.osid.OsidContext();
     //org.osid.registry.Provider checked[];
     
     private final java.util.List<SearchThread> mSearchThreads = java.util.Collections.synchronizedList(new java.util.LinkedList<SearchThread>());
@@ -110,7 +110,7 @@ public class DataSourceViewer extends ContentViewer
             initUI();
             
         setLayout(new BorderLayout());
-        this.DRB = drBrowser;
+        DRB = drBrowser;
         dataSourceList = new DataSourceList(this);
         
         Widget.setExpanded(DRB.browsePane, false); // working: why expanded sometimes?
@@ -453,7 +453,7 @@ public class DataSourceViewer extends ContentViewer
                             }
                         }});
                     }
-                    if(e.getButton() == e.BUTTON3)
+                    if(e.getButton() == MouseEvent.BUTTON3)
                     {
                      	lastMouseClick = e.getPoint();
            				displayContextMenu(e);
@@ -466,7 +466,7 @@ public class DataSourceViewer extends ContentViewer
     }
     
     public void setActiveDataSource(edu.tufts.vue.dsm.DataSource ds) {
-        this.activeDataSource = ds;
+        activeDataSource = ds;
         dataSourceList.setSelectedValue(ds,true);
         Widget.setExpanded(DRB.browsePane, false);
         Widget.setExpanded(DRB.searchPane, true);
@@ -523,9 +523,9 @@ public class DataSourceViewer extends ContentViewer
         //if (DEBUG.Enabled) Log.debug("setActiveDataSource: " + ds, new Throwable("FYI"));
         if (DEBUG.Enabled) Log.debug("setActiveDataSource: " + ds);
         
-        this.activeDataSource = ds;
+        activeDataSource = ds;
         
-        this.dataSourceList.setSelectedValue(ds, true);
+        dataSourceList.setSelectedValue(ds, true);
 
         this.browserDS = (tufts.vue.BrowseDataSource) ds;
         
@@ -655,7 +655,7 @@ public class DataSourceViewer extends ContentViewer
                                 int found =0;
                                 for (Component comp : comps) {
                                     String compName = comp.getName();
-                                    if ((compName != null) && (compName.indexOf(displayName) != -1)) {
+                                    if ((compName != null) && (compName.contains(displayName))) {
                                         if ((found == instanceIndex) || (found == instanceIndex + 1))
                                             widgetStack.remove(comp);
 
@@ -728,10 +728,7 @@ public class DataSourceViewer extends ContentViewer
                 osid.shared.Agent user = tuftsDL.authorizeUser(userName,password);
                 if(user == null)
                     return false;
-                if(tuftsDL.isAuthorized(user, TuftsDLAuthZ.AUTH_VIEW))
-                    return true;
-                else
-                    return false;
+                return tuftsDL.isAuthorized(user, TuftsDLAuthZ.AUTH_VIEW);
             } catch(Exception ex) {
                 VueUtil.alert(null,VueResources.getString("dialog.checkvaliduser.message") +ex, VueResources.getString("dialog.checkvaliduser.title"));
                 ex.printStackTrace();
@@ -933,7 +930,7 @@ public class DataSourceViewer extends ContentViewer
         
         private final StatusLabel mStatusLabel;
         private final String mRepositoryName;
-        private LWComponent mCenterComponent;
+        private final LWComponent mCenterComponent;
         public MapBasedSearchThread(org.osid.repository.Repository r,
                 String searchString,
                 Serializable searchCriteria,

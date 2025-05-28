@@ -156,7 +156,7 @@ public class LocalFilingTest {
     /**
      *  Tests directory path names using LocalCabinet.getFullName().
      */
-    public static void test2 () throws java.io.IOException, osid.filing.FilingException, osid.shared.SharedException, osid.OsidException  {
+    public static void test2 () throws java.io.IOException, osid.OsidException  {
         System.out.println ("Test 2:  Directory path names.\n");
 
         Agent agent = new Agent ("Mark", new AgentPersonType());
@@ -185,25 +185,25 @@ public class LocalFilingTest {
         File test = new File ("c:/foo/bar/biz/baz");
         String testPath = test.getPath();
         System.out.println ("test path is: " + testPath);
-        System.out.println ("separator is: " + test.separator);
+        System.out.println ("separator is: " + File.separator);
 
-        String[] parts = lm.explodePath (testPath, test.separatorChar);
+        String[] parts = lm.explodePath (testPath, File.separatorChar);
         for (int i=0; i < parts.length; i++) {
             System.out.println ("\t Part " + i + ": " + parts[i]);
         }
-        System.out.println ("reassembled test path: " + lm.implodePath(parts, test.separator));
+        System.out.println ("reassembled test path: " + lm.implodePath(parts, File.separator));
 
         System.out.println ("\nTest of root.");
         test = new File ("c:/");
         testPath = test.getPath();
         System.out.println ("test path is: " + testPath);
-        System.out.println ("separator is: " + test.separator);
+        System.out.println ("separator is: " + File.separator);
 
-        parts = lm.explodePath (testPath, test.separatorChar);
+        parts = lm.explodePath (testPath, File.separatorChar);
         for (int i=0; i < parts.length; i++) {
             System.out.println ("\t Part " + i + ": " + parts[i]);
         }
-        System.out.println ("reassembled test path: " + lm.implodePath(parts, test.separator));
+        System.out.println ("reassembled test path: " + lm.implodePath(parts, File.separator));
     }
     
     /**
@@ -298,7 +298,7 @@ public class LocalFilingTest {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws java.io.IOException, osid.filing.FilingException, osid.shared.SharedException, osid.OsidException {
+    public static void main(String[] args) throws java.io.IOException, osid.OsidException {
         int testNo = Integer.parseInt(args[0]);
         
         System.out.println ("Local Filing System Test");

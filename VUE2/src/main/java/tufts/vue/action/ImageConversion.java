@@ -66,7 +66,7 @@ public class ImageConversion extends VueAction {
             }
             FileImageOutputStream output = new FileImageOutputStream(location);            
             writer.setOutput(output);
-            IIOImage iioImage = new IIOImage((RenderedImage)image, null, null);
+            IIOImage iioImage = new IIOImage(image, null, null);
             writer.write(null, iioImage, iwp);
         }
         catch (Exception e)

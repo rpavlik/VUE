@@ -28,7 +28,7 @@ package tufts.vue.ds;
 
 public class QuantileField extends Field {
 	
-	private Field referenceField;
+	private final Field referenceField;
 	
 	QuantileField(String n, Schema schema,Field referenceField) {
 		super(n, schema);

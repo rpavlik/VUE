@@ -230,7 +230,7 @@ public class FedoraPublisher {
         System.out.println("Getting object XML for "+comp.getLabel()+" file: "+file);
         String r = "";
         String dateString = getDateString();
-        String uploadId = new String();
+        String uploadId = "";
         String pid = getFedoraPid(comp);
         String dsName = RESOURCE_DS;
         String mimeType = getMimeType(file,comp);
@@ -259,32 +259,30 @@ public class FedoraPublisher {
     }
     
     public static String getDSXML(String controlGroup,String dsName,String dateString,String label, String uploadId,String contentLocationType, String mimeType) {
-        StringBuilder xml = new StringBuilder();
-        xml.append("<foxml:datastream CONTROL_GROUP=\""+controlGroup+"\" ID=\""+dsName+"\" STATE=\"A\" VERSIONABLE=\"true\">\n");
-        xml.append("<foxml:datastreamVersion CREATED=\""+dateString+"\" FORMAT_URI=\"http://vue.tufts.edu/docs/vueformat/\"");
-        xml.append(" ID=\""+dsName+".0\" LABEL=\""+label+"\" MIMETYPE=\""+mimeType+"\">\n");
-        xml.append("<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n");
-        xml.append("<foxml:contentLocation  REF=\""+uploadId+"\" TYPE=\""+contentLocationType+"\"/>\n");
-        xml.append("</foxml:datastreamVersion></foxml:datastream>\n");
-        return xml.toString();
+        String xml = "<foxml:datastream CONTROL_GROUP=\"" + controlGroup + "\" ID=\"" + dsName + "\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+                "<foxml:datastreamVersion CREATED=\"" + dateString + "\" FORMAT_URI=\"http://vue.tufts.edu/docs/vueformat/\"" +
+                " ID=\"" + dsName + ".0\" LABEL=\"" + label + "\" MIMETYPE=\"" + mimeType + "\">\n" +
+                "<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n" +
+                "<foxml:contentLocation  REF=\"" + uploadId + "\" TYPE=\"" + contentLocationType + "\"/>\n" +
+                "</foxml:datastreamVersion></foxml:datastream>\n";
+        return xml;
     }
     
     
     
     private static String getDCXML(LWComponent comp) {
         String dateString = getDateString();
-        StringBuilder xml = new StringBuilder();
-        xml.append("<foxml:datastream CONTROL_GROUP=\"X\" ID=\"DC\" STATE=\"A\" VERSIONABLE=\"true\">\n");
-        xml.append("<foxml:datastreamVersion CREATED=\""+dateString+"\" ID=\"DC1.0\" LABEL=\"Dublin Core Metadata\" MIMETYPE=\"text/xml\">\n");
-        xml.append("<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n");
-        xml.append(" <foxml:xmlContent>\n");
-        xml.append(getDC(comp,comp.getLabel(),getFedoraPid(comp)));
-        xml.append("</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>\n");
-        return xml.toString();
+        String xml = "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"DC\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+                "<foxml:datastreamVersion CREATED=\"" + dateString + "\" ID=\"DC1.0\" LABEL=\"Dublin Core Metadata\" MIMETYPE=\"text/xml\">\n" +
+                "<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n" +
+                " <foxml:xmlContent>\n" +
+                getDC(comp, comp.getLabel(), getFedoraPid(comp)) +
+                "</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>\n";
+        return xml;
     }
     
     private static String getDC(LWComponent c,String title,String identifier) {
-        String dc = new String();
+        String dc = "";
 //      System.out.println("getDC: LWComponent: "+c+ " metadata elements: "+  c.getMetadataList().getMetadata().size());
         dc +="<oai_dc:dc xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:oai_dc=\"http://www.openarchives.org/OAI/2.0/oai_dc/\">";
         dc += "<dc:title>"+title+"</dc:title>";
@@ -305,19 +303,18 @@ public class FedoraPublisher {
     
     private static String getRelsXML(LWComponent comp,LWMap map) throws Exception  {
         String dateString = getDateString();
-        StringBuilder xml = new StringBuilder();
-        xml.append("<foxml:datastream CONTROL_GROUP=\"X\" ID=\"RELS-EXT\" STATE=\"A\" VERSIONABLE=\"true\">\n");
-        xml.append("<foxml:datastreamVersion CREATED=\""+dateString+"\" ID=\"RELS-EXT.0\" LABEL=\"Relationships to other objects\" MIMETYPE=\"text/xml\">\n");
-        xml.append("<foxml:xmlContent>\n");
-        xml.append(getRDFDescriptionForLWComponent(comp,map));
-        xml.append("</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>");
-        return xml.toString();
+        String xml = "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"RELS-EXT\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+                "<foxml:datastreamVersion CREATED=\"" + dateString + "\" ID=\"RELS-EXT.0\" LABEL=\"Relationships to other objects\" MIMETYPE=\"text/xml\">\n" +
+                "<foxml:xmlContent>\n" +
+                getRDFDescriptionForLWComponent(comp, map) +
+                "</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>";
+        return xml;
         
     }
     
     
     private static String getRDFDescriptionForLWComponent(LWComponent comp,LWMap map) {
-        String rdfDescription = new String();
+        String rdfDescription = "";
         rdfDescription = "<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:rel=\"info:fedora/fedora-system:def/relations-external#\">";
         rdfDescription += "<rdf:Description rdf:about=\"info:fedora/"+getFedoraPid(comp)+"\">";
         for(LWComponent c: map.getAllDescendents(LWComponent.ChildKind.PROPER)) {
@@ -345,7 +342,7 @@ public class FedoraPublisher {
     }
     
     private static String getFedoraOntologyTerm(String value) {
-        String term = new String();
+        String term = "";
         term = value.substring(FEDORA_ONTOLOGY.length());
         term = term.replaceAll(" ","");
         return term;

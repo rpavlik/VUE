@@ -17,6 +17,7 @@ package tufts.vue.action;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.zip.*;
 
@@ -88,7 +89,7 @@ public class Archive
 
         File tmp = null;
         try {
-            tmp = directory.createTempFile(".vueFScheck", "", directory);
+            tmp = File.createTempFile(".vueFScheck", "", directory);
         } catch (Throwable t) {
             Log.info("Cannot write to filesystem inside: " + directory + "; " + t);
         }
@@ -112,9 +113,7 @@ public class Archive
      */
 
     public static LWMap openVuePackage(final File zipFile)
-        throws java.io.IOException,
-               java.util.zip.ZipException
-    {
+        throws java.io.IOException {
         Log.info("Unpacking VUE zip archive: " + zipFile);
         
         final String unpackingDir;
@@ -122,7 +121,7 @@ public class Archive
         //File folder = new File(VueUtil.getDefaultUserFolder().getAbsolutePath()+File.separator+"VueMapArchives";
 
         final File parentDirectory = zipFile.getParentFile();
-        if (false && canCreateFiles(parentDirectory)) // for now, always unpack into the temp directory
+        if (false) // for now, always unpack into the temp directory
             unpackingDir = parentDirectory.toString();
         else
             unpackingDir = VUE.getSystemProperty("java.io.tmpdir");
@@ -270,7 +269,7 @@ public class Archive
                 filename = location + File.separator + entry.getName();
         }
 
-        if (true||DEBUG.IO) {
+        if (true) {
             // Note: entry.getSize() is not known until the entry is unpacked
             //final String comment = Archive.getComment(entry);
             String msg = "Unzipping to " + filename + " from entry " + entry;
@@ -339,9 +338,8 @@ public class Archive
 
     
     public static LWMap loadVueIMSCPArchive(File file)
-        throws java.io.FileNotFoundException,
-               java.util.zip.ZipException,
-               java.io.IOException
+        throws
+            java.io.IOException
     {
             Log.info("Unpacking VUE IMSCP zip archive: " + file);
             ZipFile zipFile = new ZipFile(file);
@@ -596,9 +594,9 @@ public class Archive
         
         if (DEBUG.IO) Log.debug("     decoding " + packageName);
         // Decode (to prevent any redundant encoding), then re-encode
-        packageName = java.net.URLDecoder.decode(packageName, "UTF-8");
+        packageName = java.net.URLDecoder.decode(packageName, StandardCharsets.UTF_8);
         if (DEBUG.IO) Log.debug("   decoded to " + packageName);
-        packageName = java.net.URLEncoder.encode(packageName, "UTF-8");
+        packageName = java.net.URLEncoder.encode(packageName, StandardCharsets.UTF_8);
         if (DEBUG.IO) Log.debug("re-encoded to " + packageName);
         // now "lock-in" the encoding: as this is now a fixed file-name, we don't ever want it to be
         // accidentally decoded, which might create something that looks like a path when we don't want it to.

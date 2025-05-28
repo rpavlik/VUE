@@ -84,7 +84,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      */
     private void addChild (osid.shared.Id childQualifierId) {
         VueQualifier qual = (VueQualifier) azMgr.getQualifier (childQualifierId);
-        if (this.children.indexOf(qual) == -1)
+        if (!this.children.contains(qual))
             this.children.add(qual);
     }
     
@@ -95,7 +95,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      */
     public void addParent(osid.shared.Id parentQualifierId) {
         VueQualifier qual = (VueQualifier) azMgr.getQualifier (parentQualifierId);
-        if (this.parents.indexOf(qual) == -1)
+        if (!this.parents.contains(qual))
             this.parents.add(qual);
         qual.addChild (parentQualifierId);
     }
@@ -119,7 +119,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      *  @author Mark Norton
      */
     public osid.authorization.QualifierIterator getChildren() {
-        return (osid.authorization.QualifierIterator) new VueQualifierIterator (children);
+        return new VueQualifierIterator (children);
     }
     
     /**
@@ -155,7 +155,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      *  @author Mark Norton
      */
     public osid.authorization.QualifierIterator getParents() {
-        return (osid.authorization.QualifierIterator) new VueQualifierIterator (children);
+        return new VueQualifierIterator (children);
     }
     
     /**
@@ -215,10 +215,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      *  @author Mark Norton
      */
     public boolean isParent() {
-        if (children.isEmpty())
-            return false;
-        else
-            return true;
+        return !children.isEmpty();
     }
     
     /**
@@ -229,7 +226,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      */
     private void removeChild (osid.shared.Id childQualifierId) {
         VueQualifier qual = (VueQualifier) azMgr.getQualifier (childQualifierId);
-        if (this.children.indexOf(qual) != -1)
+        if (this.children.contains(qual))
             this.children.remove(qual);
     }
     

@@ -137,7 +137,7 @@ public class MapFilterModelEditor extends JPanel {
 
 
     public class AddButtonListener implements ActionListener {
-        private  MapFilterModel model;
+        private final MapFilterModel model;
         public AddButtonListener(MapFilterModel model) {
             this.model=model;
         }
@@ -220,7 +220,7 @@ public class MapFilterModelEditor extends JPanel {
 
     public class MapFilterModelSelectionListener  implements ListSelectionListener {
         private int m_selectedRow;
-        private JButton m_deleteButton;
+        private final JButton m_deleteButton;
 
         public MapFilterModelSelectionListener(JButton deleteButton, int selectedRow) {
             m_selectedRow=selectedRow;
@@ -249,17 +249,13 @@ public class MapFilterModelEditor extends JPanel {
             this.m_selectedRow = row;
         }
         private void updateButtons() {
-            if (getSelectedRow()==-1) {
-                m_deleteButton.setEnabled(false);
-            } else {
-                m_deleteButton.setEnabled(true);
-            }
+            m_deleteButton.setEnabled(getSelectedRow() != -1);
         }
     }
 
     public class DeleteButtonListener implements ActionListener {
-        private JTable table;
-        private MapFilterModelSelectionListener m_sListener;
+        private final JTable table;
+        private final MapFilterModelSelectionListener m_sListener;
 
         public DeleteButtonListener(JTable table,MapFilterModelSelectionListener sListener) {
             this.table = table;

@@ -86,7 +86,7 @@ public class DataSetViewer extends ContentViewer {
 				Vector<BrowseDataSource>	dataSources = dataSourceViewer.getSaveDataSources();
 
 				while (!dataSources.isEmpty()) {
-					BrowseDataSource	ds = (BrowseDataSource)dataSources.remove(0);
+					BrowseDataSource	ds = dataSources.remove(0);
 
 					// Only show XML data sources (this includes CSV files).
 					if (ds.getTypeName().equals(XmlDataSource.TYPE_NAME)) {
@@ -242,7 +242,7 @@ public class DataSetViewer extends ContentViewer {
 				if (DEBUG.DR) System.err.print("\tsaveDataSetViewer: item " + i + " is " + tufts.Util.tag(item) + "[" + item + "]...");
 
 				if (item instanceof DataSource) {
-					dataSources.add((DataSource)item);
+					dataSources.add(item);
 
 					if (DEBUG.DR) System.err.println("saving");
 				} else {
@@ -262,7 +262,7 @@ public class DataSetViewer extends ContentViewer {
 				if (DEBUG.DR) System.err.print("\tsaveDataSetViewer: item " + i + " is " + tufts.Util.tag(item) + "[" + item + "]...");
 
 				if (item instanceof DataSource) {
-					dataSources.add((DataSource)item);
+					dataSources.add(item);
 
 					if (DEBUG.DR) System.err.println("saving");
 				} else {
@@ -310,10 +310,10 @@ public class DataSetViewer extends ContentViewer {
 	{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-		if ((DSB.dockWindow.getX() + DSB.dockWindow.getWidth() + editInfoDockWindow.getWidth()) < screenSize.getWidth())
-			editInfoDockWindow.setLocation(DSB.dockWindow.getX() + DSB.dockWindow.getWidth(), DSB.dockWindow.getY());
+		if ((DSBrowser.dockWindow.getX() + DSBrowser.dockWindow.getWidth() + editInfoDockWindow.getWidth()) < screenSize.getWidth())
+			editInfoDockWindow.setLocation(DSBrowser.dockWindow.getX() + DSBrowser.dockWindow.getWidth(), DSBrowser.dockWindow.getY());
 		else
-			editInfoDockWindow.setLocation(DSB.dockWindow.getX() - editInfoDockWindow.getWidth(), DSB.dockWindow.getY());
+			editInfoDockWindow.setLocation(DSBrowser.dockWindow.getX() - editInfoDockWindow.getWidth(), DSBrowser.dockWindow.getY());
 	}
 
 	private void refreshEditInfo(tufts.vue.DataSource ds) {

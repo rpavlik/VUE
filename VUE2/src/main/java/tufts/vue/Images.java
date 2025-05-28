@@ -579,19 +579,14 @@ public class Images
     static String keyToCacheFileName(URI key)
     //throws java.io.UnsupportedEncodingException
     {
-        try {
-            //return key.toASCIIString();
-            return java.net.URLEncoder.encode(key.toString(), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            Log.error("transforming key to cache-file name: " + key, e);
-        }
-        return null;
+        //return key.toASCIIString();
+        return java.net.URLEncoder.encode(key.toString(), StandardCharsets.UTF_8);
     }
     
     private static URI cacheFileNameToKey(String name) 
     {
         try {
-            return new URI(java.net.URLDecoder.decode(name, "UTF-8"));
+            return new URI(java.net.URLDecoder.decode(name, StandardCharsets.UTF_8));
             //return new URL(java.net.URLDecoder.decode(name, "UTF-8"));
         } catch (Throwable t) {
             if (DEBUG.Enabled) tufts.Util.printStackTrace(t);
@@ -662,7 +657,7 @@ public class Images
         protected final void relaySize(Listener l, Object src, int w, int h, long bytes, int[] sourceSize) {
             if (l != null) {
                 try {
-                    if (DEBUG.IMAGE && l instanceof ListenerRelay == false)
+                    if (DEBUG.IMAGE && !(l instanceof ListenerRelay))
                         out(Util.TERM_CYAN + "relay SIZE " + w + "x" + h + " ss=" + Util.tags(sourceSize) + " to " + tag(l) + Util.TERM_CLEAR);
                     l.gotImageSize(src, w, h, bytes, sourceSize);
                 } catch (Throwable t) {
@@ -673,7 +668,7 @@ public class Images
         protected final void relayProgress(Listener l, Object src, long bytes, float pct) {
             if (l != null) {
                 try {
-                    if (DEBUG.IMAGE && DEBUG.META && l instanceof ListenerRelay == false)
+                    if (DEBUG.IMAGE && DEBUG.META && !(l instanceof ListenerRelay))
                         out(String.format("relay PROGRESS %.2f %5d to %s", pct, bytes, tag(l)));
                     l.gotImageProgress(src, bytes, pct);
                 } catch (Throwable t) {
@@ -684,7 +679,7 @@ public class Images
         protected final void relayImage(Listener l, Object src, Handle handle) {
             if (l != null) {
                 try {
-                    if (DEBUG.IMAGE && l instanceof ListenerRelay == false)
+                    if (DEBUG.IMAGE && !(l instanceof ListenerRelay))
                         out(Util.TERM_CYAN + "relay IMAGE to " + tag(l) + Util.TERM_CLEAR);
                     l.gotImage(src, handle);
                 } catch (Throwable t) {
@@ -695,7 +690,7 @@ public class Images
         protected final void relayError(Listener l, Object src, String msg) {
             if (l != null) {
                 try {
-                    if (DEBUG.IMAGE && l instanceof ListenerRelay == false)
+                    if (DEBUG.IMAGE && !(l instanceof ListenerRelay))
                         out("relay ERROR to " + tag(head) + "; is=" + src);
                     l.gotImageError(src, msg);
                 } catch (Throwable t) {
@@ -1628,7 +1623,7 @@ public class Images
         PriorityThreadPool(int nThreads) {
             super(nThreads, nThreads,
                   0L, TimeUnit.MILLISECONDS,
-                  (BlockingQueue<Runnable>) TaskQueue,
+                    TaskQueue,
                   ImageThreadFactory);
         }
 
@@ -2627,7 +2622,7 @@ public class Images
                         // the existing queue, tho if this is a network IO thread, we still want to
                         // run it later in it's own thread, so it could just be a task the
                         // re-creates a new LoadThread
-                        Thread.currentThread().sleep(1000 * 45);
+                        Thread.sleep(1000 * 45);
                     } catch (InterruptedException e) {
                         Log.warn("reader interrupted");
                     }
@@ -2643,7 +2638,7 @@ public class Images
                     throw eom;
                }
             } catch (Throwable t) {
-                throw new ImageException("reader failed: " + t.toString());
+                throw new ImageException("reader failed: " + t);
             }
         } while (imageData == null);
 
@@ -3005,15 +3000,11 @@ public class Images
         final boolean allowSeekBack = false;
         final boolean ignoreMetadata;
 
-        if (imageSRC.isDiskCacheEntry()) {
-            ignoreMetadata = false;
-        } else {
-            // Note that basic meta-data is still present on the resulting image when we
-            // say to ignore it, tho extra meta-data we've added won't be there.  This
-            // may just be because it's creating it from scratch for the newly built
-            // image instead of reading it from the on-disk image -- not sure.
-            ignoreMetadata = true;
-        }
+        // Note that basic meta-data is still present on the resulting image when we
+        // say to ignore it, tho extra meta-data we've added won't be there.  This
+        // may just be because it's creating it from scratch for the newly built
+        // image instead of reading it from the on-disk image -- not sure.
+        ignoreMetadata = !imageSRC.isDiskCacheEntry();
         
         reader.setInput(inputStream, allowSeekBack, ignoreMetadata);
         if (DEBUG.IMAGE) out("Input for reader set to " + inputStream);
@@ -3775,7 +3766,7 @@ class FileBackedImageInputStream extends ImageInputStreamImpl
         while (len > 0) {
             // Copy a buffer's worth of data from the source to the cache
             // BUFFER_LENGTH will always fit into an int so this is safe
-            final int nbytes = stream.read(streamBuf, 0, (int)Math.min(len, (long)BUFFER_LENGTH));
+            final int nbytes = stream.read(streamBuf, 0, (int)Math.min(len, BUFFER_LENGTH));
             if (nbytes == -1) {
                 if (DEBUG.IMAGE && DEBUG.IO) System.err.println("<EOF @ " + length + ">");
                 foundEOF = true;
@@ -3826,7 +3817,7 @@ class FileBackedImageInputStream extends ImageInputStreamImpl
         long pos = readUntil(streamPos + len);
 
         // len will always fit into an int so this is safe
-        len = (int)Math.min((long)len, pos - streamPos);
+        len = (int)Math.min(len, pos - streamPos);
         if (len > 0) {
             if (DEBUG.IMAGE && DEBUG.IO) Log.debug("SEEK " + streamPos);
             cache.seek(streamPos);

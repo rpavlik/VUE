@@ -118,7 +118,7 @@ public class ColorButtonEditor extends JButton implements ActionListener {
 		//try {
 			
 			newColor = JColorChooser.showDialog( this, mTitle, mColor );
-			if( (newColor != null) && ( mColor.equals( newColor) ) ) {
+			if((mColor.equals(newColor))) {
 				setColor( newColor);
 				fireColorChanged( oldColor,  newColor);
 				

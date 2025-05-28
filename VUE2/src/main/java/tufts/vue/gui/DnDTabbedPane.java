@@ -30,10 +30,10 @@ public class DnDTabbedPane extends JTabbedPane {
             }
         }
     }
-    private static Rectangle rBackward = new Rectangle();
-    private static Rectangle rForward  = new Rectangle();
-    private static int rwh = 20;
-    private static int buttonsize = 30; //xxx magic number of scroll button size
+    private static final Rectangle rBackward = new Rectangle();
+    private static final Rectangle rForward  = new Rectangle();
+    private static final int rwh = 20;
+    private static final int buttonsize = 30; //xxx magic number of scroll button size
     private void autoScrollTest(Point glassPt) {
         Rectangle r = getTabAreaBounds();
         int tabPlacement = getTabPlacement();
@@ -159,19 +159,13 @@ public class DnDTabbedPane extends JTabbedPane {
             Transferable t = e.getTransferable();
             if(t==null) return false;
             DataFlavor[] f = e.getCurrentDataFlavors();
-            if(t.isDataFlavorSupported(f[0]) && dragTabIndex>=0) {
-                return true;
-            }
-            return false;
+            return t.isDataFlavorSupported(f[0]) && dragTabIndex >= 0;
         }
         public boolean isDropAcceptable(DropTargetDropEvent e) {
             Transferable t = e.getTransferable();
             if(t==null) return false;
             DataFlavor[] f = t.getTransferDataFlavors();
-            if(t.isDataFlavorSupported(f[0]) && dragTabIndex>=0) {
-                return true;
-            }
-            return false;
+            return t.isDataFlavorSupported(f[0]) && dragTabIndex >= 0;
         }
     }
 

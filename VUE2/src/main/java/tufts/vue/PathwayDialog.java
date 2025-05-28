@@ -37,7 +37,7 @@ public class PathwayDialog extends JDialog implements ActionListener, KeyListene
 {
     private JButton okButton, cancelButton;
     private JTextField textField;
-    private PathwayTableModel tableModel;
+    private final PathwayTableModel tableModel;
     
     public PathwayDialog(Frame parentFrame, PathwayTableModel model, Point location)
     {
@@ -64,8 +64,7 @@ public class PathwayDialog extends JDialog implements ActionListener, KeyListene
     		textField.setFocusable(true);    		
     	    textField.requestFocusInWindow();
     	    textField.selectAll();
-    		return;	
-    	}}
+        }}
     	);
     	
     	
@@ -155,7 +154,6 @@ public class PathwayDialog extends JDialog implements ActionListener, KeyListene
               VUE.setActive(LWPathway.class, this, path);
               dispose();
           }
-    	  return;
     }
     //key events for the dialog box
     public void keyPressed(KeyEvent e) {}

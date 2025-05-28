@@ -297,7 +297,7 @@ public class PaletteButtonItem extends JMenuItem
 	
     }
 
-    static private boolean sDebug = false;
+    static private final boolean sDebug = false;
     private void debug( String pStr) {
         if( sDebug) {
             System.out.println("PaletteButtonITem - "+ pStr);

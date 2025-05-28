@@ -187,7 +187,7 @@ public class VueDragTree extends JTree
              DnDConstants.ACTION_COPY |
              DnDConstants.ACTION_MOVE |
              DnDConstants.ACTION_LINK,
-             (DragGestureListener) tree);
+                    tree);
         
         addTreeExpansionListener(new TreeExpansionListener(){
             public void treeCollapsed(TreeExpansionEvent e) {}
@@ -295,7 +295,7 @@ public class VueDragTree extends JTree
     
     
     public void dragDropEnd(DragSourceDropEvent e) {
-        if (tufts.vue.VUE.dropIsLocal == true){
+        if (VUE.dropIsLocal){
             DefaultTreeModel model = (DefaultTreeModel)this.getModel();
             model.removeNodeFromParent(oldnode);
             tufts.vue.VUE.dropIsLocal = false;
@@ -313,7 +313,7 @@ public class VueDragTree extends JTree
     public void valueChanged(TreeSelectionEvent e) {
         try {
             if (e.isAddedPath() && e.getPath().getLastPathComponent() != null ) {
-                Resource resource = (Resource)((ResourceNode)e.getPath().getLastPathComponent()).getResource();
+                Resource resource = ((ResourceNode)e.getPath().getLastPathComponent()).getResource();
                 VUE.setActive(Resource.class, this, resource);
                 //resourceSelection.setTo(resource, this);
             }
@@ -564,10 +564,7 @@ class CabinetNode extends ResourceNode {
         } else if (entry != null) {
             if (type.equals(REMOTE) && ((RemoteCabinetEntry)entry).isCabinet())
                 isLeaf = false;
-            else if (type.equals(LOCAL) && ((LocalCabinetEntry)entry).isCabinet())
-                isLeaf = false;
-            else
-                isLeaf = true;
+            else isLeaf = !type.equals(LOCAL) || !((LocalCabinetEntry) entry).isCabinet();
         } else
             isLeaf = true;
 
@@ -662,7 +659,7 @@ class CabinetNode extends ResourceNode {
     {
         if (type.equals(LOCAL)) {
             
-            CabinetEntryIterator i = (LocalCabinetEntryIterator) getCabinet().entries();
+            CabinetEntryIterator i = getCabinet().entries();
                     
             while (i.hasNext()) {
                 LocalCabinetEntry ce = (LocalCabinetEntry) i.next();
@@ -674,7 +671,7 @@ class CabinetNode extends ResourceNode {
 
         } else if (type.equals(REMOTE)) {
             
-            CabinetEntryIterator i = (RemoteCabinetEntryIterator) getCabinet().entries();
+            CabinetEntryIterator i = getCabinet().entries();
             
             while (i.hasNext()) {
                 RemoteCabinetEntry ce = (RemoteCabinetEntry) i.next();
@@ -718,7 +715,7 @@ class CabinetNode extends ResourceNode {
 
 
 class FavoritesNode extends ResourceNode {
-    private boolean explored = false;
+    private final boolean explored = false;
     public FavoritesNode(Resource resource){
         super(resource);
         // ensure is marked as favorites (some versions of VUE may have left marked as type NONE)

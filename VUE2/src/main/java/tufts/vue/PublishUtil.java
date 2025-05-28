@@ -51,7 +51,7 @@ public class PublishUtil implements  tufts.vue.DublinCoreConstants  {
     public PublishUtil() {
     }
     
-    public static File createZip(LWMap map, Vector resourceVector) throws IOException, URISyntaxException, CloneNotSupportedException, ZipException {
+    public static File createZip(LWMap map, Vector resourceVector) throws IOException, URISyntaxException, CloneNotSupportedException {
       
         System.out.println("Creating a zip file");
         IMSCP imscp = new IMSCP();

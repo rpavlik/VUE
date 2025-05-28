@@ -39,10 +39,10 @@ import tufts.vue.VUE;
 public class HierarchyNode implements osid.hierarchy.Node
 {
     private osid.shared.Type type;
-    private osid.shared.Id id;
+    private final osid.shared.Id id;
     private String name;
     private String description;
-    private DefaultMutableTreeNode treeNode;
+    private final DefaultMutableTreeNode treeNode;
     
     private LWComponent component;
     
@@ -72,10 +72,10 @@ public class HierarchyNode implements osid.hierarchy.Node
             //for each child node, retrieves the hierarchy node associated with it and adds to the node vector
             
             DefaultMutableTreeNode childTreeNode = (DefaultMutableTreeNode) nextElement; 
-            children.addElement((osid.hierarchy.Node) (childTreeNode.getUserObject()));
+            children.addElement(childTreeNode.getUserObject());
         }
 
-        return (osid.hierarchy.NodeIterator) (new HierarchyNodeIterator(children));
+        return new HierarchyNodeIterator(children);
     }
     
     /**A method that returns the node's ID*/
@@ -126,13 +126,13 @@ public class HierarchyNode implements osid.hierarchy.Node
 
         //this ONLY works for the single parent structure
         if (parentTreeNode != null) 
-          parents.addElement((osid.hierarchy.Node) (parentTreeNode.getUserObject()));
+          parents.addElement(parentTreeNode.getUserObject());
         
         //maybe not needed, since you can check for this one level up
         else
           throw new osid.hierarchy.HierarchyException("this node doesn't have a parent");
         
-        return (osid.hierarchy.NodeIterator) (new HierarchyNodeIterator(parents));
+        return new HierarchyNodeIterator(parents);
     }
     
     /**A method that sets the type of the node*/

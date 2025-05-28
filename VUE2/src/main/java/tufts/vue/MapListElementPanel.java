@@ -30,8 +30,8 @@ import javax.swing.*;
 
 public class MapListElementPanel extends JPanel implements ActionListener {
     
-    private JCheckBox check;
-    private JButton remove;
+    private final JCheckBox check;
+    private final JButton remove;
     private LWMap map;
     
     public final static Color lightBlue = new Color(220,220,255);

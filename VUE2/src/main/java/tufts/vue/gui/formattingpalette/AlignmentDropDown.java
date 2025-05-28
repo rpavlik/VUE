@@ -38,20 +38,19 @@ import tufts.vue.VueResources;
 public class AlignmentDropDown extends JPanel {
     ImageIcon[] images;
     
+    private final JComboBox alignList;
 
-    private JComboBox alignList;
-    
     public AlignmentDropDown() {
         super(new BorderLayout());
 
-        //Load the pet images and create an array of indexes.
+        // Load the pet images and create an array of indexes.
         images = new ImageIcon[3];
         Integer[] intArray = new Integer[3];
-        
-        intArray[0] = new Integer(0);
-        intArray[1] = new Integer(1);
-        intArray[2] = new Integer(2);
-            
+
+        intArray[0] = 0;
+        intArray[1] = 1;
+        intArray[2] = 2;
+
         images[0] = (ImageIcon) VueResources.getIcon("list.button.leftalignment.raw");
         images[1] = (ImageIcon) VueResources.getIcon("list.button.centeralignment.raw");
         images[2] = (ImageIcon) VueResources.getIcon("list.button.rightalignment.raw");                                           
@@ -75,12 +74,15 @@ public class AlignmentDropDown extends JPanel {
 
     public void quietlySelectIndex(int p)
     {
-    	ActionListener[] l = alignList.getActionListeners();
-        for (ActionListener listener : l) alignList.removeActionListener(listener);
-    	alignList.setSelectedItem(new Integer(p));
-        for (ActionListener actionListener : l) alignList.addActionListener(actionListener);
-    	
+        ActionListener[] l = alignList.getActionListeners();
+        for (ActionListener listener : l)
+            alignList.removeActionListener(listener);
+        alignList.setSelectedItem(p);
+        for (ActionListener actionListener : l)
+            alignList.addActionListener(actionListener);
+
     }
+
     public JComboBox getComboBox()
     {
     	return alignList;

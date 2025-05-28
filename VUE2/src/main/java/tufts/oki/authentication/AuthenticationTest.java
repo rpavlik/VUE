@@ -66,7 +66,7 @@ public class AuthenticationTest {
         
         String username = null;
         while (true) {
-            System.out.println ("");
+            System.out.println ();
             System.out.print ("User name: ");
             username = readline();
             

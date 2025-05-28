@@ -39,6 +39,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -190,8 +191,7 @@ public abstract class BrowseDataSource implements DataSource
 
     public void setAuthenticationCookie(String s) {
         //if (DEBUG.DR) Log.debug("setAuthenticationCookie[" + s + "]");
-        if (s == authenticationCookie || (s != null && s.equals(authenticationCookie))) {
-            return;
+        if (Objects.equals(s, authenticationCookie)) {
         } else {
             authenticationCookie = s;
             unloadViewer();

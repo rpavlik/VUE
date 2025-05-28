@@ -173,7 +173,7 @@ public class PreviewPane extends JPanel
         // have thumbshots)  This on Leopard Java 1.5 as of 2008-05-21.
         if (!LazyLoadOnPaint || isShowing()) { 
 
-            if (false && DEBUG.IMAGE && !isShowing()) {
+            if (false) {
                 Log.debug("claims not visible on screen, SKIPPING ON DEBUG");
             } else {
                 loadPreview(mPreviewData);
@@ -280,7 +280,6 @@ public class PreviewPane extends JPanel
     public synchronized void gotImageError(Object imageSrc, String msg) {
 
         if (imageSrc != mPreviewData) {
-            return;
         } else {
             displayImage(NoImage);
             if (msg != null)

@@ -35,7 +35,7 @@ import java.awt.*;
 public class NotePanel extends tufts.vue.gui.Widget
 {
     /** the text pane **/
-    private VueTextPane mTextPane = new VueTextPane();
+    private final VueTextPane mTextPane = new VueTextPane();
 
     public NotePanel() {
         this(true);

@@ -37,6 +37,7 @@ import javax.swing.text.html.HTML;
 import javax.swing.text.html.StyleSheet;
 import com.lightdev.app.shtm.SHTMLDocument;
 import com.lightdev.app.shtm.SHTMLEditorKitActions;
+import com.lightdev.app.shtm.SHTMLEditorPane;
 import com.lightdev.app.shtm.SHTMLPanelImpl;
 import com.lightdev.app.shtm.Util;
 
@@ -54,7 +55,7 @@ public class FontEditorPanel extends JPanel
                //implements LWEditor
 //    implements ActionListener, VueConstants//, PropertyChangeListener//implements PropertyChangeListener
 {
-    private boolean DEBUG_FONTPANEL=false;
+    private final boolean DEBUG_FONTPANEL=false;
     private static String[] sFontSizes;
     
     /** the font list **/
@@ -571,7 +572,7 @@ public class FontEditorPanel extends JPanel
         //mSizeField.addActionListener( this);
         sizeHandler  = new LWPropertyHandler<Integer>(LWKey.FontSize, mSizeField) {
                 public Integer produceValue() { 
-                	return new Integer(mSizeField.getSelectedItem().toString()); 
+                	return Integer.valueOf(mSizeField.getSelectedItem().toString());
                 	}
                 public void displayValue(Integer value) { 
                	mSizeField.setSelectedItem(""+value); 
@@ -630,10 +631,7 @@ public class FontEditorPanel extends JPanel
                 }
 				public void displayValue(String propertyValue) {
 					 final String style = propertyValue;
-					 if (style.equals("underline"))
-	                    mUnderlineButton.setSelected(true);
-					 else
-						 mUnderlineButton.setSelected(false);
+                    mUnderlineButton.setSelected(style.equals("underline"));
 					
 				}
         };
@@ -875,7 +873,7 @@ public class FontEditorPanel extends JPanel
     	setForeground(list.getForeground());
     	}
 
-    	setText((value == null) ? "" : ((String) value).toString());    	
+    	setText((value == null) ? "" : ((String) value));
     	
 
     	return this;
@@ -1098,7 +1096,7 @@ public class FontEditorPanel extends JPanel
     
     // as this can sometimes take a while, we can call this manually
     // during startup to control when we take the delay.
-    private static Object sFontNamesLock = new Object();
+    private static final Object sFontNamesLock = new Object();
     static String[] getFontNames()
     {
         synchronized (sFontNamesLock) {
@@ -1183,7 +1181,7 @@ public class FontEditorPanel extends JPanel
         unorderedListButton.setEnabled(enabled);    	
     	Color c = null;
     	if (VUE.getActiveViewer().getFocal() instanceof LWSlide)
-    		c = ((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getTextColor();
+    		c = VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getTextColor();
     	else    		
     		c = mTextColorButton.getColor();
     		toggleBulletsAction.setColor(colorToString(c));
@@ -1220,7 +1218,7 @@ public class FontEditorPanel extends JPanel
         new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent e) {
 
-                if (e instanceof LWPropertyChangeEvent == false)
+                if (!(e instanceof LWPropertyChangeEvent))
                     return;
                 
                 final RichTextBox activeRTB = (RichTextBox) VUE.getActive(RichTextBox.class);
@@ -1396,8 +1394,7 @@ public class FontEditorPanel extends JPanel
     {
     	  ActionListener[] l = b.getListeners(ActionListener.class);
         for (ActionListener actionListener : l) b.removeActionListener(actionListener);
-          
-          return;
+
     }
      
     private void establishRichTextListeners(RichTextBox activeText)
@@ -1414,8 +1411,8 @@ public class FontEditorPanel extends JPanel
     	mCenterAlignButton.setEnabled(true);
     	mRightAlignButton.setEnabled(true);
     	
-        activeText.setToggleBulletList(toggleBulletsAction);
-        activeText.setNumberList(toggleNumbersAction);
+        SHTMLEditorPane.setToggleBulletList(toggleBulletsAction);
+        SHTMLEditorPane.setNumberList(toggleNumbersAction);
         
         mBoldButton.addActionListener(richBoldActionWrapper);			
         mItalicButton.addActionListener(richItalicActionWrapper);			
@@ -1500,7 +1497,7 @@ public class FontEditorPanel extends JPanel
     		}
     	});
     }
-    private static boolean isRichTextActive = false;
+    private static final boolean isRichTextActive = false;
   
    
     public void activeChanged(final ActiveEvent e, LWComponent activeText)
@@ -1660,7 +1657,7 @@ public class FontEditorPanel extends JPanel
 		//Set Font size / face defaults.
 		if (VUE.getActiveViewer().getFocal() instanceof LWSlide)
 		{
-			Font f = ((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getFont();
+			Font f = VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getFont();
 			mSizeField.getEditor().setItem(Integer.toString(f.getSize()));
 			mFontCombo.getEditor().setItem(f.getFontName());			
 		}
@@ -1680,7 +1677,7 @@ public class FontEditorPanel extends JPanel
 		//set the default color
 		if (VUE.getActiveViewer().getFocal() instanceof LWSlide)
 		{
-			Color c = ((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getTextColor();
+			Color c = VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getTextColor();
 			//System.out.println("LW SLIDE : " + c.toString());
 			mTextColorButton.setColor(c);
 		}

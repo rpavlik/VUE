@@ -167,7 +167,7 @@ public class EditorManager
             preLoadStyle(tufts.vue.NodeTool.NodeModeTool.createDefaultTextNode("editor-text-style"));
             //preLoadStyle(new LWLink(null, null));
             
-            singleton.refresh();
+            refresh();
 
         }
     }
@@ -887,11 +887,8 @@ public class EditorManager
             Log.debug("ignoring editor w/null key: " + dumpEditor(editor));
             return false;
         }
-    	
-    	if (mEditors.contains(editor))
-    		return true;
-    	else
-    		return false;
+
+        return mEditors.contains(editor);
     	
     }
     static void registerEditor(LWEditor editor) {

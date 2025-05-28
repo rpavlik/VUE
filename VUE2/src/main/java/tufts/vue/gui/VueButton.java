@@ -162,7 +162,7 @@ public class VueButton extends JButton
         
         b.setFocusable(false);
         
-        if (false && GUI.isOceanTheme()) {
+        if (false) {
             //b.setRolloverEnabled(true);
             // todo: need some kind of border, but then will need
             // to change rollover icon (or maybe change border

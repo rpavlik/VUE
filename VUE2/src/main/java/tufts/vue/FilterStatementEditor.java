@@ -41,16 +41,16 @@ import javax.swing.border.*;
 		// Statics
 		///////////
 		
-		static private String [] sConditions = {"contains","equals","starts with","ends with" };
+		static private final String [] sConditions = {"contains","equals","starts with","ends with" };
 		
-		static private String [] sSources = { "All ", "Label","Notes","User Type","Resource","User Data" };
+		static private final String [] sSources = { "All ", "Label","Notes","User Type","Resource","User Data" };
 		
 		protected SourceItem mAnywhereSource = new SourceItem( sSources[0], 0, null);
-		private SourceItem mLabelSource = new SourceItem( sSources[1], 1, null);		
-		private SourceItem mNotesSource = new SourceItem( sSources[2],2,null );
-		private SourceItem mUserTypeSource = new SourceItem( sSources[3], 3, null);
+		private final SourceItem mLabelSource = new SourceItem( sSources[1], 1, null);
+		private final SourceItem mNotesSource = new SourceItem( sSources[2],2,null );
+		private final SourceItem mUserTypeSource = new SourceItem( sSources[3], 3, null);
 		
-		private  SourceItem [] mDefaultSourceItems = {  mAnywhereSource,
+		private final SourceItem [] mDefaultSourceItems = {  mAnywhereSource,
 														mLabelSource,
 														mNotesSource,
 														mUserTypeSource };

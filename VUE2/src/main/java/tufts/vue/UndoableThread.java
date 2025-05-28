@@ -47,7 +47,7 @@ public class UndoableThread extends Thread
     }
 
     public void start() {
-        if (false && DEBUG.CASTOR)
+        if (false)
             run(); // run synchronously
         else
             super.start();

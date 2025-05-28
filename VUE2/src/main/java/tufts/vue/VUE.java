@@ -136,7 +136,7 @@ public class VUE
     public static boolean  dropIsLocal = false;
     
     private static boolean isStartupUnderway = false;
-    private static java.util.List FilesToOpen = Collections.synchronizedList(new java.util.ArrayList());
+    private static final java.util.List FilesToOpen = Collections.synchronizedList(new java.util.ArrayList());
 
     private static InspectorPane inspectorPane = null;
     private static FormatPanel formattingPanel; 
@@ -474,7 +474,7 @@ public class VUE
             //if (e.active != null && e.active.getSelectable() != null && !e.active.isPathway()) {
             if (e.active != null && e.active.getSelectable() != null) {
 
-                if (false && e.active.isPathway()) {
+                if (false) {
                     final LWComponent activeNode = ActiveComponentHandler.getActive();
                                
                     // hack: only allow a pathway to become the active component (so we can see its
@@ -487,7 +487,7 @@ public class VUE
                     // slides that currently WOULDN'T be pathway owned would be on-map slides,
                     // which aren't offically supported at the moment, but just in case we check that.
                     
-                    if (activeNode == null || activeNode instanceof LWSlide == false || !activeNode.isPathwayOwned()) {
+                    if (activeNode == null || !(activeNode instanceof LWSlide) || !activeNode.isPathwayOwned()) {
                         // allow pathway selection
                     } else {
                         return;
@@ -533,12 +533,12 @@ public class VUE
 
     private static void setMapActionsEnabled(boolean enable) {
         //Util.printStackTrace("ENABLED MAP ACTIONS " + enable);    	
-        VueMenuBar.RootMenuBar.saveAction.setEnabled(enable);
-        VueMenuBar.RootMenuBar.saveAsAction.setEnabled(enable);
-        VueMenuBar.RootMenuBar.publishMenu.setEnabled(enable);
+        VueMenuBar.saveAction.setEnabled(enable);
+        VueMenuBar.saveAsAction.setEnabled(enable);
+        VueMenuBar.publishMenu.setEnabled(enable);
         Actions.CloseMap.setEnabled(enable);
-        VueMenuBar.RootMenuBar.printAction.setEnabled(enable);
-        VueMenuBar.RootMenuBar.pdfExportMenu.setEnabled(enable);  
+        VueMenuBar.printAction.setEnabled(enable);
+        VueMenuBar.pdfExportMenu.setEnabled(enable);
         Actions.Undo.setEnabled(enable);
         Actions.Redo.setEnabled(enable);
         Actions.Paste.setEnabled(enable);
@@ -560,16 +560,16 @@ public class VUE
         
        	VueMenuBar.RootMenuBar.setMenuEnableFlg(enable);
         
-        VueMenuBar.RootMenuBar.transformMenu.setEnabled(enable); 
-        VueMenuBar.RootMenuBar.arrangeMenu.setEnabled(enable); 
-        VueMenuBar.RootMenuBar.alignMenu.setEnabled(enable); 
-        VueMenuBar.RootMenuBar.layoutMenu.setEnabled(enable); 
-        VueMenuBar.RootMenuBar.linkMenu.setEnabled(enable); 
+        VueMenuBar.transformMenu.setEnabled(enable);
+        VueMenuBar.arrangeMenu.setEnabled(enable);
+        VueMenuBar.alignMenu.setEnabled(enable);
+        VueMenuBar.layoutMenu.setEnabled(enable);
+        VueMenuBar.linkMenu.setEnabled(enable);
        
         Actions.NewNode.setEnabled(enable);
         Actions.NewRichText.setEnabled(enable);
         
-        VueMenuBar.RootMenuBar.playbackMenu.setEnabled(enable);
+        VueMenuBar.playbackMenu.setEnabled(enable);
     }
     
     /**
@@ -697,7 +697,7 @@ public class VUE
 
     public static String getSystemProperty(String name) {
         // If we're an applet, System.getProperty will throw an AccessControlException
-        if (false && isApplet())
+        if (false)
             return null;
         else {
             String prop;
@@ -728,7 +728,7 @@ public class VUE
     
     public static boolean isSystemPropertyTrue(String name) {
         String value = getSystemProperty(name);
-        return value != null && value.toLowerCase().equals("true");
+        return value != null && value.equalsIgnoreCase("true");
     }
     
     public static boolean hasSystemProperty(String name) {
@@ -1160,7 +1160,7 @@ public class VUE
      */
     static synchronized void initDataSources() {
         
-        if (!didDataInit && SKIP_DR == false ){//&& !VUE.isApplet()) {
+        if (!didDataInit && !SKIP_DR){//&& !VUE.isApplet()) {
             
             VUE.diagPush("initDS");
             
@@ -1391,7 +1391,7 @@ public class VUE
         }
 
 
-        if (false && DEBUG.Enabled && !openedUserMap) {
+        if (false) {
         
             //if (SKIP_DR && FilesToOpen.size() == 0) {
             //-------------------------------------------------------
@@ -1459,7 +1459,7 @@ public class VUE
             });
     }
 
-    private static final boolean ToolbarAtTopScreen = false && VueUtil.isMacPlatform();
+    private static final boolean ToolbarAtTopScreen = false;
 
     private static void buildApplicationInterface() {
 
@@ -1658,7 +1658,7 @@ public class VUE
                 double prefWidth = sz.getWidth();
                 double prefHeight = sz.getHeight();
                 if ((prefWidth < 100) || (sz.getHeight() < 100) || (prefHeight > (screen.height * 0.90))) {
-                    ApplicationFrame.setSize((int) appWidth, (int) appHeight);
+                    ApplicationFrame.setSize(appWidth, appHeight);
                 } else {
                     ApplicationFrame.setSize((int) sz.getWidth(), (int) sz.getHeight());
                 }
@@ -2070,7 +2070,7 @@ public class VUE
         //-----------------------------------------------------------------------------
         // Slide Viewer
         //-----------------------------------------------------------------------------
-        if (false && DEBUG.Enabled) {
+        if (false) {
             slideViewer = new tufts.vue.ui.SlideViewer(null);
             slideDock = GUI.createDockWindow(slideViewer);
             slideDock.setLocation(100,100);
@@ -2125,7 +2125,7 @@ public class VUE
         // Outline View
         //-----------------------------------------------------------------------------
 
-        if (true||!SKIP_DR) {
+        if (true) {
         
             OutlineViewTree outlineTree = new OutlineViewTree();
             JScrollPane outlineScroller = new JScrollPane(outlineTree);
@@ -2226,15 +2226,10 @@ public class VUE
         {
 
 			public void activeChanged(ActiveEvent e) {
-				if ((VUE.getActiveViewer()!=null && VUE.getActiveViewer().getFocal()!= null) 
-						&& (VUE.getActiveViewer().getFocal() instanceof LWSlide ||
-								VUE.getActiveViewer().getFocal() instanceof MasterSlide || 
-								VUE.getActiveViewer().getFocal() instanceof LWGroup))
-				{
-					returnToMapButton.setVisible(true);					
-				}
-				else
-					returnToMapButton.setVisible(false);				    
+                returnToMapButton.setVisible((VUE.getActiveViewer() != null && VUE.getActiveViewer().getFocal() != null)
+                        && (VUE.getActiveViewer().getFocal() instanceof LWSlide ||
+                        VUE.getActiveViewer().getFocal() instanceof MasterSlide ||
+                        VUE.getActiveViewer().getFocal() instanceof LWGroup));
 			}
         }); 
         returnToMapButton.setVisible(false);
@@ -3073,8 +3068,7 @@ public class VUE
         
         if (ensureChecked != null)
         {
-        	   if (!askSaveIfModified(ensureChecked))
-        		   return false;
+            return askSaveIfModified(ensureChecked);
         }
         return true;
         
@@ -3211,14 +3205,13 @@ public class VUE
         // If they change focus to another button, then hit "return"
         // (v.s. "space" for kbd button press), do action of button
         // that had focus instead of always save?
-        
+
+        // Don't Save
+        // don't save -- just close
+        // anything else (Cancel or dialog window closed)
         if (response == JOptionPane.YES_OPTION) { // Save
             return SaveAction.saveMap(map);
-        } else if (response == JOptionPane.NO_OPTION) { // Don't Save
-            // don't save -- just close
-            return true;
-        } else // anything else (Cancel or dialog window closed)
-            return false;
+        } else return response == JOptionPane.NO_OPTION;
     }
     
     public static void closeMap(LWMap map) {
@@ -3255,11 +3248,7 @@ public class VUE
     	if (mMapTabsRight !=null)
     	{
     		int selectedIndex = mMapTabsRight.getTabCount();
-    		if(selectedIndex>0){
-    			setMapActionsEnabled(true);
-    		}else{
-    		setMapActionsEnabled(false);
-    		}
+            setMapActionsEnabled(selectedIndex > 0);
     	}
     	else if (mMapTabsLeft == null)
     	{
@@ -3268,11 +3257,7 @@ public class VUE
     	else
     	{
     		int selectedIndex = mMapTabsLeft.getTabCount();
-    		if(selectedIndex>0){
-    			setMapActionsEnabled(true);
-    		}else{
-    		setMapActionsEnabled(false);
-    		}
+            setMapActionsEnabled(selectedIndex > 0);
     	}
 
 //    	if(selectedIndex>0){

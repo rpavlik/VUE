@@ -26,11 +26,11 @@ public class SakaiCollectionDialog extends SizeRestrictedDialog implements javax
 	private JTree tree = null;
     private javax.swing.tree.DefaultTreeModel treeModel = null;
     private JScrollPane jsp = null;
-	private static String TITLE = "Sakai Collections";
+	private static final String TITLE = "Sakai Collections";
 	
-	private org.osid.shared.Type _collectionAssetType = new edu.tufts.vue.util.Type("sakaiproject.org","asset","siteCollection");
-	private org.osid.shared.Type _sakaiRepositoryType = new edu.tufts.vue.util.Type("sakaiproject.org","repository","contentHosting");
-	private edu.tufts.vue.dsm.DataSourceManager _dsm = null;	   
+	private final org.osid.shared.Type _collectionAssetType = new edu.tufts.vue.util.Type("sakaiproject.org","asset","siteCollection");
+	private final org.osid.shared.Type _sakaiRepositoryType = new edu.tufts.vue.util.Type("sakaiproject.org","repository","contentHosting");
+	private final edu.tufts.vue.dsm.DataSourceManager _dsm = null;
 	
 	public SakaiCollectionDialog(edu.tufts.vue.dsm.DataSource[] dataSources)
 	{

@@ -190,7 +190,7 @@ public class LWTraversal {
                 Util.printStackTrace("found local root in pick list (loop!), skipping: " + c);
                 continue;
             }
-            if (false && c.isZoomedFocus()) { // Sibling priority turned off 2008-04-22 -- SMF
+            if (false) { // Sibling priority turned off 2008-04-22 -- SMF
                 zoomedFocus = c;
             } else {
                 traverse(c);
@@ -377,10 +377,7 @@ public class LWTraversal {
             else if (pc.ignoreSelected && c.isSelected())
                 return false;
             //else if (pc.pickType != null && !pc.pickType.isInstance(c))
-            else if (pc.acceptor != null && !pc.acceptor.accept(pc, c))
-                return false;
-            else
-                return true;
+            else return pc.acceptor == null || pc.acceptor.accept(pc, c);
         }
 
     
@@ -444,7 +441,7 @@ public class LWTraversal {
                 if (hitResult > 0)
                     System.out.format("; distance=%.2f\n", Math.sqrt(hitResult));
                 else
-                    System.out.println("");
+                    System.out.println();
             }
 
             // Note that as soon as a we have a direct-hit, we stop checking for close
@@ -546,11 +543,11 @@ public class LWTraversal {
                     //if (DEBUG.PICK) eoutln("PointPick: closeHit: " + closeHit + " distance: " + Math.sqrt(closestDistSq));
                     hit = closeHit;
                 } else {
-                    if (DEBUG.PICK) System.out.println("");
+                    if (DEBUG.PICK) System.out.println();
                 }
                 
             } else {
-                if (DEBUG.PICK) System.out.println("");
+                if (DEBUG.PICK) System.out.println();
             }
 
             LWComponent picked = null;
@@ -576,7 +573,7 @@ public class LWTraversal {
                             // not the contents.  TODO: Really, we should be picking the second
                             // top-most (that is, only penetrate through the top-level group when
                             // deep picking, not straight to the bottom.)
-                            final LWGroup groupAncestor = (LWGroup) parent.getAncestorOfType(LWGroup.class, pc.root);
+                            final LWGroup groupAncestor = parent.getAncestorOfType(LWGroup.class, pc.root);
                             if (groupAncestor != topGroupAncestor)
                                 picked = groupAncestor;
                         } else {
@@ -622,7 +619,7 @@ public class LWTraversal {
             if (DEBUG.PICK) {
                 eoutln(Util.TERM_GREEN + "PointPick:     PICKED: " + picked + Util.TERM_CLEAR);
                 if (DEBUG.PICK)
-                    System.out.println("");
+                    System.out.println();
             }
             //else if (DEBUG.WORK && picked != null) System.out.println("PICKED " + picked);
             return picked;

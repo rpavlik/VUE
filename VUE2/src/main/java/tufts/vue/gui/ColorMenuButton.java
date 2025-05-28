@@ -76,7 +76,7 @@ public class ColorMenuButton extends JButton
     private Icon mButtonIcon;
     protected Object mPropertyKey;
     protected Object mCurrentValue;
-    private Window popupWindow;
+    private final Window popupWindow;
     private final RecentlyUsedColorsManager colorManager = RecentlyUsedColorsManager.getInstance();
     /**
      *  Creates a new ColorMenuButton with the passed array of items
@@ -254,14 +254,14 @@ public class ColorMenuButton extends JButton
         else
         	contentPane = ((JWindow)popupWindow).getContentPane();
         
-        ((JComponent)contentPane).setLayout(new BorderLayout());
+        contentPane.setLayout(new BorderLayout());
         ((JComponent)contentPane).setBorder(BorderFactory.createEtchedBorder());
         
         
         contentPane.add(colorArrayPanel);
         popupWindow.pack();
     }
-    private JPanel colorPanel = new ColorPanel();
+    private final JPanel colorPanel = new ColorPanel();
     
     public Window getPopupWindow()
     {
@@ -458,7 +458,7 @@ public class ColorMenuButton extends JButton
         */
         //if (DEBUG.BOXES||DEBUG.TOOL) System.out.println(this + " _setIcon " + i);
         Dimension d = getButtonSize();
-        if (true || !GUI.isMacAqua()) {
+        if (true) {
             if (false)
                 VueButtonIcon.installGenerated(this, i, d);
             else
@@ -562,7 +562,7 @@ public class ColorMenuButton extends JButton
                                            "Red",
                                            "Green",
                                            "Blue" };*/ 
-    private static Color[] sTestColors = { new Color(0,0,0),
+    private static final Color[] sTestColors = { new Color(0,0,0),
                                            new Color(255,255,255),
                                            new Color(255,0,0),
                                            new Color(0,255,0),
@@ -592,17 +592,10 @@ public class ColorMenuButton extends JButton
             GUI.keepLocationOnScreen(location, new Dimension(popupWindow.getWidth(),popupWindow.getHeight()));
             System.out.println("G ? H : " + getWidth() + " " + getHeight());
             System.out.println(location);
-            popupWindow.setLocation(location); 
-            if (tufts.Util.isUnixPlatform())
-            {
-            	popupWindow.setAlwaysOnTop(true);
-            	//popupWindow.set
-            	//popupWindow.toFront();
-            }
-            else
-            {
-            	popupWindow.setAlwaysOnTop(false);
-            }
+            popupWindow.setLocation(location);
+            //popupWindow.set
+            //popupWindow.toFront();
+            popupWindow.setAlwaysOnTop(tufts.Util.isUnixPlatform());
             popupWindow.setVisible(true);                        
             popupWindow.requestFocus();
         } else {

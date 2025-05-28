@@ -53,8 +53,8 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
     edu.tufts.vue.dsm.DataSource newDataSource = null;
 	edu.tufts.vue.dsm.DataSource dataSourceThatWasSelectedForUpdate = null;
     
-    private static String TITLE = VueResources.getString("updateLibrary.dialogTitle");
-    private static String AVAILABLE = VueResources.getString("updateLibrary.resourcesavailable");
+    private static final String TITLE = VueResources.getString("updateLibrary.dialogTitle");
+    private static final String AVAILABLE = VueResources.getString("updateLibrary.resourcesavailable");
     private final Icon remoteIcon = VueResources.getImageIcon("dataSourceRemote");
     private ProviderListCellRenderer providerListRenderer;
     private Timer timer;

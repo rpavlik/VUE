@@ -88,11 +88,9 @@ import edu.tufts.vue.ui.DefaultQueryEditor;
 public class AnalyzerAction extends Actions.LWCAction {
 	private boolean firstTime = true;
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(AnalyzerAction.class);
-    private LWComponentAnalyzer analyzer = null;
-    
+
     private AnalyzerAction(LWComponentAnalyzer analyzer, String name,KeyStroke keyStroke) {
         super(name,keyStroke);
-        this.analyzer = analyzer;
     }
   //  boolean mayModifySelection() { return true; }
     boolean mayModifySelection() { return true; }
@@ -119,7 +117,7 @@ public class AnalyzerAction extends Actions.LWCAction {
         for (int p=0; p < RESULTS_TO_ADD && p<size; p++)
         {
         	//System.out.println(resourceList.get(p).toString());
-        	Resource r = (Resource)resourceList.get(p);
+        	Resource r = resourceList.get(p);
         	tufts.vue.LWNode node = new tufts.vue.LWNode(r.getTitle());
         	node.setFillColor(ValueNodeDataColors[colorSelection%10]);
         	node.setResource(r);
@@ -231,15 +229,15 @@ public class AnalyzerAction extends Actions.LWCAction {
     	
     		//just use the label from the node, it didn't go right.
     	//}
-    	
-    	VUE.getDRBrowser().getDataSourceViewer().queryEditor.setCriteria(query);
+
+        VUE.getDRBrowser();
+        DataSourceViewer.queryEditor.setCriteria(query);
     	VUE.getDRBrowser().getDataSourceViewer().mapBasedSearch(c);    	
     	if (firstTime)
     	{
     		GUI.makeVisibleOnScreen(VUE.getDRBrowser());
     		firstTime = false;
     	}
-    	return;
     }
     
     // random layout. scatters nodes at random
@@ -336,9 +334,9 @@ public class AnalyzerAction extends Actions.LWCAction {
         				Integer farm = null;
         				String title = null;
         				
-        				id = (String)resultObject.getString("id");
+        				id = resultObject.getString("id");
         				owner = (String)resultObject.get("owner");
-        				secret = (String)resultObject.getString("secret");
+        				secret = resultObject.getString("secret");
         				server = (String)resultObject.get("server");				
         				farm = (Integer)resultObject.get("farm");
         				title = (String)resultObject.get("title");       
@@ -350,7 +348,6 @@ public class AnalyzerAction extends Actions.LWCAction {
         			ex.printStackTrace();
         		}
 
-             return;   
             }
     };
     
@@ -470,7 +467,7 @@ public class AnalyzerAction extends Actions.LWCAction {
                                 else
                                     mlist.add("relevance", "Essential");
 
-                                mlist.add("relevance score", (new Double(rel)).toString());
+                                mlist.add("relevance score", Double.toString(rel));
                                 node.setMetadataList(mlist);
 
                                 if (res.getOntologies() != null) {
@@ -597,8 +594,7 @@ public class AnalyzerAction extends Actions.LWCAction {
 	    		VueUtil.alert(VueResources.getString("dialog.analyzeerror.message"), VueResources.getString("dialog.analyzeerror.title"));
 	    	}
 	    	VUE.getActiveViewer().selectionAdd(c);
-	    	return;
-	    }
+        }
 	}
 	static private class AlchemyAnalyzerAPIKeyGuarder extends AlchemyAnalyzer
 	{

@@ -28,9 +28,9 @@ package tufts.oki.hierarchy;
 public class HierarchyTraversalInfo implements osid.hierarchy.TraversalInfo 
 {
     //should i just implement this in node form?
-    private osid.shared.Id id;
-    private String name;
-    private int level;
+    private final osid.shared.Id id;
+    private final String name;
+    private final int level;
     
     /** Creates a new instance of HierarchyTraversalInfo */
     public HierarchyTraversalInfo(osid.shared.Id id, String name, int level)

@@ -96,7 +96,7 @@ public class FilterEditor extends JPanel  {
         });
         filterTable.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
-                if(filterTable.getSelectedRow() == (filterTableModel.getRowCount()-1) && e.getKeyCode() == e.VK_ENTER){
+                if(filterTable.getSelectedRow() == (filterTableModel.getRowCount()-1) && e.getKeyCode() == KeyEvent.VK_ENTER){
                     filterTableModel.addStatement();
                 }
             }
@@ -178,7 +178,7 @@ public class FilterEditor extends JPanel  {
             Statement stmt = new Statement();
             Key key = keyAnywhere;
             if(tufts.vue.VUE.getActiveMap().getMapFilterModel().size() > 0) {
-                key = (Key) tufts.vue.VUE.getActiveMap().getMapFilterModel().get(0);
+                key = VUE.getActiveMap().getMapFilterModel().get(0);
             }
             stmt.setKey(key);
             stmt.setOperator(key.getType().getDefaultOperator());
@@ -228,7 +228,7 @@ public class FilterEditor extends JPanel  {
             Key key = statement.getKey();
             if(col == VALUE_COL) {
                 if(statement.getKey().getType().getDisplayName().equals(Type.INTEGER_TYPE)) {
-                    statement.setValue(new Integer(value.toString()));
+                    statement.setValue(Integer.valueOf(value.toString()));
                 } else {
                     statement.setValue(value);
                 }
@@ -268,7 +268,7 @@ public class FilterEditor extends JPanel  {
     }
     
     public class AddButtonListener implements ActionListener {
-        private  FilterTableModel model;
+        private final FilterTableModel model;
         public AddButtonListener(FilterTableModel model) {
             this.model=model;
         }
@@ -279,7 +279,7 @@ public class FilterEditor extends JPanel  {
             Statement stmt = new Statement();
             Key key = keyAnywhere;
             if(tufts.vue.VUE.getActiveMap().getMapFilterModel().size() > 0) {
-                key = (Key) tufts.vue.VUE.getActiveMap().getMapFilterModel().get(0);
+                key = VUE.getActiveMap().getMapFilterModel().get(0);
             }
             stmt.setKey(key);
             stmt.setOperator(key.getType().getDefaultOperator());
@@ -387,7 +387,7 @@ public class FilterEditor extends JPanel  {
     
     public class FilterSelectionListener  implements ListSelectionListener {
         private int m_selectedRow;
-        private JButton m_deleteButton;
+        private final JButton m_deleteButton;
         
         public FilterSelectionListener(JButton deleteButton, int selectedRow) {
             m_selectedRow=selectedRow;
@@ -416,18 +416,14 @@ public class FilterEditor extends JPanel  {
             this.m_selectedRow = row;
         }
         private void updateButtons() {
-            if (getSelectedRow()==-1) {
-                m_deleteButton.setEnabled(false);
-            } else {
-                m_deleteButton.setEnabled(true);
-            }
+            m_deleteButton.setEnabled(getSelectedRow() != -1);
         }
     }
     
     
     public class DeleteButtonListener implements ActionListener {
-        private JTable table;
-        private FilterSelectionListener m_sListener;
+        private final JTable table;
+        private final FilterSelectionListener m_sListener;
         
         public DeleteButtonListener(JTable table,FilterSelectionListener sListener) {
             this.table = table;

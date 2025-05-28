@@ -20,12 +20,12 @@ import java.awt.geom.PathIterator;
 import java.util.Vector;
 
 final class Order1 extends Curve {
-    private double x0;
-    private double y0;
-    private double x1;
-    private double y1;
-    private double xmin;
-    private double xmax;
+    private final double x0;
+    private final double y0;
+    private final double x1;
+    private final double y1;
+    private final double xmin;
+    private final double xmax;
 
     public Order1(double x0, double y0,
 		  double x1, double y1,

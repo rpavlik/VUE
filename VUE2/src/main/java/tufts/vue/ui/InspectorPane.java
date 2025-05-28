@@ -698,7 +698,7 @@ public class InspectorPane extends WidgetStack
             } catch (Throwable t) {
                 Log.error("loadResource " + r, t);
                 // html will enable text-wrap
-                descriptionView = new JLabel("<html>"+ r + "<p>" + t.toString()); 
+                descriptionView = new JLabel("<html>"+ r + "<p>" + t);
             }
                 
             // todo: the below should ideally be auto-cleared when any change to the
@@ -1099,7 +1099,7 @@ public class InspectorPane extends WidgetStack
 //         }
         
         String link = findProperty(r, data, "Link");
-        if (link != null && Resource.looksLikeURLorFile(link)) {
+        if (Resource.looksLikeURLorFile(link)) {
             if (hasDesc)
                 buf.append("<p>");
             else if (!buf.toString().endsWith("<br>"))
@@ -1113,7 +1113,7 @@ public class InspectorPane extends WidgetStack
         // todo: the lookup of "Cover Image" is temporary hack: add regex lookup for *image* and/or
         // the auto-detection of file/URL encoded fields in data sets.
         final String image = findProperty(r, data, "Cover Image"); 
-        if (image != null && Resource.looksLikeURLorFile(image) && Resource.looksLikeImageFile(image)) {
+        if (Resource.looksLikeURLorFile(image) && Resource.looksLikeImageFile(image)) {
             buf.append(String.format("<center><a href=\"%s\"><img src=\"%s\"></a>", image, image));
         }
 
@@ -1712,10 +1712,7 @@ public class InspectorPane extends WidgetStack
 
         void load(LWComponent c) {
             setTypeName(this, c, "Information");
-            if (c instanceof LWText)
-            	labelValue.setEditable(false);
-            else
-            	labelValue.setEditable(true);
+            labelValue.setEditable(!(c instanceof LWText));
             labelScrollBar.setValueIsAdjusting(true);
             labelValue.attachProperty(c, LWKey.Label);
             /*

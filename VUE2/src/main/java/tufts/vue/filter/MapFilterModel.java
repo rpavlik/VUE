@@ -51,7 +51,7 @@ public class MapFilterModel  extends AbstractTableModel{
     }
     public synchronized void remove(Key key) {
         int i = keyVector.indexOf(key);
-        keyVector.remove(keyVector.indexOf(key));
+        keyVector.remove(key);
         for (tufts.vue.LWComponent lwComponent : tufts.vue.VUE.getActiveMap().getAllDescendents())
             lwComponent.getNodeFilter().removeStatements(key);
         tufts.vue.VUE.getActiveMap().getLWCFilter().removeStatements(key);
@@ -64,7 +64,7 @@ public class MapFilterModel  extends AbstractTableModel{
         
     /** adds the listeners if it doesn't exitst **/
     public synchronized void addListener(Listener l){
-        if(listeners.indexOf(l) < 0)
+        if(!listeners.contains(l))
             listeners.add(l);
       
     }
@@ -143,7 +143,7 @@ public class MapFilterModel  extends AbstractTableModel{
     }
     
     public Object getValueAt(int row, int col) {
-        Key  key=(Key) this.get(row);
+        Key  key= this.get(row);
         if (col==0)
             return key.getKey().toString();
         else
@@ -152,9 +152,9 @@ public class MapFilterModel  extends AbstractTableModel{
     }
     public void setValueAt(Object value, int row, int col) {
         
-        Key key = (Key)this.get(row);
+        Key key = this.get(row);
         if(col == 0)
-            key.setKey((String)value);
+            key.setKey(value);
         // row = -1 adds new condions else replace the existing one.
         
         fireTableCellUpdated(row, col);
@@ -165,10 +165,7 @@ public class MapFilterModel  extends AbstractTableModel{
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
         //  return editable;
-        if(col == 0)
-            return true;
-        else
-            return false;
+        return col == 0;
     }
     
     public Vector getKeyVector() {

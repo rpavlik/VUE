@@ -38,9 +38,9 @@ class DockRegion
     static final int TOP = 1;
     static final int BOTTOM = 2;
 
-    private static java.util.List sAllRegions = new java.util.ArrayList();
+    private static final java.util.List sAllRegions = new java.util.ArrayList();
         
-    private java.util.List mDockedWindows = new java.util.ArrayList();
+    private final java.util.List mDockedWindows = new java.util.ArrayList();
     private int mDockY;
 
     final int mGravity;
@@ -174,7 +174,7 @@ class DockRegion
         }
     }
 
-    private static Comparator SortByX = new Comparator() {
+    private static final Comparator SortByX = new Comparator() {
             public int compare(Object w1, Object w2) {
                 return ((Window)w1).getX() - ((Window)w2).getX();
             }};

@@ -90,7 +90,7 @@ public class VueButtonIcon implements Icon
     protected final int width;
     protected final int height;
 
-    private static Insets insets = new Insets(0,0,0,0);
+    private static final Insets insets = new Insets(0,0,0,0);
     private Color mColor = sButtonColor;
 
     private final int mType;

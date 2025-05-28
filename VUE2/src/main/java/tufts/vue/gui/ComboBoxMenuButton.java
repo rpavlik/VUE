@@ -55,7 +55,7 @@ public abstract class ComboBoxMenuButton<T> extends JComboBox
 
     public ComboBoxMenuButton() {
         setFocusable(false);
-        if (false && tufts.Util.isMacPlatform()) {
+        if (false) {
             // disabled for now: for some reason, is not taking effect for LinkToolPanel subclass
             //putClientProperty("JComboBox.isPopDown", Boolean.TRUE); // can't see what difference this makes
             putClientProperty("JComboBox.isSquare", Boolean.TRUE);

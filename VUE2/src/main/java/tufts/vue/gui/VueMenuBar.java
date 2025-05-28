@@ -466,7 +466,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         // Initializing DEBUG code
         ////////////////////////////////////////////////////////////////////////////////////
 
-        if (false && DEBUG.Enabled) {
+        if (false) {
             // THIS CODE IS TRIGGERING THE TIGER ARRAY BOUNDS BUG:
             // we're hitting bug in java (1.4.2, 1.5) on Tiger (OSX 10.4.2) here
             // (apple.laf.ScreenMenuBar array index out of bounds exception)
@@ -760,11 +760,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
 				}
 				else
 				{
-					if(!isMenuEnableFontFlg){
-						transformMenu.setEnabled(false);
-					}else{
-						transformMenu.setEnabled(true);
-					}
+                    transformMenu.setEnabled(isMenuEnableFontFlg);
 				}
 				
 			}});
@@ -925,10 +921,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
 			public void menuSelected(MenuEvent e) {handleActivation();}
 			private void handleActivation() {
 				LWPathway p =VUE.getActivePathway();
-				if (p == null || p.length() == 0)
-					notesMenu.setEnabled(false);			
-				else	
-					notesMenu.setEnabled(true);				
+                notesMenu.setEnabled(p != null && p.length() != 0);
 			}});             
         ////////////////////////////////////////////////////////////////////////////////////
         // Build Analysis Menu
@@ -954,7 +947,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         // Build Help Menu
         ////////////////////////////////////////////////////////////////////////////////////
 
-        if (tufts.Util.isMacPlatform() == false || VUE.isApplet()) {
+        if (!Util.isMacPlatform() || VUE.isApplet()) {
             // already in standard MacOSX place
             helpMenu.add(new AboutAction());
             helpMenu.addSeparator();
@@ -1274,7 +1267,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
 
 
     private static class RecentOpenAction extends VueAction {
-    	private File file;
+    	private final File file;
     	public RecentOpenAction(File f) {
             super(f.getName());
             if (DEBUG.Enabled)

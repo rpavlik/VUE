@@ -136,7 +136,7 @@ public class Actions implements VueConstants
             	pdfFileName = new File(pdfFileName.getAbsoluteFile()+".pdf");                	
             
             if (pdfFileName.exists()) {
-                int n = VueUtil.confirm(null, VueResources.local("replaceFile.text") + " \'" + pdfFileName.getName() + "\'", 
+                int n = VueUtil.confirm(null, VueResources.local("replaceFile.text") + " '" + pdfFileName.getName() + "'",
                         VueResources.local("replaceFile.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                                       
             }           
@@ -183,7 +183,7 @@ public class Actions implements VueConstants
             	pdfFileName = new File(pdfFileName.getAbsoluteFile()+".pdf");                	
             
             if (pdfFileName.exists()) {
-                int n = VueUtil.confirm(null, VueResources.local("replaceFile.text") + " \'" + pdfFileName.getName() + "\'", 
+                int n = VueUtil.confirm(null, VueResources.local("replaceFile.text") + " '" + pdfFileName.getName() + "'",
                         VueResources.local("replaceFile.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                                       
             }           
@@ -441,8 +441,8 @@ public class Actions implements VueConstants
     new LWCAction(VueResources.local("action.hierarchyview")) {
         public void act(LWNode n) {
             LWNode rootNode = n;
-            String name = new String(rootNode.getLabel() + "'s Hierarchy View");
-            String description = new String("Hierarchy view model of " + rootNode.getLabel());
+            String name = rootNode.getLabel() + "'s Hierarchy View";
+            String description = "Hierarchy view model of " + rootNode.getLabel();
             
             LWHierarchyMap hierarchyMap = new LWHierarchyMap(name);
             
@@ -451,7 +451,7 @@ public class Actions implements VueConstants
             
             hierarchyMap.setHierarchyModel(model);
             hierarchyMap.addAllComponents();
-            VUE.displayMap((LWMap)hierarchyMap);
+            VUE.displayMap(hierarchyMap);
         }
         
         boolean enabledFor(LWSelection s) {
@@ -651,33 +651,33 @@ public class Actions implements VueConstants
     public static final LWCAction LinkMakeStraight =
         //new LWCAction("Straight", VueResources.getIcon("linkTool.line.raw")) {
         new LWCAction(VueResources.local("menu.format.link.straight"), VueResources.getIcon("link.style.straight")) {
-            void init() { putValue("property.value", new Integer(0)); } // for use in a MenuButton
+            void init() { putValue("property.value", 0); } // for use in a MenuButton
             boolean enabledFor(LWSelection s) {
                 if (!s.containsType(LWLink.class))
                     return false;
-                return s.size() == 1 ? ((LWLink)s.first()).getControlCount() != 0 : true;
+                return s.size() != 1 || ((LWLink) s.first()).getControlCount() != 0;
             }
             public void act(LWLink c) { c.setControlCount(0); }
         };
     public static final LWCAction LinkMakeQuadCurved =
         //new LWCAction("Curved", VueResources.getIcon("linkTool.curve1.raw")) {
         new LWCAction(VueResources.local("menu.format.link.curved"), VueResources.getIcon("link.style.curved")) {
-            void init() { putValue("property.value", new Integer(1)); }
+            void init() { putValue("property.value", 1); }
             boolean enabledFor(LWSelection s) {
                 if (!s.containsType(LWLink.class))
                     return false;
-                return s.size() == 1 ? ((LWLink)s.first()).getControlCount() != 1 : true;
+                return s.size() != 1 || ((LWLink) s.first()).getControlCount() != 1;
             }
             public void act(LWLink c) { c.setControlCount(1); }
         };
     public static final LWCAction LinkMakeCubicCurved =
         //new LWCAction("S-Curved", VueResources.getIcon("linkTool.curve2.raw")) {
         new LWCAction(VueResources.local("menu.format.link.scurved"), VueResources.getIcon("link.style.s-curved")) {
-            void init() { putValue("property.value", new Integer(2)); }
+            void init() { putValue("property.value", 2); }
             boolean enabledFor(LWSelection s) {
                 if (!s.containsType(LWLink.class))
                     return false;
-                return s.size() == 1 ? ((LWLink)s.first()).getControlCount() != 2 : true;
+                return s.size() != 1 || ((LWLink) s.first()).getControlCount() != 2;
             }
             public void act(LWLink c) { c.setControlCount(2); }
         };
@@ -727,7 +727,7 @@ public class Actions implements VueConstants
         boolean enabledFor(LWSelection s) {
             if (!s.containsType(LWNode.class))
                 return false;
-            return s.size() == 1 ? !((LWNode) s.first()).isAutoSized() : true;
+            return s.size() != 1 || !s.first().isAutoSized();
         }
         public void act(LWNode c) {
             c.setAutoSized(true);
@@ -1241,7 +1241,7 @@ public class Actions implements VueConstants
                   	VUE.setActive(LWComponent.class, this, null);
                  
                   	String f = (fileName.getName()).toLowerCase();
-                  	String extension = f.substring(f.lastIndexOf(".")+1,f.length());
+                  	String extension = f.substring(f.lastIndexOf(".")+1);
                   	LWComponent node = null;
                   	//System.out.println("STRING : " + extension);
                   	if (extension.equals("jpg") || extension.equals("jpeg") || extension.equals("png") || extension.equals("gif"))
@@ -1336,7 +1336,7 @@ public class Actions implements VueConstants
                 try {
                     uri = new URI(option);
                 } catch (URISyntaxException e) {
-                    VueUtil.alert((Component)VUE.getApplicationFrame(),
+                    VueUtil.alert(VUE.getApplicationFrame(),
                                                   VueResources.local("dialog.addurlaction.message"), 
                                                   VueResources.local("dialog.addurlaction.title"), 
                                                   JOptionPane.ERROR_MESSAGE);
@@ -1347,7 +1347,7 @@ public class Actions implements VueConstants
                // if (r == null) {
                     r = c.getResourceFactory().get(uri);
                     if (r == null) {
-                        VueUtil.alert((Component)VUE.getApplicationFrame(),
+                        VueUtil.alert(VUE.getApplicationFrame(),
                         							   VueResources.local("dialog.addurlaction.message"), 
                         							   VueResources.local("dialog.addurlaction.title"), 
                                                       JOptionPane.ERROR_MESSAGE);
@@ -1892,7 +1892,7 @@ public class Actions implements VueConstants
                 // exactly the same parent group.
                 
                 if (removing.size() > 0) {
-                    final LWComponent first = (LWComponent) removing.get(0);
+                    final LWComponent first = removing.get(0);
                     final LWGroup group = (LWGroup) first.getParent(); // the group losing children
                     final LWContainer newParent = group.getParent();
                     group.removeChildren(removing); // more control & efficient events
@@ -2067,7 +2067,7 @@ public class Actions implements VueConstants
     public static final LWCAction FontUnderline =
         new LWCAction(VueResources.local("menu.format.font.fontunderline"), keyStroke(KeyEvent.VK_U, COMMAND)) {
             void act(LWComponent c) {
-                c.mFontUnderline.set((c.mFontUnderline.get().toString()).equals("underline") ? "normal" : "underline");
+                c.mFontUnderline.set((c.mFontUnderline.get()).equals("underline") ? "normal" : "underline");
 
             }
         };
@@ -2740,7 +2740,7 @@ public class Actions implements VueConstants
 
                 final boolean moveToEdge = overlap || intersects;
 
-                if (false && DEBUG_PUSH) {
+                if (false) {
                     // create a detached link from center of pushing to edge of each pushed to show vectors
                     LWLink link = new LWLink();
                     link.setHeadPoint(connector.getP1());
@@ -3243,8 +3243,8 @@ public class Actions implements VueConstants
   
             void arrange(LWSelection selection) {
                 AlignCentersRow.arrange(selection);
-                AlignCentersRow.oldCenterX = AlignCentersRow.centerX;
-                AlignCentersRow.oldCenterY = AlignCentersRow.centerY;
+                oldCenterX = centerX;
+                oldCenterY = centerY;
                 maxX = minX + totalWidth;
                 DistributeHorizontally.arrange(selection);
                 // note that we need to check the global selection, not the passed in selection,
@@ -3864,8 +3864,8 @@ public class Actions implements VueConstants
 //	    				System.out.println("Visible Bounds Max X:" + mv.getVisibleBounds().getMaxX() + " ::: " + mv.getWidth() + " :::" + mv.getVisibleBounds().getMinX());
 	    				if ( maxX <	 mvWidth)
 	    				{	    						    				
-	    					mv.panScrollRegion((int)dx, (int)0,false);
-		    				mv2.panScrollRegion((int)dx, (int)0,false);
+	    					mv.panScrollRegion(dx, 0,false);
+		    				mv2.panScrollRegion(dx, 0,false);
 	    				}
 
 	    				try {
@@ -3975,14 +3975,14 @@ public class Actions implements VueConstants
         		Iterator it = s.iterator();
         		for (LWComponent c : s) {
     				if (c instanceof LWLink) {
-    					((LWLink)c).setFiltered(!filtered);
+    					c.setFiltered(!filtered);
     				}
     			}
         	}
         	else 
         	for (LWComponent c : VUE.getActiveViewer().getMap().getAllDescendents()) {
                if (c instanceof LWLink)
-                    ((LWLink)c).setFiltered(!filtered);
+                    c.setFiltered(!filtered);
             }
         	VUE.getActiveViewer().repaint();
     	}
@@ -3994,7 +3994,7 @@ public class Actions implements VueConstants
         		Iterator it = s.iterator();
         		for (LWComponent c : s) {
     				if (c instanceof LWLink) {
-    					boolean isFiltered = ((LWLink)c).isFiltered();
+    					boolean isFiltered = c.isFiltered();
     					
     					if (isFiltered)
     						return true;
@@ -4007,7 +4007,7 @@ public class Actions implements VueConstants
         	{
         		if (c instanceof LWLink)        	
                 {
-                    boolean isFiltered = ((LWLink)c).isFiltered();
+                    boolean isFiltered = c.isFiltered();
                     
                     if (isFiltered)
                     	return true;
@@ -4118,7 +4118,7 @@ public class Actions implements VueConstants
             public void act() {
                 state = !state;
                 updateName();
-                edu.tufts.vue.preferences.implementations.AutoZoomPreference.getInstance().setValue(Boolean.valueOf(state));
+                edu.tufts.vue.preferences.implementations.AutoZoomPreference.getInstance().setValue(state);
             }
             void updateName() {
                 if (DEBUG.Enabled && DEBUG.KEYS && Util.isMacPlatform()) {
@@ -4290,16 +4290,16 @@ public class Actions implements VueConstants
         }
         
         LWCAction(String name, String shortDescription, KeyStroke keyStroke) {
-            this(name, shortDescription, keyStroke, (Icon) null);
+            this(name, shortDescription, keyStroke, null);
         }
         LWCAction(String name) {
-            this(name, null, null, (Icon) null);
+            this(name, null, null, null);
         }
         LWCAction(String name, Icon icon) {
             this(name, null, null, icon);
         }
         LWCAction(String name, KeyStroke keyStroke) {
-            this(name, null, keyStroke, (Icon) null);
+            this(name, null, keyStroke, null);
         }
         
         public void act() {
@@ -4307,7 +4307,7 @@ public class Actions implements VueConstants
             //System.out.println("LWCAction: " + getActionName() + " n=" + selection.size());
             if (enabledFor(selection)) {
                 if (mayModifySelection()) {
-                    selection = (LWSelection) selection.clone();
+                    selection = selection.clone();
                 }
                 act(selection);
                 VUE.getActiveViewer().repaintSelection();

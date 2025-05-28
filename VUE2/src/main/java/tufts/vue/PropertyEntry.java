@@ -23,9 +23,10 @@
 package tufts.vue;
 
 import java.util.Map;
+import java.util.Objects;
 
 
-/**
+ /**
  * Basic {@link Map.Entry} implmentation.
  */
 class KVEntry<K,V> implements Map.Entry<K,V> {
@@ -71,11 +72,10 @@ class KVEntry<K,V> implements Map.Entry<K,V> {
         final Map.Entry e = (Map.Entry) o;
         final Object k1 = getKey();
         final Object k2 = e.getKey();
-        if (k1 == k2 || (k1 != null && k1.equals(k2))) {
+        if (Objects.equals(k1, k2)) {
             final Object v1 = getValue();
             final Object v2 = e.getValue();
-            if (v1 == v2 || (v1 != null && v1.equals(v2))) 
-                return true;
+            return Objects.equals(v1, v2);
         }
         return false;
     }

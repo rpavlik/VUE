@@ -235,8 +235,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     
     private boolean inScrollPane = false;
     private MapViewport mViewport;
-    private boolean isFirstReshape = true;
-    private boolean didReshapeZoomFit = false;
+    private final boolean isFirstReshape = true;
+    private final boolean didReshapeZoomFit = false;
     private Component mFocusIndicator = new java.awt.Canvas(); // make sure is never null
     private boolean mFitToFocalRequested = false;
 
@@ -393,7 +393,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         inScrollPane = (getParent() instanceof JViewport);
 
         if (inScrollPane) {
-            if (getParent() instanceof MapViewport == false)
+            if (!(getParent() instanceof MapViewport))
                 throw new IllegalStateException("MapViewer will only work in ScrollPane if using MapViewport");
             
             mViewport = (MapViewport) getParent();
@@ -615,10 +615,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             return false;
         else if (inScrollPane && (mViewport.getWidth() <= 0 || mViewport.getHeight() <= 0))
             return false;
-        else if (VUE.isStartupUnderway())
-            return false;
-        else
-            return true;
+        else return !VUE.isStartupUnderway();
     }
 
     // Commentary: it is very difficult to know when the current map-view has "settled down" and
@@ -895,7 +892,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         } else {
             // Does this pan in MAP COORDINATES or pixels?  I think map.
             // In any case, this is panning slower than scroll-pane.
-            setMapOriginOffset(mOffset.x + dx*1, mOffset.y + dy*1);
+            setMapOriginOffset(mOffset.x + dx, mOffset.y + dy);
           //setMapOriginOffset(mOffset.x + dx*2, mOffset.y + dy*2);
         }
     }
@@ -1378,7 +1375,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
         if (DEBUG.PRESENT || DEBUG.VIEWER) out("fitToFocal", mFocal + " at " + zoomBounds);
 
-        if (animate && mLastFocal != null && mLastFocal instanceof LWMap == false && canAnimate()) {
+        if (animate && mLastFocal != null && !(mLastFocal instanceof LWMap) && canAnimate()) {
             // if last focal was the map, don't bother to ensure we're fit to it
             ZoomTool.setZoomFitRegion(this,
                                       getFocalBounds(mLastFocal),
@@ -1678,7 +1675,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             final LWMap map = mMap;
             VUE.invokeAfterAWT(new Runnable() { public void run() {
                 //Log.debug("map=" + map);
-                if (map.getClientData(Boolean.class, MAP_REQUESTED_CACHING) == false) {
+                if (!map.getClientData(Boolean.class, MAP_REQUESTED_CACHING)) {
                     map.setClientData(Boolean.class, MAP_REQUESTED_CACHING, true);
                     preCacheMap(map);
                 }
@@ -2011,7 +2008,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     
     public void activeChanged(ActiveEvent e, LWPathway.Entry entry) {
         //if (instanceName.equals("*LEFT") && VUE.getActiveViewer() != this) Util.printStackTrace("***ACTIVE VIEWER: " + VUE.getActiveViewer());
-        if (activeTool != ToolPresentation && VUE.getActiveViewer() == this && mFocal instanceof LWMap == false && entry != null) {
+        if (activeTool != ToolPresentation && VUE.getActiveViewer() == this && !(mFocal instanceof LWMap) && entry != null) {
             //if (isPathwayEntryMode()) {
             // if presentation tool is active, let it handle all this
             mFocalEntry = entry;
@@ -2563,7 +2560,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             Rectangle r = mapToScreenRect(e.getComponent().getBounds());
             super.paintImmediately(r);
             //super.repaint(0,r.x,r.y,r.width,r.height);            
-        } else if (OPTIMIZED_REPAINT == false) {
+        } else if (!OPTIMIZED_REPAINT) {
             final LWComponent singleSrc = e.onlyComponent();
             // todo: these conditions require too much knowlege about the way things
             // work outside of MapViewer -- refactor.
@@ -3173,7 +3170,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
      * these are static across al* maps, as the mouse may roll from one map to another,
      * and this makes it easy to reliably clear the tip on the old map when rolling to the new map.
      */
-    private static Object sTipLock = new Object();
+    private static final Object sTipLock = new Object();
 
     private static final Border ToolTipBorder
         = new CompoundBorder(BorderFactory.createLineBorder(Color.darkGray, 1),
@@ -3374,7 +3371,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 
                 done = true;
                 
-                if (false && DEBUG.FOCUS == false) {
+                if (false) {
                     c.setEnabled(false);
                     // Well, this "fixes" problem, but it no longer gets even MOUSE_ENTERED,
                     // and so our timer doesn't know to leave it up when you mouse out
@@ -3777,10 +3774,10 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             
             if (DrawContext.drawingMayBeSlow(mFocal) && isFastPainting()) {
                 mThisPaintIsFast = true;
-                dc.setImageQuality(dc.g, false);
-                dc.setAlphaQuality(dc.g, false);
-                dc.setAliasQuality(dc.g, true);
-                dc.setAliasTextQuality(dc.g, true);
+                DrawContext.setImageQuality(dc.g, false);
+                DrawContext.setAlphaQuality(dc.g, false);
+                DrawContext.setAliasQuality(dc.g, true);
+                DrawContext.setAliasTextQuality(dc.g, true);
             } else {
                 mThisPaintIsFast = false;
                 dc.setInteractiveQuality(); // do before anti-alias & fractional metric debug tweaks
@@ -3797,9 +3794,9 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 }
                 
                 if (DEBUG_RENDER_QUALITY != UNSET_BOOL)
-                    dc.setImageQuality(dc.g, DEBUG_RENDER_QUALITY);
+                    DrawContext.setImageQuality(dc.g, DEBUG_RENDER_QUALITY);
                 if (DEBUG_FONT_METRICS != UNSET_BOOL)
-                    dc.setFontQuality(dc.g, DEBUG_FONT_METRICS);
+                    DrawContext.setFontQuality(dc.g, DEBUG_FONT_METRICS);
                 //dc.setFractionalFontMetrics(dc.g, DEBUG_FONT_METRICS);
                 
             }
@@ -3878,7 +3875,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             g.setColor(Color.black);
             g.draw(Xaxis);
             g.draw(Yaxis);
-            if (false && mZoomFactor >= 6.0) {
+            if (false) {
                 dc.setAbsoluteStroke(1);
                 g.setColor(Color.black);
                 g.draw(Xaxis);
@@ -4606,7 +4603,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         dc.setAbsoluteStroke(1.0);
         dc.g.draw(shape);
         
-        if (false && shape instanceof RectangularPoly2D) {
+        if (false) {
             // Inscribe many sided poly's in a circle so the user can
             // more easily make all the sides of equal length if they want.
             // TODO: fix scaling
@@ -4726,7 +4723,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
             Set parentGroups = null;
             
-            if (true||sDragUnderway) {
+            if (true) {
                 if (c instanceof LWMap && !DEBUG.CONTAINMENT)
                     continue;
 
@@ -4827,7 +4824,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 // Only one in selection:
                 // SPECIAL CASE to keep control handles out of way of node icons
                 // when node is scaled way down:
-                if (false && only.getScale() < 0.6) {
+                if (false) {
                     final float grow = SelectionHandleSize/2;
                     mapSelectionBounds.x -= grow;
                     mapSelectionBounds.y -= grow;
@@ -4859,8 +4856,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             for (int i = 0; i < resizeControl.handles.length; i++) {
                 LWSelection.Controller cp = resizeControl.handles[i];
                 drawSelectionHandleCentered(dc.g,
-                                            (float)cp.x,
-                                            (float)cp.y,
+                        cp.x,
+                        cp.y,
                                             deepSelection ? COLOR_SELECTION : cp.getColor(),
                                             i);
             }
@@ -4900,7 +4897,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 dc.g.translate(-size/2, -size/2);
                 //shape.setFrame(0,0, size,size); // can't do this if shape is a constant object!
                 final Color fillColor;
-                if (false && sDragUnderway) // hilight the dragging control
+                if (false) // hilight the dragging control
                     fillColor = Color.red; // don't do for ALL controls: just the active one...
                 else
                     fillColor = ctrl.getColor();
@@ -5648,8 +5645,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         if (DEBUG.Enabled) sSinglePopup.add(Actions.ImageToNaturalSize);
     }
 
-    private JMenu syncMenu = new JMenu(VueResources.getString("mapViewer.componentMenu.syncMenu.label"));
-    private JMenu arrangeMenu = new JMenu(VueResources.getString("mapViewer.componentMenu.arrangeMenu.label"));
+    private final JMenu syncMenu = new JMenu(VueResources.getString("mapViewer.componentMenu.syncMenu.label"));
+    private final JMenu arrangeMenu = new JMenu(VueResources.getString("mapViewer.componentMenu.arrangeMenu.label"));
     
     private JPopupMenu getSingleSelectionPopup(LWComponent c) {
         if (c == null)
@@ -5831,7 +5828,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         osid.dr.InfoRecordIterator i = asset.getInfoRecords();
         while (i.hasNext()) {
             System.out.print("\t");
-            dumpInfoRecord((osid.dr.InfoRecord) i.next());
+            dumpInfoRecord(i.next());
             //osid.dr.InfoRecord r = (osid.dr.InfoRecord) i.next();
         }
     }
@@ -6534,8 +6531,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                     return true;
             }
             if (resizeControl.active) {
-                if (checkAndHandleControlListenerHits(resizeControl, e, false))
-                    return true;
+                return checkAndHandleControlListenerHits(resizeControl, e, false);
             }
             return false;
         }
@@ -6950,10 +6946,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             }
 
             if (dragComponent == null) {
-                if (dragSelectorEnabled(mme))
-                    isDraggingSelectorBox = true;
-                else
-                    isDraggingSelectorBox = false;
+                isDraggingSelectorBox = dragSelectorEnabled(mme);
             }
             
             if (dragComponent != null)
@@ -7209,7 +7202,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                     if (DEBUG.FOCUS) out("ClearTipTask: over nothing timeout for "
                                          + "#" + tipDisplayInstance
                                          + " during instance #" + sTipDisplayInstance);
-                    if (mMouseHasEnteredToolTip == false) {
+                    if (!mMouseHasEnteredToolTip) {
                         //if (sTipComponent == tipWhenTimerStarted && sTipDisplayInstance == tipDisplayInstance) {
                         if (sTipDisplayInstance == tipDisplayInstance) {
                             if (DEBUG.FOCUS) out("ClearTipTask: clearing tip " + sTipDisplayInstance);
@@ -7239,7 +7232,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             	catch(java.lang.IllegalStateException ise)
             	{
             		//keep getting timer already cancelled in applet.
-            		System.out.println(ise.toString());
+            		System.out.println(ise);
             	}
             }
         }
@@ -7398,7 +7391,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (sLastMouseOver != null && sLastMouseOver == mRollover)
                 clearRollover();
 
-            if (false && sLastMouseOver != null) {
+            if (false) {
                 sLastMouseOver.mouseExited(new MapMouseEvent(e));
                 sLastMouseOver = null;
             }
@@ -7519,7 +7512,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
             clearRollover();
             //System.out.println("drag " + drags++);
-            if (mouseWasDragged == false) {
+            if (!mouseWasDragged) {
 
                 // TODO: if the active tool claimed to have handled this event on mousePressed,
                 // do not allow following drags to do anything...
@@ -7745,7 +7738,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 if (over != null && isDropRequest(e)) { 
                     if (isValidParentTarget(VueSelection, over)) {
                         setIndicated(over);
-                    } else if (over instanceof LWSlide == false && isValidParentTarget(VueSelection, over.getParent())) {
+                    } else if (!(over instanceof LWSlide) && isValidParentTarget(VueSelection, over.getParent())) {
                         // if we're here and over is a slide, it must have been a map slide, which we don't want to drop
                         // on for now...
                         setIndicated(over.getParent());
@@ -7758,7 +7751,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (dragComponent == null && dragControl == null)
                 return;
             
-            if (OPTIMIZED_REPAINT == false) {
+            if (!OPTIMIZED_REPAINT) {
                 
                 repaint();
                 
@@ -8324,7 +8317,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         //if (activeTool != ArrowTool && activeTool != TextTool)
         //return;  check supportsClick, and add such to node tool
         
-        if (!mouseConsumed && hitOnSelectionHandle == false) {
+        if (!mouseConsumed && !hitOnSelectionHandle) {
             MapMouseEvent me = new MapMouseEvent(e, hitComponent);
             if (!activeTool.handleMouseClicked(me))
                 processMouseClick(me);
@@ -8433,7 +8426,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         // TODO: refactor such that this shares code w/LWComponent.doZoomingDoubleClick,
         // and we don't need the instanceof checks.
         //if (mFocal instanceof LWSlide || mFocal instanceof LWGroup) {
-        if (mFocal instanceof LWMap == false) {
+        if (!(mFocal instanceof LWMap)) {
             popFocal(POP_TO_TOP, ANIMATE);
             // What we really want to do here is pop to the next "tier" --
             // e.g., pop up to the slide if we're in a slide, otherwise back up
@@ -8978,9 +8971,9 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     private String out(Rectangle2D r) { return fmt(r); }
     
     
-    private boolean DEBUG_MOUSE_MOTION = VueResources.getBool("mapViewer.debug.mouse_motion");//todo: make command line -D override these
+    private final boolean DEBUG_MOUSE_MOTION = VueResources.getBool("mapViewer.debug.mouse_motion");//todo: make command line -D override these
 
-    private static final Boolean UNSET_BOOL = new Boolean(false);
+    private static final Boolean UNSET_BOOL = Boolean.FALSE;
     
     private Boolean DEBUG_RENDER_QUALITY = UNSET_BOOL;
     // private Boolean DEBUG_FONT_METRICS = UNSET_BOOL; // fractional metrics looks worse to me --SF
@@ -8988,7 +8981,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     private Boolean DEBUG_SKIP_ANTIALIAS = UNSET_BOOL;
     
     private boolean DEBUG_SHOW_ORIGIN = false;
-    private boolean DEBUG_FINDPARENT_OFF = false;
+    private final boolean DEBUG_FINDPARENT_OFF = false;
     //protected boolean DEBUG_TIMER_ROLLOVER = true; // todo: preferences
     private boolean OPTIMIZED_REPAINT = false;
     
@@ -9056,7 +9049,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         
         JFrame frame = null;
         
-        if (test_zoom == false && use_menu == false) {
+        if (!test_zoom && !use_menu) {
             // raw, simple, non-scrolled mapviewer (WITHOUT actions attached!)
             //DEBUG.FOCUS = true;
             VueUtil.displayComponent(new MapViewer(map), 400,300);

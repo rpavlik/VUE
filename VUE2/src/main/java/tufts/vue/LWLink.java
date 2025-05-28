@@ -214,7 +214,7 @@ public class LWLink extends LWComponent
     private float mCenterY;
     
     /** used when link is straight */
-    private Line2D.Float mLine = new Line2D.Float();
+    private final Line2D.Float mLine = new Line2D.Float();
     /** used when link is a quadradic curve (1 control point) */
     private QuadCurve2D.Float mQuad = null;
     /** used when link is a cubic curve (2 control points) */
@@ -242,7 +242,7 @@ public class LWLink extends LWComponent
     /** has an endpoint moved since we last computed shape? */
     private transient boolean mRecompute;
 
-    private transient LWIcon.Block mIconBlock =
+    private final transient LWIcon.Block mIconBlock =
         new LWIcon.Block(this,
                          11, 9,
                          Color.darkGray,
@@ -368,7 +368,7 @@ public class LWLink extends LWComponent
         private boolean vueHeadOnFromCSS = false;
         private boolean vueHeadOffFromCSS = false;
         
-        final Property getSlot(LWLink l) {
+        Property getSlot(LWLink l) {
             return l.mArrowState; // if getting a type-mismatch on mLine, feed this file to javac with LWComponent.java at the same time
         }
         
@@ -652,7 +652,7 @@ public class LWLink extends LWComponent
 //     private static final boolean SKIP_NODE_ENDPOINT_PRUNE = false;
     
     private void debug(String s) {
-        Log.debug(toString() + ": " + s);
+        Log.debug(this + ": " + s);
     }
 
     /** interface ControlListener handler */
@@ -1370,7 +1370,7 @@ public class LWLink extends LWComponent
             mCurve = null;
         }
         
-        Object old = new Integer(mCurveControls);
+        Object old = mCurveControls;
         mCurveControls = newControlCount;
         //this.mControlPoints = new LWSelection.Controller[MAX_CONTROL];
         mRecompute = true;
@@ -2570,7 +2570,7 @@ public class LWLink extends LWComponent
         
         if (mCurveControls == 1) {
 
-            if (false && (mArrowState.get() & ARROW_HEAD) != 0) {
+            if (false) {
                 // This backs up the curve endpoint to the tail of the arrow
                 // This will slightly move the curve, but it keeps the connection
                 // to the arrow much cleaner.
@@ -2906,31 +2906,23 @@ public class LWLink extends LWComponent
     }
 
     private static boolean badCurve(QuadCurve2D.Float c) {
-        if (Float.isNaN(c.x1) ||
-            Float.isNaN(c.y1) ||
-            Float.isNaN(c.x2) ||
-            Float.isNaN(c.y2) ||
-            Float.isNaN(c.ctrlx) ||
-            Float.isNaN(c.ctrly)
-            )
-            return true;
-        else
-            return false;
+        return Float.isNaN(c.x1) ||
+                Float.isNaN(c.y1) ||
+                Float.isNaN(c.x2) ||
+                Float.isNaN(c.y2) ||
+                Float.isNaN(c.ctrlx) ||
+                Float.isNaN(c.ctrly);
     }
     
     private static boolean badCurve(CubicCurve2D.Float c) {
-        if (Float.isNaN(c.x1) ||
-            Float.isNaN(c.y1) ||
-            Float.isNaN(c.x2) ||
-            Float.isNaN(c.y2) ||
-            Float.isNaN(c.ctrlx1) ||
-            Float.isNaN(c.ctrly1) ||
-            Float.isNaN(c.ctrlx2) ||
-            Float.isNaN(c.ctrly2)
-            )
-            return true;
-        else
-            return false;
+        return Float.isNaN(c.x1) ||
+                Float.isNaN(c.y1) ||
+                Float.isNaN(c.x2) ||
+                Float.isNaN(c.y2) ||
+                Float.isNaN(c.ctrlx1) ||
+                Float.isNaN(c.ctrly1) ||
+                Float.isNaN(c.ctrlx2) ||
+                Float.isNaN(c.ctrly2);
     }
 
     @Override protected void drawImpl(DrawContext dc)
@@ -3492,7 +3484,7 @@ public class LWLink extends LWComponent
             } else {
                 // for at right
                 if (hasLabel())
-                    ibx = (float) lx + labelBox.getBoxWidth();
+                    ibx = lx + labelBox.getBoxWidth();
                 else
                     ibx = (float) (cx - mIconBlock.getWidth() / 2);
                 iby = (float) (cy - mIconBlock.getHeight() / 2);

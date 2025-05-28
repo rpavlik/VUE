@@ -299,7 +299,7 @@ public class NodeTool extends VueTool
     
     public static class NodeModeTool extends VueTool
     {
-    	private LWNode creationNode = new LWNode("");
+    	private final LWNode creationNode = new LWNode("");
     	//private LWNode creationNode = new LWNode("New Node");
 
     	public NodeModeTool()
@@ -548,8 +548,8 @@ public class NodeTool extends VueTool
         private static final Color sShapeColor = new Color(93,98,162); // Melanie's icon blue/purple
         private static final Color sShapeColorLight = VueUtil.factorColor(sShapeColor, 1.3);
         //private static final boolean sPaintBorder = false;
-        private static GradientPaint sShapeGradient;
-        private static int sWidth;
+        private static final GradientPaint sShapeGradient;
+        private static final int sWidth;
         private static int sHeight;
         
         static {
@@ -587,7 +587,7 @@ public class NodeTool extends VueTool
             public int getIconWidth() { return sWidth; }
             public int getIconHeight() { return sHeight; }
 
-            private RectangularShape mShape;
+            private final RectangularShape mShape;
             
             public ShapeIcon(RectangularShape pShape)
             {

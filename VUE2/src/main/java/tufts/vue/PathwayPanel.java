@@ -60,7 +60,7 @@ public class PathwayPanel extends JPanel
 {    
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(PathwayPanel.class);
 
-    private Frame mParentFrame;
+    private final Frame mParentFrame;
     
     private final VueButton btnAddSlide = new VueButton("presentationDialog.button.makeSlides",this);
     private final VueButton btnMergeInto = new VueButton("presentationDialog.button.mergeInto",this);
@@ -101,25 +101,25 @@ public class PathwayPanel extends JPanel
     //private final VueButton btnPlay = new VueButton("presentationDialog.button.play", Actions.LaunchPresentation);
                                             
     //Section Labels for the top
-    private JLabel lblCreateSlides = new JLabel(VueResources.getString("presentationDialog.createslides.label"));
-    private JLabel lblEditSlides = new JLabel(VueResources.getString("presentationDialog.editslides.label"));
-    private JLabel lblViewSlide = new JLabel(VueResources.getString("presentationDialog.viewslide.label"));
-    private JLabel lblNew = new JLabel(VueResources.getString("presentationDialog.new.label"));    
+    private final JLabel lblCreateSlides = new JLabel(VueResources.getString("presentationDialog.createslides.label"));
+    private final JLabel lblEditSlides = new JLabel(VueResources.getString("presentationDialog.editslides.label"));
+    private final JLabel lblViewSlide = new JLabel(VueResources.getString("presentationDialog.viewslide.label"));
+    private final JLabel lblNew = new JLabel(VueResources.getString("presentationDialog.new.label"));
     //private JLabel lblFilter = new JLabel(VueResources.getString("presentationDialog.filter.label"));
-    private JLabel lblRefresh = new JLabel(VueResources.getString("presentationDialog.refresh.label"));
+    private final JLabel lblRefresh = new JLabel(VueResources.getString("presentationDialog.refresh.label"));
     //private JLabel lblMapView = new JLabel(VueResources.getString("presentationDialog.mapview.label"));
     //private JLabel lblMapView = new JLabel("Slide Icons");
     //private JLabel lblPlayback = new JLabel(VueResources.getString("presentationDialog.playback.label"));
-    private JLabel lblPresentationBackground = new JLabel(VueResources.getString("presentationDialog.presentationBackground.label"));
+    private final JLabel lblPresentationBackground = new JLabel(VueResources.getString("presentationDialog.presentationBackground.label"));
     private ColorMenuButton bkgrndColorButton = null;
 
     public PathwayTable mPathwayTable;
-    private PathwayTableModel mTableModel;
+    private final PathwayTableModel mTableModel;
       
     
-    private JLabel pathLabel;           // updated for current PathwayTable selection
-    private JLabel pathElementLabel;    // updated for current PathwayTable selection
-    private JTextArea notesArea;        // updated for current PathwayTable selection
+    private final JLabel pathLabel;           // updated for current PathwayTable selection
+    private final JLabel pathElementLabel;    // updated for current PathwayTable selection
+    private final JTextArea notesArea;        // updated for current PathwayTable selection
     
     private LWPathway.Entry mSelectedEntry;
     private boolean mNoteKeyWasPressed = false;
@@ -352,7 +352,7 @@ public class PathwayPanel extends JPanel
             public void propertyChange(PropertyChangeEvent e) 
             {
             
-            	 if (e instanceof LWPropertyChangeEvent == false)
+            	 if (!(e instanceof LWPropertyChangeEvent))
                      return;
             	 Color color = null;
                 
@@ -673,9 +673,8 @@ public class PathwayPanel extends JPanel
         //slidePanel.add(Box.createHorizontalStrut(1));
        // slidePanel.add(deletePanel);
        // slidePanel.add(Box.createHorizontalStrut(1));        
-       
-       
-        return;
+
+
     }
     
        
@@ -789,7 +788,7 @@ public class PathwayPanel extends JPanel
     class ImageDropDown extends JPanel {
         
     	ImageIcon[] images;        
-        private JComboBox comboList;
+        private final JComboBox comboList;
         ImageIcon disabledIcon = null;
         public ImageDropDown(ImageIcon icon1, ImageIcon icon2,ImageIcon icon3) {
             super(new BorderLayout());
@@ -800,8 +799,8 @@ public class PathwayPanel extends JPanel
             images = new ImageIcon[2];
             Integer[] intArray = new Integer[2];
             
-            intArray[0] = new Integer(0);
-            intArray[1] = new Integer(1);
+            intArray[0] = 0;
+            intArray[1] = 1;
                 
             images[0] = icon1;
             images[1] = icon2;                                                      
@@ -1257,7 +1256,7 @@ public class PathwayPanel extends JPanel
                     for (LWComponent c : allNodes) {
                         // (portalShape.intersects(c.getBounds())
                         if (c.intersects(portalRect)) {
-                            if (c instanceof LWLink && ((LWLink)c).isConnectedTo(entry.node)) {
+                            if (c instanceof LWLink && c.isConnectedTo(entry.node)) {
                                 // a link connected to the portal will always intersect, but
                                 // we really don't want to see it as it's rare the shape of
                                 // the link is actually going to pass through the body of

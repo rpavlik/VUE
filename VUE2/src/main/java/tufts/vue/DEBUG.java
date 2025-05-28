@@ -109,7 +109,7 @@ public class DEBUG
             setFlag(f, enabled);
 
         // only turn META & WORK off, not on
-        if (enabled == false)
+        if (!enabled)
             META = WORK = false;
     }
 

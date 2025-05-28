@@ -75,7 +75,7 @@ public class SlideViewer extends tufts.vue.MapViewer
     //private final VueTool PresentationTool = VueToolbarController.getController().getTool("viewTool");
 
     private boolean isMapView = false;
-    private boolean mBlackout = false;
+    private final boolean mBlackout = false;
     
     private boolean mZoomBorder;
     private boolean inFocal;
@@ -270,7 +270,7 @@ public class SlideViewer extends tufts.vue.MapViewer
             reload();
         } else {
             super.LWCChanged(e);
-            if (true||e.getComponent() == mFocal) {
+            if (true) {
                 fitToFocal();
             }
         }

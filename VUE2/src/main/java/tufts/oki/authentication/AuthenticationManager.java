@@ -92,7 +92,7 @@ public class AuthenticationManager extends OsidManager implements osid.authentic
      *  @author Mark Norton
      */
     public void initManager (osid.shared.SharedManager sharedMgr) {
-        this.sharedMgr = sharedMgr;
+        AuthenticationManager.sharedMgr = sharedMgr;
     }
     
     /**
@@ -292,11 +292,9 @@ public class AuthenticationManager extends OsidManager implements osid.authentic
      *  @return True if the type passed is a valid authentication type.
      */
     private boolean isValidAuthNType (osid.shared.Type authNType) {
-        boolean val = false;
+        boolean val = authNType.isEqual(new AuthenticationLDAP());
         
         //  Check authNType against all known authorization types.
-        if (authNType.isEqual (new AuthenticationLDAP()))
-            val = true;
         return val;
    }
     

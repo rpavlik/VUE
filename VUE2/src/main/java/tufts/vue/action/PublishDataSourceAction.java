@@ -25,7 +25,7 @@ import tufts.vue.*;
 public class PublishDataSourceAction extends VueAction   {
      public static final String LABEL = "Publish";
     /** Creates a new instance of PublishDataSourceAction */
-    private edu.tufts.vue.dsm.DataSource dataSource;
+    private final edu.tufts.vue.dsm.DataSource dataSource;
     PublishDataSourceAction(edu.tufts.vue.dsm.DataSource dataSource) {
         super(dataSource.getRepositoryDisplayName());
         this.dataSource = dataSource;

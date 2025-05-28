@@ -43,7 +43,7 @@ public class VueAuthorization implements osid.authorization.Authorization {
     private boolean explicit = false;
     private osid.shared.Id id = null;
     private osid.shared.Id agentId = null;
-    private osid.shared.Id modifiedById = null;
+    private final osid.shared.Id modifiedById = null;
     private VueFunction function = null;
     private VueQualifier qualifier = null;
     private Calendar effectiveDate = null;
@@ -178,10 +178,7 @@ public class VueAuthorization implements osid.authorization.Authorization {
         now.setTimeInMillis (System.currentTimeMillis());
         
         //  If now is between effectiveDate and expirationDate, it is active.
-        if (now.after(effectiveDate) && now.before(expirationDate))
-            return true;
-        else
-            return false;
+        return now.after(effectiveDate) && now.before(expirationDate);
     }
     
     /**
@@ -201,7 +198,7 @@ public class VueAuthorization implements osid.authorization.Authorization {
      *  @author Mark Norton
      */
     public void updateEffectiveDate(java.util.Calendar effectiveDate) throws osid.authorization.AuthorizationException {
-        if (this.explicit == false)
+        if (!this.explicit)
             throw new osid.authorization.AuthorizationException (osid.authorization.AuthorizationException.PERMISSION_DENIED);
         this.effectiveDate = effectiveDate;
         this.modifiedDate = Calendar.getInstance();
@@ -215,7 +212,7 @@ public class VueAuthorization implements osid.authorization.Authorization {
      *  @author Mark Norton
      */
     public void updateExpirationDate(java.util.Calendar expirationDate) throws osid.authorization.AuthorizationException {
-        if (this.explicit == false)
+        if (!this.explicit)
             throw new osid.authorization.AuthorizationException (osid.authorization.AuthorizationException.PERMISSION_DENIED);
         this.expirationDate = expirationDate;
         this.modifiedDate = Calendar.getInstance();
@@ -266,9 +263,7 @@ public class VueAuthorization implements osid.authorization.Authorization {
      *  @author Mark Norton
      */
     public boolean hasFunctionType (osid.shared.Type functionType) {
-        if (functionType.isEqual(function.getFunctionType()))
-            return true;
-        return false;
+        return functionType.isEqual(function.getFunctionType());
     }
     
     /**

@@ -843,7 +843,7 @@ public class DataTree extends javax.swing.JTree
             // normally only find a single node on the map, unless there are duplicate nodes on
             // the map referencing the same row
 
-            final String keyField = ((RowNode)treeNode).getSchema().getKeyFieldName();
+            final String keyField = treeNode.getSchema().getKeyFieldName();
             final String keyValue = treeNode.getRow().getValue(keyField);
 
             criteria = new ValueMatch(keyField, keyValue);
@@ -1477,13 +1477,12 @@ public class DataTree extends javax.swing.JTree
     
     private static String HTML(String s) {
         //if (true) return s;
-        final StringBuilder b = new StringBuilder(s.length() + 6);
         //b.append("<html>");
         // we add space before and after to widen the painted background selection around the text a bit
-        b.append("<html>&nbsp;");
-        b.append(s);
-        b.append("&nbsp;");
-        return b.toString();
+        String b = "<html>&nbsp;" +
+                s +
+                "&nbsp;";
+        return b;
     }
 
     private static int sortPriority(Field f) {
@@ -1706,7 +1705,7 @@ public class DataTree extends javax.swing.JTree
         }
         else if (treeNode instanceof RowNode) {
                 
-            final DataRow row = ((RowNode)treeNode).getRow();
+            final DataRow row = treeNode.getRow();
             final List<LWComponent> nodes = DataAction.makeSingleRowNode(treeNode.getSchema(), row);
             if (DEBUG.Enabled) Log.debug("made row nodes: " + Util.tags(nodes));
             if (nodes.isEmpty()) {
@@ -1811,7 +1810,7 @@ public class DataTree extends javax.swing.JTree
             final Object[] result
                 = DataAction.addDataLinksForNodes(map,
                                                   newRowNodes,
-                                                  (Field) null);
+                    null);
             targetsUsed = (Multiset) result[0];
             linksAdded = (List) result[1];
         } catch (Throwable t) {
@@ -2147,7 +2146,8 @@ public class DataTree extends javax.swing.JTree
             this.dataSetCount = dataSetValueCount;
         }
         
-        @Override final boolean isMapTracked() {
+        @Override
+        boolean isMapTracked() {
             return true;
         }
         

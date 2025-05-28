@@ -170,7 +170,7 @@ public class MetadataSearchMainGUI extends JPanel
     static AbstractAction deleteAction;
 
     private final List<JComboBox> comboBoxes = new ArrayList<>();
-    private JPopupMenu popupMenu = new JPopupMenu();
+    private final JPopupMenu popupMenu = new JPopupMenu();
     private final String RENAME_STR = VueResources.local("searchgui.rename");
     private final String DELETE_STR = VueResources.local("searchgui.delete");
     private final String RESET_STR = VueResources.local("searchgui.resetmap");
@@ -901,11 +901,8 @@ public class MetadataSearchMainGUI extends JPanel
         }
 
         public boolean isCellEditable(int row, int col) {
-            if ((col == valueColumn) || (col == categoryColumn)
-                    || (col == conditionColumn) || (col == comboColumn))
-                return true;
-            else
-                return false;
+            return (col == valueColumn) || (col == categoryColumn)
+                    || (col == conditionColumn) || (col == comboColumn);
         }
 
         public Object getValueAt(int row, int col) {            
@@ -971,17 +968,9 @@ public class MetadataSearchMainGUI extends JPanel
 
         public boolean isCellEditable(int row, int col) {
             if(this.getColumnCount() == 3){
-                if (col == 0) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return col != 0;
             }else if(this.getColumnCount() == 4){
-                if (col == 0 || col == 1) {
-                    return false;
-                } else {
-                    return true;
-                }
+                return col != 0 && col != 1;
             }
             return false;
         }
@@ -1129,7 +1118,7 @@ public class MetadataSearchMainGUI extends JPanel
         // This method is called when editing is completed.
         // It must return the new value to be stored in the cell.
         public Object getCellEditorValue() {
-            return (JLabel) component;
+            return component;
         }
     }
     public class ComboBoxAndOrRenderer implements TableCellRenderer {

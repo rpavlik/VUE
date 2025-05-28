@@ -77,7 +77,7 @@ public class VueResources
 	// Can't set the title or description yet because those strings are localized and VueResources
 	// has to be initialized before localized strings can be fetched.  The title and
 	// description will be set later, and the LanguagePreference will be added to the UI then.
-	private static LanguagePreference languagePref = LanguagePreference.create(
+	private static final LanguagePreference languagePref = LanguagePreference.create(
 		edu.tufts.vue.preferences.PreferenceConstants.LANGUAGE_CATEGORY,
 		"language",
 		null,
@@ -90,7 +90,7 @@ public class VueResources
     	final class VueResourceBundle extends ResourceBundle{
 
 //    		 List of bundles in merge bundle
-    		private List<ResourceBundle> bundles;
+    		private final List<ResourceBundle> bundles;
 
     		/**
     		 * Constructs a resource bundle from a list of other resource bundles. If
@@ -131,7 +131,7 @@ public class VueResources
 
     		                  }
 
-    		                  enumer = ((ResourceBundle)bundles.get(i++)).getKeys();
+    		                  enumer = bundles.get(i++).getKeys();
 
     		              }
 
@@ -164,7 +164,7 @@ public class VueResources
 
     	         for (int i=0;i<bundles.size();i++){
 
-    	            rb = (ResourceBundle) bundles.get(i);
+    	            rb = bundles.get(i);
 
     	            try{
 
@@ -374,7 +374,7 @@ public class VueResources
     	int h = i.getHeight(null);
     	BufferedImage bi = new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
     	Graphics bg = bi.createGraphics();
-    	bg.drawImage(i,0,0,(ImageObserver)null);
+    	bg.drawImage(i,0,0, null);
     	bg.dispose();
     	return bi;
 
@@ -470,7 +470,7 @@ public class VueResources
             }
             //System.out.println("Creating cursor for " + icon);
             //System.out.println("Creating cursor " + key + " " + Arrays.asList(data) + " with hotspot " + hot);
-            cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon.getImage(), hot, key+":"+icon.toString());
+            cursor = Toolkit.getDefaultToolkit().createCustomCursor(icon.getImage(), hot, key+":"+ icon);
         }
         return cursor;
     }
@@ -511,7 +511,7 @@ public class VueResources
 			url = VueResources.class.getResource(getString(pLookupKey));
             if (DEBUG.INIT) alert("URL for key <" + pLookupKey + "> is [" + url + "]");
         } catch (Exception e) {
-            alert("  !!! failed to lead due to "+ e.toString() );
+            alert("  !!! failed to lead due to "+ e);
         }
 
         return url;
@@ -532,7 +532,7 @@ public class VueResources
                     System.out.println("the url of the " + pLookupKey + " is " + url);
 
                     file = new File(url.getFile().replaceAll("%20"," "));
-                    System.out.println("finished with " + file.toString());
+                    System.out.println("finished with " + file);
 
                     if (file == null)
                         System.err.println("error in getFile method");
@@ -551,7 +551,7 @@ public class VueResources
 
                 System.out.println("URL found for plookupkey = "+pLookupKey+"  : "+file);
             } catch (Exception e) {
-		alert("  !!! failed to lead due to "+ e.toString() );
+		alert("  !!! failed to lead due to "+ e);
             }
             return file;
      }
@@ -733,7 +733,7 @@ public class VueResources
         int value = pDefault;
         String s = getString(key);
         if (s != null) {
-            Integer i = new Integer(s);
+            Integer i = Integer.valueOf(s);
             value = i;
         }
 	return value;
@@ -1062,7 +1062,7 @@ public class VueResources
 		}
 	}
 
-    static private boolean sDebug = false;
+    static private final boolean sDebug = false;
 
     static protected void debug( String pStr) {
         if (sDebug || DEBUG.INIT) System.out.println( pStr);

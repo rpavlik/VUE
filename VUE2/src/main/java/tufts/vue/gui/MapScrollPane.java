@@ -35,7 +35,7 @@ public class MapScrollPane extends javax.swing.JScrollPane
 {
     public final static boolean UseMacFocusBorder = false;
     
-    private FocusIndicator mFocusIndicator;
+    private final FocusIndicator mFocusIndicator;
 
     private final MapViewer mViewer;
     

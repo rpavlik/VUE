@@ -38,7 +38,7 @@ public class FedoraUtils {
     public static final String SEPARATOR = ",";
     public static final String NOT_DEFINED = "Property not defined";
     
-    private static java.util.Map prefsCache = new java.util.HashMap();
+    private static final java.util.Map prefsCache = new java.util.HashMap();
     
     public static java.util.Vector stringToVector(String str) {
         java.util.Vector vector = new java.util.Vector();
@@ -68,8 +68,8 @@ public class FedoraUtils {
     }
     
     public static Preferences getPreferences(DR dr)
-        throws java.io.FileNotFoundException,
-               java.io.IOException,
+        throws
+            java.io.IOException,
                java.util.prefs.InvalidPreferencesFormatException
     {
         if (dr.getPrefernces() != null) {
@@ -80,8 +80,8 @@ public class FedoraUtils {
     }
     
     public static Preferences getDefaultPreferences(URL url)
-        throws java.io.FileNotFoundException,
-               java.io.IOException,
+        throws
+            java.io.IOException,
                java.util.prefs.InvalidPreferencesFormatException
     {
         if (url == null) {
@@ -97,7 +97,7 @@ public class FedoraUtils {
         System.out.println("*** " + clazz.getName() + ".getPreferences: node=" + prefs);
         System.out.println("*** " + clazz.getName() + ".getPreferences: loading & caching prefs from \"" + url + "\"");
         InputStream stream = new BufferedInputStream(url.openStream());
-        prefs.importPreferences(stream);
+        Preferences.importPreferences(stream);
         prefsCache.put(url, prefs);
         stream.close();
         return prefs;

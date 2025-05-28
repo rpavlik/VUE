@@ -97,16 +97,15 @@ public class Condition  implements java.io.Serializable {
         }
         __equalsCalc = obj;
         boolean _equals;
-        _equals = true && 
-            ((this.property==null && other.getProperty()==null) || 
-             (this.property!=null &&
-              this.property.equals(other.getProperty()))) &&
-            ((this.operator==null && other.getOperator()==null) || 
-             (this.operator!=null &&
-              this.operator.equals(other.getOperator()))) &&
-            ((this.value==null && other.getValue()==null) || 
-             (this.value!=null &&
-              this.value.equals(other.getValue())));
+        _equals = ((this.property == null && other.getProperty() == null) ||
+                (this.property != null &&
+                        this.property.equals(other.getProperty()))) &&
+                ((this.operator == null && other.getOperator() == null) ||
+                        (this.operator != null &&
+                                this.operator.equals(other.getOperator()))) &&
+                ((this.value == null && other.getValue() == null) ||
+                        (this.value != null &&
+                                this.value.equals(other.getValue())));
         __equalsCalc = null;
         return _equals;
     }

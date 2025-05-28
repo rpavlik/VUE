@@ -20,8 +20,8 @@ import java.awt.geom.PathIterator;
 import java.util.Vector;
 
 final class Order0 extends Curve {
-    private double x;
-    private double y;
+    private final double x;
+    private final double y;
 
     public Order0(double x, double y) {
 	super(INCREASING);

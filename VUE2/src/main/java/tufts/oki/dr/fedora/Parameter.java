@@ -28,11 +28,11 @@ package tufts.oki.dr.fedora;
 public class Parameter implements osid.dr.InfoField {
     //private osid.OsidOwner owner = null;
     //private java.util.Map configuration = null;
-    private java.util.Vector infoFieldVector = new java.util.Vector();
-    private osid.dr.InfoStructure infoStructure = null;
-    private osid.shared.Id id = null;
+    private final java.util.Vector infoFieldVector = new java.util.Vector();
+    private final osid.dr.InfoStructure infoStructure = null;
+    private final osid.shared.Id id = null;
     private String  value = null;
-    private osid.dr.InfoPart infoPart = null;
+    private final osid.dr.InfoPart infoPart = null;
     /** Creates a new instance of Parameter */
     public Parameter() {
     }

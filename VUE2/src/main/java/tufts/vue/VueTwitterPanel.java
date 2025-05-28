@@ -218,7 +218,7 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 				 if (layer instanceof LWMap.Layer) {
 					layerList.put(layer.getLabel(), (LWMap.Layer)layer); 
 					if (!layer.getLabel().equals(TWEETS_LAYER))
-						((LWMap.Layer)layer).setVisible(false);
+						layer.setVisible(false);
 				 }
 			 }
 		 layersInit=true;
@@ -229,16 +229,16 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 	{
 
 		private static final long UPDATE_INTERVAL = 5000;
-		private HashMap<String,LWNode> fromUserClusterPoints = new HashMap<>();
+		private final HashMap<String,LWNode> fromUserClusterPoints = new HashMap<>();
 		//private HashMap<String,LWNode> geoClusterPoints = new HashMap<String,LWNode>();
-		private HashMap<String,LWNode> toUserClusterPoints = new HashMap<>();
-		private HashMap<String,LWNode> analysisClusterPoints = new HashMap<>();
+		private final HashMap<String,LWNode> toUserClusterPoints = new HashMap<>();
+		private final HashMap<String,LWNode> analysisClusterPoints = new HashMap<>();
 
 		private Twitter twitter;
-		private ListRandomLayout randomLayout = new ListRandomLayout();
-		private TabularLayout tableLayout = new TabularLayout();
-		private ClusterLayout clusterLayout = new ClusterLayout();
-		private ScrollingTabularLayout scrollTableLayout = new ScrollingTabularLayout();
+		private final ListRandomLayout randomLayout = new ListRandomLayout();
+		private final TabularLayout tableLayout = new TabularLayout();
+		private final ClusterLayout clusterLayout = new ClusterLayout();
+		private final ScrollingTabularLayout scrollTableLayout = new ScrollingTabularLayout();
 
 		
 		private LWNode handleFromNode(Tweet tweet)
@@ -291,7 +291,7 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 			
 		}
 		*/
-		private OpenCalaisAnalyzer oca = new OpenCalaisAnalyzer();
+		private final OpenCalaisAnalyzer oca = new OpenCalaisAnalyzer();
 		
 		private LWNode handleAnalysisNode(Tweet tweet)
 		{

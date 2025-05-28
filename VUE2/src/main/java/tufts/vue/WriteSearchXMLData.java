@@ -196,17 +196,17 @@ public class WriteSearchXMLData {
 				      NodeList searchTypeNmElmntLst = searchTypeElmnt.getElementsByTagName("SearchType");
 				      Element searchTypeNmElmnt = (Element) searchTypeNmElmntLst.item(0);
 				      NodeList searchTypeNm = searchTypeNmElmnt.getChildNodes();
-				      Log.info("Search : "  + ((Node) searchTypeNm.item(0)).getNodeValue());
+				      Log.info("Search : "  + searchTypeNm.item(0).getNodeValue());
 				      
 				      NodeList mapTypeNmElmntLst = searchTypeElmnt.getElementsByTagName("MapType");
 				      Element mapTypNmElmnt = (Element)  mapTypeNmElmntLst.item(0);
 				      NodeList mapTypNm = mapTypNmElmnt.getChildNodes();
-				      Log.info("MapType : " + ((Node) mapTypNm.item(0)).getNodeValue());
+				      Log.info("MapType : " + mapTypNm.item(0).getNodeValue());
 				      
 				      NodeList resultNmElmntLst = searchTypeElmnt.getElementsByTagName("Result");
 				      Element resultNmElmnt = (Element) resultNmElmntLst.item(0);
 				      NodeList resultNm = resultNmElmnt.getChildNodes();
-				      Log.info("Result : " + ((Node) resultNm.item(0)).getNodeValue());
+				      Log.info("Result : " + resultNm.item(0).getNodeValue());
 				      
 				      NodeList andOrNmElmntLst = searchTypeElmnt.getElementsByTagName("AndOr");
 				      Element andOrNmElmnt = (Element) andOrNmElmntLst.item(0);

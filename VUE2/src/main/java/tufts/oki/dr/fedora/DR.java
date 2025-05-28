@@ -79,10 +79,10 @@ public class DR implements osid.dr.DigitalRepository {
     private String userName = null;
     private String password = null;
     private String conf = null;
-    private java.util.Vector infoStructures = new java.util.Vector();
-    private java.util.Vector assetTypes = new java.util.Vector();
-    private java.util.Vector searchTypes = new java.util.Vector();
-    private java.util.Vector assets = new java.util.Vector();
+    private final java.util.Vector infoStructures = new java.util.Vector();
+    private final java.util.Vector assetTypes = new java.util.Vector();
+    private final java.util.Vector searchTypes = new java.util.Vector();
+    private final java.util.Vector assets = new java.util.Vector();
     private osid.shared.Id id = null;
     private URL configuration = null;
 
@@ -181,8 +181,8 @@ public class DR implements osid.dr.DigitalRepository {
         FedoraObjectAssetType fedoraObjectAssetType = new FedoraObjectAssetType(this,type);
         osid.dr.InfoStructureIterator iter =  fedoraObjectAssetType.getInfoStructures();
         while(iter.hasNext()) {
-            osid.dr.InfoStructure infoStructure = (osid.dr.InfoStructure)iter.next();
-            if(infoStructures.indexOf(infoStructure) < 0)
+            osid.dr.InfoStructure infoStructure = iter.next();
+            if(!infoStructures.contains(infoStructure))
                 infoStructures.add(infoStructure);
         }
         assetTypes.add(fedoraObjectAssetType);
@@ -271,7 +271,7 @@ public class DR implements osid.dr.DigitalRepository {
         } catch(Exception ex) {
             throw new DigitalRepositoryException(ex.getMessage());
         }
-        return (osid.dr.AssetIterator) new FedoraObjectIterator(assetVector);
+        return new FedoraObjectIterator(assetVector);
     }
     
     /**     Get all the Assets of the specified AssetType in this DigitalRepository.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.
@@ -309,7 +309,7 @@ public class DR implements osid.dr.DigitalRepository {
      *     @throws DigitalRepositoryException if there is a general failure
      */
     public osid.dr.InfoStructureIterator getInfoStructures() throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoStructureIterator) new InfoStructureIterator(infoStructures);
+        return new InfoStructureIterator(infoStructures);
     }
     
     /**     Get the InfoStructures that this AssetType must support.  InfoStructures are used to categorize information about Assets.  Iterators return a set, one at a time.  The Iterator's hasNext method returns true if there are additional objects available; false otherwise.  The Iterator's next method returns the next object.
@@ -465,7 +465,7 @@ public class DR implements osid.dr.DigitalRepository {
                     {
                         osid.dr.Asset asset = ai.next();
                         String idString = asset.getId().getIdString();
-                        if (ids.indexOf(idString) == -1)
+                        if (!ids.contains(idString))
                         {
                             results.addElement(asset);
                             ids.addElement(idString);
@@ -497,7 +497,7 @@ public class DR implements osid.dr.DigitalRepository {
         return null;
     }
     
-    public  osid.shared.Id ingest(String fileName,String templateFileName,String fileType, File file,Properties properties) throws osid.dr.DigitalRepositoryException, java.net.SocketException,java.io.IOException,osid.shared.SharedException,javax.xml.rpc.ServiceException{
+    public  osid.shared.Id ingest(String fileName,String templateFileName,String fileType, File file,Properties properties) throws osid.dr.DigitalRepositoryException, java.io.IOException,osid.shared.SharedException,javax.xml.rpc.ServiceException{
         long sTime = System.currentTimeMillis();
         if(DEBUG) System.out.println("INGESTING FILE TO FEDORA:fileName ="+fileName+"fileType ="+fileType+"t = 0");
         // this part transfers file to a ftp server.  this is required since the content management part of fedora server needs object to be on web server
@@ -520,7 +520,7 @@ public class DR implements osid.dr.DigitalRepository {
         // this part does the creation of METSFile
         int BUFFER_SIZE = 10240;
         StringBuilder sb = new StringBuilder();
-        String s = new String();
+        String s = "";
         BufferedInputStream fis = new BufferedInputStream(new FileInputStream(new File(getResource(templateFileName).getFile().replaceAll("%20"," "))));
         //FileInputStream fis = new FileInputStream(new File(templateFileName));
         //DataInputStream in = new DataInputStream(fis);

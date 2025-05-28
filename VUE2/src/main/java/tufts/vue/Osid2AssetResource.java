@@ -46,7 +46,7 @@ public class Osid2AssetResource extends URLResource
         new edu.tufts.vue.util.Type("mit.edu","partStructure","mediumImage");
     // TODO: Google Global is currently using mit.edu authority also for URL part type...
     
-    private osid.OsidOwner owner = null;
+    private final osid.OsidOwner owner = null;
     private org.osid.OsidContext context = null;
     private org.osid.repository.Asset asset = null;
 	
@@ -128,7 +128,7 @@ public class Osid2AssetResource extends URLResource
     }
 
     private void setAssetImpl(org.osid.repository.Asset asset)
-        throws org.osid.repository.RepositoryException, org.osid.shared.SharedException
+        throws org.osid.shared.SharedException
     {
         //java.util.Properties osid_registry_properties = new java.util.Properties();
 			

@@ -78,21 +78,21 @@ public class Diamond2D extends RectangularShape {
     public PathIterator getPathIterator(AffineTransform at) {
         return new PathIterator() {
                 int state = 0;
-                int maxstate = 4;
-                float[][] fcurrentSegment = { {(float)(x + width/2), (float)y, 0f, 0f, 0f, 0f},
+                final int maxstate = 4;
+                final float[][] fcurrentSegment = { {(float)(x + width/2), (float)y, 0f, 0f, 0f, 0f},
                                               {(float)x, (float)(y + height/2), 0f, 0f, 0f, 0f},
                                               {(float)(x + width/2), (float)(y + height), 0f, 0f, 0f, 0f},
                                               {(float)(x + width), (float)(y + height/2), 0f, 0f, 0f, 0f},
                                               {0f, 0f, 0f, 0f, 0f, 0f} };
 										  
 			
-                double[][] dcurrentSegment = {{x + width/2, y, 0.0, 0.0, 0.0, 0.0},
+                final double[][] dcurrentSegment = {{x + width/2, y, 0.0, 0.0, 0.0, 0.0},
                                               {x, y + height/2, 0.0, 0.0, 0.0, 0.0},
                                               {x + width/2, y + height, 0.0, 0.0, 0.0, 0.0},
                                               {x + width, y + height/2, 0.0, 0.0, 0.0, 0.0},
                                               {0.0, 0.0, 0.0, 0.0, 0.0, 0.0} };
 
-                int[] segment = { PathIterator.SEG_MOVETO, PathIterator.SEG_LINETO, PathIterator.SEG_LINETO, PathIterator.SEG_LINETO, PathIterator.SEG_CLOSE};
+                final int[] segment = { PathIterator.SEG_MOVETO, PathIterator.SEG_LINETO, PathIterator.SEG_LINETO, PathIterator.SEG_LINETO, PathIterator.SEG_CLOSE};
 			
                 public int currentSegment(double[] coords) { 
                     coords[0] = dcurrentSegment[state][0];  

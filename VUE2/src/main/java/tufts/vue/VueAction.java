@@ -44,7 +44,7 @@ public class VueAction extends javax.swing.AbstractAction
     public static final String LARGE_ICON = "vue.largeIcon";
     private static final String CHECKBOX_LIST = "vue.checkBoxList";
 
-    private static List<VueAction> AllActionList = new ArrayList<>();
+    private static final List<VueAction> AllActionList = new ArrayList<>();
 
     private static boolean allIgnored = false;
 
@@ -208,7 +208,7 @@ public class VueAction extends javax.swing.AbstractAction
         }
     }
 
-    private static final Boolean IS_NOT_A_TOGGLER = new Boolean(false);
+    private static final Boolean IS_NOT_A_TOGGLER = Boolean.FALSE;
 
     /**
      * if this is overridden to return a varying result, any AbstractButton watchers

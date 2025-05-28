@@ -106,15 +106,15 @@ public class ShortcutsAction extends tufts.vue.VueAction
 
     static StringBuffer html;
 
-    private static int BOLD = 1;
-    private static int ITAL = 2;
-    private static int RIGHT = 4;
-    private static int CENTER = 8;
-    private static int SPAN2 = 16;
-    private static int SPAN3 = 32;
-    private static int NO_EAST_GAP = 64;
-    private static int NO_WEST_GAP = 128;
-    private static int NO_GAP = NO_EAST_GAP + NO_WEST_GAP;
+    private static final int BOLD = 1;
+    private static final int ITAL = 2;
+    private static final int RIGHT = 4;
+    private static final int CENTER = 8;
+    private static final int SPAN2 = 16;
+    private static final int SPAN3 = 32;
+    private static final int NO_EAST_GAP = 64;
+    private static final int NO_WEST_GAP = 128;
+    private static final int NO_GAP = NO_EAST_GAP + NO_WEST_GAP;
 
     private static final String NBSP = "&nbsp;";
     //private static final String NBSP = "X";
@@ -482,10 +482,7 @@ public class ShortcutsAction extends tufts.vue.VueAction
         }
 
         if (DEBUG.Enabled) {
-            if (tufts.vue.VueAction.isDupeStrokeAction(a))
-                addRow(row, true);
-            else
-                addRow(row, false);
+            addRow(row, VueAction.isDupeStrokeAction(a));
         } else {
             addRow(row);
         }
@@ -525,7 +522,7 @@ public class ShortcutsAction extends tufts.vue.VueAction
             if (a instanceof VueAction)
                 add(BOLD, ((VueAction)a).getPermanentActionName());
             else
-                add(BOLD+ITAL, (String) a.getValue(Action.NAME));
+                add(BOLD+ITAL, a.getValue(Action.NAME));
                 
             add(k == null ? "" : k);
             add(a.getClass().getName());
@@ -542,7 +539,7 @@ public class ShortcutsAction extends tufts.vue.VueAction
             if (a instanceof VueAction)
                 add(((VueAction)a).getPermanentActionName());
             else
-                add(ITAL, (String) a.getValue(Action.NAME));
+                add(ITAL, a.getValue(Action.NAME));
                 
             if (Util.isMacLeopard()) {
                 add(NO_GAP + goRight, get_MacOSX_Leopard_Modifier_Glyphs(mods));

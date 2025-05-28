@@ -28,15 +28,15 @@ package  tufts.oki.dr.fedora;
 public class ParamaterInfoPart implements osid.dr.InfoPart {
     java.util.Vector partsVector = new java.util.Vector();
     osid.dr.InfoStructure disseminationInfoStructure = null;
-    private osid.OsidOwner owner = null;
-    private java.util.Map configuration = null;
-    private String displayName = "Parameter";
-    private String description = "Parameters needed for dissemination of Fedora Object";
+    private final osid.OsidOwner owner = null;
+    private final java.util.Map configuration = null;
+    private final String displayName = "Parameter";
+    private final String description = "Parameters needed for dissemination of Fedora Object";
     private osid.shared.Id id = null;
-    private boolean populatedByDR = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private osid.dr.InfoStructure infoStructure = (osid.dr.InfoStructure) disseminationInfoStructure;
+    private final boolean populatedByDR = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private osid.dr.InfoStructure infoStructure = disseminationInfoStructure;
 
     /** Creates a new instance of ParamaterInfoPart */
     public ParamaterInfoPart(osid.dr.InfoStructure infoStructure,DR dr) throws osid.dr.DigitalRepositoryException,osid.shared.SharedException {
@@ -137,7 +137,7 @@ public class ParamaterInfoPart implements osid.dr.InfoPart {
      */
     public osid.dr.InfoPartIterator getInfoParts()
         throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoPartIterator) (new InfoPartIterator(partsVector));
+        return new InfoPartIterator(partsVector);
     }
 
     /**

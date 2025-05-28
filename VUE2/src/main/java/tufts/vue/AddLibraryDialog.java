@@ -81,19 +81,19 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
     DataSource oldDataSource = null;
     edu.tufts.vue.dsm.DataSource newDataSource = null;
     
-    private static String MY_COMPUTER = VueResources.getString("addLibrary.mycomputer.label");
-    private static String MY_COMPUTER_DESCRIPTION = VueResources.getString("addLibrary.addbrowsecontrol");
-    private static String MY_SAVED_CONTENT = VueResources.getString("addLibrary.mysavedcontent");
-    private static String MY_SAVED_CONTENT_DESCRIPTION = VueResources.getString("addLibrary.savedcontent");
-    private static String DS_FTP = VueResources.getString("addLibrary.ftp");
-    private static String DS_FTP_DESCRIPTION = VueResources.getString("addLibrary.ftpsite");
-    private static String DS_RSS = VueResources.getString("addLibrary.rssfeed");
-    private static String DS_RSS_DESCRIPTION = VueResources.getString("addLibrary.rssfeedsite");
+    private static final String MY_COMPUTER = VueResources.getString("addLibrary.mycomputer.label");
+    private static final String MY_COMPUTER_DESCRIPTION = VueResources.getString("addLibrary.addbrowsecontrol");
+    private static final String MY_SAVED_CONTENT = VueResources.getString("addLibrary.mysavedcontent");
+    private static final String MY_SAVED_CONTENT_DESCRIPTION = VueResources.getString("addLibrary.savedcontent");
+    private static final String DS_FTP = VueResources.getString("addLibrary.ftp");
+    private static final String DS_FTP_DESCRIPTION = VueResources.getString("addLibrary.ftpsite");
+    private static final String DS_RSS = VueResources.getString("addLibrary.rssfeed");
+    private static final String DS_RSS_DESCRIPTION = VueResources.getString("addLibrary.rssfeedsite");
     
-    private static String TITLE = VueResources.getString("addLibrary.addaresource");
-    private static String AVAILABLE = VueResources.getString("addLibrary.resourcesavailable");
+    private static final String TITLE = VueResources.getString("addLibrary.addaresource");
+    private static final String AVAILABLE = VueResources.getString("addLibrary.resourcesavailable");
     
-    private static String LOADING = VueResources.getString("addLibrary.loading.label");
+    private static final String LOADING = VueResources.getString("addLibrary.loading.label");
     
     private final Icon remoteIcon = VueResources.getImageIcon("dataSourceRemote");
     private ProviderListCellRenderer providerListRenderer;
@@ -614,7 +614,6 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                 cancelButton.requestFocusInWindow();
             } 
         } );
-        return;
     }
 	
 	public DataSource getOldDataSource()

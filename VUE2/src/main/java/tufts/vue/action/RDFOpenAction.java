@@ -91,7 +91,7 @@ public class RDFOpenAction extends VueAction {
             //probably don't want to save over original rdf
             //LWMap map = new LWMap(fileName);
             //so construct a name based on file name instead:
-            String mapName = fileName.substring(fileName.lastIndexOf("/")+1,fileName.length());
+            String mapName = fileName.substring(fileName.lastIndexOf("/")+1);
             if(mapName.lastIndexOf(".")>0)
                 mapName = mapName.substring(0,mapName.lastIndexOf("."));
             if(mapName.length() == 0)
@@ -271,7 +271,7 @@ public class RDFOpenAction extends VueAction {
                 {
                     name = name.substring(0,name.length()-1);
                 }
-                name = name.substring(name.lastIndexOf("/")+1,name.length());
+                name = name.substring(name.lastIndexOf("/")+1);
                 if(name.length() == 0)
                 {
                     name = uri;

@@ -92,7 +92,7 @@ public class SearchTextField extends JTextField implements FocusListener {
 
     private static SearchTextField Singleton;
 
-    private boolean inUpdate = false;
+    private final boolean inUpdate = false;
 
     private static final boolean DRAW_OVER_STATUS = true;
 
@@ -308,7 +308,7 @@ public class SearchTextField extends JTextField implements FocusListener {
         createPopupMenu(isWindows);
 
         textField.putClientProperty("JTextField.variant", "search");
-        textField.putClientProperty("JTextField.Search.FindPopup", this.popup);
+        textField.putClientProperty("JTextField.Search.FindPopup", popup);
         // use JTextField.Search.FindAction for an action instead of a pop-up when the spyglass is clicked
         // (e.g., re-run the search)
         textField.putClientProperty("JTextField.Search.CancelAction", new ActionListener() {
@@ -515,7 +515,7 @@ public class SearchTextField extends JTextField implements FocusListener {
         item.setActionCommand(key);
         if (actionListener != null)
             item.addActionListener(actionListener);
-        this.popup.add(item);
+        popup.add(item);
         return item;
     }
 
@@ -525,10 +525,10 @@ public class SearchTextField extends JTextField implements FocusListener {
      * @param isWindows
      */
     private void createPopupMenu(boolean isWindows) {
-        if (this.popup != null)
+        if (popup != null)
             return;
 
-        this.popup = new JPopupMenu();
+        popup = new JPopupMenu();
         final ActionListener actionListener = new PopupActionListener();
         final ActionListener al = actionListener;
 
@@ -766,11 +766,7 @@ public class SearchTextField extends JTextField implements FocusListener {
         //		categoriesMenuItem.setSelected(false);
         //		categoryKeywordMenuItem.setSelected(false);
         //		labelMenuItem.setSelected(false);
-        if (editSettingsMenuItem.isSelected()) {
-            VUE.getMetadataSearchMainGUI().setVisible(true);
-        } else {
-            VUE.getMetadataSearchMainGUI().setVisible(false);
-        }
+        VUE.getMetadataSearchMainGUI().setVisible(editSettingsMenuItem.isSelected());
         // resetSettingsMenuItem.setSelected(false);
     }
 
@@ -845,7 +841,7 @@ public class SearchTextField extends JTextField implements FocusListener {
             final int spyglassWidth = searchTigerImg.getWidth(null);
             final int spyglassHeight = searchTigerImg.getHeight(null);
             g.drawImage(searchTigerImg, indent, h / 2 - 8, spyglassWidth, spyglassHeight, this);
-            if (false && hasInput()) { // disabled for now -- no mouse listener for this
+            if (false) { // disabled for now -- no mouse listener for this
                 // draw the 'x' cancel search button
                 g.drawImage(clearImg, w - 20, h / 2 - 8,
                             clearImg.getWidth(null),

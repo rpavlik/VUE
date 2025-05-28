@@ -46,13 +46,12 @@ public class OceanMetalTheme extends javax.swing.plaf.metal.OceanTheme
         //table.put("Menu.opaque", Boolean.TRUE);
         //table.put("MenuBar.gradient", null);
         table.put("MenuBar.gradient",
-                  java.util.Arrays.asList(new Object[] {
-                    new Float(1f),
-                    new Float(0f),
-                    //getWhite(),
-                    tufts.Util.factorColor(GUI.getVueColor(), 1.1),
-                    toolbar,
-                    new ColorUIResource(toolbar) })
+                  java.util.Arrays.asList(1f,
+                          0f,
+                          //getWhite(),
+                          tufts.Util.factorColor(GUI.getVueColor(), 1.1),
+                          toolbar,
+                          new ColorUIResource(toolbar))
                   );
         
         table.put("MenuBar.borderColor", new ColorUIResource(toolbar));

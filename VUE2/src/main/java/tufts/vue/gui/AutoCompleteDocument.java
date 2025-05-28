@@ -31,8 +31,8 @@ public class AutoCompleteDocument extends PlainDocument {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<String> dictionary = new ArrayList<>();
-    private JTextComponent comp;
+	private final List<String> dictionary = new ArrayList<>();
+    private final JTextComponent comp;
     public static String  z;
   
     public AutoCompleteDocument( JTextComponent field, String[] aDictionary ) {

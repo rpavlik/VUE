@@ -280,8 +280,8 @@ System.out.println("mcn " + managerClassName);
 
         if (null != packageName) {
             String pName = (packageName.endsWith(".") ? packageName
-                                                      : new String(packageName +
-                    "."));
+                                                      : packageName +
+                    ".");
             cName = pName + className;
         }
 

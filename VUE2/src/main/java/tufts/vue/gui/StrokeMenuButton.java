@@ -39,30 +39,30 @@ import tufts.vue.LWComponent;
  **/
 public class StrokeMenuButton extends ComboBoxMenuButton<Float>
 {
-    static private int sIconWidth = 24;
-    static private int sIconHeight = 16;
+    static private final int sIconWidth = 24;
+    static private final int sIconHeight = 16;
 	
     public StrokeMenuButton(float[] pValues, String [] pMenuNames, boolean pGenerateIcons, boolean pHasCustom)
     {
         Float[] values = new Float[pValues.length];
         for (int i = 0; i < pValues.length; i++)
-            values[i] = new Float(pValues[i]);
+            values[i] = pValues[i];
 
         buildMenu(values, pMenuNames, false);
         setFont(tufts.vue.VueConstants.FONT_SMALL);
         setRenderer(new ComboBoxRenderer());
         this.setMaximumRowCount(10);
-        mCurrentValue = new Float(1);
+        mCurrentValue = 1F;
     }
 
     public StrokeMenuButton() {
-        mCurrentValue = new Float(1);
+        mCurrentValue = 1F;
     }
 	
     public void displayValue(Float width) {
         setToolTipText("Stroke Width: " + width);
         if (width == null)
-            mCurrentValue = new Float(1);
+            mCurrentValue = 1F;
         else
             mCurrentValue = width;
         setSelectedItem(mCurrentValue);

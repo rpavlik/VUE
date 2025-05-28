@@ -596,7 +596,7 @@ public class VueToolbarController
             System.out.println( pMsg);
     }
 
-    private static boolean sDebug = false;
+    private static final boolean sDebug = false;
 	
     public static void main(String[] args) {
         System.out.println("VueToolbarController:main");

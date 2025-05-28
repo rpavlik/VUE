@@ -155,7 +155,7 @@ public class LocalFileDataSource extends BrowseDataSource implements Publishable
                     added++;
                 }
             }
-            if (added == 0 || tufts.Util.isWindowsPlatform() == false) {
+            if (added == 0 || !Util.isWindowsPlatform()) {
                 CabinetResource r = CabinetResource.create(LocalCabinet.instance(home, agent, null));
                 String title = "Home";
                 String user = VUE.getSystemProperty("user.name");
@@ -251,10 +251,7 @@ public class LocalFileDataSource extends BrowseDataSource implements Publishable
     }
     
     public boolean supportsMode(int mode) {
-        if(mode == Publishable.PUBLISH_ALL)
-            return false;
-        else 
-            return true;
+        return mode != Publishable.PUBLISH_ALL;
     }
     public void publish(int mode,LWMap map) throws IOException{
          System.out.println("ZIP File: "+map.getFile()+ ","+map+", mode:"+mode);            

@@ -128,13 +128,13 @@ public final class DrawContext
     
     public DrawContext(Graphics g, LWComponent focal)
     {
-        this(g, 1.0, 0, 0, (Rectangle) null, focal, false);
+        this(g, 1.0, 0, 0, null, focal, false);
         //setBackgroundFill(focal.getRenderFillColor(null)); // caller should do manually
     }
     
     public DrawContext(Graphics g, double zoom)
     {
-        this(g, zoom, 0, 0, (Rectangle) null, (LWComponent) null, false);
+        this(g, zoom, 0, 0, null, null, false);
     }
     public DrawContext(Graphics g)
     {
@@ -354,7 +354,7 @@ public final class DrawContext
     
 
     public void checkComposite(LWComponent c) {
-        if (false&&alpha != 1f) {
+        if (false) {
             
             // if we're going to do a non-opaque fill during a general transparent
             // rendering situation, change temporarily to the SRC_OVER rule instead of
@@ -443,7 +443,7 @@ public final class DrawContext
     }
 
     public boolean isFocused() {
-        return focal instanceof LWMap == false;
+        return !(focal instanceof LWMap);
     }
 
     
@@ -477,7 +477,7 @@ public final class DrawContext
         }
     }
 
-    public static final Boolean DEFAULT = new Boolean(false); // true/false not relevant
+    public static final Boolean DEFAULT = Boolean.FALSE; // true/false not relevant
     public static final Boolean QUALITY = Boolean.TRUE;
     public static final Boolean SPEED = Boolean.FALSE;
 
@@ -731,7 +731,7 @@ public final class DrawContext
     }
     
     
-    protected void out(String s) {
+    private void out(String s) {
         System.err.println(Util.TERM_PURPLE
                            + this
                            + Util.TERM_CLEAR
@@ -861,10 +861,7 @@ public final class DrawContext
     }
 
     static {
-        if (Util.isMacLeopard() && Util.getJavaVersion() < 1.6f)
-            PlatformQualityIsSlow = true; // slow, but the only one truly effective!
-        else
-            PlatformQualityIsSlow = false;
+        PlatformQualityIsSlow = Util.isMacLeopard() && Util.getJavaVersion() < 1.6f; // slow, but the only one truly effective!
         
 //         ImageQualityPreference = BooleanPreference.create
 //                 (edu.tufts.vue.preferences.PreferenceConstants.MAPDISPLAY_CATEGORY,

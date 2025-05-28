@@ -73,7 +73,7 @@ public class DSBrowser extends ContentBrowser {
 		return dataSetViewer;
 	}
 
-	public void finalize() {
+	protected void finalize() {
 		librariesPane = null;
 		associationsPane = null;
 		browsePane = null;
@@ -111,7 +111,7 @@ public class DSBrowser extends ContentBrowser {
 				ds = null;
 			} else {
 				java.util.Properties	p = cui.getProperties();
-				BrowseDataSource		bds = (BrowseDataSource)ds;
+				BrowseDataSource		bds = ds;
 
 				bds.setDisplayName(p.getProperty("name"));
 				bds.setAddress(p.getProperty("address"));
@@ -135,7 +135,7 @@ public class DSBrowser extends ContentBrowser {
 
 
 	protected void refreshMenuActions() {
-		boolean		datasetSelected = (dataSetViewer.dataSourceList.getSelectedValue() != null);
+		boolean		datasetSelected = (DataSetViewer.dataSourceList.getSelectedValue() != null);
 
 		reloadLibraryAction.setEnabled(datasetSelected);
 		removeLibraryAction.setEnabled(datasetSelected);
@@ -158,7 +158,7 @@ public class DSBrowser extends ContentBrowser {
 			DataSource ds = addDataset();
 
 			if (ds != null) {
-				dataSetViewer.dataSourceList.addOrdered(ds);
+				DataSetViewer.dataSourceList.addOrdered(ds);
 				dataSetViewer.setActiveDataSource(ds);
 
 				GUI.invokeAfterAWT(new Runnable() {

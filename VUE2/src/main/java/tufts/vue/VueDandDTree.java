@@ -92,7 +92,7 @@ public class VueDandDTree extends VueDragTree implements DropTargetListener {
     {
         DefaultTreeModel model = (DefaultTreeModel)this.getModel();
   	    ResourceNode o2 = (ResourceNode)getModel().getRoot();
-		model.insertNodeInto(newNode, (MutableTreeNode)o2, (o2.getChildCount()));
+		model.insertNodeInto(newNode, o2, (o2.getChildCount()));
     }
     
     public void drop(DropTargetDropEvent e ) {
@@ -429,7 +429,7 @@ public class VueDandDTree extends VueDragTree implements DropTargetListener {
 		// TODO Auto-generated method stub
 		   ResourceNode rootNode = (ResourceNode)getModel().getRoot();
 		   ResourceNode newNode = new ResourceNode(resource);
-		   ((DefaultTreeModel) getModel()).insertNodeInto((MutableTreeNode)newNode,  (MutableTreeNode)rootNode, ((DefaultMutableTreeNode)rootNode).getChildCount());
+		   ((DefaultTreeModel) getModel()).insertNodeInto(newNode, rootNode, rootNode.getChildCount());
 		   this.expandPath(new TreePath(rootNode.getPath()));
 
 	}

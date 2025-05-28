@@ -30,11 +30,11 @@ public class ParameterInfoPart implements osid.dr.InfoPart {
     osid.dr.InfoStructure infoStructure = null;
     //private osid.OsidOwner owner = null;
     //private java.util.Map configuration = null;
-    private String displayName = "Parameter InfoPart";
-    private String description = "Used to set parameters of disemmination. Parameters are optional in Dissemination and they can be single or multivalued.";
+    private final String displayName = "Parameter InfoPart";
+    private final String description = "Used to set parameters of disemmination. Parameters are optional in Dissemination and they can be single or multivalued.";
     private osid.shared.Id id = null;
-    private boolean populatedByDR = false;
-    private boolean mandatory = false;
+    private final boolean populatedByDR = false;
+    private final boolean mandatory = false;
     private boolean repeatable = false;
      
     /** Creates a new instance of ParameterInfoPart */

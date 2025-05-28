@@ -96,7 +96,7 @@ public class ImageTool extends VueTool
         // being a producer means for now the slider won't take on the rotation
         // value of the selected item.  
         public Object getPropertyKey() { return LWImage.KEY_Rotation; }
-        public Object getPropertyValue() { return new Double(Math.toRadians(getValue())); }
+        public Object getPropertyValue() { return Math.toRadians(getValue()); }
         public void setPropertyValue(Object value) {
             setValue((int) (Math.toDegrees((Double) value) + 0.5));
         }
@@ -111,7 +111,7 @@ public class ImageTool extends VueTool
                                + " ok2snap " + isSnappedValue(getValue()));
 
             boolean isFinalValue = false;
-            if (getValueIsAdjusting() == false) {
+            if (!getValueIsAdjusting()) {
                 // if snap-to-ticks is on, and we're not at a snapped value,
                 // we'll get TWO change events claiming no values adjusting,
                 // so ignore the first.
@@ -128,7 +128,7 @@ public class ImageTool extends VueTool
                 try {
                     image.setRotation(radians);
                 } finally {
-                    if (false && !isFinalValue) {
+                    if (false) {
                         image.getChangeSupport().setEventsResumed();
                         image.notify(LWKey.RepaintComponent);
                     }

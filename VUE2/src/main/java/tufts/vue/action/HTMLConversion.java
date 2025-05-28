@@ -50,9 +50,9 @@ import tufts.vue.*;
 public class HTMLConversion extends AbstractAction
 {   
     
-    private static  String htmlFileName = "default.html";
-    private static  String xmlFileName = "default.xml";
-    private static  String xslFileName = "viewHTML.xsl";
+    private static final String htmlFileName = "default.html";
+    private static final String xmlFileName = "default.xml";
+    private static final String xslFileName = "viewHTML.xsl";
     
     public HTMLConversion() {
     }

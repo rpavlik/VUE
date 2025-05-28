@@ -192,7 +192,7 @@ public class BlobIcon implements Icon
         g.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,  java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
         BlobShape.setRoundRect(x, y, mWidth-1, mHeight-1, 7, 7);
         
-        if (isNoFill == false) {
+        if (!isNoFill) {
             g.setColor(color);
             g.fill(BlobShape);
             //g.fillRect(x,y, mWidth, mHeight);

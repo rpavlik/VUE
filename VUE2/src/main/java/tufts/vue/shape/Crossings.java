@@ -90,7 +90,7 @@ public abstract class Crossings {
 					  double xhi, double yhi)
     {
 	Crossings cross;
-	if (pi.getWindingRule() == pi.WIND_EVEN_ODD) {
+	if (pi.getWindingRule() == PathIterator.WIND_EVEN_ODD) {
 	    cross = new EvenOdd(xlo, ylo, xhi, yhi);
 	} else {
 	    cross = new NonZero(xlo, ylo, xhi, yhi);
@@ -227,7 +227,7 @@ public abstract class Crossings {
     	return false;
     }
 
-    private Vector tmp = new Vector();
+    private final Vector tmp = new Vector();
 
     public boolean accumulateQuad(double x0, double y0, double[] coords) {
 	if (y0 < ylo && coords[1] < ylo && coords[3] < ylo) {
@@ -302,7 +302,7 @@ public abstract class Crossings {
 	    super(xlo, ylo, xhi, yhi);
 	}
 
-	public final boolean covers(double ystart, double yend) {
+	public boolean covers(double ystart, double yend) {
 	    return (limit == 2 && yranges[0] <= ystart && yranges[1] >= yend);
 	}
 
@@ -388,7 +388,7 @@ public abstract class Crossings {
 	    crosscounts = new int[yranges.length / 2];
 	}
 
-	public final boolean covers(double ystart, double yend) {
+	public boolean covers(double ystart, double yend) {
 	    int i = 0;
 	    while (i < limit) {
 		double ylo = yranges[i++];
@@ -434,7 +434,7 @@ public abstract class Crossings {
 				 crosscounts, cur/2+1,
 				 rem/2);
 	    }
-	    yranges[cur+0] = lo;
+	    yranges[cur] = lo;
 	    yranges[cur+1] = hi;
 	    crosscounts[cur/2] = dir;
 	    limit += 2;
@@ -451,7 +451,7 @@ public abstract class Crossings {
 	    }
 	    if (cur < limit) {
 		int rdir = crosscounts[cur/2];
-		double yrlo = yranges[cur+0];
+		double yrlo = yranges[cur];
 		double yrhi = yranges[cur+1];
 		if (yrhi == ystart && rdir == direction) {
 		    // Remove the range from the list and collapse it
@@ -466,7 +466,7 @@ public abstract class Crossings {
 		    remove(cur);
 		    ystart = yrlo;
 		    rdir = crosscounts[cur/2];
-		    yrlo = yranges[cur+0];
+		    yrlo = yranges[cur];
 		    yrhi = yranges[cur+1];
 		}
 		if (yend < yrlo) {

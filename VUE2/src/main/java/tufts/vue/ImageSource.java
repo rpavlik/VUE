@@ -152,11 +152,11 @@ class ImageSource {
         } else {
             resource = null;
             if (original instanceof File) {
-                readable = (File) original;
+                readable = original;
                 //setCacheFile((File) original); // note side effect
             }
             else if (original instanceof java.net.URL) {
-                readable = (java.net.URL) original;
+                readable = original;
                 if (readable.toString().startsWith(URLResource.THUMBSHOT_FETCH)) {
                     _cacheFile = DO_NOT_CACHE_TO_DISK;
                     //isThumbshot = true;
@@ -222,11 +222,8 @@ class ImageSource {
     }
         
     boolean mayBlockIndefinitely() {
-        if (readable instanceof java.net.URL) {
-            //Log.debug("MAY BLOCK INDEFINITELY: READABLE IS " + Util.tags(readable));
-            return true;
-        } else
-            return false;
+        //Log.debug("MAY BLOCK INDEFINITELY: READABLE IS " + Util.tags(readable));
+        return readable instanceof URL;
     }
 
     /** @return true if this source is a raw image that can be used to create an icon at runtime.
@@ -263,10 +260,7 @@ class ImageSource {
     }
 
     boolean useCacheFile() {
-        if (isDiskCacheEntry() || _cacheFile == DO_NOT_CACHE_TO_DISK)
-            return false;
-        else
-            return true;
+        return !isDiskCacheEntry() && _cacheFile != DO_NOT_CACHE_TO_DISK;
     }
 
     String debugName()
@@ -279,10 +273,10 @@ class ImageSource {
             String basename = key.getPath();
             final int lastSlash = basename.lastIndexOf('/');
             if (lastSlash < (basename.length()-2))
-                basename = basename.substring(lastSlash+1, basename.length());
+                basename = basename.substring(lastSlash+1);
             return basename;
         } catch (Throwable t) {
-            return "[" + t.toString() + "]";
+            return "[" + t + "]";
         }
     }
     

@@ -33,25 +33,25 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
     private final Icon checkedIcon = VueResources.getImageIcon("addLibrary.checkMarkIcon");
     private final ImageIcon waitIcon = VueResources.getImageIcon("waitIcon");
     private final Icon rssIcon = VueResources.getImageIcon("dataSourceRSS");    
-	private static String LOADING = VueResources.getString("addLibrary.loading.label");
+	private static final String LOADING = VueResources.getString("addLibrary.loading.label");
     
-	private static String MY_COMPUTER = VueResources.getString("addLibrary.mycomputer.label");
-	private static String MY_SAVED_CONTENT = "My Saved Content";
+	private static final String MY_COMPUTER = VueResources.getString("addLibrary.mycomputer.label");
+	private static final String MY_SAVED_CONTENT = "My Saved Content";
 	
-    private JPanel mRow = new JPanel();
-    private JPanel mLabelPanel = new JPanel();
-    private JLabel mLabel = new DefaultListCellRenderer();
-    private JLabel mIconLabel = new JLabel();
-    private JLabel waitLabel;     
-    private JLabel checkedLabel;
+    private final JPanel mRow = new JPanel();
+    private final JPanel mLabelPanel = new JPanel();
+    private final JLabel mLabel = new DefaultListCellRenderer();
+    private final JLabel mIconLabel = new JLabel();
+    private final JLabel waitLabel;
+    private final JLabel checkedLabel;
     
-    private Component blankArea;
+    private final Component blankArea;
     
-    private Border DividerBorder = new MatteBorder(1,0,0,0, Color.gray);
-    private Border EmptyDividerBorder = new EmptyBorder(1,0,0,0);
+    private final Border DividerBorder = new MatteBorder(1,0,0,0, Color.gray);
+    private final Border EmptyDividerBorder = new EmptyBorder(1,0,0,0);
 
-    private Color AlternateRowColor = VueResources.getColor("gui.dataSourceList.alternateRowColor", 237,243,253);
-    private Vector checklist = new Vector(50);
+    private final Color AlternateRowColor = VueResources.getColor("gui.dataSourceList.alternateRowColor", 237,243,253);
+    private final Vector checklist = new Vector(50);
     private int waitingMode = -1;
     
     public ProviderListCellRenderer()
@@ -99,7 +99,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
     
     public void setChecked(int index)
     {
-    	checklist.set(index,new Boolean(true));    	
+    	checklist.set(index, Boolean.TRUE);
     }
     public Component getListCellRendererComponent(JList list,
                                                   Object value,
@@ -133,7 +133,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
         }
         */
         if (checklist.size() == 0 || checklist.size() <= index)
-        	checklist.add(index,new Boolean(false));
+        	checklist.add(index, Boolean.FALSE);
         
         if ((Boolean) checklist.get(index) && mRow.getComponent(1) != waitLabel)
         {
@@ -244,7 +244,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
     public void clearAllChecked()
     {
     	for (int i =0; i < checklist.size(); i++)
-    		checklist.set(i,new Boolean(false));
+    		checklist.set(i, Boolean.FALSE);
     }
     
 }

@@ -27,7 +27,7 @@ import javax.swing.SwingUtilities;
 
 public class VuePopupFactory extends PopupFactory {
     private static final int offset = 5;
-    private PopupFactory wrapped;
+    private final PopupFactory wrapped;
     private static VuePopupFactory fact;
     
     public VuePopupFactory (PopupFactory wrapped) {

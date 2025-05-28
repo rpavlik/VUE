@@ -18,7 +18,7 @@ public class VueToolUtils
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(VueToolUtils.class);
 
-    private static boolean sDebug = false;
+    private static final boolean sDebug = false;
 	 /**
      * This method loads a VueTool with the given name from the
      * vue properties file.

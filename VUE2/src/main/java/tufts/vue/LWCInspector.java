@@ -30,30 +30,30 @@ class LWCInspector extends javax.swing.JPanel
                LWComponent.Listener,
                ActionListener
 {
-    private JLabel idField = new JLabel();
-    private JLabel typeField = new JLabel();
-    private JLabel parentField = new JLabel();
-    private JLabel locationField = new JLabel();
-    private JLabel sizeField = new JLabel();
-    private JLabel labelHex = new JLabel();
-    private JLabel styleField = new JLabel();
-    private JLabel syncField = new JLabel();
-    private JTextField labelField = new JTextField(15);
-    private JTextField widthField = new JTextField();
-    private JTextField heightField = new JTextField();
-    private JTextField xField = new JTextField();
-    private JTextField yField = new JTextField();
-    private JTextField transLocField = new JTextField();
-    private JTextField bitsField = new JTextField();
-    private JTextField zoomField = new JTextField();
-    private JTextField categoryField = new JTextField();
-    private JTextField resourceTypeField = new JTextField();
-    private JTextField resourceField = new JTextField();
-    private JTextField notesField = new JTextField();
+    private final JLabel idField = new JLabel();
+    private final JLabel typeField = new JLabel();
+    private final JLabel parentField = new JLabel();
+    private final JLabel locationField = new JLabel();
+    private final JLabel sizeField = new JLabel();
+    private final JLabel labelHex = new JLabel();
+    private final JLabel styleField = new JLabel();
+    private final JLabel syncField = new JLabel();
+    private final JTextField labelField = new JTextField(15);
+    private final JTextField widthField = new JTextField();
+    private final JTextField heightField = new JTextField();
+    private final JTextField xField = new JTextField();
+    private final JTextField yField = new JTextField();
+    private final JTextField transLocField = new JTextField();
+    private final JTextField bitsField = new JTextField();
+    private final JTextField zoomField = new JTextField();
+    private final JTextField categoryField = new JTextField();
+    private final JTextField resourceTypeField = new JTextField();
+    private final JTextField resourceField = new JTextField();
+    private final JTextField notesField = new JTextField();
     //private JPanel extraPanel = new JPanel();
     
     private boolean LOG_ENABLED = false;
-    private JTextArea log = new JTextArea() {
+    private final JTextArea log = new JTextArea() {
             int rows = 0;
             public void append(String s) {
                 if (LOG_ENABLED)
@@ -64,14 +64,14 @@ class LWCInspector extends javax.swing.JPanel
     
     //private JTextArea notesField = new JTextArea(1, 20);
 
-    private JPanel fieldPane = new JPanel();
-    private JPanel resourceMetadataPanel = new JPanel();
-    private JPanel metadataPane = new JPanel();
+    private final JPanel fieldPane = new JPanel();
+    private final JPanel resourceMetadataPanel = new JPanel();
+    private final JPanel metadataPane = new JPanel();
 
-    private LinkedList<LWCEvent> events = new LinkedList();
+    private final LinkedList<LWCEvent> events = new LinkedList();
 
     //String[] labels = { "ID", "<html><font color=red>Label</font></html>", "Category", "Resource", "Notes" };
-    private Object[] labelTextPairs = {
+    private final Object[] labelTextPairs = {
         "-ID",      idField,
         "-Type",      typeField,
         "-Parent",      parentField,
@@ -93,9 +93,9 @@ class LWCInspector extends javax.swing.JPanel
         //"-Notes",    notesField,
     };
 
-    private java.util.Map<JTextField,LWComponent.Key> fieldKeys = new java.util.HashMap();
+    private final java.util.Map<JTextField,LWComponent.Key> fieldKeys = new java.util.HashMap();
 
-    private JCheckBox lockBtn = new JCheckBox("Lock");
+    private final JCheckBox lockBtn = new JCheckBox("Lock");
 
     public LWCInspector()
     {
@@ -436,7 +436,7 @@ class LWCInspector extends javax.swing.JPanel
             id += " in <" + c.getParent().toName() + ">";
             id += " links:" + c.getLinks().size();
             if (c instanceof LWContainer && c.hasChildren())
-                id += " children:" + ((LWContainer)c).getChildList().size();
+                id += " children:" + c.getChildList().size();
         }
         
         idField.setText(id);
@@ -451,7 +451,7 @@ class LWCInspector extends javax.swing.JPanel
         
         locationField.setText("x: " + c.getX() + "   y: " + c.getY());
         String sizeText = String.format("%.0fx%.0f", c.getWidth(), c.getHeight());
-        if (true||c.getScale() != 1f) {
+        if (true) {
             sizeText += " z=" + c.getScale();
             sizeText += " mapZ=" + c.getMapScale();
         }
@@ -513,7 +513,7 @@ class LWCInspector extends javax.swing.JPanel
         */
     }
 
-    LWSelection dummySelection = (LWSelection) new LWSelection().clone(); // clone so won't set selection bits
+    LWSelection dummySelection = new LWSelection().clone(); // clone so won't set selection bits
     private LWSelection getSelection() {
         if (VUE.getSelection().isEmpty()) {
             dummySelection.setTo(this.lwc);
@@ -676,8 +676,8 @@ class LWCInspector extends javax.swing.JPanel
             final Class clazz = instance.getClass();
             final Method[] methods;
 
-            if (LWComponent.class.isInstance(instance) ||
-                VueTool.class.isInstance(instance)
+            if (instance instanceof LWComponent ||
+                    instance instanceof VueTool
                 )
                 methods = clazz.getMethods();
             else
@@ -718,7 +718,7 @@ class LWCInspector extends javax.swing.JPanel
         private static String shortTypeName(Class type) {
             String name = type.getName();
             if (name.indexOf('.') > 0)
-                return name.substring(name.lastIndexOf('.')+1, name.length());
+                return name.substring(name.lastIndexOf('.')+1);
             else
                 return name;
         }

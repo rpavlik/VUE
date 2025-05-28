@@ -48,12 +48,12 @@ public class VueToolPanel extends JPanel
     private Vector mTools = new Vector();
 	
     /** the current tool selection (TO DO:  remove this)  **/
-    private VueTool mCurrentTool = null;
+    private final VueTool mCurrentTool = null;
 	
     //private Box mMainBox = null;
 	
     /** a map of PaletteButtons keyed off of the tool ID **/
-    private Map mToolButtons = new HashMap();
+    private final Map mToolButtons = new HashMap();
 	
 	
     /***
@@ -94,7 +94,7 @@ public class VueToolPanel extends JPanel
 	
     class JLineSeparator extends JSeparator
     {
-         private Dimension dim;
+         private final Dimension dim;
 
          public JLineSeparator(int orient, int w, int h)
          {
@@ -383,7 +383,7 @@ public class VueToolPanel extends JPanel
     }
 
 
-    static private boolean sDebug = true;
+    static private final boolean sDebug = true;
     private void debug( String pStr) {
         if( sDebug)
             System.out.println( "VueToolPanel - "+pStr);

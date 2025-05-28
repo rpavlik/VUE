@@ -68,7 +68,7 @@ public abstract class ContentViewer extends JPanel {
 	}
 
 
-	public void finalize() {
+	protected void finalize() {
 		browserDS = null;
 	}
 
@@ -80,7 +80,7 @@ public abstract class ContentViewer extends JPanel {
 		JProgressBar bar = new JProgressBar();
 		bar.setIndeterminate(true);
 
-		if (false && Util.isMacLeopard()) {
+		if (false) {
 			bar.putClientProperty("JProgressBar.style", "circular");
 			bar.setBorder(BorderFactory.createLineBorder(Color.darkGray));
 			//bar.putClientProperty("JComponent.sizeVariant", "small"); // no effect
@@ -380,7 +380,7 @@ public abstract class ContentViewer extends JPanel {
 			// describing an error condition: now set the actual availablity
 			// of the content:
 
-			ds.setAvailable(newViewer instanceof ErrorText == false);
+			ds.setAvailable(!(newViewer instanceof ErrorText));
 
 			repaintList(); // so change in loaded status will be visible
 

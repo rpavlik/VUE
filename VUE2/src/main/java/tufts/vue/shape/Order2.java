@@ -21,21 +21,21 @@ import java.awt.geom.QuadCurve2D;
 import java.util.Vector;
 
 final class Order2 extends Curve {
-    private double x0;
-    private double y0;
-    private double cx0;
-    private double cy0;
-    private double x1;
-    private double y1;
-    private double xmin;
-    private double xmax;
+    private final double x0;
+    private final double y0;
+    private final double cx0;
+    private final double cy0;
+    private final double x1;
+    private final double y1;
+    private final double xmin;
+    private final double xmax;
 
-    private double xcoeff0;
-    private double xcoeff1;
-    private double xcoeff2;
-    private double ycoeff0;
-    private double ycoeff1;
-    private double ycoeff2;
+    private final double xcoeff0;
+    private final double xcoeff1;
+    private final double xcoeff2;
+    private final double ycoeff0;
+    private final double ycoeff1;
+    private final double ycoeff2;
 
     public static void insert(Vector curves, double[] tmp,
                               double x0, double y0,
@@ -154,7 +154,7 @@ final class Order2 extends Curve {
 	cy = coords[pos+3];
 	x1 = cx + (x1 - cx) * t;
 	y1 = cy + (y1 - cy) * t;
-	x0 = coords[pos+0];
+	x0 = coords[pos];
 	y0 = coords[pos+1];
 	x0 = x0 + (cx - x0) * t;
 	y0 = y0 + (cy - y0) * t;

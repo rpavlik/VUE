@@ -1709,7 +1709,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
     /** this is for castor persistance only */
     public java.util.List getPropertyList() {
         
-        if (mRestoreUnderway == false) {
+        if (!mRestoreUnderway) {
 
             if (mProperties.size() == 0) // a hack for castor to work
                 return null;
@@ -2161,7 +2161,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
             setTitle(title);
         }
         try {
-            setByteSize(Integer.parseInt((String) getProperty("contentLength")));
+            setByteSize(Integer.parseInt(getProperty("contentLength")));
         } catch (Exception e) {}
     }
 
@@ -2254,7 +2254,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
             }
 
             if (charset == null && contentEncoding != null) {
-                if (DEBUG.DND||true) System.err.println("*** no charset found: using contentEncoding charset " + contentEncoding);
+                if (true) System.err.println("*** no charset found: using contentEncoding charset " + contentEncoding);
                 charset = contentEncoding;
             }
             
@@ -2264,12 +2264,12 @@ public class URLResource extends Resource implements XMLUnmarshalListener
                 bufStream.reset();
                 InputStreamReader decodedStream = new InputStreamReader(bufStream, charset);
                 //InputStreamReader decodedStream = new InputStreamReader(new ByteArrayInputStream(byteBuffer), charset);
-                if (true||DEBUG.DND) System.out.println("*** decoding bytes into characters with official encoding " + decodedStream.getEncoding());
+                if (true) System.out.println("*** decoding bytes into characters with official encoding " + decodedStream.getEncoding());
                 setProperty("contentEncoding", decodedStream.getEncoding());
                 char[] decoded = new char[bytesRead];
                 int decodedChars = decodedStream.read(decoded);
                 decodedStream.close();
-                if (true||DEBUG.DND) System.err.println("*** " + decodedChars + " characters decoded using " + charset);
+                if (true) System.err.println("*** " + decodedChars + " characters decoded using " + charset);
                 decodedHTML = new String(decoded, 0, decodedChars);
             } else
                 decodedHTML = html; // we'll just have to go with the default platform charset...
@@ -2284,7 +2284,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
             Matcher m = HTML_Title_Regex.matcher(decodedHTML);
             if (m.lookingAt()) {
                 String title = m.group(1);
-                if (true||DEBUG.DND) System.err.println("*** found title ["+title+"]");
+                if (true) System.err.println("*** found title ["+title+"]");
                 metaData.put("title", title.trim());
             }
 

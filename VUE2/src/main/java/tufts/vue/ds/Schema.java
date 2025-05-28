@@ -868,9 +868,9 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
             if (DEBUG.META) extra = " " + DSGUID + "/" + mResource;
             return String.format("Schema@%08x[%s/%s; #%dx%d %s%s k=%s%s]",
                                  System.identityHashCode(this),
-                                 ""+mLocalID,
+                    mLocalID,
                                  //""+GUID,
-                                 ""+DSGUID,
+                    DSGUID,
                                  mFields.size(),
                                  mRows.size(),
                                  Util.color(mName, Util.TERM_PURPLE),
@@ -1065,9 +1065,9 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     }
 
    // private String[] matrixEntities = {"FromName","ToName","FlowAmount"};
-    private HashMap<String,Integer> matrixColNums = new HashMap<>();
-    private HashMap<String,Integer> matrixMetadataCols = new HashMap<>();
-    private Field matrixNameField = new Field(MATRIX_NAME_FIELD,this);
+    private final HashMap<String,Integer> matrixColNums = new HashMap<>();
+    private final HashMap<String,Integer> matrixMetadataCols = new HashMap<>();
+    private final Field matrixNameField = new Field(MATRIX_NAME_FIELD,this);
     
     public synchronized void ensureFields(String[] names) {
     	ensureFields(null,names,false);
@@ -1234,7 +1234,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     }
         
     public void dumpSchema(PrintWriter ps) {
-        ps.println(getClass().getName() + ": " + toString());
+        ps.println(getClass().getName() + ": " + this);
         final int pad = -mLongestFieldName;
         final String format = "%" + pad + "s: %s\n";
         for (Field f : getFields()) {
@@ -1306,7 +1306,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
         if (existingRows.get(values[matrixColNums.get(rowName)]) == null)
         {
         	addRow(fromRow);
-        	existingRows.put(values[matrixColNums.get(rowName)], new Integer(fromRow.mmap.size()));
+        	existingRows.put(values[matrixColNums.get(rowName)], fromRow.mmap.size());
         } else 
         {
         	//it's currently in as a ToRow replace it
@@ -1315,7 +1315,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
         	{
         		//remove the existing row, add new one.
         		existingRows.remove(values[matrixColNums.get(rowName)]);
-        		existingRows.put(values[matrixColNums.get(rowName)], new Integer(fromRow.mmap.size()));
+        		existingRows.put(values[matrixColNums.get(rowName)], fromRow.mmap.size());
         		
         		for (DataRow r: getRows())
         		{
@@ -1343,23 +1343,22 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
         	if (existingRows.get(values[matrixColNums.get(colName)]) == null)
         	{
         		addRow(toRow);
-        		existingRows.put(values[matrixColNums.get(colName)], new Integer(toRow.mmap.size()));
+        		existingRows.put(values[matrixColNums.get(colName)], toRow.mmap.size());
         	}
         
         	
         	if (!values[matrixColNums.get(rowName)].equals(values[matrixColNums.get(colName)]) && !(values[matrixColNums.get(relName)].equals("0")))
         		matrixRelations.add(new MatrixRelationship(values[matrixColNums.get(rowName)],values[matrixColNums.get(colName)],values[matrixColNums.get(relName)]));
         }
-        return;
-        
+
     }
     int i=0;
     String scriptTemplate;
     protected void addWideMatrixRow(XmlDataSource ds, String[] values) {
     	String script = scriptTemplate;
     	final Interpreter interpreter = new Interpreter();
-    	int matrixSize = new Integer(ds.getMatrixSizeField());
-    	int rowCount = tempTable.values().size();
+    	int matrixSize = Integer.parseInt(ds.getMatrixSizeField());
+    	int rowCount = tempTable.size();
     	
     //	System.out.println("Matrix Size :" + matrixSize);
     	//skip partial rows
@@ -1448,8 +1447,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
 	    //    System.out.println("END OF ROW");
     	}
     	//we're passed the point of using this for the matrix so use it as metadata.
-    	
-        return;        
+
     }
     
     protected void convertToRows()

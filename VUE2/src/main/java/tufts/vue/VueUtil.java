@@ -158,10 +158,7 @@ public class VueUtil extends tufts.Util
     }    
     
     public static boolean isCurrentDirectoryPathSet() {
-        if(currentDirectoryPath.equals("")) 
-            return false;
-        else
-            return true;
+        return !currentDirectoryPath.equals("");
     }
 
     public static File getDefaultUserFolder() {
@@ -365,7 +362,7 @@ public class VueUtil extends tufts.Util
                     return computeLineIntersection(segX1, segY1, segX2, segY2, lastX, lastY, seg[0], seg[1], result);
                 } else {
                     float[] tmp = computeLineIntersection(segX1, segY1, segX2, segY2, lastX, lastY, seg[0], seg[1], new float[2]);
-                    result[hits*2 + 0] = tmp[0];
+                    result[hits * 2] = tmp[0];
                     result[hits*2 + 1] = tmp[1];
                     if (++hits >= max)
                         return result;
@@ -680,7 +677,7 @@ public class VueUtil extends tufts.Util
             byte b = bytes[i];
             System.out.println("byte " + (i<10?" ":"") + i
                                + " (" + ((char)b) + ")"
-                               + " " + pad(' ', 4, new Byte(b).toString())
+                               + " " + pad(' ', 4, Byte.valueOf(b).toString())
                                + "  " + pad(' ', 2, Integer.toHexString( ((int)b) & 0xFF))
                                + "  " + pad('X', 8, toBinary(b))
                                );
@@ -689,25 +686,24 @@ public class VueUtil extends tufts.Util
     
     @SuppressWarnings("PointlessBitwiseExpression")
     public static String toBinary(byte b) {
-        StringBuilder buf = new StringBuilder(8);
-        buf.append((b & (1<<7)) == 0 ? '0' : '1');
-        buf.append((b & (1<<6)) == 0 ? '0' : '1');
-        buf.append((b & (1<<5)) == 0 ? '0' : '1');
-        buf.append((b & (1<<4)) == 0 ? '0' : '1');
-        buf.append((b & (1<<3)) == 0 ? '0' : '1');
-        buf.append((b & (1<<2)) == 0 ? '0' : '1');
-        buf.append((b & (1<<1)) == 0 ? '0' : '1');
-        buf.append((b & (1<<0)) == 0 ? '0' : '1');
-	return buf.toString();
+        String buf = String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
+                ((b & (1 << 6)) == 0 ? '0' : '1') +
+                ((b & (1 << 5)) == 0 ? '0' : '1') +
+                ((b & (1 << 4)) == 0 ? '0' : '1') +
+                ((b & (1 << 3)) == 0 ? '0' : '1') +
+                ((b & (1 << 2)) == 0 ? '0' : '1') +
+                ((b & (1 << 1)) == 0 ? '0' : '1') +
+                ((b & (1 << 0)) == 0 ? '0' : '1');
+	return buf;
     }
     
     public static void dumpString(String s) {
         char[] chars = s.toCharArray();
         for (int i = 0; i < chars.length; i++) {
-            int cv = (int) chars[i];
+            int cv = chars[i];
             System.out.println("char " + (i<10?" ":"") + i
                                + " (" + chars[i] + ")"
-                               + " " + pad(' ', 6, new Integer(cv).toString())
+                               + " " + pad(' ', 6, Integer.valueOf(cv).toString())
                                + " " + pad(' ', 4, Integer.toHexString(cv))
                                + "  " + pad('0', 16, Integer.toBinaryString(cv))
                                );
@@ -724,7 +720,7 @@ public class VueUtil extends tufts.Util
             int eqIdx = pair.indexOf('=');
             if (eqIdx > 0) {
                 String key = pair.substring(0, eqIdx);
-                String value = pair.substring(eqIdx + 1, pair.length());
+                String value = pair.substring(eqIdx + 1);
                 map.put(key.toLowerCase(), value);
             }
         }
@@ -1035,10 +1031,7 @@ public class VueUtil extends tufts.Util
 	
     public static boolean checkCollision(LWComponent c1, LWComponent c2)
     {
-        boolean collide = false;
-        if(c2.getX()>= c1.getX() && c2.getX() <= c1.getX()+c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <=c1.getY()+c2.getHeight()) {
-            collide = true;
-        }
+        boolean collide = c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
         return collide;
     }    
 

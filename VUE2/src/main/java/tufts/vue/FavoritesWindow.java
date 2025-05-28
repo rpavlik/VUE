@@ -59,12 +59,12 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
     public static final String TITLE_DEL_RESOURCE = VueResources.getString("dialog.favoriteswindow.delresourceconf");
 //    public static final String SAVE_FILE = VueUtil.getDefaultUserFolder().getAbsolutePath()+File.separatorChar+VueResources.getString("save.favorites");
     protected final static int MAX_LABEL_LINE_LENGTH = 30;
-    private String saveFile;
+    private final String saveFile;
     public static final int DEFAULT_SELECTION_ROW = 0;
     private DisplayAction displayAction = null;
     public  VueDandDTree favoritesTree ;
     //private JScrollPane browsePane;
-    private static int FAVORITES = Resource.FAVORITES;
+    private static final int FAVORITES = Resource.FAVORITES;
     JTextField keywords;
     boolean fileOpen = false;
     protected JMenuItem addToNodeMenuItem,
@@ -108,7 +108,7 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
     public Action getDisplayAction(String displayName) {
         if (displayAction == null)
             displayAction = new DisplayAction(displayName);
-        return (Action)displayAction;
+        return displayAction;
     }
     
     private class DisplayAction extends AbstractAction {
@@ -201,7 +201,7 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
             } else{
                 resNode = (ResourceNode)tp.getLastPathComponent();
             }
-            if (e.getActionCommand().toString().equals(REMOVE_RESOURCE) | e.getActionCommand().toString().equals(REMOVE_FAVORITES)) {
+            if (e.getActionCommand().equals(REMOVE_RESOURCE) | e.getActionCommand().equals(REMOVE_FAVORITES)) {
                 if (!resNode.isRoot()) {
                     if(VueUtil.confirm(this,CONFIRM_DEL_RESOURCE,TITLE_DEL_RESOURCE) == JOptionPane.OK_OPTION) {
                         TreePath parent = tp.getParentPath();
@@ -212,7 +212,7 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
                             favoritesTree.setSelectionRow(DEFAULT_SELECTION_ROW);
                     }
                 }
-            } else if (e.getActionCommand().toString().equals(ADD_TO_MAP)){
+            } else if (e.getActionCommand().equals(ADD_TO_MAP)){
                 String  label = Util.formatLines(resNode.getResource().getName(), MAX_LABEL_LINE_LENGTH);
                 LWNode  end = NodeTool.NodeModeTool.createNewNode(label);
 
@@ -222,8 +222,8 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
                     tufts.vue.VueUtil.setXYByClustering(end);
                 else
                     ResourceList.setXYByClustering(end);
-            } else if (e.getActionCommand().toString().equals(ADD_TO_NODE) ||
-                    e.getActionCommand().toString().equals(REPLACE_ON_NODE)){
+            } else if (e.getActionCommand().equals(ADD_TO_NODE) ||
+                    e.getActionCommand().equals(REPLACE_ON_NODE)){
                 LWSelection  sel = VUE.getActiveViewer().getSelection();
                 LWComponent  c = sel.only();
 
@@ -231,7 +231,7 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
                 c.setResource(resNode.getResource());
                 c.setLabel(resNode.getResource().getName());
                 VUE.setActive(LWComponent.class, this, c);
-            } else if (e.getActionCommand().toString().equals(ADD_TO_SLIDE)){
+            } else if (e.getActionCommand().equals(ADD_TO_SLIDE)){
                 LWSelection  sel = VUE.getActiveViewer().getSelection();
                 LWSlide      c = (LWSlide)sel.only();
                 LWImage      end = new LWImage();

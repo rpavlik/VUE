@@ -305,7 +305,7 @@ public class FocusManager extends java.awt.DefaultKeyboardFocusManager
             //case PaintEvent.UPDATE:
             // do don't report these.
         	
-            if (DEBUG.META == false)
+            if (!DEBUG.META)
                 break;
             
         default:
@@ -315,7 +315,7 @@ public class FocusManager extends java.awt.DefaultKeyboardFocusManager
                 || (DEBUG.PAINT && e instanceof PaintEvent)
                 || (DEBUG.KEYS && e instanceof KeyEvent)
                 ) {
-                if (!DEBUG.META && e instanceof MouseEvent && ((MouseEvent)e).getComponent().isShowing() == false) {
+                if (!DEBUG.META && e instanceof MouseEvent && !((MouseEvent) e).getComponent().isShowing()) {
                     // don't report mouse-overs of invisible windows that may be scattered about
                     break;
                     //return true;
@@ -1028,7 +1028,7 @@ public class FocusManager extends java.awt.DefaultKeyboardFocusManager
 
     private synchronized void clearForcedFocus(boolean permanent)
     {
-        if (mForcingFocus == false)
+        if (!mForcingFocus)
             return;
             
         Component c = mForcedFocus;
@@ -1138,7 +1138,7 @@ public class FocusManager extends java.awt.DefaultKeyboardFocusManager
 
 
     private void trace(String s, Object arg) {
-        if (false && DEBUG.FOCUS && DEBUG.META) {
+        if (false) {
             final String div = mForcingFocus ? ": (LIE) " : ": ";
             out(tufts.vue.VueUtil.pad(' ', 28, s, true) + div + name(arg));
         }
@@ -1164,7 +1164,7 @@ public class FocusManager extends java.awt.DefaultKeyboardFocusManager
         else
             toFocus = policy.getComponentBefore(mForcedFocusCycleRoot, currentFocus);
             
-        while (isForceFocusableComponent(toFocus) == false) {
+        while (!isForceFocusableComponent(toFocus)) {
             if (DEBUG.FOCUS) System.out.println("\tNOT FORCE-FOCUSABLE: " + name(toFocus));
             if (direction == FOCUS_FORWARD)
                 toFocus = policy.getComponentAfter(mForcedFocusCycleRoot, toFocus);

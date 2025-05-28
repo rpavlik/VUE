@@ -27,6 +27,7 @@ import java.awt.Rectangle;
 import java.awt.event.*;
 
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 
 import edu.tufts.vue.preferences.implementations.WindowPropertiesPreference;
 
@@ -61,7 +62,7 @@ public class VueFrame extends javax.swing.JFrame
         		VueResources.getString("prefernces.savewindowstates.description"),
         		true);
         
-        this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setName("VueFrame" + sNameIndex++);
         GUI.setRootPaneNames(this, getName());
         if (GUI.isMacAqua()) {
@@ -218,11 +219,8 @@ public class VueFrame extends javax.swing.JFrame
     	Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     	int rightCorner =  (int)p.getX() + (int)size.getWidth();
     	int bottomCorner = (int)p.getY() + (int)size.getHeight();
-    	
-    	if ((rightCorner <= screenSize.getWidth()) && (bottomCorner <= screenSize.getHeight()))
-    		return true;
-    	else 
-    		return false;
+
+        return (rightCorner <= screenSize.getWidth()) && (bottomCorner <= screenSize.getHeight());
     }
     
     public void saveWindowProperties()

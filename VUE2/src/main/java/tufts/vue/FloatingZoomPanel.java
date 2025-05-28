@@ -31,7 +31,7 @@ public class FloatingZoomPanel extends JPanel
 	//private final VueTool HandTool = VueToolbarController.getController().getTool("handTool");
     //private final VueTool ZoomTool = VueToolbarController.getController().getTool("zoomTool");
     
-	private String fullScreenTools = "fullScreenToolbarToolNames";
+	private final String fullScreenTools = "fullScreenToolbarToolNames";
     /** the panel where the main tools are placed **/
     private JComponent mMainToolBar = null;	
 	
@@ -42,13 +42,13 @@ public class FloatingZoomPanel extends JPanel
     private Vector mTools = new Vector();
 	
     /** the current tool selection (TO DO:  remove this)  **/
-    private VueTool mCurrentTool = null;
+    private final VueTool mCurrentTool = null;
 	
     /** a list of available tools **/
     private VueTool[] mVueTools = null;
     
     /** a map of PaletteButtons keyed off of the tool ID **/
-    private Map mToolButtons = new HashMap();
+    private final Map mToolButtons = new HashMap();
 	
 	
     public FloatingZoomPanel() {

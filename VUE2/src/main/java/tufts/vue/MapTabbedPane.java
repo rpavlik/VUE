@@ -43,7 +43,7 @@ public class MapTabbedPane extends JTabbedPane//extends DnDTabbedPane
     
     private final String name;
     private final Color BgColor;
-	private int overTabIndex = -1;
+	private final int overTabIndex = -1;
 
 	//private CloseTabPaneUI paneUI;
 //     //private final boolean isLeftViewer;
@@ -107,7 +107,7 @@ public class MapTabbedPane extends JTabbedPane//extends DnDTabbedPane
         }
         
         
-        if (GUI.isMacAqua() == false) { 
+        if (!GUI.isMacAqua()) {
             int selected = getModel().getSelectedIndex();
 
             // for non-aqua UI's, we change the selected tab color
@@ -163,7 +163,7 @@ public class MapTabbedPane extends JTabbedPane//extends DnDTabbedPane
                 // on the viewer, as new viewers have this turned off by default initially,
                 // so we can direct focus as desired (even non-visible right-viewers will
                 // delightfully grab the focus when created if you let them).
-                viewer.grabVueApplicationFocus(toString() + ".setSelectedIndex="+index + " " + viewer, null);
+                viewer.grabVueApplicationFocus(this + ".setSelectedIndex="+index + " " + viewer, null);
             }});
         }
     }

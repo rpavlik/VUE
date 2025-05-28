@@ -480,7 +480,7 @@ public class SakaiPublisher {
 			System.out.println("Sent ContentHosting.createFolder(sessionId, collId, name), got '" + resString + "'");
 		}
 		catch (Exception e) {
-			System.err.println(e.toString());
+			System.err.println(e);
 		}
 		return resId + "/";
 	}

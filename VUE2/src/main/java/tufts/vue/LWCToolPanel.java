@@ -330,7 +330,7 @@ public class LWCToolPanel extends JPanel
     // issue events marked as rapid changers?  Or should subclasses of
     // LWCToolPanel just handle it?
     
-    private boolean mIgnoreLWCEvents = false;
+    private final boolean mIgnoreLWCEvents = false;
     public void LWCChanged(LWCEvent e) {
         // if we don't handle this property, loadToolValue will ignore this event
         if (mIgnoreLWCEvents) {
@@ -362,7 +362,7 @@ public class LWCToolPanel extends JPanel
     public void propertyChange(PropertyChangeEvent e)
     {
 
-        if (e instanceof LWPropertyChangeEvent == false) {
+        if (!(e instanceof LWPropertyChangeEvent)) {
             // We're not interested in "ancestor" events, icon change events, etc.
             if (DEBUG.TOOL && DEBUG.META) out("ignored AWT/Swing: [" + e.getPropertyName() + "] from " + e.getSource().getClass());
             return;
@@ -397,15 +397,11 @@ public class LWCToolPanel extends JPanel
             // back up to the tools, we want to ignore those events while this is underway -- the tools
             // already have their state set to this.
             //mIgnoreLWCEvents = true;
-            try {
-                for (tufts.vue.LWComponent c : selection) {
-                    if (c.supportsProperty(key))
-                        c.setProperty(key, newValue);
-                }
-            } finally {
-                // mIgnoreLWCEvents = false;
+            for (tufts.vue.LWComponent c : selection) {
+                if (c.supportsProperty(key))
+                    c.setProperty(key, newValue);
             }
-            
+
             if (VUE.getUndoManager() != null)
                 VUE.getUndoManager().markChangesAsUndo(key.toString());
         }
@@ -422,7 +418,7 @@ public class LWCToolPanel extends JPanel
         final Object source = e.getSource();
         for (LWEditor editor : mEditors) {
             if (source == editor) {
-                if (true||DEBUG.TOOL) out("matched ChangeEvent source to editor " + editor.getClass());
+                if (true) out("matched ChangeEvent source to editor " + editor.getClass());
                 propertyChange(new LWPropertyChangeEvent(editor, editor.getPropertyKey(), editor.produceValue()));
                 // LWPropertyChangeEvent could detect that source is instanceof a editor, and pull key & value from that
             }

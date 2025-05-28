@@ -79,7 +79,7 @@ public class OpenURLAction extends VueAction
         	GetUrlDialog gud = new GetUrlDialog();
         	URL url = null;
         	
-        	String option = (String)GetUrlDialog.getURL();
+        	String option = GetUrlDialog.getURL();
             
             if (option == null || option.length() <= 0)
                 return;

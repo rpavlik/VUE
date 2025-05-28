@@ -7,8 +7,8 @@ package tufts.vue.propertyeditor;
  */
 
 public class ComparisonOperator implements java.io.Serializable {
-    private java.lang.String _value_;
-    private static java.util.HashMap _table_ = new java.util.HashMap();
+    private final java.lang.String _value_;
+    private static final java.util.HashMap _table_ = new java.util.HashMap();
 
     // Constructor
     protected ComparisonOperator(java.lang.String value) {

@@ -28,8 +28,8 @@ package  tufts.oki.dr.fedora;
 public class InfoField implements osid.dr.InfoField {
     
     /** Creates a new instance of InfoField */
-    private osid.OsidOwner owner = null;
-    private java.util.Vector infoFieldVector = new java.util.Vector();
+    private final osid.OsidOwner owner = null;
+    private final java.util.Vector infoFieldVector = new java.util.Vector();
     private osid.dr.InfoStructure infoStructure = null;
     private osid.shared.Id id = null;
     private java.io.Serializable value = null;
@@ -122,7 +122,7 @@ public class InfoField implements osid.dr.InfoField {
      * @throws osid.dr.DigitalRepositoryException with one of the following messages: OPERATION_FAILED
      */
     public osid.dr.InfoFieldIterator getInfoFields() throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoFieldIterator) (new InfoFieldIterator(infoFieldVector));
+        return new InfoFieldIterator(infoFieldVector);
     }
     
     /**

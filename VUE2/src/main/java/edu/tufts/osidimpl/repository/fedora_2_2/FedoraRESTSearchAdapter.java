@@ -21,6 +21,7 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -55,7 +56,8 @@ public class FedoraRESTSearchAdapter {
             NodeList fieldNode = null;
             if(lSearchCriteria.getSearchOperation() == SearchCriteria.FIND_OBJECTS) {
                 
-                URL url = new URL("http",repository.getAddress(),repository.getPort(),SEARCH_STRING+URLEncoder.encode(lSearchCriteria.getKeywords()+WILDCARD,"ISO-8859-1"));
+                URL url = new URL("http", repository.getAddress(), repository.getPort(), SEARCH_STRING
+                        + URLEncoder.encode(lSearchCriteria.getKeywords() + WILDCARD, StandardCharsets.ISO_8859_1));
                 XPathFactory  factory=XPathFactory.newInstance();
                 XPath xPath=factory.newXPath();
                 xPath.setNamespaceContext(new FedoraNamespaceContext());
@@ -102,12 +104,12 @@ public class FedoraRESTSearchAdapter {
     
     public static String getQueryFromConditions(Condition[] conds) throws org.osid.repository.RepositoryException{
         try {
-            String query = new String();
+            String query = "";
             for (Condition cond : conds) {
                 query += cond.getProperty();
 //            query += conds[i].getOperator();
                 query += "%7E"; // temporary fix
-                query += URLEncoder.encode(cond.getValue(), "ISO-8859-1");
+                query += URLEncoder.encode(cond.getValue(), StandardCharsets.ISO_8859_1);
                 query += "%20";
             }
             query = query.substring(0,query.length()-3);
@@ -130,13 +132,13 @@ public class FedoraRESTSearchAdapter {
                 for(int j = 0; j<n.getChildNodes().getLength();j++) {
                     org.w3c.dom.Node e =    n.getChildNodes().item(j);
                     if(e.getNodeType() == Node.ELEMENT_NODE) {
-                        if(e.getNodeName().toString().equals(PID)) {
+                        if (e.getNodeName().equals(PID)) {
                             pid = e.getFirstChild().getNodeValue();
                         }
-                        if(e.getNodeName().toString().equals(TITLE)) {
+                        if (e.getNodeName().equals(TITLE)) {
                             title = e.getFirstChild().getNodeValue();
                         }
-                        if(e.getNodeName().toString().equals(CMODEL)) {
+                        if (e.getNodeName().equals(CMODEL)) {
                             cModel= e.getFirstChild().getNodeValue();
                         }
                     }
@@ -180,8 +182,10 @@ public class FedoraRESTSearchAdapter {
         return re;
     }
     public static void testSearch() throws Exception {
-        URL url = new URL("http://dl.tufts.edu:8080/"+SEARCH_STRING+URLEncoder.encode("street","ISO-8859-1"));
-        //url = new URL("http://dl.tufts.edu:8080/fedora/search?pid=true&title=true&xml=true&cModel=true&description=true&terms=tufts");
+        URL url = new URL(
+                "http://dl.tufts.edu:8080/" + SEARCH_STRING + URLEncoder.encode("street", StandardCharsets.ISO_8859_1));
+        // url = new URL(
+        //         "http://dl.tufts.edu:8080/fedora/search?pid=true&title=true&xml=true&cModel=true&description=true&terms=tufts");
         XPathFactory  factory=XPathFactory.newInstance();
         XPath xPath=factory.newXPath();
         xPath.setNamespaceContext(new FedoraNamespaceContext());

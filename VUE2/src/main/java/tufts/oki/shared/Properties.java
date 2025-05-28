@@ -76,7 +76,7 @@ public class Properties implements osid.shared.Properties {
      *  @return The value associated with this key.
      */
     public java.io.Serializable getProperty(java.io.Serializable key) {
-        return (java.io.Serializable)map.get((Object)key);
+        return (java.io.Serializable)map.get(key);
     }
     
     /**

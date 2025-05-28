@@ -48,7 +48,6 @@ public class LaunchPresentationTool extends VueSimpleTool
     @Override
     public void actionPerformed(ActionEvent e) {
         Actions.LaunchPresentation.fire(this, e);
-        return;
     }
 
 

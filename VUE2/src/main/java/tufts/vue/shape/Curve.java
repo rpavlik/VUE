@@ -61,8 +61,7 @@ public abstract class Curve {
 			  DECREASING);
 	} else if (y0 == y1 && y0 == coords[1]) {
 	    // Do not add horizontal lines
-	    return;
-	} else {
+    } else {
 	    Order2.insert(curves, coords,
 			  x0, y0,
 			  coords[0], coords[1],
@@ -85,8 +84,7 @@ public abstract class Curve {
 			  DECREASING);
 	} else if (y0 == y1 && y0 == coords[1] && y0 == coords[3]) {
 	    // Do not add horizontal lines
-	    return;
-	} else {
+    } else {
 	    Order3.insert(curves, coords,
 			  x0, y0,
 			  coords[0], coords[1],
@@ -101,7 +99,7 @@ public abstract class Curve {
 				       double x1, double y1)
     {
 	if (y0 > y1) {
-	    return 0 - crossingsForLine(x, y, x1, y1, x0, y0);
+	    return -crossingsForLine(x, y, x1, y1, x0, y0);
 	}
 	if (y0 == y1) {
 	    return 0;
@@ -680,11 +678,9 @@ public abstract class Curve {
 		    }
 		}
 		if (ys1 >= yt && yt1 >= ys) {
-		    if (findIntersect(that, yrange, ymin, slevel+1, tlevel+1,
-				      s, xs, ys, s1, xs1, ys1,
-				      t, xt, yt, t1, xt1, yt1)) {
-			return true;
-		    }
+            return findIntersect(that, yrange, ymin, slevel + 1, tlevel + 1,
+                    s, xs, ys, s1, xs1, ys1,
+                    t, xt, yt, t1, xt1, yt1);
 		}
 	    } else {
 		if (ys >= yt0) {
@@ -695,11 +691,9 @@ public abstract class Curve {
 		    }
 		}
 		if (yt1 >= ys) {
-		    if (findIntersect(that, yrange, ymin, slevel+1, tlevel,
-				      s, xs, ys, s1, xs1, ys1,
-				      t0, xt0, yt0, t1, xt1, yt1)) {
-			return true;
-		    }
+            return findIntersect(that, yrange, ymin, slevel + 1, tlevel,
+                    s, xs, ys, s1, xs1, ys1,
+                    t0, xt0, yt0, t1, xt1, yt1);
 		}
 	    }
 	} else if (t1 - t0 > TMIN) {
@@ -719,11 +713,9 @@ public abstract class Curve {
 		}
 	    }
 	    if (ys1 >= yt) {
-		if (findIntersect(that, yrange, ymin, slevel, tlevel+1,
-				  s0, xs0, ys0, s1, xs1, ys1,
-				  t, xt, yt, t1, xt1, yt1)) {
-		    return true;
-		}
+            return findIntersect(that, yrange, ymin, slevel, tlevel + 1,
+                    s0, xs0, ys0, s1, xs1, ys1,
+                    t, xt, yt, t1, xt1, yt1);
 	    }
 	} else {
 	    // No more subdivisions

@@ -66,11 +66,8 @@ public class SearchResultTableModel extends AbstractTableModel {
 	}
 
 	public boolean isCellEditable(int row, int col) {
-		if (editFlg && col == 0) {
-			return true;
-		}
-		return false;
-	}
+        return editFlg && col == 0;
+    }
 
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		SearchData data = searchResultArrLst.get(rowIndex);

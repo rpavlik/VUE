@@ -76,9 +76,7 @@ public class UserProperty {
 		mTags = null;
         if( tags != null) {
 			mTags = new String[tags.length];
-			for(int i=0; i<tags.length; i++ ) {
-				mTags[i] = tags[i];
-				}
+            System.arraycopy(tags, 0, mTags, 0, tags.length);
 			}
 	}
 	
@@ -192,7 +190,7 @@ public class UserProperty {
 			}
 		else
 		if( pObj instanceof String ) {
-			retValue = mID.equals( (String) pObj);
+			retValue = mID.equals(pObj);
 			}
 		return retValue;
 			}

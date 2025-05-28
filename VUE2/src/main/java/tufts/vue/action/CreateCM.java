@@ -32,7 +32,7 @@ import java.awt.event.*;
 
 public class CreateCM  extends VueAction{
     
-    private String label;
+    private final String label;
     
     /** Creates a new instance of CreateCM */
     public CreateCM(String label) {

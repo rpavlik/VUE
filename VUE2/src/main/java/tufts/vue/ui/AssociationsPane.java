@@ -129,7 +129,7 @@ public class AssociationsPane extends Widget
 		}
 	}
 
-	public void finalize() {
+	protected void finalize() {
 //		addAssociationAction = null;
 		deleteAssociationAction = null;
 		associationsTable = null;

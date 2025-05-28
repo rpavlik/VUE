@@ -76,7 +76,7 @@ public class MapChooser extends JDialog implements ActionListener{
     private JTextField file = null;
     private JButton browseButton = null;
     private File selectedFile = null;
-    private File currentMapDir = null;
+    private final File currentMapDir = null;
     
     private LWMap selectedMap = null;
    

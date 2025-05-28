@@ -148,7 +148,7 @@ public class DockWindow
     private boolean mStickingRight;
     private boolean mWasStickingRight;
     private boolean mHasWindowShadow = true;
-    private boolean isToolbar;
+    private final boolean isToolbar;
 
     static int CollapsedHeight = 0;
     /** visible exposed height of parent DockWindow that child window shouldn't overlap */
@@ -610,7 +610,7 @@ public class DockWindow
 
         	// Call addPropertyChangeListener() for each tab...
         	for (int tabIndex = 0; tabIndex < tabCount; tabIndex ++) {
-        		Component tab = ((JTabbedPane)c).getComponent(tabIndex);
+        		Component tab = c.getComponent(tabIndex);
 
         		if (tab instanceof JScrollPane)
         			toListen = ((JScrollPane)(tab)).getViewport().getView();
@@ -852,7 +852,7 @@ public class DockWindow
     }
 
     public static boolean isTopDockEmpty() {
-        return TopDock == null ? true : TopDock.isEmpty();
+        return TopDock == null || TopDock.isEmpty();
     }
     
     public static DockRegion getTopDock() {
@@ -1505,11 +1505,11 @@ public class DockWindow
         if (show && !VUE.isApplet()) {
             if (autoUnrollOnShow && isRolledUp())
                 setRolledUp(false);
-            else if (false && mUnrolledShape != null)
+            else if (false)
                 // need to show before we do this!  Will need to tweak us so that's okay to do.
                 setShapeAnimated(getX(), getY(), mUnrolledShape.width, mUnrolledShape.height);
             
-        } else if (false && !VUE.isApplet()) {
+        } else if (false) {
             if (!isRolledUp())
                 mUnrolledShape = getBounds();
             setShapeAnimated(getX(), getY(), getWidth(), 0);
@@ -1538,7 +1538,7 @@ public class DockWindow
             mChildWhenHidden = null;
             mParentWhenHidden = null;
             
-            if ((isMac && true || windowStackChanged) && !VUE.isApplet()) {
+            if ((isMac || windowStackChanged) && !VUE.isApplet()) {
                 raiseChildrenLater();
             }
         }
@@ -1549,7 +1549,7 @@ public class DockWindow
     private void updateOnVisibilityChange() {
         if (DEBUG.DOCK) out("updateOnVisibilityChange; mShowing=" + mShowing + " visible=" + isVisible());
 
-        if (mShowing == false) {
+        if (!mShowing) {
             mChildWhenHidden = mChild;
             mParentWhenHidden = mParent;
             if (mChild != null) {
@@ -1657,7 +1657,7 @@ public class DockWindow
     // that that would need testing to determine for sure.  SMF 2012-06-16.
     public static void flickerAnchorDock()
     {
-        if (VUE.usingAnchorDock() == false)
+        if (!VUE.usingAnchorDock())
             return;
         
     	  if (!VUE.isApplet() && Util.isMacLeopard() && VUE.getAnchorDock().isVisible()) {
@@ -1667,18 +1667,14 @@ public class DockWindow
           	VUE.getAnchorDock().setVisible(true);
           	VUE.getAnchorDock().toFront();
           }
-          return;
     }
     private boolean isPointFullyOnScreen(Point p, Dimension size, Dimension screenSize)
         
     {
     	int rightCorner =  (int)p.getX() + (int)size.getWidth();
     	int bottomCorner = (int)p.getY() + (int)size.getHeight();
-    	
-    	if ((rightCorner <= screenSize.getWidth()) && (bottomCorner <= screenSize.getHeight()))
-    		return true;
-    	else 
-    		return false;
+
+        return (rightCorner <= screenSize.getWidth()) && (bottomCorner <= screenSize.getHeight());
     }
     public WindowPropertiesPreference getWindowProperties()
     {
@@ -1931,7 +1927,7 @@ public class DockWindow
         if (mDockRegion != null)
             return mDockRegion.getRolledWidth(this);
             
-        if (isStacked() == false) {
+        if (!isStacked()) {
             if (wantsSidewaysRollup()) {
                 return CollapsedHeight;
                 //} else if (mDockRegion != null) {
@@ -2414,7 +2410,7 @@ public class DockWindow
         }
 
         boolean inRangeOf(Edge e) {
-            if (false && isLip)
+            if (false)
                 return max > e.min && e.max > min && e.min >= min; 
             else
                 return max > e.min && e.max > min;
@@ -2455,13 +2451,13 @@ public class DockWindow
                 //if (c.getParent() instanceof JTabbedPane)
                 //c = (JTabbedPane) c.getParent();
                 if (c.getParent() instanceof JViewport)
-                    c = (JViewport) c.getParent();
+                    c = c.getParent();
                 //if (c.getParent() instanceof JScrollPane)
                 //c = (JScrollPane) c.getParent();
 
                 Point loc = new Point(c.getX(), c.getY());
 
-                if (c instanceof Window == false)
+                if (!(c instanceof Window))
                     SwingUtilities.convertPointToScreen(loc, c);
                     
                 int TOP = loc.y;
@@ -2792,10 +2788,10 @@ public class DockWindow
     /** columns sticky on their right side (window left edges stick to them) */
     // the names are reversed so they make sense when read from the perpective of
     // Window edges, as opposed to screen edges.
-    private static EdgeArray StickyLeftEdges = new EdgeArray("RIGHT");
-    private static EdgeArray StickyRightEdges = new EdgeArray("LEFT");
-    private static EdgeArray StickyTopEdges = new EdgeArray("BOTTOM");
-    private static EdgeArray StickyBottomEdges = new EdgeArray("TOP");
+    private static final EdgeArray StickyLeftEdges = new EdgeArray("RIGHT");
+    private static final EdgeArray StickyRightEdges = new EdgeArray("LEFT");
+    private static final EdgeArray StickyTopEdges = new EdgeArray("BOTTOM");
+    private static final EdgeArray StickyBottomEdges = new EdgeArray("TOP");
 
     private Point getConstrainedLocation(int x, int y)
     {
@@ -3205,7 +3201,7 @@ public class DockWindow
 
         if (DEBUG.MOUSE) out("mDragStartScreen=" + mDragStartScreen + " mDragStart=" + mDragStart);
         
-        if (false && isMac) { // don't shadow child
+        if (false) { // don't shadow child
             // better: don't raise us up if we're rolling up, but then would
             // have to do this on mouseReleased
             // TODO: is this getting repeated after interceptMousePress?
@@ -3251,7 +3247,7 @@ public class DockWindow
     
     private void dragMoveWindow(MouseEvent e)
     {
-        if (mWindowDragUnderway == false) {
+        if (!mWindowDragUnderway) {
             if (!dragStartWindowMove(e))
                 return;
         }
@@ -3267,7 +3263,7 @@ public class DockWindow
         if (isMac) {
             if (GUI.hasMultipleScreens()) {
                 //if (GUI.getAllScreenBounds().x
-                if (false && y < 22) // can never have a screen above otherwise
+                if (false) // can never have a screen above otherwise
                     y = 22;
             } else if (y < 22) {
                 y = 22;
@@ -3991,7 +3987,7 @@ public class DockWindow
             // if we do damn orderAbove...
 
 
-            if (false && mChild.mChild == null) {
+            if (false) {
                 // workaround for above bug: be sure to raise *this* window,
                 // then our child: apparently the parent is stepping entirely
                 // out of the order somehow?  W/out our toFront first, the
@@ -4042,14 +4038,14 @@ public class DockWindow
     public String toString() {
         //String s = "DockWindow[" + mTitle;
         String s = "[" + mTitleName;
-        if (true || mChild == null)
+        if (true)
             return s + "]";
         else
             return s + " ->" + mChild.mTitleName + "]";
     }
 
     public static class ScrollableWidthTracker extends JPanel implements Scrollable {
-        private JComponent tracked;
+        private final JComponent tracked;
         
         ScrollableWidthTracker(JComponent wrapped, JComponent tracked) {
             super(new BorderLayout());
@@ -4094,17 +4090,17 @@ public class DockWindow
         private TitlePanel mTitle;
         private boolean isVertical = false;
 
-        private boolean gradientBG = false;
+        private final boolean gradientBG = false;
 
         private Object titleConstraints = BorderLayout.NORTH;
         private JScrollPane mScroller;
 
-        private Object contentConstraints;
+        private final Object contentConstraints;
         
         public ContentPane(String title, boolean asToolbar)
         {
             mContent.setName(title + ".dockContent");
-            if (true||asToolbar) {
+            if (true) {
                 setLayout(new BorderLayout());
 
                 if (asToolbar)
@@ -4337,7 +4333,7 @@ public class DockWindow
             g.fillRect(0,0, getWidth(), getHeight());
             //super.paintComponent(g);
 
-            if (false && isToolbar) {
+            if (false) {
                 g.setColor(Color.lightGray);
                 g.drawLine(0, 0, getWidth(),0);
             }
@@ -4392,7 +4388,7 @@ public class DockWindow
 
     //private class Gripper extends javax.swing.JPanel {
     private class Gripper extends javax.swing.Box {
-        private JComponent closeButton;
+        private final JComponent closeButton;
         
         Gripper() {
             super(BoxLayout.Y_AXIS);
@@ -4460,7 +4456,7 @@ public class DockWindow
                      width,           0, TopGradientColor  );         
          
         	
-            ((Graphics2D)g).setPaint(mGradient);
+            g.setPaint(mGradient);
 
             g.fillRect(0,0, width, height);
             g.setColor(new Color(128,128,128));
@@ -4522,9 +4518,9 @@ public class DockWindow
 
     private class TitlePanel extends javax.swing.Box {
         
-        private CloseButton mCloseButton;
+        private final CloseButton mCloseButton;
         private GradientPaint mGradient;
-        private JLabel mLabel;
+        private final JLabel mLabel;
      //   private JLabel mOpenLabel; // for open/close icon
         private boolean isVertical = false;
         private MenuButton mMenuButton; // null of has no menu
@@ -4589,7 +4585,7 @@ public class DockWindow
 
              if (helpText != null && helpText.length() > 0) {
              
-                 if (false && Util.isMacLeopard()) {
+                 if (false) {
 
                      final JButton help = new JButton();
 
@@ -4976,7 +4972,7 @@ public class DockWindow
             public void paintIcon(Component c, Graphics g, int x, int y) {
                 int xoff = x-1;
                 int yoff = y+1;
-                if (false && isMacAquaMetal == false) {
+                if (false) {
                     //g.setColor(SystemColor.activeCaption);
                     // we fill in case window is so narrow that title text
                     // would appear under this icon: we don't want to see that.

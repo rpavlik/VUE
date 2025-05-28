@@ -34,16 +34,16 @@ public class DataSourceListCellRenderer extends DefaultListCellRenderer //implem
     private edu.tufts.vue.dsm.DataSource infoDataSource;
     private final static String OFFLINE = "offline";
     private final static String ONLINE = "";
-    private JLabel offlineLabel = new JLabel(OFFLINE, JLabel.RIGHT);
-    private JLabel onlineLabel = new JLabel(ONLINE, JLabel.RIGHT);
+    private final JLabel offlineLabel = new JLabel(OFFLINE, JLabel.RIGHT);
+    private final JLabel onlineLabel = new JLabel(ONLINE, JLabel.RIGHT);
 
-    private JPanel mRow = new JPanel();
-    private JLabel mLabel = new DefaultListCellRenderer();
-    private JLabel mIconLabel = new DefaultListCellRenderer();
-    private CheckBoxRenderer mCheckBox = new CheckBoxRenderer();
+    private final JPanel mRow = new JPanel();
+    private final JLabel mLabel = new DefaultListCellRenderer();
+    private final JLabel mIconLabel = new DefaultListCellRenderer();
+    private final CheckBoxRenderer mCheckBox = new CheckBoxRenderer();
 
     
-    private Border DividerBorder = new DashBorder(Color.LIGHT_GRAY,false,true,false,false);
+    private final Border DividerBorder = new DashBorder(Color.LIGHT_GRAY,false,true,false,false);
     
     private final Border EmptyDividerBorder = new EmptyBorder(1,0,0,0);
 
@@ -85,7 +85,7 @@ public class DataSourceListCellRenderer extends DefaultListCellRenderer //implem
         if (selected) {
             bg = GUI.getTextHighlightColor();
         } else {
-            if (true || DEBUG.TEST) {
+            if (true) {
                 bg = SystemColor.control;
             } else {
                 bg = DataSourcesColor;

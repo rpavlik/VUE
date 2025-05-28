@@ -52,9 +52,9 @@ public class LocalCabinetEntry implements osid.filing.CabinetEntry
 //     private java.util.Date created_time;
 //     private java.util.Date modified_time;
 //     private java.util.Date accessed_time;
-    private long created_time;
+    private final long created_time;
     private long modified_time;
-    private long accessed_time;
+    private final long accessed_time;
     private final Vector modified_times;
     private final osid.filing.Cabinet parent;
 
@@ -122,7 +122,7 @@ public class LocalCabinetEntry implements osid.filing.CabinetEntry
      *  @return The id of this CabinetEntry.
      */
     public osid.shared.Id getId() throws osid.filing.FilingException {
-        return (osid.shared.Id) id;
+        return id;
     }
     
     /**

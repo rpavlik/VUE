@@ -126,10 +126,10 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
 
     private static final Color SelectionColor = GUI.getTextHighlightColor();//VueResources.getColor("mapViewer.textBox.selection.color");
     private boolean revert = false;
-    private static boolean TestDebug = false;
-    private static boolean TestHarness = false;
+    private static final boolean TestDebug = false;
+    private static final boolean TestHarness = false;
     
-    private LWComponent lwc;
+    private final LWComponent lwc;
     /** bounds: generally used by the component as local coordinates (relative to the coordinate 0,0)
      * The width/height are set here in TextBox */
     private final Rectangle2D.Float mBounds = new Rectangle2D.Float();
@@ -264,7 +264,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
       ((SHTMLDocument)getDocument()).setZoomFactor(zoom);
     
         super.addNotify();                         
-        preAddDimension= new Dimension((int)getWidth(),(int)getHeight());
+        preAddDimension= new Dimension(getWidth(), getHeight());
        // System.out.println(preAddDimension.toString());
        // System.out.println(getPreferredSize().toString());
  
@@ -347,7 +347,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         	
        this.setSize(preAddDimension);
        
-        if (mFirstAfterAddNotify == false) {
+        if (!mFirstAfterAddNotify) {
             // if cleared, it was used
             out("restoring expanded width");
          //   setSize(new Dimension(getWidth(), getHeight()));
@@ -740,11 +740,10 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         // with any modifier down except a shift alone (in case of
         // caps lock) complete the edit.
         return e.getKeyCode() == KeyEvent.VK_ENTER &&
-            (
-             e.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD ||
-             (e.getModifiersEx() != 0 && !e.isShiftDown())
-             )
-            == true;
+                (
+                        e.getKeyLocation() == KeyEvent.KEY_LOCATION_NUMPAD ||
+                                (e.getModifiersEx() != 0 && !e.isShiftDown())
+                );
         //== false; // reversed logic of below description
     }
 
@@ -770,8 +769,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
             //setText(mUnchangedText);
             revert = true;
             getParent().remove(this); // will trigger a save (via focusLost)
-            return;
-           // setSize(mUnchangedSize); // todo: won't be good enough if we ever resize the actual node as we type
+            // setSize(mUnchangedSize); // todo: won't be good enough if we ever resize the actual node as we type
         } else if (isFinishEditKeyPress(e)) {
             keyWasPressed = true;
             e.consume();
@@ -843,7 +841,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     	//System.out.println(e.getOppositeComponent().toString());
         if (TestDebug||DEBUG.FOCUS)
         	outc("focusLost to " + e.getOppositeComponent() + "   " + opposite.getName());
-        if (TestHarness == false && getParent() != null)
+        if (!TestHarness && getParent() != null)
         {
             getParent().remove(this);
            // VUE.getFormattingPanel().getTextPropsPane().getFontEditorPanel().updateFormatControlsTB(this);
@@ -878,7 +876,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     /** do not use, or won't be able to get out actual text height */
     @Override
     public void setPreferredSize(Dimension preferredSize) {
-        if (true||TestDebug) out("setPreferred " + preferredSize);
+        if (true) out("setPreferred " + preferredSize);
         super.setPreferredSize(preferredSize);
     }
     /*@Override
@@ -1028,7 +1026,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
        	{	if (DEBUG.TEXT)
        			out("got style");
        		int diff =0;
-       		Integer i = new Integer(a.toString());
+       		Integer i = Integer.valueOf(a.toString());
        		diff = i;
        		//minS.height = minS.height - diff;
        		if (VUE.getActiveViewer() !=null)
@@ -1055,12 +1053,12 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         		
         		float minSpan = ui.getMinimumSpan(View.X_AXIS);
         		float mins2 = Math.max(minSpan,(float)position.getX());
-        		s = new Dimension((int)(mBounds.width > mins2 ? mBounds.width : mins2),(int)height);
+        		s = new Dimension((int)(mBounds.width > mins2 ? mBounds.width : mins2), height);
         	}
         	else
         	{
         		float minSpan = ui.getMinimumSpan(View.X_AXIS);
-        		s = new Dimension((int)(mBounds.width > minSpan ? mBounds.width : minSpan),(int)height);
+        		s = new Dimension((int)(mBounds.width > minSpan ? mBounds.width : minSpan), height);
         	}
         	//float widthRatio = ((float)s.width /(float)lwc.width);
        	//	float heightRatio =((float)s.height/(float)lwc.height);
@@ -1177,7 +1175,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         return s;
     }
     public void setMaximumSize(Dimension s) {
-        if (true||TestDebug) out("setMaximumSize", s);
+        if (true) out("setMaximumSize", s);
         super.setMaximumSize(s);
     }
     public Dimension getMaximumSize() {
@@ -1186,7 +1184,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         return s;
     }
     public void setMinimumSize(Dimension s) {
-        if (true||TestDebug) out("setMinimumSize", s);
+        if (true) out("setMinimumSize", s);
         super.setMinimumSize(s);
     }
     public Dimension getMinimumSize() {
@@ -1200,7 +1198,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     	{	if (DEBUG.TEXT)
     			out("got style");
     		int diff =0;
-    		Integer i = new Integer(a.toString());
+    		Integer i = Integer.valueOf(a.toString());
     		diff = i;
     		if (VUE.getActiveViewer()!=null)
     		{
@@ -1404,7 +1402,7 @@ return super.viewToModel(new Point(alloc));
             g.setClip(null);
             final int xpad = 1;
             final int ypad = 1;
-            g.drawRect(-xpad,-ypad, (int)((getWidth())+xpad*2-1), (int)((getHeight())+ypad*2-1));
+            g.drawRect(-xpad,-ypad, (getWidth())+xpad*2-1, (getHeight())+ypad*2-1);
         }
     }
 
@@ -1552,7 +1550,7 @@ return super.viewToModel(new Point(alloc));
     public int getHeight() 
     {  
         	
-        		return (int)super.getHeight();        
+        		return super.getHeight();
         	
     }
    
@@ -1645,8 +1643,7 @@ return super.viewToModel(new Point(alloc));
 			 if (GUI.isMenuPopup(e))
 			 {
 				 displayContextMenu(e);
-				 return;
-			 }		
+             }
 	}
 	
 	private void displayContextMenu(MouseEvent e) {

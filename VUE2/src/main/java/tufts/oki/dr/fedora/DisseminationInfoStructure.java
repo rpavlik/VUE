@@ -26,13 +26,13 @@ package tufts.oki.dr.fedora;
  * @author  akumar03
  */
 public class DisseminationInfoStructure implements osid.dr.InfoStructure {
-    private osid.OsidOwner owner = null;
+    private final osid.OsidOwner owner = null;
     java.util.Vector partsVector = new java.util.Vector();
-    private String displayName = "Dissemination";
-    private String description = "Provides information needed to get the dissemination";
+    private final String displayName = "Dissemination";
+    private final String description = "Provides information needed to get the dissemination";
     private osid.shared.Id id = null;
-    private String schema = null;
-    private String format = "Plain Text";
+    private final String schema = null;
+    private final String format = "Plain Text";
     
     private osid.dr.InfoPart BDEFInfoPart  = null;
     private osid.dr.InfoPart disseminationURLInfoPart = null;
@@ -121,7 +121,7 @@ public class DisseminationInfoStructure implements osid.dr.InfoStructure {
      */
     public osid.dr.InfoPartIterator getInfoParts()
     throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoPartIterator) (new InfoPartIterator(partsVector));
+        return new InfoPartIterator(partsVector);
     }
     
     /**

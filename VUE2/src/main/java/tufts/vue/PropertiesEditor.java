@@ -223,7 +223,7 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
         return tableModel;
     }
     // a model for Properties table
-    private static String PROPERTY_NOT_SET = "";
+    private static final String PROPERTY_NOT_SET = "";
     public static class PropertiesTableModel extends AbstractTableModel {
         java.util.List m_conditions;
         Map mProperties;
@@ -359,7 +359,7 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
     
     public class PropertiesSelectionListener  implements ListSelectionListener {
         private int m_selectedRow;
-        private JButton m_deleteButton;
+        private final JButton m_deleteButton;
         
         public PropertiesSelectionListener(JButton deleteButton, int selectedRow) {
             m_selectedRow=selectedRow;
@@ -390,18 +390,14 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
         
         private void updateButtons() {
             if(PropertiesEditor.this.tableModel.isEditable()){
-                if (getSelectedRow()==-1) {
-                    m_deleteButton.setEnabled(false);
-                } else {
-                    m_deleteButton.setEnabled(true);
-                }
+                m_deleteButton.setEnabled(getSelectedRow() != -1);
             }
         }
     }
     
     public class AddPropertiesButtonListener implements ActionListener {
         
-        private PropertiesTableModel m_model;
+        private final PropertiesTableModel m_model;
         
         public AddPropertiesButtonListener(PropertiesTableModel model) {
             m_model=model;
@@ -415,8 +411,8 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
     
     public class DeletePropertiesButtonListener implements ActionListener {
         
-        private PropertiesSelectionListener m_sListener;
-        private JTable table;
+        private final PropertiesSelectionListener m_sListener;
+        private final JTable table;
         
         public DeletePropertiesButtonListener(JTable table,PropertiesSelectionListener sListener) {
             

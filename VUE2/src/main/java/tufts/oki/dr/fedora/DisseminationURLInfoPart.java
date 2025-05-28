@@ -35,14 +35,14 @@ package tufts.oki.dr.fedora;
 public class DisseminationURLInfoPart implements osid.dr.InfoPart {
      java.util.Vector partsVector = new java.util.Vector();
     osid.dr.InfoStructure disseminationInfoStructure = null;
-    private osid.OsidOwner owner = null;
-    private String displayName = "DisseminationURL";
-    private String description = "An URL to get dissemination of Fedora Object";
+    private final osid.OsidOwner owner = null;
+    private final String displayName = "DisseminationURL";
+    private final String description = "An URL to get dissemination of Fedora Object";
     private osid.shared.Id id = null;
-    private boolean populatedByDR = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private osid.dr.InfoStructure infoStructure = (osid.dr.InfoStructure) disseminationInfoStructure;
+    private final boolean populatedByDR = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private osid.dr.InfoStructure infoStructure = disseminationInfoStructure;
 
     /** Creates a new instance of OutputInfoPart */
     public DisseminationURLInfoPart(osid.dr.InfoStructure infoStructure,DR dr) throws osid.dr.DigitalRepositoryException,osid.shared.SharedException {
@@ -143,7 +143,7 @@ public class DisseminationURLInfoPart implements osid.dr.InfoPart {
      */
     public osid.dr.InfoPartIterator getInfoParts()
         throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoPartIterator) (new InfoPartIterator(partsVector));
+        return new InfoPartIterator(partsVector);
     }
 
     /**

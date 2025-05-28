@@ -225,7 +225,7 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
             //  The current working directory is now intialized.
             initialized = true;
         }
-        return (osid.filing.CabinetEntryIterator) new RemoteCabinetEntryIterator(children);
+        return new RemoteCabinetEntryIterator(children);
     }
     
     /**
@@ -240,7 +240,7 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
         for (int i = 0; i < children.size(); i++) {
             RemoteCabinetEntry entry = (RemoteCabinetEntry) children.elementAt(i);
             if (name.compareTo(entry.getDisplayName()) == 0) {
-                return (osid.filing.CabinetEntry) entry;
+                return entry;
             }
         }
         /*  ITEM_DOES_NOT_EXIST is not exactly the right sentiment for not finding the entry.  */
@@ -260,7 +260,7 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
             RemoteCabinetEntry entry = (RemoteCabinetEntry) children.elementAt(i);
             try {
                 if (id.isEqual(entry.getId())) {
-                    return (osid.filing.CabinetEntry) entry;
+                    return entry;
                 }
             } catch (osid.shared.SharedException ex) {
                 /*  Not exactly sure what could go wrong with an Id comparison,
@@ -283,7 +283,7 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
      */
     public java.util.Map getProperties() throws osid.filing.FilingException {
         HashMap map = properties.getPropertySet();
-        return (Map) map;
+        return map;
     }
     
     /**
@@ -405,8 +405,8 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
      *  @author Mark Norton
      */
     public String getFullName() {
-        StringBuffer fn = new StringBuffer(rc.getRootBase());
-        fn = new StringBuffer();
+        StringBuilder fn = new StringBuilder(rc.getRootBase());
+        fn = new StringBuilder();
         ArrayList parts = new ArrayList(100);
         
         //  Walk path to root.

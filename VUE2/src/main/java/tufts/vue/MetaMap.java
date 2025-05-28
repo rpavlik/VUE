@@ -92,7 +92,7 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
 
     @Override
     public boolean equals(Object o) {
-        if (o instanceof MetaMap == false)
+        if (!(o instanceof MetaMap))
             return false;
         return mData.equals( ((MetaMap)o).mData );
     }
@@ -245,10 +245,7 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
             return true;
         else if (v.getClass() == String.class && v.toString().length() == 0)
             return true;
-        else if (v instanceof Collection && ((Collection)v).size() == 0)
-            return true;
-        else
-            return false;
+        else return v instanceof Collection && ((Collection) v).size() == 0;
     }
     
     /** add the given key/value, only if the value is considered "non-empty"

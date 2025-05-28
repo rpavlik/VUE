@@ -129,7 +129,7 @@ public class LWCEvent
                 tufts.Util.printStackTrace(this + "RETURNING FIRST ONLY WHEN IT CONTAINS "
                                            + components.size() + "\n" + components + "\n");
             }
-            return (LWComponent) components.get(0);
+            return components.get(0);
         } else
             return component;
     }

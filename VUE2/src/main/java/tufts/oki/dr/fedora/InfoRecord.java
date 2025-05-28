@@ -27,10 +27,10 @@ package tufts.oki.dr.fedora;
  */
 public class InfoRecord implements osid.dr.InfoRecord {
     private osid.dr.InfoStructure infoStructure = null;
-    private java.util.Vector infoFieldVector = new java.util.Vector();
-    private osid.OsidOwner owner = null;
+    private final java.util.Vector infoFieldVector = new java.util.Vector();
+    private final osid.OsidOwner owner = null;
     private osid.shared.Id id = null;
-    private boolean isMultivalued = false;
+    private final boolean isMultivalued = false;
     /** Creates a new instance of InfoRecord */
     public InfoRecord(osid.shared.Id id, osid.dr.InfoStructure infoStructure) {
         this.id = id;
@@ -114,7 +114,7 @@ public class InfoRecord implements osid.dr.InfoRecord {
      */
     public osid.dr.InfoFieldIterator getInfoFields()
         throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoFieldIterator) (new InfoFieldIterator(infoFieldVector));
+        return new InfoFieldIterator(infoFieldVector);
     }
 
     /**

@@ -30,6 +30,8 @@ import java.util.Collection;
 import java.util.List;
 import java.awt.*;
 import java.awt.geom.*;
+import java.util.Objects;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -114,9 +116,9 @@ public class LWNode extends LWContainer
 
     private transient boolean isRectShape = true;
 
-    private transient Line2D.Float mIconDivider = new Line2D.Float(); // vertical line between icon block & node label / children
-    private transient Point2D.Float mLabelPos = new Point2D.Float(); // for use with irregular node shapes
-    private transient Point2D.Float mChildPos = new Point2D.Float(); // for use with irregular node shapes
+    private final transient Line2D.Float mIconDivider = new Line2D.Float(); // vertical line between icon block & node label / children
+    private final transient Point2D.Float mLabelPos = new Point2D.Float(); // for use with irregular node shapes
+    private final transient Point2D.Float mChildPos = new Point2D.Float(); // for use with irregular node shapes
 
     private transient Size mMinSize;
 
@@ -261,7 +263,7 @@ public class LWNode extends LWContainer
             } else
                 otherValue = null;
 
-            return value == otherValue || (otherValue != null && otherValue.equals(value));
+            return Objects.equals(otherValue, value);
         }
         
     };
@@ -616,7 +618,7 @@ public class LWNode extends LWContainer
     
     public static boolean isTextNode(LWComponent c) {
         if (c instanceof LWNode)
-            return ((LWNode)c).isTextNode();
+            return c.isTextNode();
         else
             return false;
     }
@@ -731,10 +733,7 @@ public class LWNode extends LWContainer
         if (c1 == null || c2 == null)
             return false;
         if (c1 == c2) {
-            if (java.awt.geom.RoundRectangle2D.class.isAssignableFrom(c1))
-                return false; // just in case arc's are different
-            else
-                return true;
+            return !RoundRectangle2D.class.isAssignableFrom(c1); // just in case arc's are different
         } else
             return false;
     }
@@ -764,7 +763,7 @@ public class LWNode extends LWContainer
             return super.intersectsImpl(mapRect);
         } else {
             // TODO: only use the fast reject if this is for paint-clip testing?  already overkill?
-            if (super.intersectsImpl(mapRect) == false) {
+            if (!super.intersectsImpl(mapRect)) {
                 return false; // fast-reject
             } else {
 //                 if (DEBUG.BOXES && mapRect == LWTraversal.mapRect) {
@@ -1243,7 +1242,7 @@ public class LWNode extends LWContainer
 
         setSizeNoLayout(newWidth, newHeight);
 
-        if (isCenterLayout == false) {
+        if (!isCenterLayout) {
             // layout label last in case size is bigger than min and label is centered
             layoutBoxed_label();
 
@@ -1564,7 +1563,7 @@ public class LWNode extends LWContainer
 
         // regions for icons, label & children
         private Rectangle2D.Float rIcons;
-        private Rectangle2D.Float rLabel = new Rectangle2D.Float();
+        private final Rectangle2D.Float rLabel = new Rectangle2D.Float();
         private Rectangle2D.Float rChildren;
 
         /**
@@ -1641,7 +1640,7 @@ public class LWNode extends LWContainer
             box is used for <i>centering</i> the content in the bounding box of the shape,
             and for the initial rough estimate of an enclosing shape.
         */
-        private Rectangle2D.Float checker = new Rectangle2D.Float();
+        private final Rectangle2D.Float checker = new Rectangle2D.Float();
         boolean fitsInside(RectangularShape shape) {
             //return shape.contains(this);
             boolean fit = true;
@@ -1804,7 +1803,7 @@ public class LWNode extends LWContainer
         mBoxedLayoutChildY = EdgePadY + labelText.height; // must set before layoutChildren, as may be used in childOffsetY()
 
         float minWidth;
-        if (false && isPresentationContext()) {
+        if (false) {
             minWidth = Math.max(labelText.width, getWidth()-20);
             // Prob will have to just let it compute max child width, then center
             // the whole child box in the node (this isn't letting shrink node via drag-resize properly,
@@ -2513,14 +2512,13 @@ public class LWNode extends LWContainer
     @Override
     protected void drawChildren(DrawContext dc) {
         if (isCollapsed()) {
-            if (COLLAPSE_IS_GLOBAL == false) {
+            if (!COLLAPSE_IS_GLOBAL) {
                 // draw an indicator on this individual node showing that it's collapsed
                 dc.g.setStroke(STROKE_ONE);
                 dc.g.setColor(getRenderFillColor(dc));
                 final int bottom = (int) (getHeight() + getStrokeWidth() / 2f + 2.5f);
                 dc.g.drawLine(1, bottom, (int) (getWidth() - 0.5f), bottom);
             }
-            return;
         } else
             super.drawChildren(dc);
     }
@@ -2581,7 +2579,7 @@ public class LWNode extends LWContainer
 //             imageIcon.paintIcon(null, dc.g, 0, 0);
 //         } else
         
-        if (false && (dc.isPresenting() || isPresentationContext())) { // old-style "turn off the wrappers"
+        if (false) { // old-style "turn off the wrappers"
             // do nothing: no fill
         } else {
             Color fillColor = getRenderFillColor(dc);
@@ -2619,7 +2617,7 @@ public class LWNode extends LWContainer
         if (DEBUG.BOXES) {
             dc.setAbsoluteStroke(0.5);
             //if (hasChildren()) dc.g.draw(child_box);
-            if (false && _lastNodeContent != null && !isRectShape) {
+            if (false) {
                 dc.g.setColor(Color.darkGray);
                 dc.g.draw(_lastNodeContent);
             } else {
@@ -2779,7 +2777,7 @@ public class LWNode extends LWContainer
             // but only to a certian threshold -- what a hack!
             //float textHeight = getLabelBox().getPreferredSize().height;
             
-            if (false && WrapText)
+            if (false)
                 return mLabelPos.y;
             else {
                 // Doing this risks slighly moving the damn TextBox just as you edit it.

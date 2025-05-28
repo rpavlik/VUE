@@ -108,7 +108,7 @@ public class VueAquaLookAndFeel extends apple.laf.AquaLookAndFeel
         if (false) {
             table.put("CommandBarUI", "tufts.vue.VueAquaLookAndFeel$CommandBarUI");
             table.put("CommandBarTitleBarUI", "tufts.vue.VueAquaLookAndFeel$FloatingToolbarTitleUI");
-            table.put("CommandBar.titleBarSize", new Integer(8));
+            table.put("CommandBar.titleBarSize", 8);
             table.put("CommandBar.titleBarBackground", SystemColor.control);
             //table.put("CommandBar.titleBarBackground", new javax.swing.plaf.ColorUIResource(SystemColor.window));
             //table.put("CommandBar.titleBarBackground", SystemColor.window); // does NOT work as a ColorUIResource for some reason

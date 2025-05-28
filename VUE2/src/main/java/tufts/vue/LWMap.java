@@ -286,7 +286,7 @@ public class LWMap extends LWContainer
 
     /** persistance only */
     public String getSaveLocation() {
-        return mSaveLocation == null ? null : mSaveLocation.toString();
+        return mSaveLocation == null ? null : mSaveLocation;
     }
 
     /** persistance only */
@@ -798,7 +798,7 @@ public class LWMap extends LWContainer
     private void upgradeLinksToParentRelative(Collection<LWComponent> nodes)
     {
         for (LWComponent c : nodes) {
-            if (c instanceof LWLink == false)
+            if (!(c instanceof LWLink))
                 continue;
 
             final LWLink link = (LWLink) c;
@@ -1387,7 +1387,7 @@ public class LWMap extends LWContainer
         //if (!tufts.vue.action.SaveAction.PACKAGE_DEBUG) // tmp hack
             
         for (LWComponent c : components) {
-            if (c instanceof LWLink == false)
+            if (!(c instanceof LWLink))
                 continue;
             if (DEBUG.LAYOUT||DEBUG.INIT) out("LAYOUT LINK: in " +  c.getParent() + ": " + c);
             try {
@@ -2218,7 +2218,7 @@ public class LWMap extends LWContainer
         if (c instanceof LWPathway)
             throw new IllegalArgumentException("LWPathways not added as direct children of map: use addPathway " + c);
         
-        if (c instanceof Layer == false && !mXMLRestoreUnderway) {
+        if (!(c instanceof Layer) && !mXMLRestoreUnderway) {
             if (mActiveLayer != null) {
                 Log.warn("addChildImpl: forcing to active layer: " + mActiveLayer + " in " + this);
                 mActiveLayer.addChildImpl(c, context);
@@ -2342,7 +2342,7 @@ public class LWMap extends LWContainer
         if (DEBUG.UNDO) {
             //String msg = "MARKED TO +" + mChanges + " WITH OLD VALUE: " + Util.tags(e.oldValue) + "; " + e;
             String msg = "MARKED TO +" + mChanges + " ON " + e;
-            if (true||mXMLRestoreUnderway)
+            if (true)
                 Log.debug(msg);
             else
                 Log.debug(msg, new Throwable("HERE"));
@@ -2723,7 +2723,7 @@ public class LWMap extends LWContainer
     // to be helping with the sporadic javac failures -- SMF 2008-04-09
     private final ColorProperty mPresentationColor = new ColorProperty(KEY_PresentationColor, new java.awt.Color(32,32,32));
     public static final Key KEY_PresentationColor = new Key("presentation.color", KeyType.STYLE)
-        { final Property getSlot(LWMap c) { return c.mPresentationColor; } };
+        { Property getSlot(LWMap c) { return c.mPresentationColor; } };
     
     private List searchArrLst = new ArrayList();
     public List getSearchArrLst() { return searchArrLst; }

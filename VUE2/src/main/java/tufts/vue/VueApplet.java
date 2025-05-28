@@ -71,7 +71,7 @@ public class VueApplet extends JApplet {
 
 	private static boolean isInited = false;
 	private static boolean firstInit = true;
-	private static MapViewer viewer = null;
+	private static final MapViewer viewer = null;
 	private static JPanel toolbarPanel = null;
 	private static JComponent toolbar = null;
 	private static boolean fullyStopped = false;
@@ -81,7 +81,7 @@ public class VueApplet extends JApplet {
 	// web browser page:
 	// new applet & context objects are created even when you go forward/back
 	// pages.	
-	private static MapTabbedPane mMapTabbedPane = null;
+	private static final MapTabbedPane mMapTabbedPane = null;
 
 	// applet parameters
 	/*
@@ -239,7 +239,8 @@ public class VueApplet extends JApplet {
 			tufts.vue.gui.DockWindow.HideAllWindows();
 				EditorManager.destroy();
 				VueToolbarController.destroyController();
-				VUE.getActiveViewer().destroyContextMenus();		
+            VUE.getActiveViewer();
+            MapViewer.destroyContextMenus();
 		}});
 		//	VUE.finalizeDocks();	
 			fullyStopped = true;
@@ -262,7 +263,7 @@ public class VueApplet extends JApplet {
 		return isZotero;
 	}
 	private void processAppletParameters() {
-		String zoteroPlugin = this.getParameter(this.zoteroPlugin);
+		String zoteroPlugin = this.getParameter(VueApplet.zoteroPlugin);
 		if (zoteroPlugin != null)
 			zoteroPlugin = zoteroPlugin.toLowerCase();
 		if (zoteroPlugin != null && zoteroPlugin.equals("true")) {
@@ -283,7 +284,7 @@ public class VueApplet extends JApplet {
             LWComponent n = (LWComponent)it.next();
             if(n instanceof LWNode)
             {
-                items = (new StringBuilder()).append(items).append(n.getLabel()).append(",").toString();
+                items = items + n.getLabel() + ",";
                 String id = null;
                 try
                 {
@@ -294,9 +295,9 @@ public class VueApplet extends JApplet {
                     System.out.println("Exception in zotero import from vue: no zotero id");
                 }
                 if(id == null)
-                    items = (new StringBuilder()).append(items).append("none,").toString();
+                    items = items + "none,";
                 else
-                    items = (new StringBuilder()).append(items).append(id).append(",").toString();
+                    items = items + id + ",";
                 String url = null;
                 try
                 {
@@ -307,10 +308,10 @@ public class VueApplet extends JApplet {
                     System.out.println("Exception in zotero import from vue: no zotero url");
                 }
                 if(url == null)
-                    items = (new StringBuilder()).append(items).append("none").toString();
+                    items = items + "none";
                 else
-                    items = (new StringBuilder()).append(items).append(url).toString();
-                items = (new StringBuilder()).append(items).append("\n").toString();
+                    items = items + url;
+                items = items + "\n";
             }
         } while(true);
         return items;
@@ -403,7 +404,7 @@ public class VueApplet extends JApplet {
         InputStream is;
 		try {
 			is = new java.io.ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse((InputStream) is);
+			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse(is);
 			NodeList nodeLst = doc.getElementsByTagName("link");
 			
 			//build multimap of links
@@ -482,7 +483,7 @@ public class VueApplet extends JApplet {
         InputStream is;
 		try {
 			is = new java.io.ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse((InputStream) is);
+			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse(is);
 			NodeList nodeLst = doc.getElementsByTagName("note");
 			
 			//build multimap of links
@@ -502,7 +503,7 @@ public class VueApplet extends JApplet {
                            
 
 	              
-	                map.put(n.getNodeValue(), ((Node)noteList.item(0)).getNodeValue().trim());
+	                map.put(n.getNodeValue(), noteList.item(0).getNodeValue().trim());
 	               // System.out.println("puts : " + n.getNodeValue() +"," +fstNode.getNodeValue());
 	            }
 
@@ -605,7 +606,7 @@ public class VueApplet extends JApplet {
 										}
 										catch(NullPointerException npe)
 										{
-											System.out.println(npe.toString());
+											System.out.println(npe);
 											added = false;
 											tries++;
 											try {

@@ -68,7 +68,7 @@ public abstract class MenuButton<T> extends JButton
     private Icon mButtonIcon;
 
     //protected static final String ArrowText = "v ";
-    private static boolean isButtonActionable = false;
+    private static final boolean isButtonActionable = false;
 
     private boolean actionAreaClicked = false;
 
@@ -191,7 +191,7 @@ public abstract class MenuButton<T> extends JButton
         */
         //if (DEBUG.BOXES||DEBUG.TOOL) System.out.println(this + " _setIcon " + i);
         Dimension d = getButtonSize();
-        if (true || !GUI.isMacAqua()) {
+        if (true) {
             if (false)
                 VueButtonIcon.installGenerated(this, i, d);
             else

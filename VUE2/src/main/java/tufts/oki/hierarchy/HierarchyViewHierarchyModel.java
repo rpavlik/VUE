@@ -37,11 +37,11 @@ public class HierarchyViewHierarchyModel extends HierarchyModel {
     
     //hash map which stores information of the hierarchy map data
     //node hashtable serves the purpose of mapping duplicates to the original nodes
-    private HashMap hierarchyHash;
-    private Hashtable nodeHash;
+    private final HashMap hierarchyHash;
+    private final Hashtable nodeHash;
     
     //an arraylist which holds all the nodes that were connected from the root node
-    private ArrayList originalNodes;
+    private final ArrayList originalNodes;
     
     private LWHierarchyMap hierarchyMap = null;
     //problems:
@@ -119,7 +119,7 @@ public class HierarchyViewHierarchyModel extends HierarchyModel {
         duplicateNode(rootNode, hierarchyMap);
        
         //stores default values to the hierarchy hashmap
-        hierarchyHash.put((LWNode)nodeHash.get(rootNode), new ShortestPathData(null, 0));
+        hierarchyHash.put(nodeHash.get(rootNode), new ShortestPathData(null, 0));
         
         //Dijkstra's theorem (shortest path)
         while(!nodesVector.isEmpty())
@@ -262,10 +262,10 @@ public class HierarchyViewHierarchyModel extends HierarchyModel {
               String label, description;
             
               if ((label = node.getLabel()) == null)   
-                label = new String("Node:" + node.getID());
+                label = "Node:" + node.getID();
               
               if ((description = node.getNotes()) == null)
-                description = new String("No description for " + label);
+                description = "No description for " + label;
               
               hierarchyNode = (HierarchyNode)createRootNode(new tufts.oki.shared.Id(getNextID()), new tufts.oki.shared.VueType(), 
                                              label, description);
@@ -314,14 +314,14 @@ public class HierarchyViewHierarchyModel extends HierarchyModel {
             if ((label = component.getLabel()) == null)
             {
                 if (component instanceof LWLink)
-                  label = new String("Link:" + component.getID());
+                  label = "Link:" + component.getID();
                 
                 else if (component instanceof LWNode)   
-                  label = new String("Node:" + component.getID());
+                  label = "Node:" + component.getID();
             }
             
             if ((description = component.getNotes()) == null)
-              description = new String("No description for " + label);
+              description = "No description for " + label;
               
             //creates a hierarchy node and sets its LWcomponent to the given one
             node = (HierarchyNode)createNode(new tufts.oki.shared.Id(getNextID()), parentNode.getId(), new tufts.oki.shared.VueType(), 
@@ -373,8 +373,8 @@ public class HierarchyViewHierarchyModel extends HierarchyModel {
     /**A class which stores the information of the hierarchy*/
     private class ShortestPathData
     {
-        private LWNode parentNode;
-        private int distance;
+        private final LWNode parentNode;
+        private final int distance;
         
         public ShortestPathData(LWNode parentNode, int distance)
         {

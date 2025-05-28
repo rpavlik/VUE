@@ -32,7 +32,7 @@ import java.awt.Font;
  */
 public final class MasterSlide extends LWSlide
 {
-    protected static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(MasterSlide.class);
+    private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(MasterSlide.class);
     
     final static String TitleLabel = "Slide Title Style";
     final static String TextLabel = "Slide Text Style";
@@ -62,7 +62,7 @@ public final class MasterSlide extends LWSlide
     	
 
     @Override
-    public final void setParent(LWContainer parent) {
+    public void setParent(LWContainer parent) {
         if (parent instanceof LWPathway) {
             super.setParent(parent);
             setPathwayEntry(((LWPathway)parent).asEntry());
@@ -326,7 +326,7 @@ public final class MasterSlide extends LWSlide
             else
                 dc.g.setColor(EditLabelColorLightBG);
             dc.g.drawString("Master Slide", 72/4, 72);
-            if (true||DEBUG.Enabled) {
+            if (true) {
                 //dc.g.setColor(Color.red);
                 dc.g.drawString(getEntry().pathway.getLabel(), 72/4, getHeight() - 72/4);
             }

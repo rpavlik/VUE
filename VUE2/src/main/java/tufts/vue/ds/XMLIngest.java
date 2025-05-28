@@ -380,11 +380,7 @@ public class XMLIngest {
             if (!node.hasChildNodes()) {
                 DO_TAG = false;
             }
-            else if (children.getLength() == 1 && isText(firstChild) && firstChild.getNodeValue().trim().length() == 0) {
-                DO_TAG = false;
-            }
-            else
-                DO_TAG = true;
+            else DO_TAG = children.getLength() != 1 || !isText(firstChild) || firstChild.getNodeValue().trim().length() != 0;
             
             // if (!DO_TAG) ioutln("<!-- empty: " + nodeName + " -->");
         }

@@ -43,7 +43,7 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 	
 	// FIX:  resources
 	// private static String [] sTypeNames = VueResources.getStringArray( "userPropertyTYpes");
-	private static String [] sTypeNames = { "String", "Integer", "Number", "Choice", "Boolean" };
+	private static final String [] sTypeNames = { "String", "Integer", "Number", "Choice", "Boolean" };
 	
 	////////////
 	// Fields
@@ -303,7 +303,7 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 			Object [] objs = new Object[3];
 			objs[0] = prop;
 			objs[1] = "String";   // FIX: do lookup
-			objs [2] = new String("");
+			objs [2] = "";
 			
 			mTableModel.addRow( objs );
 			if( mCurType != null)

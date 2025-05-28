@@ -61,12 +61,12 @@ public class AssetResource extends URLResource {
         super();
         setClientType(Resource.ASSET_FEDORA);
     }
-    public AssetResource(Asset asset) throws osid.dr.DigitalRepositoryException,osid.OsidException {
+    public AssetResource(Asset asset) throws osid.OsidException {
         this();
         setAsset(asset);
     }
     
-    public void setAsset(Asset asset) throws osid.dr.DigitalRepositoryException,osid.OsidException {
+    public void setAsset(Asset asset) throws osid.OsidException {
         this.asset = asset;
         setPropertiesByAsset();
         setSpec(asset.getInfoField(new tufts.oki.dr.fedora.PID(VUE_DEFAULT_VIEW_ID)).getValue().toString());
@@ -119,7 +119,7 @@ public class AssetResource extends URLResource {
         return url;
     }
     
-    public void setCastorFedoraObject(CastorFedoraObject castorFedoraObject) throws osid.dr.DigitalRepositoryException,osid.OsidException {
+    public void setCastorFedoraObject(CastorFedoraObject castorFedoraObject) throws osid.OsidException {
         this.castorFedoraObject = castorFedoraObject;
         this.asset = this.castorFedoraObject.getFedoraObject();
         setSpec(asset.getInfoField(new tufts.oki.dr.fedora.PID(VUE_DEFAULT_VIEW_ID)).getValue().toString());

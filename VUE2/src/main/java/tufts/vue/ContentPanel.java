@@ -54,7 +54,7 @@ public class ContentPanel extends JPanel {
 	}
 
 
-	public void finalize() {
+	protected void finalize() {
 		resources = null;
 		datasets = null;
 		ontologies = null;

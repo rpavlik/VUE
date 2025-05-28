@@ -82,7 +82,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
         this.functions = new Vector(100);
         this.qualifiers = new Vector(100);
         this.rootQualifiers = new Vector(100);
-        this.sharedMgr = sharedMgr;
+        AuthorizationManager.sharedMgr = sharedMgr;
     }
     
     /**
@@ -94,7 +94,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
      */
     public void initManager (osid.shared.Agent user, osid.shared.SharedManager sharedMgr) {
         this.user = user;
-        this.sharedMgr = sharedMgr;
+        AuthorizationManager.sharedMgr = sharedMgr;
     }
     
     /**
@@ -147,7 +147,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
         osid.authorization.Qualifier qual = getQualifier (qualifierId);
         VueAuthorization az = new VueAuthorization (authId, agentId, ftn, qual, effectiveDate, expirationDate, true);
         auths.add (az);
-        return (osid.authorization.Authorization) az;
+        return az;
     }
     
     /**
@@ -158,7 +158,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
     public osid.authorization.Function createFunction(osid.shared.Id functionId, String displayName, String description, osid.shared.Type functionType, osid.shared.Id qualifierHierarchyId) {
         VueFunction ftn = new VueFunction (displayName, description, functionType, functionId, qualifierHierarchyId);
         functions.add (ftn);
-        return (osid.authorization.Function) ftn;
+        return ftn;
     }
     
     /**
@@ -265,13 +265,13 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (azCopy);
                 }
-                else if (isActiveNow == false) {
+                else if (!isActiveNow) {
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (az);
                 }
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -294,13 +294,13 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (azCopy);
                 }
-                else if (isActiveNow == false) {
+                else if (!isActiveNow) {
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (az);
                 }
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -323,13 +323,13 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (azCopy);
                 }
-                else if (isActiveNow == false) {
+                else if (!isActiveNow) {
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (az);
                 }
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -352,13 +352,13 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (azCopy);
                 }
-                else if (isActiveNow == false) {
+                else if (!isActiveNow) {
                     VueAuthorization azCopy = (VueAuthorization) az.clone();
                     authz.add (az);
                 }
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -379,11 +379,11 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
             if (az.hasAgent(agentId) && az.hasFunction(functionId) && az.hasQualifier(qualifierId)) {
                 if (isActiveNow && az.isActiveNow())
                     authz.add (az);
-                else if (isActiveNow == false)
+                else if (!isActiveNow)
                     authz.add (az);
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -404,11 +404,11 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
             if (az.hasAgent(agentId) && az.hasFunctionType(functionType) && az.hasQualifier(qualifierId)) {
                 if (isActiveNow && az.isActiveNow())
                     authz.add (az);
-                else if (isActiveNow == false)
+                else if (!isActiveNow)
                     authz.add (az);
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -429,11 +429,11 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
             if (az.hasFunction(functionId) && az.hasQualifier(qualifierId)) {
                 if (isActiveNow && az.isActiveNow())
                     authz.add (az);
-                else if (isActiveNow == false)
+                else if (!isActiveNow)
                     authz.add (az);
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -454,11 +454,11 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
             if (az.hasFunctionType(functionType) && az.hasQualifier(qualifierId)) {
                 if (isActiveNow && az.isActiveNow())
                     authz.add (az);
-                else if (isActiveNow == false)
+                else if (!isActiveNow)
                     authz.add (az);
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
     
     /**
@@ -480,11 +480,11 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
             if (az.hasAgent(agentId)) {
                 if (isActiveNow && az.isActiveNow())
                     authz.add (az);
-                else if (isActiveNow == false)
+                else if (!isActiveNow)
                     authz.add (az);
             }
         }
-        return (osid.authorization.AuthorizationIterator) new VueAuthorizationIterator (authz);
+        return new VueAuthorizationIterator (authz);
     }
 
     /**
@@ -562,7 +562,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                 children.add (qual);
             }
         }
-        return (osid.authorization.QualifierIterator) new VueQualifierIterator (children);
+        return new VueQualifierIterator (children);
     }
     
     /**
@@ -578,7 +578,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
                 children.add (qual);
             }
         }
-        return (osid.authorization.QualifierIterator) new VueQualifierIterator (children);
+        return new VueQualifierIterator (children);
     }
     
     /**
@@ -612,7 +612,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
      *  @author Mark Norton
      */
     public osid.authorization.QualifierIterator getRootQualifiers(osid.shared.Id qualifierHierarchyId) {
-        return (osid.authorization.QualifierIterator) new VueQualifierIterator (this.rootQualifiers);
+        return new VueQualifierIterator (this.rootQualifiers);
     }
     
     /**
@@ -631,7 +631,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
         while (it.hasNext()) {
             VueAuthorization az = (VueAuthorization) it.next();
             osid.shared.Agent ag = az.getAgent();
-            if (agents.indexOf (ag) == -1)
+            if (!agents.contains(ag))
                 agents.add(ag);
         }
         return new tufts.oki.shared.AgentIterator(agents);
@@ -648,10 +648,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
         VueAuthorizationIterator it = (VueAuthorizationIterator) this.getAllAZs(agentId, functionId, qualifierId, true);
         
         //  If there is one or more, then the agent is authorized.
-        if (it.hasNext())
-            return true;
-        else
-            return false;
+        return it.hasNext();
     }
     
     /**

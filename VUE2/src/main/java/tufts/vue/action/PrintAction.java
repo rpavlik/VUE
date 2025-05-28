@@ -110,10 +110,8 @@ public class PrintAction extends tufts.vue.VueAction
             out("nothing to print in " + map);
             return;
         }
-        boolean viewerPrint = false;
-        if (ae.getActionCommand() != null &&
-                ae.getActionCommand().contains("Visible"))
-            viewerPrint = true;
+        boolean viewerPrint = ae.getActionCommand() != null &&
+                ae.getActionCommand().contains("Visible");
 
         // if any tool windows open in W2K/1.4.2 when start this thread,
         // the print dialog get's obscured!
@@ -138,11 +136,11 @@ public class PrintAction extends tufts.vue.VueAction
 
     private class PrintJob extends Thread implements Printable
     {
-        private LWMap map;
-        private LWComponent focal;
-        private String jobName;
-        private boolean isPrintingView;
-        private Rectangle2D bounds; // map bounds of print job
+        private final LWMap map;
+        private final LWComponent focal;
+        private final String jobName;
+        private final boolean isPrintingView;
+        private final Rectangle2D bounds; // map bounds of print job
         
         private PrintJob(MapViewer viewer, boolean viewerPrint) {
             super("PrintJob#" + JobCount++);

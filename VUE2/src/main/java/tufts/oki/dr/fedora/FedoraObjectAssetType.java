@@ -31,9 +31,9 @@ import java.util.prefs.Preferences;
  */
 
 public class FedoraObjectAssetType extends osid.shared.Type {   
-    private Vector infoStructures = new Vector();
-    private DR dr;
-    private String id;
+    private final Vector infoStructures = new Vector();
+    private final DR dr;
+    private final String id;
     private String type ="TUFTS_STD_IMAGE";
     private osid.dr.InfoStructure disseminationInfoStructure = null;
     private osid.dr.InfoStructure sVUEInfoStructure = null;
@@ -53,7 +53,7 @@ public class FedoraObjectAssetType extends osid.shared.Type {
     public osid.dr.InfoStructureIterator getInfoStructures()
         throws osid.dr.DigitalRepositoryException
     {
-        return (osid.dr.InfoStructureIterator) new InfoStructureIterator(infoStructures);
+        return new InfoStructureIterator(infoStructures);
     }
     public osid.dr.InfoStructure getDissemiationInfoStructure()  throws osid.dr.DigitalRepositoryException  {
         if(this.disseminationInfoStructure == null) 

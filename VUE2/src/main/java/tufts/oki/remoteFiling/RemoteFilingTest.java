@@ -71,7 +71,7 @@ public class RemoteFilingTest {
         
         System.out.println ("Remote Filing System Test using FTP");
         System.out.println ("-----------------------------------");
-        System.out.println ("");
+        System.out.println ();
         
         //  Get the server name, user name, and password.
         /*

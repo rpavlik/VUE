@@ -214,7 +214,7 @@ public class LWPortal extends LWNode
                 clipDC.dispose();
                 
                 dc.g.setTransform(zeroTransform);
-                if (true || this.stroke == STROKE_ZERO)
+                if (true)
                     dc.setAbsoluteStroke(2);
                 else
                     dc.g.setStroke(this.stroke);

@@ -72,7 +72,7 @@ public class PropertyPanel extends JPanel {
      **/
     public void addProperty( String pName, String pValue) {
         JLabel  value = createLabel( pValue);
-        addProperty( pName, (JComponent) value);
+        addProperty( pName, value);
     }
     /**
      *

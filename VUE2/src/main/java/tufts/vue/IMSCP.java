@@ -52,22 +52,22 @@ public class IMSCP {
     public IMSCP(tufts.vue.ConceptMap map,URL location) {
     }
     **/
-    public IMSCP(URL location) throws ZipException,IOException{
+    public IMSCP(URL location) throws IOException{
         this.location = location;
         createTempFile();
     }
     
     
-    public InputStream getManifest() throws ZipException,IOException{
+    public InputStream getManifest() throws IOException{
         return getContent(MANIFEST_FILE);
     }
     
-    public InputStream getConceptMap() throws ZipException,IOException {
+    public InputStream getConceptMap() throws IOException {
 
         return getContent(MAP_FILE);
     }
     
-    public InputStream getResource(String fileName) throws ZipException, IOException{
+    public InputStream getResource(String fileName) throws IOException{
        return getContent(RESOURCE_FILES+File.separator+fileName);
     }
     
@@ -75,7 +75,7 @@ public class IMSCP {
         return tempFile;
     }
     
-    public void putEntry(String entryName,File file) throws ZipException, IOException {
+    public void putEntry(String entryName,File file) throws IOException {
         
         byte[] buf = new byte[1024]; // buffer for reading file
         int len;
@@ -97,11 +97,11 @@ public class IMSCP {
         }
     }
     
-    public void putEntry(File file) throws ZipException, IOException {
+    public void putEntry(File file) throws IOException {
         putEntry(file.getName(),file);
     }
     
-    private InputStream getContent(String fileName) throws ZipException, IOException {
+    private InputStream getContent(String fileName) throws IOException {
         InputStream inputStream;
         zipFile = new ZipFile(tempFile);
         ZipEntry entry = zipFile.getEntry(fileName);
@@ -109,7 +109,7 @@ public class IMSCP {
         return inputStream;
     }
     
-    private void createTempFile() throws ZipException, IOException{
+    private void createTempFile() throws IOException{
         String fileName = location.getFile();
         String prefix = fileName.substring(fileName.lastIndexOf("/")+1,fileName.indexOf("."));
         String suffix = fileName.substring(fileName.indexOf("."));

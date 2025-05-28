@@ -111,9 +111,7 @@ public class UserMapType {
 		Vector v = new Vector();
 		
 		if( pProperties != null) {
-			for (UserProperty pProperty : pProperties) {
-				v.add(pProperty);
-			}
+            Collections.addAll(v, pProperties);
 			}
 		
 		mProperties = v;
@@ -320,7 +318,7 @@ public class UserMapType {
 		for (Object key : pValues.keySet()) {
 			Object value = pValues.get(key);
 			if (value != null) {
-				str = str + " <br> " + key.toString() + " - " + value.toString();
+				str = str + " <br> " + key.toString() + " - " + value;
 			}
 		}
 		return str;

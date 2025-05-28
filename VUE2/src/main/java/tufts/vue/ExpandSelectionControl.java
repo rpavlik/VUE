@@ -102,7 +102,7 @@ public class ExpandSelectionControl extends JPanel implements ExpandSelectionLis
 
 
 	public ExpandSelectionListener[] getExpandSelectionListeners() {
-		return (ExpandSelectionListener[])listenerList.getListeners(
+		return listenerList.getListeners(
 				ExpandSelectionListener.class);
 	}
 

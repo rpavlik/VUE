@@ -183,7 +183,7 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 	}
 
 
-	public void finalize() {
+	protected void finalize() {
 		contentPanel = null;
 		classesCheckBox = null;
 		innerClassesCheckBox = null;
@@ -593,12 +593,12 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 
 	protected void newClass(boolean isPublic, boolean isAbstract, boolean isFinal, String sourceName, String className,
 			String extendsClassName, ArrayList<String> implementsInterfaceNames, double x, double y) {
-		StringBuffer	debugMessage = null;
+		StringBuilder debugMessage = null;
 
 		LWNode		classNode = findOrCreateClassNode(className, x, y);
 
 		if (DEBUG) {
-			debugMessage = new StringBuffer("newClass() found " +
+			debugMessage = new StringBuilder("newClass() found " +
 					(isPublic ? "public " : "") + (isAbstract ? "abstract " : "") + (isFinal ? "final " : "") +
 					"class " + className);
 		}
@@ -644,12 +644,12 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 
 	protected void newInterface(boolean isPublic, boolean isAbstract, boolean isFinal, String sourceName, String interfaceName,
 			ArrayList<String> extendsInterfaceNames, double x, double y) {
-		StringBuffer	debugMessage = null;
+		StringBuilder debugMessage = null;
 
 		LWNode		interfaceNode = findOrCreateInterfaceNode(interfaceName, x, y);
 
 		if (DEBUG) {
-			debugMessage = new StringBuffer("newInterface() found " +
+			debugMessage = new StringBuilder("newInterface() found " +
 					(isPublic ? "public " : "") + (isAbstract ? "abstract " : "") + (isFinal ? "final " : "") +
 					"interface " + interfaceName);
 		}

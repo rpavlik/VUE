@@ -99,7 +99,7 @@ public class Toolbox {
 
 			// If this component has already been visited at a higher depth, don't revisit it.
 			if (alreadyVisitedAtLevel == null || alreadyVisitedAtLevel < depth) {
-				alreadyVisited.put(comp, new Integer(depth));
+				alreadyVisited.put(comp, depth);
 
 				boolean		compIsUserSelected = userSelection.contains(comp),
 							compIsLink =  (comp.getClass() == LWLink.class);

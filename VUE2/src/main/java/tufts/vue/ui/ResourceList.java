@@ -63,17 +63,17 @@ public class ResourceList extends JList
     public static final Color DividerColor = VueResources.getColor("ui.resourceList.dividerColor", 204,204,204);
  
     public static final boolean ALL_DATA = true; // use all data while comparing similarity between two LW Components. All includes notes and metadata
-    private static ImageIcon DragIcon = tufts.vue.VueResources.getImageIcon("favorites.leafIcon");
+    private static final ImageIcon DragIcon = tufts.vue.VueResources.getImageIcon("favorites.leafIcon");
  
-    private static int PreviewItems = 4;
-    private static int PreviewModelSize = PreviewItems + 1;
+    private static final int PreviewItems = 4;
+    private static final int PreviewModelSize = PreviewItems + 1;
 
-    private static int LeftInset = 2;
-    private static int IconSize = 32;
-    private static int IconTextGap = new JLabel().getIconTextGap();
-    private static int RowHeight = IconSize + 5;
+    private static final int LeftInset = 2;
+    private static final int IconSize = 32;
+    private static final int IconTextGap = new JLabel().getIconTextGap();
+    private static final int RowHeight = IconSize + 5;
 
-    private DefaultListModel mDataModel;
+    private final DefaultListModel mDataModel;
 
     private boolean isMaskingModel = false; // are we using a masking model?
     private boolean isMasking = false; // if using a masking model, is it currently masking most entries?
@@ -95,7 +95,7 @@ public class ResourceList extends JList
     }
 
     private JLabel mMoreLabel = new MsgLabel("?"); // failsafe
-    private JLabel mLessLabel = new MsgLabel(String.format(Locale.getDefault(), VueResources.getString("resourcelist.showless"), PreviewItems));
+    private final JLabel mLessLabel = new MsgLabel(String.format(Locale.getDefault(), VueResources.getString("resourcelist.showless"), PreviewItems));
     
     /**
      * A model that can intially "mask" out all but a set of initial
@@ -624,11 +624,8 @@ public class ResourceList extends JList
 	}
 	
 	public static boolean checkCollision(LWComponent c1, LWComponent c2) {
-		boolean collide = false;
-		if(c2.getX()>= c1.getX() && c2.getX() <= c1.getX()+c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <=c1.getY()+c2.getHeight()) {
-			collide = true;
-		}
-		return collide;
+		boolean collide = c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
+        return collide;
 	}
 }
 

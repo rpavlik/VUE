@@ -406,7 +406,7 @@ public class PresentationTool extends VueTool
                 // want to do this, as it's a bit complicating...
                 // TODO: handle map-nodes (groups) -- technically, we want
                 // to check every ancestor for the path membership...
-                final LWSlide slide = (LWSlide) node.getAncestorOfType(LWSlide.class);
+                final LWSlide slide = node.getAncestorOfType(LWSlide.class);
                 return slide != null && slide.inPathway(p);
             } else
                 return false;
@@ -666,9 +666,9 @@ public class PresentationTool extends VueTool
                     faint = null;
                 
                 if (DEBUG.Enabled && entry != null && entry.isLast()) {
-                    int left = (int) Math.round(super.x) + 4;
-                    int right = (int) Math.round(super.x + super.width) - 4;
-                    int bottom = (int) Math.round(super.y + super.height) - 4;
+                    int left = Math.round(super.x) + 4;
+                    int right = Math.round(super.x + super.width) - 4;
+                    int bottom = Math.round(super.y + super.height) - 4;
                     dc.g.setStroke(STROKE_ONE);
                     dc.g.setColor(faint);
                     dc.g.drawLine(left, bottom, right, bottom);
@@ -804,7 +804,7 @@ public class PresentationTool extends VueTool
             
             setTextColor(NavTextColor);
         
-            if (false && pathway != null) {
+            if (false) {
                 // Nav node for jumping to another pathway
                 //final Color color = Util.alphaMix(pathway.getColor(), pathway.getMasterSlide().getFillColor());
                 final Color color = Util.alphaMix(pathway.getColor(), Color.gray);
@@ -948,7 +948,7 @@ public class PresentationTool extends VueTool
         
         // force label at left (non-centered)                
         @Override
-        protected final float relativeLabelX() { return -NavNodeX + 10; }
+        protected float relativeLabelX() { return -NavNodeX + 10; }
 
     }
 
@@ -1108,7 +1108,7 @@ public class PresentationTool extends VueTool
             startPresentation();
             
         } else if (onCurrentPathway()) {
-            if (false && allTheWay) {
+            if (false) {
                 // todo: skip to end of queue if been here instead
                 // of blowing it away!
                 // skipping far forward complicates the hell
@@ -1120,7 +1120,7 @@ public class PresentationTool extends VueTool
         } else {
             if (guessing) {
 
-                if (false && inCurrentPathway()) {
+                if (false) {
                     // This too hairy for now: we're attempting to allow "space"
                     // to auto-pop back up to a slide whose contents we've delved into,
                     // tho we really need to be checking the back-list to make sure
@@ -1150,7 +1150,7 @@ public class PresentationTool extends VueTool
     @Override
     public PickContext initPick(PickContext pc, float x, float y) {
         // allow picking of node icons, group contents, etc as long as not a at top level map
-        if (mFocal instanceof LWMap == false)
+        if (!(mFocal instanceof LWMap))
             pc.pickDepth = 1;
         return pc;
     }
@@ -1345,7 +1345,7 @@ public class PresentationTool extends VueTool
     
     //private boolean isPresenting() { return !mShowContext.isSelected(); }
     
-    private static float[] OverviewMapScales = {8, 6, 4, 3, 2.5f, 2, 1.5f, 1.25f, 1};
+    private static final float[] OverviewMapScales = {8, 6, 4, 3, 2.5f, 2, 1.5f, 1.25f, 1};
     private static int OverviewMapSizeIndex = 5;
     private float mNavMapX, mNavMapY; // location of the overview navigator map
     private DrawContext mNavMapDC;
@@ -1404,7 +1404,7 @@ public class PresentationTool extends VueTool
             
             //final LWSlide slide = (LWSlide) standout.getAncestorOfType(LWSlide.class);
             // TODO: Test using getParent v.s. getAncestor...
-            inSlide = (LWSlide) standout.getParentOfType(LWSlide.class);
+            inSlide = standout.getParentOfType(LWSlide.class);
             if (inSlide != null)
                 standout = inSlide;
               //standout = slide.getSourceNode();
@@ -1517,7 +1517,7 @@ public class PresentationTool extends VueTool
         
             
         //if (!(standout instanceof LWSlide) && mCurrentPage.isMapView() && bounds != null) {
-        if (standout instanceof LWMap == false) {
+        if (!(standout instanceof LWMap)) {
 
             // draw the red reticle 
                 
@@ -2582,11 +2582,8 @@ public class PresentationTool extends VueTool
 
         if (DEBUG.PRESENT) out("  animating focal: " + animatingFocal);
         if (DEBUG.PRESENT) out("destination focal: " + newFocal);
-        
-        if (animatingFocal instanceof LWSlide && newFocal == animatingFocal)
-            animateToFocal(viewer, newFocal, true);
-        else
-            animateToFocal(viewer, newFocal, false);
+
+            animateToFocal(viewer, newFocal, animatingFocal instanceof LWSlide && newFocal == animatingFocal);
 
 
         }
@@ -2727,7 +2724,7 @@ public class PresentationTool extends VueTool
     }
 
     private boolean isOverviewVisible() {
-        return mShowOverview && mFocal instanceof LWMap == false;
+        return mShowOverview && !(mFocal instanceof LWMap);
     }
     
     @Override
@@ -2746,7 +2743,7 @@ public class PresentationTool extends VueTool
             // all drawing effects of the active tool, so we don't have to worry about
             // it.
 
-            if (true || dc.isInteractive()) {
+            if (true) {
                 drawNavNodes(dc.push()); dc.pop();
             } else
                 out("NON-INTERACTIVE (no NavNodes)");
@@ -2765,7 +2762,7 @@ public class PresentationTool extends VueTool
             drawOverviewMap(dc.push()); dc.pop();
         }
 
-        if (true || dc.isInteractive()) {
+        if (true) {
             if (ResumeButton.isVisible()) {
                 dc.setFrameDrawing();
                 ResumeButton.setLocation(30, dc.frame.height - (ResumeButton.height+70)); 
@@ -3239,10 +3236,7 @@ public class PresentationTool extends VueTool
     public boolean permitsToolChange() {
         if (VUE.inNativeFullScreen())
             return false;
-        else if (VUE.inWorkingFullScreen() && ResumeButton.isVisible())
-            return false;
-        else
-            return true;
+        else return !VUE.inWorkingFullScreen() || !ResumeButton.isVisible();
     }
 
 

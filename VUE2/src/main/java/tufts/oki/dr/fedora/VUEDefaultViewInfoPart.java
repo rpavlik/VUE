@@ -28,14 +28,14 @@ package  tufts.oki.dr.fedora;
 public class VUEDefaultViewInfoPart  implements osid.dr.InfoPart {
    java.util.Vector partsVector = new java.util.Vector();
     osid.dr.InfoStructure disseminationInfoStructure = null;
-    private osid.OsidOwner owner = null;
-    private String displayName = "VUEDefaultViewInfoPart";
-    private String description = "Store URL for VUE to view the object";
+    private final osid.OsidOwner owner = null;
+    private final String displayName = "VUEDefaultViewInfoPart";
+    private final String description = "Store URL for VUE to view the object";
     private osid.shared.Id id = null;
-    private boolean populatedByDR = false;
-    private boolean mandatory = false;
-    private boolean repeatable = false;
-    private osid.dr.InfoStructure infoStructure = (osid.dr.InfoStructure) disseminationInfoStructure;
+    private final boolean populatedByDR = false;
+    private final boolean mandatory = false;
+    private final boolean repeatable = false;
+    private osid.dr.InfoStructure infoStructure = disseminationInfoStructure;
 
     /** Creates a new instance of OutputInfoPart */
     public VUEDefaultViewInfoPart(osid.dr.InfoStructure infoStructure,DR dr) throws osid.dr.DigitalRepositoryException,osid.shared.SharedException {
@@ -136,7 +136,7 @@ public class VUEDefaultViewInfoPart  implements osid.dr.InfoPart {
      */
     public osid.dr.InfoPartIterator getInfoParts()
         throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoPartIterator) (new InfoPartIterator(partsVector));
+        return new InfoPartIterator(partsVector);
     }
 
     /**

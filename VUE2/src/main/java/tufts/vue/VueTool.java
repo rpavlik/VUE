@@ -139,7 +139,7 @@ public abstract class VueTool extends AbstractAction
         while (e.hasMoreElements()) {
             String key = (String) e.nextElement();
             if (key.startsWith(pID)) {
-                String localKey = key.substring(mID.length()+1, key.length());
+                String localKey = key.substring(mID.length()+1);
                 //System.out.println("\tkey: " + localKey + "=" + rb.getString(key));
                 mResourceMap.put(localKey, rb.getString(key));// todo: use rb.getObject?
             }
@@ -568,11 +568,7 @@ public abstract class VueTool extends AbstractAction
             // TEST ONLY FOR NOW.
             //-----------------------------------------------------------------------------
             
-        if (false &&
-            !s.isEmpty() &&
-            VUE.multipleMapsVisible() &&
-            VUE.isActiveViewerOnLeft() &&
-            VUE.getRightTabbedPane().getSelectedViewer().getMap() == VUE.getActiveMap()
+        if (false
             )
             {
                 MapViewer viewer = VUE.getRightTabbedPane().getSelectedViewer();
@@ -845,7 +841,8 @@ public abstract class VueTool extends AbstractAction
 
         if (parent != null) {
             //if (DEBUG.Enabled) Util.printStackTrace("actionPerformed tool switch to " + parent + " from " + VueToolbarController.getController().getActiveTool());
-            parent.handleToolSelection(true, VueToolbarController.getController().getActiveTool());
+            VueToolbarController.getController();
+            parent.handleToolSelection(true, VueToolbarController.getActiveTool());
         }
         if (this.hasSubTools())
             VueToolbarController.getController().handleToolSelection(this.getSelectedSubTool());

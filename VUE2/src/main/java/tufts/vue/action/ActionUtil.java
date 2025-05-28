@@ -191,7 +191,7 @@ public class ActionUtil
             }
             
             if (picked.exists()) {            	
-                int n = VueUtil.confirm(null, VueResources.getString("replaceFile.text") + " \'" + picked.getName() + "\'", 
+                int n = VueUtil.confirm(null, VueResources.getString("replaceFile.text") + " '" + picked.getName() + "'",
                         VueResources.getString("replaceFile.title"), JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                   
                 if (n == JOptionPane.NO_OPTION){
@@ -425,14 +425,14 @@ public class ActionUtil
             return null;
     }
     
-    private static HashMap LoadedMappings = new HashMap();
+    private static final HashMap LoadedMappings = new HashMap();
     /** return's a Mapping if successful, or an Exception if not.
      * Results are cached (if load was successful) for future calls.*/
     private static Object _loadMapping(URL mappingSource)
     //throws java.io.IOException //, org.exolab.castor.mapping.MappingException
     {
         if (!DEBUG.CASTOR && LoadedMappings.containsKey(mappingSource))
-            return (Mapping) LoadedMappings.get(mappingSource);
+            return LoadedMappings.get(mappingSource);
         Mapping mapping = new Mapping();
         if (DEBUG.IO || DEBUG.INIT) Log.debug("Loading mapping " + mappingSource + "...");
         try {
@@ -1053,7 +1053,7 @@ public class ActionUtil
                 if (DEBUG.IO) Log.debug("Found saving version line: " + line);
                 final int savingVersionIndex = line.indexOf("VUE");
                 if (savingVersionIndex > 0) {
-                    savingVersion = line.substring(line.indexOf("VUE"), line.length());
+                    savingVersion = line.substring(line.indexOf("VUE"));
                     if (savingVersion.indexOf("-->") > 10)
                         savingVersion = savingVersion.substring(0, savingVersion.indexOf("-->"));
                     savingVersion = savingVersion.trim();
@@ -1131,7 +1131,7 @@ public class ActionUtil
                     
                 Log.info(url + "; assuming "
                              + (localEncoding ? "LOCAL " : "PLATFORM DEFAULT ")
-                             + "\'" + guessedEncoding + "\' charset encoding");
+                             + "'" + guessedEncoding + "' charset encoding");
 
                 // Note: doing this is a real tradeoff amongst bugs: any old save file
                 // that had fancy unicode characters in UTF, such as something in a

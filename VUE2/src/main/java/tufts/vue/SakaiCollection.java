@@ -17,7 +17,7 @@ package tufts.vue;
 public class SakaiCollection
 {
 //	private org.osid.shared.Type _collectionAssetType = new edu.tufts.vue.util.Type("org.sakaiproject","asset","siteCollection");
-	private org.osid.shared.Type _collectionAssetType = new edu.tufts.vue.util.Type("com.harvestroad","asset","category");
+	private final org.osid.shared.Type _collectionAssetType = new edu.tufts.vue.util.Type("com.harvestroad","asset","category");
 	private org.osid.repository.Asset _asset = null;
 	
 	public SakaiCollection(org.osid.repository.Asset asset)

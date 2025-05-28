@@ -39,7 +39,7 @@ import tufts.vue.*;
  
 public class TextOpenAction  extends VueAction {
     
-    private static boolean DEBUG_LOCAL = false;
+    private static final boolean DEBUG_LOCAL = false;
     
     //todo: add constants for row length, starting position, y gaps and x gaps
     //also make these all be read from VueResources.properties file for ease of modification
@@ -111,7 +111,7 @@ public class TextOpenAction  extends VueAction {
         Map<String,LWNode> nodeMap = new HashMap<>();
          Map<String,Integer> repeatMap = new HashMap<>();
         Map<String,LWLink> linkMap = new HashMap<>();
-        String mapName = fileName.substring(fileName.lastIndexOf("/")+1,fileName.length());
+        String mapName = fileName.substring(fileName.lastIndexOf("/")+1);
         if(mapName.lastIndexOf(".")>0)
             mapName = mapName.substring(0,mapName.lastIndexOf("."));
         if(mapName.length() == 0)
@@ -235,12 +235,12 @@ public class TextOpenAction  extends VueAction {
                       Resource resource = map.getResourceFactory().get(words[1]);
                     node1.setResource(resource);
                     nodeMap.put(words[0],node1);
-                     repeatMap.put(words[0], new Integer(1));
+                     repeatMap.put(words[0], 1);
                     map.add(node1);
                 } else {
                     node1 = nodeMap.get(words[0]);
                     int nc= repeatMap.get(words[0]);
-                    repeatMap.put(words[0],new Integer(nc+1));
+                    repeatMap.put(words[0], nc + 1);
                 }
                 if(!nodeMap.containsKey(words[2])) {
                     node2 = new LWNode(words[2]);
@@ -248,12 +248,12 @@ public class TextOpenAction  extends VueAction {
                     node2.setResource(resource);
                     map.add(node2);
                     nodeMap.put(words[2],node2);
-                    repeatMap.put(words[2], new Integer(1));
+                    repeatMap.put(words[2], 1);
                     
                 } else {
                     node2 = nodeMap.get(words[2]);
                       int nc= repeatMap.get(words[2]);
-                    repeatMap.put(words[2],new Integer(nc+1));
+                    repeatMap.put(words[2], nc + 1);
                 }
                 
             }else {
@@ -264,22 +264,22 @@ public class TextOpenAction  extends VueAction {
                 if(!nodeMap.containsKey(words[0])) {
                     node1 = new LWNode(words[0]);
                     nodeMap.put(words[0],node1);
-                     repeatMap.put(words[0], new Integer(1));
+                     repeatMap.put(words[0], 1);
                     map.add(node1);
                 } else {
                     node1 = nodeMap.get(words[0]);
                       int nc= repeatMap.get(words[0]);
-                    repeatMap.put(words[0],new Integer(nc+1));
+                    repeatMap.put(words[0], nc + 1);
                 }
                 if(!nodeMap.containsKey(words[1])) {
                     node2 = new LWNode(words[1]);
                     map.add(node2);
                     nodeMap.put(words[1],node2);
-                     repeatMap.put(words[1], new Integer(1));
+                     repeatMap.put(words[1], 1);
                 } else {
                     node2 = nodeMap.get(words[1]);
                       int nc= repeatMap.get(words[1]);
-                    repeatMap.put(words[1],new Integer(nc+1));
+                    repeatMap.put(words[1], nc + 1);
                 }
                 
                 }

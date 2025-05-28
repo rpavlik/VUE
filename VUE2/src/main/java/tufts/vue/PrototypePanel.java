@@ -89,12 +89,12 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 		label40.setFont(tufts.vue.gui.GUI.LabelFace);
 		label20.setFont(tufts.vue.gui.GUI.LabelFace);
 		label0.setFont(tufts.vue.gui.GUI.LabelFace);
-		labelTable.put(new Integer(100), label100);
-		labelTable.put(new Integer(80), label80);
-		labelTable.put(new Integer(60), label60);
-		labelTable.put(new Integer(40), label40);
-		labelTable.put(new Integer(20), label20);
-		labelTable.put(new Integer(0), label0);
+		labelTable.put(100, label100);
+		labelTable.put(80, label80);
+		labelTable.put(60, label60);
+		labelTable.put(40, label40);
+		labelTable.put(20, label20);
+		labelTable.put(0, label0);
 
 		fadeSlider.setLabelTable(labelTable);
 		fadeSlider.setPaintLabels(true);
@@ -125,12 +125,12 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
         label3.setFont(tufts.vue.gui.GUI.LabelFace);
         label4.setFont(tufts.vue.gui.GUI.LabelFace);
         label5.setFont(tufts.vue.gui.GUI.LabelFace);
-        labelTable.put(new Integer(0), label0);
-        labelTable.put(new Integer(1), label1);
-        labelTable.put(new Integer(2), label2);
-        labelTable.put(new Integer(3), label3);
-        labelTable.put(new Integer(4), label4);
-        labelTable.put(new Integer(5), label5);
+        labelTable.put(0, label0);
+        labelTable.put(1, label1);
+        labelTable.put(2, label2);
+        labelTable.put(3, label3);
+        labelTable.put(4, label4);
+        labelTable.put(5, label5);
         depthSlider.setLabelTable(labelTable);
         depthSlider.setPaintLabels(true);
         depthSlider.setSnapToTicks(true);
@@ -241,7 +241,7 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 		setVisible(true);
 	}
 
-	public void finalize() {
+	protected void finalize() {
 		fadeSlider = null;
 		zoomSelButton = null;
 		zoomMapButton = null;

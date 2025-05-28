@@ -28,15 +28,15 @@ public class BDEFInfoPart implements osid.dr.InfoPart {
 
     java.util.Vector partsVector = new java.util.Vector();
     osid.dr.InfoStructure disseminationInfoStructure = null;
-    private osid.OsidOwner owner = null;
-    private java.util.Map configuration = null;
-    private String displayName = "BDEF";
-    private String description = "Behaviour Definition of Fedora Object";
+    private final osid.OsidOwner owner = null;
+    private final java.util.Map configuration = null;
+    private final String displayName = "BDEF";
+    private final String description = "Behaviour Definition of Fedora Object";
     private osid.shared.Id id = null;
-    private boolean populatedByDR = true;
-    private boolean mandatory = true;
-    private boolean repeatable = false;
-    private osid.dr.InfoStructure infoStructure = (osid.dr.InfoStructure) disseminationInfoStructure;
+    private final boolean populatedByDR = true;
+    private final boolean mandatory = true;
+    private final boolean repeatable = false;
+    private osid.dr.InfoStructure infoStructure = disseminationInfoStructure;
 
     /**
      * Creates a new instance of BDEFInfoPart
@@ -133,7 +133,7 @@ public class BDEFInfoPart implements osid.dr.InfoPart {
      */
     public osid.dr.InfoPartIterator getInfoParts()
             throws osid.dr.DigitalRepositoryException {
-        return (osid.dr.InfoPartIterator) (new InfoPartIterator(partsVector));
+        return new InfoPartIterator(partsVector);
     }
 
     /**

@@ -49,17 +49,17 @@ import tufts.oki.authorization.*;
  * @author  Mark Norton
  */
 public class TuftsDLAuthZ {
-    public static final String VISITOR_LIST = new String ("http://www.nolaria.org/vue_visitors.txt");
-    public static final String ADMIN_LIST = new String ("http://www.nolaria.org/vue_admins.txt");
-    public static final String AUTH_SEARCH = new String ("search");
-    public static final String AUTH_VIEW = new String ("view");
-    public static final String AUTH_UPDATE = new String ("update");
-    public static final String AUTH_ADD = new String ("add");
-    public static final String AUTH_DELETE = new String ("delete");
-    public static final String ASSET = new String ("asset");
-    public static final String OWNED_ASSET = new String ("owned-asset");
-    private String username = null;             //  Cached user name.
-    private String password = null;             //  Cached  password.
+    public static final String VISITOR_LIST = "http://www.nolaria.org/vue_visitors.txt";
+    public static final String ADMIN_LIST = "http://www.nolaria.org/vue_admins.txt";
+    public static final String AUTH_SEARCH = "search";
+    public static final String AUTH_VIEW = "view";
+    public static final String AUTH_UPDATE = "update";
+    public static final String AUTH_ADD = "add";
+    public static final String AUTH_DELETE = "delete";
+    public static final String ASSET = "asset";
+    public static final String OWNED_ASSET = "owned-asset";
+    private final String username = null;             //  Cached user name.
+    private final String password = null;             //  Cached  password.
     private HashMap functionTypes = null;       //  Indexed function types.
     private HashMap qualifierTypes = null;      //  Indexed qualifier types.
     private HashMap agentTypes = null;          //  Index agent types.
@@ -88,7 +88,7 @@ public class TuftsDLAuthZ {
         authNMgr = (tufts.oki.authentication.AuthenticationManager) osid.OsidLoader.getManager("osid.authentication.AuthenticationManager", "tufts.oki.authentication", myOwner);      
         authNMgr.initManager (sharedMgr);
         authZMgr = (tufts.oki.authorization.AuthorizationManager) osid.OsidLoader.getManager("osid.authorization.AuthorizationManager", "tufts.oki.authorization", myOwner);      
-        authZMgr.initManager ((osid.shared.Agent) null, sharedMgr);
+        authZMgr.initManager (null, sharedMgr);
         
         //  Initialize the functions, qualifiers, and their types.
         //  Qualifiers must be initialized first, since functions refer to them indirectly.
@@ -132,7 +132,7 @@ public class TuftsDLAuthZ {
      */
     private void initQualifiers () {
         try {
-            root = (VueQualifier) authZMgr.createRootQualifier(sharedMgr.createId(), "Tufts DL Asset", "A Tufts digital library asset.", (osid.shared.Type) qualifierTypes.get("asset"), (osid.shared.Id) null);
+            root = (VueQualifier) authZMgr.createRootQualifier(sharedMgr.createId(), "Tufts DL Asset", "A Tufts digital library asset.", (osid.shared.Type) qualifierTypes.get("asset"), null);
             qualifiers.put (TuftsDLAuthZ.ASSET, root);
             qualifiers.put (TuftsDLAuthZ.OWNED_ASSET, authZMgr.createQualifier(sharedMgr.createId(), "Tufts DL Owned Asset", "An owned Tufts digital library asset.", (osid.shared.Type) qualifierTypes.get("owned-asset"), root.getId()));
         }
@@ -229,7 +229,7 @@ public class TuftsDLAuthZ {
         authNMgr.setPassword (password);
         
         //  Create an LDAP authentication type.
-        osid.shared.Type ldapType = (osid.shared.Type) new tufts.oki.authentication.AuthenticationLDAP();
+        osid.shared.Type ldapType = new AuthenticationLDAP();
 
         //  Authentication the user against the Tufts LDAP system.
         try {

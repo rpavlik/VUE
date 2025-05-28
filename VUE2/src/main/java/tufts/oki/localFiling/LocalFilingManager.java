@@ -288,7 +288,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
         Vector vect = new Vector(10);
         SortedSet set = new TreeSet();
         //vect.add (root);
-        osid.filing.CabinetEntryIterator it = (osid.filing.CabinetEntryIterator) new LocalCabinetEntryIterator(set);
+        osid.filing.CabinetEntryIterator it = new LocalCabinetEntryIterator(set);
         return it;
     }
     public osid.filing.CabinetEntryIterator listRoots() throws osid.filing.FilingException {
@@ -771,7 +771,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
         }
         
         //  Starting at the root, work down the path to the directory indicated.
-        osid.filing.Cabinet ptr = (osid.filing.Cabinet) root;
+        osid.filing.Cabinet ptr = root;
         for (int i = 1; i < parts.length; i++) {
             //  Make sure that the directory we are at is open.
             if (! ((LocalCabinet)ptr).isOpen())

@@ -154,7 +154,7 @@ public class RemoteFilingManager extends tufts.oki.OsidManager implements osid.f
     public osid.filing.CabinetEntryIterator listRoots() throws osid.filing.FilingException {
         Vector vect = new Vector(10);
         vect.add (root);
-        osid.filing.CabinetEntryIterator it = (osid.filing.CabinetEntryIterator) new RemoteCabinetEntryIterator(vect);
+        osid.filing.CabinetEntryIterator it = new RemoteCabinetEntryIterator(vect);
         return it;
     }
 

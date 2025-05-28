@@ -87,8 +87,8 @@ public class LWText extends LWComponent {
     public void copyStyle(LWComponent styleSource) {
         super.copyStyle(styleSource, ~0L);
 
-        if (styleSource == null)
-            return;
+        if (styleSource == null) {
+        }
         else
         	this.getRichLabelBox().copyStyle(styleSource);
     }
@@ -98,8 +98,7 @@ public class LWText extends LWComponent {
 	//	super.label = text;
 		richLabel = text;
 
-		return;
-	}
+    }
 	
 	public LWText(String label) {
 		super();
@@ -145,10 +144,10 @@ public class LWText extends LWComponent {
 		
 		if (VUE.getActiveViewer() != null && VUE.getActiveViewer().getFocal() instanceof LWSlide && overrideStyleSheet)
 	    {			 
-			   String fontName = (String)((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getPropertyValue(LWKey.FontName);		
-			   Integer fontSize = (Integer)((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getPropertyValue(LWKey.FontSize);
+			   String fontName = (String) VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getPropertyValue(LWKey.FontName);
+			   Integer fontSize = (Integer) VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getPropertyValue(LWKey.FontSize);
 			   VueStyleSheet ss =(VueStyleSheet)((SHTMLDocument)richLabelBox.getDocument()).getStyleSheet();
-			   Color color = ((LWSlide)VUE.getActivePathway().getMasterSlide()).getMasterSlide().getTextStyle().getTextColor();
+			   Color color = VUE.getActivePathway().getMasterSlide().getMasterSlide().getTextStyle().getTextColor();
 			   final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
 		       ss.addRule("body {margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;font-size:"+ fontSize +";font-family:"+ fontName +";color: "+colorString+";}");
 		       ss.addRule("ol { margin-top:6;font-family:"+fontName+";vertical-align: middle;margin-left:30;font-size:"+ fontSize +";list-style-position:outside;}");
@@ -161,7 +160,7 @@ public class LWText extends LWComponent {
 	    	String fontName = fep.mFontCombo.getEditor().getItem().toString();
 	    	String fontSize = fep.mSizeField.getEditor().getItem().toString();			
 			VueStyleSheet ss =(VueStyleSheet)((SHTMLDocument)richLabelBox.getDocument()).getStyleSheet();
-			Color color = fep.mTextColorButton.getColor();
+			Color color = FontEditorPanel.mTextColorButton.getColor();
 			final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
 		    ss.addRule("body {margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;font-size:"+ fontSize +";font-family:"+ fontName +";color: "+colorString+";}");
 		    ss.addRule("ol { margin-top:6;font-family:"+fontName+";vertical-align: middle;margin-left:30;font-size:"+ fontSize +";list-style-position:outside;}");
@@ -216,7 +215,7 @@ public class LWText extends LWComponent {
         // imageIcon.paintIcon(null, dc.g, 0, 0);
         // } else
 
-        if (false && (dc.isPresenting() || isPresentationContext())) { // old-style
+        if (false) { // old-style
             // "turn
             // off
             // the
@@ -781,7 +780,7 @@ public class LWText extends LWComponent {
             //mShape.setFrame(0, 0, getWidth(), getHeight());
 	}
 
-	private transient Point2D.Float mLabelPos = new Point2D.Float(); // for
+	private final transient Point2D.Float mLabelPos = new Point2D.Float(); // for
 
 	// use
 	// with

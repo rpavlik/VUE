@@ -221,9 +221,9 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
      */
     public osid.filing.ByteStore copyByteStore(String name, osid.filing.ByteStore oldByteStore) throws osid.filing.FilingException {
 
-        osid.filing.ByteStore bs = (osid.filing.ByteStore) createByteStore (name);
+        osid.filing.ByteStore bs = createByteStore (name);
         byte[] byte_store = ((LocalByteStore)oldByteStore).getBytes();
-        byte[] new_store = (byte[])byte_store.clone();
+        byte[] new_store = byte_store.clone();
         bs.write (new_store);
         return bs;
     }
@@ -276,7 +276,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
             
             /*  Add the element to the Vector array.  */
             children.add(entry);
-            return (osid.filing.Cabinet) entry;
+            return entry;
          }
          catch (OsidException e1) {
              throw new osid.filing.FilingException (osid.filing.FilingException.OPERATION_FAILED);
@@ -365,7 +365,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
             LocalCabinetEntry entry = (LocalCabinetEntry) child;
             //System.out.println ("getCabinetEntryByName - scan: " + entry.getDisplayName());
             if (name.compareTo(entry.getDisplayName()) == 0) {
-                return (osid.filing.CabinetEntry) entry;
+                return entry;
             }
         }
         /*  ITEM_DOES_NOT_EXIST is not exactly the right sentiment for not finding the entry.  */
@@ -385,7 +385,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
             LocalCabinetEntry entry = (LocalCabinetEntry) child;
             try {
                 if (id.isEqual(entry.getId())) {
-                    return (osid.filing.CabinetEntry) entry;
+                    return entry;
                 }
             } catch (osid.shared.SharedException ex) {
                 /*  Not exactly sure what could go wrong with an Id comparison,
@@ -513,10 +513,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
     public boolean isEmpty() {
         if (children == null)
             return true;
-        if (children.size() == 0)
-            return true;
-        else
-            return false;
+        return children.size() == 0;
     }
     
     /**
@@ -601,7 +598,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
         //  Build the path name string.
         path = (String) nodes.elementAt(nodes.size()-1);
         for (int i = nodes.size()-2; i != -1; i--) {
-            path += (String) nodes.elementAt(i) + "/";
+            path += nodes.elementAt(i) + "/";
         }
         
         return path;
@@ -639,9 +636,9 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
         catch (osid.filing.FilingException ex1) {}
         
         //  Build the path name string.
-        path = sep + (String) nodes.get(0);
+        path = sep + nodes.get(0);
         for (int i = 1; i < nodes.size(); i++) {
-            path += sep + (String) nodes.get(i);
+            path += sep + nodes.get(i);
         }
         
         return path;
@@ -677,7 +674,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
 
         root = (LocalCabinet) getRootCabinet();
         File file = root.getFile();
-        return file.separator;
+        return File.separator;
     }
     
     /**
@@ -686,7 +683,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
     public char separatorChar () {
         LocalCabinet root = (LocalCabinet) getRootCabinet();
         File file = root.getFile();
-        return file.separatorChar;
+        return File.separatorChar;
     }
 
     /**

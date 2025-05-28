@@ -75,20 +75,20 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
     private LWMap mMap;
     private boolean isDragUnderway;
     private Row mDragRow;
-    private GridBagLayout gridbag = new GridBagLayout();
-    private GridBagConstraints gBC = new GridBagConstraints();
+    private final GridBagLayout gridbag = new GridBagLayout();
+    private final GridBagConstraints gBC = new GridBagConstraints();
     private int selectedIndex = -1;
    
     //private static final Collection<VueAction> _selectionWatchers = new java.util.ArrayList();
 
     private static final Collection<LayerAction> AllLayerActions = new java.util.ArrayList();
-    private JPopupMenu popupMenu = new JPopupMenu();
-    private JPopupMenu unlockPopupMenu = new JPopupMenu();
-    private JMenuItem unLockMenuItem;
-    private JMenuItem renameMenuItem;
-    private JMenuItem duplicateMenuItem;
-    private JMenuItem lockMenuItem;
-    private JMenuItem deleteMenuItem;
+    private final JPopupMenu popupMenu = new JPopupMenu();
+    private final JPopupMenu unlockPopupMenu = new JPopupMenu();
+    private final JMenuItem unLockMenuItem;
+    private final JMenuItem renameMenuItem;
+    private final JMenuItem duplicateMenuItem;
+    private final JMenuItem lockMenuItem;
+    private final JMenuItem deleteMenuItem;
     //private class LayerAction extends Actions.LWCAction {
     private class LayerAction extends VueAction {
 
@@ -271,11 +271,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
 	                	Row row =null;
 	               	 	for (Row rows : mRows){
 	               	 		row = rows;
-		                     if (rows.layer.equals(layer)){		                    	 
-		                    	 row.layer.setVisible(true);
-		                     }else{		                    	 
-		                    	 row.layer.setVisible(false);
-		                     }
+                            row.layer.setVisible(rows.layer.equals(layer));
 	                     }	                    	
 	                	
                         //locked.setEnabled(layer.isVisible());                        
@@ -285,7 +281,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                         if (row.layer == getActiveLayer() && !canBeActive(row.layer))
                             if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);                        
                         
-	                	setActiveLayer((Layer) layer, !UPDATE);                	
+	                	setActiveLayer(layer, !UPDATE);
 	                	
 	                	flg = !flg;
                 	}else{
@@ -959,15 +955,11 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         for (Row row : mRows) {
             if (row.grab == null)
                 continue;
+            //Log.debug("DISABLE GRAB IN " + row);
+            //Log.debug(" ENABLE GRAB IN " + row);
             if (disable) {
                 row.grab.setEnabled(false);
-            } else if (parents.size() == 1 && parents.contains(row.layer)) {
-                //Log.debug("DISABLE GRAB IN " + row);
-                row.grab.setEnabled(false);
-            } else  {
-                //Log.debug(" ENABLE GRAB IN " + row);
-                row.grab.setEnabled(true);
-            }
+            } else row.grab.setEnabled(parents.size() != 1 || !parents.contains(row.layer));
         }
     }
 
@@ -1180,7 +1172,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             if (row == exclusiveRow)
                 continue;
 
-            row.label.setEnabled(entering ? false : row.visible.isSelected());
+            row.label.setEnabled(!entering && row.visible.isSelected());
                 
             layer.setHidden(LAYER_EXCLUDED, entering);
         }
@@ -1391,7 +1383,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             dc.setAntiAlias(true);
             dc.setInteractive(false);
                         
-            if (layer instanceof Layer == false) {
+            if (!(layer instanceof Layer)) {
                 //dc.fillBackground(Color.white);
                 layer.drawFit(dc, 0);
                 return;
@@ -1842,7 +1834,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             //preview.setPreferredSize(new Dimension(256, Short.MAX_VALUE));
             //preview.setMaximumSize(GUI.MaxSize);
 
-            if (false && DEBUG.Enabled)
+            if (false)
                 layer.addLWCListener(new LWComponent.Listener() {
                         public void LWCChanged(LWCEvent e) {
                             // this is heavy duty!  Would be nice if UserActionCompleted
@@ -2253,8 +2245,8 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             // This prevents us from being laid-out to the new location
             // during drags (jumping to the new location for one mouse-move)
             // Must be paired with setDragLocation to work.
-            if (mDragRow == this)
-                return;
+            if (mDragRow == this) {
+            }
             else
                 super.setBounds(x, y, width, height);
         }

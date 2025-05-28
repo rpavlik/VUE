@@ -80,7 +80,7 @@ public class AuthZTest {
             if (ct == 0)
                 System.out.println ("\t(none)");
             else {
-                System.out.println ("");
+                System.out.println ();
                 
                 if (tuftsDL.isAuthorized (user, TuftsDLAuthZ.AUTH_SEARCH))
                     System.out.println ("User is authorized for search.");

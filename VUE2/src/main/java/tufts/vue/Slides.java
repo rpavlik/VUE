@@ -464,7 +464,7 @@ class Slides {
             for (Resource r : nodeUnique) {
                 final LWComponent newNode;
                 // TODO: merge this code into something common with buildPathwaySlide
-                if (false && r.isImage()) {
+                if (false) {
                     newNode = new LWImage(r);
                 } else {
                     newNode = createNode(nodeSources.get(r), r);

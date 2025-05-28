@@ -23,6 +23,7 @@ import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URL;
 import java.awt.Image;
+import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 import tufts.vue.ui.ResourceIcon;
 import javax.swing.JComponent;
@@ -164,7 +165,7 @@ public abstract class Resource implements Cloneable
                             org.osid.OsidContext context)
             throws org.osid.repository.RepositoryException
         {
-            if (DEBUG.RESOURCE) System.out.println(""); // for spacing out large sets of search results
+            if (DEBUG.RESOURCE) System.out.println(); // for spacing out large sets of search results
             Resource r = new Osid2AssetResource(asset, context);
             try {
                 //if (DEBUG.DR && repository != null) r.addProperty("~Repository", repository.getDisplayName());
@@ -278,7 +279,7 @@ public abstract class Resource implements Cloneable
     
     /** @return null if SIZE_UNKOWN, otherwise a valid Long */
     public Long getPersistByteSize() {
-        return mByteSize == SIZE_UNKNOWN ? null : Long.valueOf(mByteSize);
+        return mByteSize == SIZE_UNKNOWN ? null : mByteSize;
     }
     
     protected void setByteSize(long size) {
@@ -433,12 +434,12 @@ public abstract class Resource implements Cloneable
     
     public long getAccessAttempted() { return mAccessAttempted; }
     public void setAccessAttempted(long attempted) { mAccessAttempted = attempted; }
-    public Long getPersistAccessAttempted() { return mAccessAttempted == 0 ? null : Long.valueOf(mAccessAttempted); }
+    public Long getPersistAccessAttempted() { return mAccessAttempted == 0 ? null : mAccessAttempted; }
     public void setPersistAccessAttempted(Long l) { setAccessAttempted(l == null ? 0 : l); }
     
     public long getAccessSuccessful() { return mAccessSuccessful; }
     public void setAccessSuccessful(long succeeded) { mAccessSuccessful = succeeded; }
-    public Long getPersistAccessSuccessful() { return mAccessSuccessful == 0 ? null : Long.valueOf(mAccessSuccessful); }
+    public Long getPersistAccessSuccessful() { return mAccessSuccessful == 0 ? null : mAccessSuccessful; }
     public void setPersistAccessSuccessful(Long l) { setAccessSuccessful(l == null ? 0 : l); }
     
     protected void markAccessAttempt() {
@@ -964,19 +965,16 @@ public abstract class Resource implements Cloneable
         if (path == null || path.length() == 0)
             return false;
         String s = path.toLowerCase();
-        if    (s.endsWith(".gif")
-            || s.endsWith(".jpg")
-            || s.endsWith(".jpe")
-            || s.endsWith(".jpeg")
-            || s.endsWith(".png")
-            || s.endsWith(".tif")
-            || s.endsWith(".tiff")
-            || s.endsWith(".fpx")
-            || s.endsWith(".bmp")
-            || s.endsWith(".ico")
-          
-               ) return true;
-        return false;
+        return s.endsWith(".gif")
+                || s.endsWith(".jpg")
+                || s.endsWith(".jpe")
+                || s.endsWith(".jpeg")
+                || s.endsWith(".png")
+                || s.endsWith(".tif")
+                || s.endsWith(".tiff")
+                || s.endsWith(".fpx")
+                || s.endsWith(".bmp")
+                || s.endsWith(".ico");
     }
 
     //public static boolean isLikelyURLorFile(String s) {
@@ -1231,7 +1229,7 @@ public abstract class Resource implements Cloneable
 
         try {
             //encoded = java.net.URLEncoder.encode(s, "UTF-8");
-            return java.net.URLEncoder.encode(s, "UTF-8");
+            return java.net.URLEncoder.encode(s, StandardCharsets.UTF_8);
         } catch (Throwable t) {
             Log.error("Failed to encode [" + s + "]", t);
             return java.net.URLEncoder.encode(s);
@@ -1246,7 +1244,7 @@ public abstract class Resource implements Cloneable
     protected static String decodeURI(String s)
         throws java.io.UnsupportedEncodingException
     {
-        String decoded = java.net.URLDecoder.decode(s, "UTF-8");
+        String decoded = java.net.URLDecoder.decode(s, StandardCharsets.UTF_8);
         return decoded;
     }
     
@@ -1342,7 +1340,7 @@ public abstract class Resource implements Cloneable
             
             try {
                 //decoded = URLDecode(uri.toString());
-                decoded = java.net.URLDecoder.decode(uri.toString(), "UTF-8");
+                decoded = java.net.URLDecoder.decode(uri.toString(), StandardCharsets.UTF_8);
                 //decoded = replaceAll("+", 
                 url = new URL(decoded);
             } catch (Throwable t) {
@@ -1422,7 +1420,7 @@ public abstract class Resource implements Cloneable
             }
             
             if (uri != null && uri.getScheme() == null)
-                uri = new java.net.URI("file:" + uri.toString());
+                uri = new java.net.URI("file:" + uri);
 
 
         } catch (Throwable t) {

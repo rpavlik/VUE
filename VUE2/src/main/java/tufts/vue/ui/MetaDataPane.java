@@ -654,7 +654,7 @@ public class MetaDataPane extends tufts.vue.gui.Widget
     }
 
 
-    private MouseListener CommonURLListener = new URLMouseListener();
+    private final MouseListener CommonURLListener = new URLMouseListener();
 
     private final Color ObjectColor = new Color(128,0,0);
 
@@ -728,11 +728,10 @@ public class MetaDataPane extends tufts.vue.gui.Widget
             }
                 
             //-----------------------------------------------------------------------------
-            
-            final StringBuilder buf = new StringBuilder(txt.length() + 1);
-            buf.append(txt);
-            buf.append(':');
-            label.setText(buf.toString());
+
+            String buf = txt +
+                    ':';
+            label.setText(buf);
         }
 
         mLastLabel = labelText;
@@ -770,15 +769,12 @@ public class MetaDataPane extends tufts.vue.gui.Widget
                 field.setToolTipText(Util.tags(value));
             }
             
-            if (value instanceof String == false)
+            if (!(value instanceof String))
                 field.setForeground(ObjectColor);
         }
        
         // if field has at least one space, use word wrap
-        if (valueText.indexOf(' ') >= 0)
-            field.setWrapStyleWord(true);
-        else
-            field.setWrapStyleWord(false);
+        field.setWrapStyleWord(valueText.indexOf(' ') >= 0);
        
         label.setVisible(true);
         field.setVisible(true);
@@ -923,8 +919,7 @@ public class MetaDataPane extends tufts.vue.gui.Widget
                defaultExpander.setOpaque(false);
            gridBag.add(defaultExpander, c);
        }
-       
-     return; 
+
    }
    /*
 	**  Return the number of lines of text, including wrapped lines.

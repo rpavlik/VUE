@@ -167,7 +167,7 @@ public class LWCFilter {
         Vector removeStatements = new Vector();
         for (Object o : statements) {
             Statement statement = (Statement) o;
-            if (((String) statement.getKey().getKey()).equals(key.getKey().toString()))
+            if (statement.getKey().getKey().equals(key.getKey().toString()))
                 removeStatements.add(statement);
         }
         this.statements.removeAll(removeStatements);

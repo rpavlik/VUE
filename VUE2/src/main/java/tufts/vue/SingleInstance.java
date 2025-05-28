@@ -31,7 +31,7 @@ public class SingleInstance {
     
     public static boolean running = false;
     private static final int port = 12000;
-    private static int count = 0;
+    private static final int count = 0;
     Socket socket = null;
     Socket client = null;
     ServerSocket server;
@@ -115,8 +115,8 @@ public class SingleInstance {
                     if (VueUtil.isWindowsPlatform())
                     {
                     	VUE.getApplicationFrame().setVisible(true);
-                    	((VueFrame)VUE.getApplicationFrame()).setExtendedState(java.awt.Frame.ICONIFIED);
-                        ((VueFrame)VUE.getApplicationFrame()).setExtendedState(java.awt.Frame.NORMAL);
+                    	VUE.getApplicationFrame().setExtendedState(java.awt.Frame.ICONIFIED);
+                        VUE.getApplicationFrame().setExtendedState(java.awt.Frame.NORMAL);
                     	VUE.getApplicationFrame().toFront();
                     }
                     System.out.println("Connection closed by client");

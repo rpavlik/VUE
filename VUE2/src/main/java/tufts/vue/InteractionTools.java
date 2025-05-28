@@ -62,18 +62,18 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 									GUTTER = 2 * HALF_GUTTER,
 									DEPTH_SLIDER_MIN = 0,
 									DEPTH_SLIDER_MAX = 5;
-	protected static final String	ONE_HUNDRED_PERCENT = new String("100%"),
-									EIGHTY_PERCENT = new String("80%"),
-									SIXTY_PERCENT = new String("60%"),
-									FOURTY_PERCENT = new String("40%"),
-									TWENTY_PERCENT = new String("20%"),
-									ZERO_PERCENT = new String("0%"),
-									OFF = new String(VueResources.getString("interactionTools.off")),
-									ONE = new String("1"),
-									TWO = new String("2"),
-									THREE = new String("3"),
-									FOUR = new String("4"),
-									FIVE = new String("5");
+	protected static final String	ONE_HUNDRED_PERCENT = "100%",
+									EIGHTY_PERCENT = "80%",
+									SIXTY_PERCENT = "60%",
+									FOURTY_PERCENT = "40%",
+									TWENTY_PERCENT = "20%",
+									ZERO_PERCENT = "0%",
+									OFF = VueResources.getString("interactionTools.off"),
+									ONE = "1",
+									TWO = "2",
+									THREE = "3",
+									FOUR = "4",
+									FIVE = "5";
 	boolean							ignoreSliderEvents = false;
 	protected JSlider				fadeSlider = null,
 									depthSlider = null;
@@ -120,12 +120,12 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		label40.setFont(tufts.vue.gui.GUI.LabelFace);
 		label20.setFont(tufts.vue.gui.GUI.LabelFace);
 		label0.setFont(tufts.vue.gui.GUI.LabelFace);
-		fadeTable.put(new Integer(100), label100);
-		fadeTable.put(new Integer(80), label80);
-		fadeTable.put(new Integer(60), label60);
-		fadeTable.put(new Integer(40), label40);
-		fadeTable.put(new Integer(20), label20);
-		fadeTable.put(new Integer(0), label0);
+		fadeTable.put(100, label100);
+		fadeTable.put(80, label80);
+		fadeTable.put(60, label60);
+		fadeTable.put(40, label40);
+		fadeTable.put(20, label20);
+		fadeTable.put(0, label0);
 
 		fadeSlider.setLabelTable(fadeTable);
 		fadeSlider.setPaintLabels(true);
@@ -159,12 +159,12 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		label3.setFont(tufts.vue.gui.GUI.LabelFace);
 		label4.setFont(tufts.vue.gui.GUI.LabelFace);
 		label5.setFont(tufts.vue.gui.GUI.LabelFace);
-		depthTable.put(new Integer(0), labelOff);
-		depthTable.put(new Integer(1), label1);
-		depthTable.put(new Integer(2), label2);
-		depthTable.put(new Integer(3), label3);
-		depthTable.put(new Integer(4), label4);
-		depthTable.put(new Integer(5), label5);
+		depthTable.put(0, labelOff);
+		depthTable.put(1, label1);
+		depthTable.put(2, label2);
+		depthTable.put(3, label3);
+		depthTable.put(4, label4);
+		depthTable.put(5, label5);
 
 		depthSlider.setLabelTable(depthTable);
 		depthSlider.setPaintLabels(true);
@@ -342,7 +342,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 	}
 
 
-	public void finalize() {
+	protected void finalize() {
 		fadeSlider = null;
 		zoomSelButton = null;
 		zoomMapButton = null;
@@ -460,7 +460,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 
 
 	public ExpandSelectionListener[] getExpandSelectionListeners() {
-		return (ExpandSelectionListener[])listenerList.getListeners(
+		return listenerList.getListeners(
 				ExpandSelectionListener.class);
 	}
 

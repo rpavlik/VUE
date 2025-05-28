@@ -151,7 +151,7 @@ public class VueToolPopupAdapter extends MouseAdapter {
     }
 
 
-    private static boolean sDebug = false;
+    private static final boolean sDebug = false;
     private void debug( String pStr) {
         if( sDebug ) {
             System.out.println("VueToolPopupAdapter " + Integer.toHexString(hashCode()) + ": " +pStr);

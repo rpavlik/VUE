@@ -138,8 +138,8 @@ public class LWComponent
         HideCause() { type = CAUSE_DEFAULT; }
     }
 
-    private static Object FLAG_DEFAULT = "flag_default";
-    private static Object FLAG_UNDOABLE = "flag_undoable";
+    private static final Object FLAG_DEFAULT = "flag_default";
+    private static final Object FLAG_UNDOABLE = "flag_undoable";
 
     /** runtime flags explicitly set and cleared by VUE code -- not managed by UNDO */
     public enum Flag {
@@ -460,7 +460,7 @@ public class LWComponent
             boolean applied = false;
 
             System.err.format("%-35s CSS key %-17s value %-15s",
-                              toString(),
+                    this,
                               '\'' + cssName + '\'',
                               '\"' + cssValue + '\"'
                               );
@@ -607,7 +607,7 @@ public class LWComponent
                 this.bit = 0;
                 tufts.Util.printStackTrace(Key.class + ": " + InstanceCount + "th key created -- need to re-implement (try BitSet)");
             } else
-                this.bit = 1 << InstanceCount;
+                this.bit = 1L << InstanceCount;
             AllKeys.add(this);
 
             // Note: this only works if the key is in fact declared in the enclosing class to
@@ -818,7 +818,7 @@ public class LWComponent
         boolean valueEquals(TSubclass c, Object otherValue)
         {
             final TValue value = getValue(c);
-            return value == otherValue || (otherValue != null && otherValue.equals(value));
+            return Objects.equals(otherValue, value);
         }
 
         void copyValue(TSubclass source, TSubclass target)
@@ -831,7 +831,7 @@ public class LWComponent
                 final TValue newValue = getValue(source);
                 final TValue oldValue = getValue(target);
 
-                if (newValue != oldValue && (newValue == null || !newValue.equals(oldValue))) {
+                if (!Objects.equals(newValue, oldValue)) {
                     if (DEBUG.STYLE) System.out.format("    COPY-VALUE: %s %s%-15s%s %-40s -> %s over (%s)\n",
                                                        source,
                                                        TERM_PURPLE,
@@ -878,10 +878,7 @@ public class LWComponent
 
         boolean isChanged(T newValue)
         {
-            if (this.value == newValue || (newValue != null && newValue.equals(this.value)))
-                return false;
-            else
-                return true;
+            return !Objects.equals(newValue, this.value);
         }
 
         void set(T newValue) {
@@ -1012,7 +1009,7 @@ public class LWComponent
 
 
 
-    private static final Integer _DefaultInteger = Integer.valueOf(0);
+    private static final Integer _DefaultInteger = 0;
 
     public class IntProperty extends NumberProperty<java.lang.Integer> {
         IntProperty(Key key, Integer defaultValue) {
@@ -1026,7 +1023,7 @@ public class LWComponent
         void setBy(String s) { set(Integer.valueOf(s)); }
     }
 
-    private static final Float _DefaultFloat = new Float(0f);
+    private static final Float _DefaultFloat = 0f;
     public class FloatProperty extends NumberProperty<java.lang.Float> {
         FloatProperty(Key key) {
             super(key);
@@ -1043,7 +1040,7 @@ public class LWComponent
         final void setBy(String s) {
         	//check for underline
 
-        	String p = s.substring(s.indexOf("-")+1,s.length());
+        	String p = s.substring(s.indexOf("-")+1);
         	p = p.substring(0,p.indexOf("-"));
 
         	if (p.endsWith("underline"))
@@ -1219,7 +1216,7 @@ public class LWComponent
 //         }
 
         public boolean equals(Color c) {
-            return value == c || (c != null && c.equals(value));
+            return Objects.equals(c, value);
         }
 
 
@@ -1265,14 +1262,14 @@ public class LWComponent
 
     public enum Alignment { LEFT, CENTER, RIGHT }
 
-    public static final Key<LWComponent, Color> KEY_FillColor   = new Key<LWComponent, Color>("fill.color", "background")       { final Property getSlot(LWComponent c) { return c.mFillColor; } };
-    public static final Key<LWComponent, Color> KEY_TextColor   = new Key<LWComponent, Color>("text.color", "font-color")       { final Property getSlot(LWComponent c) { return c.mTextColor; } };
-    public static final Key<LWComponent, Color> KEY_StrokeColor = new Key<LWComponent, Color>("stroke.color", "border-color")   { final Property getSlot(LWComponent c) { return c.mStrokeColor; } };
-    public static final Key<LWComponent, Float> KEY_StrokeWidth = new Key<LWComponent, Float>("stroke.width", "stroke-width")   { final Property getSlot(LWComponent c) { return c.mStrokeWidth; } };
+    public static final Key<LWComponent, Color> KEY_FillColor   = new Key<LWComponent, Color>("fill.color", "background")       { Property getSlot(LWComponent c) { return c.mFillColor; } };
+    public static final Key<LWComponent, Color> KEY_TextColor   = new Key<LWComponent, Color>("text.color", "font-color")       { Property getSlot(LWComponent c) { return c.mTextColor; } };
+    public static final Key<LWComponent, Color> KEY_StrokeColor = new Key<LWComponent, Color>("stroke.color", "border-color")   { Property getSlot(LWComponent c) { return c.mStrokeColor; } };
+    public static final Key<LWComponent, Float> KEY_StrokeWidth = new Key<LWComponent, Float>("stroke.width", "stroke-width")   { Property getSlot(LWComponent c) { return c.mStrokeWidth; } };
     public static final Key<LWComponent, StrokeStyle> KEY_StrokeStyle = new Key<LWComponent, StrokeStyle>
-        ("stroke.style", KeyType.STYLE)   { final Property getSlot(LWComponent c) { return c.mStrokeStyle; } };
+        ("stroke.style", KeyType.STYLE)   { Property getSlot(LWComponent c) { return c.mStrokeStyle; } };
     public static final Key<LWComponent, Alignment> KEY_Alignment = new Key<LWComponent, Alignment>
-        ("alignment", KeyType.STYLE)   { final Property getSlot(LWComponent c) { return c.mAlignment; } };
+        ("alignment", KeyType.STYLE)   { Property getSlot(LWComponent c) { return c.mAlignment; } };
 
 
     /* font.size: point size for font */
@@ -1280,11 +1277,11 @@ public class LWComponent
     /* font.name: family name of the font */
 
     /** Aggregate font key, which represents the combination of it's three sub-properties */
-    public static final Key<LWComponent, Font> KEY_Font = new Key<LWComponent, Font>("font", KeyType.STYLE)                               { final Property getSlot(LWComponent c) { return c.mFont; } };
-    public static final Key<LWComponent, Integer> KEY_FontSize  = new Key<LWComponent, Integer>("font.size", KeyType.SUB_STYLE)           { final Property getSlot(LWComponent c) { return c.mFontSize; } };
-    public static final Key<LWComponent, Integer> KEY_FontStyle = new Key<LWComponent, Integer>("font.style", KeyType.SUB_STYLE)          { final Property getSlot(LWComponent c) { return c.mFontStyle; } };
-    public static final Key<LWComponent, String> KEY_FontUnderline = new Key<LWComponent, String>("font.underline", KeyType.SUB_STYLE)    { final Property getSlot(LWComponent c) { return c.mFontUnderline; } };
-    public static final Key<LWComponent, String> KEY_FontName  = new Key<LWComponent, String>("font.name", KeyType.SUB_STYLE)             { final Property getSlot(LWComponent c) { return c.mFontName; } };
+    public static final Key<LWComponent, Font> KEY_Font = new Key<LWComponent, Font>("font", KeyType.STYLE)                               { Property getSlot(LWComponent c) { return c.mFont; } };
+    public static final Key<LWComponent, Integer> KEY_FontSize  = new Key<LWComponent, Integer>("font.size", KeyType.SUB_STYLE)           { Property getSlot(LWComponent c) { return c.mFontSize; } };
+    public static final Key<LWComponent, Integer> KEY_FontStyle = new Key<LWComponent, Integer>("font.style", KeyType.SUB_STYLE)          { Property getSlot(LWComponent c) { return c.mFontStyle; } };
+    public static final Key<LWComponent, String> KEY_FontUnderline = new Key<LWComponent, String>("font.underline", KeyType.SUB_STYLE)    { Property getSlot(LWComponent c) { return c.mFontUnderline; } };
+    public static final Key<LWComponent, String> KEY_FontName  = new Key<LWComponent, String>("font.name", KeyType.SUB_STYLE)             { Property getSlot(LWComponent c) { return c.mFontName; } };
 
     public static final Key<LWComponent, Boolean> KEY_Collapsed =
         new Key<LWComponent, Boolean>("collapsed") {
@@ -1471,7 +1468,7 @@ public class LWComponent
         //if (p != null) extra = val.toString();
         //valType += "@" + Integer.toHexString(val.hashCode());
 
-        return key + " " + valType + "(" + valRep + ")" + extra + "";
+        return key + " " + valType + "(" + valRep + ")" + extra;
     }
 
     // todo: this not yet implemented as actually persistant -- it
@@ -1666,8 +1663,8 @@ public class LWComponent
      * passing flags into the dupe context.
      */
     public static class LinkPatcher {
-        private java.util.Map<LWComponent,LWComponent> mCopies = new java.util.IdentityHashMap<>();
-        private java.util.Map<LWComponent,LWComponent> mOriginals = new java.util.IdentityHashMap<>();
+        private final java.util.Map<LWComponent,LWComponent> mCopies = new java.util.IdentityHashMap<>();
+        private final java.util.Map<LWComponent,LWComponent> mOriginals = new java.util.IdentityHashMap<>();
 
         public LinkPatcher() {
             if (DEBUG.DND) Log.debug("LinkPatcher: created");
@@ -2349,7 +2346,7 @@ public class LWComponent
     }
     /** for persistance -- will not update the label */
     public void setLabelFormat(String s) {
-        if (s == mLabelFormat || (s != null && s.equals(mLabelFormat)))
+        if (Objects.equals(s, mLabelFormat))
             return;
 
         final Object old = mLabelFormat;
@@ -2476,7 +2473,7 @@ public class LWComponent
                         buf.append(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(value));
 
                         // include untouched any/all text found after the '}'
-                        buf.append(s.substring(braceClose + 1, s.length()));
+                        buf.append(s, braceClose + 1, s.length());
 
                         noValueFound = false;
                         anyReplacement = true;
@@ -2791,7 +2788,7 @@ public class LWComponent
     /** @Return true: subclasses (e.g. containers), override to return false if you never want this component
         reparented by users */
     // todo: handle via API that LWGroup can declare
-    public boolean supportsReparenting() { return parent instanceof LWGroup == false; }
+    public boolean supportsReparenting() { return !(parent instanceof LWGroup); }
 
     /** @return true: by default, all objects can be selected with other objects at the same time */
     public boolean supportsMultiSelection() { return true; }
@@ -2815,7 +2812,7 @@ public class LWComponent
 
     /** @return true -- subclass impl's can override */
     protected boolean canLinkToImpl(LWComponent target) {
-        return hasFlag(Flag.LOCKED) == false;
+        return !hasFlag(Flag.LOCKED);
     }
 
     public boolean hasLabel() {
@@ -3121,12 +3118,12 @@ public class LWComponent
      * or resizes based on font, label, etc, do it here.
      */
     public final void layout() {
-        if (mXMLRestoreUnderway == false)
+        if (!mXMLRestoreUnderway)
             layout(LAYOUT_DEFAULT);
     }
 
     final void layout(Object triggerKey) {
-        if (mXMLRestoreUnderway == false) {
+        if (!mXMLRestoreUnderway) {
 
             layoutImpl(triggerKey);
 
@@ -3195,7 +3192,7 @@ public class LWComponent
 
 
     private static boolean eq(Object a, Object b) {
-        return a == b || (a != null && a.equals(b));
+        return Objects.equals(a, b);
     }
 
     public boolean isTransparent() {
@@ -3816,7 +3813,7 @@ public class LWComponent
                 stored.add(s);
             return stored;
         } else
-            return (List<LWComponent>) getChildren();
+            return getChildren();
     }
 
 
@@ -4290,10 +4287,7 @@ public class LWComponent
             if (link.hasEndpoint(c))
                 count++;
 
-        if (count >1)
-        	return true;
-        else
-        	return false;
+        return count > 1;
     }
 
     /** @return true of this component has any connections (links) to the given component.
@@ -4519,7 +4513,7 @@ public class LWComponent
     }
 
     public boolean isMoveable() {
-        return hasFlag(Flag.FIXED_LOCATION) == false;
+        return !hasFlag(Flag.FIXED_LOCATION);
     }
 
     /** @return true if this component is "owned" by the pathway -- e.g., a slide that only appears as an icon */
@@ -6128,14 +6122,11 @@ public class LWComponent
 
     /** @return true if the given x/y (already transformed to our local coordinate space), is within our shape */
     public final boolean contains(float x, float y, PickContext pc) {
-        if (containsImpl(x, y, pc))
-            return true;
-//         else if (isDrawingSlideIcon()) {
-//             if (DEBUG.PICK) out("Checking slide icon bounds " + getSlideIconBounds());
-//             return getSlideIconBounds().contains(x, y);
-//         }
-        else
-            return false;
+        //         else if (isDrawingSlideIcon()) {
+        //             if (DEBUG.PICK) out("Checking slide icon bounds " + getSlideIconBounds());
+        //             return getSlideIconBounds().contains(x, y);
+        //         }
+        return containsImpl(x, y, pc);
     }
 
     /** @return 0 means a hit, -1 a completely miss, > 0 means distance (squared), to be sorted out by caller  */
@@ -6366,7 +6357,7 @@ public class LWComponent
         final AffineTransform zeroTransform = DEBUG.PDF ? dc.g.getTransform() : null;
 
         dc.checkComposite(this);
-        if (DEBUG.Enabled) dc.recordDebug(this);
+        if (DEBUG.Enabled) DrawContext.recordDebug(this);
 
         try {
 
@@ -6401,7 +6392,7 @@ public class LWComponent
             dc.g.fill(getZeroShape());
         }
 
-        if (DEBUG.PDF && DEBUG.META && this instanceof LWLink == false) {
+        if (DEBUG.PDF && DEBUG.META && !(this instanceof LWLink)) {
             dc = dc.create();
             dc.g.setTransform(zeroTransform);
             dc.g.setColor(Color.blue);
@@ -6613,7 +6604,7 @@ public class LWComponent
 
 
     protected static final BasicStroke SlideIconPathwayStroke =
-        new BasicStroke((float) (LWPathway.PathBorderStrokeWidth / SlideIconScale),
+        new BasicStroke(LWPathway.PathBorderStrokeWidth / SlideIconScale,
                         BasicStroke.CAP_ROUND,
                         BasicStroke.JOIN_ROUND);
 
@@ -7133,7 +7124,7 @@ public class LWComponent
     }
 
     public final boolean isAncestorSelected() {
-        return parent == null ? false : parent.selectedOrParent();
+        return parent != null && parent.selectedOrParent();
     }
 
     public final boolean isPruned() {
@@ -7182,7 +7173,7 @@ public class LWComponent
 //         }
 
         if (mState != old)
-            notify(KEY_State, Integer.valueOf(old));
+            notify(KEY_State, old);
     }
 
     public boolean hasState(State s) {
@@ -7293,12 +7284,12 @@ public class LWComponent
     String getDescriptionOfSetBits(Class enumType, long bits) {
         final StringBuilder buf = new StringBuilder();
         //buf.append(enumType.getSimpleName());
-        buf.append(enumType.getSimpleName().substring(0,2));
+        buf.append(enumType.getSimpleName(), 0, 2);
         buf.append('(');
         boolean first = true;
         for (Object eValue : enumType.getEnumConstants()) {
             final Enum e = (Enum) eValue;
-            if ((bits & (1<<e.ordinal())) != 0) {
+            if ((bits & (1L <<e.ordinal())) != 0) {
                 if (!first)
                     buf.append(',');
                 buf.append(eValue);
@@ -7510,10 +7501,7 @@ public class LWComponent
 
         if (clipped) {
             focusNode = true;
-        } else if (overlapWidth > 0.8 || overlapHeight > 0.8) {
-            focusNode = false;
-        } else
-            focusNode = true;
+        } else focusNode = !(overlapWidth > 0.8) && !(overlapHeight > 0.8);
 
         if (focusNode) {
             viewer.clearRollover();
@@ -7617,7 +7605,7 @@ public class LWComponent
      * @param zoom -- a zoom for the map size in producing the image (currently ignored if maxSize is provided)
      */
     protected BufferedImage getAsImage(double alpha, Dimension maxSize, double zoom) {
-        return createImage(alpha, maxSize, (Color) null, zoom);
+        return createImage(alpha, maxSize, null, zoom);
     }
 
     public BufferedImage getAsImage(double alpha, Dimension maxSize) {
@@ -7751,7 +7739,7 @@ public class LWComponent
         final int height = imageSize.pixelHeight();
 
         if (width >= 512 || height >= 512)
-            Log.info("creating large image: " + imageSize + " = approx " + Util.abbrevBytes(width * height * 4));
+            Log.info("creating large image: " + imageSize + " = approx " + Util.abbrevBytes((long) width * height * 4));
 
         try {
             Log.info(this + "; createImage:"

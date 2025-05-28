@@ -220,7 +220,7 @@ public class LWSelection extends java.util.ArrayList<LWComponent>
         return inNotify;
     }
 
-    private Listener[] listener_buf = new Listener[128]; // todo: this a bit overkill
+    private final Listener[] listener_buf = new Listener[128]; // todo: this a bit overkill
     private boolean inNotify = false;
     private synchronized void notifyListeners()
     {
@@ -242,7 +242,7 @@ public class LWSelection extends java.util.ArrayList<LWComponent>
                 debug("NOTIFYING " + listeners.size() + " LISTENERS");
                 //Log.debug("content summary: " + mTypes);
             }
-            Listener[] listener_iter = (Listener[]) listeners.toArray(listener_buf);
+            Listener[] listener_iter = listeners.toArray(listener_buf);
             int nListener = listeners.size();
             long start = 0;
             for (int i = 0; i < nListener; i++) {

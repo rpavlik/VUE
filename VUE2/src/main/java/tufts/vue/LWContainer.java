@@ -366,7 +366,7 @@ public abstract class LWContainer extends LWComponent
             Log.warn("not an existing child: " + existingChild);
             context = ADD_DEFAULT;
         } else {
-            context = Integer.valueOf(index + 1);
+            context = index + 1;
         }
 
         addChildren(Collections.singletonList(newChild), context);
@@ -803,11 +803,11 @@ public abstract class LWContainer extends LWComponent
     // the embedded nature of child components in nodes.
     private void ensureLinksPaintOnTopOfAllParents()
     {
-        ensureLinksPaintOnTopOfAllParents((LWComponent) this);
+        ensureLinksPaintOnTopOfAllParents(this);
         for (LWComponent c : getChildren()) {
             ensureLinksPaintOnTopOfAllParents(c);
             if (c instanceof LWContainer)
-                ensureLinksPaintOnTopOfAllParents((LWContainer)c);
+                ensureLinksPaintOnTopOfAllParents(c);
         }
     }
 
@@ -1357,7 +1357,7 @@ public abstract class LWContainer extends LWComponent
 
     protected void drawChildren(DrawContext dc)
     {
-        if (hasChildren() == false)
+        if (!hasChildren())
             return;
 
         for (LWComponent c : getChildren()) {

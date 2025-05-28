@@ -167,10 +167,10 @@ public class LinkToolPanel extends ToolPanel
         };
         
         Integer[] i = new Integer[4];
-		i[0]= new Integer(0);
-		i[1]= new Integer(1);
-		i[2]= new Integer(2);
-		i[3]= new Integer(3);
+		i[0]= 0;
+		i[1]= 1;
+		i[2]= 2;
+		i[3]= 3;
 		
         AbstractButton linkTypeMenu = new VuePopupMenu(LWKey.LinkShape, LinkTypeActions);
         linkTypeMenu.setToolTipText(VueResources.getString("linktoolpanel.linkstyle.tooltip"));

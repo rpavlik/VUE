@@ -718,10 +718,7 @@ public final class Relation {
         
         final Schema s2 = row2.getSchema();
 
-        if (relatedBy(s2.getKeyFieldName(), row1, row2) != null)
-            return true;
-        
-        return false;
+        return relatedBy(s2.getKeyFieldName(), row1, row2) != null;
     }
     
     /** @return true if the two rows (from the same schema) are the "same" -- the have the same key field value */

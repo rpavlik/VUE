@@ -374,7 +374,7 @@ class ResizeControl implements LWSelection.ControlListener, VueConstants
             boolean moved = false;
             if (newWidth != requestWidth) {
                 //System.out.println("width stuck at " + newWidth + " can't go to " + requestWidth);
-                if (isLeftCtrl(controlPoint) == false || newWidth == oldWidth) {
+                if (!isLeftCtrl(controlPoint) || newWidth == oldWidth) {
                     // do NOT move the X coord (tho Y coord might be moving)
                     newX = oldX;
                 } else {
@@ -391,7 +391,7 @@ class ResizeControl implements LWSelection.ControlListener, VueConstants
                 
             if (newHeight != requestHeight) {
                 //System.out.println("height stuck at " + newHeight + " can't go to " + requestHeight);
-                if (isTopCtrl(controlPoint) == false || newHeight == oldHeight) {
+                if (!isTopCtrl(controlPoint) || newHeight == oldHeight) {
                     // do NOT move the Y coord (tho X coord might be moving)
                     newY = oldY;
                 } else {
@@ -408,7 +408,7 @@ class ResizeControl implements LWSelection.ControlListener, VueConstants
 
             if (moved) {
                 
-                if (LOCAL_RESIZE == false) {
+                if (!LOCAL_RESIZE) {
                     if (DEBUG.WORK) System.out.format("RC: new absolute loc: %6.1f,%-6.1f; %s\n", newX, newY, c);
                     final Point2D.Float p = new Point2D.Float();
                     c.getParent().transformMapToZeroPoint(new Point2D.Float(newX, newY), p);
@@ -456,7 +456,7 @@ class ResizeControl implements LWSelection.ControlListener, VueConstants
         for (LWComponent c : selection) {
             if (c.isManagedLocation()) // must match conditinal aboice where we collect mOriginal_each_bounds[] -- OVERKILL, allow reshaping of child (managed loc) objects
                 continue;
-            if (false && c.getParent().isSelected()) // skip if our parent also being resized -- race conditions possible -- todo: deeper nesting???
+            if (false) // skip if our parent also being resized -- race conditions possible -- todo: deeper nesting???
                 continue;
 
             

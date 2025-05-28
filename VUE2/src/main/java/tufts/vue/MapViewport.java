@@ -654,8 +654,7 @@ public class MapViewport extends JViewport
     }
 
     private String out(Point2D p) { return (float)p.getX() + ", " + (float)p.getY(); }
-    private String out(Rectangle2D r) { return ""
-            + (float)r.getX() + ", " + (float)r.getY()
+    private String out(Rectangle2D r) { return (float)r.getX() + ", " + (float)r.getY()
             + "  "
             + (float)r.getWidth() + " x " + (float)r.getHeight()
             ;

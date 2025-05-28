@@ -549,7 +549,7 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
     }
     
     class DatasourceListCellRenderer extends   DefaultListCellRenderer {
-        private JPanel composite = new JPanel(new BorderLayout());
+        private final JPanel composite = new JPanel(new BorderLayout());
         private JRadioButton radioButton;
         public Component getListCellRendererComponent(
                 JList list, Object value, int index,
@@ -629,11 +629,7 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
     private static boolean isVueMapFolder( org.osid.repository.Asset asset )
     throws RepositoryException {
         String folderName = asset.getDisplayName();
-        if( folderName.endsWith( SakaiPublisher.VUE_MAP_FOLDER_SUFFIX )) {
-            return true;
-        } else {
-            return false;
-        }
+        return folderName.endsWith(SakaiPublisher.VUE_MAP_FOLDER_SUFFIX);
     }
     
     /** This method is called to check whether a folder exists in a Sakai

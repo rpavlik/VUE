@@ -177,16 +177,11 @@ public class LWImage extends LWComponent
         if (parent == null)
             return;
 
-        if (parent instanceof LWNode &&
-            parent.getChild(0) == this &&
-            getResource() != null &&
-            getResource().equals(parent.getResource()))
-        {
-            // if first child of a LWNode is an LWImage, treat it as an icon
-            setNodeIcon(true);
-        } else {
-            setNodeIcon(false);
-        }
+        // if first child of a LWNode is an LWImage, treat it as an icon
+        setNodeIcon(parent instanceof LWNode &&
+                parent.getChild(0) == this &&
+                getResource() != null &&
+                getResource().equals(parent.getResource()));
     }
 
     /** used by Actions to size the image */
@@ -938,7 +933,7 @@ public class LWImage extends LWComponent
 
     public static final Key KEY_Rotation = new Key("image.rotation", KeyType.STYLE) { // rotation in radians
             public void setValue(LWComponent c, Object val) { ((LWImage)c).setRotation((Double) val); }
-            public Object getValue(LWComponent c) { return new Double(((LWImage)c).getRotation()); }
+            public Object getValue(LWComponent c) { return ((LWImage) c).getRotation(); }
         };
     
     public void setRotation(double rad) {

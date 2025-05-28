@@ -89,7 +89,7 @@ public class SaveVueJTree {
                             if (resource instanceof URLResource) {
                                 // this is a total hack just to fix this crazy stuff up for now
                                 // (we're editing the resource when it's restored!)
-                                ((URLResource)resource).setTitle(file.getName());
+                                resource.setTitle(file.getName());
                             }
                         }
                         nextNode = new ResourceNode(resource);

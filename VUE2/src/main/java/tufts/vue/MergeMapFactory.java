@@ -506,7 +506,7 @@ public class MergeMapFactory {
             if (counter == null)
                 counter = target.putClientData(new Counter());
             counter.count++;
-            final String notesAnno = String.format("[in:%d:%s]", counter.count, anno.toString());
+            final String notesAnno = String.format("[in:%d:%s]", counter.count, anno);
             if (target.hasNotes()) {
                 target.setNotes(target.getNotes()
                                 + (counter.count > 1 ? "\n" : "\n----\n")
@@ -551,7 +551,7 @@ public class MergeMapFactory {
     private void annotateLinkSources(final ConnectivityMatrixList sources, final Object key1, final Object key2, final LWLink newLink)
     {
      // final StringBuilder anno = new StringBuilder("#source:");
-        final StringBuilder annoBuf = new StringBuilder("");
+        final StringBuilder annoBuf = new StringBuilder();
         final int tagPrefix = annoBuf.length();
 
         int matchCount = 0;

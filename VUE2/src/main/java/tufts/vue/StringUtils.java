@@ -49,14 +49,14 @@ public abstract class StringUtils {
             
             //  Check for the end of a sub-string.
             if (str[i] == delim) {
-                list.add (new String(temp.toString().trim()));     //  Add the sub-string to the list.
+                list.add (temp.toString().trim());     //  Add the sub-string to the list.
                 temp.delete (0, temp.length());             //  Flush the temp string.
             }
             
             //  Check for last sub-string.
             else if (i == str.length-1) {
                 temp.append (str[i]);
-                list.add (new String(temp.toString().trim()));
+                list.add (temp.toString().trim());
                 temp.delete (0, temp.length());             //  Flush the temp string.
             }
             

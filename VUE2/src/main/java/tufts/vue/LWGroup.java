@@ -398,7 +398,7 @@ public class LWGroup extends LWContainer
                     // links to links can get out of sync with updates
                     // depending on the order they exist in the child list.
                     // this should help for at least most first tier cases:
-                    ((LWLink)c).layout();
+                    c.layout();
                 }
             }
             

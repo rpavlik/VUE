@@ -54,7 +54,7 @@ public class NodeFilter extends AbstractTableModel  {
         Vector removeStatements = new Vector();
         for (Object o : statementVector) {
             Statement statement = (Statement) o;
-            if (((String) statement.getKey().getKey()).equals(key.getKey().toString()))
+            if (statement.getKey().getKey().equals(key.getKey().toString()))
                 removeStatements.add(statement);
         }
         removeAll(removeStatements);
@@ -159,7 +159,7 @@ public class NodeFilter extends AbstractTableModel  {
      * }
      */
     public Object getValueAt(int row, int col) {
-        Statement statement = (Statement) get(row);
+        Statement statement = get(row);
         if (col== KEY_COL)
             return statement.getKey().toString();
         else
@@ -167,11 +167,11 @@ public class NodeFilter extends AbstractTableModel  {
         
     }
     public void setValueAt(Object value, int row, int col) {
-        Statement statement = (Statement) get(row);
+        Statement statement = get(row);
         Key key = statement.getKey();
         if(col == VALUE_COL) {
             if(statement.getKey().getType().getDisplayName().equals(Type.INTEGER_TYPE)) {
-                statement.setValue(new Integer(value.toString()));
+                statement.setValue(Integer.valueOf(value.toString()));
             } else {
                 statement.setValue(value);
             }
@@ -192,10 +192,7 @@ public class NodeFilter extends AbstractTableModel  {
         //Note that the data/cell address is constant,
         //no matter where the cell appears onscreen.
         //  return editable;
-        if(col == this.VALUE_COL) {
-            return true;
-        } else
-            return false;
+        return col == VALUE_COL;
         
     }
 }

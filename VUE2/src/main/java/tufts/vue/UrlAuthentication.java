@@ -76,7 +76,7 @@ public class UrlAuthentication implements edu.tufts.vue.dsm.DataSourceListener
                     scanForCredentials(ds);
             }
             
-            if (true||DEBUG.Enabled)
+            if (true)
                 Log.info("Done scanning for authentication keys: " + HostMap);
             else
                 Log.info("Done scanning for authentication keys.");
@@ -345,7 +345,7 @@ public class UrlAuthentication implements edu.tufts.vue.dsm.DataSourceListener
         // show web services errors?
         String debugString = configuration.getProperty("sakaiAuthenticationDebug");
         if (debugString != null) {
-            debug = (debugString.trim().toLowerCase().equals("true"));
+            debug = (debugString.trim().equalsIgnoreCase("true"));
         }
 		
         // System.out.println("username " + this.username);

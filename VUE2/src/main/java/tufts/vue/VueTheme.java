@@ -87,7 +87,7 @@ public class VueTheme extends javax.swing.plaf.metal.DefaultMetalTheme
     //private FontUIResource fontWindowTitle  = new FontUIResource(FixedFont);
     //private FontUIResource fontSubText  = new FontUIResource(FONT_TINY);
     
-    private Color FocusColor = new ColorUIResource(Color.red);
+    private final Color FocusColor = new ColorUIResource(Color.red);
     
     // these are gray in Metal Default Theme
     //private static ColorUIResource VueSecondary1 = new ColorUIResource(VueColor.darker().darker());
@@ -96,9 +96,9 @@ public class VueTheme extends javax.swing.plaf.metal.DefaultMetalTheme
 
     //private Color VueLowContrast = new ColorUIResource(VueUtil.factorColor(VueColor, 0.95));
 
-    private Color TestColor1 = new ColorUIResource(Color.red);
-    private Color TestColor2 = new ColorUIResource(Color.green);
-    private Color TestColor3 = new ColorUIResource(Color.blue);
+    private final Color TestColor1 = new ColorUIResource(Color.red);
+    private final Color TestColor2 = new ColorUIResource(Color.green);
+    private final Color TestColor3 = new ColorUIResource(Color.blue);
     
     public String getName() {
         return super.getName() + " (VUE)";

@@ -279,7 +279,7 @@ public abstract class LWIcon extends Rectangle2D.Float
         //public static final int COORDINATES_COMPONENT  = 1;
         //public static final int COORDINATES_COMPONENT_NO_SHRINK = 2; // only currently works for blocks laid out at 0,0 of node
         
-        private LWComponent mLWC;
+        private final LWComponent mLWC;
         
         private final LWIcon[] mIcons = new LWIcon[7];
 
@@ -496,7 +496,7 @@ public abstract class LWIcon extends Rectangle2D.Float
             // TODO: don't need to do this if there's already a tip showing!
             if (tipIcon != null) {
                 tipComponent = tipIcon.getToolTipComponent();
-                final Rectangle2D tipRegion = mLWC.transformZeroToMapRect((Rectangle2D.Float) tipIcon.getBounds2D());
+                final Rectangle2D tipRegion = mLWC.transformZeroToMapRect(tipIcon.getBounds2D());
 
                 // if node, compute avoid region node+tipRegion,
                 // if link avoid = label+entire tip block
@@ -513,7 +513,7 @@ public abstract class LWIcon extends Rectangle2D.Float
                         // Just stay way from the whole icon block:
                         avoidRegion = this;
                     }
-                    mLWC.transformZeroToMapRect((Rectangle2D.Float)avoidRegion);
+                    mLWC.transformZeroToMapRect(avoidRegion);
                 } else {
                     // So it works when zoomed focus, use the transform:
                     avoidRegion = mLWC.transformZeroToMapRect(mLWC.getZeroBounds());
@@ -843,7 +843,7 @@ public abstract class LWIcon extends Rectangle2D.Float
         void draw(DrawContext dc)
         {
         
-            if (false&&DEBUG.Enabled) {
+            if (false) {
                 // test code for inserting actual icon into node icon gutter (should at least do by
                 // default for local file icons)
                 Icon icon = mLWC.getResource().getContentIcon();
@@ -855,7 +855,7 @@ public abstract class LWIcon extends Rectangle2D.Float
                 }
             }
             
-            if (true || extension == null) // TODO PERF: sometimes starts with boxBounds wrong...
+            if (true) // TODO PERF: sometimes starts with boxBounds wrong...
                 internalLayout();
             
             super.draw(dc);
@@ -891,7 +891,7 @@ public abstract class LWIcon extends Rectangle2D.Float
 	        		g2d.clearRect(0,0, (int)getWidth(), (int)getHeight());
 	        	} 
 	        	
-	        	dc.g.drawImage(bi, (BufferedImageOp)null, (int)getX(), (int)getY());
+	        	dc.g.drawImage(bi, null, (int)getX(), (int)getY());
 	        	dc.g.setRenderingHint(PdfGraphics2D.HyperLinkKey.KEY_INSTANCE, 
 	                 	PdfGraphics2D.HyperLinkKey.VALUE_HYPERLINKKEY_OFF);
 	         }
@@ -1205,8 +1205,8 @@ public abstract class LWIcon extends Rectangle2D.Float
         private final static double scaleInv = 1/scale;
         private final static AffineTransform t = AffineTransform.getScaleInstance(scale, scale);
 
-        private static float iconWidth = (float) (MaxX * scale);
-        private static float iconHeight = (float) (MaxY * scale);
+        private static final float iconWidth = (float) (MaxX * scale);
+        private static final float iconHeight = (float) (MaxY * scale);
 
         //-------------------------------------------------------
 
@@ -1303,8 +1303,8 @@ public abstract class LWIcon extends Rectangle2D.Float
         private final static double scaleInv = 1/scale;
         private final static AffineTransform t = AffineTransform.getScaleInstance(scale, scale);
 
-        private static float iconWidth = (float) (MaxX * scale);
-        private static float iconHeight = (float) (MaxY * scale);
+        private static final float iconWidth = (float) (MaxX * scale);
+        private static final float iconHeight = (float) (MaxY * scale);
 
         //-------------------------------------------------------
 
@@ -1375,8 +1375,8 @@ public abstract class LWIcon extends Rectangle2D.Float
         private final static double scaleInv = 1/scale;
         private final static AffineTransform t = AffineTransform.getScaleInstance(scale, scale);
 
-        private static float iconWidth = (float) (MaxX * scale);
-        private static float iconHeight = (float) (MaxY * scale);
+        private static final float iconWidth = (float) (MaxX * scale);
+        private static final float iconHeight = (float) (MaxY * scale);
 
         //-------------------------------------------------------
         
@@ -1589,12 +1589,8 @@ public abstract class LWIcon extends Rectangle2D.Float
             if (IconPref.getHierarchyIconValue()) {
                 if (mLWC.numChildren() == 1) {
                     LWComponent child0 = mLWC.getChild(0);
-                    if (child0.isTextNode() || LWNode.isImageNode(mLWC))
-                        return false;
-                    else
-                        return true;
-                } else if (mLWC.hasChildren())
-                    return true;
+                    return !child0.isTextNode() && !LWNode.isImageNode(mLWC);
+                } else return mLWC.hasChildren();
             }
             return false;
         }
@@ -1614,7 +1610,7 @@ public abstract class LWIcon extends Rectangle2D.Float
         private String ttTreeHtml;
         public JComponent getToolTipComponent()
         {
-            if ((mLWC instanceof LWContainer) == false)
+            if (!(mLWC instanceof LWContainer))
                 return new JLabel(VueResources.getString("jlabel.nochild"));
             
             // todo perf: use StringBuffer
@@ -1689,7 +1685,7 @@ public abstract class LWIcon extends Rectangle2D.Float
         }
     }
     
-    private static Font MinisculeFont = new Font("SansSerif", Font.PLAIN, 1);
+    private static final Font MinisculeFont = new Font("SansSerif", Font.PLAIN, 1);
     //private static Font MinisculeFont = new Font("Arial Narrow", Font.PLAIN, 1);
 
     

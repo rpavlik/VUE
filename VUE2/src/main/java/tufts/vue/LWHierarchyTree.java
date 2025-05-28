@@ -50,7 +50,7 @@ import javax.swing.event.TreeModelListener;
 public class LWHierarchyTree extends JPanel implements TreeModelListener
 {
     //private DisplayAction displayAction = null;
-    private JTree tree;
+    private final JTree tree;
     private tufts.oki.hierarchy.HierarchyNode selectedNode = null;
     
     /** Creates a new instance of HierarchyTreeWindow */
@@ -147,7 +147,7 @@ public class LWHierarchyTree extends JPanel implements TreeModelListener
         catch (NullPointerException exc) {}
        
         //might want to come up with an exception
-        if(treeNode != (DefaultMutableTreeNode)tree.getModel().getRoot())
+        if(treeNode != tree.getModel().getRoot())
         {
             //changes the node's label and sets it as a new object of the tree node
             try

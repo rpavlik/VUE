@@ -60,10 +60,10 @@ public class OutlineViewTree extends JTree
     private LWContainer currentContainer = null;
     private tufts.oki.hierarchy.OutlineViewHierarchyModel hierarchyModel = null;
     
-    private ImageIcon  nodeIcon = VueResources.getImageIcon("outlineIcon.node");
-    private ImageIcon linkIcon = VueResources.getImageIcon("outlineIcon.link");
-    private ImageIcon   mapIcon = VueResources.getImageIcon("outlineIcon.map");
-    private ImageIcon   textIcon = VueResources.getImageIcon("outlineIcon.text");
+    private final ImageIcon  nodeIcon = VueResources.getImageIcon("outlineIcon.node");
+    private final ImageIcon linkIcon = VueResources.getImageIcon("outlineIcon.link");
+    private final ImageIcon   mapIcon = VueResources.getImageIcon("outlineIcon.map");
+    private final ImageIcon   textIcon = VueResources.getImageIcon("outlineIcon.text");
    
     /** Creates a new instance of OverviewTree */
     public OutlineViewTree()
@@ -164,13 +164,11 @@ public class OutlineViewTree extends JTree
             
             currentContainer.addLWCListener(this, LWKey.Label);
             currentContainer.addLWCListener(hierarchyModel,
-                                            new Object[] { LWKey.ChildrenAdded,
-                                                           LWKey.ChildrenRemoved,
-                                                           LWKey.HierarchyChanged,
-                                                           LWKey.LinkAdded,
-                                                           LWKey.LinkRemoved
-                                            }
-                                            );
+                    LWKey.ChildrenAdded,
+                    LWKey.ChildrenRemoved,
+                    LWKey.HierarchyChanged,
+                    LWKey.LinkAdded,
+                    LWKey.LinkRemoved);
         } else
             setModel(null);
     }
@@ -214,11 +212,7 @@ public class OutlineViewTree extends JTree
     /**A method which returns whether the model has been intialized or not*/
     public boolean isInitialized()
     {
-        if (hierarchyModel != null)
-          return true;
-        
-        else
-          return false;
+        return hierarchyModel != null;
     }
     
     /**A method for handling a LWC event*/
@@ -308,18 +302,10 @@ public class OutlineViewTree extends JTree
             }
             //else
             	//label = tree.convertValueToText(value, sel, expanded, leaf, row, hasFocus);
-            
-            if (sel) 
-              setIsSelected(true);  
-           
-            else
-              setIsSelected(false);
-            
-            if (hasFocus) 
-              setIsFocused(true);
-            
-            else      
-              setIsFocused(false);
+
+            setIsSelected(sel);
+
+            setIsFocused(hasFocus);
          
          
             setText(label);
@@ -543,7 +529,7 @@ public class OutlineViewTree extends JTree
     {
         private IconPanel iconPanel = null;
         private JTextArea label = null;
-        private JViewport viewPort = null;
+        private final JViewport viewPort = null;
         private JScrollPane scrollPane = null;
         private OutlineViewTreeEditor editor = null;
         

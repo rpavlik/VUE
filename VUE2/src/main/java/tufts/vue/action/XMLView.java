@@ -53,10 +53,10 @@ import tufts.vue.*;
 
 public class XMLView extends AbstractAction{ 
     
-    private static  String fileName = "default.xml";
+    private static final String fileName = "default.xml";
     private XMLTextPane xmlArea = null;
     private StyledDocument doc = null;
-    private ArrayList braces = null;
+    private final ArrayList braces = null;
     
     
     public XMLView() {
@@ -149,7 +149,7 @@ public class XMLView extends AbstractAction{
         Pattern p = Pattern.compile("</|<|>");
         String lookUp = stringWriter.toString();
         Matcher m = p.matcher(lookUp);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int indent = -2;
         //braces = new ArrayList(); 
         while(m.find()){

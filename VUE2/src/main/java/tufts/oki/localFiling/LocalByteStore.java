@@ -41,7 +41,7 @@ public class LocalByteStore extends LocalCabinetEntry implements osid.filing.Byt
     //private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(LocalByteStore.class);
     
     //private byte[] byte_store;          //  This is the actual byte storage buffer. (UNUSED)
-    private int used = 0;                   //  Bytes written to the buffer.
+    private final int used = 0;                   //  Bytes written to the buffer.
     private String mime_type = null;    //  The mime type of this byte store.
     private boolean writable = true;    //  Is it writable?
     private boolean readable = true;    //  Is it readable?
@@ -300,7 +300,7 @@ public class LocalByteStore extends LocalCabinetEntry implements osid.filing.Byt
         byte[] buf = getBytes();
 
         //  Create an iterator over the buffer.
-        osid.shared.ByteValueIterator it = (osid.shared.ByteValueIterator) new ByteValueIterator(buf);
+        osid.shared.ByteValueIterator it = new ByteValueIterator(buf);
         return it;
     }
     
@@ -324,7 +324,7 @@ public class LocalByteStore extends LocalCabinetEntry implements osid.filing.Byt
         //  Copy the buffer to the file stream.
         try {
             for (byte value : b) {
-                stream.write((int) value);
+                stream.write(value);
             }
             stream.close();
         }

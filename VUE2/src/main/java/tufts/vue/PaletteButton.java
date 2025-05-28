@@ -180,9 +180,7 @@ public class PaletteButton extends JRadioButton
         } else {
             int len = mItems.length;
             PaletteButtonItem[] newItems = new PaletteButtonItem[len+1];
-            for(int i=0; i< len; i++) {
-                newItems[i] = mItems[i];
-            }
+            System.arraycopy(mItems, 0, newItems, 0, len);
             newItems[len] = pItem;
             setPaletteButtonItems(newItems);
         }
@@ -318,7 +316,7 @@ public class PaletteButton extends JRadioButton
         implements javax.swing.event.PopupMenuListener
     {
         private long mLastHidden;
-        private JPopupMenu mMenu;
+        private final JPopupMenu mMenu;
         
         public PalettePopupMenuHandler(Component trigger, JPopupMenu menu)
         {

@@ -24,7 +24,7 @@ import edu.tufts.vue.preferences.interfaces.VuePreference;
 public class RecentlyOpenedUrlManager 
 {
 	private static final String maxSize = "20";
-	 private static VuePreference openFilePref = StringPreference.create(
+	 private static final VuePreference openFilePref = StringPreference.create(
 				edu.tufts.vue.preferences.PreferenceConstants.FILES_CATEGORY,
 				"recentlyOpenedUrls", 
 				"Recently Opened Urls", 
@@ -32,7 +32,7 @@ public class RecentlyOpenedUrlManager
 				maxSize,
 				false);
 	
-	private LinkedList list = new LinkedList();
+	private final LinkedList list = new LinkedList();
 	private int maxsize; 
 	private static RecentlyOpenedUrlManager _instance; 
 	
@@ -59,22 +59,21 @@ public class RecentlyOpenedUrlManager
 			list.add(tokens.nextToken());
 		}
 		maxsize = getMaxSize();
-		
-		return;
-	}
+
+    }
 	
 	private int getMaxSize()
 	{
             if (DEBUG.Enabled) return 30;
             
-            maxsize = Integer.valueOf((String)list.getFirst());
+            maxsize = Integer.parseInt((String)list.getFirst());
             return maxsize;
 	}
 	
 	private void setMaxSize(int i)
 	{
 		list.removeFirst();
-		list.set(0, (Object)(new Integer(i).toString()));
+		list.set(0, Integer.valueOf(i).toString());
 		maxsize = i;
 	}
 	
@@ -112,8 +111,7 @@ public class RecentlyOpenedUrlManager
 		//is file already in list?
 		if (list.contains(s))
 		{
-			int index = list.indexOf(s);
-			list.remove(index);
+            list.remove(s);
 			list.add(1, s);
 			
 		}

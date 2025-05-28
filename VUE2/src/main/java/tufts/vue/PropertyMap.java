@@ -36,7 +36,7 @@ public class PropertyMap extends java.util.HashMap<String,Object> implements Tab
 //     }
 
     private volatile SortedMapModel mTableModel;
-    private Object mTableModel_LOCK = new Object();
+    private final Object mTableModel_LOCK = new Object();
     private boolean mHoldingChanges = false;
     private int mChanges;
     private List listeners;
@@ -76,10 +76,7 @@ public class PropertyMap extends java.util.HashMap<String,Object> implements Tab
             return false;
         else if (v.getClass() == String.class && v.toString().length() == 0)
             return false;
-        else if (v instanceof Collection && ((Collection)v).size() == 0)
-            return false;
-        else
-            return true;
+        else return !(v instanceof Collection) || ((Collection) v).size() != 0;
 
     }
 

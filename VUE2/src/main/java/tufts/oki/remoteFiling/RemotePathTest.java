@@ -34,10 +34,10 @@ public class RemotePathTest {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws osid.shared.SharedException, osid.OsidException, osid.filing.FilingException {
+    public static void main(String[] args) throws osid.OsidException {
         System.out.println ("Remote Path Test");
         System.out.println ("----------------");
-        System.out.println ("");
+        System.out.println ();
         
         //  Create a root cabinet.
         RemoteCabinet root = null;

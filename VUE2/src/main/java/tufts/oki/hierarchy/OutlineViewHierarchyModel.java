@@ -91,10 +91,10 @@ public class OutlineViewHierarchyModel extends HierarchyModel implements LWCompo
             String label, description;
             
             if ((label = container.getLabel()) == null)   
-                label = new String("Container:" + container.getID());
+                label = "Container:" + container.getID();
               
             if ((description = container.getNotes()) == null)
-                description = new String("No description for " + label);
+                description = "No description for " + label;
               
             hierarchyNode = (HierarchyNode)createRootNode(new tufts.oki.shared.Id(getNextID()),
                                                           new tufts.oki.shared.VueType(), 
@@ -275,10 +275,10 @@ public class OutlineViewHierarchyModel extends HierarchyModel implements LWCompo
             */
             
             if (addedChild.hasChildren()) {
-                for (Iterator childIterator = ((LWContainer)addedChild).getChildIterator(); childIterator.hasNext();) {
+                for (Iterator childIterator = addedChild.getChildIterator(); childIterator.hasNext();) {
                     LWComponent child = (LWComponent)childIterator.next();
                     if (child instanceof LWContainer)
-                        addHierarchyTreeNode((LWContainer)addedChild, (LWContainer)child);
+                        addHierarchyTreeNode((LWContainer)addedChild, child);
                 }
             }
         }
@@ -483,7 +483,7 @@ public class OutlineViewHierarchyModel extends HierarchyModel implements LWCompo
             label = getNodeLabel(component);
             
             if ((description = component.getNotes()) == null)
-              description = new String("No description for " + label);
+              description = "No description for " + label;
               
             //creates a hierarchy node and sets its LWcomponent to the given one
             node = (HierarchyNode)createNode(new tufts.oki.shared.Id(getNextID()), parentNode.getId(), new tufts.oki.shared.VueType(), 
@@ -581,10 +581,10 @@ public class OutlineViewHierarchyModel extends HierarchyModel implements LWCompo
             if ((label = component.getDisplayLabel()) == null)
             {
                 if (component instanceof LWLink)
-                  label = new String("Link-ID# " + component.getID());
+                  label = "Link-ID# " + component.getID();
               
                 else if (component instanceof LWNode)   
-                  label = new String("Node-ID# " + component.getID());
+                  label = "Node-ID# " + component.getID();
                 
                 else
                   label = "no label";

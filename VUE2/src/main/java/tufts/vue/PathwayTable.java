@@ -501,8 +501,8 @@ public class PathwayTable extends JTable
         BottomGradient1 = new Color(142,129,82);
         private final Color TopGradient2 = new Color(195,193,186);
         private final Color BottomGradient2 = new Color(162,161,156);
-        private GradientPaint Gradient = null;
-        private GradientPaint Gradient2 = null;
+        private final GradientPaint Gradient = null;
+        private final GradientPaint Gradient2 = null;
         private int curRow =0;
     	public ColorRenderer() {
             setOpaque(true);
@@ -755,7 +755,7 @@ public class PathwayTable extends JTable
 
         private final Color TopGradient2 = new Color(195,193,186);
         private final Color BottomGradient2 = new Color(162,161,156);
-        private LWPathway path;
+        private final LWPathway path;
         private GradientPaint Gradient = null;
        
         private GradientPaint Gradient2 = null;
@@ -1073,9 +1073,8 @@ public class PathwayTable extends JTable
 				arg0.rejectDrop();
             }
                // end else: can't get the object
-           
-			return;
-	}
+
+    }
 	public void dropActionChanged(DropTargetDragEvent arg0) {
 	}
 	
@@ -1089,8 +1088,8 @@ public class PathwayTable extends JTable
 				//TODO: FIGURE OUT WHAT TO TRANSFER				
 				LWPathway.Entry entry = model.getEntry(this.getSelectedRow());
 				
-				if(entry.isPathway())
-					return;
+				if(entry.isPathway()) {
+                }
 				else
 					dragSource.startDrag(event, DragSource.DefaultMoveDrop, entry, this);
 				
