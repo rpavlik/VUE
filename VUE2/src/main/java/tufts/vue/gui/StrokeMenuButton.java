@@ -18,6 +18,7 @@ package tufts.vue.gui;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.util.Objects;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -61,10 +62,7 @@ public class StrokeMenuButton extends ComboBoxMenuButton<Float>
 	
     public void displayValue(Float width) {
         setToolTipText("Stroke Width: " + width);
-        if (width == null)
-            mCurrentValue = 1F;
-        else
-            mCurrentValue = width;
+        mCurrentValue = Objects.requireNonNullElse(width, 1F);
         setSelectedItem(mCurrentValue);
     }
     

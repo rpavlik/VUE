@@ -244,18 +244,25 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	
 	public void setValue(String prefName, Object b)
 	{
-		if (prefName.equals(resourceIconName))
-			previousResourceValue = resourceCheckbox.isSelected();
-		// else if (prefName.equals(behaviorIconName))
-		// previousBehaviorValue = Boolean.valueOf(behaviorCheckbox.isSelected());
-		else if (prefName.equals(notesIconName))
-			previousNotesValue = notesCheckbox.isSelected();
-		else if (prefName.equals(pathwayIconName))
-			previousPathwayValue = pathwayCheckbox.isSelected();
-		else if (prefName.equals(metaDataIconName))
-			previousMetaDataValue = metaDataCheckbox.isSelected();
-		else if (prefName.equals(hierarchyIconName))
-			previousHierarchyValue = hierarchyCheckbox.isSelected();
+        switch (prefName) {
+            case resourceIconName:
+                previousResourceValue = resourceCheckbox.isSelected();
+                break;
+            // else if (prefName.equals(behaviorIconName))
+            // previousBehaviorValue = Boolean.valueOf(behaviorCheckbox.isSelected());
+            case notesIconName:
+                previousNotesValue = notesCheckbox.isSelected();
+                break;
+            case pathwayIconName:
+                previousPathwayValue = pathwayCheckbox.isSelected();
+                break;
+            case metaDataIconName:
+                previousMetaDataValue = metaDataCheckbox.isSelected();
+                break;
+            case hierarchyIconName:
+                previousHierarchyValue = hierarchyCheckbox.isSelected();
+                break;
+        }
 
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
 		p.putBoolean(getPrefName(prefName), (Boolean) b);
@@ -271,38 +278,42 @@ public class ShowIconsPreference extends BasePref implements ItemListener
 	
 	public Object getPreviousValue(String prefName)
 	{
-		if (prefName.equals(resourceIconName))
-			return (previousResourceValue == null) ? getDefaultValue(prefName) : previousResourceValue;
-		//else if (prefName.equals(behaviorIconName))
-		//	return (previousBehaviorValue == null) ? getDefaultValue(prefName) : previousBehaviorValue;
-		else if (prefName.equals(notesIconName))
-			return (previousNotesValue == null) ? getDefaultValue(prefName) : previousNotesValue;
-		else if (prefName.equals(pathwayIconName))
-			return (previousPathwayValue == null) ? getDefaultValue(prefName) : previousPathwayValue;
-		else if (prefName.equals(metaDataIconName))
-			return (previousMetaDataValue == null) ? getDefaultValue(prefName) : previousMetaDataValue;
-		else if (prefName.equals(hierarchyIconName))	
-			return (previousHierarchyValue == null) ? getDefaultValue(prefName) : previousHierarchyValue;
-		else
-			return Boolean.TRUE;
+        switch (prefName) {
+            case resourceIconName:
+                return (previousResourceValue == null) ? getDefaultValue(prefName) : previousResourceValue;
+            //else if (prefName.equals(behaviorIconName))
+            //	return (previousBehaviorValue == null) ? getDefaultValue(prefName) : previousBehaviorValue;
+            case notesIconName:
+                return (previousNotesValue == null) ? getDefaultValue(prefName) : previousNotesValue;
+            case pathwayIconName:
+                return (previousPathwayValue == null) ? getDefaultValue(prefName) : previousPathwayValue;
+            case metaDataIconName:
+                return (previousMetaDataValue == null) ? getDefaultValue(prefName) : previousMetaDataValue;
+            case hierarchyIconName:
+                return (previousHierarchyValue == null) ? getDefaultValue(prefName) : previousHierarchyValue;
+            default:
+                return Boolean.TRUE;
+        }
 	}
 
 	public Object getDefaultValue(String prefName)
 	{
-		if (prefName.equals(resourceIconName))
-			return resourceIconDefault;
-		//else if (prefName.equals(behaviorIconName))
-		//	return behaviorIconDefault;
-		else if (prefName.equals(notesIconName))
-			return notesIconDefault;
-		else if (prefName.equals(pathwayIconName))
-			return pathwayIconDefault;
-		else if (prefName.equals(metaDataIconName))
-			return metaDataIconDefault;
-		else if (prefName.equals(hierarchyIconName))	
-			return hierarchyIconDefault;
-		else
-			return Boolean.TRUE;
+        switch (prefName) {
+            case resourceIconName:
+                return resourceIconDefault;
+            //else if (prefName.equals(behaviorIconName))
+            //	return behaviorIconDefault;
+            case notesIconName:
+                return notesIconDefault;
+            case pathwayIconName:
+                return pathwayIconDefault;
+            case metaDataIconName:
+                return metaDataIconDefault;
+            case hierarchyIconName:
+                return hierarchyIconDefault;
+            default:
+                return Boolean.TRUE;
+        }
 	}
 
 	protected synchronized void _fireVuePrefEvent(String prefName) {

@@ -923,10 +923,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     }
     
     public synchronized Field getEncodingField() {
-        if (mEncodingField == null)
-        	return new Field("win", this);
-        else
-        	return mEncodingField;
+        return Objects.requireNonNullElseGet(mEncodingField, () -> new Field("win", this));
     }
 
     public synchronized String getKeyFieldName() {

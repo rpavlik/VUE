@@ -1049,22 +1049,20 @@ public class DataSourceViewer extends ContentViewer
         private String translateRepositoryException(String msg)
         {
         	String s;
-        	if (msg.equals(org.osid.repository.RepositoryException.OPERATION_FAILED))
-        	{
-        		s = VueResources.getString("repositoryexception.operationfailed"); 
-        	}
-        	else if (msg.equals(org.osid.repository.RepositoryException.PERMISSION_DENIED))
-        	{
-        		s = VueResources.getString("repositoryexception.permissiondenied");
-        	}
-        	else if (msg.equals(org.osid.repository.RepositoryException.CONFIGURATION_ERROR))
-        	{
-        		s = VueResources.getString("repositoryexception.configurationerror");
-        	}
-        	else
-        	{
-        		s = VueResources.getString("repositoryexception.genericmsg");
-        	}
+            switch (msg) {
+                case RepositoryException.OPERATION_FAILED:
+                    s = VueResources.getString("repositoryexception.operationfailed");
+                    break;
+                case RepositoryException.PERMISSION_DENIED:
+                    s = VueResources.getString("repositoryexception.permissiondenied");
+                    break;
+                case RepositoryException.CONFIGURATION_ERROR:
+                    s = VueResources.getString("repositoryexception.configurationerror");
+                    break;
+                default:
+                    s = VueResources.getString("repositoryexception.genericmsg");
+                    break;
+            }
         	
         	return s;
         }
@@ -1524,22 +1522,20 @@ public class DataSourceViewer extends ContentViewer
         private String translateRepositoryException(String msg)
         {
         	String s;
-        	if (msg.equals(org.osid.repository.RepositoryException.OPERATION_FAILED))
-        	{
-        		s = VueResources.getString("repositoryexception.operationfailed"); 
-        	}
-        	else if (msg.equals(org.osid.repository.RepositoryException.PERMISSION_DENIED))
-        	{
-        		s = VueResources.getString("repositoryexception.permissiondenied");
-        	}
-        	else if (msg.equals(org.osid.repository.RepositoryException.CONFIGURATION_ERROR))
-        	{
-        		s = VueResources.getString("repositoryexception.configurationerror");
-        	}
-        	else
-        	{
-        		s = VueResources.getString("repositoryexception.genericmsg");
-        	}
+            switch (msg) {
+                case RepositoryException.OPERATION_FAILED:
+                    s = VueResources.getString("repositoryexception.operationfailed");
+                    break;
+                case RepositoryException.PERMISSION_DENIED:
+                    s = VueResources.getString("repositoryexception.permissiondenied");
+                    break;
+                case RepositoryException.CONFIGURATION_ERROR:
+                    s = VueResources.getString("repositoryexception.configurationerror");
+                    break;
+                default:
+                    s = VueResources.getString("repositoryexception.genericmsg");
+                    break;
+            }
         	
         	return s;
         }

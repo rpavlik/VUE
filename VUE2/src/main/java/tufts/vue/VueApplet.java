@@ -44,6 +44,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 
@@ -307,10 +308,7 @@ public class VueApplet extends JApplet {
                 {
                     System.out.println("Exception in zotero import from vue: no zotero url");
                 }
-                if(url == null)
-                    items = items + "none";
-                else
-                    items = items + url;
+                items = items + Objects.requireNonNullElse(url, "none");
                 items = items + "\n";
             }
         } while(true);

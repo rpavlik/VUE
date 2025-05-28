@@ -543,7 +543,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
             final String val = md.getValue();
             
             if (dataList.size() > 1)
-                for (int i = key.length(); i < 22; i++) b.append("&nbsp;");
+                b.append("&nbsp;".repeat(Math.max(0, 22 - key.length())));
             
             b.append(key).append(": ");
             if (val == null) {

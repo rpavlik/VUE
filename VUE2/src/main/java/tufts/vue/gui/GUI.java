@@ -153,14 +153,20 @@ public class GUI
 
     public static void parseArgs(String[] args) {
         for (String arg : args) {
-            if (arg.equals("-skip_custom_laf")) {
-                SKIP_CUSTOM_LAF = true;
-            } else if (arg.equals("-skip_ocean_theme")) {
-                SKIP_OCEAN_THEME = true;
-            } else if (arg.equals("-win") || arg.equals("-nativeWindowsLookAndFeel")) {
-                FORCE_WINDOWS_LAF = true;
-            } else if (arg.equals("-nowin")) {
-                SKIP_WIN_NATIVE_LAF = true;
+            switch (arg) {
+                case "-skip_custom_laf":
+                    SKIP_CUSTOM_LAF = true;
+                    break;
+                case "-skip_ocean_theme":
+                    SKIP_OCEAN_THEME = true;
+                    break;
+                case "-win":
+                case "-nativeWindowsLookAndFeel":
+                    FORCE_WINDOWS_LAF = true;
+                    break;
+                case "-nowin":
+                    SKIP_WIN_NATIVE_LAF = true;
+                    break;
             }
         }
     }
@@ -844,22 +850,24 @@ public class GUI
             return null;
         
         ext = ext.toLowerCase();
-        
-        if (ext.equals(Resource.EXTENSION_VUE)) {
-            final String key = "vueIcon" + sizeRequest;
-            Image image = IconCache.get(key);
-            if (image == null)  {
-                image = tufts.vue.VueResources.getImage(key);
-                if (image == null)
-                    image = tufts.vue.VueResources.getImage("vueIcon64");
-                IconCache.put(key, image);
-            }
-            return image;
-        } else if (ext.equals("rss"))
-            return RSSIcon;
 
-        if (ext == Resource.EXTENSION_HTTP)
-            ext = "htm";
+        switch (ext) {
+            case Resource.EXTENSION_VUE:
+                final String key = "vueIcon" + sizeRequest;
+                Image image = IconCache.get(key);
+                if (image == null) {
+                    image = VueResources.getImage(key);
+                    if (image == null)
+                        image = VueResources.getImage("vueIcon64");
+                    IconCache.put(key, image);
+                }
+                return image;
+            case "rss":
+                return RSSIcon;
+            case Resource.EXTENSION_HTTP:
+                ext = "htm";
+                break;
+        }
 
         if (Util.isMacPlatform() && !VUE.isApplet()) {
 

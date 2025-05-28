@@ -156,55 +156,57 @@ public class XMLView extends AbstractAction{
             String group = m.group();
             String tab = "";
             String tabInd = "          ";
-            
-            if(group.equals("</")){
-                
-                for(int i = 0; i < indent; i++)
-                    tab += tabInd;
-                indent--;
-                m.appendReplacement(sb, "\n" + tab + "</");
-            }
-            else if(group.equals("<")){
-                indent++;
-                for(int i = 0; i < indent; i++)
-                    tab += tabInd;
-                
-                m.appendReplacement(sb, "\n" + tab + "<");
-            }
-            else if(group.equals(">")){
-                indent++;
-                for(int i = 0; i < indent; i++)
-                    tab += tabInd;
-                if(m.end() < lookUp.length()){
-                    Pattern pat = Pattern.compile("\\w|#");
-                    Matcher match = pat.matcher(lookUp.substring(m.end(), m.end()+1));
-                    boolean b = match.matches();
 
-                    if(b)
-                    {   m.appendReplacement(sb, ">\n" + tab);
-                        
+            switch (group) {
+                case "</":
+
+                    for (int i = 0; i < indent; i++)
+                        tab += tabInd;
+                    indent--;
+                    m.appendReplacement(sb, "\n" + tab + "</");
+                    break;
+                case "<":
+                    indent++;
+                    for (int i = 0; i < indent; i++)
+                        tab += tabInd;
+
+                    m.appendReplacement(sb, "\n" + tab + "<");
+                    break;
+                case ">":
+                    indent++;
+                    for (int i = 0; i < indent; i++)
+                        tab += tabInd;
+                    if (m.end() < lookUp.length()) {
+                        Pattern pat = Pattern.compile("\\w|#");
+                        Matcher match = pat.matcher(lookUp.substring(m.end(), m.end() + 1));
+                        boolean b = match.matches();
+
+                        if (b) {
+                            m.appendReplacement(sb, ">\n" + tab);
+
+                        } else {
+                            m.appendReplacement(sb, ">");
+
+                        }
+                        indent--;
                     }
-                    else{
-                        m.appendReplacement(sb, ">");
-                        
-                    }indent--;
-                }
-            }
-            else if(group.equals(">#")){
-                indent++;
-                for(int i = 0; i < indent; i++)
-                    tab += tabInd;
-                
-                m.appendReplacement(sb, ">\n" + tab + "     #" );
-                indent--;
-            }
-            else if(group.equals(">\\w")){
-                indent++;
-                for(int i = 0; i < indent; i++)
-                    tab += tabInd; 
-                
-                m.appendReplacement(sb, ">\n" + tab + "     $1" );
-                indent--;
+                    break;
+                case ">#":
+                    indent++;
+                    for (int i = 0; i < indent; i++)
+                        tab += tabInd;
+
+                    m.appendReplacement(sb, ">\n" + tab + "     #");
+                    indent--;
+                    break;
+                case ">\\w":
+                    indent++;
+                    for (int i = 0; i < indent; i++)
+                        tab += tabInd;
+
+                    m.appendReplacement(sb, ">\n" + tab + "     $1");
+                    indent--;
+                    break;
             }
         }
         m.appendTail(sb);

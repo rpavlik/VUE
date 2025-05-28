@@ -46,6 +46,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -715,10 +716,7 @@ public class VUE
      */
     public static String getSystemPropertyValue(String name) {
         String value = getSystemProperty(name);
-        if (value == null)
-            return NullSystemProperty;
-        else
-            return value;
+        return Objects.requireNonNullElse(value, NullSystemProperty);
     }
     
     public static boolean isSystemPropertyTrue(String name) {
@@ -823,25 +821,36 @@ public class VUE
         String allArgs = "";
         for (String arg : args) {
             allArgs += "[" + arg + "]";
-            if (arg.equals("-nosplash")) {
-                SKIP_SPLASH = true;
-            } else if (arg.equals("-nodr")) {
-                SKIP_DR = true;
-                SKIP_SPLASH = true;
-            } else if (arg.equals("-noem")) {
-                SKIP_EDITOR_MANAGER = true;
-            } else if (arg.equals("-noidx")) {
-                SKIP_RDF_INDEX = true;
-            } else if (arg.equals("-nocat")) {
-                SKIP_CAT = true;
-            } else if (arg.equals("-skip")) {
-                SKIP_DR = true;
-                SKIP_CAT = true;
-                SKIP_SPLASH = true;
-            } else if (arg.equals("-exit_after_init")) // for startup time trials
-                exitAfterInit = true;
-            else
-                DEBUG.parseArg(arg);
+            switch (arg) {
+                case "-nosplash":
+                    SKIP_SPLASH = true;
+                    break;
+                case "-nodr":
+                    SKIP_DR = true;
+                    SKIP_SPLASH = true;
+                    break;
+                case "-noem":
+                    SKIP_EDITOR_MANAGER = true;
+                    break;
+                case "-noidx":
+                    SKIP_RDF_INDEX = true;
+                    break;
+                case "-nocat":
+                    SKIP_CAT = true;
+                    break;
+                case "-skip":
+                    SKIP_DR = true;
+                    SKIP_CAT = true;
+                    SKIP_SPLASH = true;
+                    break;
+                case "-exit_after_init":
+// for startup time trials
+                    exitAfterInit = true;
+                    break;
+                default:
+                    DEBUG.parseArg(arg);
+                    break;
+            }
 
             if (arg.startsWith("-debug")) DEBUG.Enabled = true;
 

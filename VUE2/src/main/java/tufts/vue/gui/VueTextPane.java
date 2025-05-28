@@ -20,6 +20,8 @@ import tufts.Util;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Objects;
+
 import javax.swing.*;
 import javax.swing.text.*;
 
@@ -236,11 +238,7 @@ public class VueTextPane extends JTextPane
         } else {
             setEnabled(false);
         }
-        if (text == null) {
-            loadText("");
-        } else {
-            loadText(text);
-        }
+        loadText(Objects.requireNonNullElse(text, ""));
     }
     
     public void LWCChanged(LWCEvent e)

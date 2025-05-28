@@ -306,11 +306,18 @@ java.awt.event.ActionListener
         }
         
         private String getNiceName(String operString) {
-            if (operString.equals("has")) return "contains";
-            if (operString.equals("eq")) return "eq";
-            if (operString.equals("lt")) return "lt";
-            if (operString.equals("lte")) return "lte";
-            if (operString.equals("gt")) return "gt";
+            switch (operString) {
+                case "has":
+                    return "contains";
+                case "eq":
+                    return "eq";
+                case "lt":
+                    return "lt";
+                case "lte":
+                    return "lte";
+                case "gt":
+                    return "gt";
+            }
             return "gte";
         }
         

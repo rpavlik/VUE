@@ -390,110 +390,117 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 				isAbstract = false;
 				isFinal = false;
 			} else if (tokenizer.ttype == StreamTokenizer.TT_WORD) {
-				if (tokenizer.sval.equals(PUBLIC_KEYWORD)) {
-					isPublic = true;
-				} else if (tokenizer.sval.equals(ABSTRACT_KEYWORD)) {
-					isAbstract = true;
-				} else if (tokenizer.sval.equals(FINAL_KEYWORD)) {
-					isFinal = true;
-				} else if (tokenizer.sval.equals(CLASS_KEYWORD)) {
-					if (analyzeClasses) {
-						if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-							String				className = tokenizer.sval,
-												extendsClassName = null;
-							ArrayList<String>	implementsInterfaceNames = null;
-
-							skipGeneric(tokenizer);
-
+				switch (tokenizer.sval) {
+					case PUBLIC_KEYWORD:
+						isPublic = true;
+						break;
+					case ABSTRACT_KEYWORD:
+						isAbstract = true;
+						break;
+					case FINAL_KEYWORD:
+						isFinal = true;
+						break;
+					case CLASS_KEYWORD:
+						if (analyzeClasses) {
 							if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-								if (tokenizer.sval.equals(EXTENDS_KEYWORD)) {
-									if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-										extendsClassName = tokenizer.sval;
-										skipGeneric(tokenizer);
+								String className = tokenizer.sval,
+										extendsClassName = null;
+								ArrayList<String> implementsInterfaceNames = null;
+
+								skipGeneric(tokenizer);
+
+								if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
+									if (tokenizer.sval.equals(EXTENDS_KEYWORD)) {
+										if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
+											extendsClassName = tokenizer.sval;
+											skipGeneric(tokenizer);
+										}
+									} else {
+										// If the current token isn't extends, it might be implements -- push it back
+										// into the stream so it will be ready to be taken out of the stream again
+										// below.
+										tokenizer.pushBack();
 									}
-								} else {
-									// If the current token isn't extends, it might be implements -- push it back
-									// into the stream so it will be ready to be taken out of the stream again below.
-									tokenizer.pushBack();
-								}
 
-								if (analyzeInterfaces) {
-									if (tokenizer.nextToken() == StreamTokenizer.TT_WORD &&
-											tokenizer.sval.equals(IMPLEMENTS_KEYWORD)) {
-										boolean		parsingInterfaces = true;
+									if (analyzeInterfaces) {
+										if (tokenizer.nextToken() == StreamTokenizer.TT_WORD &&
+												tokenizer.sval.equals(IMPLEMENTS_KEYWORD)) {
+											boolean parsingInterfaces = true;
 
-										implementsInterfaceNames = new ArrayList<>();
+											implementsInterfaceNames = new ArrayList<>();
 
-										while (parsingInterfaces) {
-											if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-												implementsInterfaceNames.add(tokenizer.sval);
-												skipGeneric(tokenizer);
-											} else {
-												parsingInterfaces = false;
-											}
+											while (parsingInterfaces) {
+												if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
+													implementsInterfaceNames.add(tokenizer.sval);
+													skipGeneric(tokenizer);
+												} else {
+													parsingInterfaces = false;
+												}
 
-											if (tokenizer.nextToken() != COMMA_TOKEN) {
-												parsingInterfaces = false;
+												if (tokenizer.nextToken() != COMMA_TOKEN) {
+													parsingInterfaces = false;
+												}
 											}
 										}
 									}
 								}
-							}
 
-							boolean		isNotInner = className.equals(sourceName);
+								boolean isNotInner = className.equals(sourceName);
 
-							if (analyzeInnerClasses || isNotInner) {
-								newClass(isPublic, isAbstract, isFinal, (isNotInner ? null : sourceName),
-										className, extendsClassName, implementsInterfaceNames, x, y);
-							}
-						}
-					}
-
-					foundCount++;
-					isPublic = false;
-					isAbstract = false;
-					isFinal = false;
-				} else if (tokenizer.sval.equals(INTERFACE_KEYWORD)) {
-					if (analyzeInterfaces) {
-						if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-							String				interfaceName = tokenizer.sval;
-							ArrayList<String>	extendsInterfaceNames = null;
-
-							skipGeneric(tokenizer);
-
-							if (tokenizer.nextToken() == StreamTokenizer.TT_WORD &&
-									tokenizer.sval.equals(EXTENDS_KEYWORD)) {
-								boolean		parsingInterfaces = true;
-
-								extendsInterfaceNames = new ArrayList<>();
-
-								while (parsingInterfaces) {
-									if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
-										extendsInterfaceNames.add(tokenizer.sval);
-										skipGeneric(tokenizer);
-									} else {
-										parsingInterfaces = false;
-									}
-
-									if (tokenizer.nextToken() != COMMA_TOKEN) {
-										parsingInterfaces = false;
-									}
+								if (analyzeInnerClasses || isNotInner) {
+									newClass(isPublic, isAbstract, isFinal, (isNotInner ? null : sourceName),
+											className, extendsClassName, implementsInterfaceNames, x, y);
 								}
 							}
+						}
 
-							boolean		isNotInner = interfaceName.equals(sourceName);
+						foundCount++;
+						isPublic = false;
+						isAbstract = false;
+						isFinal = false;
+						break;
+					case INTERFACE_KEYWORD:
+						if (analyzeInterfaces) {
+							if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
+								String interfaceName = tokenizer.sval;
+								ArrayList<String> extendsInterfaceNames = null;
 
-							if (analyzeInnerInterfaces || isNotInner) {
-								newInterface(isPublic, isAbstract, isFinal, (isNotInner ? null : sourceName),
-										interfaceName, extendsInterfaceNames, x, y);
+								skipGeneric(tokenizer);
+
+								if (tokenizer.nextToken() == StreamTokenizer.TT_WORD &&
+										tokenizer.sval.equals(EXTENDS_KEYWORD)) {
+									boolean parsingInterfaces = true;
+
+									extendsInterfaceNames = new ArrayList<>();
+
+									while (parsingInterfaces) {
+										if (tokenizer.nextToken() == StreamTokenizer.TT_WORD) {
+											extendsInterfaceNames.add(tokenizer.sval);
+											skipGeneric(tokenizer);
+										} else {
+											parsingInterfaces = false;
+										}
+
+										if (tokenizer.nextToken() != COMMA_TOKEN) {
+											parsingInterfaces = false;
+										}
+									}
+								}
+
+								boolean isNotInner = interfaceName.equals(sourceName);
+
+								if (analyzeInnerInterfaces || isNotInner) {
+									newInterface(isPublic, isAbstract, isFinal, (isNotInner ? null : sourceName),
+											interfaceName, extendsInterfaceNames, x, y);
+								}
 							}
 						}
-					}
 
-					foundCount++;
-					isPublic = false;
-					isAbstract = false;
-					isFinal = false;
+						foundCount++;
+						isPublic = false;
+						isAbstract = false;
+						isFinal = false;
+						break;
 				}
 			}
 		}

@@ -499,25 +499,28 @@ public class XMLIngest {
 
                     final String newNodeValue;
 
-                    if ("true".equals(nextName)) {
-                        //newNodeValue = next.getNodeValue()
-                        newNodeValue = "true"; // is a simle "<true/>" self-terminating value with/NO CHILDREN
-                    }
-                    else if ("false".equals(nextName)) {
-                        // almost never see this in iTunes Music Library.xml
-                        //errout("GOT FALSE");
-                        newNodeValue = "false";
-                    }
-                    else if ("dict".equals(nextName) || "array".equals(nextName)) {
+                    switch (nextName) {
+                        case "true":
+                            //newNodeValue = next.getNodeValue()
+                            newNodeValue = "true"; // is a simle "<true/>" self-terminating value with/NO CHILDREN
 
-                        continue;
-                                
-                        //                                 //newNodeValue = "(todo: pull-up under: " + nextName + ")";
-                        //                                 newNodeValue = nextName;
-                        //                                 i--;  // we're not extracting this yet, so don't pull it out below
-                    }
-                    else {
-                        newNodeValue = next.getChildNodes().item(0).getNodeValue();
+                            break;
+                        case "false":
+                            // almost never see this in iTunes Music Library.xml
+                            //errout("GOT FALSE");
+                            newNodeValue = "false";
+                            break;
+                        case "dict":
+                        case "array":
+
+                            continue;
+
+                            //                                 //newNodeValue = "(todo: pull-up under: " + nextName + ")";
+                            //                                 newNodeValue = nextName;
+                            //                                 i--;  // we're not extracting this yet, so don't pull it out below
+                        default:
+                            newNodeValue = next.getChildNodes().item(0).getNodeValue();
+                            break;
                     }
 
                     //if ("Visible".equals(newNodeName)) errout("VALUE: " + newNodeValue);

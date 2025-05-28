@@ -570,10 +570,7 @@ public class LWComponent
          */
         private static long PartialPropertyMaskForClass(Class clazz) {
             final Long bitsForClass = ClassProperties.get(clazz); // property bits for this class
-            if (bitsForClass == null)
-                return 0L;
-            else
-                return bitsForClass;
+            return Objects.requireNonNullElse(bitsForClass, 0L);
         }
 
         public boolean isStyleProperty() {

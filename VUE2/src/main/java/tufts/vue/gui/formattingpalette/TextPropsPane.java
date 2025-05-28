@@ -31,6 +31,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Enumeration;
+import java.util.Objects;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -526,10 +527,7 @@ public class TextPropsPane extends JPanel implements CaretListener// ,
 				boldButton.setSelected(false);
 
 			b = (Boolean) attsSet.getAttribute(StyleConstants.Underline);
-			if (b != null)
-				underlineButton.setSelected(b);
-			else
-				underlineButton.setSelected(false);
+			underlineButton.setSelected(Objects.requireNonNullElse(b, false));
 
 			b = (Boolean) attsSet.getAttribute(StyleConstants.Italic);
 			if (b != null)

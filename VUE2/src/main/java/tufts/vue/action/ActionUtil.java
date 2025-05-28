@@ -62,6 +62,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.net.*;
+import java.util.Objects;
 
 /**
  * A class which defines utility methods for any of the action class.
@@ -1288,10 +1289,7 @@ class MapUnmarshalHandler implements UnmarshalListener {
         
     MapUnmarshalHandler(Object source, Object context) {
         this.source = source;
-        if (context == null)
-            this.context = CONTEXT_NONE;
-        else
-            this.context = context;
+        this.context = Objects.requireNonNullElse(context, CONTEXT_NONE);
     }
 
     /** This must be called first */

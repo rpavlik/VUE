@@ -199,23 +199,30 @@ public class AlchemyAnalyzer implements LWComponentAnalyzer {
         for (Node child = entity.getFirstChild(); null != child; child = child.getNextSibling()) {
             if (Node.ELEMENT_NODE == child.getNodeType())
             {
-                if ("type".equals(child.getNodeName()))
-                    type = getElementValue(child);
-                else if ("text".equals(child.getNodeName()))
-                    try {
-                        value = URLDecoder.decode(getElementValue(child), StandardCharsets.UTF_8);
-                    }
-                    catch(Exception e) {
-                        value = null;
-                    }
-                else if ("disambiguated".equals(child.getNodeName()))
-                    disambiguatedNode = (Element)child;
-                else try {
-                    if ("relevance".equals(child.getNodeName()))
-                        relevance = Double.parseDouble(getElementValue(child));
-                    else if ("count".equals(child.getNodeName()))
-                        count = Integer.parseInt(getElementValue(child));
-                } catch (NumberFormatException ex) {}
+                switch (child.getNodeName()) {
+                    case "type":
+                        type = getElementValue(child);
+                        break;
+                    case "text":
+                        try {
+                            value = URLDecoder.decode(getElementValue(child), StandardCharsets.UTF_8);
+                        } catch (Exception e) {
+                            value = null;
+                        }
+                        break;
+                    case "disambiguated":
+                        disambiguatedNode = (Element) child;
+                        break;
+                    default:
+                        try {
+                            if ("relevance".equals(child.getNodeName()))
+                                relevance = Double.parseDouble(getElementValue(child));
+                            else if ("count".equals(child.getNodeName()))
+                                count = Integer.parseInt(getElementValue(child));
+                        } catch (NumberFormatException ex) {
+                        }
+                        break;
+                }
             }
         }
          if (null != disambiguatedNode)

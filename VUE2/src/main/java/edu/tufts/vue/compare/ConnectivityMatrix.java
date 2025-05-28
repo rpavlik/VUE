@@ -296,7 +296,7 @@ public class ConnectivityMatrix
         
         
         if (LABELS_TOP) {
-            if (LABELS_LEFT) for (int i = 0; i <= maxLeftLen; i++) b.append(' ');
+            if (LABELS_LEFT) b.append(" ".repeat(Math.max(0, maxLeftLen + 1)));
             for (Object key : this.keys) {
                 if (key != null) {
                     if (LABELS_TOP_CHAR) {
@@ -326,8 +326,7 @@ public class ConnectivityMatrix
                 if (txt.length() > maxLeftLen) {
                     b.append(txt, 0, maxLeftLen);
                 } else {
-                    for (int i = txt.length(); i < maxLeftLen; i++)
-                        b.append(SPACE);
+                    b.append(String.valueOf(SPACE).repeat(maxLeftLen - txt.length()));
                     b.append(txt);
                 }
                 // I'd be nice to have an invisible char separator at end of label here in case

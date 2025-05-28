@@ -24,6 +24,8 @@ package edu.tufts.vue.style;
 
 import java.awt.*;
 import java.awt.font.*;
+import java.util.Objects;
+
 public class ShorthandParser {
     public static final float DEFAULT_FONT_SIZE = 10;
     public static final String CSS_FONT_STYLE_VAL = "italic";
@@ -35,12 +37,8 @@ public class ShorthandParser {
     public static Float parseFontSize(String value){
         float fv = DEFAULT_FONT_SIZE;
          Float f = parseSize(value);
-         
-        if(f != null) {
-             return f;
-        } else {
-             return fv;
-        }
+
+        return Objects.requireNonNullElse(f, fv);
     }
     
     /*

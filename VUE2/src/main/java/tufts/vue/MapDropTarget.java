@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.Objects;
 import java.util.regex.*;
 
 import java.io.File;
@@ -1748,10 +1749,7 @@ public class MapDropTarget
             }
         }
 
-        if (redirectURL == null)
-            return url;
-        else
-            return redirectURL;
+        return Objects.requireNonNullElse(redirectURL, url);
         
     }
 

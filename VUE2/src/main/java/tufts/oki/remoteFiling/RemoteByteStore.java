@@ -187,10 +187,7 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
         String dispName = getDisplayName();
         String extension = dispName.substring(dispName.lastIndexOf(".") + 1);
         String mimeType  = (String) mimeTypesSuffixTable.get(extension);
-        if (mimeType != null)
-            return mimeType;
-        else 
-            return "text/plain";
+        return Objects.requireNonNullElse(mimeType, "text/plain");
     }
 
         
