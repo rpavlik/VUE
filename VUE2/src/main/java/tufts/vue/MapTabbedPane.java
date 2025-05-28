@@ -112,7 +112,7 @@ public class MapTabbedPane extends JTabbedPane//extends DnDTabbedPane
 
             // for non-aqua UI's, we change the selected tab color
             
-            if (mWasSelected >= 0)
+            if (mWasSelected >= 0 && getTabCount() > 0)
                 setForegroundAt(mWasSelected, Color.darkGray);
             
             if (selected >= 0) {
