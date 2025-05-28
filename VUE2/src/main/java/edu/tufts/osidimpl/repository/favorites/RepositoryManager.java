@@ -22,8 +22,8 @@ public class RepositoryManager
     private org.osid.repository.Repository repository = null;
     private org.osid.shared.Type repositoryType = null;
     private org.osid.shared.Id repositoryId = null;
-    private java.util.Vector repositoryVector = new java.util.Vector();
-    private java.util.Vector searchTypeVector = new java.util.Vector();
+    private java.util.Vector<org.osid.repository.Repository> repositoryVector = new java.util.Vector<>();
+    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
     
     public void osidVersion_2_0()
     throws org.osid.repository.RepositoryException {
@@ -109,7 +109,7 @@ public class RepositoryManager
         if (repositoryType == null) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<org.osid.repository.Repository> result = new java.util.Vector<>();
         org.osid.repository.RepositoryIterator repositoryIterator = getRepositories();
         while (repositoryIterator.hasNextRepository()) {
             org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
@@ -188,12 +188,12 @@ public class RepositoryManager
         if (assetId == null) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<Long> result = new java.util.Vector<>();
         try {
             org.osid.repository.RepositoryIterator repositoryIterator = getRepositories();
             while (repositoryIterator.hasNextRepository()) {
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
-                org.osid.shared.LongValueIterator longValueIterator = repository.getAssetDates(assetId);
+                org.osid.shared.LongValueIterator longValueIterator = nextRepository.getAssetDates(assetId);
                 while (longValueIterator.hasNextLongValue()) {
                     result.addElement(new Long(longValueIterator.nextLongValue()));
                 }
@@ -213,8 +213,9 @@ public class RepositoryManager
         if (repositories == null) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        try {
-            java.util.Vector results = new java.util.Vector();
+        try
+        {
+            java.util.Vector<org.osid.repository.Asset> results = new java.util.Vector<>();
             for (org.osid.repository.Repository nextRepository : repositories) {
                 //optionally add a separate thread here
                 try {
@@ -245,12 +246,16 @@ public class RepositoryManager
     }
     
     public org.osid.shared.TypeIterator getRepositoryTypes()
-    throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
-        try {
+    throws org.osid.repository.RepositoryException
+    {
+        java.util.Vector<org.osid.shared.Type> results = new java.util.Vector<>();
+        try
+        {
             results.addElement(this.repositoryType);
             return new TypeIterator(results);
-        } catch (Throwable t) {
+        }
+        catch (Throwable t)
+        {
             Utilities.log(t);
             throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
         }

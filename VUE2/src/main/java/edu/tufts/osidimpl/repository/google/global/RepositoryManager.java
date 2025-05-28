@@ -247,7 +247,7 @@ implements org.osid.repository.RepositoryManager
             while (repositoryIterator.hasNextRepository())
             {
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
-                org.osid.shared.LongValueIterator longValueIterator = repository.getAssetDates(assetId);
+                org.osid.shared.LongValueIterator longValueIterator = nextRepository.getAssetDates(assetId);
                 while (longValueIterator.hasNextLongValue())
                 {
                     result.addElement(new Long(longValueIterator.nextLongValue()));
