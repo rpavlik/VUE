@@ -45,8 +45,8 @@ targetCompatibility = 11
 def timestamp = new Date()
 def tz = TimeZone.getTimeZone('UTC')
 
-def getSysProp(propName) {
-    return java.lang.System.getProperty(propName, '')
+static def getSysProp(propName) {
+    return System.getProperty(propName, '')
 }
 
 ext.date_str = "${timestamp.format('dd/MMM/yyyy', tz)}"
@@ -92,7 +92,7 @@ launch4j {
 
 createAllExecutables.dependsOn(shadowJar)
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.compilerArgs << '-Xlint:unchecked'
     options.deprecation = true
 }
