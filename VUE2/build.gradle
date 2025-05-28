@@ -14,6 +14,7 @@ plugins {
     // For Windows .exe files
     id "edu.sc.seis.launch4j" version "3.0.6"
 
+    id 'com.opencastsoftware.gradle.buildinfo' version '0.3.1'
 //    id "com.github.spotbugs" version "4.6.0"
 }
 
@@ -25,13 +26,12 @@ mainClassName = 'tufts.vue.VUE'
 
 
 // Load the version number from the main resources file.
-def resourceProps = file('src/main/resources/tufts/vue/VueResources.properties').withReader {
+version = file('src/main/resources/tufts/vue/VueResources.properties').withReader {
     reader ->
         def props = new Properties()
         props.load(reader)
-        props
+        props['vue.version']
 }
-version = resourceProps['vue.version']
 
 
 sourceCompatibility = 1.8
@@ -42,6 +42,34 @@ targetCompatibility = 1.8
 //     withJavadocJar()
 // }
 
+def timestamp = new Date()
+def tz = TimeZone.getTimeZone('UTC')
+
+def getSysProp(propName) {
+    return java.lang.System.getProperty(propName, '')
+}
+
+ext.date_str = "${timestamp.format('dd/MMM/yyyy', tz)}"
+ext.time_str = "${timestamp.getTimeString()}"
+ext.user = getSysProp("user.name")
+ext.platform = "${getSysProp('os.name')} ${getSysProp('os.version')} ${getSysProp('os.arch')}"
+ext.jvm = "${getSysProp('java.vm.name')} ${getSysProp('java.vm.version')}, Gradle ${project.gradle.gradleVersion}"
+ext.allInfo = "${date_str} at ${time_str} by ${user} on ${platform} JVM ${jvm}"
+
+
+buildInfo {
+    packageName = 'tufts.vue'
+    className = 'Version'
+    properties = [
+        Date: "${date_str}",
+        Time: "${time_str}",
+        User: user,
+        Platform: "${platform}",
+        JVM: "${jvm}",
+        AllInfo: allInfo,
+        WhatString: "@(#)VUE: built ${allInfo}",
+    ]
+}
 
 jar {
     manifest {
