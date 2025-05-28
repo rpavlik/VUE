@@ -80,7 +80,7 @@ public class ListRandomLayout extends Layout {
      * @param map the map for layout
      */
     public void layout(LWMap map) {
-        Iterator<LWNode> nodeIterator = map.getChildIterator();
+        Iterator<LWNode> nodeIterator = (Iterator<LWNode>)map.getChildIterator();
         while (nodeIterator.hasNext()) {
             LWNode node = nodeIterator.next();
             node.setLocation(MAP_SIZE * Math.random(), MAP_SIZE * Math.random());

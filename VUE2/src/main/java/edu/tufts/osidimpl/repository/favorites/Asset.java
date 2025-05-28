@@ -93,9 +93,9 @@ public class Asset
     }
     
     public org.osid.repository.AssetIterator getAssets()
-    throws org.osid.repository.RepositoryException {
-        java.util.Vector<Asset> result = new java.util.Vector<Asset>();
-        return new AssetIterator(result);
+    throws org.osid.repository.RepositoryException
+    {
+        return new AssetIterator(new java.util.Vector<Asset>());
     }
     
     public org.osid.repository.AssetIterator getAssetsByType(org.osid.shared.Type assetType)
@@ -178,7 +178,7 @@ public class Asset
     
     public org.osid.repository.RecordStructureIterator getRecordStructures()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
+        java.util.Vector<RecordStructure> results = new java.util.Vector<>();
         results.addElement(new RecordStructure());
         return new RecordStructureIterator(results);
     }
@@ -242,7 +242,7 @@ public class Asset
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
         try {
-            java.util.Vector results = new java.util.Vector();
+            java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
                 org.osid.repository.Record record = (org.osid.repository.Record)this.recordVector.elementAt(i);
                 org.osid.repository.PartIterator partIterator = record.getParts();

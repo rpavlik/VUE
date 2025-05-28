@@ -1012,7 +1012,7 @@ public class LWComponent
 
 
 
-    private static final Integer _DefaultInteger = new Integer(0);
+    private static final Integer _DefaultInteger = Integer.valueOf(0);
 
     public class IntProperty extends NumberProperty<java.lang.Integer> {
         IntProperty(Key key, Integer defaultValue) {
@@ -1023,7 +1023,7 @@ public class LWComponent
             this(key, _DefaultInteger);
         }
 
-        void setBy(String s) { set(new Integer(s)); }
+        void setBy(String s) { set(Integer.valueOf(s)); }
     }
 
     private static final Float _DefaultFloat = new Float(0f);
@@ -1032,7 +1032,7 @@ public class LWComponent
             super(key);
             value = _DefaultFloat;
         }
-        void setBy(String s) { set(new Float(s)); }
+        void setBy(String s) { set(Float.valueOf(s)); }
     }
 
     public class FontProperty extends Property<java.awt.Font> {
@@ -1265,14 +1265,13 @@ public class LWComponent
 
     public enum Alignment { LEFT, CENTER, RIGHT }
 
-    public static final Key KEY_FillColor   = new Key("fill.color", "background")       { final Property getSlot(LWComponent c) { return c.mFillColor; } };
-    public static final Key KEY_TextColor   = new Key("text.color", "font-color")       { final Property getSlot(LWComponent c) { return c.mTextColor; } };
-    public static final Key KEY_StrokeColor = new Key("stroke.color", "border-color")   { final Property getSlot(LWComponent c) { return c.mStrokeColor; } };
-    //public static final Key KEY_StrokeStyle = new Key("stroke.style", "border-style")   { final Property getSlot(LWComponent c) { return null; } };
-    public static final Key KEY_StrokeWidth = new Key("stroke.width", "stroke-width")   { final Property getSlot(LWComponent c) { return c.mStrokeWidth; } };
-    public static final Key KEY_StrokeStyle = new Key<LWComponent,StrokeStyle>
+    public static final Key<LWComponent, Color> KEY_FillColor   = new Key<LWComponent, Color>("fill.color", "background")       { final Property getSlot(LWComponent c) { return c.mFillColor; } };
+    public static final Key<LWComponent, Color> KEY_TextColor   = new Key<LWComponent, Color>("text.color", "font-color")       { final Property getSlot(LWComponent c) { return c.mTextColor; } };
+    public static final Key<LWComponent, Color> KEY_StrokeColor = new Key<LWComponent, Color>("stroke.color", "border-color")   { final Property getSlot(LWComponent c) { return c.mStrokeColor; } };
+    public static final Key<LWComponent, Float> KEY_StrokeWidth = new Key<LWComponent, Float>("stroke.width", "stroke-width")   { final Property getSlot(LWComponent c) { return c.mStrokeWidth; } };
+    public static final Key<LWComponent, StrokeStyle> KEY_StrokeStyle = new Key<LWComponent, StrokeStyle>
         ("stroke.style", KeyType.STYLE)   { final Property getSlot(LWComponent c) { return c.mStrokeStyle; } };
-    public static final Key KEY_Alignment = new Key<LWComponent,Alignment>
+    public static final Key<LWComponent, Alignment> KEY_Alignment = new Key<LWComponent, Alignment>
         ("alignment", KeyType.STYLE)   { final Property getSlot(LWComponent c) { return c.mAlignment; } };
 
 
@@ -1281,14 +1280,14 @@ public class LWComponent
     /* font.name: family name of the font */
 
     /** Aggregate font key, which represents the combination of it's three sub-properties */
-    public static final Key KEY_Font = new Key("font", KeyType.STYLE)                   { final Property getSlot(LWComponent c) { return c.mFont; } };
-    public static final Key KEY_FontSize  = new Key("font.size", KeyType.SUB_STYLE)     { final Property getSlot(LWComponent c) { return c.mFontSize; } };
-    public static final Key KEY_FontStyle = new Key("font.style", KeyType.SUB_STYLE)    { final Property getSlot(LWComponent c) { return c.mFontStyle; } };
-    public static final Key KEY_FontUnderline = new Key("font.underline", KeyType.SUB_STYLE)    { final Property getSlot(LWComponent c) { return c.mFontUnderline; } };
-    public static final Key KEY_FontName  = new Key("font.name", KeyType.SUB_STYLE)     { final Property getSlot(LWComponent c) { return c.mFontName; } };
+    public static final Key<LWComponent, Font> KEY_Font = new Key<LWComponent, Font>("font", KeyType.STYLE)                               { final Property getSlot(LWComponent c) { return c.mFont; } };
+    public static final Key<LWComponent, Integer> KEY_FontSize  = new Key<LWComponent, Integer>("font.size", KeyType.SUB_STYLE)           { final Property getSlot(LWComponent c) { return c.mFontSize; } };
+    public static final Key<LWComponent, Integer> KEY_FontStyle = new Key<LWComponent, Integer>("font.style", KeyType.SUB_STYLE)          { final Property getSlot(LWComponent c) { return c.mFontStyle; } };
+    public static final Key<LWComponent, String> KEY_FontUnderline = new Key<LWComponent, String>("font.underline", KeyType.SUB_STYLE)    { final Property getSlot(LWComponent c) { return c.mFontUnderline; } };
+    public static final Key<LWComponent, String> KEY_FontName  = new Key<LWComponent, String>("font.name", KeyType.SUB_STYLE)             { final Property getSlot(LWComponent c) { return c.mFontName; } };
 
-    public static final Key KEY_Collapsed =
-        new Key<LWComponent,Boolean>("collapsed") {
+    public static final Key<LWComponent, Boolean> KEY_Collapsed =
+        new Key<LWComponent, Boolean>("collapsed") {
         @Override public void setValue(LWComponent c, Boolean collapsed) {
             c.setCollapsed(collapsed);
         }
@@ -1297,7 +1296,7 @@ public class LWComponent
         }
     };
 
-    public static final Key KEY_Created =
+    public static final Key<LWComponent,Long> KEY_Created =
         new Key<LWComponent,Long>("created") {
         @Override public Long getValue(LWComponent c) {
             return c.getCreated();

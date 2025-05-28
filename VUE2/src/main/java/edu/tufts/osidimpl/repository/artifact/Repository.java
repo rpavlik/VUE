@@ -35,7 +35,7 @@ implements org.osid.repository.Repository
     private String description = null;
     private String address = null;
     private String searchKeywordTypePrefix = "searchType=Any";
-    private java.util.Vector searchTypeVector = new java.util.Vector();
+    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
     private java.util.Properties configuration;
     private static final String DEFAULT_ADDRESS = "http://artifact.tufts.edu/";
 	private static final String SEARCH_URL_PREFIX = DEFAULT_ADDRESS+"vue_xml/search2.asp?searchType=Any&max_return=10&query=";
@@ -48,7 +48,7 @@ implements org.osid.repository.Repository
 						 String maxReturn,
 						 org.osid.shared.Id repositoryId,
 						 org.osid.shared.Type repositoryType,
-						 java.util.Vector searchTypeVector)
+						 java.util.Vector<org.osid.shared.Type> searchTypeVector)
 		throws org.osid.repository.RepositoryException
     {
         this.displayName = displayName;
@@ -281,7 +281,6 @@ implements org.osid.repository.Repository
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.UNKNOWN_TYPE);
 		}
 				
-		java.util.Vector results = new java.util.Vector();
         try
         {
             String criteria = (String)searchCriteria;
@@ -357,7 +356,7 @@ implements org.osid.repository.Repository
         }
         if (recordStructureType.isEqual(new Type("tufts.edu","recordStructure","artifact")))
         {
-            java.util.Vector results = new java.util.Vector();
+            java.util.Vector<RecordStructure> results = new java.util.Vector<>();
             results.addElement(RecordStructure.getInstance());
             return new RecordStructureIterator(results);
         }
@@ -369,7 +368,7 @@ implements org.osid.repository.Repository
     {
         try
         {
-            return new PropertiesIterator(new java.util.Vector());
+            return new PropertiesIterator(new java.util.Vector<org.osid.shared.Properties>());
         }
         catch (Throwable t)
         {
@@ -393,7 +392,7 @@ implements org.osid.repository.Repository
     {
         try
         {
-            return new TypeIterator(new java.util.Vector());
+            return new TypeIterator(new java.util.Vector<org.osid.shared.Type>());
         }
         catch (Throwable t)
         {

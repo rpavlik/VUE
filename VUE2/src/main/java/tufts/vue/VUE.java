@@ -393,7 +393,7 @@ public class VUE
                     
             try {
 
-                final Collection<LWComponent> everything = new ArrayList(64);
+                final Collection<LWComponent> everything = new ArrayList<>(64);
                 
                 for (int i = 0; i < mMapTabsLeft.getTabCount(); i++) {
                     LWMap map = mMapTabsLeft.getMapAt(i);
@@ -2957,7 +2957,7 @@ public class VUE
         if (mMapTabsLeft != null)
             return mMapTabsLeft.getAllMapsBag();
         else
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
     }
 
     public static void layoutAllMaps(Object layoutKey) {

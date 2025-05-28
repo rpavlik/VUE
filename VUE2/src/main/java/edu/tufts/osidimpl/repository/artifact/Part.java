@@ -103,7 +103,7 @@ implements org.osid.repository.Part
     public org.osid.repository.PartIterator getParts()
     throws org.osid.repository.RepositoryException
     {
-        return new PartIterator(new java.util.Vector());
+        return new PartIterator(new java.util.Vector<org.osid.repository.Part>());
     }
 
     public org.osid.repository.PartStructure getPartStructure()

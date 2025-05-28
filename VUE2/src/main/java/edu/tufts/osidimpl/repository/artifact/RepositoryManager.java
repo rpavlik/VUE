@@ -96,7 +96,7 @@ implements org.osid.repository.RepositoryManager
 							this.searchTypeVector);
 //					System.out.println("RM: Address: "+ configuration.getProperty("address"));
 //					System.out.println("RM: maxReturn: "+ configuration.getProperty("maxReturn"));
-					this.repositoryVector =  new java.util.Vector();
+					this.repositoryVector =  new java.util.Vector<>();
 					this.repositoryVector.addElement(this.repository);
 
         }
@@ -146,7 +146,7 @@ implements org.osid.repository.RepositoryManager
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<org.osid.repository.Repository> result = new java.util.Vector<>();
         org.osid.repository.RepositoryIterator repositoryIterator = getRepositories();
         while (repositoryIterator.hasNextRepository())
         {
@@ -252,7 +252,7 @@ implements org.osid.repository.RepositoryManager
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<Long> result = new java.util.Vector<>();
         try
         {
             org.osid.repository.RepositoryIterator repositoryIterator = getRepositories();
@@ -323,7 +323,7 @@ implements org.osid.repository.RepositoryManager
     public org.osid.shared.TypeIterator getRepositoryTypes()
     throws org.osid.repository.RepositoryException
     {
-        java.util.Vector results = new java.util.Vector();
+        java.util.Vector<org.osid.shared.Type> results = new java.util.Vector<>();
         try
         {
             results.addElement(this.repositoryType);

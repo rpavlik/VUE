@@ -79,7 +79,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
     private final java.util.Map<String,Vector> extraValuesByKey;
     
     public ConfigurationUI(java.io.InputStream stream) {
-        this(stream, java.util.Collections.EMPTY_MAP);
+        this(stream, java.util.Collections.emptyMap());
     }
     
     public ConfigurationUI(java.io.InputStream stream, java.util.Map<String,Vector> extraValues) {

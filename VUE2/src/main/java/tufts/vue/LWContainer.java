@@ -138,7 +138,7 @@ public abstract class LWContainer extends LWComponent
     }
 
 
-    public Iterator getChildIterator()
+    public Iterator<? extends LWComponent> getChildIterator()
     {
         return mChildren == NO_CHILDREN ? Util.EmptyIterator : mChildren.iterator();
     }
@@ -1438,7 +1438,7 @@ public abstract class LWContainer extends LWComponent
 
         if (cc.dupeChildren && mChildren != NO_CHILDREN) {
 
-            containerCopy.mChildren = new ArrayList(mChildren.size());
+            containerCopy.mChildren = new ArrayList<>(mChildren.size());
             
             for (LWComponent c : getChildren()) {
                 LWComponent childCopy = c.duplicate(cc);

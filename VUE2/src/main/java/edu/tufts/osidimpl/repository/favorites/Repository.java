@@ -24,22 +24,22 @@ public class Repository
     private org.osid.shared.Type assetType = new Type("edu.tufts","favorites","Asset");
     private String displayName = null;
     private String description = null;
-    private java.util.Vector searchTypeVector = null;
-    private java.util.Vector assetVector = null;
+    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
+    private java.util.Vector<org.osid.repository.Asset> assetVector = null;
     
     
     protected Repository(String displayName,
             String description,
             org.osid.shared.Id repositoryId,
             org.osid.shared.Type repositoryType,
-            java.util.Vector searchTypeVector)
+            java.util.Vector<org.osid.shared.Type> searchTypeVector)
             throws org.osid.repository.RepositoryException {
         this.displayName = displayName;
         this.description = description;
         this.repositoryId = repositoryId;
         this.repositoryType = repositoryType;
         this.searchTypeVector = searchTypeVector;
-        this.assetVector = new Vector();
+        this.assetVector = new Vector<>();
     }
     
     public String getDisplayName()
@@ -112,7 +112,7 @@ public class Repository
     
     public org.osid.shared.TypeIterator getAssetTypes()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
+        java.util.Vector<org.osid.shared.Type> results = new java.util.Vector<>();
         try {
             results.addElement(this.assetType);
             return new TypeIterator(results);
@@ -124,7 +124,7 @@ public class Repository
     
     public org.osid.repository.RecordStructureIterator getRecordStructures()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
+        java.util.Vector<org.osid.repository.RecordStructure> results = new java.util.Vector<>();
         results.addElement(RecordStructure.getInstance());
         return new RecordStructureIterator(results);
     }
@@ -135,7 +135,7 @@ public class Repository
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
         if (assetType.isEqual(this.assetType)) {
-            java.util.Vector results = new java.util.Vector();
+            java.util.Vector<org.osid.repository.RecordStructure> results = new java.util.Vector<>();
             results.addElement(RecordStructure.getInstance());
             return new RecordStructureIterator(results);
         }
@@ -144,7 +144,6 @@ public class Repository
     
     public org.osid.shared.TypeIterator getSearchTypes()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
         try {
             return new TypeIterator(this.searchTypeVector);
         } catch (Throwable t) {
@@ -155,7 +154,7 @@ public class Repository
     
     public org.osid.shared.TypeIterator getStatusTypes()
     throws org.osid.repository.RepositoryException {
-        java.util.Vector results = new java.util.Vector();
+        java.util.Vector<org.osid.shared.Type> results = new java.util.Vector<>();
         try {
             results.addElement(new Type("mit.edu","asset","valid"));
             return new TypeIterator(results);
@@ -228,7 +227,7 @@ public class Repository
         }
         
         String criteria = ((String)searchCriteria).toLowerCase();
-        java.util.Vector result = new java.util.Vector();
+        java.util.Vector<org.osid.repository.Asset> result = new java.util.Vector<>();
         try {
             // get all assets and look for matches
             org.osid.repository.AssetIterator ai = getAssets();
@@ -256,7 +255,7 @@ public class Repository
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
         if (recordStructureType.isEqual(new Type("edu.tufts","recordStructure","artifact"))) {
-            java.util.Vector results = new java.util.Vector();
+            java.util.Vector<RecordStructure> results = new java.util.Vector<>();
             results.addElement(RecordStructure.getInstance());
             return new RecordStructureIterator(results);
         }
@@ -266,7 +265,7 @@ public class Repository
     public org.osid.shared.PropertiesIterator getProperties()
     throws org.osid.repository.RepositoryException {
         try {
-            return new PropertiesIterator(new java.util.Vector());
+            return new PropertiesIterator(new java.util.Vector<org.osid.shared.Properties>());
         } catch (Throwable t) {
             Utilities.log(t.getMessage());
             throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
@@ -284,7 +283,7 @@ public class Repository
     public org.osid.shared.TypeIterator getPropertyTypes()
     throws org.osid.repository.RepositoryException {
         try {
-            return new TypeIterator(new java.util.Vector());
+            return new TypeIterator(new java.util.Vector<org.osid.shared.Type>());
         } catch (Throwable t) {
             Utilities.log(t.getMessage());
             throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
