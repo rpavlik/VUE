@@ -29,7 +29,7 @@ public class EditorManager
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(EditorManager.class);
     
     private static final Collection<LWEditor> mEditors = new HashSet<>();
-    private static final Map<LWEditor,JLabel> mLabels = new HashMap();
+    private static final Map<LWEditor,JLabel> mLabels = new HashMap<>();
     private static EditorManager singleton;
     private static boolean EditorLoadingUnderway; // editors are loading values from the selection
     private static boolean PropertySettingUnderway; // editor values are being applied to the selection
@@ -131,7 +131,7 @@ public class EditorManager
     private static StyleType CurrentStyle;
     private static StyleType CurrentToolStyle;
 
-    private static final Map<Object,StyleType> StylesByType = new HashMap();
+    private static final Map<Object,StyleType> StylesByType = new HashMap<>();
         
     private LWComponent singleSelection;
 
@@ -812,7 +812,7 @@ public class EditorManager
     private void extractMostRecentlyUsedStyles(LWMap map) {
         final Collection<LWComponent> allNodes = map.getAllDescendents(LWMap.ChildKind.ANY);
 
-        final Map<Object,LWComponent> foundStyles = new HashMap();
+        final Map<Object,LWComponent> foundStyles = new HashMap<>();
 
         Object typeToken;
         LWComponent curStyle;

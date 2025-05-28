@@ -310,7 +310,7 @@ implements org.osid.repository.Repository
     {
         try
         {
-            return new PropertiesIterator(new java.util.Vector());
+            return new PropertiesIterator(new java.util.Vector<>());
         }
         catch (Throwable t)
         {
@@ -334,7 +334,7 @@ implements org.osid.repository.Repository
     {
         try
         {
-            return new TypeIterator(new java.util.Vector());
+            return new TypeIterator(new java.util.Vector<>());
         }
         catch (Throwable t)
         {

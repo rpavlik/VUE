@@ -41,7 +41,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
     private static final boolean UseCache = false;
     private static final Map<String,LocalCabinet> Cache;
 
-    static { Cache = UseCache ? new java.util.concurrent.ConcurrentHashMap() : null; }
+    static { Cache = UseCache ? new java.util.concurrent.ConcurrentHashMap<>() : null; }
 
     //private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(LocalCabinet.class);
     

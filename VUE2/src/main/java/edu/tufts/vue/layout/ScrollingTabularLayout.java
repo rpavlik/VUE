@@ -75,7 +75,7 @@ public class ScrollingTabularLayout extends Layout {
         int count = 0;
         int total = 0;
 
-        final java.util.List<LWComponent> toLayout = new ArrayList(selection.size());
+        final java.util.List<LWComponent> toLayout = new ArrayList<>(selection.size());
 
         for (LWComponent c : selection) {
 

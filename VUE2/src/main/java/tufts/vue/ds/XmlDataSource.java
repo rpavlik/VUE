@@ -484,7 +484,7 @@ public class XmlDataSource extends BrowseDataSource
                               ,this.imageField // current value
                               ,edu.tufts.vue.ui.ConfigurationUI.COMBO_BOX_CONTROL);
         if (mSchema != null) {
-            imageField.values = new Vector();
+            imageField.values = new Vector<>();
             imageField.values.add(NONE_SELECTED);
             final Vector fieldNames = mSchema.getFieldNames();
             Collections.sort(fieldNames);
@@ -501,7 +501,7 @@ public class XmlDataSource extends BrowseDataSource
         
        // encodingField.value = new Vector();
         SortedMap<String,Charset> sets = java.nio.charset.Charset.availableCharsets();
-        encodingField.values = new Vector();
+        encodingField.values = new Vector<>();
         encodingField.values.add(AUTO_SELECTED);
         encodingField.values.addAll(sets.keySet());
         
@@ -804,7 +804,7 @@ public class XmlDataSource extends BrowseDataSource
             
         b.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         b.append("<configuration>\n");
-        final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap();
+        final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap<>();
         for (ConfigField f : getWideMatrixConfigurationUIFields(values)) {
                 EditLibraryPanel.addField(b, f.key, f.title, f.description, f.value, f.uiControl, f.maxLen);
                 if (f.values != null)
@@ -829,7 +829,7 @@ public class XmlDataSource extends BrowseDataSource
             
         b.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         b.append("<configuration>\n");
-        final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap();
+        final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap<>();
         for (ConfigField f : getMatrixConfigurationUIFields(values)) {
                 EditLibraryPanel.addField(b, f.key, f.title, f.description, f.value, f.uiControl, f.maxLen);
                 if (f.values != null)
@@ -865,7 +865,7 @@ public class XmlDataSource extends BrowseDataSource
     	List l = Arrays.asList(values);
     	//l.add(0, NONE_SELECTED);
     	
-        field1.values = new Vector(l);
+        field1.values = new Vector<>(l);
         
     	fields.add(field1);
 
@@ -922,7 +922,7 @@ public class XmlDataSource extends BrowseDataSource
     	List l = Arrays.asList(values);
     	//l.add(0, NONE_SELECTED);
     	
-        field1.values = new Vector(l);
+        field1.values = new Vector<>(l);
         
     	fields.add(field1);
 
@@ -933,7 +933,7 @@ public class XmlDataSource extends BrowseDataSource
                           ,this.matrixColField // current value
                           ,edu.tufts.vue.ui.ConfigurationUI.COMBO_BOX_CONTROL);
     	
-        field2.values = new Vector(l);
+        field2.values = new Vector<>(l);
         
     	fields.add(field2);
     	
@@ -944,7 +944,7 @@ public class XmlDataSource extends BrowseDataSource
                           ,this.matrixRelField // current value
                           ,edu.tufts.vue.ui.ConfigurationUI.COMBO_BOX_CONTROL);
 
-        field3.values = new Vector(l);
+        field3.values = new Vector<>(l);
         
     	fields.add(field3);
 

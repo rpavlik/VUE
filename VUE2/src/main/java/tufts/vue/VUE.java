@@ -137,7 +137,7 @@ public class VUE
     public static boolean  dropIsLocal = false;
     
     private static boolean isStartupUnderway = false;
-    private static final java.util.List FilesToOpen = Collections.synchronizedList(new java.util.ArrayList());
+    private static final java.util.List FilesToOpen = Collections.synchronizedList(new java.util.ArrayList<>());
 
     private static InspectorPane inspectorPane = null;
     private static FormatPanel formattingPanel; 

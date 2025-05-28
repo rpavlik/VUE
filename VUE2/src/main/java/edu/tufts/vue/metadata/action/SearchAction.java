@@ -756,7 +756,7 @@ public class SearchAction extends AbstractAction
             } else if (action == RA_SHOW) {
                 // compute inverse of targets for this map:
                 final Collection<LWComponent> allOnMap = map.getAllDescendents(SearchRelevant);
-                final Collection<LWComponent> toHide = new ArrayList(32);
+                final Collection<LWComponent> toHide = new ArrayList<>(32);
                 
                 for (LWComponent c : allOnMap)
                     if (!targets.contains(c))
@@ -1088,7 +1088,7 @@ public class SearchAction extends AbstractAction
 
     /** localized enum type for the kind of search (e.g., labels, everything, etc). */
     public static final class /*enum*/ SearchType extends ComboKey {
-        public static final Map<String,SearchType> KeyMap=new LinkedHashMap(), ValueMap=new HashMap();
+        public static final Map<String,SearchType> KeyMap=new LinkedHashMap<>(), ValueMap=new HashMap<>();
         private SearchType(String s) { super(s, KeyMap, ValueMap); }
         public static Object[] All() {
             if (KeyMap.isEmpty()) throw new InitError(SearchType.class);
@@ -1097,7 +1097,7 @@ public class SearchAction extends AbstractAction
     }
     /** localized enum type for the desired result operation: e.g., select, show, hide, etc */
     public static final class /*enum*/ ResultOp extends ComboKey {
-        public static final Map<String,ResultOp> KeyMap=new LinkedHashMap(), ValueMap=new HashMap();
+        public static final Map<String,ResultOp> KeyMap=new LinkedHashMap<>(), ValueMap=new HashMap<>();
         private ResultOp(String s)  { super(s, KeyMap, ValueMap); }
         public static Object[] All() {
             if (KeyMap.isEmpty()) throw new InitError(ResultOp.class);

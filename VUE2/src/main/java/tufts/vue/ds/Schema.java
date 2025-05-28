@@ -58,7 +58,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     private static final Multimap<String,Field> AllFieldsByLowerName = Multimaps.newHashMultimap();
     
     /** All possible column's in this Schema */
-    private final Map<String,Field> mFields = new HashMap();
+    private final Map<String,Field> mFields = new HashMap<>();
     //private final Map<String,Field> mFields = new LinkedHashMap();
     /** Ordered list of column's in this Schema -- same contents as mFields */
     private final List<Field> mFieldList = new ArrayList<>();
@@ -104,8 +104,8 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
 
     ///** contains "empty" (no data) schemas, which are retained as handles to be replaced if actual data schemas arrive */
     //private static final Collection<Schema> SchemaHandles = Collections.synchronizedList(new ArrayList<>());
-    private static final Map<Resource,Schema> _SchemaByResource = Collections.synchronizedMap(new HashMap());
-    private static final Map<String,Schema> _SchemaByDSGUID = Collections.synchronizedMap(new HashMap());
+    private static final Map<Resource,Schema> _SchemaByResource = Collections.synchronizedMap(new HashMap<>());
+    private static final Map<String,Schema> _SchemaByDSGUID = Collections.synchronizedMap(new HashMap<>());
     
     private static Schema newAuthorityInstance(Resource r, String dsGUID) {
 
@@ -1139,7 +1139,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
 
     // this returns a Vector so can be fed directly to a JComboBox if desired
     public synchronized Vector<String> getPossibleKeyFieldNames() {
-        final Vector<String> possibleKeyFields = new Vector();
+        final Vector<String> possibleKeyFields = new Vector<>();
 
         for (Field field : getFields())
             if (field.isPossibleKeyField())
@@ -1158,7 +1158,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
 
     // this returns a Vector so can be fed directly to a JComboBox if desired
     public synchronized Vector<String> getFieldNames() {
-        final Vector<String> names = new Vector();
+        final Vector<String> names = new Vector<>();
 
         for (Field field : getFields())
             names.add(field.getName());
@@ -1511,7 +1511,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     {
         if (DEBUG.Enabled) Log.debug("getMatchingRows: " + Relation.quoteKV(field, fieldValue));
         
-        final Collection<DataRow> results = new HashSet();
+        final Collection<DataRow> results = new HashSet<>();
         // todo: more performant than HashSet?  perhaps just scan at end for dupes
         
         if (hasField(field)) {
@@ -1567,7 +1567,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     {
         if (DEBUG.Enabled) Log.debug("getMatchingRows: " + Util.tags(searchKeys));
         
-        final Collection<DataRow> matching = new HashSet();
+        final Collection<DataRow> matching = new HashSet<>();
         // we use a HashSet to prevent duplicates, which could happen through
         // duplicate associations, or associations that are duped by an auto-join
 

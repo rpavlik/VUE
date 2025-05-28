@@ -234,7 +234,7 @@ public final class Relation {
 
         //final Set<String> valuesSeen = new HashSet(); // to detect dups
         //final List<Relation> results = new ArrayList<>();
-        final Map<String,Relation> results = new HashMap();
+        final Map<String,Relation> results = new HashMap<>();
         
         if (DEBUG.SCHEMA || DEBUG.WORK) {
             Log.debug("getCrossSchemaJoinedValues:"

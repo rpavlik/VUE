@@ -51,7 +51,7 @@ public class SakaiExport
     public java.util.List<edu.tufts.vue.dsm.DataSource> getSakaiDataSources()
         throws org.osid.repository.RepositoryException
     {
-        final java.util.List<edu.tufts.vue.dsm.DataSource> sakaiSources = new java.util.ArrayList();
+        final java.util.List<edu.tufts.vue.dsm.DataSource> sakaiSources = new java.util.ArrayList<>();
         
         for (edu.tufts.vue.dsm.DataSource ds : _dsm.getDataSources())
             if (isSakaiSource(ds))

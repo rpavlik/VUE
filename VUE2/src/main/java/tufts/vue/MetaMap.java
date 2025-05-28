@@ -617,7 +617,7 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
 
     public synchronized void addListener(TableBag.Listener l) {
         if (listeners == null)
-            listeners = new java.util.ArrayList();
+            listeners = new java.util.ArrayList<>();
         listeners.add(l);
     }
     public synchronized void removeListener(TableBag.Listener l) {

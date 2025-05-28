@@ -364,7 +364,7 @@ public final class Association
 
     /** @return all opposite Fields mentioned in associations containing the given Field */
     public static Collection<Field> getPairedFields(Field field) {
-        final Collection<Field> pairedTo = new HashSet();
+        final Collection<Field> pairedTo = new HashSet<>();
         for (Association a : Association.getAliases(field)) {
             pairedTo.add(a.getPairedField(field));
         }

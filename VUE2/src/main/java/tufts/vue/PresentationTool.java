@@ -584,7 +584,7 @@ public class PresentationTool extends VueTool
     
     private final PageQueue<Page> mVisited = new PageQueue();
     
-    private final List<NavNode> mNavNodes = new java.util.ArrayList();
+    private final List<NavNode> mNavNodes = new java.util.ArrayList<>();
 
     private static final Font NavFont = new Font("SansSerif", Font.PLAIN, 16);
     private static final Font NavFontBold = new Font("SansSerif", Font.BOLD, 16);
@@ -697,7 +697,7 @@ public class PresentationTool extends VueTool
         private List<JumpBox> createPathwayJumpBoxes(LWComponent node)
         {
             final List<LWPathway.Entry> entries = node.getEntries();
-            final List<JumpBox> boxes = new ArrayList(entries.size());
+            final List<JumpBox> boxes = new ArrayList<>(entries.size());
 
             float rightEdge = getWidth() - (BoxGap + 5);
             
@@ -2929,7 +2929,7 @@ public class PresentationTool extends VueTool
 
         boolean offEdgeNodes = true;
 
-        final Set<LWComponent> unique = new HashSet();
+        final Set<LWComponent> unique = new HashSet<>();
 
         //final Object skip1, skip2;
         //NavLayout(Rectangle frame, Object s1, Object s2) {

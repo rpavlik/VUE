@@ -925,7 +925,7 @@ public class VueUtil extends tufts.Util
     public static List<LWComponent> setXYByClustering(LWMap map, Collection<? extends LWComponent> layoutNodes)
     {
         final Collection<LWComponent> all = map.getAllDescendents();
-        final Collection<LWNode> relatingNodes = new ArrayList(all.size() / 2);
+        final Collection<LWNode> relatingNodes = new ArrayList<>(all.size() / 2);
         
         for (LWNode n : typeFilter(all, LWNode.class)) {
             if (!layoutNodes.contains(n))

@@ -48,12 +48,12 @@ public class ActiveInstance<T>
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(ActiveInstance.class);
     
-    private static final Map<Class,ActiveInstance> AllActiveHandlers = new HashMap();
-    private static final List<ActiveListener> ListenersForAllActiveEvents = new CopyOnWriteArrayList();
+    private static final Map<Class,ActiveInstance> AllActiveHandlers = new HashMap<>();
+    private static final List<ActiveListener> ListenersForAllActiveEvents = new CopyOnWriteArrayList<>();
     protected static int depth = -1; // event delivery depth
     
-    private final CopyOnWriteArrayList<ActiveListener> mListeners = new CopyOnWriteArrayList();
-    private final Set<T> allInstances = Collections.synchronizedSet(new HashSet());
+    private final CopyOnWriteArrayList<ActiveListener> mListeners = new CopyOnWriteArrayList<>();
+    private final Set<T> allInstances = Collections.synchronizedSet(new HashSet<>());
     
     protected final Class itemType;
     protected final String itemTypeName; // for debug

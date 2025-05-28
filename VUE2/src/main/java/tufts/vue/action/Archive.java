@@ -130,7 +130,7 @@ public class Archive
 
         final ZipInputStream zin = new ZipInputStream(new FileInputStream(zipFile));
 
-        final Map<String,String> packagedResources = new HashMap();
+        final Map<String,String> packagedResources = new HashMap<>();
 
         ZipEntry entry;
         ZipEntry mapEntry = null;
@@ -343,7 +343,7 @@ public class Archive
     {
             Log.info("Unpacking VUE IMSCP zip archive: " + file);
             ZipFile zipFile = new ZipFile(file);
-            Vector<Resource> resourceVector = new Vector();
+            Vector<Resource> resourceVector = new Vector<>();
             File resourceFolder = new File(VueUtil.getDefaultUserFolder().getAbsolutePath()+File.separator+IMSCP.RESOURCE_FILES);
             if(resourceFolder.exists() || resourceFolder.mkdir()) {
                 ZipInputStream zin = new ZipInputStream(new FileInputStream(file));
@@ -689,7 +689,7 @@ public class Archive
         final Collection<Resource> uniqueResources = map.getAllUniqueResources();
         final Collection<PropertyEntry> manifest = new ArrayList<>();
         final List<Item> items = new ArrayList<>();
-        final Set<String> uniqueEntryNames = new HashSet();
+        final Set<String> uniqueEntryNames = new HashSet<>();
 
         Archive.UniqueNameFailsafeCount = 1;  // note: static variable -- not threadsafe
         

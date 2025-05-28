@@ -309,7 +309,7 @@ public class Images
             if (image == null && cacheFile == null)
                 throw new IllegalArgumentException("CacheEntry: at least one of image or file must be non null");
             if (image != null)
-                this.ref = new SoftReference(image);
+                this.ref = new SoftReference<>(image);
             else
                 this.ref = null;
             this.file = cacheFile;
@@ -1331,11 +1331,11 @@ public class Images
         // the screen.
         
         // For icon tasks, runs as FIFO (would be better as a JDK1.6 ArrayDeque, as this never needs shuffling)
-        private final LinkedList<E> q1 = new LinkedList();
+        private final LinkedList<E> q1 = new LinkedList<>();
         // For normal priorities, runs as LIFO, and requires re-shuffling:
-        private final LinkedList<E> q2 = new LinkedList();
+        private final LinkedList<E> q2 = new LinkedList<>();
         // For low priorities, runs as FIFO (also better as ArrayDeque)
-        private final LinkedList<E> q3 = new LinkedList();
+        private final LinkedList<E> q3 = new LinkedList<>();
         
         // The total queue can be seen as three regions arranged linearly in order of priority,
         // left to right, to be fed to the TPE (ThreadPoolExecutor):

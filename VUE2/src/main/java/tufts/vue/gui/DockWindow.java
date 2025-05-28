@@ -73,7 +73,7 @@ public class DockWindow
     public static final int DefaultWidth = 300;
     private static boolean AllVisible = true;
     
-    final static LinkedList<DockWindow> AllWindows = new LinkedList();
+    final static LinkedList<DockWindow> AllWindows = new LinkedList<>();
     final static char RightArrowChar = 0x25B8; // unicode
     final static char DownArrowChar = 0x25BE; // unicode
     //final static String RightArrow = "" + RightArrowChar;

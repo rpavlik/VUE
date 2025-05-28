@@ -131,7 +131,7 @@ public abstract class ComboBoxMenuButton<T> extends JComboBox
             icon = makeIcon((T) value);
         }
         if (mIconCache == null)
-            mIconCache = new HashMap();
+            mIconCache = new HashMap<>();
         //System.out.println("Loading cache for [" + value + "] with " + icon);
         mIconCache.put((T) value, icon == null ? NO_ICON : icon);
         return icon;

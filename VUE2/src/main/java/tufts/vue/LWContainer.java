@@ -404,7 +404,7 @@ public abstract class LWContainer extends LWComponent
         notify(LWKey.HierarchyChanging);
 
         if (mChildren == NO_CHILDREN)
-            mChildren = new ArrayList(toAdd.size());
+            mChildren = new ArrayList<>(toAdd.size());
 
         if (toAdd.size() > 1 && context != ADD_PRESORTED)
             toAdd = sortForIncomingZOrder(toAdd);
@@ -418,7 +418,7 @@ public abstract class LWContainer extends LWComponent
         // user action, and after that, it can ignore further changes on the same
         // parent: it has all it needs to restore the parent's state before the action.
         
-        final List<LWComponent> added = new ArrayList(toAdd.size());
+        final List<LWComponent> added = new ArrayList<>(toAdd.size());
 
         final long timestamp = System.currentTimeMillis();
 

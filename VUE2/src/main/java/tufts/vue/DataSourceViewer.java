@@ -801,7 +801,7 @@ public class DataSourceViewer extends ContentViewer
 
         final java.util.List<tufts.vue.DataSource> dataSources;
         synchronized (oldStyleDataSources) {
-            dataSources = new ArrayList(oldStyleDataSources);
+            dataSources = new ArrayList<>(oldStyleDataSources);
         }
         
         for (DataSource ds : dataSources) {
@@ -941,7 +941,7 @@ public class DataSourceViewer extends ContentViewer
             setDaemon(true);
             
             if (listOfLists == null)
-            	listOfLists = Collections.synchronizedList(new ArrayList());
+            	listOfLists = Collections.synchronizedList(new ArrayList<>());
             if (DEBUG.DR)
             {
             	System.out.println("Search Thread\n-----------");

@@ -708,7 +708,7 @@ public class InspectorPane extends WidgetStack
             // "auto-clear-on-change")
 
             if (gotView && r != null)
-                r.setProperty(DESCRIPTION_VIEWER_KEY, new java.lang.ref.SoftReference(descriptionView));
+                r.setProperty(DESCRIPTION_VIEWER_KEY, new java.lang.ref.SoftReference<>(descriptionView));
             // r.putSoft
             // r.data.putSoft
         }

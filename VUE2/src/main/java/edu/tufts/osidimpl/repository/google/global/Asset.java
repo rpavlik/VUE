@@ -125,7 +125,7 @@ implements org.osid.repository.Asset
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        return new AssetIterator(new java.util.Vector());
+        return new AssetIterator(new java.util.Vector<>());
     }
 
     public org.osid.repository.Record createRecord(org.osid.shared.Id recordStructureId)

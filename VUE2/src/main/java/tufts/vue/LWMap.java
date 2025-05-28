@@ -689,7 +689,7 @@ public class LWMap extends LWContainer
      */
     public Collection<Resource> getAllResources() {
 
-        final Map<Resource,Boolean> resources = new IdentityHashMap(); // really, want IdentityHashSet
+        final Map<Resource,Boolean> resources = new IdentityHashMap<>(); // really, want IdentityHashSet
 
         for (LWComponent c : getAllDescendents(ChildKind.ANY))
             if (c.hasResource())
@@ -1576,7 +1576,7 @@ public class LWMap extends LWContainer
 
     class ResourceFactory extends Resource.DefaultFactory {
 
-        private final Map<String,Resource> resourceMap = new java.util.concurrent.ConcurrentHashMap();
+        private final Map<String,Resource> resourceMap = new java.util.concurrent.ConcurrentHashMap<>();
 
         void loadResources(Collection<Resource> resourceBag) {
             for (Resource r : resourceBag)
@@ -1694,7 +1694,7 @@ public class LWMap extends LWContainer
     }
 
     private Collection<Schema> findAllSchemas() {
-        final Set<Schema> allSchemas = new HashSet();
+        final Set<Schema> allSchemas = new HashSet<>();
 
         for (LWComponent c : getAllDescendents()) {
             Schema s = c.getDataSchema();

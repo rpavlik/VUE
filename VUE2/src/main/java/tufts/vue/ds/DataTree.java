@@ -85,7 +85,7 @@ public class DataTree extends javax.swing.JTree
     private static final MapListener ActiveMapListener = new MapListener();
     private static final java.util.concurrent.atomic.AtomicBoolean FirstInstance = new java.util.concurrent.atomic.AtomicBoolean(true);
     
-    private static final Collection<DataTree> ActiveTrees = new java.util.concurrent.CopyOnWriteArrayList();
+    private static final Collection<DataTree> ActiveTrees = new java.util.concurrent.CopyOnWriteArrayList<>();
     private static volatile DataTree ForegroundTree;
     private static volatile LWMap mActiveMap;
     
@@ -189,7 +189,7 @@ public class DataTree extends javax.swing.JTree
         if (mActiveMap != null) {
 
             final Collection<LWComponent> allNodes = mActiveMap.getAllDescendents();
-            final Collection<LWComponent> dataNodes = new ArrayList(allNodes.size());
+            final Collection<LWComponent> dataNodes = new ArrayList<>(allNodes.size());
             
             for (LWComponent c : allNodes) {
                 if (c.isDataNode() && c instanceof LWNode) // leave out data-links for now
@@ -414,7 +414,7 @@ public class DataTree extends javax.swing.JTree
    
     private void applyDataUpdatesToMap(final LWMap map)
     {
-        final Map<String,DataRow> freshData = new HashMap();
+        final Map<String,DataRow> freshData = new HashMap<>();
         final Field keyField = mSchema.getKeyField();
         final String keyFieldName = keyField.getName();
 
@@ -1568,7 +1568,7 @@ public class DataTree extends javax.swing.JTree
             //  value counts == 1
             valueEntries = entrySet;
         } else {
-            final ArrayList<Multiset.Entry<String>> sortedValues = new ArrayList(entrySet);
+            final ArrayList<Multiset.Entry<String>> sortedValues = new ArrayList<>(entrySet);
 
             sortedValues.sort((e1, e2) -> {
                 // always put any empty value item last, otherwise sort on frequency

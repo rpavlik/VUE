@@ -40,7 +40,7 @@ public abstract class Style {
     public static final String SEMI=";";
     public static final String COLON=":";
     String name;
-    private Map<String,String>  attributes =  new HashMap();
+    private Map<String,String>  attributes =  new HashMap<>();
     
     public abstract org.osid.shared.Type getType();
     public String  getName() {

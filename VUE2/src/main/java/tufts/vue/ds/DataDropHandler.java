@@ -196,7 +196,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
         if (clusteringTargets.size() > 0) {
 
             if (DEBUG.Enabled) Log.debug("SELECTING based on both new nodes and clustering targets " + Util.tags(clusteringTargets));
-            s.add(new Util.GroupIterator(newNodes, clusteringTargets));
+            s.add(new Util.GroupIterator<>(newNodes, clusteringTargets));
         } else {
             if (DEBUG.Enabled) Log.debug("SELECTING based on " + droppingDataItem + "; hasStyle=" + droppingDataItem.hasStyle());
             if (droppingDataItem.hasStyle()) {

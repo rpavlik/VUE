@@ -305,7 +305,7 @@ public class Asset
         }
         try
         {
-            java.util.Vector<org.osid.repository.Part> results = new java.util.Vector();
+            java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
             for (int i=0, size = this.recordVector.size(); i < size; i++)
             {
                 org.osid.repository.Record record = this.recordVector.elementAt(i);

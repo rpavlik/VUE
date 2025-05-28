@@ -86,7 +86,7 @@ public class VueDataSourceManager
     private final Set<DataSource> DataSources;
 
     /** This is only used marshalling and unmarshalling */
-    private final Vector<DataSource> marshallingVector = new Vector();
+    private final Vector<DataSource> marshallingVector = new Vector<>();
     
     private final List<edu.tufts.vue.dsm.DataSourceListener> dataSourceListeners
         = new java.util.concurrent.CopyOnWriteArrayList<>();
@@ -113,7 +113,7 @@ public class VueDataSourceManager
     }
     
     private VueDataSourceManager(boolean isSingleton) {
-        DataSources = new LinkedHashSet();        
+        DataSources = new LinkedHashSet<>();
     }
     
     public synchronized void save() {

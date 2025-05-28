@@ -1245,7 +1245,7 @@ public class Util
 
 
     public static <T> List<T> asList(T[] array) {
-        return new ExposedArrayList(array);
+        return new ExposedArrayList<>(array);
     }
     
     public static <T> T[] toArray(Collection<? extends T> bag, Class<T> clazz) {
@@ -1357,7 +1357,7 @@ public class Util
                                  final Class<T> clazz)
     {
 
-        final List<T> desiredType = new ArrayList(list.size());
+        final List<T> desiredType = new ArrayList<>(list.size());
 
         for (A item : list)
             if (clazz.isInstance(item))
@@ -1375,7 +1375,7 @@ public class Util
         (final Collection<T> list,
          final Picker<T> picker)
     {
-        final List<T> desired = new ArrayList(list.size());
+        final List<T> desired = new ArrayList<>(list.size());
         
         for (T item : list) {
             try {
@@ -1394,7 +1394,7 @@ public class Util
         (final Collection<T> list,
          final Filter<T> filter)
     {
-        final List<T> desired = new ArrayList(list.size());
+        final List<T> desired = new ArrayList<>(list.size());
         
         for (T item : list) {
             try {
@@ -1537,7 +1537,7 @@ public class Util
         if (list instanceof java.util.ArrayList)
             return (List<T>) ((java.util.ArrayList)list).clone();
         else
-            return new ArrayList(list);
+            return new ArrayList<>(list);
     }
     
 
@@ -1721,7 +1721,7 @@ public class Util
         
         public synchronized Object put(Object key, Object value) {
             //out("SoftMap; put: " + key);
-            return super.put(key, new SoftReference(value));
+            return super.put(key, new SoftReference<>(value));
         }
 
         public synchronized boolean containsKey(Object key) {

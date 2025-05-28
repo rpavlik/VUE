@@ -81,7 +81,7 @@ public class MergeMapFactory {
     private List<Double> linkIntervalBoundaries;
 
     /** keysMerged will be used during construction to track what's already been merged */
-    private final Map<Object,LWComponent> keysMerged = new HashMap();
+    private final Map<Object,LWComponent> keysMerged = new HashMap<>();
     
     /** if we will be excluding all keys found on the base map from the output, this will be filled */
     private Set baseMapKeys;
@@ -92,8 +92,8 @@ public class MergeMapFactory {
 
     public MergeMapFactory(LWMap baseMap, List<LWMap> mapList, List<Boolean> actives) {
         this.baseMap = baseMap;
-        this.mapList = new ArrayList(mapList);
-        this.activeStatus = new ArrayList(actives);
+        this.mapList = new ArrayList<>(mapList);
+        this.activeStatus = new ArrayList<>(actives);
         this.outputMap = new LWMap(getNextTitle());
         this.activeMaps = computeActiveMaps();
         boolean bma = false;
@@ -152,12 +152,12 @@ public class MergeMapFactory {
     
     public void         setNodeIntervalBoundaries(List<Double> nib) {
         if (DEBUG.MERGE) { Log.debug("nodeIntervals:"); tufts.Util.dump(nib); }
-        nodeIntervalBoundaries = new ArrayList(nib);
+        nodeIntervalBoundaries = new ArrayList<>(nib);
     }
 
     public void         setLinkIntervalBoundaries(List<Double> lib) {
         if (DEBUG.MERGE) { Log.debug("linkIntervals:"); tufts.Util.dump(lib); }
-        linkIntervalBoundaries = new ArrayList(lib);
+        linkIntervalBoundaries = new ArrayList<>(lib);
     }
     public List<LWMap> getMapList() { return mapList; }
     
@@ -174,7 +174,7 @@ public class MergeMapFactory {
             return mapList;
         }
         final List<LWMap> maps = getMapList();
-        final List<LWMap> actives = new ArrayList(maps.size());
+        final List<LWMap> actives = new ArrayList<>(maps.size());
         final Iterator<Boolean> statusIter = activeStatus.iterator();
 
         for (LWMap map : maps) {
@@ -256,7 +256,7 @@ public class MergeMapFactory {
         // Fetch all the top level children of the single default layer in the merge-map.  Note
         // we're about to add links, so be sure to pass down and iterate a copy of the live
         // list.
-        final Collection<LWComponent> allMergedNodes = new ArrayList(outputMap.getChild(0).getChildren());
+        final Collection<LWComponent> allMergedNodes = new ArrayList<>(outputMap.getChild(0).getChildren());
         
         for (LWComponent c : allMergedNodes) 
             if (isMergeSkipped(c)) Log.warn("unexpected content in merge results: " + c);

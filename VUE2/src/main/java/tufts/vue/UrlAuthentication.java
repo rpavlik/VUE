@@ -51,7 +51,7 @@ public class UrlAuthentication implements edu.tufts.vue.dsm.DataSourceListener
 {
     private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(UrlAuthentication.class);
     
-    private static final Map<String, Map<String,String>> HostMap = new java.util.concurrent.ConcurrentHashMap();
+    private static final Map<String, Map<String,String>> HostMap = new java.util.concurrent.ConcurrentHashMap<>();
     private static final UrlAuthentication ua = new UrlAuthentication();
     
     /** Note: this must be called the first time before the VDSM has configured any DataSources */
@@ -390,7 +390,7 @@ public class UrlAuthentication implements edu.tufts.vue.dsm.DataSourceListener
             Map<String,String> httpRequestProperties;
 
             if ("vue-dl.tccs.tufts.edu".equals(hostname) && "8180".equals(port)) {
-                httpRequestProperties = new HashMap();
+                httpRequestProperties = new HashMap<>();
                 httpRequestProperties.put("Cookie", sessionId);
                 // Special case for tufts Sakai server? Do all Sakai servers
                 // need this?

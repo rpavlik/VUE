@@ -106,6 +106,6 @@ implements org.osid.repository.PartStructure
     public org.osid.repository.PartStructureIterator getPartStructures()
     throws org.osid.repository.RepositoryException
     {
-        return new PartStructureIterator(new java.util.Vector());
+        return new PartStructureIterator(new java.util.Vector<>());
     }
 }

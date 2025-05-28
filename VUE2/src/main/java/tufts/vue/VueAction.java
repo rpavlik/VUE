@@ -106,8 +106,8 @@ public class VueAction extends javax.swing.AbstractAction
     private static void trackForDupeStrokes(VueAction a, KeyStroke keyStroke)
     {
         if (AllStrokes == null) {
-            AllStrokes = new java.util.HashMap();
-            DupeStrokeActions = new java.util.HashSet();
+            AllStrokes = new java.util.HashMap<>();
+            DupeStrokeActions = new java.util.HashSet<>();
         }
 
         if (keyStroke != null) {
@@ -502,7 +502,7 @@ public class VueAction extends javax.swing.AbstractAction
         return fireIfMatching(e, e);
     }
 
-    private static final Collection<VueAction> _selectionWatchers = new java.util.ArrayList();
+    private static final Collection<VueAction> _selectionWatchers = new java.util.ArrayList<>();
 
      /** can be overridden for action subclass categories that may want to use a different selection */
     protected Collection<VueAction> getSelectionWatchers() {

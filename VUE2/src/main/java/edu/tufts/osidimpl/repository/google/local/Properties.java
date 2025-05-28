@@ -22,7 +22,7 @@ implements org.osid.shared.Properties
     public org.osid.shared.ObjectIterator getKeys()
     throws org.osid.shared.SharedException
     {
-        return new ObjectIterator(new java.util.Vector());
+        return new ObjectIterator(new java.util.Vector<>());
     }
 
     public java.io.Serializable getProperty(java.io.Serializable key)

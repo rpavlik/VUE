@@ -393,11 +393,11 @@ class Slides {
 
         if (DEBUG.Enabled) outf("NODE/SILDE SYNCHRONIZATION; type(%s) ---\n\t NODE: %s\n\tSLIDE: %s", type, node, slide);
         
-        final Set<Resource> slideUnique = new LinkedHashSet();
-        final Set<Resource> nodeUnique = new LinkedHashSet();
+        final Set<Resource> slideUnique = new LinkedHashSet<>();
+        final Set<Resource> nodeUnique = new LinkedHashSet<>();
         
-        final Map<Resource,LWComponent> slideSources = new HashMap();
-        final Map<Resource,LWComponent> nodeSources = new HashMap();
+        final Map<Resource,LWComponent> slideSources = new HashMap<>();
+        final Map<Resource,LWComponent> nodeSources = new HashMap<>();
 
         // First add all resources in any descendent of the node to nodeUnique (include
         // the node's resource itself), then iterate through all the resources found
@@ -420,7 +420,7 @@ class Slides {
                 outf("%40s: %s", "UNIQUE NODE RESOURCE", Util.tags(r));
         }
             
-        final Set<Resource> nodeDupes = new HashSet();
+        final Set<Resource> nodeDupes = new HashSet<>();
 
         for (LWComponent c : slide.getAllDescendents()) {
             if (c.hasResource()) {

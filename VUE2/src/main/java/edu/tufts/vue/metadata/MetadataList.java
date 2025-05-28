@@ -605,8 +605,8 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     /* don't include empty values, and put keyless data at the end */
     private void buildHTMLFilteredAndOrganized(final StringBuilder b, final int typeRequest)
     {
-        final List<VueMetadataElement> haveKey = new ArrayList(dataList.size());
-        final List<VueMetadataElement> haveOnlyValue = new ArrayList(dataList.size());
+        final List<VueMetadataElement> haveKey = new ArrayList<>(dataList.size());
+        final List<VueMetadataElement> haveOnlyValue = new ArrayList<>(dataList.size());
             
         for (VueMetadataElement md : dataList) {
             // "<missing>" is a special value produced by the Schema code.  It can't be displayed

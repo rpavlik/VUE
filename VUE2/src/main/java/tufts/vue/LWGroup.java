@@ -114,7 +114,7 @@ public class LWGroup extends LWContainer
         final LWGroup group = new LWGroup();
 
         // performance: pre-allocate the child list for the maximum child content size
-        group.mChildren = new ArrayList(selection.size());
+        group.mChildren = new ArrayList<>(selection.size());
         
         group.createFromNonLinks(selection);
         if (DEBUG.CONTAINMENT) System.out.println("CREATED: " + group);
@@ -227,8 +227,8 @@ public class LWGroup extends LWContainer
         // gets all the events needed to sort things out...
         //----------------------------------------------------------------------------------------
         //final Collection<LWComponent> reparenting = new HashSet();
-        reparenting = new HashSet();
-        final Collection<LWComponent> allUniqueDescendents = new HashSet();
+        reparenting = new HashSet<>();
+        final Collection<LWComponent> allUniqueDescendents = new HashSet<>();
         for (LWComponent c : selection) {
             reparenting.add(c);
             allUniqueDescendents.add(c);

@@ -61,12 +61,12 @@ public class LWPathway extends LWContainer
     private transient boolean mOpen = true;
 
     /** The pathway Entry's */
-    private java.util.List<Entry> mEntries = new java.util.ArrayList(); // could re-use from LWComponent, but may be dangerous
+    private java.util.List<Entry> mEntries = new java.util.ArrayList<>(); // could re-use from LWComponent, but may be dangerous
     /** Read-only version of the entry list */
     private java.util.List<Entry> mSecureEntries = java.util.Collections.unmodifiableList(mEntries);
 
     /** for backward compat with old style saved pathways -- the ordered list of member node ID's */
-    private final transient java.util.List<String> mOldStyleMemberIDList = new java.util.ArrayList();
+    private final transient java.util.List<String> mOldStyleMemberIDList = new java.util.ArrayList<>();
     /** for backward compat with old style saved pathways (pre Feb/March 2006) */
     private final ArrayList<LWPathwayElementProperty> mOldStyleProperties = new ArrayList<>();
 
@@ -1024,7 +1024,7 @@ public class LWPathway extends LWContainer
 
     public LWComponent createMergedNode(Collection<LWComponent> selection)
     {
-        final Collection<LWComponent> mergedContents = new LinkedHashSet(); // preserve's insertion order
+        final Collection<LWComponent> mergedContents = new LinkedHashSet<>(); // preserve's insertion order
         
         for (LWComponent c : selection) {
             mergedContents.add(c);
@@ -1524,7 +1524,7 @@ public class LWPathway extends LWContainer
         }
 
         // Replace the incomplete entries (castor can only use the default constructor) with fully restored entries
-        List<Entry> newEntries = new java.util.ArrayList(mEntries.size());
+        List<Entry> newEntries = new java.util.ArrayList<>(mEntries.size());
         for (Entry e : mEntries)
             newEntries.add(new Entry(this, e));
         mEntries.clear(); // clear for GC, and setEntries needs no old value at init
@@ -1570,7 +1570,7 @@ public class LWPathway extends LWContainer
     /** in support of restoring old-style pathway XML */
     private List<Entry> findEntriesWithNodeID(String ID)    
     {
-        List<Entry> matches = new java.util.ArrayList();
+        List<Entry> matches = new java.util.ArrayList<>();
 
         for (Entry e : mEntries)
             if (e.node != null && e.node.getID().equals(ID))

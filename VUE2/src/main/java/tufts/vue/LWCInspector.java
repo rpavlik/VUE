@@ -68,7 +68,7 @@ class LWCInspector extends javax.swing.JPanel
     private final JPanel resourceMetadataPanel = new JPanel();
     private final JPanel metadataPane = new JPanel();
 
-    private final LinkedList<LWCEvent> events = new LinkedList();
+    private final LinkedList<LWCEvent> events = new LinkedList<>();
 
     //String[] labels = { "ID", "<html><font color=red>Label</font></html>", "Category", "Resource", "Notes" };
     private final Object[] labelTextPairs = {
@@ -93,7 +93,7 @@ class LWCInspector extends javax.swing.JPanel
         //"-Notes",    notesField,
     };
 
-    private final java.util.Map<JTextField,LWComponent.Key> fieldKeys = new java.util.HashMap();
+    private final java.util.Map<JTextField,LWComponent.Key> fieldKeys = new java.util.HashMap<>();
 
     private final JCheckBox lockBtn = new JCheckBox("Lock");
 
@@ -629,7 +629,7 @@ class LWCInspector extends javax.swing.JPanel
         final StringBuffer text = new StringBuffer();
         final JTextArea textArea = new JTextArea();
 
-        final Map<Class,Object> allActive = new HashMap();
+        final Map<Class,Object> allActive = new HashMap<>();
         // todo: keep sorted so we can see order of active items
 
         public Introspector() {

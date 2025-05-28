@@ -1678,7 +1678,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     private static void preCacheMap(final LWMap map) {
         if (DEBUG.Enabled) Log.debug("scanning for content to pre-cache in " + map);
 
-        final Set<LWComponent> toCache = new LinkedHashSet();
+        final Set<LWComponent> toCache = new LinkedHashSet<>();
         
         try {
             for (LWPathway pathway : map.getPathwayList()) {
@@ -8053,8 +8053,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         // if there are embedded children selected.
         //-------------------------------------------------------
 
-        final Collection<LWComponent> moveList = new java.util.ArrayList();
-        final Collection<LWContainer> putbacks = new java.util.ArrayList();
+        final Collection<LWComponent> moveList = new java.util.ArrayList<>();
+        final Collection<LWContainer> putbacks = new java.util.ArrayList<>();
 
         for (LWComponent dropped : selection) {
 
@@ -8118,7 +8118,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             // back to the parent's layout spot from the draggeed position they
             // currently occupy and we're trying to move them to.
                 
-            Set<LWContainer> parents = new java.util.HashSet();
+            Set<LWContainer> parents = new java.util.HashSet<>();
             for (LWComponent c : moveList)
                 parents.add(c.getParent());
 

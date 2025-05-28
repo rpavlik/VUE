@@ -633,7 +633,7 @@ public class LWTraversal {
     public static class RegionPick extends LWTraversal.Picker
     {
         final Rectangle2D mapRect;
-        final java.util.List<LWComponent> hits = new java.util.ArrayList();
+        final java.util.List<LWComponent> hits = new java.util.ArrayList<>();
 
         public RegionPick(PickContext pc) {
             super(pc);

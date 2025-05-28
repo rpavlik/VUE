@@ -180,7 +180,7 @@ public class Field implements tufts.vue.XMLUnmarshalListener
     /** interface {@link XMLUnmarshalListener} -- init */
     public void XML_initialized(Object context) {
         mXMLRestoreUnderway = true;
-        mRelatedFields = new HashSet();
+        mRelatedFields = new HashSet<>();
     }
     
     /** interface {@link XMLUnmarshalListener} -- track us */

@@ -717,7 +717,7 @@ public class CSSParser {
     }
     
     private static Map<String,String> bufferToMap(StringBuffer buffer) {
-        Map<String,String> map = new HashMap();
+        Map<String,String> map = new HashMap<>();
         String[] keyValues = buffer.toString().split(";");
         for (String keyValue : keyValues) {
             String[] tokens = keyValue.split(":");

@@ -172,7 +172,7 @@ public class LinkToolPanel extends ToolPanel
 		i[2]= 2;
 		i[3]= 3;
 		
-        AbstractButton linkTypeMenu = new VuePopupMenu(LWKey.LinkShape, LinkTypeActions);
+        AbstractButton linkTypeMenu = new VuePopupMenu<>(LWKey.LinkShape, LinkTypeActions);
         linkTypeMenu.setToolTipText(VueResources.getString("linktoolpanel.linkstyle.tooltip"));
         //linkTypeMenu.addPropertyChangeListener(this);
         

@@ -70,7 +70,7 @@ public class EventHandler<E>
         void eventRaised(E event);
     }
     
-    private static final Map<Class,EventHandler> AllEventHandlers = new HashMap();
+    private static final Map<Class,EventHandler> AllEventHandlers = new HashMap<>();
     //private static final List<Listener> ListenersForAllEvents = new CopyOnWriteArrayList();
 
     public static void addListener(Class clazz, Listener listener) {
@@ -97,7 +97,7 @@ public class EventHandler<E>
 
     //=============================================================================
     
-    protected final CopyOnWriteArrayList<Listener> mListeners = new CopyOnWriteArrayList();
+    protected final CopyOnWriteArrayList<Listener> mListeners = new CopyOnWriteArrayList<>();
     
     protected final Class _itemType;
     protected final String _itemTypeName; // for debug

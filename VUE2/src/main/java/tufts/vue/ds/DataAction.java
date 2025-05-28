@@ -64,7 +64,7 @@ public final class DataAction
                 
         // anything linked will be placed based on centroid:
         final Collection<LWComponent> pushable = map.getTopLevelItems(tufts.vue.LWComponent.ChildKind.EDITABLE);
-        final Collection<LWComponent> toPush = new ArrayList(pushable.size() + nodes.size());
+        final Collection<LWComponent> toPush = new ArrayList<>(pushable.size() + nodes.size());
         toPush.addAll(nodes); // also push other new nodes (they're not on the map yet)
         for (LWComponent c : map.getTopLevelItems(tufts.vue.LWComponent.ChildKind.EDITABLE)) {
             if (c instanceof tufts.vue.LWLink)
@@ -421,7 +421,7 @@ public final class DataAction
         
         final List<LWLink> links = Util.skipNullsArrayList();
 
-        final List<LWComponent> singletonTargetList = new ArrayList(2);
+        final List<LWComponent> singletonTargetList = new ArrayList<>(2);
         singletonTargetList.add(null);
         
         for (LWComponent target : linkTargets) {

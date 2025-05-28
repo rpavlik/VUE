@@ -49,7 +49,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
 
     private static final boolean SCROLLABLE = true;
 
-    private final java.util.List<Row> mRows = new java.util.ArrayList();
+    private final java.util.List<Row> mRows = new java.util.ArrayList<>();
     private final JPanel mToolbar = new JPanel();
     private final JPanel mRowList = new JPanel();
 
@@ -81,7 +81,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
    
     //private static final Collection<VueAction> _selectionWatchers = new java.util.ArrayList();
 
-    private static final Collection<LayerAction> AllLayerActions = new java.util.ArrayList();
+    private static final Collection<LayerAction> AllLayerActions = new java.util.ArrayList<>();
     private final JPopupMenu popupMenu = new JPopupMenu();
     private final JPopupMenu unlockPopupMenu = new JPopupMenu();
     private final JMenuItem unLockMenuItem;
@@ -863,7 +863,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             // update the active layer indication based on a change
             // in the selection (hilite *any* layers found in the selection)
 
-            final Set<Layer> layersInSelection = new HashSet(parents.size());
+            final Set<Layer> layersInSelection = new HashSet<>(parents.size());
             
             // on empty selection, parents will be empty
             

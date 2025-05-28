@@ -146,7 +146,7 @@ public abstract class BrowseDataSource implements DataSource
     }
 
     public java.util.List<ConfigField> getConfigurationUIFields() {
-        List<ConfigField> fields = new java.util.ArrayList();
+        List<ConfigField> fields = new java.util.ArrayList<>();
 
         fields.add(new ConfigField("address",
                                    VueResources.getString("dialog.address.label"),

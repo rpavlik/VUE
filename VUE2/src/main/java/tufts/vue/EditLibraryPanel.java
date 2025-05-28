@@ -137,7 +137,7 @@ public class EditLibraryPanel extends JPanel implements ActionListener
                             
             final tufts.vue.BrowseDataSource ds = (tufts.vue.BrowseDataSource) dataSource;
             
-            final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap();
+            final java.util.Map<String,Vector> extraValuesMap = new java.util.HashMap<>();
             for (ConfigField f : ds.getConfigurationUIFields()) {
                 addField(b, f.key, f.title, f.description, f.value, f.uiControl, f.maxLen);
                 if (f.values != null)

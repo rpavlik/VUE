@@ -504,7 +504,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     
     public void setConfiguration(java.util.Properties properties)
 		throws org.osid.repository.RepositoryException {
-        _propertyList  = new Vector();
+        _propertyList  = new Vector<>();
         if (this.repositoryManager != null) {
             try {
                 Enumeration keys = properties.keys();

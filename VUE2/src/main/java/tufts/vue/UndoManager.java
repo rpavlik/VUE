@@ -71,7 +71,7 @@ public class UndoManager
     private UndoAction mCurrentUndo;
 
     /** map of threads currently attched to a particular undo mark */
-    private final Map<Thread,UndoMark> mThreadsWithMark = Collections.synchronizedMap(new HashMap());
+    private final Map<Thread,UndoMark> mThreadsWithMark = Collections.synchronizedMap(new HashMap<>());
 
     ///** map of threads currently attched to no undo manager (events to discard) */
     //private static Map ThreadsToIgnore = Collections.synchronizedMap(new HashMap());

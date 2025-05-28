@@ -1854,7 +1854,7 @@ public class Actions implements VueConstants
                 return s.count(LWGroup.class) > 0 || s.allHaveSameParentOfType(LWGroup.class);
             }
             void act(LWSelection s) {
-                final Collection<LWComponent> toSelect = new HashSet(); // ensure no duplicates
+                final Collection<LWComponent> toSelect = new HashSet<>(); // ensure no duplicates
                 if (s.count(LWGroup.class) > 0) {
                     if (DEBUG.EVENTS) out("Ungroup: dispersing any selected groups");
                     disperse(s, toSelect);
@@ -2706,8 +2706,8 @@ public class Actions implements VueConstants
             final Point2D.Float groundZero = new Point2D.Float((float) pushShape.getCenterX(),
                                                                (float) pushShape.getCenterY());
             
-            final java.util.List<LWComponent> links = new java.util.ArrayList();
-            final java.util.List<LWComponent> nodes = new java.util.ArrayList();
+            final java.util.List<LWComponent> links = new java.util.ArrayList<>();
+            final java.util.List<LWComponent> nodes = new java.util.ArrayList<>();
         
             for (LWComponent node : toPush) {
 
@@ -3033,7 +3033,7 @@ public class Actions implements VueConstants
                 final LWComponent center = selection.first();
                 final Collection<LWComponent> linked = center.getClustered();
 
-                final List<LWComponent> toReparent = new ArrayList();
+                final List<LWComponent> toReparent = new ArrayList<>();
 
                 for (LWComponent c : linked) {
                     if (c.hasAncestor(center))
@@ -3087,7 +3087,7 @@ public class Actions implements VueConstants
 
                 if (anyLinks) {
                     for (LWComponent asCenter : selection) {
-                        Collection<LWComponent> outGroupLinked = new ArrayList(asCenter.getClustered());
+                        Collection<LWComponent> outGroupLinked = new ArrayList<>(asCenter.getClustered());
                         outGroupLinked.removeAll(selection);
                         if (DEBUG.Enabled) Log.debug("asCenter: " + asCenter + "; outGroupLinked=" + Util.tags(outGroupLinked));
                         doClusterAction(asCenter, outGroupLinked);
@@ -3118,7 +3118,7 @@ public class Actions implements VueConstants
 
                 LWComponent center = null;
 
-                List<LWComponent> toCluster = new ArrayList(selection.size());
+                List<LWComponent> toCluster = new ArrayList<>(selection.size());
                     
                 for (LWComponent c : selection) {
                     if (c.isDataValueNode()) {

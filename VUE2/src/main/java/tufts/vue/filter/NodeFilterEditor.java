@@ -260,7 +260,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
         /** setting the defaultCellEditor **/
         JComboBox editor = null;
         public OperatorCellEditor() {
-            super(new JComboBox());
+            super(new JComboBox<>());
         }
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
 
@@ -270,7 +270,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
                 editor =  new JComboBox((Vector) nodeFilter.get(row).getKey().getType().getSettableOperators());
                 return editor;
             }
-            return (new JComboBox());
+            return (new JComboBox<>());
         }
 
         public Object getCellEditorValue() {
@@ -285,7 +285,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
     public class KeyCellEditor extends DefaultCellEditor {
         JComboBox editor = null;
         public KeyCellEditor() {
-            super(new JComboBox());
+            super(new JComboBox<>());
         }
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             TableModel tableModel = table.getModel();
@@ -293,7 +293,7 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
                 editor = new JComboBox(tufts.vue.VUE.getActiveMap().getMapFilterModel().getKeyVector());
                 return editor;
             }
-            return (new JComboBox());// if no editor present
+            return (new JComboBox<>());// if no editor present
         }
         public Object getCellEditorValue() {
             if(editor!= null) {

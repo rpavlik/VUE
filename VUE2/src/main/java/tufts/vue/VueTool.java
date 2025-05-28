@@ -74,14 +74,14 @@ public abstract class VueTool extends AbstractAction
     private JPanel mToolPanel;
 
     /** tool display order by keyname **/               protected Vector mSubToolIDs = new Vector();
-    /** the sub tool map with toolname as key **/       protected Map<String,VueTool> mSubToolMap = new HashMap();    
+    /** the sub tool map with toolname as key **/       protected Map<String,VueTool> mSubToolMap = new HashMap<>();
     /** the parent tool -- if this is a subtool **/     protected VueTool mParentTool = null;
     /** the currently active subtool name **/           protected VueTool mSelectedSubTool = null;
 
-    private static final Map<Class<? extends VueTool>, VueTool> InstanceMap = new HashMap();
+    private static final Map<Class<? extends VueTool>, VueTool> InstanceMap = new HashMap<>();
 
     /** for storing all the tools by name, including sub-tools */
-    private static final java.util.List<VueTool> mAllTools = new java.util.ArrayList();
+    private static final java.util.List<VueTool> mAllTools = new java.util.ArrayList<>();
 	
     //private LWComponent mStyleCache;
     

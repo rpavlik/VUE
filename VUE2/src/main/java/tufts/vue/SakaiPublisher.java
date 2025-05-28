@@ -519,7 +519,7 @@ public class SakaiPublisher {
 	 */
 	public static Vector<String> getChildCollectionIds( String collectionId )
 	{
-		return new Vector();
+		return new Vector<>();
 	}
         	
 	/** Create a a Sakai folder name by replacing the ".vue" suffix with the 

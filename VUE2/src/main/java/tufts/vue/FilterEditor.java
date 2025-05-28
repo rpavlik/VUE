@@ -302,7 +302,7 @@ public class FilterEditor extends JPanel  {
         /** setting the defaultCellEditor **/
         JComboBox editor = null;
         public OperatorCellEditor() {
-            super(new JComboBox());
+            super(new JComboBox<>());
         }
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             editor =  new JComboBox((Vector)((Statement)(VUE.getActiveMap().getLWCFilter().getStatements().get(row))).getKey().getType().getOperators());
@@ -340,7 +340,7 @@ public class FilterEditor extends JPanel  {
         Vector keys = new Vector();
         JComboBox editor = null;
         public KeyCellEditor() {
-            super(new JComboBox());
+            super(new JComboBox<>());
         }
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             keys.removeAllElements();

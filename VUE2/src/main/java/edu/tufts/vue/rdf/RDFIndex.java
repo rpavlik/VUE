@@ -123,7 +123,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
 
     /** will contain the URI's of everything indexed in the map, unless this is a global index,
      * in which case it will contain the merged URI's from all maps */
-    private final Map<URI,LWComponent> vueComponentMap = new HashMap();
+    private final Map<URI,LWComponent> vueComponentMap = new HashMap<>();
 
     /** a general default index -- available but unused feature up through summer 2012 */
     private static RDFIndex defaultIndex;

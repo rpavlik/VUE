@@ -80,7 +80,7 @@ implements Runnable
 												 edu.tufts.vue.fsm.SearchEngine.SEARCH_EXCEPTION,
 												 t.getMessage(),
 												 endTime - this.startTime,
-												 new AssetIterator(new java.util.Vector()),
+												 new AssetIterator(new java.util.Vector<>()),
 												 this.foreignIdString);
 			} catch (Throwable t1) {
 				edu.tufts.vue.util.Logger.log(t1);

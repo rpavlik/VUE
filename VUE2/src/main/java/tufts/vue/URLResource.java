@@ -1714,7 +1714,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
             if (mProperties.size() == 0) // a hack for castor to work
                 return null;
 
-            mXMLpropertyList = new ArrayList(mProperties.size());
+            mXMLpropertyList = new ArrayList<>(mProperties.size());
             
             //for (Map.Entry<String,?> e : mProperties.entries())
             for (Map.Entry e : mProperties.entries())
@@ -1741,7 +1741,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
     public void XML_initialized(Object context) {
         if (DEBUG.CASTOR) System.out.println(getClass() + " XML INIT");
         mRestoreUnderway = true;
-        mXMLpropertyList = new ArrayList();
+        mXMLpropertyList = new ArrayList<>();
     }
 
     public void XML_fieldAdded(Object context, String name, Object child) {

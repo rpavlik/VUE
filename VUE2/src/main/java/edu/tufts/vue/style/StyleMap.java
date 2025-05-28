@@ -28,7 +28,7 @@ import java.net.*;
 
 public class StyleMap {
     public static final String CSS_EXTENSION =".css";
-    static  Map<String,Style> m = Collections.synchronizedMap(new HashMap());
+    static  Map<String,Style> m = Collections.synchronizedMap(new HashMap<>());
     
     public static Style getStyle(String key) {
         return m.get(key);
