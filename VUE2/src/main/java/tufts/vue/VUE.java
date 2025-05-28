@@ -225,18 +225,18 @@ public class VUE
    
     /** active pathway handler -- will update active pathway-entry handler if needed */
     private static final ActiveInstance<LWPathway>
-        ActivePathwayHandler = new ActiveInstance<LWPathway>(LWPathway.class) {
+        ActivePathwayHandler = new ActiveInstance<>(LWPathway.class) {
         @Override
         protected void onChange(ActiveEvent<LWPathway> e) {
             // Only run the update if this isn't already an auxillary sync update from ActivePathwayEntryHandler:
-            if (e.source instanceof ActiveEvent && ((ActiveEvent)e.source).type == LWPathway.Entry.class)
+            if (e.source instanceof ActiveEvent && ((ActiveEvent) e.source).type == LWPathway.Entry.class)
                 return;
-            
+
             if (e.active != null)
                 ActivePathwayEntryHandler.setActive(e, e.active.getCurrentEntry());
             else
                 ActivePathwayEntryHandler.setActive(e, null);
-                
+
         }
     };
 
@@ -245,31 +245,28 @@ public class VUE
      * Will guess at and update the active pathway entry if it can.
      */
     private static final ActiveInstance<LWComponent>
-        ActiveComponentHandler = new ActiveInstance<LWComponent>(LWComponent.class) {
+        ActiveComponentHandler = new ActiveInstance<>(LWComponent.class) {
         @Override
-        protected void onChange(ActiveEvent<LWComponent> e)
-        {
+        protected void onChange(ActiveEvent<LWComponent> e) {
             final LWComponent node = e.active;
-            
+
             if (node == null) {
                 // nothing to do
-            }
-            else if (node instanceof LWSlide && ((LWSlide)node).getEntry() != null) {
-                ActivePathwayEntryHandler.setActive(e, ((LWSlide)node).getEntry());
-            }
-            else if (node instanceof LWPortal && node.hasEntries()) {
+            } else if (node instanceof LWSlide && ((LWSlide) node).getEntry() != null) {
+                ActivePathwayEntryHandler.setActive(e, ((LWSlide) node).getEntry());
+            } else if (node instanceof LWPortal && node.hasEntries()) {
                 final LWPathway knownUnique = node.getExclusiveVisiblePathway();
                 if (knownUnique != null)
                     ActivePathwayEntryHandler.setActive(e, knownUnique.getFirstEntry(node));
                 else if (node.inPathway(VUE.getActivePathway()))
                     ActivePathwayEntryHandler.setActive(e, VUE.getActivePathway().getFirstEntry(node));
-                
+
             }
 
 //             //-------------------------------------------------------
 //             // now set the active Layer
 //             //-------------------------------------------------------
-            
+
 //             if (node != null && node.getLayer() != null)
 //                 ActiveInstance.set(LWMap.Layer.class, this, node.getLayer());
 
@@ -283,7 +280,7 @@ public class VUE
             } else {
                 ActiveResourceHandler.setActive(e, node.getResource());
             }
-            
+
             // Note: the below problem also applies to the selection of raw images (raw
             // images are nodes) that have been added to a pathway.  This is
             // particularly a problem there in that raw images on a pathway never have a
@@ -314,7 +311,7 @@ public class VUE
                 newActiveEntry = activePathway.getEntry(activePathway.firstIndexOf(node));
             if (newActiveEntry != null)
                 ActivePathwayEntryHandler.setActive(e, newActiveEntry);
-            
+
 //                 // This code will auto-select the first pathway entry for a selected node.
 //                 // There is a problem if we do this tho, in that changing the active
 //                 // entry also changes the active pathway, and doing that means
@@ -332,7 +329,7 @@ public class VUE
 //                 }
 //                 if (newActiveEntry != null)
 //                     ActivePathwayEntryHandler.setActive(e, newActiveEntry);
-            
+
         }
     };
 
@@ -340,7 +337,7 @@ public class VUE
      * Global active Layer handler for the active layer within the active map.
      */
     private static final ActiveInstance<LWMap.Layer>
-        ActiveLayerHandler = new ActiveInstance<LWMap.Layer>(LWMap.Layer.class) {
+        ActiveLayerHandler = new ActiveInstance<>(LWMap.Layer.class) {
 //         @Override
 //         protected void onChange(ActiveEvent<LWMap.Layer> e)
 //         {
@@ -361,10 +358,9 @@ public class VUE
      * Global active Resource handler.
      */
     private static final ActiveInstance<Resource>
-        ActiveResourceHandler = new ActiveInstance<Resource>(Resource.class) {
+        ActiveResourceHandler = new ActiveInstance<>(Resource.class) {
         @Override
-        protected void onChange(ActiveEvent<Resource> e)
-        {
+        protected void onChange(ActiveEvent<Resource> e) {
             if (VUE.inPresentMode()) {
                 // do NOT attempt to update anything if we're in the
                 // middle of a presentation (e.g., the current focal
@@ -410,9 +406,7 @@ public class VUE
                 
             } finally {
 
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    VUE.clearWaitCursor();
-                }});
+                GUI.invokeAfterAWT(() -> VUE.clearWaitCursor());
 
             }
 
@@ -459,13 +453,13 @@ public class VUE
      * is the middle of a notification of it's own.
      */
     private static final ActiveInstance<LWPathway.Entry>
-        ActivePathwayEntryHandler = new ActiveInstance<LWPathway.Entry>(LWPathway.Entry.class) {
+        ActivePathwayEntryHandler = new ActiveInstance<>(LWPathway.Entry.class) {
         @Override
         protected void onChange(ActiveEvent<LWPathway.Entry> e) {
             // Only run the update if this isn't already an auxillary sync update from ActivePathwayHandler:
-            if (e.source instanceof ActiveEvent && ((ActiveEvent)e.source).type == LWPathway.class)
+            if (e.source instanceof ActiveEvent && ((ActiveEvent) e.source).type == LWPathway.class)
                 return;
-            
+
             if (e.active != null)
                 ActivePathwayHandler.setActive(e, e.active.pathway);
             else
@@ -476,7 +470,7 @@ public class VUE
 
                 if (false) {
                     final LWComponent activeNode = ActiveComponentHandler.getActive();
-                               
+
                     // hack: only allow a pathway to become the active component (so we can see its
                     // notes), if the current active component is NOT a slide owned by a pathway
                     // (meaning really: not a pathway entry) So if you want to see pathway notes,
@@ -486,7 +480,7 @@ public class VUE
                     // DE-select the node, and you could never add it to the pathway!  The only
                     // slides that currently WOULDN'T be pathway owned would be on-map slides,
                     // which aren't offically supported at the moment, but just in case we check that.
-                    
+
                     if (activeNode == null || !(activeNode instanceof LWSlide) || !activeNode.isPathwayOwned()) {
                         // allow pathway selection
                     } else {
@@ -503,7 +497,7 @@ public class VUE
                 }
             }
 
-            if ((DEBUG.BOXES&&DEBUG.META) && e.active.isPathway() && !Images.lowMemoryConditions()) {
+            if ((DEBUG.BOXES && DEBUG.META) && e.active.isPathway() && !Images.lowMemoryConditions()) {
                 // for visually verifying the load-order
                 e.active.pathway.preCacheContent();
             }
@@ -516,7 +510,7 @@ public class VUE
      * the global undo action labels.
      */
     private static final ActiveInstance<LWMap>
-        ActiveMapHandler = new ActiveInstance<LWMap>(LWMap.class) {
+        ActiveMapHandler = new ActiveInstance<>(LWMap.class) {
         @Override
         protected void onChange(ActiveEvent<LWMap> e, final LWMap nowActive) {
             if (nowActive != null) {
@@ -582,7 +576,7 @@ public class VUE
      * Will update the active map handler.
      */
     private static final ActiveInstance<MapViewer>
-        ActiveViewerHandler = new ActiveInstance<MapViewer>(MapViewer.class) {
+        ActiveViewerHandler = new ActiveInstance<>(MapViewer.class) {
         @Override
         protected void notifyListeners(ActiveEvent<MapViewer> e) {
             if (!(e.active instanceof tufts.vue.ui.SlideViewer)) {
@@ -594,8 +588,9 @@ public class VUE
                     ActiveMapHandler.setActive(e, null);
             }
         }
+
         protected void onChange(ActiveEvent<MapViewer> e) {
-            
+
         }
     };
 
@@ -603,11 +598,11 @@ public class VUE
      * For the currently active tufts.vue.DataSource
      */
     private static final ActiveInstance<tufts.vue.DataSource>
-        ActiveDataSourceHandler = new ActiveInstance<tufts.vue.DataSource>(tufts.vue.DataSource.class) {
+        ActiveDataSourceHandler = new ActiveInstance<>(tufts.vue.DataSource.class) {
         @Override
         protected void onChange(ActiveEvent<tufts.vue.DataSource> e) {
             // perhaps set active tufts.vue.BrowseDataSource
-            
+
         }
     };
     
@@ -805,11 +800,11 @@ public class VUE
 //         }
 
         if (DEBUG.Enabled) {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 // This, of course, must run in the AWT thread to do what we want:
                 Thread.currentThread().setName("*AWT*");
                 //Thread.currentThread().setName(Util.TERM_RED + "*AWT*" + Util.TERM_CLEAR);
-            } });
+            });
         }
     }
 
@@ -1089,13 +1084,13 @@ public class VUE
         }
 
         if (DEBUG.KEYS) {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 for (AbstractAction a : VueAction.getAllActions())  {
                     KeyStroke ks = (KeyStroke) a.getValue(Action.ACCELERATOR_KEY);
                     if (ks != null && a.getPropertyChangeListeners().length == 0)
                         Log.warn("Action has no listeners, may be unable to activate by keystroke: " + Util.tags(a) + "; " + ks);
                 }
-            }});
+            });
         }
         
         if (exitAfterInit) {
@@ -1109,7 +1104,7 @@ public class VUE
         
         initDataSources();
         
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
             if (contentPanel != null)
                 contentPanel.loadDataSourceViewer();
 
@@ -1117,10 +1112,10 @@ public class VUE
             // must be done in AWT to be threadsafe, as involves
             // non-synhcronized code in tufts.vue.VueDataSource while
             // setting up the threads
-            
+
             // DataSourceViewer.cacheDataSourceViewers();
-            
-        }});
+
+        });
 
                 
         //-------------------------------------------------------
@@ -1364,30 +1359,28 @@ public class VUE
                 for (Object o : FilesToOpen) {
                     final String fileName = (String) o;
                     openedUserMap = true;
-                    GUI.invokeAfterAWT(new Runnable() {
-                        public void run() {
-                            VUE.activateWaitCursor();
-                            //LWMap map = OpenAction.loadMap(fileName);
-                            if (DEBUG.Enabled) Log.debug("opening map during startup " + fileName);
-                            if (fileName != null) {
-                                displayMap(new File(fileName));
-                                //openedUserMap = true;
-                            }
+                    GUI.invokeAfterAWT(() -> {
+                        VUE.activateWaitCursor();
+                        //LWMap map = OpenAction.loadMap(fileName);
+                        if (DEBUG.Enabled) Log.debug("opening map during startup " + fileName);
+                        if (fileName != null) {
+                            displayMap(new File(fileName));
+                            //openedUserMap = true;
                         }
                     });
                 }
             } finally {
                 VUE.clearWaitCursor();                
             }
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 // ensure first item gets selected
                 if (mMapTabsLeft.getTabCount() > 0)
-                    mMapTabsLeft.setSelectedIndex(0); 
+                    mMapTabsLeft.setSelectedIndex(0);
                 // above would normally focus grab, but it skips these during startup,
                 // so do it manually here: (so the pathway panel loads, etc)
                 // [re-enabled focus grabs even during startup -- was mainly for command line debug loads]
                 //mMapTabsLeft.getViewerAt(0).grabVueApplicationFocus("startup", null);
-            }});
+            });
         }
 
 
@@ -1750,9 +1743,7 @@ public class VUE
         		// Not reliable on PC unless we invokeLater
         		if (!VUE.isApplet())
         		{
-        			GUI.invokeAfterAWT(new Runnable() { public void run() {
-        			SplitPaneRightButtonOneTouchActionHandler.actionPerformed(null);                  
-        			}});
+        			GUI.invokeAfterAWT(() -> SplitPaneRightButtonOneTouchActionHandler.actionPerformed(null));
         		}
         		// this is also eventually getting eaten in java 1.5: no matter where
         		// we put this call during init: will have to patch w/more hacking
@@ -1781,9 +1772,7 @@ public class VUE
                 // This is backup: hit it one more time just in case, as on the
                 // newer, faster intel Mac's, the timing is changed and the
                 // above is no longer catching it.
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    SplitPaneRightButtonOneTouchActionHandler.actionPerformed(null);                  
-                }});
+                GUI.invokeAfterAWT(() -> SplitPaneRightButtonOneTouchActionHandler.actionPerformed(null));
             }
         }
         
@@ -1884,12 +1873,12 @@ public class VUE
         
         if (acrossTop.length > 0) {
             // Run after AWT to ensure all peers to have been created & shown
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 // TODO: doesn't appear to be allowing old state to rule as is supposed to:
                 assignDefaultPositions(acrossTop);
                 if (!VUE.isApplet())
                     DockWindow.RestoreAllWindowStates();
-            }});
+            });
         }
         
         // restoreSavedDockWindowPositions();
@@ -2216,22 +2205,11 @@ public class VUE
 //        toolbarPanel.add(new BackwardForwardPanel(), gBC);
 
         returnToMapButton = new JButton(VueResources.getString("returnToMap.label"));        
-        returnToMapButton.addActionListener(new ActionListener(){
-        	public void actionPerformed(ActionEvent e)
-        	{
-        		Actions.ReturnToMap.act();
-        	}
-        });
-        tufts.vue.VUE.addActiveListener(tufts.vue.LWMap.class,new ActiveListener()
-        {
-
-			public void activeChanged(ActiveEvent e) {
-                returnToMapButton.setVisible((VUE.getActiveViewer() != null && VUE.getActiveViewer().getFocal() != null)
-                        && (VUE.getActiveViewer().getFocal() instanceof LWSlide ||
-                        VUE.getActiveViewer().getFocal() instanceof MasterSlide ||
-                        VUE.getActiveViewer().getFocal() instanceof LWGroup));
-			}
-        }); 
+        returnToMapButton.addActionListener(e -> Actions.ReturnToMap.act());
+        tufts.vue.VUE.addActiveListener(tufts.vue.LWMap.class, e -> returnToMapButton.setVisible((VUE.getActiveViewer() != null && VUE.getActiveViewer().getFocal() != null)
+                && (VUE.getActiveViewer().getFocal() instanceof LWSlide ||
+                VUE.getActiveViewer().getFocal() instanceof MasterSlide ||
+                VUE.getActiveViewer().getFocal() instanceof LWGroup)));
         returnToMapButton.setVisible(false);
 		gBC.fill = GridBagConstraints.NONE;			
 		gBC.gridx = 2;
@@ -2821,51 +2799,50 @@ public class VUE
         split.setLeftComponent(leftComponent);
         
 
-        split.addPropertyChangeListener(new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent e) {
-                    //System.out.println("VS " + e);
-                    if (!e.getPropertyName().equals("dividerLocation"))
-                        return;
-                    if (DEBUG.TOOL || DEBUG.INIT || DEBUG.FOCUS)
-                        out("split.propertyChange[" + e.getPropertyName() + "] "
-                                        + "\n\tnew=" + e.getNewValue().getClass().getName()
-                                        + " " + e.getNewValue()
-                                        + "\n\told=" + e.getOldValue()
-                                        + "\n\tsrc=" + GUI.name(e.getSource())
-                                        );
+        split.addPropertyChangeListener(e -> {
+            //System.out.println("VS " + e);
+            if (!e.getPropertyName().equals("dividerLocation"))
+                return;
+            if (DEBUG.TOOL || DEBUG.INIT || DEBUG.FOCUS)
+                out("split.propertyChange[" + e.getPropertyName() + "] "
+                                + "\n\tnew=" + e.getNewValue().getClass().getName()
+                                + " " + e.getNewValue()
+                                + "\n\told=" + e.getOldValue()
+                                + "\n\tsrc=" + GUI.name(e.getSource())
+                                );
 
-                        //Util.printStackTrace();
-                    
-                    MapViewer leftViewer = null;
-                    MapViewer rightViewer = null;
-                    if (mMapTabsLeft != null)
-                        leftViewer = mMapTabsLeft.getSelectedViewer();
-                    if (mMapTabsRight != null)
-                        rightViewer = mMapTabsRight.getSelectedViewer();
+                //Util.printStackTrace();
 
-                    if (multipleMapsVisible()) {
-                        /*
-                          // should be handled by MapVewer.reshape
-                        if (leftViewer != null)
-                            leftViewer.fireViewerEvent(MapViewerEvent.PAN);
-                        if (rightViewer != null)
-                            rightViewer.fireViewerEvent(MapViewerEvent.PAN);
-                        */
-                        // why did we ever need to handle this condition?  was this just-in-case code?
-                        if (leftViewer != null) leftViewer.setVisible(true);
-                        if (rightViewer != null) rightViewer.setVisible(true);
-                    } else {
-                        if (leftViewer != null && leftViewer != getActiveViewer()) {
-                            if (DEBUG.TOOL || DEBUG.FOCUS)
-                                out("split: active viewer: " + getActiveViewer()
-                                    + " focus going to " + leftViewer);
-                            leftViewer.requestFocus();
-                            if (rightViewer != null)
-                                //rightViewer.fireViewerEvent(MapViewerEvent.HIDDEN);
-                                rightViewer.setVisible(false);
-                        }
-                    }
-                }});
+            MapViewer leftViewer = null;
+            MapViewer rightViewer = null;
+            if (mMapTabsLeft != null)
+                leftViewer = mMapTabsLeft.getSelectedViewer();
+            if (mMapTabsRight != null)
+                rightViewer = mMapTabsRight.getSelectedViewer();
+
+            if (multipleMapsVisible()) {
+                /*
+                  // should be handled by MapVewer.reshape
+                if (leftViewer != null)
+                    leftViewer.fireViewerEvent(MapViewerEvent.PAN);
+                if (rightViewer != null)
+                    rightViewer.fireViewerEvent(MapViewerEvent.PAN);
+                */
+                // why did we ever need to handle this condition?  was this just-in-case code?
+                if (leftViewer != null) leftViewer.setVisible(true);
+                if (rightViewer != null) rightViewer.setVisible(true);
+            } else {
+                if (leftViewer != null && leftViewer != getActiveViewer()) {
+                    if (DEBUG.TOOL || DEBUG.FOCUS)
+                        out("split: active viewer: " + getActiveViewer()
+                            + " focus going to " + leftViewer);
+                    leftViewer.requestFocus();
+                    if (rightViewer != null)
+                        //rightViewer.fireViewerEvent(MapViewerEvent.HIDDEN);
+                        rightViewer.setVisible(false);
+                }
+            }
+        });
 
         return split;
     }

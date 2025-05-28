@@ -103,14 +103,10 @@ public class DataSourceList extends JList implements DropTargetListener
         this.setCellRenderer(new DataSourceListCellRenderer());
 
         edu.tufts.vue.dsm.impl.VueDataSourceManager.getInstance().addDataSourceListener
-            (new edu.tufts.vue.dsm.DataSourceListener() {
-                    public void changed(edu.tufts.vue.dsm.DataSource[] dataSource,
-                                        Object state,
-                                        edu.tufts.vue.dsm.DataSource changed) {
-                        if (DEBUG.DATA || DEBUG.EVENTS) Log.debug("data sources changed: repaint");
-                        repaint();
-                    }
-                });
+            ((dataSource, state, changed) -> {
+                if (DEBUG.DATA || DEBUG.EVENTS) Log.debug("data sources changed: repaint");
+                repaint();
+            });
     }
     
     private Object locationToValue(Point p) {

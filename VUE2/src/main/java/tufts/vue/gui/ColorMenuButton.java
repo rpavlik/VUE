@@ -216,11 +216,9 @@ public class ColorMenuButton extends JButton
         	
         	public void mouseExited(final MouseEvent e)
         	{        		
-        		SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        if (popupWindow.isVisible())
-                            doClick();
-                    }
+        		SwingUtilities.invokeLater(() -> {
+                    if (popupWindow.isVisible())
+                        doClick();
                 });
         	}
         });
@@ -237,11 +235,9 @@ public class ColorMenuButton extends JButton
             		return;
             	}
             		
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        if (popupWindow.isVisible())
-                            doClick();
-                    }
+                SwingUtilities.invokeLater(() -> {
+                    if (popupWindow.isVisible())
+                        doClick();
                 });
             }
         });
@@ -354,20 +350,16 @@ public class ColorMenuButton extends JButton
     	
     	JButton item = new JButton(VueResources.getString("button.label.other"));
     	item.setFocusable(false);
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) 
-            { 
-            	Color c =(Color)runCustomChooser();
-            	colorManager.updateRecentlyUsedColors(c.getRed()+","+c.getGreen()+","+c.getBlue());
-            	handleValueSelection(c); 
-            	doClick();
-            	if (tufts.Util.isWindowsPlatform())
-            		popupWindow.setAlwaysOnTop(true);
-            	
-            //	rebuildMenu();
-            }
-            
-            });
+        item.addActionListener(e -> {
+            Color c1 =(Color)runCustomChooser();
+            colorManager.updateRecentlyUsedColors(c1.getRed()+","+ c1.getGreen()+","+ c1.getBlue());
+            handleValueSelection(c1);
+            doClick();
+            if (tufts.Util.isWindowsPlatform())
+                popupWindow.setAlwaysOnTop(true);
+
+        //	rebuildMenu();
+        });
     	item.setBorderPainted(false);
 		item.setContentAreaFilled(false);		
 		parent.add(colorPanel,BorderLayout.CENTER);

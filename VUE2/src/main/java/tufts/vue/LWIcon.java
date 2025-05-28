@@ -101,29 +101,25 @@ public abstract class LWIcon extends Rectangle2D.Float
         // number of checkboxes in the UI.  Also, *every single node in existence* used to be a
         // listener, (that was crazy), so it was generating a zillion events.  Now, this is the
         // single lister in all of VUE for icon preference changes. [SMF -- summer 2012]
-        IconPref.addVuePrefListener(new VuePrefListener() {
-                public void preferenceChanged(VuePrefEvent pe) {
-                    // Log.info("icon prefs change notification: " + tufts.Util.tags(pe));
-                    // if (pe.getNewValue().equals(pe.getOldValue())) // Can't rely on this: values not 100% reliable
-                    //     return;
-                    Log.info("an icon display preference has changed: re-layout of all open VUE maps");
-                    final LWMap activeMap = VUE.getActiveMap();
-                    // refresh the active map immediatley, and other maps interspersed on AWT thread
-                    if (activeMap != null) {
-                        refreshIconsForMap(activeMap);
-                        activeMap.notify(LWKey.Repaint); // todo: shouldn't need this for MapPanner updates
-                    }
-                    for (final LWMap map : VUE.getAllMaps()) {
-                        if (map != activeMap) {
-                            tufts.vue.gui.GUI.invokeAfterAWT(new Runnable() { public void run() {                          
-                                refreshIconsForMap(map);
-                            }});
-                        }
-                    }
-                    //if (DEBUG.Enabled) Log.info("all maps re-laid out.");
-                        
+        IconPref.addVuePrefListener(pe -> {
+            // Log.info("icon prefs change notification: " + tufts.Util.tags(pe));
+            // if (pe.getNewValue().equals(pe.getOldValue())) // Can't rely on this: values not 100% reliable
+            //     return;
+            Log.info("an icon display preference has changed: re-layout of all open VUE maps");
+            final LWMap activeMap = VUE.getActiveMap();
+            // refresh the active map immediatley, and other maps interspersed on AWT thread
+            if (activeMap != null) {
+                refreshIconsForMap(activeMap);
+                activeMap.notify(LWKey.Repaint); // todo: shouldn't need this for MapPanner updates
+            }
+            for (final LWMap map : VUE.getAllMaps()) {
+                if (map != activeMap) {
+                    tufts.vue.gui.GUI.invokeAfterAWT(() -> refreshIconsForMap(map));
                 }
-            });
+            }
+            //if (DEBUG.Enabled) Log.info("all maps re-laid out.");
+
+        });
     }
 
     private static void refreshIconsForMap(final LWMap map) {

@@ -158,14 +158,11 @@ public class ActionUtil
             
             saveChooser.setFileFilter(defaultFilter); 
         }         
-        saveChooser.addPropertyChangeListener(new PropertyChangeListener()
-        {
-			public void propertyChange(PropertyChangeEvent arg0) {				
-				if (arg0.getPropertyName() == VueFileChooser.FILE_FILTER_CHANGED_PROPERTY)
-				{
-					adjustExtension();
-				}
-			}
+        saveChooser.addPropertyChangeListener(arg0 -> {
+            if (arg0.getPropertyName() == VueFileChooser.FILE_FILTER_CHANGED_PROPERTY)
+            {
+                adjustExtension();
+            }
         });
         adjustExtension();
         int option = saveChooser.showSaveDialog(VUE.getDialogParentAsFrame());//, VueResources.getString("dialog.save.title"));

@@ -252,13 +252,10 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 				
 				fromUserClusterPoints.put(tweet.getFromUser(), fromNode);
 				final LWNode finalFromNode = fromNode;
-				javax.swing.SwingUtilities.invokeLater(new Runnable() {
-					public void run() 
-					{
-						LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
-						fromLayer.addChild(finalFromNode);							
-					}
-				});
+				javax.swing.SwingUtilities.invokeLater(() -> {
+                    LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
+                    fromLayer.addChild(finalFromNode);
+                });
 			}
 			return fromNode;
 		}
@@ -339,13 +336,10 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 				
 				analysisClusterPoints.put(topic, topicNode);
 				final LWNode finalTopicNode = topicNode;
-				javax.swing.SwingUtilities.invokeLater(new Runnable() {
-					public void run() 
-					{
-						LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
-						analysisLayer.addChild(finalTopicNode);							
-					}
-				});
+				javax.swing.SwingUtilities.invokeLater(() -> {
+                    LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
+                    analysisLayer.addChild(finalTopicNode);
+                });
 			}
 			return topicNode;
 			
@@ -411,24 +405,21 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 							
 							
 						
-						javax.swing.SwingUtilities.invokeLater(new Runnable() {
-							public void run() 
-							{
-								final LWLink analysisLink = new LWLink(analysisNode,node);
-								final LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
-								LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
-								tweetsLayer.addChild(node);	
-								
-								LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
-								fromLayer.addChild(fromLink);
-								layout(node);
-								
-								if (analysisNode !=null)
-								{
-									analysisLayer.addChild(analysisLink);
-								}
-							}
-						});						
+						javax.swing.SwingUtilities.invokeLater(() -> {
+                            final LWLink analysisLink = new LWLink(analysisNode,node);
+                            final LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
+                            LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
+                            tweetsLayer.addChild(node);
+
+                            LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
+                            fromLayer.addChild(fromLink);
+                            layout(node);
+
+                            if (analysisNode !=null)
+                            {
+                                analysisLayer.addChild(analysisLink);
+                            }
+                        });
 					}
 					
 					
@@ -538,172 +529,146 @@ public class VueTwitterPanel extends JPanel implements ItemListener, ActionListe
 	   		}
 	   		else */if (button.equals(fromCheckbox))
 	   		{	   
-	   			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-					public void run() 
-					{
-						//LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
-						//LWMap.Layer toLayer = layerList.get(TO_LAYER);
-						LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
-						LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
-						//geoLayer.setVisible(false);
-						//toLayer.setVisible(false);
-						fromLayer.setVisible(true);
-						analysisLayer.setVisible(false);
-						
-						
-			   			LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
-			   			final LWSelection select = VUE.getSelection();
-			   			select.clear();
-			   			
-			   			
-			   			final List<LWComponent> l = new ArrayList<>();
-			   			Iterable<LWNode> nodeIterator = fromLayer.getChildrenOfType(LWNode.class);
-			   			for (LWNode c : nodeIterator)
-			   			{
-			   				
-			   				l.add(c);
-			   				//System.out.println(c.getLabel());
-			   			}
-			   			
-			   			select.addAll(l);
-			   			
-			   			try {
-							//tableLayout.layout(select);
-							nodeIterator = fromLayer.getChildrenOfType(LWNode.class);
-				   			for (final LWNode c : nodeIterator)
-				   			{
-				   				SwingUtilities.invokeLater(new Runnable() { 
-				   					public void run()				   				
-				   					{
-				   						//Actions.ClusterAction.clusterNodesAbout(c, c.getLinked());	
-				   						
-				   						clusterLayout.layout(select);
-				   					}
-				   				});
-				   				
-				   				
-				   		
-				   			}
-							
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						SwingUtilities.invokeLater(new Runnable() { 
-		   					public void run()				   				
-		   					{
-		   					//	ZoomTool.setZoomFit();
-		   					}
-						});
-					}
-	   			});
+	   			javax.swing.SwingUtilities.invokeLater(() -> {
+                       //LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
+                       //LWMap.Layer toLayer = layerList.get(TO_LAYER);
+                       LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
+                       LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
+                       //geoLayer.setVisible(false);
+                       //toLayer.setVisible(false);
+                       fromLayer.setVisible(true);
+                       analysisLayer.setVisible(false);
+
+
+                          LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
+                          final LWSelection select = VUE.getSelection();
+                          select.clear();
+
+
+                          final List<LWComponent> l = new ArrayList<>();
+                          Iterable<LWNode> nodeIterator = fromLayer.getChildrenOfType(LWNode.class);
+                          for (LWNode c : nodeIterator)
+                          {
+
+                              l.add(c);
+                              //System.out.println(c.getLabel());
+                          }
+
+                          select.addAll(l);
+
+                          try {
+                           //tableLayout.layout(select);
+                           nodeIterator = fromLayer.getChildrenOfType(LWNode.class);
+                              for (final LWNode c : nodeIterator)
+                              {
+                                  SwingUtilities.invokeLater(() -> {
+//Actions.ClusterAction.clusterNodesAbout(c, c.getLinked());
+
+clusterLayout.layout(select);
+});
+
+
+
+                              }
+
+                       } catch (Exception e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                       }
+                       SwingUtilities.invokeLater(() -> {
+//	ZoomTool.setZoomFit();
+});
+                   });
 	   			
 	   		} else if (button.equals(analysisCheckbox))
 	   		{
-	   			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-					public void run() 
-					{
-						//LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
-						//LWMap.Layer toLayer = layerList.get(TO_LAYER);
-						LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
-						LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
-						//geoLayer.setVisible(false);
-						//toLayer.setVisible(false);
-						fromLayer.setVisible(false);
-						analysisLayer.setVisible(true);
-						
-						
-			   			LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
-			   			final LWSelection select = VUE.getSelection();
-			   			select.clear();
-			   			
-			   			
-			   			final List<LWComponent> l = new ArrayList<>();
-			   			Iterable<LWNode> nodeIterator = analysisLayer.getChildrenOfType(LWNode.class);
-			   			for (LWNode c : nodeIterator)
-			   			{
-			   				
-			   				l.add(c);
-			   				//System.out.println(c.getLabel());
-			   			}
-			   			
-			   			
-			   				select.addAll(l);
-			   		
-			   			
-			   			try {
-							//tableLayout.layout(select);
-							nodeIterator = analysisLayer.getChildrenOfType(LWNode.class);
-				   			for (final LWNode c : nodeIterator)
-				   			{
-				   				SwingUtilities.invokeLater(new Runnable() { 
-				   					public void run()				   				
-				   					{
-				   						//Actions.ClusterAction.clusterNodesAbout(c, c.getLinked());	
-				   						
-				   						clusterLayout.layout(select);
-				   					}
-				   				});
-				   				
-				   				
-				   		
-				   			}
-							
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
-						SwingUtilities.invokeLater(new Runnable() { 
-		   					public void run()				   				
-		   					{
-		   						ZoomTool.setZoomFit();
-		   					}
-						});
-					}
-	   			});
+	   			javax.swing.SwingUtilities.invokeLater(() -> {
+                       //LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
+                       //LWMap.Layer toLayer = layerList.get(TO_LAYER);
+                       LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
+                       LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
+                       //geoLayer.setVisible(false);
+                       //toLayer.setVisible(false);
+                       fromLayer.setVisible(false);
+                       analysisLayer.setVisible(true);
+
+
+                          LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
+                          final LWSelection select = VUE.getSelection();
+                          select.clear();
+
+
+                          final List<LWComponent> l = new ArrayList<>();
+                          Iterable<LWNode> nodeIterator = analysisLayer.getChildrenOfType(LWNode.class);
+                          for (LWNode c : nodeIterator)
+                          {
+
+                              l.add(c);
+                              //System.out.println(c.getLabel());
+                          }
+
+
+                              select.addAll(l);
+
+
+                          try {
+                           //tableLayout.layout(select);
+                           nodeIterator = analysisLayer.getChildrenOfType(LWNode.class);
+                              for (final LWNode c : nodeIterator)
+                              {
+                                  SwingUtilities.invokeLater(() -> {
+//Actions.ClusterAction.clusterNodesAbout(c, c.getLinked());
+
+clusterLayout.layout(select);
+});
+
+
+
+                              }
+
+                       } catch (Exception e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                       }
+
+                       SwingUtilities.invokeLater(() -> ZoomTool.setZoomFit());
+                   });
 	   			
 	   		}
 	   		else
 	   		{
 	   			//scatter
-	   			javax.swing.SwingUtilities.invokeLater(new Runnable() {
-					public void run() 
-					{
-						//LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
-						//LWMap.Layer toLayer = layerList.get(TO_LAYER);
-						LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
-						LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
-						//geoLayer.setVisible(false);
-						//toLayer.setVisible(false);
-						fromLayer.setVisible(false);
-						analysisLayer.setVisible(false);
-						
-			   			LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
-			   			LWSelection select = VUE.getSelection();
-			   			select.clear();
+	   			javax.swing.SwingUtilities.invokeLater(() -> {
+                       //LWMap.Layer geoLayer = layerList.get(GEO_LAYER);
+                       //LWMap.Layer toLayer = layerList.get(TO_LAYER);
+                       LWMap.Layer fromLayer = layerList.get(FROM_LAYER);
+                       LWMap.Layer analysisLayer = layerList.get(ANALYSIS_LAYER);
+                       //geoLayer.setVisible(false);
+                       //toLayer.setVisible(false);
+                       fromLayer.setVisible(false);
+                       analysisLayer.setVisible(false);
+
+                          LWMap.Layer tweetsLayer = layerList.get(TWEETS_LAYER);
+                          LWSelection select = VUE.getSelection();
+                          select.clear();
 //			   			select.addAll();
-			   			
-			   		//	if (node == null)
-			   				select.addAll(tweetsLayer.getAllDescendents());
-			   		//	else
-			   		//		select.add(node);
-			   			
-			   			try {
-							scrollTableLayout.layout(select);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-			   			SwingUtilities.invokeLater(new Runnable() { 
-		   					public void run()				   				
-		   					{
-		   						VUE.getActiveViewer().repaint();
-		   					//	ZoomTool.setZoomFit();
-		   					}
-						});
-					}
-	   			});
+
+                      //	if (node == null)
+                              select.addAll(tweetsLayer.getAllDescendents());
+                      //	else
+                      //		select.add(node);
+
+                          try {
+                           scrollTableLayout.layout(select);
+                       } catch (Exception e) {
+                           // TODO Auto-generated catch block
+                           e.printStackTrace();
+                       }
+                          SwingUtilities.invokeLater(() -> {
+VUE.getActiveViewer().repaint();
+//	ZoomTool.setZoomFit();
+});
+                   });
 	   		}
 	   			
 	   		

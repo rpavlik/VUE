@@ -321,7 +321,7 @@ public class Repository
     {
         try
         {
-            return new PropertiesIterator(new java.util.Vector<org.osid.shared.Properties>());
+            return new PropertiesIterator(new java.util.Vector<>());
         }
         catch (Throwable t)
         {

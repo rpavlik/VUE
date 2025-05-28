@@ -334,13 +334,11 @@ public class VueDragTree extends JTree
         popup.add(menuItem);
         if (mResources.size() > 0) {
             menuItem = new JMenuItem(VueResources.getString("vuedragtree.menu.addalltomap"));
-            menuItem.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        VUE.getActiveViewer().getMapDropTarget()
-                            .processTransferable(new tufts.vue.gui.GUI.ResourceTransfer(mResources), null);
-                        // VUE.getActiveMap().getUndoManager().mark("Add Resources to Map"); // todo: can't override pre-existing "Drop" mark
-                    }
-                });
+            menuItem.addActionListener(e -> {
+                VUE.getActiveViewer().getMapDropTarget()
+                    .processTransferable(new GUI.ResourceTransfer(mResources), null);
+                // VUE.getActiveMap().getUndoManager().mark("Add Resources to Map"); // todo: can't override pre-existing "Drop" mark
+            });
         }
                 
         popup.add(menuItem);

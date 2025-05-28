@@ -228,11 +228,9 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
         edu.tufts.vue.dsm.DataSource selectedDataSource = (edu.tufts.vue.dsm.DataSource) repList.getSelectedValue();
         wTree = new JTree(getWorkSpaceTreeModel(selectedDataSource));
         wTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        wTree.addTreeSelectionListener(new TreeSelectionListener() {
-            public void valueChanged( TreeSelectionEvent tse ) {
-                TreePath tp = tse.getNewLeadSelectionPath();
-                _tp = tp;
-            }
+        wTree.addTreeSelectionListener(tse -> {
+            TreePath tp = tse.getNewLeadSelectionPath();
+            _tp = tp;
         });
         JScrollPane wPane = new JScrollPane(wTree);
         JPanel scrollPanel = new JPanel(new BorderLayout());
@@ -394,30 +392,26 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
             validateTree();
         } else if(e.getActionCommand().equals(PUBLISH_BUTTON_TEXT)) {
             
-            final Thread t = new Thread() {
-                public void run() {
-                    getContentPane().remove(mPanel);
-                    mPanel.remove(modeInfo);
-                    getContentPane().remove(buttonPanel);
-                    setUpPublishPanel();
-                    
-                    getContentPane().add(pPanel,BorderLayout.WEST);
-                    getContentPane().add(buttonPanel,BorderLayout.SOUTH);
-                    validate();
-                    repaint();
+            final Thread t = new Thread(() -> {
+                getContentPane().remove(mPanel);
+                mPanel.remove(modeInfo);
+                getContentPane().remove(buttonPanel);
+                setUpPublishPanel();
+
+                getContentPane().add(pPanel,BorderLayout.WEST);
+                getContentPane().add(buttonPanel,BorderLayout.SOUTH);
+                validate();
+                repaint();
+            });
+            Thread invokeThread = new Thread(() -> {
+                try {
+                    SwingUtilities.invokeAndWait(t);
+                    publishMapToDL();
+                    setUpConfirmPanel();
+                }catch(Throwable tw) {
+                    tw.printStackTrace();
                 }
-            };
-            Thread invokeThread = new Thread() {
-                public void run() {
-                    try {
-                        SwingUtilities.invokeAndWait(t);
-                        publishMapToDL();
-                        setUpConfirmPanel();
-                    }catch(Throwable tw) {
-                        tw.printStackTrace();
-                    }
-                }
-            };
+            });
             invokeThread.start();
         }
         if(e.getActionCommand().equals(MODE_LABELS[0])){

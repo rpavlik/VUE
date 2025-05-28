@@ -103,16 +103,14 @@ public class OntologyBrowser extends JPanel {
     }
 
     public Widget addTypeList(final edu.tufts.vue.ontology.ui.TypeList list,String name,URL url) {
-        list.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-           //     TypeList oldSelection = selectedOntology;
-           //     selectedOntology = list;
-           //     if (oldSelection != null)
-           //     {
-           //       oldSelection.repaint();
-           //     }
-                fireOntologySelectionChanged(list);
-            }
+        list.getSelectionModel().addListSelectionListener(listSelectionEvent -> {
+       //     TypeList oldSelection = selectedOntology;
+       //     selectedOntology = list;
+       //     if (oldSelection != null)
+       //     {
+       //       oldSelection.repaint();
+       //     }
+            fireOntologySelectionChanged(list);
         });
 
         String loadingString = "Loading " + name;

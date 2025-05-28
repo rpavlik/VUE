@@ -171,53 +171,51 @@ public class ResourceList extends JList
         selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         setSelectionModel(selectionModel);
 
-        selectionModel.addListSelectionListener(new ListSelectionListener() {
-                public void valueChanged(ListSelectionEvent e) {
-                    if (DEBUG.RESOURCE || DEBUG.SELECTION || DEBUG.FOCUS) {
-                        System.out.println(ResourceList.this + " valueChanged: " + e
-                                           + " index=" + getSelectedIndex()
-                                           + " picked=" + getPicked());
+        selectionModel.addListSelectionListener(e -> {
+            if (DEBUG.RESOURCE || DEBUG.SELECTION || DEBUG.FOCUS) {
+                System.out.println(ResourceList.this + " valueChanged: " + e
+                                   + " index=" + getSelectedIndex()
+                                   + " picked=" + getPicked());
 
-                        // TODO: Leopard java 1.5 2008-05-28 SMF: a tiny drag on a
-                        // resource leading to an aborted drag leaves us in a state such
-                        // that all the events coming in as a result of up/down arrow
-                        // key movement (which do move the selection), claim
-                        // valueIsAdjusting!  So the arrows break after doing this,
-                        // until the mouse click is used to change the resource
-                        // selection, which resets us.  This is looking like a java bug.
-                        
-                        if (e.getValueIsAdjusting())
-                            System.out.println(ResourceList.this + " isAdjusting: ignoring");
-                    }
+                // TODO: Leopard java 1.5 2008-05-28 SMF: a tiny drag on a
+                // resource leading to an aborted drag leaves us in a state such
+                // that all the events coming in as a result of up/down arrow
+                // key movement (which do move the selection), claim
+                // valueIsAdjusting!  So the arrows break after doing this,
+                // until the mouse click is used to change the resource
+                // selection, which resets us.  This is looking like a java bug.
 
-                    if (e.getValueIsAdjusting())
-                        return;
-                    
-                    if (DEBUG.SELECTION) tufts.Util.printStackTrace("ResourceList valueChanged " + ResourceList.this);
-                    if (isMaskingModel) {
-                        if (isMasking && getSelectedIndex() >= PreviewItems)
-                            ((MaskingModel)mDataModel).expand();
-                        else if (!isMasking && getSelectedIndex() == mDataModel.size()) {
+                if (e.getValueIsAdjusting())
+                    System.out.println(ResourceList.this + " isAdjusting: ignoring");
+            }
 
-                            // For now: do nothing: force them to click on the collapse
-                            // (keyboarding to it creates a user-loop when holding the
-                            // down arrow, where it collpases, goes back to the top, then
-                            // selects till it expands, then selects down to end and collapses
-                            // again...
-                            
-                            //((MaskingModel)model).collapse();
-                            // "selected" item doesn't exist at this point, so nothing is "picked"
-                            // this will follow with a second selection event, which will
-                            // set the resource selection to null, as nothing is picked by default.
+            if (e.getValueIsAdjusting())
+                return;
 
-                            return;
-                        }
-                    }
-                    if (getPicked() != null)
-                        tufts.vue.VUE.setActive(Resource.class, ResourceList.this, getPicked());
-                    //tufts.vue.VUE.getResourceSelection().setTo(getPicked(), ResourceList.this);
+            if (DEBUG.SELECTION) Util.printStackTrace("ResourceList valueChanged " + ResourceList.this);
+            if (isMaskingModel) {
+                if (isMasking && getSelectedIndex() >= PreviewItems)
+                    ((MaskingModel)mDataModel).expand();
+                else if (!isMasking && getSelectedIndex() == mDataModel.size()) {
+
+                    // For now: do nothing: force them to click on the collapse
+                    // (keyboarding to it creates a user-loop when holding the
+                    // down arrow, where it collpases, goes back to the top, then
+                    // selects till it expands, then selects down to end and collapses
+                    // again...
+
+                    //((MaskingModel)model).collapse();
+                    // "selected" item doesn't exist at this point, so nothing is "picked"
+                    // this will follow with a second selection event, which will
+                    // set the resource selection to null, as nothing is picked by default.
+
+                    return;
                 }
-            });
+            }
+            if (getPicked() != null)
+                VUE.setActive(Resource.class, ResourceList.this, getPicked());
+            //tufts.vue.VUE.getResourceSelection().setTo(getPicked(), ResourceList.this);
+        });
 
         setDragEnabled(false);
 

@@ -126,24 +126,20 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
             addLibraryList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
             addLibraryList.addListSelectionListener(this);
             addLibraryList.setFixedCellHeight(25);
-            addLibraryList.addListSelectionListener(new ListSelectionListener(){
+            addLibraryList.addListSelectionListener(arg0 -> {
+                Object o = ((JList)arg0.getSource()).getSelectedValue();
 
-				public void valueChanged(ListSelectionEvent arg0) {
-					Object o = ((JList)arg0.getSource()).getSelectedValue();
-					
-					
-					if (o instanceof String)
-					{
-						String s =(String)o;
-						if (s.equals(LOADING))
-						{
-							addLibraryList.setSelectedIndex(0);
-							addLibraryList.repaint();
-						}
-					}
-					
-				}
-            	
+
+                if (o instanceof String)
+                {
+                    String s =(String)o;
+                    if (s.equals(LOADING))
+                    {
+                        addLibraryList.setSelectedIndex(0);
+                        addLibraryList.repaint();
+                    }
+                }
+
             });
             providerListRenderer = new ProviderListCellRenderer();
             addLibraryList.setCellRenderer(providerListRenderer);
@@ -272,10 +268,7 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
             listModel.addElement(LOADING);
        int ONE_TNTH_SECOND = 100;
             providerListRenderer.invokeWaitingMode(LIST_PARTITION_CONSTANT);
-            timer = new Timer(ONE_TNTH_SECOND, new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    repaint();
-                }});
+            timer = new Timer(ONE_TNTH_SECOND, evt -> repaint());
                 timer.start();
                 
 			//System.out.println("In Add Library Dialog, asking Provider for list of Providers");
@@ -434,13 +427,11 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                             },
                             VueResources.getString("optiondialog.addlibrary.decline")) != 0) {
                             	//cancelButton.requestFocus();
-                            	SwingUtilities.invokeLater(new Runnable() { 
-                                    public void run() { 
-                                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                                        AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
-                                        cancelButton.requestFocusInWindow();
-                                    } 
-                            	} );
+                            	SwingUtilities.invokeLater(() -> {
+                                    KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                                    AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
+                                    cancelButton.requestFocusInWindow();
+                                });
                                 return;
                             }
                         }
@@ -458,13 +449,11 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                             Log.error("install failed " + provider.getId().getIdString());
                             VueUtil.alert(this,VueResources.getString("dialog.installerror.messaged"),VueResources.getString("dialog.error.title"));
                             //cancelButton.requestFocus();
-                            SwingUtilities.invokeLater(new Runnable() { 
-                                public void run() { 
-                                    KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                                    AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
-                                    cancelButton.requestFocusInWindow();
-                                } 
-                            } );
+                            SwingUtilities.invokeLater(() -> {
+                                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                                AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
+                                cancelButton.requestFocusInWindow();
+                            });
                             return;
                         } 
                     } else {
@@ -499,13 +488,11 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                     VueUtil.alert(this,t.getMessage(),VueResources.getString("dialog.osidinstall.title"));
                     t.printStackTrace();
                     //cancelButton.requestFocus();
-                    SwingUtilities.invokeLater(new Runnable() { 
-                        public void run() { 
-                            KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                            AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
-                            cancelButton.requestFocusInWindow();
-                        } 
-                    } );
+                    SwingUtilities.invokeLater(() -> {
+                        KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+                        AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
+                        cancelButton.requestFocusInWindow();
+                    });
                     return;
                 }
             }
@@ -564,7 +551,7 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                             GUI.activateWaitCursor();
 							//System.out.println("setting config " + cui.getProperties());
                             this.newDataSource.setConfiguration(cui.getProperties());
-                            GUI.invokeAfterAWT(new Runnable() { public void run() {
+                            GUI.invokeAfterAWT(() -> {
                                 try {
                                     //synchronized (dataSourceManager) {
                                     // DSM handles the synchronization itself -- locking hear can deadlock -- SMF 2007-11-19
@@ -574,7 +561,7 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
                                 } catch (Throwable t) {
                                     Log.error(t);
                                 }
-                            }});
+                            });
                             
                         } catch (Throwable t2) {
                         	proceed=false;
@@ -607,13 +594,11 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
         
         DataSourceViewer.saveDataSourceViewer();
         //cancelButton.requestFocus();
-        SwingUtilities.invokeLater(new Runnable() { 
-            public void run() { 
-                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
-                cancelButton.requestFocusInWindow();
-            } 
-        } );
+        SwingUtilities.invokeLater(() -> {
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+            AddLibraryDialog.this.getRootPane().setDefaultButton(cancelButton);
+            cancelButton.requestFocusInWindow();
+        });
     }
 	
 	public DataSource getOldDataSource()
@@ -636,10 +621,7 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
             repaint();
             int ONE_TNTH_SECOND = 100;
             
-            timer = new Timer(ONE_TNTH_SECOND, new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    repaint();
-                }});
+            timer = new Timer(ONE_TNTH_SECOND, evt -> repaint());
                 timer.start();
                 
                 AddDSThread t = new AddDSThread();

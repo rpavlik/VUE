@@ -239,8 +239,7 @@ public class TextOpenAction  extends VueAction {
                     map.add(node1);
                 } else {
                     node1 = nodeMap.get(words[0]);
-                    int nc= repeatMap.get(words[0]);
-                    repeatMap.put(words[0], nc + 1);
+                    repeatMap.compute(words[0], (k, nc) -> nc + 1);
                 }
                 if(!nodeMap.containsKey(words[2])) {
                     node2 = new LWNode(words[2]);
@@ -252,8 +251,7 @@ public class TextOpenAction  extends VueAction {
                     
                 } else {
                     node2 = nodeMap.get(words[2]);
-                      int nc= repeatMap.get(words[2]);
-                    repeatMap.put(words[2], nc + 1);
+                    repeatMap.compute(words[2], (k, nc) -> nc + 1);
                 }
                 
             }else {
@@ -268,8 +266,7 @@ public class TextOpenAction  extends VueAction {
                     map.add(node1);
                 } else {
                     node1 = nodeMap.get(words[0]);
-                      int nc= repeatMap.get(words[0]);
-                    repeatMap.put(words[0], nc + 1);
+                    repeatMap.compute(words[0], (k, nc) -> nc + 1);
                 }
                 if(!nodeMap.containsKey(words[1])) {
                     node2 = new LWNode(words[1]);
@@ -278,8 +275,7 @@ public class TextOpenAction  extends VueAction {
                      repeatMap.put(words[1], 1);
                 } else {
                     node2 = nodeMap.get(words[1]);
-                      int nc= repeatMap.get(words[1]);
-                    repeatMap.put(words[1], nc + 1);
+                    repeatMap.compute(words[1], (k, nc) -> nc + 1);
                 }
                 
                 }

@@ -1666,17 +1666,11 @@ return super.viewToModel(new Point(alloc));
 			m.add(copyItem);
 	    	m.add(pasteItem);
 	    	
-	    	copyItem.addActionListener(new ActionListener() {
-	    	      public void actionPerformed(ActionEvent e) {
-	    	    	  RichTextBox.this.copy();
-	    	      }
-	    	    });
-	    	    pasteItem.addActionListener(new ActionListener() {
-	    	      public void actionPerformed(ActionEvent e) {	    	      	    	        	    
-	    	    	  RichTextBox.this.paste();
-	    	    	  setSize(getPreferredSize());
-	    	      } 
-	    	    });
+	    	copyItem.addActionListener(e2 -> RichTextBox.this.copy());
+	    	    pasteItem.addActionListener(e1 -> {
+                    RichTextBox.this.paste();
+                    setSize(getPreferredSize());
+                });
 	    
 		}
 		

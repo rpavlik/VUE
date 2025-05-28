@@ -268,36 +268,32 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		gbConstraints.weightx = 1;
 		
 		mapBasedSearchCheckBox.setFont(GUI.LabelFace);
-		mapBasedSearchCheckBox.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				if (mapBasedSearchCheckBox.isSelected())
-				{	field.setEditable(false);
-					field.setEnabled(false);}
-				else
-				{	
-					field.setText("");
-					field.setEnabled(true);
-					field.setEditable(true);
-					searchButton1.setEnabled(false);
-					searchButton2.setEnabled(false);
+		mapBasedSearchCheckBox.addActionListener(e -> {
+            if (mapBasedSearchCheckBox.isSelected())
+            {	field.setEditable(false);
+                field.setEnabled(false);}
+            else
+            {
+                field.setText("");
+                field.setEnabled(true);
+                field.setEditable(true);
+                searchButton1.setEnabled(false);
+                searchButton2.setEnabled(false);
 
-				}
-				LWSelection selection = VUE.getSelection();
-				if (mapBasedSearchCheckBox.isSelected() && !(selection.size() == 1 && selection.get(0) instanceof tufts.vue.LWNode))
-				{
-					field.setText(VueResources.getString("analyzeraction.selectnode"));
-				}
-				else if (mapBasedSearchCheckBox.isSelected() && (selection.size() == 1 && selection.get(0) instanceof tufts.vue.LWNode))
-				{
-					searchButton1.setEnabled(true);
-					searchButton2.setEnabled(true);
-				}
-				 
-					
-			}
-		});
+            }
+            LWSelection selection = VUE.getSelection();
+            if (mapBasedSearchCheckBox.isSelected() && !(selection.size() == 1 && selection.get(0) instanceof tufts.vue.LWNode))
+            {
+                field.setText(VueResources.getString("analyzeraction.selectnode"));
+            }
+            else if (mapBasedSearchCheckBox.isSelected() && (selection.size() == 1 && selection.get(0) instanceof tufts.vue.LWNode))
+            {
+                searchButton1.setEnabled(true);
+                searchButton2.setEnabled(true);
+            }
+
+
+        });
 		add(mapBasedSearchCheckBox,gbConstraints);
 		
 		gbConstraints.gridx = 0;
@@ -648,7 +644,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		 types.  Check these again the VUE set (based on Dublin Core).  Return the VUE names for
 		 all that match.
 		 */
-		java.util.Vector<java.util.Vector<String>> intersections = new java.util.Vector<java.util.Vector<String>>();
+		java.util.Vector<java.util.Vector<String>> intersections = new java.util.Vector<>();
 		
 		try {
 			org.osid.repository.Repository[] repositories = sourcesAndTypesManager.getRepositoriesToSearch();

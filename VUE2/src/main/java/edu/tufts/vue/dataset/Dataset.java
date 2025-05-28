@@ -126,28 +126,27 @@ public class Dataset {
 		map = new LWMap(getMapName(fileName));
 
  		// Must wait until XmlDataSource.isLoading() returns false before creating map.
-		timer = new Timer(100, new ActionListener() {
-			public void actionPerformed(ActionEvent event) {
-				try {
-			    	if (!datasource.isLoading()) {
-						timer.stop();
+		timer = new Timer(100, event -> {
+            try {
+                if (!datasource.isLoading()) {
+                    timer.stop();
 
-			    		List<LWComponent> nodes =  DataAction.makeRowNodes(datasource.getSchema());
+                    List<LWComponent> nodes =  DataAction.makeRowNodes(datasource.getSchema());
 
-			    		for(LWComponent component: nodes) {
-			    			map.add(component);
-			    		}
+                    for(LWComponent component: nodes) {
+                        map.add(component);
+                    }
 
-			    		LayoutAction.random.act(new LWSelection(nodes));
-			    	}
-				} catch(Exception ex) {
-					ex.printStackTrace();
-					timer.stop();
-				} finally {
-		    		// Call back to the listener to tell it the map is ready to be displayed.
-		    		createMapListener.actionPerformed(event);
-				}
-		}});
+                    LayoutAction.random.act(new LWSelection(nodes));
+                }
+            } catch(Exception ex) {
+                ex.printStackTrace();
+                timer.stop();
+            } finally {
+                // Call back to the listener to tell it the map is ready to be displayed.
+                createMapListener.actionPerformed(event);
+            }
+    });
 
 		timer.setInitialDelay(100);
 		timer.start();

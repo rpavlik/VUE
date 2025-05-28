@@ -67,15 +67,15 @@ public class LWSelection extends java.util.ArrayList<LWComponent>
     /** optional style in which to record style property changes that have been applied to the selection */
     private LWComponent mStyleRecord;
 
-    private final Set<LWContainer> mParents = new java.util.HashSet<LWContainer>() {
-            @Override
-            public boolean add(LWContainer parent) {
-                if (parent != null)
-                    return super.add(parent);
-                else
-                    return false;
-            }
-        };
+    private final Set<LWContainer> mParents = new java.util.HashSet<>() {
+        @Override
+        public boolean add(LWContainer parent) {
+            if (parent != null)
+                return super.add(parent);
+            else
+                return false;
+        }
+    };
     private final Multiset<Class> mTypes = HashMultiset.create();
     private List<LWComponent> mSecureList = null;
 

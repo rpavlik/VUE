@@ -311,10 +311,7 @@ public class SearchTextField extends JTextField implements FocusListener {
         textField.putClientProperty("JTextField.Search.FindPopup", popup);
         // use JTextField.Search.FindAction for an action instead of a pop-up when the spyglass is clicked
         // (e.g., re-run the search)
-        textField.putClientProperty("JTextField.Search.CancelAction", new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    setResetSettingsAction();
-                } });
+        textField.putClientProperty("JTextField.Search.CancelAction", (ActionListener) e -> setResetSettingsAction());
         textField.addMouseListener(MacMouseListener);
         textField.addKeyListener(SearchKeyListener);
     }

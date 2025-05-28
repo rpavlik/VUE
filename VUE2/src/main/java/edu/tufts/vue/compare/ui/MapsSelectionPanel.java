@@ -185,12 +185,8 @@ public class MapsSelectionPanel extends JPanel  {
                 revalidate();
             }
         });
-        VUE.getTabbedPane().addChangeListener(new ChangeListener()
-        {
-            public void stateChanged(javax.swing.event.ChangeEvent e)
-            {
-                //System.out.println("MSP: VUE tabbed pane change event " + e);
-            }
+        VUE.getTabbedPane().addChangeListener(e -> {
+            //System.out.println("MSP: VUE tabbed pane change event " + e);
         });
         
         VUE.getTabbedPane().addPropertyChangeListener(new PropertyChangeListener()
@@ -263,19 +259,17 @@ public class MapsSelectionPanel extends JPanel  {
         
         final JComboBox mergePropertyChoice = new JComboBox(MergePropertyChoices);
         
-        mergePropertyChoice.addItemListener(new ItemListener(){
-           public void itemStateChanged(ItemEvent ie) {
-               if (ie.getStateChange() == ItemEvent.SELECTED) {
-                        if (ie.getItem().equals(MergePropertyChoices[0])) Util.setMergeProperty(MP.LABEL);
-                   else if (ie.getItem().equals(MergePropertyChoices[1])) Util.setMergeProperty(MP.RESOURCE);
-                   else if (ie.getItem().equals(MergePropertyChoices[2])) Util.setMergeProperty(MP.TYPE);
-                   else if (ie.getItem().equals(MergePropertyChoices[3])) Util.setMergeProperty(MP.BOTH); // historical name
-                   else {
-                       System.err.println("MSP unknown choice: " + ie.getItem());
-                       Util.setMergeProperty(MP.LABEL);
-                   }
-               }
-           }
+        mergePropertyChoice.addItemListener(ie -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                     if (ie.getItem().equals(MergePropertyChoices[0])) Util.setMergeProperty(MP.LABEL);
+                else if (ie.getItem().equals(MergePropertyChoices[1])) Util.setMergeProperty(MP.RESOURCE);
+                else if (ie.getItem().equals(MergePropertyChoices[2])) Util.setMergeProperty(MP.TYPE);
+                else if (ie.getItem().equals(MergePropertyChoices[3])) Util.setMergeProperty(MP.BOTH); // historical name
+                else {
+                    System.err.println("MSP unknown choice: " + ie.getItem());
+                    Util.setMergeProperty(MP.LABEL);
+                }
+            }
         });
         
         mergePropertyChoice.setFont(tufts.vue.gui.GUI.LabelFace);

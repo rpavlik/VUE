@@ -99,28 +99,24 @@ public class LWHierarchyTree extends JPanel implements TreeModelListener
         
         //tree selection listener to keep track of the selected node 
         tree.addTreeSelectionListener(
-            new TreeSelectionListener() 
-            { 
-                public void valueChanged(TreeSelectionEvent e) 
-                {
+                e -> {
                     DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
-                    
+
                     //if there is no selected node
                     if (treeNode == null)
                       selectedNode = null;
-                                
-                    else 
+
+                    else
                     {
                         //retrieves the LWComponent associated with the selected tree node
                         selectedNode = (tufts.oki.hierarchy.HierarchyNode)treeNode.getUserObject();
                         LWComponent selectedComponent = selectedNode.getLWComponent();
-                        
+
                         //if the selected node is not an instance of LWMap
                         //if(!(selectedComponent instanceof LWMap))
                           //VUE.getSelection().setTo(selectedComponent);
                     }
                 }
-            }
         );
 
         JScrollPane scrollPane = new JScrollPane(tree);

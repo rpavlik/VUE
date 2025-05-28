@@ -182,19 +182,19 @@ public class LWGroup extends LWContainer
         final Collection<LWComponent> reparenting;
         
         if (true) {
-            reparenting = 
-            new HashSet<LWComponent>() {
-                @Override
-                public boolean add(LWComponent c) {
-                    //if (c instanceof LWLink && ((LWLink)c).isBound()) 
-                    //// don't add any links that are connected to anything: they'll reparent themselves
-                    if (c instanceof LWLink) {
-                        // don't add any links AT ALL for now -- safer -- see below problem comment
-                        return false;
-                    } else
-                        return super.add(c);
-                }
-            };
+            reparenting =
+                    new HashSet<>() {
+                        @Override
+                        public boolean add(LWComponent c) {
+                            //if (c instanceof LWLink && ((LWLink)c).isBound())
+                            //// don't add any links that are connected to anything: they'll reparent themselves
+                            if (c instanceof LWLink) {
+                                // don't add any links AT ALL for now -- safer -- see below problem comment
+                                return false;
+                            } else
+                                return super.add(c);
+                        }
+                    };
 
             reparenting.addAll(selection);
             

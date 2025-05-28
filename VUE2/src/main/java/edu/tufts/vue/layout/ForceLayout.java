@@ -84,13 +84,11 @@ public class ForceLayout extends Layout {
                 LWComponent head= link.getHead();
                 LWComponent tail = link.getTail();
                 if(repeatMap.containsKey( head)) {
-                    int nc= repeatMap.get(head);
-                    repeatMap.put(head, nc + 1);
+                    repeatMap.compute(head, (k, nc) -> nc + 1);
                     
                 }
                 if(repeatMap.containsKey(tail)) {
-                    int nc= repeatMap.get(tail);
-                    repeatMap.put(tail, nc + 1);
+                    repeatMap.compute(tail, (k, nc) -> nc + 1);
                 }
             }
         }

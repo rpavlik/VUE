@@ -1159,16 +1159,12 @@ public class PathwayTable extends JTable
 		else if (e.getSource().equals(playbackPresentation))
 		{
           	final PresentationTool presTool = PresentationTool.getTool();
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
-                VUE.toggleFullScreen(true);
-            }});
+            GUI.invokeAfterAWT(() -> VUE.toggleFullScreen(true));
             GUI.invokeAfterAWT(new Runnable() { public void run() {
                 //VueToolbarController.getController().setSelectedTool(presTool);
                 VUE.setActive(VueTool.class, this, presTool);
             }});
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
-                presTool.startPresentation();
-            }});
+            GUI.invokeAfterAWT(() -> presTool.startPresentation());
 		}
 		else if (e.getSource().equals(masterSlidePresentation))
 		{	
@@ -1210,9 +1206,9 @@ public class PathwayTable extends JTable
 		}
 		else if (e.getSource().equals(deleteEntry))
 		{
-		    GUI.invokeAfterAWT(new Runnable() { public void run() {
+		    GUI.invokeAfterAWT(() -> {
 		    	DeleteSlideDialog dsd = PathwayPanel.getDeleteSlideDialog();
-		        java.awt.Point p = java.awt.GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+		        Point p = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
                 p.x -= dsd.getWidth() / 2;
                 p.y -= dsd.getHeight() / 2;
                 dsd.setLocation(p);
@@ -1220,11 +1216,11 @@ public class PathwayTable extends JTable
                 {
                 	dsd.setVisible(true);
                 }
-                
+
                 if (dsd.getOkCanel())
                 	VUE.getActivePathway().remove(VUE.getActivePathway().getCurrentIndex());
-		    	
-            }});
+
+            });
 			   
 		}
 		repaint();

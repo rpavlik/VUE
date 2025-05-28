@@ -21,7 +21,9 @@ import edu.tufts.vue.rdf.*;
 import edu.tufts.vue.style.*;
 import edu.tufts.vue.ontology.*;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.datatransfer.*;
 import java.awt.geom.Rectangle2D;
@@ -31,11 +33,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
 //import javax.swing.DefaultListModel;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenuItem;
@@ -101,19 +105,16 @@ public class TypeList extends JList implements MouseListener,ActionListener {
         javax.swing.DefaultListSelectionModel selectionModel = new javax.swing.DefaultListSelectionModel();
         selectionModel.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         setSelectionModel(selectionModel);
-        selectionModel.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent e)
+        selectionModel.addListSelectionListener(e -> {
+            comp = createLWComponent(getSelectedValue());
+            OntologyBrowser browser = OntologyBrowser.getBrowser();
+            TypeList oldSelection = OntologyBrowser.getSelectedList();
+            if(oldSelection !=null && oldSelection != TypeList.this)
             {
-                comp = createLWComponent(getSelectedValue());
-                OntologyBrowser browser = OntologyBrowser.getBrowser();
-                TypeList oldSelection = OntologyBrowser.getSelectedList();
-                if(oldSelection !=null && oldSelection != TypeList.this)
-                {
-                    oldSelection.clearSelection();
-                    oldSelection.repaint();
-                }
-                OntologyBrowser.setSelectedList(TypeList.this);
+                oldSelection.clearSelection();
+                oldSelection.repaint();
             }
+            OntologyBrowser.setSelectedList(TypeList.this);
         });
         
         // probably always zero for now, see overriden setModel below
@@ -567,136 +568,131 @@ public class TypeList extends JList implements MouseListener,ActionListener {
     public void loadOntology(final URL ontologyURL,final URL cssURL,final org.osid.shared.Type ontType,
                              final OntologyBrowser browser,final tufts.vue.gui.Widget widget)
     {
-       Thread t = new Thread(){ 
-        
-         public void run()
-         {
-           
-          JLabel loadingLabelText = new JLabel(VueResources.getString("addLibrary.loading.label")); 
-          JLabel loadingLabelImage = new JLabel(tufts.vue.VueResources.getImageIcon("dsv.statuspanel.waitIcon"));
-          JPanel loadingLabel = new JPanel();
-          loadingLabel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-             loadingLabel.add(loadingLabelImage);
-          loadingLabel.add(loadingLabelText);
-          
-          //widget.removeAll();
-             
-          widget.add(loadingLabel,java.awt.BorderLayout.NORTH);
-          
-          try
-          {      
-            if(ontType.isEqual(OntologyType.RDFS_TYPE))
-              ontology = new RDFSOntology(ontologyURL.toString());
-            else if(ontType.isEqual(OntologyType.OWL_TYPE))
-              ontology = new OWLLOntology(ontologyURL.toString());
-            else{ // make a guess, but ontology population will return
-                 // without filling the types...
-              return;
-              //ontology = new RDFSOntology(ontologyURL.toString());
-            }
-            
-            OntManager.getOntManager().addOntology(ontologyURL,ontology);
-            
-            
-            try
-            {
-                browser.getViewer().getList().refresh();
-                browser.getViewer().getList().repaint();
-            }
-            catch(Exception e)
-            {
-              System.out.println("TypeList: exception while updating ontology browser list ui -- " + e);
-            }
-            
-            ontology.setEnabled(true);
-            //OntManager.getOntManager().getOntology(new URL(ontology.getBase())).setEnabled(true);
-            
-            if(cssURL !=null)
-            {
-              OntManager.getOntManager().populateStyledOntology(ontologyURL,
-                                                      cssURL,
-                                                      ontology);
-            }
-            else
-            {
-              edu.tufts.vue.ontology.OntManager.getOntManager().
-                      populateOntology(ontologyURL,ontology);
-            }
-          }
-          catch(Exception fnfe)
-          {
-              widget.remove(loadingLabel);
-              
-              System.out.println("load failure -- " + ontologyURL);
-              
-              if(DEBUG_LOCAL)
-              {
-                  System.out.println("load failure exception: " + fnfe);
-                  fnfe.printStackTrace();   
-              }
-              
-              JLabel fileNotFound = new JLabel(VueResources.getString("actionutil.filenotfound.title"));
-              if(!ontologyURL.toString().contains("file:"))
-              {
-                  fileNotFound.setText(VueResources.getString(VueResources.getString("actionutil.locationnotfound.tooltip")));
-              }
-              fileNotFound.setBorder(javax.swing.BorderFactory.createEmptyBorder(10,5,10,0));
-              widget.add(fileNotFound);
-          }
-                    
-          setModel(new OntologyTypeListModel(ontology));
+      Thread t = new Thread(() -> {
 
-          widget.setName(widget.getName().substring(7));
+        JLabel loadingLabelText = new JLabel(VueResources.getString("addLibrary.loading.label"));
+        JLabel loadingLabelImage = new JLabel(VueResources.getImageIcon("dsv.statuspanel.waitIcon"));
+        JPanel loadingLabel = new JPanel();
+        loadingLabel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        loadingLabel.add(loadingLabelImage);
+        loadingLabel.add(loadingLabelText);
 
-          widget.remove(loadingLabel);
-          //repaint();
-          //browser.addTypeList(TypeList.this,ontologyURL.getFile());
-          
-          // produces a lot of switching between ontologies on load of 
-          // browser -- re-enable once there is a parameter to skip this
-          // step on load and/or if selecting the new ontology is needed
-          /*if(browser !=null && browser.getViewer() != null && browser.getViewer().getList() !=null && ontology != null)
-          {    
-            browser.getViewer().getList().setSelectedValue(ontology,true);
-          }*/
-          
-          
-          //clearSelection();
-          //setSelectedIndex(-1);
-          
+         // widget.removeAll();
+
+         widget.add(loadingLabel, BorderLayout.NORTH);
+
+         try
+        {
+          if(ontType.isEqual(OntologyType.RDFS_TYPE))
+            ontology = new RDFSOntology(ontologyURL.toString());
+          else if(ontType.isEqual(OntologyType.OWL_TYPE))
+            ontology = new OWLLOntology(ontologyURL.toString());
+          else{ // make a guess, but ontology population will return
+               // without filling the types...
+            return;
+            //ontology = new RDFSOntology(ontologyURL.toString());
+          }
+
+          OntManager.getOntManager().addOntology(ontologyURL,ontology);
+
+
           try
-          {        
-            OntManager.getOntManager().getOntology(new URL(ontology.getBase())).setEnabled(true);
-          }
-          catch(java.net.MalformedURLException mue)
           {
-              System.out.println("TypeList: malformed url exception attempting to enable ontology " + mue);
-          }
-          catch(Exception npe)
-          {
-              System.out.println("TypeList: Exception, likely npe enabling ontology  -- " + npe);
-          }
-          
-          /*try
-          {
-           // browser.getViewer().getList().updateUI();
-           //   browser.getViewer().getList().repaint();
-              
-              
               browser.getViewer().getList().refresh();
               browser.getViewer().getList().repaint();
           }
           catch(Exception e)
           {
             System.out.println("TypeList: exception while updating ontology browser list ui -- " + e);
-          } */
-          //browser.getViewer().repaint();
-          //browser.revalidate();
-         // browser.repaint();
-          edu.tufts.vue.ontology.OntManager.getOntManager().save();
-         }
-         
-       };
+          }
+
+          ontology.setEnabled(true);
+          //OntManager.getOntManager().getOntology(new URL(ontology.getBase())).setEnabled(true);
+
+          if(cssURL !=null)
+          {
+            OntManager.getOntManager().populateStyledOntology(ontologyURL,
+                                                    cssURL,
+                                                    ontology);
+          }
+          else
+          {
+            OntManager.getOntManager().
+                    populateOntology(ontologyURL,ontology);
+          }
+        }
+        catch(Exception fnfe)
+        {
+            widget.remove(loadingLabel);
+
+            System.out.println("load failure -- " + ontologyURL);
+
+            if(DEBUG_LOCAL)
+            {
+                System.out.println("load failure exception: " + fnfe);
+                fnfe.printStackTrace();
+            }
+
+            JLabel fileNotFound = new JLabel(VueResources.getString("actionutil.filenotfound.title"));
+            if(!ontologyURL.toString().contains("file:"))
+            {
+                fileNotFound.setText(VueResources.getString(VueResources.getString("actionutil.locationnotfound.tooltip")));
+            }
+            fileNotFound.setBorder(BorderFactory.createEmptyBorder(10,5,10,0));
+            widget.add(fileNotFound);
+        }
+
+        setModel(new OntologyTypeListModel(ontology));
+
+        widget.setName(widget.getName().substring(7));
+
+        widget.remove(loadingLabel);
+        //repaint();
+        //browser.addTypeList(TypeList.this,ontologyURL.getFile());
+
+        // produces a lot of switching between ontologies on load of
+        // browser -- re-enable once there is a parameter to skip this
+        // step on load and/or if selecting the new ontology is needed
+        /*if(browser !=null && browser.getViewer() != null && browser.getViewer().getList() !=null && ontology != null)
+        {
+          browser.getViewer().getList().setSelectedValue(ontology,true);
+        }*/
+
+
+        //clearSelection();
+        //setSelectedIndex(-1);
+
+        try
+        {
+          OntManager.getOntManager().getOntology(new URL(ontology.getBase())).setEnabled(true);
+        }
+        catch(MalformedURLException mue)
+        {
+            System.out.println("TypeList: malformed url exception attempting to enable ontology " + mue);
+        }
+        catch(Exception npe)
+        {
+            System.out.println("TypeList: Exception, likely npe enabling ontology  -- " + npe);
+        }
+
+        /*try
+        {
+         // browser.getViewer().getList().updateUI();
+         //   browser.getViewer().getList().repaint();
+
+
+            browser.getViewer().getList().refresh();
+            browser.getViewer().getList().repaint();
+        }
+        catch(Exception e)
+        {
+          System.out.println("TypeList: exception while updating ontology browser list ui -- " + e);
+        } */
+        //browser.getViewer().repaint();
+        //browser.revalidate();
+       // browser.repaint();
+        OntManager.getOntManager().save();
+       });
        
        t.start();
         

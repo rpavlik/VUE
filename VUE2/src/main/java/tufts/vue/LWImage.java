@@ -264,12 +264,12 @@ public class LWImage extends LWComponent
 
             //Util.printStackTrace("SELECTED WITH ERROR " + this);
             
-            addCleanupTask(new Runnable() { public void run() {
+            addCleanupTask(() -> {
                 if (hasResource() && VUE.getSelection().only() == LWImage.this)
                     // TODO: would need an UNDO-MARK for this, so really
                     // this wants to trigger our new LWNode image0 replacement code
                     initRef(getResource());
-            }});
+            });
         }
     }
     

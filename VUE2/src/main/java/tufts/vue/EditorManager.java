@@ -143,7 +143,7 @@ public class EditorManager
         // make sure it runs in AWT, as will be scanning AWT heirarchy, and may be
         // interrogating java.awt.Components
         Log.debug("install...");
-        tufts.vue.gui.GUI.invokeOnEDT(new Runnable() { public void run() { _install(); }});
+        tufts.vue.gui.GUI.invokeOnEDT(() -> _install());
     }
     
     /*
@@ -175,9 +175,7 @@ public class EditorManager
     /** find all LWEditors in the AWT hierarchy and register them */
     public static synchronized void refresh() {
         // make sure it runs on the AWT EDT, as this will be scanning the AWT heirarchy
-        tufts.vue.gui.GUI.invokeOnEDT(new Runnable() { public void run() {
-            singleton.findEditors();
-        }});
+        tufts.vue.gui.GUI.invokeOnEDT(() -> singleton.findEditors());
     }
 
     private EditorManager() {

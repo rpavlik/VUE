@@ -185,257 +185,214 @@ public class FontEditorPanel extends JPanel
 //                 }
 //             });
         
-        fontSizeActionWrapper = new ActionListener(){
+        fontSizeActionWrapper = e -> {
+            if (suspendItemListeners) return;
+            if (EditorManager.isEditorLoading()) return;
 
-			public void actionPerformed(ActionEvent e) {
-				if (suspendItemListeners) return;
-				if (EditorManager.isEditorLoading()) return;
+            fontSizeAction.actionPerformed(e);
 
-				fontSizeAction.actionPerformed(e);
-				
-			}
-        	   
-           };
+        };
            
-           fontFamilyActionWrapper = new ActionListener(){
+           fontFamilyActionWrapper = e -> {
 
-   			public void actionPerformed(ActionEvent e) {
+            if (suspendItemListeners) return;
+            if (EditorManager.isEditorLoading()) return;
 
-				if (suspendItemListeners) return;
-				if (EditorManager.isEditorLoading()) return;
+               fontFamilyAction.actionPerformed(e);
 
-   				fontFamilyAction.actionPerformed(e);
-   				
-   			}
            };
               
-           paraAlignRightActionWrapper = new ActionListener(){
+           paraAlignRightActionWrapper = e -> {
 
-      			public void actionPerformed(ActionEvent e) {
+             if (suspendItemListeners) return;
+             if (EditorManager.isEditorLoading()) return;
 
-    				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
+               paraAlignRightAction.actionPerformed(e);
 
-      				paraAlignRightAction.actionPerformed(e);
-      				
-      		}              	  
-           };
+};
 
-           paraAlignLeftActionWrapper = new ActionListener(){
+           paraAlignLeftActionWrapper = e -> {
 
-           			public void actionPerformed(ActionEvent e) {
+            if (suspendItemListeners) return;
+            if (EditorManager.isEditorLoading()) return;
 
-        				if (suspendItemListeners) return;
-        				if (EditorManager.isEditorLoading()) return;
+            paraAlignLeftAction.actionPerformed(e);
 
-        				paraAlignLeftAction.actionPerformed(e);
-           				
-      			}
-             };
+      };
 
-             paraAlignCenterActionWrapper = new ActionListener(){
+             paraAlignCenterActionWrapper = e -> {
 
-            	 public void actionPerformed(ActionEvent e) {
+                 if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-     				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
+                 paraAlignCenterAction.actionPerformed(e);
+};
 
-            		 paraAlignCenterAction.actionPerformed(e);
-                }
-             };
+             toggleBulletsActionWrapper = e -> {
 
-             toggleBulletsActionWrapper = new ActionListener(){
+                 if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-            	 public void actionPerformed(ActionEvent e) {
+                 toggleBulletsAction.actionPerformed(e);
+};
 
-     				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
+             toggleNumbersActionWrapper = e -> {
 
-     				toggleBulletsAction.actionPerformed(e);
-                }
-             };
+                 if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-             toggleNumbersActionWrapper = new ActionListener(){
+toggleNumbersAction.actionPerformed(e);
+};
 
-            	 public void actionPerformed(ActionEvent e) {
+             richBoldActionWrapper = e -> {
 
-     				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
-                
-                    toggleNumbersAction.actionPerformed(e);
-                }
-             };
+                 if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-             richBoldActionWrapper = new ActionListener(){
+                 richBoldAction.actionPerformed(e);
+};
 
-            	 public void actionPerformed(ActionEvent e) {
+             richUnderlineActionWrapper = e -> {
 
-     				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
+                 if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-            		 richBoldAction.actionPerformed(e);
-                }
-             };
-
-             richUnderlineActionWrapper = new ActionListener(){
-
-            	 public void actionPerformed(ActionEvent e) {
-                
-     				if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;                              
-                        		
-                    richUnderlineAction.actionPerformed(e);
-                }
-             };
+richUnderlineAction.actionPerformed(e);
+};
              
-             richItalicActionWrapper = new ActionListener(){
+             richItalicActionWrapper = e -> {
 
-            	 public void actionPerformed(ActionEvent e) {
+                if (suspendItemListeners) return;
+                if (EditorManager.isEditorLoading()) return;
 
-            		if (suspendItemListeners) return;
-    				if (EditorManager.isEditorLoading()) return;
-
-    				richItalicAction.actionPerformed(e);
-                }
-             };
+                richItalicAction.actionPerformed(e);
+};
 
 
         /* LWText ActionListeners Start */
        
-        globalBoldListener = new ActionListener(){
-            
-        	public void actionPerformed(ActionEvent fe) 
-        	{
-        		if (lwtext == null)
-        			return;
-        		if (EditorManager.isEditorLoading())
-        			return;
-        		//System.out.println("BOLD : " + countf++);
-        		lwtext.richLabelBox.selectAll();
-        		
-        		//Do Some basic set up.
-        		SimpleAttributeSet set = new SimpleAttributeSet();
-        		SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
-        		Element charElem = srcDoc.getCharacterElement(1);
-        	    AttributeSet charSet = charElem.getAttributes();
-        	    Enumeration characterAttributeEnum = charSet.getAttributeNames();
-        	  
-        	    boolean isBold = false;
-        	    while (characterAttributeEnum.hasMoreElements())
-        	    {
-        	      	Object o = characterAttributeEnum.nextElement();
-        	      	
-        	    	if ((o.toString().equals("font-weight") && charSet.getAttribute(o).toString().equals("bold")) || o.toString().equals("b"))
-            		{	
-        	    		isBold = true;
-            		}
-        	    }
-        	    String bold = !isBold ? "bold" : "normal";
-        	    //System.out.println("bold? : "+ !isBold + " ,, " + bold);
-        		Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_WEIGHT,bold);
-        	//	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
-        		lwtext.richLabelBox.applyAttributes(set, false);
-        		lwtext.richLabelBox.select(0,0);
-        	
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
-         		   if (lwtext.getParent() !=null)
-         	    		lwtext.getParent().layout();         		           		           		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);            		   
-         		
-         		
-        	}
-         };  
-         globalItalicListener = new ActionListener(){
-             
-         	public void actionPerformed(ActionEvent fe) 
-         	{
-         		
-         		if (lwtext == null)
-        			return;
-         		if (EditorManager.isEditorLoading())
-        			return;
-        		//System.out.println("BOLD : " + countf++);
-        		lwtext.richLabelBox.selectAll();
-        		
-        		//Do Some basic set up.
-        		SimpleAttributeSet set = new SimpleAttributeSet();
-        		SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
-        		Element charElem = srcDoc.getCharacterElement(1);
-        	    AttributeSet charSet = charElem.getAttributes();
-        	    Enumeration characterAttributeEnum = charSet.getAttributeNames();
-        	  
-        	    boolean isBold = false;
-        	    while (characterAttributeEnum.hasMoreElements())
-        	    {
-        	      	Object o = characterAttributeEnum.nextElement();
-        	      	
-        	    	if ((o.toString().equals("font-style") && charSet.getAttribute(o).toString().equals("italic")) || o.toString().equals("i"))
-            		{	
-        	    		isBold = true;
-            		}
-        	    }
-        	    String bold = !isBold ? "italic" : "normal";
-        	    //System.out.println("bold? : "+ !isBold + " ,, " + bold);
-        		Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_STYLE,bold);
-        	//	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
-        		lwtext.richLabelBox.applyAttributes(set, false);
-        		lwtext.richLabelBox.select(0,0);
-        	
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
-         		   if (lwtext.getParent() !=null)
-         	    		lwtext.getParent().layout();         		           		           		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);       
-          		
-         	}
-          };  
-          globalUnderlineListener = new ActionListener(){
-              
-          	public void actionPerformed(ActionEvent fe) 
-          	{
-          		
-          		if (lwtext == null)
-        			return;
-          		if (EditorManager.isEditorLoading())
-        			return;
-        		//System.out.println("BOLD : " + countf++);
-        		lwtext.richLabelBox.selectAll();
-        		
-        		//Do Some basic set up.
-        		SimpleAttributeSet set = new SimpleAttributeSet();
-        		SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
-        		Element charElem = srcDoc.getCharacterElement(1);
-        	    AttributeSet charSet = charElem.getAttributes();
-        	    Enumeration characterAttributeEnum = charSet.getAttributeNames();
-        	  
-        	    boolean isBold = false;
-        	    while (characterAttributeEnum.hasMoreElements())
-        	    {
-        	      	Object o = characterAttributeEnum.nextElement();
-        	      	
-        	    	if ((o.toString().equals("text-decoration") && charSet.getAttribute(o).toString().equals("underline")) || o.toString().equals("u"))
-            		{	
-        	    		isBold = true;
-            		}
-        	    }
-        	    String bold = !isBold ? "underline" : "normal";
-        	    //System.out.println("bold? : "+ !isBold + " ,, " + bold);
-        		Util.styleSheet().addCSSAttribute(set,CSS.Attribute.TEXT_DECORATION,bold);
-        	//	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
-        		lwtext.richLabelBox.applyAttributes(set, false);
-        		lwtext.richLabelBox.select(0,0);
-        	
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
-         		   if (lwtext.getParent() !=null)
-         	    		lwtext.getParent().layout();         		           		           		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);       
-          	}
-           };
+        globalBoldListener = fe -> {
+            if (lwtext == null)
+                return;
+            if (EditorManager.isEditorLoading())
+                return;
+            //System.out.println("BOLD : " + countf++);
+            lwtext.richLabelBox.selectAll();
+
+            //Do Some basic set up.
+            SimpleAttributeSet set = new SimpleAttributeSet();
+            SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
+            Element charElem = srcDoc.getCharacterElement(1);
+            AttributeSet charSet = charElem.getAttributes();
+            Enumeration characterAttributeEnum = charSet.getAttributeNames();
+
+            boolean isBold = false;
+            while (characterAttributeEnum.hasMoreElements())
+            {
+                  Object o = characterAttributeEnum.nextElement();
+
+                if ((o.toString().equals("font-weight") && charSet.getAttribute(o).toString().equals("bold")) || o.toString().equals("b"))
+                {
+                    isBold = true;
+                }
+            }
+            String bold = !isBold ? "bold" : "normal";
+            //System.out.println("bold? : "+ !isBold + " ,, " + bold);
+            Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_WEIGHT,bold);
+        //	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
+            lwtext.richLabelBox.applyAttributes(set, false);
+            lwtext.richLabelBox.select(0,0);
+
+            lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
+                if (lwtext.getParent() !=null)
+                     lwtext.getParent().layout();
+
+             lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
+
+
+        };
+         globalItalicListener = fe -> {
+
+             if (lwtext == null)
+                return;
+             if (EditorManager.isEditorLoading())
+                return;
+            //System.out.println("BOLD : " + countf++);
+            lwtext.richLabelBox.selectAll();
+
+            //Do Some basic set up.
+            SimpleAttributeSet set = new SimpleAttributeSet();
+            SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
+            Element charElem = srcDoc.getCharacterElement(1);
+            AttributeSet charSet = charElem.getAttributes();
+            Enumeration characterAttributeEnum = charSet.getAttributeNames();
+
+            boolean isBold = false;
+            while (characterAttributeEnum.hasMoreElements())
+            {
+                  Object o = characterAttributeEnum.nextElement();
+
+                if ((o.toString().equals("font-style") && charSet.getAttribute(o).toString().equals("italic")) || o.toString().equals("i"))
+                {
+                    isBold = true;
+                }
+            }
+            String bold = !isBold ? "italic" : "normal";
+            //System.out.println("bold? : "+ !isBold + " ,, " + bold);
+            Util.styleSheet().addCSSAttribute(set,CSS.Attribute.FONT_STYLE,bold);
+        //	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
+            lwtext.richLabelBox.applyAttributes(set, false);
+            lwtext.richLabelBox.select(0,0);
+
+            lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
+                if (lwtext.getParent() !=null)
+                     lwtext.getParent().layout();
+
+             lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
+
+         };
+          globalUnderlineListener = fe -> {
+
+              if (lwtext == null)
+                return;
+              if (EditorManager.isEditorLoading())
+                return;
+            //System.out.println("BOLD : " + countf++);
+            lwtext.richLabelBox.selectAll();
+
+            //Do Some basic set up.
+            SimpleAttributeSet set = new SimpleAttributeSet();
+            SHTMLDocument srcDoc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
+            Element charElem = srcDoc.getCharacterElement(1);
+            AttributeSet charSet = charElem.getAttributes();
+            Enumeration characterAttributeEnum = charSet.getAttributeNames();
+
+            boolean isBold = false;
+            while (characterAttributeEnum.hasMoreElements())
+            {
+                  Object o = characterAttributeEnum.nextElement();
+
+                if ((o.toString().equals("text-decoration") && charSet.getAttribute(o).toString().equals("underline")) || o.toString().equals("u"))
+                {
+                    isBold = true;
+                }
+            }
+            String bold = !isBold ? "underline" : "normal";
+            //System.out.println("bold? : "+ !isBold + " ,, " + bold);
+            Util.styleSheet().addCSSAttribute(set,CSS.Attribute.TEXT_DECORATION,bold);
+        //	set.addAttribute(HTML.Attribute.TEXT_WEIGHT, );
+            lwtext.richLabelBox.applyAttributes(set, false);
+            lwtext.richLabelBox.select(0,0);
+
+            lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
+                if (lwtext.getParent() !=null)
+                     lwtext.getParent().layout();
+
+             lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
+          };
         globalSizeListener = new ActionListener(){
         
         	public void actionPerformed(ActionEvent fe) 
@@ -471,37 +428,34 @@ public class FontEditorPanel extends JPanel
         	}
          };
             		   
-          globalFaceListener = new ActionListener(){ 
-          	public void actionPerformed(ActionEvent fe) 
-          	{          		
-          		if (suspendItemListeners)
-        			return;
-        		
-          		if (lwtext == null)
-        			return;
-          		if (EditorManager.isEditorLoading())
-        			return;
-          		lwtext.richLabelBox.selectAll();
-        		SHTMLDocument doc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
-        		SimpleAttributeSet set = new SimpleAttributeSet();
-                Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_FAMILY,
-            				 mFontCombo.getSelectedItem().toString());
-                set.addAttribute(HTML.Attribute.FACE, mFontCombo.getSelectedItem().toString());
-                lwtext.richLabelBox.applyAttributes(set, false);
-                
-        		lwtext.richLabelBox.select(0,0);
-       
-        		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-         		
-         		   if (lwtext.getParent() !=null)
-         	    		lwtext.getParent().layout();
-         		  
-         		  
-         		 
-      	        
-         		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint); 
-          	}
-           };
+          globalFaceListener = fe -> {
+              if (suspendItemListeners)
+                return;
+
+              if (lwtext == null)
+                return;
+              if (EditorManager.isEditorLoading())
+                return;
+              lwtext.richLabelBox.selectAll();
+            SHTMLDocument doc = (SHTMLDocument)lwtext.richLabelBox.getDocument();
+            SimpleAttributeSet set = new SimpleAttributeSet();
+Util.styleSheet().addCSSAttribute(set, CSS.Attribute.FONT_FAMILY,
+                         mFontCombo.getSelectedItem().toString());
+set.addAttribute(HTML.Attribute.FACE, mFontCombo.getSelectedItem().toString());
+lwtext.richLabelBox.applyAttributes(set, false);
+
+            lwtext.richLabelBox.select(0,0);
+
+            lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
+                if (lwtext.getParent() !=null)
+                     lwtext.getParent().layout();
+
+
+
+
+             lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
+          };
         /* End LWText ActionListeners */
         //mFontCombo.setBorder(new javax.swing.border.LineBorder(Color.green, 2));
         //mFontCombo.setBackground(Color.white); // handled by L&F tweaks in VUE.java
@@ -1215,56 +1169,54 @@ public class FontEditorPanel extends JPanel
      * just ignore it.
      */
     private final PropertyChangeListener RichTextColorChangeListener =
-        new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent e) {
+            e -> {
 
                 if (!(e instanceof LWPropertyChangeEvent))
                     return;
-                
+
                 final RichTextBox activeRTB = (RichTextBox) VUE.getActive(RichTextBox.class);
-                
-                
+
+
                 if (activeRTB == null && lwtext == null) {
                     // no problem: just ignore if there's no active edit
                     //tufts.Util.printStackTrace("FEP propertyChange: no active RichTextBox: " + e);
                     return;
                 }
-                
+
                 if (lwtext !=null)
                 	lwtext.richLabelBox.selectAll();
-                
-               
+
+
                 final Color color = (Color) e.getNewValue();
                 final SimpleAttributeSet set = new SimpleAttributeSet();
                 final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
                 toggleBulletsAction.setColor(colorString);
                 toggleNumbersAction.setColor(colorString);
                 Util.styleSheet().addCSSAttribute(set, CSS.Attribute.COLOR, colorString);
-                
+
                 set.addAttribute(HTML.Attribute.COLOR, colorString);
                 if (activeRTB != null)
                 	activeRTB.applyAttributes(set, false);
                 else
                 	lwtext.richLabelBox.applyAttributes(set, false);
-                
+
                 if (lwtext !=null)
                 {
                 	lwtext.richLabelBox.select(0,0);
-                    
+
                 	lwtext.richLabelBox.select(0,0);
             		//lwtext.setLabel0(lwtext.richLabelBox.getRichText(), false);
-            		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());        		        	         		
-             		
+            		lwtext.richLabelBox.setSize(lwtext.richLabelBox.getPreferredSize());
+
              		   if (lwtext.getParent() !=null)
              	    		lwtext.getParent().layout();
-             		  
-             		  
-             		 
-          	        
-             		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint); 
+
+
+
+
+             		lwtext.notify(lwtext.richLabelBox, LWKey.Repaint);
                 }
-            }
-        };
+            };
         
     private void setEditorPanes(RichTextBox activeText)
     {
@@ -1482,20 +1434,17 @@ public class FontEditorPanel extends JPanel
     }
     public void clearAlignmentSelection()
     {
-    	SwingUtilities.invokeLater(new Runnable() {
-    		public void run()
-    		{
-    			buttonGroup.remove(mLeftAlignButton);
-    			buttonGroup.remove(mCenterAlignButton);
-    			buttonGroup.remove(mRightAlignButton);
-    			mLeftAlignButton.setSelected(false);
-    			mCenterAlignButton.setSelected(false);
-    			mRightAlignButton.setSelected(false);
-    			buttonGroup.add(mLeftAlignButton);
-    			buttonGroup.add(mCenterAlignButton);
-    			buttonGroup.add(mRightAlignButton);
-    		}
-    	});
+    	SwingUtilities.invokeLater(() -> {
+            buttonGroup.remove(mLeftAlignButton);
+            buttonGroup.remove(mCenterAlignButton);
+            buttonGroup.remove(mRightAlignButton);
+            mLeftAlignButton.setSelected(false);
+            mCenterAlignButton.setSelected(false);
+            mRightAlignButton.setSelected(false);
+            buttonGroup.add(mLeftAlignButton);
+            buttonGroup.add(mCenterAlignButton);
+            buttonGroup.add(mRightAlignButton);
+        });
     }
     private static final boolean isRichTextActive = false;
   
@@ -1811,12 +1760,7 @@ public class FontEditorPanel extends JPanel
 	
 	  public void caretUpdate(final CaretEvent e) {
 		 
-		      EventQueue.invokeLater(new Runnable(){
-
-		            public void run() {
-		                updateFormatControls(e);
-		            }            
-		        });		  
+		      EventQueue.invokeLater(() -> updateFormatControls(e));
 		  }
 
 	public void componentHidden(ComponentEvent arg0) {

@@ -573,17 +573,13 @@ public class Actions implements VueConstants
         final LWSelection savedSelection = VUE.getSelection().clone();
         // activating the presentation tool is going to clear the selection,
         // so we need to save it here and then pass it to startPresentation.
-        
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
-            VUE.toggleFullScreen(true);
-        }});
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
-            //VueToolbarController.getController().setSelectedTool(presTool);
+
+        GUI.invokeAfterAWT(() -> VUE.toggleFullScreen(true));
+        GUI.invokeAfterAWT(() -> {
+            // VueToolbarController.getController().setSelectedTool(presTool);
             VUE.setActive(VueTool.class, source, presTool);
-        }});
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
-            presTool.startPresentation(savedSelection);
-        }});
+        });
+        GUI.invokeAfterAWT(() -> presTool.startPresentation(savedSelection));
     }
                 
     
@@ -3564,19 +3560,19 @@ public class Actions implements VueConstants
             protected boolean enabled() { return true; }
             public void act() 
             {
-            	GUI.reloadGraphicsInfo();
-            	GUI.invokeAfterAWT(new Runnable() { public void run() {
-            		DockWindow[] acrossTop = new DockWindow[VUE.acrossTop.length];
-            		System.arraycopy(VUE.acrossTop, 0, acrossTop, 0, VUE.acrossTop.length);
-            		//acrossTop[VUE.acrossTop.length] = VUE.getMergeMapsDock();
-            		//acrossTop[VUE.acrossTop.length+1] = VUE.getFormatDock();
-            		//acrossTop[VUE.acrossTop.length+1] = VUE.getInteractionToolsDock();
-            		VUE.getFormatDock().setLocation(150,150);
-            		VUE.getMergeMapsDock().setLocation(150,150);
-            		VUE.assignDefaultPositions(acrossTop);
-            	}});
-            }
-        };
+                    GUI.reloadGraphicsInfo();
+                    GUI.invokeAfterAWT(() -> {
+                        DockWindow[] acrossTop = new DockWindow[VUE.acrossTop.length];
+                        System.arraycopy(VUE.acrossTop, 0, acrossTop, 0, VUE.acrossTop.length);
+                        // acrossTop[VUE.acrossTop.length] = VUE.getMergeMapsDock();
+                        // acrossTop[VUE.acrossTop.length+1] = VUE.getFormatDock();
+                        // acrossTop[VUE.acrossTop.length+1] = VUE.getInteractionToolsDock();
+                        VUE.getFormatDock().setLocation(150, 150);
+                        VUE.getMergeMapsDock().setLocation(150, 150);
+                        VUE.assignDefaultPositions(acrossTop);
+                    });
+                }
+            };
     /** move the input focus to the main-window search box */
     public static final VueAction FocusToSearchField =
     new VueAction(local("dockWindow.search.title"), keyStroke(KeyEvent.VK_F, COMMAND)) {
@@ -4252,9 +4248,7 @@ public class Actions implements VueConstants
 
             if (newItem.supportsUserLabel()) {
                 // Just in case, do this later:
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    viewer.activateLabelEdit(newItem);
-                }});
+                GUI.invokeAfterAWT(() -> viewer.activateLabelEdit(newItem));
             }
 
             return newItem;

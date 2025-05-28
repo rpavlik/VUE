@@ -702,14 +702,14 @@ public class WidgetStack extends Widget
                     final JScrollPane sp = (JScrollPane) SwingUtilities.getAncestorOfClass(JScrollPane.class, this);
                     if (sp != null) {
                         sp.getVerticalScrollBar().setValueIsAdjusting(true);
-                        GUI.invokeAfterAWT(new Runnable() { public void run() {
+                        GUI.invokeAfterAWT(() -> {
                             // Wait for scroll-bar to appear and/or adjust after
                             // we're made visible before doing this
                             scrollRectToVisible(bounds);
                             sp.getVerticalScrollBar().setValueIsAdjusting(false);
                             //_forcePrefSize=false;
                             if (DEBUG.WIDGET) out("DELAYED SCROLL COMPLETE");
-                        }});
+                        });
                     }
                 }
             }
@@ -798,9 +798,7 @@ public class WidgetStack extends Widget
         }
 
         private void updateLockingStateLater() {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
-                updateLockingState();
-            }});
+            GUI.invokeAfterAWT(() -> updateLockingState());
         }
 
         private void setWidgetHidden(boolean hide) {
@@ -1195,13 +1193,7 @@ public class WidgetStack extends Widget
 		public void mouseClicked(MouseEvent arg0) {
 			if (iconChar != null)
 			{
-				GUI.invokeAfterAWT(new Runnable()
-	    		{
-	    			public void run()
-	    			{
-	    				setIcon(VueResources.getImageIcon(iconChar+".raw"));		
-	    			}
-	    		});
+				GUI.invokeAfterAWT(() -> setIcon(VueResources.getImageIcon(iconChar+".raw")));
 			}
 			
 		}
@@ -1219,13 +1211,7 @@ public class WidgetStack extends Widget
 		public void mouseEntered(MouseEvent arg0) {		
 			if (iconChar != null)
 			{
-				GUI.invokeAfterAWT(new Runnable()
-	    		{
-	    			public void run()
-	    			{
-	    				setIcon(VueResources.getImageIcon(iconChar+".hover"));		
-	    			}
-	    		});
+				GUI.invokeAfterAWT(() -> setIcon(VueResources.getImageIcon(iconChar+".hover")));
 			}
 				
 			
@@ -1235,13 +1221,7 @@ public class WidgetStack extends Widget
 		public void mouseExited(MouseEvent arg0) {
 			if (iconChar != null)
 			{
-				GUI.invokeAfterAWT(new Runnable()
-	    		{
-	    			public void run()
-	    			{
-	    				setIcon(VueResources.getImageIcon(iconChar+".raw"));		
-	    			}
-	    		});
+				GUI.invokeAfterAWT(() -> setIcon(VueResources.getImageIcon(iconChar+".raw")));
 			}
 			
 		}                

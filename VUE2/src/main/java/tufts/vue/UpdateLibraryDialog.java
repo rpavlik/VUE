@@ -353,7 +353,7 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
 					try {
 						GUI.activateWaitCursor();
 						this.newDataSource.setConfiguration(cui.getProperties());
-						GUI.invokeAfterAWT(new Runnable() { public void run() {
+						GUI.invokeAfterAWT(() -> {
 							try {
 								synchronized (dataSourceManager) {
 									dataSourceManager.save();
@@ -361,7 +361,7 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
 							} catch (Throwable t) {
 								System.out.println(t.getMessage());
 							}
-						}});
+						});
 						
 					} catch (Throwable t2) {
 						
@@ -410,10 +410,7 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
             repaint();
             int ONE_TNTH_SECOND = 100;
             
-            timer = new Timer(ONE_TNTH_SECOND, new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    repaint();
-                }});
+            timer = new Timer(ONE_TNTH_SECOND, evt -> repaint());
 			timer.start();
 			
 			UpdateDSThread t = new UpdateDSThread();

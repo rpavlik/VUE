@@ -97,8 +97,8 @@ public class DataSourceViewer extends ContentViewer
     private final org.osid.OsidContext context = new org.osid.OsidContext();
     //org.osid.registry.Provider checked[];
     
-    private final java.util.List<SearchThread> mSearchThreads = java.util.Collections.synchronizedList(new java.util.LinkedList<SearchThread>());
-    private final java.util.List<MapBasedSearchThread> mMapBasedSearchThreads = java.util.Collections.synchronizedList(new java.util.LinkedList<DataSourceViewer.MapBasedSearchThread>());
+    private final java.util.List<SearchThread> mSearchThreads = java.util.Collections.synchronizedList(new java.util.LinkedList<>());
+    private final java.util.List<MapBasedSearchThread> mMapBasedSearchThreads = java.util.Collections.synchronizedList(new java.util.LinkedList<>());
 
     private static volatile DataSourceViewer singleton;
     
@@ -386,13 +386,23 @@ public class DataSourceViewer extends ContentViewer
         //dataSourceList.addKeyListener(this); // not currently used
         // WORKING: commented out
         //librariesDockWindow.setVisible(true); // try to make menu appear
-        dataSourceList.addListSelectionListener(new ListSelectionListener() {
-            public void valueChanged(ListSelectionEvent e) {
-                if (DEBUG.KEYS || DEBUG.EVENTS) Log.debug("valueChanged: " + e);
-                Object o = ((JList)e.getSource()).getSelectedValue();
-                if (o !=null) {
-                    // for the moment, we are doing double work to keep old data sources
-                    if (o instanceof tufts.vue.DataSource) {
+        dataSourceList.addListSelectionListener(e -> {
+            if (DEBUG.KEYS || DEBUG.EVENTS) Log.debug("valueChanged: " + e);
+            Object o = ((JList)e.getSource()).getSelectedValue();
+            if (o !=null) {
+                // for the moment, we are doing double work to keep old data sources
+                if (o instanceof DataSource) {
+                    DataSource ds = (DataSource)o;
+                    DataSourceViewer.this.setActiveDataSource(ds);
+                    refreshEditInfo(ds);
+                } else if (o instanceof edu.tufts.vue.dsm.DataSource) {
+                    edu.tufts.vue.dsm.DataSource ds = (edu.tufts.vue.dsm.DataSource)o;
+                    DataSourceViewer.this.setActiveDataSource(ds);
+                    refreshEditInfo(ds);
+                } else {
+                    int index = ((JList)e.getSource()).getSelectedIndex();
+                    o = dataSourceList.getModelContents().getElementAt(index-1);
+                    if (o instanceof DataSource) {
                         DataSource ds = (DataSource)o;
                         DataSourceViewer.this.setActiveDataSource(ds);
                         refreshEditInfo(ds);
@@ -400,22 +410,11 @@ public class DataSourceViewer extends ContentViewer
                         edu.tufts.vue.dsm.DataSource ds = (edu.tufts.vue.dsm.DataSource)o;
                         DataSourceViewer.this.setActiveDataSource(ds);
                         refreshEditInfo(ds);
-                    } else {
-                        int index = ((JList)e.getSource()).getSelectedIndex();
-                        o = dataSourceList.getModelContents().getElementAt(index-1);
-                        if (o instanceof tufts.vue.DataSource) {
-                            DataSource ds = (DataSource)o;
-                            DataSourceViewer.this.setActiveDataSource(ds);
-                            refreshEditInfo(ds);
-                        } else if (o instanceof edu.tufts.vue.dsm.DataSource) {
-                            edu.tufts.vue.dsm.DataSource ds = (edu.tufts.vue.dsm.DataSource)o;
-                            DataSourceViewer.this.setActiveDataSource(ds);
-                            refreshEditInfo(ds);
-                        }
                     }
                 }
-                refreshMenuActions();
-            }}
+            }
+            refreshMenuActions();
+        }
         );
         
         dataSourceList.addMouseListener(new MouseAdapter() {
@@ -440,7 +439,7 @@ public class DataSourceViewer extends ContentViewer
                         dataSourceList.repaint();
                         //queryEditor.refresh();
                         
-                        GUI.invokeAfterAWT(new Runnable() { public void run() {
+                        GUI.invokeAfterAWT(() -> {
                             queryEditor.refresh();
                             try {
                                 synchronized (dataSourceManager) {
@@ -449,9 +448,9 @@ public class DataSourceViewer extends ContentViewer
                                     if (DEBUG.DR) Log.debug("DataSourceManager saved.");
                                 }
                             } catch (Throwable t) {
-                                tufts.Util.printStackTrace(t);
+                                Util.printStackTrace(t);
                             }
-                        }});
+                        });
                     }
                     if(e.getButton() == MouseEvent.BUTTON3)
                     {
@@ -630,7 +629,7 @@ public class DataSourceViewer extends ContentViewer
                                 VueResources.getString("datasource.dialog.title"),
                                 javax.swing.JOptionPane.OK_CANCEL_OPTION) == javax.swing.JOptionPane.YES_OPTION) {
                             dataSourceManager.remove(ds.getId());
-                            GUI.invokeAfterAWT(new Runnable() { public void run() {
+                            GUI.invokeAfterAWT(() -> {
                                 try {
                                     synchronized (dataSourceManager) {
                                         if (DEBUG.DR) Log.debug("DataSourceManager saving...");
@@ -638,9 +637,9 @@ public class DataSourceViewer extends ContentViewer
                                         if (DEBUG.DR) Log.debug("DataSourceManager saved.");
                                     }
                                 } catch (Throwable t) {
-                                    tufts.Util.printStackTrace(t);
+                                    Util.printStackTrace(t);
                                 }
-                            }});
+                            });
                             dataSourceList.getModelContents().removeElement(ds);
                             saveDataSourceViewer();
                             
@@ -1016,11 +1015,11 @@ public class DataSourceViewer extends ContentViewer
                 GUI.apply(GUI.ErrorFace, textArea);
                 textArea.setOpaque(false);
                 	
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
+                GUI.invokeAfterAWT(() -> {
                     mResultPane.setTitle(VueResources.getString("searchgui.results") +": "+ mRepositoryName);
                     mResultPane.removeAll();
                     mResultPane.add(textArea);
-                }});
+                });
                                 
             }
 
@@ -1085,11 +1084,11 @@ public class DataSourceViewer extends ContentViewer
         public void interrupt() {
             if (DEBUG.DR) Log.debug("INTERRUPTED " + this);
             super.interrupt();
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mResultPane.setTitle(mRepositoryName + " (Stopped)");
                 mStatusLabel.removeIcon();
                 mStatusLabel.setText(VueResources.getString("datasourcehandle.searchstopped.tooltip"));
-            }});
+            });
         }
         
         private void adjustQuery()
@@ -1199,13 +1198,13 @@ public class DataSourceViewer extends ContentViewer
             listOfLists.addAll(resourceList);
            // System.out.println("AAAAAAA" + listOfLists.size());
              
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mResultPane.setTitle(title);
                 mResultPane.removeAll();
                 mResultPane.add(results);
                 if (resourceList.size() > 0)
                 	AnalyzerAction.addResultsToMap(resourceList,mCenterComponent,mMapBasedSearchThreads.size());
-            }});                
+            });
         }
     }
     
@@ -1494,11 +1493,11 @@ public class DataSourceViewer extends ContentViewer
                 GUI.apply(GUI.ErrorFace, textArea);
                 textArea.setOpaque(false);
                 	
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
+                GUI.invokeAfterAWT(() -> {
                     mResultPane.setTitle(VueResources.getString("searchgui.results")+": " + mRepositoryName);
                     mResultPane.removeAll();
                     mResultPane.add(textArea);
-                }});
+                });
             }
 
             if (stopped()) {
@@ -1560,11 +1559,11 @@ public class DataSourceViewer extends ContentViewer
         public void interrupt() {
             if (DEBUG.DR) Log.debug("INTERRUPTED " + this);
             super.interrupt();
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mResultPane.setTitle(mRepositoryName + " (Stopped)");
                 mStatusLabel.removeIcon();
                 mStatusLabel.setText(VueResources.getString("datasourcehandle.searchstopped.tooltip"));
-            }});
+            });
         }
         
         private void adjustQuery()
@@ -1654,11 +1653,11 @@ public class DataSourceViewer extends ContentViewer
                 results = new ResourceList(resourceList, title);
             }
             
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mResultPane.setTitle(title);
                 mResultPane.removeAll();
                 mResultPane.add(results);
-            }});
+            });
             
         }
     }

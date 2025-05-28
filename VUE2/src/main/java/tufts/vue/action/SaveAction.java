@@ -307,9 +307,7 @@ public class SaveAction extends VueAction
                                         map.getLabel(), file, Util.formatLines(e.toString(), 80)),
                           "Problem Saving Map");
         } finally {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
-                GUI.clearWaitCursor();
-            }});
+            GUI.invokeAfterAWT(() -> GUI.clearWaitCursor());
         }
 
         return false;

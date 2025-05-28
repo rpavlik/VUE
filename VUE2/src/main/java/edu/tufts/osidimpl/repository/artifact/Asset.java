@@ -111,7 +111,7 @@ implements org.osid.repository.Asset
     public org.osid.repository.AssetIterator getAssets()
     throws org.osid.repository.RepositoryException
     {
-        return new AssetIterator(new java.util.Vector<org.osid.repository.Asset>());
+        return new AssetIterator(new java.util.Vector<>());
     }
 
     public org.osid.repository.AssetIterator getAssetsByType(org.osid.shared.Type assetType)
@@ -121,7 +121,7 @@ implements org.osid.repository.Asset
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        return new AssetIterator(new java.util.Vector<org.osid.repository.Asset>());
+        return new AssetIterator(new java.util.Vector<>());
     }
 
     public org.osid.repository.Record createRecord(org.osid.shared.Id recordStructureId)

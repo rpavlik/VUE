@@ -130,16 +130,12 @@ public class CategoryEditor extends JPanel
                              //scroll.requestFocus();
                              CategoryEditor.this.requestFocus(false);
                          }*/
-                         
-                         ((MetadataCategoryTableModel)customCategoryTable.getModel()).refresh();
 
-                         SwingUtilities.invokeLater(new Runnable(){
-                            public void run()
-                            {
-                              scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum());                              
-                            }
-                         });
-                       }
+                    ((MetadataCategoryTableModel) customCategoryTable.getModel()).refresh();
+
+                    SwingUtilities.invokeLater(
+                            () -> scroll.getVerticalScrollBar().setValue(scroll.getVerticalScrollBar().getMaximum()));
+                }
                    }
                    
                    
@@ -199,12 +195,10 @@ public class CategoryEditor extends JPanel
         buttonPanel.add(doneButton);
         add(buttonPanel);
         
-        
-        
-        doneButton.addActionListener(new java.awt.event.ActionListener() { public void actionPerformed(java.awt.event.ActionEvent e) {
-                ((CategoryComboBoxModel)categories.getModel()).refreshCategoryMenu();
-                CategoryEditor.this.dialog.dispose();
-        }});
+        doneButton.addActionListener(e -> {
+            ((CategoryComboBoxModel) categories.getModel()).refreshCategoryMenu();
+            CategoryEditor.this.dialog.dispose();
+        });
                 //categories.setSelectedItem(categories.getSelectedItem());
                 //int n = categories.getModel().getSize();
                 // final String currentKey = metadataEditor.getKeyForRow(row);

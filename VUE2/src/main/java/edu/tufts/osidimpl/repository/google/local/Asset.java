@@ -113,7 +113,7 @@ public class Asset
     public org.osid.repository.AssetIterator getAssets()
     throws org.osid.repository.RepositoryException
     {
-		java.util.Vector<org.osid.repository.Asset> result = new java.util.Vector<org.osid.repository.Asset>();
+		java.util.Vector<org.osid.repository.Asset> result = new java.util.Vector<>();
         return new AssetIterator(result);
     }
 
@@ -124,7 +124,7 @@ public class Asset
         {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
         }
-        return new AssetIterator(new java.util.Vector<org.osid.repository.Asset>());
+        return new AssetIterator(new java.util.Vector<>());
     }
 
     public org.osid.repository.Record createRecord(org.osid.shared.Id recordStructureId)

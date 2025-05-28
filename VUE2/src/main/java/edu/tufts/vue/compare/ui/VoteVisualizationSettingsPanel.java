@@ -193,13 +193,9 @@ public class VoteVisualizationSettingsPanel extends JPanel {
         add(linkThresholdSlider);
         
         
-        linkThresholdSlider.addChangeListener(new ChangeListener()
-        {
-           public void stateChanged(ChangeEvent e)
-           {
-        	   Object[] link = {linkThresholdSlider.getValue()};
-        	   linkPercentageDisplay.setText(VueResources.getFormatMessage(link,"dialog.visualizationsettings.linkspercentage"));
-           }
+        linkThresholdSlider.addChangeListener(e1 -> {
+            Object[] link1 = {linkThresholdSlider.getValue()};
+            linkPercentageDisplay.setText(VueResources.getFormatMessage(link1,"dialog.visualizationsettings.linkspercentage"));
         });
         
     }

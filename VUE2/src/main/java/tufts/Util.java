@@ -1207,14 +1207,14 @@ public class Util
     }
 
     public static Itering<org.w3c.dom.Node> iterable(final org.w3c.dom.NodeList nl) {
-        return new IndexedItering<org.w3c.dom.Node>(nl.getLength()) {
+        return new IndexedItering<>(nl.getLength()) {
             public org.w3c.dom.Node next() {
                 return nl.item(index++);
             }
         };
     }
     public static Itering<org.w3c.dom.Node> iterable(final org.w3c.dom.NamedNodeMap nm) {
-        return new IndexedItering<org.w3c.dom.Node>(nm.getLength()) {
+        return new IndexedItering<>(nm.getLength()) {
             public org.w3c.dom.Node next() {
                 return nm.item(index++);
             }

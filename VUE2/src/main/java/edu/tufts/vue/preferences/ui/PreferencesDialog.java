@@ -335,11 +335,9 @@ public class PreferencesDialog extends JDialog {
 	private void createButtonPanel() {
 		JPanel buttonPanel = new JPanel(new BorderLayout(5, 5));
 		JButton closeButton = new JButton(VueResources.getString("button.close.label"));
-		closeButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				PreferencesDialog.this.setVisible(false);
-				PreferencesDialog.this.dispose();
-			}
+		closeButton.addActionListener(e -> {
+			PreferencesDialog.this.setVisible(false);
+			PreferencesDialog.this.dispose();
 		});
 		buttonPanel.add(closeButton, BorderLayout.EAST);
 

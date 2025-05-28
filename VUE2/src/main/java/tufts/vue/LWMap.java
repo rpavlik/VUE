@@ -2298,7 +2298,7 @@ public class LWMap extends LWContainer
      ** than "this" is used, but it's not, so here it is not inline. (For that matter, it should
      ** simply have method references, which would erase the need for this construct entirely, but
      ** i digress). */
-    private final Runnable EnsureBoundsCacheIsFilled = new Runnable() { public void run() { getMapBounds(); }};
+    private final Runnable EnsureBoundsCacheIsFilled = () -> getMapBounds();
     
     private void flushBounds() {
         mCachedBounds = null;

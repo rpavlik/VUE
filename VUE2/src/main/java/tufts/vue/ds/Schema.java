@@ -520,12 +520,12 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
         (final Schema newAuthority,
          final Collection<tufts.vue.LWMap> maps)
     {
-        tufts.vue.gui.GUI.invokeOnEDT(new Runnable() { public void run() {
+        tufts.vue.gui.GUI.invokeOnEDT(() -> {
             // safest to ensure all this happs on the AWT thread, so later association data
             // fetches (data search & filter actions) don't need synchronized read access
             makeSchemaReferencesAuthoritative(newAuthority, maps);
             Association.updateForNewAuthoritativeSchema(newAuthority);
-        }});
+        });
     }
     
     /** find all schema handles in all nodes that match the new schema

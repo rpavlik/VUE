@@ -867,12 +867,11 @@ public class VueUtil extends tufts.Util
                 //np.setBorder(new EtchedBorder());
                 np.setBorder(new LineBorder(Color.black));
                 np.setOpaque(true);
-                np.addPropertyChangeListener(new PropertyChangeListener() {
-                        public void propertyChange(PropertyChangeEvent e) {
-                            System.out.println("CC " + e.getPropertyName() + "=" + e.getNewValue());
-                            if (e.getPropertyName().equals("foreground"))
-                                np.setBackground((Color)e.getNewValue());
-                        }});
+                np.addPropertyChangeListener(e -> {
+                    System.out.println("CC " + e.getPropertyName() + "=" + e.getNewValue());
+                    if (e.getPropertyName().equals("foreground"))
+                        np.setBackground((Color)e.getNewValue());
+                });
                 colorChooser.setPreviewPanel(np); // also makes dissapear entirely
             }
             /*
@@ -887,8 +886,7 @@ public class VueUtil extends tufts.Util
                                            VueResources.getString("dialog.colorchooser.title"),
                                            true,  
                                            colorChooser,
-                                           new ActionListener() { public void actionPerformed(ActionEvent e)
-                                               { colorChosen = true; } },
+                        e -> colorChosen = true,
                                            null);
         }
         if (c != null)

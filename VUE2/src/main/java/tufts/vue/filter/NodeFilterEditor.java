@@ -389,19 +389,13 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
             // SOUTH: southPanel(cancelButton, okButton)
 
             JButton okButton=new JButton(VueResources.getString("button.ok.label"));
-            okButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    updateModelAndNotify();
-                    setVisible(false);
-                }
+            okButton.addActionListener(e -> {
+                updateModelAndNotify();
+                setVisible(false);
             });
 
             JButton cancelButton=new JButton(VueResources.getString("button.cancel.lable"));
-            cancelButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
-                }
-            });
+            cancelButton.addActionListener(e -> setVisible(false));
 
             JPanel southPanel=new JPanel();
             southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -514,19 +508,13 @@ public class NodeFilterEditor extends JPanel implements MapFilterModel.Listener,
             // SOUTH: southPanel(cancelButton, okButton)
 
             JButton okButton=new JButton(VueResources.getString("button.ok.label"));
-            okButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    updateModelAndNotify();
-                    setVisible(false);
-                }
+            okButton.addActionListener(e -> {
+                updateModelAndNotify();
+                setVisible(false);
             });
 
             JButton cancelButton=new JButton(VueResources.getString("button.cancel.lable"));
-            cancelButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(false);
-                }
-            });
+            cancelButton.addActionListener(e -> setVisible(false));
 
             JPanel southPanel=new JPanel();
             southPanel.setLayout(new FlowLayout(FlowLayout.CENTER));

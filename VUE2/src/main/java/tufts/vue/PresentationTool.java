@@ -142,16 +142,12 @@ public class PresentationTool extends VueTool
         	//tufts.vue.Actions.LaunchPresentation.act();
         	presTool.handleFullScreen(true, true);
             //VUE.toggleFullScreen(true);
-        	GUI.invokeAfterAWT(new Runnable() { public void run() {
-    			VUE.toggleFullScreen(true);
-    		}});
+        	GUI.invokeAfterAWT(() -> VUE.toggleFullScreen(true));
     		GUI.invokeAfterAWT(new Runnable() { public void run() {
     			//VueToolbarController.getController().setSelectedTool(presTool);
     			VUE.setActive(VueTool.class, this, presTool);
     		}});
-    		GUI.invokeAfterAWT(new Runnable() { public void run() {
-    			presTool.startPresentation();
-    		}});
+    		GUI.invokeAfterAWT(() -> presTool.startPresentation());
             //VUE.setActive(VueTool.class, , VueTool.getInstance(SelectionTool.class));
         	
         }
@@ -2592,10 +2588,10 @@ public class PresentationTool extends VueTool
 
         //if (!loaded) {
             if (true) { // just in case...
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mFocal = newFocal; // TODO: THREADSAFE?
                 viewer.loadFocal(newFocal, true, false);
-            }});
+            });
         }
 
 
@@ -2828,9 +2824,7 @@ public class PresentationTool extends VueTool
         // the current slide.  We'd really need a separate Images API entry point for
         // caching to specity low-priority tasks for this to work perfectly.
         
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
-            attemptPathwayLocalPreCaching();
-        }});
+        GUI.invokeAfterAWT(() -> attemptPathwayLocalPreCaching());
             
     }
 
@@ -2895,9 +2889,7 @@ public class PresentationTool extends VueTool
                 // this may be helpful, as even images we've already seen may have, of
                 // course, been GC'd, and re-requesting them to be cached is releveant.
                     
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    focal.preCacheContent();
-                }});
+                GUI.invokeAfterAWT(() -> focal.preCacheContent());
             }
         }
     }
@@ -3125,9 +3117,7 @@ public class PresentationTool extends VueTool
     public static void fadeUpLater() {
         if (Util.isMacCocoaSupported() && VUE.inNativeFullScreen()) {
             if (DEBUG.PRESENT) Log.debug("requesting fadeUp");
-            VUE.invokeAfterAWT(new Runnable() { public void run() {
-                fadeUp();
-            }});
+            VUE.invokeAfterAWT(() -> fadeUp());
         }
     }
 

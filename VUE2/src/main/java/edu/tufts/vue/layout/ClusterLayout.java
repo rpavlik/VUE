@@ -158,13 +158,13 @@ public class ClusterLayout extends Layout {
                 LWComponent tail = link.getTail();
                 if (selection.contains(head)) {
                     if (!clusterMap.containsKey(head)) {
-                        clusterMap.put(head, new ArrayList<LWComponent>());
+                        clusterMap.put(head, new ArrayList<>());
                     }
                     clusterMap.get(head).add(tail);
                 }
                 if (selection.contains(tail)) {
                     if (!clusterMap.containsKey(tail)) {
-                        clusterMap.put(tail, new ArrayList<LWComponent>());
+                        clusterMap.put(tail, new ArrayList<>());
                     }
                     clusterMap.get(tail).add(head);
                 }

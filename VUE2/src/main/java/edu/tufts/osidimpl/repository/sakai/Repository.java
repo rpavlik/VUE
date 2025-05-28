@@ -21,8 +21,8 @@ import javax.xml.namespace.QName;
 public class Repository
 implements org.osid.repository.Repository
 {
-    private final java.util.Vector<org.osid.shared.Type> assetTypeVector = new java.util.Vector<org.osid.shared.Type>();
-    private final java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<org.osid.shared.Type>();
+    private final java.util.Vector<org.osid.shared.Type> assetTypeVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<>();
     private org.osid.shared.Id repositoryId = null;
     private final String repositoryIdPrefixString = "E89F7F92-8C23-481B-AF8C-7AE169699F34-2595-000008D778AFEB53";
     private final org.osid.shared.Type repositoryType = new Type("sakaiproject.org", "repository", "contentHosting");

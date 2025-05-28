@@ -274,7 +274,7 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 				messageTextArea.setText(DISPLAYING);
 				analyzeButton.setEnabled(false);
 
-				GUI.invokeAfterAWT(new Runnable() { public void run() {
+				GUI.invokeAfterAWT(() -> {
 					displayResults();
 
 					allNodes = null;
@@ -285,7 +285,7 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 					messageTextArea.setText("");
 					analyzeButton.setText(CHOOSE_FILES);
 					analyzeButton.setEnabled(true);
-				}});
+				});
 			}
 		}
 	}

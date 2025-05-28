@@ -1329,13 +1329,13 @@ public class DockWindow
         // which it never should, given that it's focusable state is
         // false.
         
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
             final tufts.vue.MapViewer viewer = VUE.getActiveViewer();
             if (viewer != null) {
                 if (DEBUG.DOCK) Log.debug("focusRequest to return focus to " + viewer);
                 viewer.requestFocus();
                 //VUE.getActiveViewer().grabVueApplicationFocus(DockWindow.class.getName(), null);
-            }}});
+            }});
     }
 
 
@@ -1455,10 +1455,10 @@ public class DockWindow
             // Unfrotunately, this is not full-proof, but
             // adding a call to toFront seems to have fixed this?
             if (isMacAqua && MacWindowShadowEnabled  && !VUE.isApplet()) {
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
+                GUI.invokeAfterAWT(() -> {
                     superSetVisible(true);
                     toFront();
-                }});
+                });
             } else {
                 superSetVisible(true);
             }
@@ -1481,7 +1481,7 @@ public class DockWindow
 
     private void raiseChildrenLater() {
         // apparently, sometimes, we must raise the children later for toFront to work
-        GUI.invokeAfterAWT(new Runnable() { public void run() { raiseChildren(); }});
+        GUI.invokeAfterAWT(() -> raiseChildren());
     }
     
     protected void setVisible(boolean show, boolean autoUnrollOnShow)
@@ -2272,21 +2272,19 @@ public class DockWindow
             }
             setBounds(x, y, width, height);
         } finally {
-            GUI.invokeAfterAWT(new Runnable() {
-                    public void run() {
-                        mAnimatingReshape = false;
-                        if (DEBUG.DOCK) out("setShapeAnimated: AWT eventQueue cleared, animating stopped.");
-                        
-                        // You might thinking calling the final setBounds in here would
-                        // be cleaner than the manual invalidate/validate but what you get
-                        // is a much messier result on screen.
+            GUI.invokeAfterAWT(() -> {
+                mAnimatingReshape = false;
+                if (DEBUG.DOCK) out("setShapeAnimated: AWT eventQueue cleared, animating stopped.");
 
-                        if (resized) {
-                            invalidate();
-                            validate();
-                        }
-                    }
-                });
+                // You might thinking calling the final setBounds in here would
+                // be cleaner than the manual invalidate/validate but what you get
+                // is a much messier result on screen.
+
+                if (resized) {
+                    invalidate();
+                    validate();
+                }
+            });
             
             //setIgnoreRepaint(false); // can apparently never recover from this on Mac
             //repaint();
@@ -3895,7 +3893,7 @@ public class DockWindow
         }
         
         if (isMac && MacWindowShadowEnabled)
-            GUI.invokeAfterAWT(new Runnable() { public void run() { updateWindowShadow(); }});
+            GUI.invokeAfterAWT(() -> updateWindowShadow());
 
         StackDepth--;
     }

@@ -110,23 +110,19 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         addSelectedTerm = new JButton(VueResources.getString("ontologicalmembership.selectedterm"));
         addSelectedTerm.setFont(tufts.vue.gui.GUI.LabelFace);
         
-        addSelectedTerm.addActionListener(new ActionListener(){
-           public void actionPerformed(ActionEvent e)
-           {
-                OntologyBrowser.getBrowser();
-                TypeList selectedList = OntologyBrowser.getSelectedList();
-                if (selectedList != null) {
-                   Object type = selectedList.getSelectedValue();
-                   if(type != null)
-                   {
-                       VueMetadataElement vme = new VueMetadataElement();
-                       vme.setObject(type);
-                       current.getMetadataList().getMetadata().add(vme);
-                       refresh();
-                       repaint();
-                   }
-               }
-           }
+        addSelectedTerm.addActionListener(e -> {
+            OntologyBrowser.getBrowser();
+            TypeList selectedList = OntologyBrowser.getSelectedList();
+            if (selectedList != null) {
+                Object type = selectedList.getSelectedValue();
+                if (type != null) {
+                    VueMetadataElement vme = new VueMetadataElement();
+                    vme.setObject(type);
+                    current.getMetadataList().getMetadata().add(vme);
+                    refresh();
+                    repaint();
+                }
+            }
         });
         
         // OntologyBrowser not yet initialized at startup, todo:

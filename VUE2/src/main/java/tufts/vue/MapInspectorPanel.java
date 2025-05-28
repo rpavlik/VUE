@@ -531,10 +531,10 @@ public class MapInspectorPanel extends JPanel
         }
 
         protected void updateStats() {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 mObjectStats.setText(mMap.getObjectStatistics());    // Must call getObjectStatistics() before getConnectivityStatistics().
                 mConnectivityStats.setText(mMap.getConnectivityStatistics());
-            }});
+            });
         }
 
         // LWComponent.Listener method

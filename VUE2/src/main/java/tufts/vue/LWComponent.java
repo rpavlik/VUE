@@ -343,27 +343,19 @@ public class LWComponent
 
     protected transient BufferedImage mImageBuffer;
 
-    public static final Comparator<LWComponent> XSorter = new Comparator<LWComponent>() {
-            public int compare(LWComponent c1, LWComponent c2) {
-                // we multiply up the result so as not to loose differential precision in the integer result
-                return (int) (128f * (c1.x - c2.x));
-            }
-        };
-    public static final Comparator<LWComponent> YSorter = new Comparator<LWComponent>() {
-            public int compare(LWComponent c1, LWComponent c2) {
-                return (int) (128f * (c1.y - c2.y));
-            }
-        };
+    public static final Comparator<LWComponent> XSorter = (c1, c2) -> {
+        // we multiply up the result so as not to loose differential precision in the integer result
+        return (int) (128f * (c1.x - c2.x));
+    };
+    public static final Comparator<LWComponent> YSorter = (c1, c2) -> (int) (128f * (c1.y - c2.y));
 
-    public static final Comparator<LWComponent> GridSorter = new Comparator<LWComponent>() {
-            public int compare(LWComponent c1, LWComponent c2) {
-                if (c1.y == c2.y)
-                    return XSorter.compare(c1, c2);
-                else
-                    return YSorter.compare(c1, c2);
+    public static final Comparator<LWComponent> GridSorter = (c1, c2) -> {
+        if (c1.y == c2.y)
+            return XSorter.compare(c1, c2);
+        else
+            return YSorter.compare(c1, c2);
 
-            }
-        };
+    };
 
     /** constructor */
     public LWComponent()
@@ -1262,14 +1254,38 @@ public class LWComponent
 
     public enum Alignment { LEFT, CENTER, RIGHT }
 
-    public static final Key<LWComponent, Color> KEY_FillColor   = new Key<LWComponent, Color>("fill.color", "background")       { Property getSlot(LWComponent c) { return c.mFillColor; } };
-    public static final Key<LWComponent, Color> KEY_TextColor   = new Key<LWComponent, Color>("text.color", "font-color")       { Property getSlot(LWComponent c) { return c.mTextColor; } };
-    public static final Key<LWComponent, Color> KEY_StrokeColor = new Key<LWComponent, Color>("stroke.color", "border-color")   { Property getSlot(LWComponent c) { return c.mStrokeColor; } };
-    public static final Key<LWComponent, Float> KEY_StrokeWidth = new Key<LWComponent, Float>("stroke.width", "stroke-width")   { Property getSlot(LWComponent c) { return c.mStrokeWidth; } };
-    public static final Key<LWComponent, StrokeStyle> KEY_StrokeStyle = new Key<LWComponent, StrokeStyle>
-        ("stroke.style", KeyType.STYLE)   { Property getSlot(LWComponent c) { return c.mStrokeStyle; } };
-    public static final Key<LWComponent, Alignment> KEY_Alignment = new Key<LWComponent, Alignment>
-        ("alignment", KeyType.STYLE)   { Property getSlot(LWComponent c) { return c.mAlignment; } };
+    public static final Key<LWComponent, Color> KEY_FillColor   = new Key<>("fill.color", "background") {
+        Property getSlot(LWComponent c) {
+            return c.mFillColor;
+        }
+    };
+    public static final Key<LWComponent, Color> KEY_TextColor   = new Key<>("text.color", "font-color") {
+        Property getSlot(LWComponent c) {
+            return c.mTextColor;
+        }
+    };
+    public static final Key<LWComponent, Color> KEY_StrokeColor = new Key<>("stroke.color", "border-color") {
+        Property getSlot(LWComponent c) {
+            return c.mStrokeColor;
+        }
+    };
+    public static final Key<LWComponent, Float> KEY_StrokeWidth = new Key<>("stroke.width", "stroke-width") {
+        Property getSlot(LWComponent c) {
+            return c.mStrokeWidth;
+        }
+    };
+    public static final Key<LWComponent, StrokeStyle> KEY_StrokeStyle = new Key<>
+            ("stroke.style", KeyType.STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mStrokeStyle;
+        }
+    };
+    public static final Key<LWComponent, Alignment> KEY_Alignment = new Key<>
+            ("alignment", KeyType.STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mAlignment;
+        }
+    };
 
 
     /* font.size: point size for font */
@@ -1277,31 +1293,57 @@ public class LWComponent
     /* font.name: family name of the font */
 
     /** Aggregate font key, which represents the combination of it's three sub-properties */
-    public static final Key<LWComponent, Font> KEY_Font = new Key<LWComponent, Font>("font", KeyType.STYLE)                               { Property getSlot(LWComponent c) { return c.mFont; } };
-    public static final Key<LWComponent, Integer> KEY_FontSize  = new Key<LWComponent, Integer>("font.size", KeyType.SUB_STYLE)           { Property getSlot(LWComponent c) { return c.mFontSize; } };
-    public static final Key<LWComponent, Integer> KEY_FontStyle = new Key<LWComponent, Integer>("font.style", KeyType.SUB_STYLE)          { Property getSlot(LWComponent c) { return c.mFontStyle; } };
-    public static final Key<LWComponent, String> KEY_FontUnderline = new Key<LWComponent, String>("font.underline", KeyType.SUB_STYLE)    { Property getSlot(LWComponent c) { return c.mFontUnderline; } };
-    public static final Key<LWComponent, String> KEY_FontName  = new Key<LWComponent, String>("font.name", KeyType.SUB_STYLE)             { Property getSlot(LWComponent c) { return c.mFontName; } };
+    public static final Key<LWComponent, Font> KEY_Font = new Key<>("font", KeyType.STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mFont;
+        }
+    };
+    public static final Key<LWComponent, Integer> KEY_FontSize  = new Key<>("font.size", KeyType.SUB_STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mFontSize;
+        }
+    };
+    public static final Key<LWComponent, Integer> KEY_FontStyle = new Key<>("font.style", KeyType.SUB_STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mFontStyle;
+        }
+    };
+    public static final Key<LWComponent, String> KEY_FontUnderline = new Key<>("font.underline", KeyType.SUB_STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mFontUnderline;
+        }
+    };
+    public static final Key<LWComponent, String> KEY_FontName  = new Key<>("font.name", KeyType.SUB_STYLE) {
+        Property getSlot(LWComponent c) {
+            return c.mFontName;
+        }
+    };
 
     public static final Key<LWComponent, Boolean> KEY_Collapsed =
-        new Key<LWComponent, Boolean>("collapsed") {
-        @Override public void setValue(LWComponent c, Boolean collapsed) {
-            c.setCollapsed(collapsed);
-        }
-        @Override public Boolean getValue(LWComponent c) {
-            return c.isCollapsed() ? Boolean.TRUE : Boolean.FALSE;
-        }
-    };
+            new Key<>("collapsed") {
+                @Override
+                public void setValue(LWComponent c, Boolean collapsed) {
+                    c.setCollapsed(collapsed);
+                }
+
+                @Override
+                public Boolean getValue(LWComponent c) {
+                    return c.isCollapsed() ? Boolean.TRUE : Boolean.FALSE;
+                }
+            };
 
     public static final Key<LWComponent,Long> KEY_Created =
-        new Key<LWComponent,Long>("created") {
-        @Override public Long getValue(LWComponent c) {
-            return c.getCreated();
-        }
-        @Override public String getStringValue(LWComponent c) {
-            return new Date(c.getCreated()).toString();
-        }
-    };
+            new Key<>("created") {
+                @Override
+                public Long getValue(LWComponent c) {
+                    return c.getCreated();
+                }
+
+                @Override
+                public String getStringValue(LWComponent c) {
+                    return new Date(c.getCreated()).toString();
+                }
+            };
 
 
 
@@ -1315,11 +1357,17 @@ public class LWComponent
         };
     public final ColorProperty mStrokeColor = new ColorProperty(KEY_StrokeColor, java.awt.Color.darkGray);
     public final FloatProperty mStrokeWidth = new FloatProperty(KEY_StrokeWidth) { void onChange() { rebuildStroke(); }};
-    public final EnumProperty<Alignment> mAlignment = new EnumProperty<Alignment>(KEY_Alignment, Alignment.LEFT) {
-            void onChange() { layout(KEY_Alignment); }
-        };
+    public final EnumProperty<Alignment> mAlignment = new EnumProperty<>(KEY_Alignment, Alignment.LEFT) {
+        void onChange() {
+            layout(KEY_Alignment);
+        }
+    };
 
-    public final EnumProperty<StrokeStyle> mStrokeStyle = new EnumProperty<StrokeStyle>(KEY_StrokeStyle, StrokeStyle.SOLID) { void onChange() { rebuildStroke(); }};
+    public final EnumProperty<StrokeStyle> mStrokeStyle = new EnumProperty<>(KEY_StrokeStyle, StrokeStyle.SOLID) {
+        void onChange() {
+            rebuildStroke();
+        }
+    };
 
     public enum StrokeStyle {
 
@@ -1429,18 +1477,30 @@ public class LWComponent
 
 
     public static final String KEY_LabelFormat = "label.format";
-    public static final Key<LWComponent, String> KEY_Label = new Key<LWComponent,String>("label", KeyType.DATA) {
-        @Override public void setValueWithContext(LWComponent c, String val, Object context) {
+    public static final Key<LWComponent, String> KEY_Label = new Key<>("label", KeyType.DATA) {
+        @Override
+        public void setValueWithContext(LWComponent c, String val, Object context) {
             if (context == PROPERTY_SET_UNDO)
                 c.setLabelImpl(val, true, false);
             else
                 c.setLabel(val);
         }
-        @Override public String getValue(LWComponent c) { return c.getLabel(); }
+
+        @Override
+        public String getValue(LWComponent c) {
+            return c.getLabel();
+        }
     };
-    public static final Key<LWComponent, String> KEY_Notes = new Key<LWComponent,String>("notes", KeyType.DATA) {
-        @Override public void setValue(LWComponent c, String val) { c.setNotes(val); }
-        @Override public String getValue(LWComponent c) { return c.getNotes(); }
+    public static final Key<LWComponent, String> KEY_Notes = new Key<>("notes", KeyType.DATA) {
+        @Override
+        public void setValue(LWComponent c, String val) {
+            c.setNotes(val);
+        }
+
+        @Override
+        public String getValue(LWComponent c) {
+            return c.getNotes();
+        }
     };
 
 
@@ -4319,7 +4379,7 @@ public class LWComponent
 
     /** @return a collection of our ancestors.  default impl returns a list with nearest ancestor first */
     public List<LWComponent> getAncestors() {
-        return (List<LWComponent>) getAncestors(new ArrayList<LWComponent>(8));
+        return (List<LWComponent>) getAncestors(new ArrayList<>(8));
     }
 
     protected Collection<LWComponent> getAncestors(Collection<LWComponent> bag) {
@@ -7137,13 +7197,24 @@ public class LWComponent
     }
 
     public static final Key<LWComponent, Integer> KEY_State =
-        new Key<LWComponent,Integer>("state") {
-        @Override public void setValue(LWComponent c, Integer state) { c.mState = state; } // for undo
-        @Override public Integer getValue(LWComponent c) { return c.mState; } // for undo/debug
-        @Override public String getStringValue(LWComponent c) { return Integer.toHexString(c.mState); }
-        // arch: would be nice if all the stuff for dealing with bitfields was handled in a single
-        // BooleanKey which could be used for multiple bit fields.
-    };
+            new Key<>("state") {
+                @Override
+                public void setValue(LWComponent c, Integer state) {
+                    c.mState = state;
+                } // for undo
+
+                @Override
+                public Integer getValue(LWComponent c) {
+                    return c.mState;
+                } // for undo/debug
+
+                @Override
+                public String getStringValue(LWComponent c) {
+                    return Integer.toHexString(c.mState);
+                }
+                // arch: would be nice if all the stuff for dealing with bitfields was handled in a single
+                // BooleanKey which could be used for multiple bit fields.
+            };
 
     public void setState(State s) {
         setState(s, true);

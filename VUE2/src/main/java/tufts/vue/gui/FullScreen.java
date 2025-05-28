@@ -296,9 +296,7 @@ public class FullScreen
             isHidden = false;
             if (Util.isMacCocoaSupported()) {
                 if (DEBUG.Enabled) Log.debug("requesting fadeup");
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    doFadeUp();
-                }});
+                GUI.invokeAfterAWT(() -> doFadeUp());
             }
         }
         
@@ -716,20 +714,20 @@ public class FullScreen
         
         final VueTool activeTool = VueToolbarController.getActiveTool();
         
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
             if (DEBUG.PRESENT) Log.debug("AWT thread activeTool.handleFullScreen for " + activeTool);
             activeTool.handleFullScreen(true, goNative);
-        }});
+        });
 
         if (wentBlack) {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 // shouldn't ever be able to see this happen, as the native full-screen should be
                 // on top of us, but just in case we make sure to clear it out behind us...
                 goClear();
-            }});
+            });
         }
 
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
 
             // The initial request for focus sometimes happens while the
             // FullScreenViewer already has focus, and immediately after that it
@@ -744,9 +742,9 @@ public class FullScreen
             // added this repaint for going native full-screen on the NON-DEFAULT device
             // in a Mac OSX multi-monitor setup -- window was appearing, but needed to
             // move mouse to see the first paint.
-            FullScreenViewer.repaint(); 
+            FullScreenViewer.repaint();
             NDC.pop();
-        }});
+        });
         
     }
 
@@ -828,38 +826,38 @@ public class FullScreen
 
         if (ExtraDockWindowHiding && nativeModeHidAllDockWindows) {
             nativeModeHidAllDockWindows = false;
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 DockWindow.ShowPreviouslyHiddenWindows();
                 if (Util.isMacPlatform()) {
 
                     // This will ensure the windows are fully painted when we return
                     // from fade-back.
-                    
+
                     // Only need to do this on mac, as we can't hide what's happening on
                     // WinXP by fading to/from black anyway.
-                    
+
                     DockWindow.ImmediatelyRepaintAllWindows();
                 }
-            }});
+            });
         }
 
         if (FullScreenLastActiveViewer != FullScreenViewer) {
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 // todo: we do NOT want to do this if the active map has changed while in
                 // full-screen mode: we want to activate the viewer for the map currently
                 // displayed
                 FullScreenLastActiveViewer.grabVueApplicationFocus("FullScreen.exit", null);
-            }});
+            });
         }
         
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
             VueToolbarController.getActiveTool().handleFullScreen(false, wasNative);
             //Log.debug("activeTool.handleFullScreen " + VueToolbarController.getActiveTool());
             //VUE.getActiveViewer().popToMapFocal(); // old active viewer shouldn't have changed...
-        }});
+        });
 
 
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
 
             // Do not now ask for the currently active viewer: use the reference to the one that
             // was active when we entered full-screen mode: the java focus system can be very
@@ -872,7 +870,7 @@ public class FullScreen
             // works for this, but the corner cases need handling.  Easiest approach may be to have
             // FullScreenLastActiveViewer actually repoint to the standard viewer for the active
             // map if the active map changes.
-            
+
             final MapViewer returnViewer = FullScreenLastActiveViewer;
             //final MapViewer returnViewer = VUE.getActiveViewer();
 
@@ -885,7 +883,7 @@ public class FullScreen
 
             try {
                 if (!wasNative && returnViewer != null) {
-                    
+
                     // If the focal has changed while in full screen mode, and it's still a
                     // focal from the same map that's in the viewer we're returning back to,
                     // swap load the same focal into the returning viewer.  (e.g., a slide
@@ -896,7 +894,7 @@ public class FullScreen
                         if (returnViewer.getFocal() != fullScreenFocal)
                             returnViewer.loadFocal(fullScreenFocal);
                     }
-            		
+
                     // have the returning viewer zoom to the same region
                     // that is visible in the full-screen viewer
                     // problem with this method: the region keeps shrinking on repeated in/out of working FS mode
@@ -923,8 +921,8 @@ public class FullScreen
             } finally {
                 if (!fadeBack) NDC.pop();
             }
-            
-        }});
+
+        });
 
 
 // This works to have the toolbar painted, vut the tabbed pane and viewer apparently aren't ready yet (just shows dark gray)
@@ -934,10 +932,10 @@ public class FullScreen
         
         if (fadeBack) {
             if (DEBUG.Enabled) Log.debug("requesting fadeFromBlack");
-            GUI.invokeAfterAWT(new Runnable() { public void run() {
+            GUI.invokeAfterAWT(() -> {
                 fadeFromBlack();
                 NDC.pop();
-            }});
+            });
         }
 
         

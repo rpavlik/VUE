@@ -243,8 +243,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
     
     public void clearAllChecked()
     {
-    	for (int i =0; i < checklist.size(); i++)
-    		checklist.set(i, Boolean.FALSE);
+        checklist.replaceAll(ignored -> Boolean.FALSE);
     }
     
 }

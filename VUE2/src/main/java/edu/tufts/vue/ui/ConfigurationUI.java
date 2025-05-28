@@ -479,16 +479,13 @@ public class ConfigurationUI extends javax.swing.JPanel {
                         
                         chooser = new JButton(VueResources.getString("resourceInstallation.chooserOpen"));
 
-
-                        ActionListener chooserActionListener = new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                VueFileChooser fileChooser = VueFileChooser.getVueFileChooser();
-                                fileChooser.setCurrentDirectory(new java.io.File("."));
-                                fileChooser.setDialogTitle(VueResources.getString("resourceInstallation.chooserTitle"));
-                                fileChooser.setFileSelectionMode(VueFileChooser.FILES_AND_DIRECTORIES);
-                                if (fileChooser.showOpenDialog(chooser) == VueFileChooser.APPROVE_OPTION) {
-                                    textField8.setText(fileChooser.getSelectedFile().toString());
-                                }
+                        ActionListener chooserActionListener = e -> {
+                            VueFileChooser fileChooser = VueFileChooser.getVueFileChooser();
+                            fileChooser.setCurrentDirectory(new java.io.File("."));
+                            fileChooser.setDialogTitle(VueResources.getString("resourceInstallation.chooserTitle"));
+                            fileChooser.setFileSelectionMode(VueFileChooser.FILES_AND_DIRECTORIES);
+                            if (fileChooser.showOpenDialog(chooser) == VueFileChooser.APPROVE_OPTION) {
+                                textField8.setText(fileChooser.getSelectedFile().toString());
                             }
                         };
                         

@@ -421,98 +421,88 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         renameMenuItem = new JMenuItem(VueResources.getString("layer.rename"));
         popupMenu.add(renameMenuItem);
         popupMenu.addSeparator();
-        renameMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-            	Layer layer = getActiveLayer();            	
-            	Row row =null;
-            	 for (Row rows : mRows){
-                  if (rows.layer.equals(layer))
-                	  row = rows;
-                 
-                 }
-            	if (row == null)
-            		return;            	    	
-            	row.label.setVisible(true);
-            	row.label.setEnabled(true);
-            	row.label.setEditable(true);
-            	row.label.requestFocus();     	
-            	
-            }
+        renameMenuItem.addActionListener(event -> {
+            Layer layer = getActiveLayer();
+            Row row =null;
+             for (Row rows : mRows){
+              if (rows.layer.equals(layer))
+                  row = rows;
+
+             }
+            if (row == null)
+                return;
+            row.label.setVisible(true);
+            row.label.setEnabled(true);
+            row.label.setEditable(true);
+            row.label.requestFocus();
+
         });
         
         unLockMenuItem = new JMenuItem(VueResources.getString("layer.unlock"));
         unlockPopupMenu.add(unLockMenuItem);        
-        unLockMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {            	        	
-            	Layer layer = getActiveLayer();
-            	Row row =null;
-            	 for (Row rows : mRows){
-                  if (rows.layer.equals(layer))
-                	  row = rows;
-                 
-                 }
-            	if (row == null)
-            		return;            	
-            	row.locked.setSelected(false);
-            	row.locked.setIcon(VueResources.getImageIcon("lockOpen"));         
-            	layer.setLocked(false); 
-            }
+        unLockMenuItem.addActionListener(event -> {
+            Layer layer = getActiveLayer();
+            Row row =null;
+             for (Row rows : mRows){
+              if (rows.layer.equals(layer))
+                  row = rows;
+
+             }
+            if (row == null)
+                return;
+            row.locked.setSelected(false);
+            row.locked.setIcon(VueResources.getImageIcon("lockOpen"));
+            layer.setLocked(false);
         });
         
         duplicateMenuItem = new JMenuItem(VueResources.getString("layer.duplicate"));        
         popupMenu.add(duplicateMenuItem);
         popupMenu.addSeparator();
-        duplicateMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-            	 Layer active = getActiveLayer();
-            	 final Layer dupe = (Layer) active.duplicate();
-                 mMap.addOnTop(active, dupe);
-                 setActiveLayer(dupe); // make the new duplicate layer the active layer
-            }
+        duplicateMenuItem.addActionListener(event -> {
+             Layer active = getActiveLayer();
+             final Layer dupe = (Layer) active.duplicate();
+             mMap.addOnTop(active, dupe);
+             setActiveLayer(dupe); // make the new duplicate layer the active layer
         });
         lockMenuItem = new JMenuItem(VueResources.getString("layer.lock"));
         popupMenu.add(lockMenuItem);
         popupMenu.addSeparator();
-        lockMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-            	Layer layer = getActiveLayer();
-            	Row row =null;
-            	 for (Row rows : mRows){
-                  if (rows.layer.equals(layer))
-                	  row = rows;                 
-                 }
-            	if (row == null)
-            		return;            	
-            	row.locked.setSelected(true);
-            	row.locked.setIcon(VueResources.getImageIcon("lock"));           
-            	layer.setLocked(true);            	
-                if (layer == getActiveLayer() && !canBeActive(layer))
-                    if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
-            }
-        });        
+        lockMenuItem.addActionListener(event -> {
+            Layer layer = getActiveLayer();
+            Row row =null;
+             for (Row rows : mRows){
+              if (rows.layer.equals(layer))
+                  row = rows;
+             }
+            if (row == null)
+                return;
+            row.locked.setSelected(true);
+            row.locked.setIcon(VueResources.getImageIcon("lock"));
+            layer.setLocked(true);
+            if (layer == getActiveLayer() && !canBeActive(layer))
+                if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
+        });
       
         deleteMenuItem = new JMenuItem(VueResources.getString("layer.delete"));      
         popupMenu.add(deleteMenuItem); 
         
-        deleteMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) { 
-            	deleteMenuItem.setEnabled(true);
-            	// Modal dialog with OK button
-                String message = VueResources.getString("dialog.deletelayer.message");               
-                if (VueUtil.confirm(null,
-                		message, VueResources.getString("dialog.title.confirmation"),
-                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){                
-                	Layer active = getActiveLayer();
-                	if(!active.isLocked()){
-    	            	selectedIndex = active.getIndex();
-    	            	mMap.deleteChildPermanently(active); // todo: LWMap should setActiveLayer(null) if active is deleted
-    	            	mMap.setActiveLayer(null);                
-    	                attemptAlternativeActiveLayer(true); // better if this tried to find the nearest layer, and not check last-active
-    	            }
-                	if(mRows.size() == 1){
-                    	deleteMenuItem.setEnabled(false) ;
-                	}
-                }            	
+        deleteMenuItem.addActionListener(event -> {
+            deleteMenuItem.setEnabled(true);
+            // Modal dialog with OK button
+            String message = VueResources.getString("dialog.deletelayer.message");
+            if (VueUtil.confirm(null,
+                    message, VueResources.getString("dialog.title.confirmation"),
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
+                Layer active = getActiveLayer();
+                if(!active.isLocked()){
+                    selectedIndex = active.getIndex();
+                    mMap.deleteChildPermanently(active); // todo: LWMap should setActiveLayer(null) if active is deleted
+                    mMap.setActiveLayer(null);
+                    attemptAlternativeActiveLayer(true); // better if this tried to find the nearest layer, and not check last-active
+                }
+                if(mRows.size() == 1){
+                    deleteMenuItem.setEnabled(false) ;
+                }
             }
         });
     }
@@ -1024,7 +1014,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                 mRows.add(produceRow(layer));
                 if (mShowAll.isSelected()) {
                     //for (LWComponent c : reverse(layer.getChildren()))
-                    for (LWComponent c : reverse(layer.getAllDescendents(ChildKind.PROPER, new ArrayList<LWComponent>(), Order.DEPTH)))
+                    for (LWComponent c : reverse(layer.getAllDescendents(ChildKind.PROPER, new ArrayList<>(), Order.DEPTH)))
                         mRows.add(produceRow(c));
                 }
             }
@@ -1227,31 +1217,28 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                     }
                 });
 
-            row.layer.addLWCListener(new LWComponent.Listener() {
-                    public void LWCChanged(LWCEvent e) {
+            row.layer.addLWCListener(e -> {
 
-                        final String text = row.layer.getDisplayLabel();
+                final String text = row.layer.getDisplayLabel();
 
-                        if (text.equals(getText())) {
-                            
-                            // be sure to skip the setText if the text is the same:
-                            // setting a text component to the same value tends to
-                            // trigger a java bug where setScrollOffset(0) stops
-                            // working, and the left-most text stays obscured if the
-                            // text is wider than the display area.
-                            
-                            return;
-                        }                        
-                        setText(text);
-                        setScrollOffset(0);
-                        // also do this later just in case: somes helps, tho
-                        // Vista and XP still seem to have a hard time with this bug,
-                        // but generally only if the model text is set elsewhere,
-                        // and we're just handling a value update here.
-                        GUI.invokeAfterAWT(new Runnable() { public void run() {
-                            setScrollOffset(0);
-                        }});
-                    }},
+                if (text.equals(getText())) {
+
+                    // be sure to skip the setText if the text is the same:
+                    // setting a text component to the same value tends to
+                    // trigger a java bug where setScrollOffset(0) stops
+                    // working, and the left-most text stays obscured if the
+                    // text is wider than the display area.
+
+                    return;
+                }
+                setText(text);
+                setScrollOffset(0);
+                // also do this later just in case: somes helps, tho
+                // Vista and XP still seem to have a hard time with this bug,
+                // but generally only if the model text is set elsewhere,
+                // and we're just handling a value update here.
+                GUI.invokeAfterAWT(() -> setScrollOffset(0));
+            },
                 LWKey.Label);
 
             activeBorder = getBorder();
@@ -1624,27 +1611,25 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             locked.setSelected(layer.isLocked());
             locked.setBorderPainted(layer.isLocked());
             locked.setOpaque(false);
-            locked.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        //locked.setBorderPainted(locked.isSelected());                    	
-                        layer.setLocked(locked.isSelected());
-                        if (layer == getActiveLayer() && !canBeActive(layer))
-                            if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
-                    }});
+            locked.addActionListener(e -> {
+                //locked.setBorderPainted(locked.isSelected());
+                layer.setLocked(locked.isSelected());
+                if (layer == getActiveLayer() && !canBeActive(layer))
+                    if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
+            });
             
 
             visible.setSelected(layer.isVisible());
-            visible.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                    	layer.setVisible(visible.isSelected());
-                        locked.setEnabled(layer.isVisible());                        
-                        label.setEnabled(layer.isVisible());        
-                        VUE.getMainWindow().repaint();
-                        if (layer == getActiveLayer() && !canBeActive(layer))
-                            if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
-                        layer.getUndoManager().mark((layer.isVisible() ? "Show" : "Hide")
-                                                    + " Layer");
-                    }});
+            visible.addActionListener(e -> {
+                layer.setVisible(visible.isSelected());
+                locked.setEnabled(layer.isVisible());
+                label.setEnabled(layer.isVisible());
+                VUE.getMainWindow().repaint();
+                if (layer == getActiveLayer() && !canBeActive(layer))
+                    if (AUTO_ADJUST_ACTIVE_LAYER) attemptAlternativeActiveLayer(false);
+                layer.getUndoManager().mark((layer.isVisible() ? "Show" : "Hide")
+                                            + " Layer");
+            });
 
             label.setEnabled(layer.isVisible());            
             
@@ -1657,11 +1642,10 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                 exclusive.setIcon(VueResources.getIcon(VUE.class, "images/quickFocus_ov.png"));
                 exclusive.setFocusable(false);
                 exclusive.setOpaque(false);
-                exclusive.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            exclusive.setBorderPainted(exclusive.isSelected());
-                            Row.this.setExclusive(exclusive.isSelected());
-                        }});
+                exclusive.addActionListener(e -> {
+                    exclusive.setBorderPainted(exclusive.isSelected());
+                    Row.this.setExclusive(exclusive.isSelected());
+                });
             
                 //grab = new JButton("Grab");
                 //grab.setFont(VueConstants.SmallFont);
@@ -1683,13 +1667,12 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
 //                     grab.putClientProperty("JButton.buttonType", "textured");
 //                     grab.putClientProperty("JButton.sizeVariant", "tiny");
                 
-                grab.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            if (VUE.getSelection().size() > 0) {
-                                grabFromSelection((Layer)layer);
-                                VUE.getUndoManager().mark("Move To Layer " + Util.quote(layer.getLabel()));
-                            }
-                        }});
+                grab.addActionListener(e -> {
+                    if (VUE.getSelection().size() > 0) {
+                        grabFromSelection((Layer)layer);
+                        VUE.getUndoManager().mark("Move To Layer " + Util.quote(layer.getLabel()));
+                    }
+                });
             } else {
                 exclusive = null;
                 grab = null;
@@ -1710,27 +1693,26 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                 // Note: depends on Layer having permitZombieEvent(e) return
                 // true, otherwise won't update correctly on undo.
                 final LWComponent.Listener countListener
-                    = new LWComponent.Listener() {
-                        public void LWCChanged(LWCEvent e) {
-                            //if (DEBUG.Enabled) Log.debug("UPDATING " + Row.this + " " + e);
-                            String counts = "";
-                            final int nChild = layer.numChildren();
-                            final int allChildren = layer.getDescendentCount();
-                            info.setForeground(Color.gray);   
-                            if (nChild > 0)
-                                counts += nChild;
-                            if (allChildren != nChild)
-                                counts += "/" + allChildren;
-                            
-                            if(counts.length()==0){
-                            	info.setText("");
-                            }else{
-                            	info.setText("("+counts+")");
-                            }                            
-                            //if (DEBUG.Enabled) { Row.this.validate(); GUI.paintNow(Row.this); } // slower
-                            // above will usually cause a deadlock tho when dropping images and this UI is visible
-                            //if (DEBUG.Enabled) { Row.this.validate(); GUI.paintNow(info); } // faster
-                        }};
+                    = e -> {
+                        //if (DEBUG.Enabled) Log.debug("UPDATING " + Row.this + " " + e);
+                        String counts = "";
+                        final int nChild = layer.numChildren();
+                        final int allChildren = layer.getDescendentCount();
+                        info.setForeground(Color.gray);
+                        if (nChild > 0)
+                            counts += nChild;
+                        if (allChildren != nChild)
+                            counts += "/" + allChildren;
+
+                        if(counts.length()==0){
+                            info.setText("");
+                        }else{
+                            info.setText("("+counts+")");
+                        }
+                        //if (DEBUG.Enabled) { Row.this.validate(); GUI.paintNow(Row.this); } // slower
+                        // above will usually cause a deadlock tho when dropping images and this UI is visible
+                        //if (DEBUG.Enabled) { Row.this.validate(); GUI.paintNow(info); } // faster
+                    };
                 countListener.LWCChanged(null); // do the initial set
                 layer.addLWCListener(countListener, LWKey.ChildrenAdded, LWKey.ChildrenRemoved);
             }
@@ -1835,13 +1817,12 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
             //preview.setMaximumSize(GUI.MaxSize);
 
             if (false)
-                layer.addLWCListener(new LWComponent.Listener() {
-                        public void LWCChanged(LWCEvent e) {
-                            // this is heavy duty!  Would be nice if UserActionCompleted
-                            // came through the layer, and we could listen for that,
-                            // but it comes through the map
-                            preview.repaint();
-                        }});
+                layer.addLWCListener(e -> {
+                    // this is heavy duty!  Would be nice if UserActionCompleted
+                    // came through the layer, and we could listen for that,
+                    // but it comes through the map
+                    preview.repaint();
+                });
             
             
 

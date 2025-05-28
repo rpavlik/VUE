@@ -207,7 +207,7 @@ public class MetadataEditor extends JPanel
         }
         
         public void repaintLater() {
-            GUI.invokeAfterAWT(new Runnable() { public void run() { repaint(); }});
+            GUI.invokeAfterAWT(() -> repaint());
         }
                 
         @Override public String getToolTipText(MouseEvent me) {
@@ -350,11 +350,11 @@ public class MetadataEditor extends JPanel
                         
                         mdTable.stopAnyEditing();
                         
-                        GUI.invokeAfterAWT(new Runnable() { public void run() {
+                        GUI.invokeAfterAWT(() -> {
                             refreshAll();
                             if (existing == null)
                                 OntologiesList.saveCustomOntology();
-                        }}); 
+                        });
                     }
                 }
         }); 
@@ -395,13 +395,13 @@ public class MetadataEditor extends JPanel
         final JCheckBox advancedSearch = new JCheckBox();
         //advancedSearch.setBorder(BorderFactory.createEmptyBorder(0,0,15,0));
 
-        advancedSearch.addActionListener(new java.awt.event.ActionListener() { public void actionPerformed(java.awt.event.ActionEvent e) {
+        advancedSearch.addActionListener(e -> {
             //advancedSearch.setIcon(new ImageIcon(VueResources.getURL("advancedSearchLess.raw"))); // getURL("advancedSearchMore.raw")));
             model.toggleCategoryKeyColumn();
             advancedSearch.setSelected(model.getColumnCount() == 3);
             adjustColumnModel();
             revalidate();
-        }});
+        });
         
         optionsPanel.add(advancedSearch);
         advancedSearch.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -483,9 +483,7 @@ public class MetadataEditor extends JPanel
 
         // As this can be lazily constructed, included the request for a selection listener, if this is the
         // first time we've been created, simulate an update call from the selection.
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
-            selectionChanged(VUE.getSelection());
-        }}); 
+        GUI.invokeAfterAWT(() -> selectionChanged(VUE.getSelection()));
                 
     }
     
@@ -977,14 +975,14 @@ public class MetadataEditor extends JPanel
             //if (INSTANCE_COLUMN == 0) box.add(catCombo);
 
             // note: if this had been an action listener insted of an item listener, we may not have had to deal with the event disabling code
-            catCombo.addItemListener(new ItemListener() { public void itemStateChanged(final ItemEvent ie) {
+            catCombo.addItemListener(ie -> {
                 // Note: this is being fired at from the INTERNAL select down in selectKnownCategory, and always has been!
                 // No wonder the combo-box has been so wiggy.  We have to handle event ignoring for this to work.
                 if (ignoreCategorySelectEvents || ie.getStateChange() != ItemEvent.SELECTED)
                     return;
-                
+
                 if (DEBUG.PAIN) debug("catCombo itemStateChanged " + Util.tags(ie.getItem()));
-                
+
                 if (ie.getItem() instanceof edu.tufts.vue.metadata.gui.EditCategoryItem) {
                     if (mdTable.getCellEditor() == null) {
                         // We shouldn't see this now that events are disabled when editCategory refreshes the model.
@@ -998,7 +996,7 @@ public class MetadataEditor extends JPanel
                     catComboHasMadeSelection(ie);
                     mdTable.stopAnyEditing();
                 }
-            }});
+            });
 
         }            
        
@@ -1122,13 +1120,13 @@ public class MetadataEditor extends JPanel
                //       THIS IS WHERE THE VueMetadataElement VALUE IS EXTRACTED FROM THE MODEL AND PUSHED TO THE UI
                //---------------------------------------------------------------------------------------------------------------
                load_UI_text( vme ); // copy into field
-               GUI.invokeAfterAWT(new Runnable() { public void run() {
+               GUI.invokeAfterAWT(() -> {
                    // This object is not yet in the AWT hierarchy (we haven't even returned it yet).  It
                    // normally will be alive be by the time this is run.
                    field.requestFocus();
                    if (vme == InputVME)
                        field.selectAll();
-               }}); 
+               });
                MetadataEditor.this.activeTextEdit = this;
                // field.setBorder(null); // this will remove the focus border and cause the field to fill the entire cell
                return field;

@@ -338,14 +338,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         final XMLView xmlAction = new XMLView("XML View");*/
         final RecentlyOpenedFilesManager rofm = RecentlyOpenedFilesManager.getInstance();
 
-        rofm.getPreference().addVuePrefListener(new VuePrefListener()
-        {
-			public void preferenceChanged(VuePrefEvent prefEvent) {
-				rebuildRecentlyOpenedItems(fileMenu, recentlyOpenedMenu, rofm);
-				
-			}
-        	
-        });
+        rofm.getPreference().addVuePrefListener(prefEvent -> rebuildRecentlyOpenedItems(fileMenu, recentlyOpenedMenu, rofm));
         // create menu for dataset import
        
         // Note: now that repositories are configured after loading, this gets called
@@ -355,111 +348,109 @@ public class VueMenuBar extends javax.swing.JMenuBar
         // this code is idempotent, so it can be re-run as many times as needed.  It
         // must stay this way.
         
-        edu.tufts.vue.dsm.impl.VueDataSourceManager.getInstance().addDataSourceListener(new edu.tufts.vue.dsm.DataSourceListener() {
-            public void changed(edu.tufts.vue.dsm.DataSource[] dataSource, Object state, edu.tufts.vue.dsm.DataSource changed) {
-                if (DEBUG.DR) Log.debug("data sources changed; " + state);
-                if (state == VueDataSourceManager.DS_CONFIGURED) {
-                    // Rebuild the publish menu.  Note that we don't wait for just
-                    // DS_ALL_CONFIGURED, as it's possible that may never come
-                } else if (state == VueDataSourceManager.DS_ALL_CONFIGURED && VUE.BLOCKING_OSID_LOAD) {
-                    // Rebuild the publish menu.  If OSID load is blocking, we won't get
-                    // any DS_CONFIGURED events -- only the DS_ALL_CONFIGURED at the
-                    // end.
-                } else {
-                    return;
-                }
-                    
-                //final int rebuildCount = PublishRebuildCount.incrementAndGet();
-                final List<Action> typeActions = new java.util.ArrayList();
-           
-                int count = 0;
-                boolean sakaiFlag = false;
-                boolean fedoraFlag = false;
-                //publishMenu.removeAll();
-                final List<Action> publishActions = new java.util.ArrayList();
-                for (edu.tufts.vue.dsm.DataSource source : dataSource) {
-                    try {
-                        final org.osid.repository.Repository r = source.getRepository();
-                        if (r == null) {
-                            if (DEBUG.DR) Log.debug("null repository in " + source);
-                            continue;
-                        }
-                        if (r.getType().isEqual(edu.tufts.vue.dsm.DataSourceTypes.FEDORA_REPOSITORY_TYPE)) {
-                            if (!fedoraFlag) {
-                                typeActions.add(PublishActionFactory.createPublishAction(edu.tufts.vue.dsm.DataSourceTypes.FEDORA_REPOSITORY_TYPE));
-                                fedoraFlag = true;
-                                if (DEBUG.DR) Log.debug("PUBLISHABLE: " + source);
-                            }
-                            publishActions.add(PublishActionFactory.createPublishAction(source));
-                            count++;
-                        } else if (r.getType().isEqual(edu.tufts.vue.dsm.DataSourceTypes.SAKAI_REPOSITORY_TYPE)) {
-                            if (!sakaiFlag) {
-                                typeActions.add(PublishActionFactory.createPublishAction(edu.tufts.vue.dsm.DataSourceTypes.SAKAI_REPOSITORY_TYPE));
-                                sakaiFlag = true;
-                                if (DEBUG.DR) Log.debug("PUBLISHABLE: " + source);
-                            }
-                            publishActions.add(PublishActionFactory.createPublishAction(source));
-                            count++;
-                        }
-
-                    } catch (org.osid.repository.RepositoryException ex) {
-                        Log.error("changed:", ex);
-                    }
-                }
-                // todo: could create an GUI MostRecentOnly Runnable with an exec that is only called
-                // if it's the most recent -- would be very handy -- tho how to collate with various
-                // types?  Would need to have a HashMap of all class instances (the inner anonomous
-                // one generated) containing atomic counts for each instance -- eithar that or require
-                // passing in a constant AtomicLong for each instancing group -- that'd be easier.
-
-                final int rebuildCount = PublishRebuildCount.incrementAndGet();
-                // technically, would be most efficient to increment this counter
-                // above at the moment we know we'll be issuing a new AWT invocation,
-                // tho any exception between then and here would have to be caught
-                // to ensure the menu was rebuilt no matter what.
-
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-
-                    final int curCount = PublishRebuildCount.get();
-
-                    if (rebuildCount < curCount) {
-                        if (DEBUG.INIT || DEBUG.DR) Log.debug("skipping rebuild; runnable count " + rebuildCount + " < " + curCount);
-                        return;
-                    } else {
-                        Log.info("rebuilding with " + publishActions.size()
-                                 + " publishable data source(s) after "
-                                 + curCount
-                                 + " updates");
-                    }
-
-                    // rebuild the menus on the AWT thread for thread safety
-
-                    publishMenu.removeAll();
-
-                    if (typeActions.size() > 0) {
-                        
-                        for (Action a : typeActions)
-                            publishMenu.add(a);
-                        
-                        if (publishActions.size() > 0) {
-                            publishMenu.addSeparator();    
-                            for (Action a : publishActions)
-                                publishMenu.add(a);
-                        }
-                        
-                    } else {
-                        
-                        // no accelerator key for this menu
-                        publishMenu.add(createWindowItem(VUE.getContentDock(), 0, VueResources.getString("menu.publisher.resourcewindow")));
-                    }
-
-                    publishMenu.setEnabled(false);
-                    fileMenu.remove(publishMenu);
-                    fileMenu.add(publishMenu,11);
-                    
-                }});
-                
+        edu.tufts.vue.dsm.impl.VueDataSourceManager.getInstance().addDataSourceListener((dataSource, state, changed) -> {
+            if (DEBUG.DR) Log.debug("data sources changed; " + state);
+            if (state == VueDataSourceManager.DS_CONFIGURED) {
+                // Rebuild the publish menu.  Note that we don't wait for just
+                // DS_ALL_CONFIGURED, as it's possible that may never come
+            } else if (state == VueDataSourceManager.DS_ALL_CONFIGURED && VUE.BLOCKING_OSID_LOAD) {
+                // Rebuild the publish menu.  If OSID load is blocking, we won't get
+                // any DS_CONFIGURED events -- only the DS_ALL_CONFIGURED at the
+                // end.
+            } else {
+                return;
             }
+
+            //final int rebuildCount = PublishRebuildCount.incrementAndGet();
+            final List<Action> typeActions = new java.util.ArrayList();
+
+            int count = 0;
+            boolean sakaiFlag = false;
+            boolean fedoraFlag = false;
+            //publishMenu.removeAll();
+            final List<Action> publishActions = new java.util.ArrayList();
+            for (edu.tufts.vue.dsm.DataSource source : dataSource) {
+                try {
+                    final org.osid.repository.Repository r = source.getRepository();
+                    if (r == null) {
+                        if (DEBUG.DR) Log.debug("null repository in " + source);
+                        continue;
+                    }
+                    if (r.getType().isEqual(edu.tufts.vue.dsm.DataSourceTypes.FEDORA_REPOSITORY_TYPE)) {
+                        if (!fedoraFlag) {
+                            typeActions.add(PublishActionFactory.createPublishAction(edu.tufts.vue.dsm.DataSourceTypes.FEDORA_REPOSITORY_TYPE));
+                            fedoraFlag = true;
+                            if (DEBUG.DR) Log.debug("PUBLISHABLE: " + source);
+                        }
+                        publishActions.add(PublishActionFactory.createPublishAction(source));
+                        count++;
+                    } else if (r.getType().isEqual(edu.tufts.vue.dsm.DataSourceTypes.SAKAI_REPOSITORY_TYPE)) {
+                        if (!sakaiFlag) {
+                            typeActions.add(PublishActionFactory.createPublishAction(edu.tufts.vue.dsm.DataSourceTypes.SAKAI_REPOSITORY_TYPE));
+                            sakaiFlag = true;
+                            if (DEBUG.DR) Log.debug("PUBLISHABLE: " + source);
+                        }
+                        publishActions.add(PublishActionFactory.createPublishAction(source));
+                        count++;
+                    }
+
+                } catch (org.osid.repository.RepositoryException ex) {
+                    Log.error("changed:", ex);
+                }
+            }
+            // todo: could create an GUI MostRecentOnly Runnable with an exec that is only called
+            // if it's the most recent -- would be very handy -- tho how to collate with various
+            // types?  Would need to have a HashMap of all class instances (the inner anonomous
+            // one generated) containing atomic counts for each instance -- eithar that or require
+            // passing in a constant AtomicLong for each instancing group -- that'd be easier.
+
+            final int rebuildCount = PublishRebuildCount.incrementAndGet();
+            // technically, would be most efficient to increment this counter
+            // above at the moment we know we'll be issuing a new AWT invocation,
+            // tho any exception between then and here would have to be caught
+            // to ensure the menu was rebuilt no matter what.
+
+            GUI.invokeAfterAWT(() -> {
+
+                final int curCount = PublishRebuildCount.get();
+
+                if (rebuildCount < curCount) {
+                    if (DEBUG.INIT || DEBUG.DR) Log.debug("skipping rebuild; runnable count " + rebuildCount + " < " + curCount);
+                    return;
+                } else {
+                    Log.info("rebuilding with " + publishActions.size()
+                             + " publishable data source(s) after "
+                             + curCount
+                             + " updates");
+                }
+
+                // rebuild the menus on the AWT thread for thread safety
+
+                publishMenu.removeAll();
+
+                if (typeActions.size() > 0) {
+
+                    for (Action a : typeActions)
+                        publishMenu.add(a);
+
+                    if (publishActions.size() > 0) {
+                        publishMenu.addSeparator();
+                        for (Action a : publishActions)
+                            publishMenu.add(a);
+                    }
+
+                } else {
+
+                    // no accelerator key for this menu
+                    publishMenu.add(createWindowItem(VUE.getContentDock(), 0, VueResources.getString("menu.publisher.resourcewindow")));
+                }
+
+                publishMenu.setEnabled(false);
+                fileMenu.remove(publishMenu);
+                fileMenu.add(publishMenu,11);
+
+            });
+
         });
         
         ////////////////////////////////////////////////////////////////////////////////////

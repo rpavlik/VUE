@@ -310,11 +310,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     static {
 
         PresentationTool.AutoZoomPreference.addVuePrefListener
-            (new VuePrefListener() {
-                    public void preferenceChanged(VuePrefEvent pe) {
-                        AutoZoomEnabledInPresentations = (Boolean) pe.getNewValue();
-                    }
-                });
+            (pe -> AutoZoomEnabledInPresentations = (Boolean) pe.getNewValue());
 
     }
 
@@ -341,25 +337,23 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         addFocusListener(this);
 
         edu.tufts.vue.preferences.implementations.AutoZoomPreference.getInstance().addVuePrefListener
-            (new VuePrefListener() {
-                    public void preferenceChanged(VuePrefEvent pe) {
+            (pe -> {
 
-                        // Having this static flag set again by every open viewer when this
-                        // preference changes is overkill, but harmless.
+                // Having this static flag set again by every open viewer when this
+                // preference changes is overkill, but harmless.
 
-                        AutoZoomEnabled = (Boolean) pe.getNewValue();
+                AutoZoomEnabled = (Boolean) pe.getNewValue();
 
-                        // If we're over a node in the active viewer, immediately zoom-up or zoom-off.
-                        
-                        if (VUE.getActiveViewer() == MapViewer.this) {
-                            if (AutoZoomEnabled) {
-                                runRolloverTask();
-                            } else {
-                                clearRollover();
-                            }
-                        }
+                // If we're over a node in the active viewer, immediately zoom-up or zoom-off.
+
+                if (VUE.getActiveViewer() == MapViewer.this) {
+                    if (AutoZoomEnabled) {
+                        runRolloverTask();
+                    } else {
+                        clearRollover();
                     }
-                });
+                }
+            });
 
         
         
@@ -710,9 +704,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (SwingUtilities.isEventDispatchThread()) {
                 doAdjustCanvasSize(expand, trimNorthWest, trimSouthEast);
             } else {
-                GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    doAdjustCanvasSize(expand, trimNorthWest, trimSouthEast);
-                }});
+                GUI.invokeAfterAWT(() -> doAdjustCanvasSize(expand, trimNorthWest, trimSouthEast));
             }
         }
     }
@@ -1400,7 +1392,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             //ZoomTool.setZoomFit(this);
             //VUE.invokeAfterAWT(new Runnable() { public void run() {  resetScrollRegion(); }});
             resetScrollRegion();
-            VUE.invokeAfterAWT(new Runnable() { public void run() { ZoomTool.setZoomFit(MapViewer.this); }});
+            VUE.invokeAfterAWT(() -> ZoomTool.setZoomFit(MapViewer.this));
             
         } else {
             ZoomTool.setZoomFitRegion(this,
@@ -1673,13 +1665,13 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
         if (mMap != null && mMap == mFocal && !Images.lowMemoryConditions()) {
             final LWMap map = mMap;
-            VUE.invokeAfterAWT(new Runnable() { public void run() {
+            VUE.invokeAfterAWT(() -> {
                 //Log.debug("map=" + map);
                 if (!map.getClientData(Boolean.class, MAP_REQUESTED_CACHING)) {
                     map.setClientData(Boolean.class, MAP_REQUESTED_CACHING, true);
                     preCacheMap(map);
                 }
-            }});
+            });
         }
     }
 
@@ -1718,7 +1710,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         
         if (!Images.lowMemoryConditions()) {
             if (DEBUG.IMAGE) Util.dump(toCache);
-            VUE.invokeAfterAWT(new Runnable() { public void run() {
+            VUE.invokeAfterAWT(() -> {
                 Log.info("pre-cache run " + Util.quote(map.getLabel()) + ": " + Util.tags(toCache));
                 for (LWComponent c : toCache) {
                     try {
@@ -1729,7 +1721,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                     if (Images.lowMemoryConditions())
                         break;
                 }
-            }});
+            });
         }
     }
 
@@ -3520,7 +3512,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (inScrollPane)
                 adjustCanvasSize(); // need for intial scroll-bar sizes if bigger than viewport on startup
             // todo: do we really want this running the first the the full-screen window appears?
-            VUE.invokeAfterAWT(new Runnable() { public void run() { ensureMapVisible(); }});
+            VUE.invokeAfterAWT(() -> ensureMapVisible());
             //trackViewChanges("first-paint");
         }
 
@@ -3651,10 +3643,10 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (DEBUG.Enabled) out("LOADING SET...");
         } else {
             if (DEBUG.Enabled) out("LOADING CLEARING...");
-            VUE.invokeAfterAWT(new Runnable() { public void run() {
+            VUE.invokeAfterAWT(() -> {
                 mFocalLoading = false;
                 if (DEBUG.Enabled) out("LOADING CLEARED");
-            }});
+            });
         }
     }
     
@@ -6209,7 +6201,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 	                    		{
 	                    			deepSelection = new HashSet<>();
 		                            Toolbox.findChildrenToDepth(userSelection, deepSelection, 
-		    								userSelection, depth, true, true, new Hashtable<LWComponent,Integer>());
+		    								userSelection, depth, true, true, new Hashtable<>());
 		
 		                            // -- now we have a set with nodes and links
 		
@@ -7153,20 +7145,20 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 if (e.isShiftDown()) {
                     panScrollRegion(rotation * PanFactor, 0);
                     // for (int i = 0; i < rotation; i++) GUI.invokeAfterAWT(PanLeft);
-                    GUI.invokeAfterAWT(new Runnable() { public void run() { panScrollRegion(rotation * PanFactor, 0); }});
-                    GUI.invokeAfterAWT(new Runnable() { public void run() { panScrollRegion(rotation * PanFactor, 0); }});
+                    GUI.invokeAfterAWT(() -> panScrollRegion(rotation * PanFactor, 0));
+                    GUI.invokeAfterAWT(() -> panScrollRegion(rotation * PanFactor, 0));
                 } else {
                     panScrollRegion(0, rotation * PanFactor);
                     // for (int i = 0; i < rotation; i++) GUI.invokeAfterAWT(PanRight);
-                    GUI.invokeAfterAWT(new Runnable() { public void run() { panScrollRegion(0, rotation * PanFactor); }});
-                    GUI.invokeAfterAWT(new Runnable() { public void run() { panScrollRegion(0, rotation * PanFactor); }});
+                    GUI.invokeAfterAWT(() -> panScrollRegion(0, rotation * PanFactor));
+                    GUI.invokeAfterAWT(() -> panScrollRegion(0, rotation * PanFactor));
                 }
             }
             //lastRotationTime = System.currentTimeMillis();
         }
 
-    private final Runnable PanLeft  = new Runnable() { public void run() { panScrollRegion(2, 0); } };
-    private final Runnable PanRight = new Runnable() { public void run() { panScrollRegion(0, 2); } };
+    private final Runnable PanLeft  = () -> panScrollRegion(2, 0);
+    private final Runnable PanRight = () -> panScrollRegion(0, 2);
 
 
     
@@ -8475,7 +8467,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         }
     //} old InputHandler close
     
-    private final Runnable focusIndicatorRepaint = new Runnable() { public void run() { mFocusIndicator.repaint(); }};
+    private final Runnable focusIndicatorRepaint = () -> mFocusIndicator.repaint();
     
     public void activeChanged(ActiveEvent e, MapViewer viewer) {
         // We delay the repaint request for the focus indicator on this event because normally, it

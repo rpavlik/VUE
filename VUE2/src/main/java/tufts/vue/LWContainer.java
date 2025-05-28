@@ -1092,44 +1092,38 @@ public abstract class LWContainer extends LWComponent
      * other.
      */
 
-    protected static final Comparator ForwardOrder = new Comparator<LWComponent>() {
-        public int compare(LWComponent c1, LWComponent c2) {
-            return c2.getParent().indexOf(c2) - c1.getParent().indexOf(c1);
-        }};
+    protected static final Comparator ForwardOrder = (Comparator<LWComponent>) (c1, c2) -> c2.getParent().indexOf(c2) - c1.getParent().indexOf(c1);
     
-    protected static final Comparator ReverseOrder = new Comparator<LWComponent>() {
-        public int compare(LWComponent c1, LWComponent c2) {
-            LWContainer parent1 = c1.getParent();
-            LWContainer parent2 = c2.getParent();
-            if (parent1 == null)
-                return Short.MIN_VALUE;
-            else if (parent2 == null)
-                return Short.MAX_VALUE;
-            if (parent1 == parent2)
-                return parent1.indexOf(c1) - parent1.indexOf(c2);
-            else
-                return parent1.getDepth() - parent2.getDepth();
-        }};
+    protected static final Comparator ReverseOrder = (Comparator<LWComponent>) (c1, c2) -> {
+        LWContainer parent1 = c1.getParent();
+        LWContainer parent2 = c2.getParent();
+        if (parent1 == null)
+            return Short.MIN_VALUE;
+        else if (parent2 == null)
+            return Short.MAX_VALUE;
+        if (parent1 == parent2)
+            return parent1.indexOf(c1) - parent1.indexOf(c2);
+        else
+            return parent1.getDepth() - parent2.getDepth();
+    };
 
     /** If all the children do not have the same parent, the sort order won't be 100% correct. */
-    public static final Comparator ZOrderSorter = new Comparator<LWComponent>() {
-            public int compare(LWComponent c1, LWComponent c2) {
-                final LWContainer parent1 = c1.getParent();
-                final LWContainer parent2 = c2.getParent();
+    public static final Comparator ZOrderSorter = (Comparator<LWComponent>) (c1, c2) -> {
+        final LWContainer parent1 = c1.getParent();
+        final LWContainer parent2 = c2.getParent();
 
-                // We can't get z-order on a node if it's an orphan (no
-                // parent), which is what any paste's or system drags
-                // will get us.  So we'll need to keep a sync'd a z-order
-                // value in LWComponent to support this in all cases.
+        // We can't get z-order on a node if it's an orphan (no
+        // parent), which is what any paste's or system drags
+        // will get us.  So we'll need to keep a sync'd a z-order
+        // value in LWComponent to support this in all cases.
 
-                if (parent1 == parent2)
-                    return parent1.getChildren().indexOf(c1) - parent2.getChildren().indexOf(c2);
-                else
-                    return 0;
-                // it's possible to figure out which parent is deepest,
-                // but we'll save that for later.
-            }
-        };
+        if (parent1 == parent2)
+            return parent1.getChildren().indexOf(c1) - parent2.getChildren().indexOf(c2);
+        else
+            return 0;
+        // it's possible to figure out which parent is deepest,
+        // but we'll save that for later.
+    };
     
     
     

@@ -850,34 +850,29 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
             panel.add(buttonImage);
             panel.add(hotSpot);
             panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(0,5,0,5));
-            //$
-            final javax.swing.JColorChooser chooser = new javax.swing.JColorChooser();
-            final java.awt.event.ActionListener okListener = new java.awt.event.ActionListener() {
-                public void actionPerformed(java.awt.event.ActionEvent e) {
-                    buttonImage.setBackground(chooser.getColor());
-                    if(/*current!=null &&*/ (parameterChoice.getSelectedIndex() == 0)) {
-                        Style currStyle = StyleMap.getStyle("node.w"+(currentRow+1));
-                        if(currStyle!=null) {
-                            //currStyle.setBackgroundColor(chooser.getColor());
-                            currStyle.setAttribute("background",Style.colorToHex(chooser.getColor()));
-                        }
-                    }
-                    if(/*current!=null && */(parameterChoice.getSelectedIndex() == 1)) {
-                        Style currStyle = StyleMap.getStyle("link.w"+(currentRow+1));
-                        if(currStyle!=null) {
-                            //currStyle.setBackgroundColor(chooser.getColor());
-                            currStyle.setAttribute("background",Style.colorToHex(chooser.getColor()));
-                        }
-                    }
-                    
-                    IntervalStylePreview isp = (IntervalStylePreview)intervalList.getModel().getValueAt(currentRow,1);
-                    isp.setBackground(chooser.getColor());
-                    intervalList.getModel().setValueAt(isp,currentRow,1);
-                    
-                    panel.repaint();
-                }
-                //stopCellEditing();
 
+            final javax.swing.JColorChooser chooser = new javax.swing.JColorChooser();
+
+            final java.awt.event.ActionListener okListener = e -> {
+                buttonImage.setBackground(chooser.getColor());
+                if ((parameterChoice.getSelectedIndex() == 0)) {
+                    Style currStyle = StyleMap.getStyle("node.w" + (currentRow + 1));
+                    if (currStyle != null) {
+                        currStyle.setAttribute("background", Style.colorToHex(chooser.getColor()));
+                    }
+                }
+                if (parameterChoice.getSelectedIndex() == 1) {
+                    Style currStyle = StyleMap.getStyle("link.w" + (currentRow + 1));
+                    if (currStyle != null) {
+                        currStyle.setAttribute("background", Style.colorToHex(chooser.getColor()));
+                    }
+                }
+
+                IntervalStylePreview isp = (IntervalStylePreview) intervalList.getModel().getValueAt(currentRow, 1);
+                isp.setBackground(chooser.getColor());
+                intervalList.getModel().setValueAt(isp, currentRow, 1);
+
+                panel.repaint();
             };
             hotSpot.addMouseListener(new java.awt.event.MouseAdapter(){
                 public void mousePressed(java.awt.event.MouseEvent e) {

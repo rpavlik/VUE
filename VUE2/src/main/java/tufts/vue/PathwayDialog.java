@@ -57,16 +57,12 @@ public class PathwayDialog extends JDialog implements ActionListener, KeyListene
     }
     public void setVisible(boolean b)
     {
-    	super.setVisible(b);
-    	SwingUtilities.invokeLater(new Runnable() {
-    	public void run()
-    	{
-    		textField.setFocusable(true);    		
-    	    textField.requestFocusInWindow();
-    	    textField.selectAll();
-        }}
-    	);
-    	
+        super.setVisible(b);
+        SwingUtilities.invokeLater(() -> {
+            textField.setFocusable(true);
+            textField.requestFocusInWindow();
+            textField.selectAll();
+        });
     	
     }
     private static int newcnt = 1;

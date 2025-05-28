@@ -259,10 +259,7 @@ public abstract class MenuButton<T> extends JButton
         //final String valueKey = getPropertyName() + ".value"; // propertyName usually not set at this point!
             
         final ActionListener menuItemAction =
-            new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    handleMenuSelection(e);
-                }};
+                e -> handleMenuSelection(e);
             
         for (int i = 0; i < values.length; i++) {
             JMenuItem item;
@@ -290,8 +287,7 @@ public abstract class MenuButton<T> extends JButton
 
         if (createCustom) {
             JMenuItem item = new JMenuItem(VueResources.getString("menubutton.custom")); // todo: more control over this item
-            item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) { handleValueSelection(runCustomChooser()); }});
+            item.addActionListener(e -> handleValueSelection(runCustomChooser()));
             mPopup.add(item);
         }
 

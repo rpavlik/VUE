@@ -94,26 +94,24 @@ public class DatasetLoader {
         }
         radioButtons[0].setSelected(true);
         JButton loadButton = new JButton(VueResources.getString("jbutton.load.label"));
-        loadButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String command = group.getSelection().getActionCommand();
-                if (command == relationalDS) {
-                    ds = new RelationalDataset();
-                    ds.setLayout(new RelRandomLayout());
-                } else if(command == folderDS) {
-                    ds = new FolderDataset();
-                }else {
-                    ds  = new ListDataset();
-                }
-                ds.setFileName(fileName);
-                try {
-                    ds.loadDataset();
-                } catch(Exception ex) {
-                    ex.printStackTrace();
-                }
-              //  ds.createOntology();
-                dialog.setVisible(false);
+        loadButton.addActionListener(e -> {
+            String command = group.getSelection().getActionCommand();
+            if (command == relationalDS) {
+                ds = new RelationalDataset();
+                ds.setLayout(new RelRandomLayout());
+            } else if(command == folderDS) {
+                ds = new FolderDataset();
+            }else {
+                ds  = new ListDataset();
             }
+            ds.setFileName(fileName);
+            try {
+                ds.loadDataset();
+            } catch(Exception ex) {
+                ex.printStackTrace();
+            }
+          //  ds.createOntology();
+            dialog.setVisible(false);
         });
         
         return createPane(VueResources.getString("pane.dataset.message"),radioButtons, loadButton);

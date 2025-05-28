@@ -223,13 +223,11 @@ public class InspectorPane extends WidgetStack
 
         // No idea why we might need to do this twice right now...
         
-        GUI.invokeAfterAWT(new Runnable() { 
-                public void run() { 
-                    mScrollPane.getVerticalScrollBar().setValue(0);
-                    mScrollPane.getVerticalScrollBar().setValueIsAdjusting(false);
-                    //VUE.getInfoDock().scrollToTop();
-                } 
-            });
+        GUI.invokeAfterAWT(() -> {
+            mScrollPane.getVerticalScrollBar().setValue(0);
+            mScrollPane.getVerticalScrollBar().setValueIsAdjusting(false);
+            //VUE.getInfoDock().scrollToTop();
+        });
         
            
     }
@@ -729,8 +727,7 @@ public class InspectorPane extends WidgetStack
     }
 
     private static final HyperlinkListener DefaultHyperlinkListener =
-        new HyperlinkListener() {
-            public void hyperlinkUpdate(HyperlinkEvent e) {
+            e -> {
                 //Log.debug(e);
                 if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
                     java.net.URL url = null;
@@ -739,14 +736,13 @@ public class InspectorPane extends WidgetStack
                         if (url == null) {
                             Log.warn("no URL in " + e);
                         } else {
-                            tufts.vue.VueUtil.openURL(url.toString());
+                            VueUtil.openURL(url.toString());
                         }
                     } catch (Throwable t) {
                         Log.warn("hyperlinkUpdate; url=" + url + "; " + e, t);
                     }
                 }
-            }
-        };
+            };
 
 //     private static String findProperty(Resource r, LWComponent node, String... keys) {
         
@@ -1256,12 +1252,10 @@ public class InspectorPane extends WidgetStack
     {
         expandCollapsePanes(NOTES);
     	
-    	SwingUtilities.invokeLater(new Runnable() { 
-            public void run() { 
-                KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
-                mNotes.getTextPane().requestFocusInWindow();
-            } 
-    	} );
+    	SwingUtilities.invokeLater(() -> {
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().clearGlobalFocusOwner();
+            mNotes.getTextPane().requestFocusInWindow();
+        });
 
     }
     

@@ -97,11 +97,9 @@ public class FillToolPanel extends ToolPanel implements ComponentListener
         mFillColorButton.setColor((Color)fillPrefColor.getValue());
         mFillColorButton.setToolTipText("Fill Color");
         //mFillColorButton.addPropertyChangeListener(this); // always last or we get prop change events for setup
-        mFillColorButton.addPropertyChangeListener(new PropertyChangeListener() {	
-                public void propertyChange(PropertyChangeEvent e) {
-                    if (e instanceof LWPropertyChangeEvent)
-                        fillPrefColor.setValue(mFillColorButton.getColor());
-                }        	
+        mFillColorButton.addPropertyChangeListener(e -> {
+            if (e instanceof LWPropertyChangeEvent)
+                fillPrefColor.setValue(mFillColorButton.getColor());
         });
         //-------------------------------------------------------
         // Stroke Color menu
@@ -113,11 +111,9 @@ public class FillToolPanel extends ToolPanel implements ComponentListener
         //mStrokeColorButton.setButtonIcon(new LineIcon(16,16, 4, false));
         mStrokeColorButton.setToolTipText("Stroke Color");
         //mStrokeColorButton.addPropertyChangeListener(this);
-        mStrokeColorButton.addPropertyChangeListener(new PropertyChangeListener() {	
-                public void propertyChange(PropertyChangeEvent e) {
-                    if (e instanceof LWPropertyChangeEvent)
-                        strokePrefColor.setValue(mStrokeColorButton.getColor());							
-                }        	
+        mStrokeColorButton.addPropertyChangeListener(e -> {
+            if (e instanceof LWPropertyChangeEvent)
+                strokePrefColor.setValue(mStrokeColorButton.getColor());
         });
 
         lineLabel.addMouseListener(new MouseAdapter() {

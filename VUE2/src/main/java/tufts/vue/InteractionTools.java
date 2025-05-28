@@ -579,94 +579,90 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		}
 
 
-		Runnable sliderMoved = new Runnable() {
-			public void run() {
-				try {
-					LWSelection	guiSelection = VUE.getSelection();
-					int			depth = depthSlider.getValue();
+		Runnable sliderMoved = () -> {
+            try {
+                LWSelection	guiSelection = VUE.getSelection();
+                int			depth = depthSlider.getValue();
 
-					// ignoreSelectionEvents = true means that the selection events that will be coming up
-					// are caused by deepening the selection and should be ignored -- ie, they shouldn't
-					// cause the selection to be deepened further.
-					ignoreSelectionEvents = true;
+                // ignoreSelectionEvents = true means that the selection events that will be coming up
+                // are caused by deepening the selection and should be ignored -- ie, they shouldn't
+                // cause the selection to be deepened further.
+                ignoreSelectionEvents = true;
 
-					if (previousDepth == 0) {
-						// userSelection will be empty;  set it to the GUI's current selection.
-						userSelection.addAll(guiSelection);
-					} else {
-						// deepSelection will be recomputed below (if previousDepth is 0, it's already empty).
-						deepSelection.clear();
+                if (previousDepth == 0) {
+                    // userSelection will be empty;  set it to the GUI's current selection.
+                    userSelection.addAll(guiSelection);
+                } else {
+                    // deepSelection will be recomputed below (if previousDepth is 0, it's already empty).
+                    deepSelection.clear();
 
-						if (depth < previousDepth) {
-							// deepSelection will be smaller;  reset the GUI's selection to userSelection.
-							guiSelection.setTo(userSelection);
-						}
-					}
+                    if (depth < previousDepth) {
+                        // deepSelection will be smaller;  reset the GUI's selection to userSelection.
+                        guiSelection.setTo(userSelection);
+                    }
+                }
 
-					if (depth == 0) {
-						// Done with userSelection for now;  empty it.
-						userSelection.clear();
-					} else {
-						// Find deepSelection and add it to the GUI's selection.
-						Toolbox.findChildrenToDepth(userSelection, deepSelection, 
-								userSelection, depth, incomingLinksCheckBox.isSelected(), outgoingLinksCheckBox.isSelected(), new Hashtable<LWComponent,Integer>());
-						guiSelection.add(deepSelection.iterator());
-					}
+                if (depth == 0) {
+                    // Done with userSelection for now;  empty it.
+                    userSelection.clear();
+                } else {
+                    // Find deepSelection and add it to the GUI's selection.
+                    Toolbox.findChildrenToDepth(userSelection, deepSelection,
+                            userSelection, depth, incomingLinksCheckBox.isSelected(), outgoingLinksCheckBox.isSelected(), new Hashtable<>());
+                    guiSelection.add(deepSelection.iterator());
+                }
 
-					previousDepth = depth;
+                previousDepth = depth;
 
-					zoomIfLocked();
-				}
-				catch (Exception ex) {
-					ex.printStackTrace();
-					Log.error("exception in InteractionPanel.sliderMoved()", ex);
-				}
-				finally {
-					ignoreSelectionEvents = false;
-				}
-			}
-		};
+                zoomIfLocked();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+                Log.error("exception in InteractionPanel.sliderMoved()", ex);
+            }
+            finally {
+                ignoreSelectionEvents = false;
+            }
+        };
 
 
-		Runnable selectionChanged = new Runnable() {
-			public void run() {
-				try {
-					LWSelection	guiSelection = VUE.getSelection();
-					int			depth = depthSlider.getValue();
+		Runnable selectionChanged = () -> {
+            try {
+                LWSelection	guiSelection = VUE.getSelection();
+                int			depth = depthSlider.getValue();
 
-					ignoreSelectionEvents = true;
+                ignoreSelectionEvents = true;
 
-					if (depth > 0) {
-						// Compute userSelection as the GUI's current selection minus deepSelection.
-						userSelection.clear();
-						userSelection.addAll(guiSelection);
+                if (depth > 0) {
+                    // Compute userSelection as the GUI's current selection minus deepSelection.
+                    userSelection.clear();
+                    userSelection.addAll(guiSelection);
 
-                        for (LWComponent lwComponent : deepSelection) {
-                            userSelection.remove(lwComponent);
-                        }
+for (LWComponent lwComponent : deepSelection) {
+userSelection.remove(lwComponent);
+}
 
-						// Find deepSelection.
-						deepSelection.clear();
-						Toolbox.findChildrenToDepth(userSelection, deepSelection, 
-								userSelection, depth, incomingLinksCheckBox.isSelected(), outgoingLinksCheckBox.isSelected(), new Hashtable<LWComponent,Integer>());
+                    // Find deepSelection.
+                    deepSelection.clear();
+                    Toolbox.findChildrenToDepth(userSelection, deepSelection,
+                            userSelection, depth, incomingLinksCheckBox.isSelected(), outgoingLinksCheckBox.isSelected(), new Hashtable<>());
 
-						// Set the GUI's selection to userSelection (it may have gotten smaller) and add deepSelection.
-						guiSelection.setTo(userSelection);
-						guiSelection.add(deepSelection);
-					}
+                    // Set the GUI's selection to userSelection (it may have gotten smaller) and add deepSelection.
+                    guiSelection.setTo(userSelection);
+                    guiSelection.add(deepSelection);
+                }
 
-					zoomSelButton.setEnabled(guiSelection.size() > 0);
-					zoomIfLocked();
-				}
-				catch (Exception ex) {
-					ex.printStackTrace();
-					Log.error("exception in InteractionPanel.selectionChanged()", ex);
-				}
-				finally {
-					ignoreSelectionEvents = false;
-				}
-			}
-		};
+                zoomSelButton.setEnabled(guiSelection.size() > 0);
+                zoomIfLocked();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+                Log.error("exception in InteractionPanel.selectionChanged()", ex);
+            }
+            finally {
+                ignoreSelectionEvents = false;
+            }
+        };
 
 
 	}

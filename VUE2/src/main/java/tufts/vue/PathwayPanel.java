@@ -348,35 +348,27 @@ public class PathwayPanel extends JPanel
         else
         	bkgrndColorButton.selectValue(VUE.getActiveMap().getPresentationBackgroundValue());
         bkgrndColorButton.setPropertyKey(LWKey.PresentationColor);
-        bkgrndColorButton.addPropertyChangeListener( new PropertyChangeListener() {
-            public void propertyChange(PropertyChangeEvent e) 
-            {
-            
-            	 if (!(e instanceof LWPropertyChangeEvent))
-                     return;
-            	 Color color = null;
-                
-                 color= (Color) e.getNewValue();
-                
-                                
-                
-                final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
-                //System.out.println(colorString); 
-                VUE.getActiveMap().setPresentationBackgroundValue(color);
-            }
+        bkgrndColorButton.addPropertyChangeListener(e -> {
+
+             if (!(e instanceof LWPropertyChangeEvent))
+                 return;
+             Color color = null;
+
+             color= (Color) e.getNewValue();
+
+
+
+            final String colorString = "#" + Integer.toHexString(color.getRGB()).substring(2);
+            //System.out.println(colorString);
+            VUE.getActiveMap().setPresentationBackgroundValue(color);
         });
         
-        tufts.vue.VUE.addActiveListener(tufts.vue.LWMap.class,new ActiveListener()
-        {
-
-			public void activeChanged(ActiveEvent e) 
-			{
-				//System.out.println("ACTIVE MAP CHANGED");
-				if (e== null || e.active == null)
-					return;
-				LWMap map = (LWMap)e.active;
-				bkgrndColorButton.selectValue(map.getPresentationBackgroundValue());
-			}
+        tufts.vue.VUE.addActiveListener(tufts.vue.LWMap.class, e -> {
+            //System.out.println("ACTIVE MAP CHANGED");
+            if (e== null || e.active == null)
+                return;
+            LWMap map = (LWMap)e.active;
+            bkgrndColorButton.selectValue(map.getPresentationBackgroundValue());
         }); 
         //gbc.insets = new Insets(0,0,0,300);                       
         enclosingPanel.add(bkgrndColorButton,gbc);
@@ -428,8 +420,7 @@ public class PathwayPanel extends JPanel
         VUE.addActiveListener(LWPathway.class, this);
         VUE.addActiveListener(LWPathway.Entry.class, this);
         
-        VUE.getSelection().addListener(new LWSelection.Listener() {
-                public void selectionChanged(LWSelection s) {
+        VUE.getSelection().addListener(s -> {
 //                     final LWPathway curPath = getSelectedPathway();
 //                     if (s.size() == 1 && s.first().inPathway(curPath)) {
 //                         if (DEBUG.Enabled)
@@ -439,9 +430,8 @@ public class PathwayPanel extends JPanel
 //                                                + Util.TERM_CLEAR);
 //                         //curPath.setIndex(curPath.firstIndexOf(s.first()));
 //                     } else
-                        updateEnabledStates();
-                }
-            }     
+                updateEnabledStates();
+        }
         );          
     }
     

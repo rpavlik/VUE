@@ -174,10 +174,7 @@ class DockRegion
         }
     }
 
-    private static final Comparator SortByX = new Comparator() {
-            public int compare(Object w1, Object w2) {
-                return ((Window)w1).getX() - ((Window)w2).getX();
-            }};
+    private static final Comparator SortByX = (w1, w2) -> ((Window)w1).getX() - ((Window)w2).getX();
         
 
     private void sortByX() {

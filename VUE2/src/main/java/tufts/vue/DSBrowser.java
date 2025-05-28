@@ -161,13 +161,11 @@ public class DSBrowser extends ContentBrowser {
 				DataSetViewer.dataSourceList.addOrdered(ds);
 				dataSetViewer.setActiveDataSource(ds);
 
-				GUI.invokeAfterAWT(new Runnable() {
-					public void run() {
-						try {
-							DataSetViewer.saveDataSetViewer();
-						} catch (Throwable t) {
-							tufts.Util.printStackTrace(t);
-						}
+				GUI.invokeAfterAWT(() -> {
+					try {
+						DataSetViewer.saveDataSetViewer();
+					} catch (Throwable t) {
+						tufts.Util.printStackTrace(t);
 					}
 				});
 			}
@@ -208,13 +206,11 @@ public class DSBrowser extends ContentBrowser {
 						javax.swing.JOptionPane.OK_CANCEL_OPTION) == javax.swing.JOptionPane.YES_OPTION) {
 					DataSetViewer.dataSourceList.getModelContents().removeElement(ds);
 
-					GUI.invokeAfterAWT(new Runnable() {
-						public void run() {
-							try {
-								DataSetViewer.saveDataSetViewer();
-							} catch (Throwable t) {
-								tufts.Util.printStackTrace(t);
-							}
+					GUI.invokeAfterAWT(() -> {
+						try {
+							DataSetViewer.saveDataSetViewer();
+						} catch (Throwable t) {
+							tufts.Util.printStackTrace(t);
 						}
 					});
 

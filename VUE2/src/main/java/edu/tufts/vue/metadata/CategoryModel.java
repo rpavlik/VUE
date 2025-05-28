@@ -51,33 +51,29 @@ public class CategoryModel extends ArrayList<edu.tufts.vue.ontology.Ontology>
     private static final Map<URL,edu.tufts.vue.ontology.Ontology> ontCache = new HashMap<>(); // is never cleared
     
     private edu.tufts.vue.ontology.Ontology customOntology;
+
     public CategoryModel() {
         Log.debug("Creating Category Model");
-        Runnable ontologyLoader = new Runnable()
-        {
-          public void run()
-          {
+        Runnable ontologyLoader = () -> {
             loadDefaultVUEOntologies();
             loadCustomOntology(false);
-            
-            /*if(defaultOntologyUrls[VRA].toString().indexOf("/edu/tufts/vue/metadata/vra_core_3.rdf") == -1)
-            {
-                System.out.println("warning: may be removing incorrect VRA url " + defaultOntologyUrls[VRA] );
-            }
-            removeDefaultOntology(VRA);*/
-            
-            edu.tufts.vue.preferences.implementations.MetadataSchemaPreference
-                    msp =
-                    edu.tufts.vue.preferences.implementations.MetadataSchemaPreference.getInstance();
-            
-            if(!msp.getDublinCoreValue())
-                removeDefaultOntology(DUBLIN_CORE);
-            
-            if(!msp.getVRAValue())
-                removeDefaultOntology(VRA);
-            
-            ontologiesLoaded = true;
+
+          /*if(defaultOntologyUrls[VRA].toString().indexOf("/edu/tufts/vue/metadata/vra_core_3.rdf") == -1)
+          {
+              System.out.println("warning: may be removing incorrect VRA url " + defaultOntologyUrls[VRA] );
           }
+          removeDefaultOntology(VRA);*/
+
+            edu.tufts.vue.preferences.implementations.MetadataSchemaPreference msp = edu.tufts.vue.preferences.implementations.MetadataSchemaPreference
+                    .getInstance();
+
+            if (!msp.getDublinCoreValue())
+                removeDefaultOntology(DUBLIN_CORE);
+
+            if (!msp.getVRAValue())
+                removeDefaultOntology(VRA);
+
+            ontologiesLoaded = true;
         };
         Thread loader = new Thread(ontologyLoader);
         loader.start();

@@ -222,12 +222,12 @@ public class DataTree extends javax.swing.JTree
             Log.warn(t); // an assistave measure only -- non fatal
         }
 
-        GUI.invokeOnEDT(new Runnable() { public void run() {
+        GUI.invokeOnEDT(() -> {
             if (FirstInstance.getAndSet(false)) {
                 if (DEBUG.ANNOTATE) Log.debug("FIRST RUN");
                 // Listen for changes to the ActiveMap
                 VUE.addActiveListener(LWMap.class, ActiveMapListener);
-                
+
                 // Simulate an active-map changed event to make sure we're listening to the active map.
                 ActiveMapListener.activeChanged(null, VUE.getActiveMap());
                 // ensure the global data is loaded 1st time from the ActiveMap
@@ -235,7 +235,7 @@ public class DataTree extends javax.swing.JTree
             }
             tree.kickAnnotate();
             ActiveTrees.add(tree); // make sure to do this last -- activeChanged above will kick all 1st time
-        }});
+        });
         
         return buildControllerUI(tree);
     }
@@ -294,9 +294,7 @@ public class DataTree extends javax.swing.JTree
                 
                 if (mSchema.isMatrixDataSet)
                 {
-                	GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    	applyMatrixRelations(newNodes);
-                    	}});
+                	GUI.invokeAfterAWT(() -> applyMatrixRelations(newNodes));
                 }
             }
             
@@ -309,9 +307,7 @@ public class DataTree extends javax.swing.JTree
                 }
                 
                 if (mSchema.isMatrixDataSet)
-                	GUI.invokeAfterAWT(new Runnable() { public void run() {
-                    	applyMatrixRelations(newNodes);
-                    	}});
+                	GUI.invokeAfterAWT(() -> applyMatrixRelations(newNodes));
             }
         } catch (Throwable t) {
             Log.warn("updateMap", t);
@@ -482,26 +478,10 @@ public class DataTree extends javax.swing.JTree
         tree.mUpdateButton.setFont(tufts.vue.gui.GUI.LabelFace);
         tree.mSendToMapButton.setFont(tufts.vue.gui.GUI.LabelFace);
 
-        tree.mNewRowsCheckBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    tree.enableUpdateButton();
-                }
-            });
-        tree.mChangedRowsCheckBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    tree.enableUpdateButton();
-                }
-            });
-       tree.mUpdateButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    tree.updateMap();
-                }
-            });
-        tree.mSendToMapButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    tree.sendSelectedToMap();
-                }
-            });
+        tree.mNewRowsCheckBox.addActionListener(e -> tree.enableUpdateButton());
+        tree.mChangedRowsCheckBox.addActionListener(e -> tree.enableUpdateButton());
+       tree.mUpdateButton.addActionListener(e -> tree.updateMap());
+        tree.mSendToMapButton.addActionListener(e -> tree.sendSelectedToMap());
 
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
 
@@ -636,14 +616,14 @@ public class DataTree extends javax.swing.JTree
             treeNode.getField().getStyleNode().setVisible(expanded);
         }
 
-        GUI.invokeAfterAWT(new Runnable() { public void run() {
+        GUI.invokeAfterAWT(() -> {
             if (!inDoubleClick) {
                 if (DEBUG.FOCUS) Log.debug("setExpandedState " + path + " = " + expanded + " RELAYING");
                 DataTree.super.setExpandedState(path, expanded);
-            } else 
+            } else
                 if (DEBUG.FOCUS) Log.debug("setExpandedState " + path + " = " + expanded + " SKIPPING");
             inDoubleClick = false;
-        }});
+        });
     }
 
     private boolean inDoubleClick;
@@ -1130,9 +1110,7 @@ public class DataTree extends javax.swing.JTree
 
     private void kickAnnotate() {
 
-        GUI.invokeOnEDT(new Runnable() { public void run() {
-            mUpdateButton.setEnabled(false);
-        }});
+        GUI.invokeOnEDT(() -> mUpdateButton.setEnabled(false));
 
         if (DEBUG.THREAD) debug("WAKING-> ANNOTATION THREAD " + mAnnotateThread);
 
@@ -1195,7 +1173,7 @@ public class DataTree extends javax.swing.JTree
 
         if (Thread.interrupted()) return true;
         
-        GUI.invokeOnEDT(new Runnable() { public void run() {
+        GUI.invokeOnEDT(() -> {
             String	newRowsMessage = "",
             		changedRowsMessage = "";
 
@@ -1218,7 +1196,7 @@ public class DataTree extends javax.swing.JTree
 
             // TODO: don't bother with refresh if annotations didn't change at all
             refreshAll();
-        }});
+        });
 
         return false;
     }
@@ -1269,9 +1247,7 @@ public class DataTree extends javax.swing.JTree
                     if (style != null && style.isVisible()) {
                         final TreePath path = getPathForRow(i);
                         if (DEBUG.Enabled) Log.debug("EXPAND " + Util.tags(n) + " " + Util.tags(path));
-                        GUI.invokeOnEDT(new Runnable() { public void run() {                        
-                            DataTree.super.setExpandedState(path, true);
-                        }});
+                        GUI.invokeOnEDT(() -> DataTree.super.setExpandedState(path, true));
                     }
                 }
             }
@@ -1388,77 +1364,75 @@ public class DataTree extends javax.swing.JTree
 
         addMouseListener(new ClickHandler());
 
-        addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
-                public void valueChanged(javax.swing.event.TreeSelectionEvent e) {
-                    //final TreePath[] paths = e.getPaths();
-                    final TreePath[] paths = getSelectionModel().getSelectionPaths();
+        addTreeSelectionListener(e -> {
+            //final TreePath[] paths = e.getPaths();
+            final TreePath[] paths = getSelectionModel().getSelectionPaths();
 
-                    if (DEBUG.Enabled) Log.debug("valueChanged: isAddedPath=" + e.isAddedPath() + "; PATHS:");
-                    if (DEBUG.Enabled) Util.dump(paths);
-                    //if (DEBUG.Enabled) Log.debug("OLD LeadPath: " + e.getOldLeadSelectionPath());
-                    //if (DEBUG.Enabled) Log.debug("NEW LeadPath: " + e.getNewLeadSelectionPath());
+            if (DEBUG.Enabled) Log.debug("valueChanged: isAddedPath=" + e.isAddedPath() + "; PATHS:");
+            if (DEBUG.Enabled) Util.dump(paths);
+            //if (DEBUG.Enabled) Log.debug("OLD LeadPath: " + e.getOldLeadSelectionPath());
+            //if (DEBUG.Enabled) Log.debug("NEW LeadPath: " + e.getNewLeadSelectionPath());
 
-                    // TODO: change from checking getPaths to model.getSelectionPaths & ignoring isAddedPath
+            // TODO: change from checking getPaths to model.getSelectionPaths & ignoring isAddedPath
 //                     if (!e.isAddedPath() || e.getPath().getLastPathComponent() == null)
 //                         return;
 
-                    final DataNode treeNode = (DataNode) e.getPath().getLastPathComponent();
-                    if (treeNode instanceof RowNode) {
-                        VUE.setActive(tufts.vue.MetaMap.class,
-                                      DataTree.this,
-                                      treeNode.getRow().getData());
-                    }
-                    else if (treeNode instanceof ValueNode && treeNode.getField().isPossibleKeyField()) {
-                        DataRow row = mSchema.findRow(treeNode.getField(), treeNode.getValue());
-                        if (row!=null)
-                        {
-                        	VUE.setActive(tufts.vue.MetaMap.class,
-                                      DataTree.this,
-                                      row.getData());
-                        }
-                        else
-                        {
-                        	Log.warn("Row is NULL while trying to set active in tree selection value changed");
-                        }
-                    }
-                    //                         else if (treeNode.hasStyle()) {
-                    //                             final tufts.vue.LWSelection selection = VUE.getSelection();
-                    //                             selection.setSource(DataTree.this);
-                    //                             // prevents from ever drawing through on map:
-                    //                             selection.setSelectionSourceFocal(null);
-                    //                             selection.setTo(treeNode.getStyle());
-                    //                         }
-                    else if (paths != null) {
-
-                        boolean multipleSearchTerms = false;
-                        DataNode node = null;
-                        for (TreePath path : paths) {
-                            node = (DataNode) path.getLastPathComponent();
-                            selectMatchingNodes(node, multipleSearchTerms);
-                            multipleSearchTerms = true;
-                        }
-                        if (paths.length == 1)
-                            mSelectedSearchNode = node;
-                        else
-                            mSelectedSearchNode = null;
-                            
-                    } else {
-                        if (DEBUG.Enabled) Log.warn("null search path from selection model");
-                    }
-                        
-                    //                         else if (treeNode instanceof ValueNode) {
-                    //                             if (treeNode.getField().isPossibleKeyField()) {
-                    //                                 DataRow row = mSchema.findRow(treeNode.getField(), treeNode.getValue());
-                    //                                 VUE.setActive(tufts.vue.MetaMap.class,
-                    //                                               DataTree.this,
-                    //                                               row.getData());
-                    //                             } else {
-                    //                                 selectMapForNode(treeNode, false);
-                    //                             }
-                    //                         }
-                    //VUE.setActive(LWComponent.class, this, node.styleNode);
+            final DataNode treeNode = (DataNode) e.getPath().getLastPathComponent();
+            if (treeNode instanceof RowNode) {
+                VUE.setActive(tufts.vue.MetaMap.class,
+                              DataTree.this,
+                              treeNode.getRow().getData());
+            }
+            else if (treeNode instanceof ValueNode && treeNode.getField().isPossibleKeyField()) {
+                DataRow row = mSchema.findRow(treeNode.getField(), treeNode.getValue());
+                if (row!=null)
+                {
+                    VUE.setActive(tufts.vue.MetaMap.class,
+                              DataTree.this,
+                              row.getData());
                 }
-            });
+                else
+                {
+                    Log.warn("Row is NULL while trying to set active in tree selection value changed");
+                }
+            }
+            //                         else if (treeNode.hasStyle()) {
+            //                             final tufts.vue.LWSelection selection = VUE.getSelection();
+            //                             selection.setSource(DataTree.this);
+            //                             // prevents from ever drawing through on map:
+            //                             selection.setSelectionSourceFocal(null);
+            //                             selection.setTo(treeNode.getStyle());
+            //                         }
+            else if (paths != null) {
+
+                boolean multipleSearchTerms = false;
+                DataNode node = null;
+                for (TreePath path : paths) {
+                    node = (DataNode) path.getLastPathComponent();
+                    selectMatchingNodes(node, multipleSearchTerms);
+                    multipleSearchTerms = true;
+                }
+                if (paths.length == 1)
+                    mSelectedSearchNode = node;
+                else
+                    mSelectedSearchNode = null;
+
+            } else {
+                if (DEBUG.Enabled) Log.warn("null search path from selection model");
+            }
+
+            //                         else if (treeNode instanceof ValueNode) {
+            //                             if (treeNode.getField().isPossibleKeyField()) {
+            //                                 DataRow row = mSchema.findRow(treeNode.getField(), treeNode.getValue());
+            //                                 VUE.setActive(tufts.vue.MetaMap.class,
+            //                                               DataTree.this,
+            //                                               row.getData());
+            //                             } else {
+            //                                 selectMapForNode(treeNode, false);
+            //                             }
+            //                         }
+            //VUE.setActive(LWComponent.class, this, node.styleNode);
+        });
 
     }
 
@@ -1529,25 +1503,19 @@ public class DataTree extends javax.swing.JTree
 
         schema.getFields().toArray(sortedFields);        
 
-        Arrays.sort(sortedFields, new Comparator<Field>() {
-                public int compare(Field f1, Field f2) {
-                    return sortPriority(f2) - sortPriority(f1);
-                }
-            });
+        Arrays.sort(sortedFields, (f1, f2) -> sortPriority(f2) - sortPriority(f1));
 
-        final LWComponent.Listener styleRepainter = new LWComponent.Listener() {
-                // todo: schema style nodes are currently parentless, which means
-                // their property change events don't go up through the map to
-                // the undo-manager, making changes to them not undoable -- either
-                // manually relay style property change events up through the appropriate
-                // map, or have a way for a map to have hidden list of style children.
-                public void LWCChanged(tufts.vue.LWCEvent e) {
-                    if (DEBUG.EVENTS) Log.debug("REPAINTER UPDATE ON " + e);
-                    if (e.getKey() == LWKey.FillColor) {
-                        DataTree.this.refreshAllStyleNodes();
-                    }
-                }
-            };
+        // todo: schema style nodes are currently parentless, which means
+// their property change events don't go up through the map to
+// the undo-manager, making changes to them not undoable -- either
+// manually relay style property change events up through the appropriate
+// map, or have a way for a map to have hidden list of style children.
+        final LWComponent.Listener styleRepainter = e -> {
+            if (DEBUG.EVENTS) Log.debug("REPAINTER UPDATE ON " + e);
+            if (e.getKey() == LWKey.FillColor) {
+                DataTree.this.refreshAllStyleNodes();
+            }
+        };
                     
         //The current data model doesn't make sense for matrix data and so it's not going to make a ton of sense
         if (!DataTree.this.mSchema.isMatrixDataSet)
@@ -1602,19 +1570,17 @@ public class DataTree extends javax.swing.JTree
         } else {
             final ArrayList<Multiset.Entry<String>> sortedValues = new ArrayList(entrySet);
 
-            Collections.sort(sortedValues, new Comparator<Multiset.Entry<String>>() {
-                    public int compare(final Multiset.Entry<String> e1, final Multiset.Entry<String> e2) {
-                        // always put any empty value item last, otherwise sort on frequency
-                        if (e1.getElement() == Field.EMPTY_VALUE)
-                            return 1;
-                        else if (e2.getElement() == Field.EMPTY_VALUE)
-                            return -1;
-                        else if (SORT_BY_COUNT)
-                            return e2.getCount() - e1.getCount();
-                        else // SORT_BY_VALUE
-                            return tufts.Strings.compareNaturalIgnoreCaseAscii(e1.getElement(), e2.getElement());
-                    }
-                });
+            sortedValues.sort((e1, e2) -> {
+                // always put any empty value item last, otherwise sort on frequency
+                if (e1.getElement() == Field.EMPTY_VALUE)
+                    return 1;
+                else if (e2.getElement() == Field.EMPTY_VALUE)
+                    return -1;
+                else if (SORT_BY_COUNT)
+                    return e2.getCount() - e1.getCount();
+                else // SORT_BY_VALUE
+                    return tufts.Strings.compareNaturalIgnoreCaseAscii(e1.getElement(), e2.getElement());
+            });
 
             valueEntries = sortedValues;
         }
@@ -1762,8 +1728,9 @@ public class DataTree extends javax.swing.JTree
         Log.debug("SENDING TO MAP: " + treeNode);
     }
 
-    private static final Ordering<Multiset.Entry> ByDecreasingFrequency = new Ordering<Multiset.Entry>() {
-        /*@Override*/ public int compare(Multiset.Entry a, Multiset.Entry b) {
+    private static final Ordering<Multiset.Entry> ByDecreasingFrequency = new Ordering<>() {
+        /*@Override*/
+        public int compare(Multiset.Entry a, Multiset.Entry b) {
             return b.getCount() - a.getCount();
         }
     };
@@ -2212,13 +2179,11 @@ public class DataTree extends javax.swing.JTree
             this.schema = schema;
             if (schema.getRowNodeStyle() == null)
                 schema.setRowNodeStyle(DataAction.makeStyleNode(schema));
-            schema.getRowNodeStyle().addLWCListener(new LWComponent.Listener() {
-                    public void LWCChanged(tufts.vue.LWCEvent e) {
-                        if (DEBUG.EVENTS) Log.debug("ALL-ROWS-NODE UPDATE " + e);
-                        DataTree.this.refreshRootNode();
-                        //updateLabel(true);
-                    }
-                });
+            schema.getRowNodeStyle().addLWCListener(e -> {
+                if (DEBUG.EVENTS) Log.debug("ALL-ROWS-NODE UPDATE " + e);
+                DataTree.this.refreshRootNode();
+                //updateLabel(true);
+            });
             updateLabel(false);
         }
 

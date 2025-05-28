@@ -1349,7 +1349,7 @@ public class GUI
     public static synchronized void clearWaitCursor() {
         //tufts.Util.printStackTrace("CLEAR WAIT-CURSOR");
         if (DEBUG.FOCUS) Log.info("CLEAR WAIT CURSOR SCHEDULED");
-        VUE.invokeAfterAWT(new Runnable() { public void run() { clearAllWaitCursors(); }});
+        VUE.invokeAfterAWT(() -> clearAllWaitCursors());
     }
     
     private static synchronized void clearAllWaitCursors() {
@@ -1635,9 +1635,7 @@ public class GUI
     }
     
     public static void messageAfterAWT(final String s) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() { System.out.println(s); }
-            });
+        java.awt.EventQueue.invokeLater(() -> System.out.println(s));
     }
 
     public static void postEvent(AWTEvent e) {
@@ -1645,7 +1643,7 @@ public class GUI
     }
     
     public static void postEventLater(final AWTEvent e) {
-        invokeAfterAWT(new Runnable() { public void run() { postEvent(e); }});
+        invokeAfterAWT(() -> postEvent(e));
     }
 
     /** make sure there's a colon on the end of the string.  E.g., some localized resource

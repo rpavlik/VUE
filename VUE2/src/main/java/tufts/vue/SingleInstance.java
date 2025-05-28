@@ -63,21 +63,19 @@ public class SingleInstance {
      */
     public static void main(String[] args) {
         running = true;
-        Thread t = new Thread() {
-            public void run() {
-                while(running) {
-                    try {
-                        running = tufts.vue.VUE.getApplicationFrame() != null;
-                        Thread.sleep(2000);
-                    } catch(Exception e) {
-                        System.out.println("Error checking instance of vue: running="+running);
-                        running = false;
-                        
-                    }
-                    System.out.println(running);
+        Thread t = new Thread(() -> {
+            while(running) {
+                try {
+                    running = VUE.getApplicationFrame() != null;
+                    Thread.sleep(2000);
+                } catch(Exception e) {
+                    System.out.println("Error checking instance of vue: running="+running);
+                    running = false;
+
                 }
+                System.out.println(running);
             }
-        };
+        });
         //t.start();
         System.out.println("Starting Single Instance");
         SingleInstance singleInstance = new SingleInstance(args);
@@ -89,11 +87,7 @@ public class SingleInstance {
         try {
             server = new ServerSocket(port);
             
-            Thread vueThread = new Thread() {
-                public void run() {
-                    tufts.vue.VUE.main(SingleInstance.this.args);
-                }
-            };
+            Thread vueThread = new Thread(() -> VUE.main(SingleInstance.this.args));
             vueThread.start();
             while(running) {
                 try {

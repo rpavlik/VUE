@@ -20,6 +20,7 @@ import com.google.common.collect.Multiset;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.plastic.Plastic3DLookAndFeel;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -28,6 +29,7 @@ import org.xml.sax.SAXException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -40,8 +42,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.swing.JApplet;
 import javax.swing.JComponent;
@@ -51,6 +55,8 @@ import javax.swing.UIManager;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import tufts.vue.action.OpenAction;
+import tufts.vue.action.OpenURLAction;
 import tufts.vue.ds.DataAction;
 import tufts.vue.ds.XmlDataSource;
 import tufts.vue.gui.GUI;
@@ -183,25 +189,23 @@ public class VueApplet extends JApplet {
         // Trigger the load of the OSID's and set up UrlAuthentication
         //-------------------------------------------------------      
         VUE.initDataSources();
-		GUI.invokeAfterAWT(new Runnable() { public void run() {
-			final DRBrowser DR_BROWSER = VUE.getDRBrowser();    
+		GUI.invokeAfterAWT(() -> {
+			final DRBrowser DR_BROWSER = VUE.getDRBrowser();
             if (DR_BROWSER != null)
                 DR_BROWSER.loadDataSourceViewer();
-            
+
             // Kick-off tufts.vue.VueDataSource viewer build threads:
             // must be done in AWT to be threadsafe, as involves
             // non-synhcronized code in tufts.vue.VueDataSource while
             // setting up the threads
 
-        }});
+        });
 		
 		isInited=true;
 	}
 	
 	public void ToggleAllVisible() {
-		SwingUtilities.invokeLater(new Runnable() {public void run() {
-			tufts.vue.gui.DockWindow.ToggleAllVisible();
-		}});
+		SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.ToggleAllVisible());
 		
 	}
 	
@@ -213,15 +217,11 @@ public class VueApplet extends JApplet {
 	}
 	public void ShowPreviouslyHiddenWindows()
 	{
-		SwingUtilities.invokeLater(new Runnable() {public void run() {
-			tufts.vue.gui.DockWindow.ShowPreviouslyHiddenWindows();	
-		}});
+		SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.ShowPreviouslyHiddenWindows());
 		
 	}
 	public void HideAllDockWindows()
-	{	SwingUtilities.invokeLater(new Runnable() {public void run() {
-			tufts.vue.gui.DockWindow.HideAllWindows();
-		}});
+	{	SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.HideAllWindows());
 	}
 	
 	public void stop() 
@@ -235,13 +235,13 @@ public class VueApplet extends JApplet {
 	}
 	
 	public void destroy() {
-		SwingUtilities.invokeLater(new Runnable() { public void run() {
+		SwingUtilities.invokeLater(() -> {
 			tufts.vue.gui.DockWindow.HideAllWindows();
 				EditorManager.destroy();
 				VueToolbarController.destroyController();
             VUE.getActiveViewer();
             MapViewer.destroyContextMenus();
-		}});
+		});
 		//	VUE.finalizeDocks();	
 			fullyStopped = true;
 			isInited=false;
@@ -390,159 +390,153 @@ public class VueApplet extends JApplet {
 	@SuppressWarnings("unchecked")
 	public static void addLinksToMap(final String content)
 	{
-		AccessController.doPrivileged(new PrivilegedAction() {
+		AccessController.doPrivileged((PrivilegedAction) () -> {
+    //        Reader reader = openReader();
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+factory.setIgnoringElementContentWhitespace(true);
+factory.setIgnoringComments(true);
+//factory.setCoalescing(true);
+factory.setValidating(false);
+// We don't use is.setEncoding(), as openReader will already have handled that
+//      is.setCharacterStream(reader);
+InputStream is;
+    try {
+        is = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
+        final Document doc = factory.newDocumentBuilder().parse(is);
+        NodeList nodeLst = doc.getElementsByTagName("link");
 
-			public Object run() {
-	    //        Reader reader = openReader();
-	    javax.xml.parsers.DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setIgnoringElementContentWhitespace(true);
-        factory.setIgnoringComments(true);
-        //factory.setCoalescing(true);
-        factory.setValidating(false);
-        // We don't use is.setEncoding(), as openReader will already have handled that
-        //      is.setCharacterStream(reader);
-        InputStream is;
-		try {
-			is = new java.io.ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse(is);
-			NodeList nodeLst = doc.getElementsByTagName("link");
-			
-			//build multimap of links
-			Multimap<String,String> map = Multimaps.newArrayListMultimap();
-			  for (int s = 0; s < nodeLst.getLength(); s++) {
+        //build multimap of links
+        Multimap<String,String> map = Multimaps.newArrayListMultimap();
+          for (int s = 0; s < nodeLst.getLength(); s++) {
 
-			    Node fstNode = nodeLst.item(s);
-			    
-			    if (fstNode.getNodeType() == Node.ELEMENT_NODE) 
-			    {
-			    	NamedNodeMap atts = fstNode.getAttributes();
-	            
-	               Node n = atts.item(0);
-	               Node val = atts.item(1);
-	               
-	               map.put(n.getNodeValue(), val.getNodeValue());
-	            }
+            Node fstNode = nodeLst.item(s);
 
-			  }
-			  
-			  
-			  java.util.Collection<LWComponent> comps = VUE.getActiveMap().getAllDescendents();
-			  java.util.Iterator<LWComponent> iter = comps.iterator();
-			  //build map of data row nodes
-			  HashMap<String,LWNode> dataRowNodes = new HashMap<>();
-			  while (iter.hasNext())
-			  {
-				 LWComponent comp = iter.next();
-				 if (comp.isDataRowNode())
-				 {
-					String fromId= comp.getDataValue("id");
-					dataRowNodes.put(fromId, (LWNode)comp);										
-				 }
-			  }
-			  
-			  //draw links
-			  Multiset<String> keys = map.keys();
+            if (fstNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+                NamedNodeMap atts = fstNode.getAttributes();
 
-			for (String fromId : keys) {
-				Collection<String> toIds = map.get(fromId);
-				for (String tid : toIds) {
-					LWNode fromNode = dataRowNodes.get(fromId);
-					LWNode toNode = dataRowNodes.get(tid);
+               Node n = atts.item(0);
+               Node val = atts.item(1);
 
-					if (fromNode != null && toNode != null) {
-						LWLink link = new LWLink(fromNode, toNode);
-						VUE.getActiveMap().add(link);
-					}
-				}
-			}
-			  
-		} catch (ParserConfigurationException | IOException | SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-                return null;
-			}
-		});
+               map.put(n.getNodeValue(), val.getNodeValue());
+            }
+
+          }
+
+
+          Collection<LWComponent> comps = VUE.getActiveMap().getAllDescendents();
+          Iterator<LWComponent> iter = comps.iterator();
+          //build map of data row nodes
+          HashMap<String,LWNode> dataRowNodes = new HashMap<>();
+          while (iter.hasNext())
+          {
+             LWComponent comp = iter.next();
+             if (comp.isDataRowNode())
+             {
+                String fromId= comp.getDataValue("id");
+                dataRowNodes.put(fromId, (LWNode)comp);
+             }
+          }
+
+          //draw links
+          Multiset<String> keys = map.keys();
+
+        for (String fromId : keys) {
+            Collection<String> toIds = map.get(fromId);
+            for (String tid : toIds) {
+                LWNode fromNode = dataRowNodes.get(fromId);
+                LWNode toNode = dataRowNodes.get(tid);
+
+                if (fromNode != null && toNode != null) {
+                    LWLink link = new LWLink(fromNode, toNode);
+                    VUE.getActiveMap().add(link);
+                }
+            }
+        }
+
+    } catch (ParserConfigurationException | IOException | SAXException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+return null;
+        });
 		
 	}
 	
 	@SuppressWarnings("unchecked")
 	public static void addNotesToMap(final String content)
 	{
-		AccessController.doPrivileged(new PrivilegedAction() {
+		AccessController.doPrivileged((PrivilegedAction) () -> {
+    //        Reader reader = openReader();
+    DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+factory.setIgnoringElementContentWhitespace(true);
+factory.setIgnoringComments(true);
+//factory.setCoalescing(true);
+factory.setValidating(false);
+// We don't use is.setEncoding(), as openReader will already have handled that
+//      is.setCharacterStream(reader);
+InputStream is;
+    try {
+        is = new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
+        final Document doc = factory.newDocumentBuilder().parse(is);
+        NodeList nodeLst = doc.getElementsByTagName("note");
 
-			public Object run() {
-	    //        Reader reader = openReader();
-	    javax.xml.parsers.DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setIgnoringElementContentWhitespace(true);
-        factory.setIgnoringComments(true);
-        //factory.setCoalescing(true);
-        factory.setValidating(false);
-        // We don't use is.setEncoding(), as openReader will already have handled that
-        //      is.setCharacterStream(reader);
-        InputStream is;
-		try {
-			is = new java.io.ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8));
-			final org.w3c.dom.Document doc = factory.newDocumentBuilder().parse(is);
-			NodeList nodeLst = doc.getElementsByTagName("note");
-			
-			//build multimap of links
-			HashMap<String,String> map = new HashMap<>();
-			  for (int s = 0; s < nodeLst.getLength(); s++) 
-			  {
+        //build multimap of links
+        HashMap<String,String> map = new HashMap<>();
+          for (int s = 0; s < nodeLst.getLength(); s++)
+          {
 
-			    Node fstNode = nodeLst.item(s);
-			    
-			    if (fstNode.getNodeType() == Node.ELEMENT_NODE) 
-			    {
-			    	NamedNodeMap atts = fstNode.getAttributes();	            
-	                Node n = atts.item(0);
+            Node fstNode = nodeLst.item(s);
 
-	                NodeList noteList = fstNode.getChildNodes();
+            if (fstNode.getNodeType() == Node.ELEMENT_NODE)
+            {
+                NamedNodeMap atts = fstNode.getAttributes();
+                Node n = atts.item(0);
 
-                           
+                NodeList noteList = fstNode.getChildNodes();
 
-	              
-	                map.put(n.getNodeValue(), noteList.item(0).getNodeValue().trim());
-	               // System.out.println("puts : " + n.getNodeValue() +"," +fstNode.getNodeValue());
-	            }
 
-			  }
-			  
-			  
-			  java.util.Collection<LWComponent> comps = VUE.getActiveMap().getAllDescendents();
-			  java.util.Iterator<LWComponent> iter = comps.iterator();
-			  //build map of data row nodes
-			  HashMap<String,LWNode> dataRowNodes = new HashMap<>();
-			  while (iter.hasNext())
-			  {
-				 LWComponent comp = iter.next();
-				 if (comp.isDataRowNode())
-				 {
-					String fromId= comp.getDataValue("id");
-					dataRowNodes.put(fromId, (LWNode)comp);										
-				 }
-			  }
-			  
-			  //draw links
-			  java.util.Set<String> keys = map.keySet();
 
-			for (String id : keys) {
-				LWNode fromNode = dataRowNodes.get(id);
-				if (fromNode != null) {
-					String note = map.get(id);
-					fromNode.setNotes(note);
-				}
 
-			}
-			  
-		} catch (ParserConfigurationException | IOException | SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-                return null;
-			}
-		});
+                map.put(n.getNodeValue(), noteList.item(0).getNodeValue().trim());
+               // System.out.println("puts : " + n.getNodeValue() +"," +fstNode.getNodeValue());
+            }
+
+          }
+
+
+          Collection<LWComponent> comps = VUE.getActiveMap().getAllDescendents();
+          Iterator<LWComponent> iter = comps.iterator();
+          //build map of data row nodes
+          HashMap<String,LWNode> dataRowNodes = new HashMap<>();
+          while (iter.hasNext())
+          {
+             LWComponent comp = iter.next();
+             if (comp.isDataRowNode())
+             {
+                String fromId= comp.getDataValue("id");
+                dataRowNodes.put(fromId, (LWNode)comp);
+             }
+          }
+
+          //draw links
+          Set<String> keys = map.keySet();
+
+        for (String id : keys) {
+            LWNode fromNode = dataRowNodes.get(id);
+            if (fromNode != null) {
+                String note = map.get(id);
+                fromNode.setNotes(note);
+            }
+
+        }
+
+    } catch (ParserConfigurationException | IOException | SAXException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+return null;
+        });
 		
 	}
 	
@@ -581,10 +575,10 @@ public class VueApplet extends JApplet {
 								VUE.getContentDock().setVisible(true);
 								VUE.getContentPanel().showDatasetsTab();
 									
-									SwingUtilities.invokeLater(new Runnable() { public void run() {
+									SwingUtilities.invokeLater(() -> {
 										VUE.getContentPanel().getDSBrowser().getDataSetViewer().setActiveDataSource(xmlds);
 										VUE.getContentPanel().getDSBrowser().getDataSetViewer().refreshBrowser();
-									}});
+									});
 								if (addToMap)
 								{
 									
@@ -643,9 +637,7 @@ public class VueApplet extends JApplet {
 
 						VUE.getContentPanel().showDatasetsTab();
 						DataSetViewer.getDataSetList().addOrdered(ds);
-						SwingUtilities.invokeLater(new Runnable(){	public void run()	{						
-						VUE.getContentPanel().getDSBrowser().getDataSetViewer().setActiveDataSource(ds);									       
-						}});
+						SwingUtilities.invokeLater(() -> VUE.getContentPanel().getDSBrowser().getDataSetViewer().setActiveDataSource(ds));
 						DataSourceViewer.saveDataSourceViewer();			    			    																			
 						if (addToMap)
 						{
@@ -706,53 +698,45 @@ public class VueApplet extends JApplet {
 	@SuppressWarnings("unchecked")
 	private static void innerDisplayMap(final String urlString) {
 
-		AccessController.doPrivileged(new PrivilegedAction() {
+		AccessController.doPrivileged((PrivilegedAction) () -> {
+            /*
+             * try { File tempFile = null; tempFile =
+             * File.createTempFile(new
+             * Long(System.currentTimeMillis()).toString(), null);
+             * InputStream io = null;
+             *
+             * io = getInputStream(urlString); byte[] buf = new byte[256];
+             * int read = 0; java.io.FileOutputStream fos = null; fos = new
+             * java.io.FileOutputStream(tempFile);
+             *
+             * while ((read = io.read(buf)) > 0) { fos.write(buf, 0, read); }
+             */
+            URL url;
+            try {
+                url = new URL(urlString);
+                OpenURLAction.displayMap(url);
+            } catch (MalformedURLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-			public Object run() {
-				/*
-				 * try { File tempFile = null; tempFile =
-				 * File.createTempFile(new
-				 * Long(System.currentTimeMillis()).toString(), null);
-				 * InputStream io = null;
-				 * 
-				 * io = getInputStream(urlString); byte[] buf = new byte[256];
-				 * int read = 0; java.io.FileOutputStream fos = null; fos = new
-				 * java.io.FileOutputStream(tempFile);
-				 * 
-				 * while ((read = io.read(buf)) > 0) { fos.write(buf, 0, read); }
-				 */
-				URL url;
-				try {
-					url = new URL(urlString);
-					tufts.vue.action.OpenURLAction.displayMap(url);
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				/*
-				 * tufts.vue.action.OpenAction.displayMap(tempFile);
-				 *  } catch(Exception e) { e.printStackTrace(); }
-				 */
-				return null;
-			}
-
-		});
+            /*
+             * tufts.vue.action.OpenAction.displayMap(tempFile);
+             *  } catch(Exception e) { e.printStackTrace(); }
+             */
+            return null;
+        });
 
 	}
 	
 	@SuppressWarnings("unchecked")
 	private static void innerDisplayLocalMap(final String fileString) {
 
-		AccessController.doPrivileged(new PrivilegedAction() {
+		AccessController.doPrivileged((PrivilegedAction) () -> {
 
-			public Object run() {
-				
-					tufts.vue.action.OpenAction.displayMap(new File(fileString));
-					return null;
-			}
-
-		});
+                OpenAction.displayMap(new File(fileString));
+                return null;
+        });
 
 	}
 

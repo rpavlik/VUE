@@ -382,87 +382,83 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 			}
 		}
 
-		Runnable sliderMoved = new Runnable() {
-			public void run() {
-				try {
-					LWSelection	guiSelection = VUE.getSelection();
-					int			depth = depthSlider.getValue();
+		Runnable sliderMoved = () -> {
+            try {
+                LWSelection	guiSelection = VUE.getSelection();
+                int			depth = depthSlider.getValue();
 
-					ignoreSelectionEvents = true;
+                ignoreSelectionEvents = true;
 
-					if (previousDepth == 0) {
-						// userSelection will be empty;  set it to the GUI's current selection.
-						userSelection.addAll(guiSelection);
-					} else {
-						// deepSelection will be recomputed below (if previousDepth is 0, it's already empty).
-						deepSelection.clear();
+                if (previousDepth == 0) {
+                    // userSelection will be empty;  set it to the GUI's current selection.
+                    userSelection.addAll(guiSelection);
+                } else {
+                    // deepSelection will be recomputed below (if previousDepth is 0, it's already empty).
+                    deepSelection.clear();
 
-						if (depth < previousDepth) {
-							// deepSelection will be smaller;  reset the GUI's selection to userSelection.
-							guiSelection.setTo(userSelection);
-						}
-					}
+                    if (depth < previousDepth) {
+                        // deepSelection will be smaller;  reset the GUI's selection to userSelection.
+                        guiSelection.setTo(userSelection);
+                    }
+                }
 
-					if (depth == 0) {
-						// Done with userSelection for now;  empty it.
-						userSelection.clear();
-					} else {
-						// Find deepSelection and add it to the GUI's selection.
-						findChildrenToDepth(userSelection, depth + 1);
-						guiSelection.add(deepSelection.iterator());
-					}
+                if (depth == 0) {
+                    // Done with userSelection for now;  empty it.
+                    userSelection.clear();
+                } else {
+                    // Find deepSelection and add it to the GUI's selection.
+                    findChildrenToDepth(userSelection, depth + 1);
+                    guiSelection.add(deepSelection.iterator());
+                }
 
-					previousDepth = depth;
+                previousDepth = depth;
 
-					PrototypePanel.zoomIfLocked();
-				}
-				catch (Exception ex) {
-					ex.printStackTrace();
+                PrototypePanel.zoomIfLocked();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
 //					Log.error("exception in InteractionPanel.sliderMoved()", ex);
-				}
-				finally {
-					ignoreSelectionEvents = false;
-				}
-			}
-		};
+            }
+            finally {
+                ignoreSelectionEvents = false;
+            }
+        };
 
-		Runnable selectionChanged = new Runnable() {
-			public void run() {
-				try {
-					LWSelection	guiSelection = VUE.getSelection();
-					int			depth = depthSlider.getValue();
+		Runnable selectionChanged = () -> {
+            try {
+                LWSelection	guiSelection = VUE.getSelection();
+                int			depth = depthSlider.getValue();
 
-					ignoreSelectionEvents = true;
+                ignoreSelectionEvents = true;
 
-					if (depth > 0) {
-						// Compute userSelection as the GUI's current selection minus deepSelection.
-						userSelection.clear();
-						userSelection.addAll(guiSelection);
+                if (depth > 0) {
+                    // Compute userSelection as the GUI's current selection minus deepSelection.
+                    userSelection.clear();
+                    userSelection.addAll(guiSelection);
 
-                        for (LWComponent lwComponent : deepSelection) {
-                            userSelection.remove(lwComponent);
-                        }
+for (LWComponent lwComponent : deepSelection) {
+userSelection.remove(lwComponent);
+}
 
-						// Find deepSelection.
-						deepSelection.clear();
-						findChildrenToDepth(userSelection, depth + 1);
+                    // Find deepSelection.
+                    deepSelection.clear();
+                    findChildrenToDepth(userSelection, depth + 1);
 
-						// Set the GUI's selection to userSelection (it may have gotten smaller) and add deepSelection.
-						guiSelection.setTo(userSelection);
-						guiSelection.add(deepSelection);
-					}
+                    // Set the GUI's selection to userSelection (it may have gotten smaller) and add deepSelection.
+                    guiSelection.setTo(userSelection);
+                    guiSelection.add(deepSelection);
+                }
 
-					PrototypePanel.zoomIfLocked();
-				}
-				catch (Exception ex) {
-					ex.printStackTrace();
+                PrototypePanel.zoomIfLocked();
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
 //					Log.error("exception in InteractionPanel.selectionChanged()", ex);
-				}
-				finally {
-					ignoreSelectionEvents = false;
-				}
-			}
-		};
+            }
+            finally {
+                ignoreSelectionEvents = false;
+            }
+        };
 
 		protected void findChildrenToDepth(Collection<LWComponent> collection, int depth) {
 			// Add each node to deepSelection.

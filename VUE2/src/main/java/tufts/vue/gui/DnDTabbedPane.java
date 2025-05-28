@@ -103,19 +103,17 @@ public class DnDTabbedPane extends JTabbedPane {
                 return flavor.getHumanPresentableName().equals(NAME);
             }
         };
-        final DragGestureListener dgl = new DragGestureListener() {
-            public void dragGestureRecognized(DragGestureEvent e) {
-                if(getTabCount()<=1) return;
-                Point tabPt = e.getDragOrigin();
-                dragTabIndex = indexAtLocation(tabPt.x, tabPt.y);
-                //"disabled tab problem".
-                if(dragTabIndex<0 || !isEnabledAt(dragTabIndex)) return;
-                initGlassPane(e.getComponent(), e.getDragOrigin());
-                try{
-                    e.startDrag(DragSource.DefaultMoveDrop, t, dsl);
-                }catch(InvalidDnDOperationException idoe) {
-                    idoe.printStackTrace();
-                }
+        final DragGestureListener dgl = e -> {
+            if(getTabCount()<=1) return;
+            Point tabPt = e.getDragOrigin();
+            dragTabIndex = indexAtLocation(tabPt.x, tabPt.y);
+            //"disabled tab problem".
+            if(dragTabIndex<0 || !isEnabledAt(dragTabIndex)) return;
+            initGlassPane(e.getComponent(), e.getDragOrigin());
+            try{
+                e.startDrag(DragSource.DefaultMoveDrop, t, dsl);
+            }catch(InvalidDnDOperationException idoe) {
+                idoe.printStackTrace();
             }
         };
         new DropTarget(glassPane, DnDConstants.ACTION_COPY_OR_MOVE, new CDropTargetListener(), true);

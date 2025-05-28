@@ -1532,16 +1532,16 @@ public class MapDropTarget
         // have already been added to the map before we start trying to make any
         // new room
         
-        node.addCleanupTask(new Runnable() { public void run() {
+        node.addCleanupTask(() -> {
 
             if (!node.getParent().isTopLevel()) {
                 // todo: a design where we don't need this check here -- see addNodeToFocal
                 if (DEBUG.Enabled) Log.debug("ignoring push for non-top0level final parent of " + node);
                 return;
             }
-            
+
             final LWMap.Layer layer = node.getLayer();
-            
+
             if (layer != null && layer.getChildren() != null) {
                 final Rectangle2D.Float clearRegion = Util.grow(node.getMapBounds(), 24);
                 for (LWComponent n : layer.getChildren()) {
@@ -1553,7 +1553,7 @@ public class MapDropTarget
                     }
                 }
             }
-        }});
+        });
     }
 
 

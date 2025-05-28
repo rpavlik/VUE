@@ -182,11 +182,10 @@ public final class DataAction
 
     }
 
-    private static final Picker DataNodePicker = new Picker<LWComponent>() {
-            public boolean match(LWComponent c) {
-                return c.getClass() == LWNode.class;
-                //return c.getClass() == LWNode.class && c.isDataNode();
-            }};
+    private static final Picker DataNodePicker = (Picker<LWComponent>) c -> {
+        return c.getClass() == LWNode.class;
+        //return c.getClass() == LWNode.class && c.isDataNode();
+    };
 
     /** @return a list of all *possible* targets we may want to be linking to */
     private static List<? extends LWComponent> getLinkTargets(LWMap map) {

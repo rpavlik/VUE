@@ -107,30 +107,28 @@ public class DataSetViewer extends ContentViewer {
 
 
 	private void addListeners() {
-		dataSourceList.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent e) {
-				if (DEBUG.KEYS || DEBUG.EVENTS) Log.debug("valueChanged: " + e);
+		dataSourceList.addListSelectionListener(e -> {
+            if (DEBUG.KEYS || DEBUG.EVENTS) Log.debug("valueChanged: " + e);
 
-				Object obj = ((JList)e.getSource()).getSelectedValue();
+            Object obj = ((JList)e.getSource()).getSelectedValue();
 
-				if (obj !=null) {
-					if (obj instanceof tufts.vue.DataSource) {
-						DataSource ds = (DataSource)obj;
-						setActiveDataSource(ds);
-						refreshEditInfo(ds);
-					} else {
-						obj = dataSourceList.getModelContents().getElementAt(((JList)e.getSource()).getSelectedIndex() - 1);
-						if (obj instanceof tufts.vue.DataSource) {
-							DataSource ds = (DataSource)obj;
-							setActiveDataSource(ds);
-							refreshEditInfo(ds);
-						}
-					}
-				}
+            if (obj !=null) {
+                if (obj instanceof DataSource) {
+                    DataSource ds = (DataSource)obj;
+                    setActiveDataSource(ds);
+                    refreshEditInfo(ds);
+                } else {
+                    obj = dataSourceList.getModelContents().getElementAt(((JList)e.getSource()).getSelectedIndex() - 1);
+                    if (obj instanceof DataSource) {
+                        DataSource ds = (DataSource)obj;
+                        setActiveDataSource(ds);
+                        refreshEditInfo(ds);
+                    }
+                }
+            }
 
-				DSB.refreshMenuActions();
-			}
-		});
+            DSB.refreshMenuActions();
+        });
 
 		dataSourceList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent event) {

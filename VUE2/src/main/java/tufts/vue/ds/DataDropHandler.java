@@ -138,12 +138,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
                 if (droppingDataItem.getSchema().isMatrixDataSet)
                 {
                 	
-                	GUI.invokeAfterAWT(new Runnable() { public void run() {
-
-                	
-                		dataTree.applyMatrixRelations(newNodes);
-                	
-                	}});
+                	GUI.invokeAfterAWT(() -> dataTree.applyMatrixRelations(newNodes));
                 }
                             
         return true;

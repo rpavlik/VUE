@@ -321,12 +321,10 @@ public class MetaDataPane extends tufts.vue.gui.Widget
                     value.setForeground(Color.red);
                     value.paintImmediately(0,0, value.getWidth(), value.getHeight());
                     tufts.vue.VueUtil.openURL(value.getText());
-                    GUI.invokeAfterAWT(new Runnable() {
-                            public void run() {
-                                value.select(0,0);
-                                GUI.invokeAfterAWT(new Runnable() { public void run() { value.setForeground(c); }});
-                            }
-                        });
+                    GUI.invokeAfterAWT(() -> {
+                        value.select(0,0);
+                        GUI.invokeAfterAWT(() -> value.setForeground(c));
+                    });
                 }
             } catch (Throwable t) {
                 Log.error(t);
@@ -379,15 +377,13 @@ public class MetaDataPane extends tufts.vue.gui.Widget
         // and only perform the update if mProperties hasn't changed since we got this
         // notification.
 
-        GUI.invokeAfterAWT(new Runnable() {
-                public void run() {
-                    try {
-                        updateDisplayAWT(source);
-                    } catch (Throwable t) {
-                        Log.error("udpateDisplayAWT: " + Util.tags(source) + ";", t);
-                    }
-                }
-            });
+        GUI.invokeAfterAWT(() -> {
+            try {
+                updateDisplayAWT(source);
+            } catch (Throwable t) {
+                Log.error("udpateDisplayAWT: " + Util.tags(source) + ";", t);
+            }
+        });
         
         // if (DEBUG.IMAGE) Log.info("propertyMapChanged exit  " + Util.tag(source));
     }
@@ -409,11 +405,7 @@ public class MetaDataPane extends tufts.vue.gui.Widget
             // we risk a dead-lock.  This is not the normal case, but
             // we handle it to ensure we can never dead-lock.
 
-            GUI.invokeAfterAWT(new Runnable() {
-                    public void run() {
-                        loadPropertiesAWT(propertyMap);
-                    }
-                });
+            GUI.invokeAfterAWT(() -> loadPropertiesAWT(propertyMap));
         }
     }
    

@@ -419,31 +419,29 @@ public class MetadataSearchMainGUI extends JPanel
      **/
     public class MetaSearchPanel extends JPanel implements PropertyChangeListener, FocusListener {
         
-            final ItemListener searchTypesListener = new ItemListener() {
-                public void itemStateChanged(ItemEvent ie) {
-                    if (ie.getStateChange() != ItemEvent.SELECTED)
-                        return;
-                    // This would all better be handled via events instead
-                    // of this direct calling into SearchTextField hack stuff.
-                    final Object selected = ie.getItem();
-                    
-                    if (SEARCH_EVERYTHING.equals(selected)) {
-                        setEverythingSearch();
-                        SearchTextField.searcheveryWhereMenuItem.setSelected(true);
-                    } else if (SEARCH_ONLY_LABELS.equals(selected)) {
-                        setLabelSearch();
-                        SearchTextField.labelMenuItem.setSelected(true);
-                    } else if (SEARCH_ONLY_KEYWORDS.equals(selected)) {
-                        setAllMetadataSearch();
-                        SearchTextField.keywordMenuItem.setSelected(true);
-                    } else if (SEARCH_WITH_CATEGORIES.equals(selected)) {
-                        setCategorySearch();
-                        SearchTextField.categoryKeywordMenuItem.setSelected(true);                          
-                    } else
-                        Log.warn("Unknown selected search-type: " + Util.tags(selected));
-                    
-                    SearchTextField.updateSearchType();
-                }
+            final ItemListener searchTypesListener = ie -> {
+                if (ie.getStateChange() != ItemEvent.SELECTED)
+                    return;
+                // This would all better be handled via events instead
+                // of this direct calling into SearchTextField hack stuff.
+                final Object selected = ie.getItem();
+
+                if (SEARCH_EVERYTHING.equals(selected)) {
+                    setEverythingSearch();
+                    SearchTextField.searcheveryWhereMenuItem.setSelected(true);
+                } else if (SEARCH_ONLY_LABELS.equals(selected)) {
+                    setLabelSearch();
+                    SearchTextField.labelMenuItem.setSelected(true);
+                } else if (SEARCH_ONLY_KEYWORDS.equals(selected)) {
+                    setAllMetadataSearch();
+                    SearchTextField.keywordMenuItem.setSelected(true);
+                } else if (SEARCH_WITH_CATEGORIES.equals(selected)) {
+                    setCategorySearch();
+                    SearchTextField.categoryKeywordMenuItem.setSelected(true);
+                } else
+                    Log.warn("Unknown selected search-type: " + Util.tags(selected));
+
+                SearchTextField.updateSearchType();
             };
         
             final ItemListener locationChoiceListener = new ItemListener() {
@@ -458,15 +456,13 @@ public class MetadataSearchMainGUI extends JPanel
                 }
             };
         
-            final ItemListener resultsTypeListener = new ItemListener() {
-                public void itemStateChanged(ItemEvent e) {
-                    if (e.getStateChange() == ItemEvent.SELECTED) {
-                        if (termsAction != null && e.getItem() instanceof GUI.ComboKey) {
-                            // This means the SearchAction won't be told about the "Create New Map"
-                            // result action, but it doesn't need to -- currently, any search
-                            // across all maps has only one fixed result action: create a new map.
-                            termsAction.setResultAction(e.getItem());
-                        }
+            final ItemListener resultsTypeListener = e -> {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    if (termsAction != null && e.getItem() instanceof GUI.ComboKey) {
+                        // This means the SearchAction won't be told about the "Create New Map"
+                        // result action, but it doesn't need to -- currently, any search
+                        // across all maps has only one fixed result action: create a new map.
+                        termsAction.setResultAction(e.getItem());
                     }
                 }
             };
@@ -626,21 +622,18 @@ public class MetadataSearchMainGUI extends JPanel
 
             saveButton = new JButton(VueResources.local("searchgui.save"));
             saveButton.setFont(tufts.vue.gui.GUI.LabelFace);
-            saveButton.addActionListener(new ActionListener() { // TODO: CHRIST: MORE REPEATED CODE???
-                    public void actionPerformed(ActionEvent e) {
-                        if (DEBUG.Enabled) Log.debug("saveButton action: " + e);
-                        runSaveAction(e);
-                    }
-                });
+            // TODO: CHRIST: MORE REPEATED CODE???
+            saveButton.addActionListener(e -> {
+                if (DEBUG.Enabled) Log.debug("saveButton action: " + e);
+                runSaveAction(e);
+            });
 
             resetButton = new JButton(VueResources.local("searchgui.resetmap"));
             resetButton.setFont(tufts.vue.gui.GUI.LabelFace);
-            resetButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    SearchAction.revertGlobalSearchSelectionFromMSGUI();
-                    updateEnabled();
-                    VUE.getActiveViewer().repaint();
-                }
+            resetButton.addActionListener(e -> {
+                SearchAction.revertGlobalSearchSelectionFromMSGUI();
+                updateEnabled();
+                VUE.getActiveViewer().repaint();
             });
 
             searchButton = new JButton(VueResources.local("searchgui.search"));
@@ -805,33 +798,27 @@ public class MetadataSearchMainGUI extends JPanel
             JMenuItem resetMenuItem = new JMenuItem(RESET_STR);
             popupMenu.add(resetMenuItem);
             popupMenu.addSeparator();
-            resetMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent event) {
-                	SearchAction.revertGlobalSearchSelectionFromMSGUI();
-                    VUE.getActiveViewer().repaint();
-                }
+            resetMenuItem.addActionListener(event -> {
+                SearchAction.revertGlobalSearchSelectionFromMSGUI();
+                VUE.getActiveViewer().repaint();
             });
             JMenuItem renameMenuItem = new JMenuItem(RENAME_STR);
             popupMenu.add(renameMenuItem);
             popupMenu.addSeparator();
             JMenuItem deleteMenuItem = new JMenuItem(DELETE_STR);
             popupMenu.add(deleteMenuItem);            
-            deleteMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent event) {
-                    int selectedIndex = searchResultTbl.getSelectedRow();
-                    if (selectedIndex != -1){
-                        searchResultModel.removeRow(selectedIndex);
-                    }
+            deleteMenuItem.addActionListener(event -> {
+                int selectedIndex = searchResultTbl.getSelectedRow();
+                if (selectedIndex != -1){
+                    searchResultModel.removeRow(selectedIndex);
                 }
             });
-            renameMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent event) {
-                    searchResultModel.setEditableFlag(true);
-                    int selectedIndex = searchResultTbl.getSelectedRow();
-                    if (selectedIndex != -1){
-                        searchResultTbl.editCellAt(selectedIndex, 0);
-                        searchResultModel.setEditableFlag(false);
-                    }
+            renameMenuItem.addActionListener(event -> {
+                searchResultModel.setEditableFlag(true);
+                int selectedIndex = searchResultTbl.getSelectedRow();
+                if (selectedIndex != -1){
+                    searchResultTbl.editCellAt(selectedIndex, 0);
+                    searchResultModel.setEditableFlag(false);
                 }
             });
             // add the listener to the jtable
@@ -1518,11 +1505,7 @@ public class MetadataSearchMainGUI extends JPanel
                 String val = ((String[]) searchTerms.get(row).getObject())[1];
                 field.setText(val);
 
-                field.addActionListener(new ActionListener(){
-                    public void actionPerformed(ActionEvent actionEvent){
-                        searchButton.doClick();
-                    }
-                });
+                field.addActionListener(actionEvent -> searchButton.doClick());
 
                 comp.add(field);
                 return comp;
@@ -1593,25 +1576,23 @@ public class MetadataSearchMainGUI extends JPanel
             categories.setModel(new CategoryComboBoxModel());
             categories.setRenderer(new CategoryComboBoxRenderer());
 
-            categories.addItemListener(new ItemListener() {
-                public void itemStateChanged(ItemEvent ie) {
-                    if (ie.getStateChange() == ItemEvent.SELECTED) {
+            categories.addItemListener(ie -> {
+                if (ie.getStateChange() == ItemEvent.SELECTED) {
 
-                        if (!(categories.getSelectedItem() instanceof OntType))
-                            return;
+                    if (!(categories.getSelectedItem() instanceof OntType))
+                        return;
 
-                        OntType type = (OntType) categories.getSelectedItem();
-                        String[] statement = {
-                                type.getBase() + "#" + type.getLabel(),
-                                searchTerms.get(row).getValue(),
-                                ((String[]) (searchTerms.get(row).getObject()))[2] };
+                    OntType type = (OntType) categories.getSelectedItem();
+                    String[] statement = {
+                            type.getBase() + "#" + type.getLabel(),
+                            searchTerms.get(row).getValue(),
+                            ((String[]) (searchTerms.get(row).getObject()))[2] };
 
-                        VueMetadataElement ele = new VueMetadataElement();
-                        ele.setObject(statement);
-                        ele.setType(VueMetadataElement.SEARCH_STATEMENT);                        
-                        searchTerms.set(row, ele);
+                    VueMetadataElement ele = new VueMetadataElement();
+                    ele.setObject(statement);
+                    ele.setType(VueMetadataElement.SEARCH_STATEMENT);
+                    searchTerms.set(row, ele);
 
-                    }
                 }
             });
 
@@ -1633,25 +1614,23 @@ public class MetadataSearchMainGUI extends JPanel
             String[] conditions = { "contains", "starts with" };
             final JComboBox conditionCombo = new JComboBox(conditions);
             conditionCombo.setFont(tufts.vue.gui.GUI.LabelFace);
-            conditionCombo.addItemListener(new ItemListener() {
-                public void itemStateChanged(ItemEvent ie) {
-                    if (ie.getStateChange() == ItemEvent.SELECTED) {
-                        String condition = conditionCombo.getSelectedItem()
-                                .toString();
-                        if (condition.equals("starts with")) {
-                            condition = "STARTS_WITH";
-                        } else {
-                            condition = "CONTAINS";
-                        }
-
-                        String[] statement = {
-                                ((String[]) (searchTerms.get(row).getObject()))[0],
-                                searchTerms.get(row).getValue(), condition };
-                        VueMetadataElement ele = new VueMetadataElement();
-                        ele.setObject(statement);
-                        ele.setType(VueMetadataElement.SEARCH_STATEMENT);
-                        searchTerms.set(row, ele);
+            conditionCombo.addItemListener(ie -> {
+                if (ie.getStateChange() == ItemEvent.SELECTED) {
+                    String condition = conditionCombo.getSelectedItem()
+                            .toString();
+                    if (condition.equals("starts with")) {
+                        condition = "STARTS_WITH";
+                    } else {
+                        condition = "CONTAINS";
                     }
+
+                    String[] statement = {
+                            ((String[]) (searchTerms.get(row).getObject()))[0],
+                            searchTerms.get(row).getValue(), condition };
+                    VueMetadataElement ele = new VueMetadataElement();
+                    ele.setObject(statement);
+                    ele.setType(VueMetadataElement.SEARCH_STATEMENT);
+                    searchTerms.set(row, ele);
                 }
             });
             String currentCondition = ((String[]) (searchTerms.get(row)
@@ -1792,9 +1771,9 @@ public class MetadataSearchMainGUI extends JPanel
             resetButton.setVisible(true);
         } else {
             // Note: however, this means can no longer use this button to clear the selection....
-            GUI.invokeAfterAWT(new Runnable() { public void run() { // delay hiding it a tad
+            GUI.invokeAfterAWT(() -> { // delay hiding it a tad
                 resetButton.setVisible(false);
-            }});
+            });
             //resetButton.setLabel(RedoLabel + );
         }
     }
