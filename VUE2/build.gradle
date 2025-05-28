@@ -34,8 +34,8 @@ version = file('src/main/resources/tufts/vue/VueResources.properties').withReade
 }
 
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 
 // java {
