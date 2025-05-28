@@ -4,12 +4,10 @@ import java.util.*;
 
 import edu.tufts.vue.dataset.Dataset;
 import tufts.vue.LWComponent;
-import tufts.vue.LWContainer;
 import tufts.vue.LWLink;
 import tufts.vue.LWMap;
 import tufts.vue.LWNode;
 import tufts.vue.LWSelection;
-import tufts.vue.VUE;
 
 public class HierarchicalLayout extends Layout {
 	public static final int MAX_DEPTH = 5; // Restricted max depth to 5

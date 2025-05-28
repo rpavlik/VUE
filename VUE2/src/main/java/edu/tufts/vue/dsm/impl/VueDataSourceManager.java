@@ -539,15 +539,15 @@ public class VueDataSourceManager
     
     private static synchronized VueDataSourceManager unMarshalVDSM(File file)
         throws java.io.IOException,
-               org.exolab.castor.xml.MarshalException,
-               org.exolab.castor.xml.ValidationException,
-               org.exolab.castor.mapping.MappingException
+               MarshalException,
+               ValidationException,
+               MappingException
     {
         VueDataSourceManager vdsm = null;
 
         try {
             vdsm = unmarshalWithEncoding(file, null);
-        } catch (org.exolab.castor.xml.MarshalException e) {
+        } catch (MarshalException e) {
             Log.error(e.toString() + "; " + file);
             
             if (e.getCause() instanceof org.xml.sax.SAXParseException &&

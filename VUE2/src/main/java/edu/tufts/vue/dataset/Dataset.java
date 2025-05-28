@@ -33,13 +33,9 @@ import tufts.vue.*;
 import tufts.vue.ds.DataAction;
 import tufts.vue.ds.XmlDataSource;
 
-import java.net.*;
-
 import javax.swing.Timer;
 
 
-
-import au.com.bytecode.opencsv.CSVReader;
 
 import edu.tufts.vue.layout.*;
 

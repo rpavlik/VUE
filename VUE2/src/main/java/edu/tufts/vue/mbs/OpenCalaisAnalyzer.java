@@ -1,43 +1,24 @@
 package edu.tufts.vue.mbs;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.Attributes;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.DefaultHandler;
-import org.xml.sax.helpers.XMLReaderFactory;
 import com.clearforest.calais.common.CalaisJavaIf;
-import com.clearforest.calais.common.Property;
 import com.clearforest.calais.common.StringUtils;
 import com.clearforest.calais.simple.Entity;
 import com.google.common.collect.AbstractMapEntry;
@@ -48,11 +29,8 @@ import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
 import tufts.vue.AnalyzerAction;
 import tufts.vue.LWComponent;
-import tufts.vue.LWNode;
 import tufts.vue.MetaMap;
 import tufts.vue.Resource;
-import tufts.vue.VUE;
-import tufts.vue.VueResources;
 
 public class OpenCalaisAnalyzer implements LWComponentAnalyzer {
 

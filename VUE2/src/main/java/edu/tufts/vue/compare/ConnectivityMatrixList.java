@@ -16,9 +16,6 @@
 
 package edu.tufts.vue.compare;
 
-import tufts.vue.LWLink;
-import tufts.vue.LWComponent;
-
 /*
  * ConnectivityMatrixList.java
  *

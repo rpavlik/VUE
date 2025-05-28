@@ -17,14 +17,11 @@
 package edu.tufts.vue.compare;
 
 import java.util.*;
-import java.io.*;
 import tufts.vue.DEBUG;
 import tufts.vue.LWComponent;
 import tufts.vue.LWComponent.ChildKind;
 import tufts.vue.LWMap;
-import tufts.vue.LWNode;
 import tufts.vue.LWLink;
-import tufts.vue.LWImage;
 
 
 /**

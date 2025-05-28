@@ -15,14 +15,10 @@
 
 package edu.tufts.osidimpl.repository.artifact;
 
-import tufts.vue.*;
 import java.net.*;
 import java.io.*;
-import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
-import java.io.OutputStreamWriter;
 import org.xml.sax.InputSource;
 
 public class AssetIterator

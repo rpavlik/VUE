@@ -18,7 +18,6 @@ package edu.tufts.osidimpl.authentication.sakai;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import javax.xml.namespace.QName;
-import org.apache.axis.encoding.Base64;
 
 public class AuthenticationManager
 implements org.osid.authentication.AuthenticationManager

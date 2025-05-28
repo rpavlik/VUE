@@ -15,12 +15,8 @@
 
 package edu.tufts.osidimpl.repository.google.local;
 
-import com.google.soap.search.*;
-import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
-import java.io.OutputStreamWriter;
 import java.io.*;
 import java.net.*;
 import tufts.Util;

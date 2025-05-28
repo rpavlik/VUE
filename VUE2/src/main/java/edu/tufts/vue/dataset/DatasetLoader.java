@@ -31,9 +31,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.util.List;
-import java.util.Properties;
-
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -42,14 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import tufts.vue.DataSetViewer;
-import tufts.vue.DataSourceViewer;
-import tufts.vue.LWComponent;
-import tufts.vue.LWMap;
-import tufts.vue.VUE;
 import tufts.vue.VueResources;
-import tufts.vue.ds.DataAction;
-import tufts.vue.ds.XmlDataSource;
 import edu.tufts.vue.layout.RelRandomLayout;
 
 public class DatasetLoader {

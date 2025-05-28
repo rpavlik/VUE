@@ -20,9 +20,7 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
-import java.io.*;
 import java.util.*;
-import java.util.prefs.Preferences;
 
 /**
  *

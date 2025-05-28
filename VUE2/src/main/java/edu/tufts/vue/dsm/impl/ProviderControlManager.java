@@ -2,7 +2,6 @@ package edu.tufts.vue.dsm.impl;
 
 import java.io.File;
 import java.util.Properties;
-import org.apache.log4j.Level;
 
 /**
  * This exists to provide an org.osid.provider.ProviderControlManager with the ability to change the

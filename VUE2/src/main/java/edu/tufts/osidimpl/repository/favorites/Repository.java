@@ -15,14 +15,7 @@
 
 package edu.tufts.osidimpl.repository.favorites;
 
-import javax.swing.filechooser.FileSystemView;
-import java.io.*;
 import java.util.*;
-import osid.filing.*;
-import tufts.oki.remoteFiling.*;
-import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
-import tufts.vue.*;
 
 public class Repository
         implements org.osid.repository.Repository {

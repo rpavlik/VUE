@@ -15,17 +15,10 @@
 
 package edu.tufts.vue.layout;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
 import tufts.vue.*;
 import edu.tufts.vue.dataset.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
-import java.awt.geom.Line2D;
 
 
 public class StretchLayout extends Layout {

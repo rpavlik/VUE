@@ -21,7 +21,6 @@
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 import java.net.*;
-import java.io.*;
 import java.util.*;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathFactory;
@@ -32,7 +31,6 @@ import javax.xml.XMLConstants;
 //import org.apache.xpath.NodeSet;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
-import org.w3c.dom.Element;
 import org.xml.sax.InputSource;
 
 // this is legacy need to remove it.

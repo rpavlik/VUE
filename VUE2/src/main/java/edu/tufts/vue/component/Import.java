@@ -29,17 +29,11 @@ package edu.tufts.vue.component;
 import tufts.vue.ds.*;
 import edu.tufts.vue.dataset.Dataset;
 import edu.tufts.vue.layout.*;
-import tufts.vue.action.SaveAction;
 import tufts.vue.action.ActionUtil;
 import tufts.vue.*;
 
 import java.io.File;
 import java.util.*;
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Timer;
 
 
 public class Import {

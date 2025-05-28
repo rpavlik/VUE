@@ -17,13 +17,12 @@ package edu.tufts.osidimpl.repository.sakai;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import javax.xml.namespace.QName;
-import org.apache.axis.encoding.Base64;
 
 public class Repository
 implements org.osid.repository.Repository
 {
-    private java.util.Vector assetTypeVector = new java.util.Vector();
-    private java.util.Vector searchTypeVector = new java.util.Vector();
+    private java.util.Vector<org.osid.shared.Type> assetTypeVector = new java.util.Vector<org.osid.shared.Type>();
+    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<org.osid.shared.Type>();
 	private org.osid.shared.Id repositoryId = null;
 	private String repositoryIdPrefixString = "E89F7F92-8C23-481B-AF8C-7AE169699F34-2595-000008D778AFEB53";
 	private org.osid.shared.Type repositoryType = new Type("sakaiproject.org","repository","contentHosting");

@@ -20,7 +20,6 @@
 package edu.tufts.vue.compare;
 
 import tufts.vue.*;
-import  java.util.*;
 public class Util {
 
     public enum MP { LABEL, TYPE, BOTH, RESOURCE }

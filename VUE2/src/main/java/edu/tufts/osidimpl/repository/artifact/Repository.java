@@ -18,8 +18,6 @@ package edu.tufts.osidimpl.repository.artifact;
 import javax.xml.parsers.*;
 import org.w3c.dom.*;
 
-import edu.tufts.osidimpl.repository.fedora_2_2.PID;
-
 import java.io.*;
 import java.util.Properties;
 
