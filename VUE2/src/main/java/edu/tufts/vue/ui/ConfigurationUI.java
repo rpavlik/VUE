@@ -64,8 +64,8 @@ public class ConfigurationUI extends javax.swing.JPanel {
     private final Vector<String> descriptionVector = new java.util.Vector<>();
     private final Vector<String> keyVector = new java.util.Vector<>();
     private final Vector<Boolean> mandatoryVector = new java.util.Vector<>();
-    private final Vector<Integer> maxCharsVector = new java.util.Vector<Integer>();
-    private final Vector<String> titleVector = new java.util.Vector<String>();
+    private final Vector<Integer> maxCharsVector = new java.util.Vector<>();
+    private final Vector<String> titleVector = new java.util.Vector<>();
     private final Vector<Integer> uiVector = new java.util.Vector<>();
     private final java.util.Vector fieldVector = new java.util.Vector();
     private final java.util.Vector valuesVector = new java.util.Vector();
