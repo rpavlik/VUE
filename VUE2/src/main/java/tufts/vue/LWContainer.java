@@ -298,7 +298,7 @@ public abstract class LWContainer extends LWComponent
         // the default is to replicate the existing z-order sort
 
         if (toAdd.size() == 0)
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
 
         Collection<? extends LWComponent> sorted;
 

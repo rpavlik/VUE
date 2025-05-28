@@ -74,11 +74,11 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 	private int currentStyle = BASIC;
 	
 	private javax.swing.JTextField[] advancedFields = null;
-	private java.util.Vector typesVector = null;
+	private java.util.Vector<String> typesVector = null;
 	
 	// advanced search universe of types
-	private java.util.Vector advancedSearchUniverseOfTypeStringsVector = new java.util.Vector();
-	private java.util.Vector advancedSearchPromptsVector = new java.util.Vector();
+	private java.util.Vector<String> advancedSearchUniverseOfTypeStringsVector = new java.util.Vector<>();
+	private java.util.Vector<String> advancedSearchPromptsVector = new java.util.Vector<>();
 	
 	// maintain a vector for current values
 	private String[] advancedSearchFieldsText = null;
@@ -593,7 +593,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 	}
 
 
-	private java.util.Vector getUnionSearchFields()
+	private java.util.Vector<String> getUnionSearchFields()
 	{
 		/*
 		 Find each repository that will be searched.  Get all the asset types and for each the
@@ -602,7 +602,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		 all that match.
 		 */
 		
-		java.util.Vector union = new java.util.Vector();
+		java.util.Vector<String> union = new java.util.Vector<>();
 		
 		try {
 			org.osid.repository.Repository[] repositories = sourcesAndTypesManager.getRepositoriesToSearch();
@@ -640,7 +640,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		return union;
 	}
 		
-	private java.util.Vector getIntersectionSearchFields()
+	private java.util.Vector<String> getIntersectionSearchFields()
 	{
 		/*
 		 Find each repository that will be searched.  Get all the asset types and for each the
@@ -648,14 +648,14 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		 types.  Check these again the VUE set (based on Dublin Core).  Return the VUE names for
 		 all that match.
 		 */
-		java.util.Vector intersections = new java.util.Vector();
+		java.util.Vector<java.util.Vector<String>> intersections = new java.util.Vector<java.util.Vector<String>>();
 		
 		try {
 			org.osid.repository.Repository[] repositories = sourcesAndTypesManager.getRepositoriesToSearch();
 			for (org.osid.repository.Repository repository : repositories) {
 //				 System.out.println("QueryEditor: Respository:"+repositories[i].getDisplayName());
 
-				java.util.Vector intersection = new java.util.Vector();
+				java.util.Vector<String> intersection = new java.util.Vector<>();
 				// not all these methods may be implemented -- in which case we are out of luck
 				try {
 					// must support the multi-field search type
@@ -672,7 +672,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 					}
 					if (!supportsMultiField) {
 						// some repository did not have the multi-field search, so stop
-						return new java.util.Vector();
+						return new java.util.Vector<>();
 					}
 
 					typeIterator = repository.getAssetTypes();
@@ -704,15 +704,15 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 					t.printStackTrace();
 				}
 			}
-			// now find what is common accross intersections
+			// now find what is common across intersections
 			int numIntersections = intersections.size();
 			if (numIntersections == 0) {
-				return intersections;
+				return new java.util.Vector<>();
 			} else {
-				java.util.Vector intersection = (java.util.Vector)intersections.firstElement();
+				java.util.Vector<String> intersection = intersections.firstElement();
 				for (int j=1; j < numIntersections; j++) {
-					java.util.Vector nextIntersection = (java.util.Vector)intersections.elementAt(j);
-					java.util.Vector newIntersection = new java.util.Vector();
+					java.util.Vector<String> nextIntersection = intersections.elementAt(j);
+					java.util.Vector<String> newIntersection = new java.util.Vector<>();
 
 					int numCandidates = intersection.size();
 					for (int k=0; k < numCandidates; k++) {
@@ -728,7 +728,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		} catch (Throwable t1) {
 			edu.tufts.vue.util.Logger.log(t1);
 		}
-		return new java.util.Vector();
+		return new java.util.Vector<>();
 	}
 	
 	private void populateAdvancedSearchUniverseOfTypeStringsVector()

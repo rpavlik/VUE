@@ -244,7 +244,7 @@ public class LWComponent
     public static final int MIN_SIZE = 10;
     public static final Size MinSize = new Size(MIN_SIZE, MIN_SIZE);
     public static final float NEEDS_DEFAULT = Float.MIN_VALUE;
-    public static final java.util.List<LWComponent> NO_CHILDREN = Collections.EMPTY_LIST;
+    public static final java.util.List<LWComponent> NO_CHILDREN = Collections.emptyList();
 
     public static final boolean COLLAPSE_IS_GLOBAL = true;
 
@@ -1319,11 +1319,11 @@ public class LWComponent
         };
     public final ColorProperty mStrokeColor = new ColorProperty(KEY_StrokeColor, java.awt.Color.darkGray);
     public final FloatProperty mStrokeWidth = new FloatProperty(KEY_StrokeWidth) { void onChange() { rebuildStroke(); }};
-    public final EnumProperty<Alignment> mAlignment = new EnumProperty(KEY_Alignment, Alignment.LEFT) {
+    public final EnumProperty<Alignment> mAlignment = new EnumProperty<Alignment>(KEY_Alignment, Alignment.LEFT) {
             void onChange() { layout(KEY_Alignment); }
         };
 
-    public final EnumProperty<StrokeStyle> mStrokeStyle = new EnumProperty(KEY_StrokeStyle, StrokeStyle.SOLID) { void onChange() { rebuildStroke(); }};
+    public final EnumProperty<StrokeStyle> mStrokeStyle = new EnumProperty<StrokeStyle>(KEY_StrokeStyle, StrokeStyle.SOLID) { void onChange() { rebuildStroke(); }};
 
     public enum StrokeStyle {
 
