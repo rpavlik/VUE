@@ -23,20 +23,20 @@ public class Asset
 implements org.osid.repository.Asset
 {
     private String displayName = null;
-    private String description = null;
+    private final String description = null;
     private org.osid.shared.Id assetId = null;
-	private String assetIdString = null;
-	private org.osid.shared.Type assetType = null;
-    private org.osid.shared.Type mimeType =  new Type("mit.edu","asset","MIME");
-	private org.osid.repository.Repository repository = null;
-	private org.osid.repository.Record record = null;
-	private org.osid.shared.Id recordStructureId = null;
-	private java.util.Vector partIdStringVector = null;
-	private java.util.Vector partValueVector = null;	
-	private String key = null;	
-	private String sessionId = null;
-	private java.util.Vector assetVector = new java.util.Vector();
-	
+    private String assetIdString = null;
+    private org.osid.shared.Type assetType = null;
+    private final org.osid.shared.Type mimeType = new Type("mit.edu", "asset", "MIME");
+    private final org.osid.repository.Repository repository = null;
+    private org.osid.repository.Record record = null;
+    private org.osid.shared.Id recordStructureId = null;
+    private final java.util.Vector partIdStringVector = null;
+    private final java.util.Vector partValueVector = null;
+    private String key = null;
+    private String sessionId = null;
+    private final java.util.Vector assetVector = new java.util.Vector();
+
 	public static final String LIST_TAG = "list";
 	public static final String RESOURCE_TAG = "resource";
 	public static final String ID_TAG = "id";
@@ -223,7 +223,7 @@ implements org.osid.repository.Asset
 			String address = Utilities.getAddress();
 			call.setTargetEndpointAddress (new java.net.URL(endpoint) );
 			call.setOperationName(new QName(address, "createContentItem"));
-			String result = (String) call.invoke( new Object[] {sessionId, name, this.assetIdString, encodedContent, description, type, new Boolean(true)} );
+			String result = (String) call.invoke( new Object[] {sessionId, name, this.assetIdString, encodedContent, description, type, Boolean.TRUE} );
 		} catch (Throwable t) {
 			throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
 		}

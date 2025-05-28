@@ -18,16 +18,16 @@ package edu.tufts.osidimpl.repository.localfiles;
 public class RecordStructure
 implements org.osid.repository.RecordStructure
 {
-    private String idString = "LocalFilesRecordStructureId";
-    private String displayName = "Local Files, various time parts";
-    private String description = "Holds metadata for an local file asset";
-    private String format = "";
-    private String schema = "";
-    private org.osid.shared.Type type = new Type("edu.tufts","recordStructure","localFile");
-    private boolean repeatable = false;
-	private static RecordStructure recordStructure = new RecordStructure();
+    private final String idString = "LocalFilesRecordStructureId";
+    private final String displayName = "Local Files, various time parts";
+    private final String description = "Holds metadata for an local file asset";
+    private final String format = "";
+    private final String schema = "";
+    private final org.osid.shared.Type type = new Type("edu.tufts", "recordStructure", "localFile");
+    private final boolean repeatable = false;
+    private static final RecordStructure recordStructure = new RecordStructure();
     private org.osid.shared.Id id = null;
-	
+
 	protected static RecordStructure getInstance()
 	{
 		return recordStructure;

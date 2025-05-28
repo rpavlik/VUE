@@ -18,9 +18,9 @@ package edu.tufts.osidimpl.repository.google.local;
 public class Record
 implements org.osid.repository.Record
 {
-    private java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
+    private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
     private org.osid.shared.Id recordStructureId = null;
-    private String displayName = null;
+    private final String displayName = null;
     private org.osid.shared.Id id = null;
 
     public String getDisplayName()
@@ -74,7 +74,7 @@ implements org.osid.repository.Record
         {
             for (int i=0, size = this.partVector.size(); i < size; i++)
             {
-                org.osid.repository.Part part = (org.osid.repository.Part)this.partVector.elementAt(i);
+                org.osid.repository.Part part = this.partVector.elementAt(i);
                 if (part.getId().isEqual(partId))
                 {
                     this.partVector.removeElementAt(i);

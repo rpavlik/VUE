@@ -18,16 +18,16 @@ package edu.tufts.osidimpl.repository.submissionAdapter;
 public class RepositoryManager
 implements org.osid.repository.RepositoryManager
 {
-    private org.osid.OsidContext context = null;
-    private java.util.Properties configurationProperties = null;
-	private java.util.Vector repositoryVector = new java.util.Vector();
+	private org.osid.OsidContext context = null;
+	private java.util.Properties configurationProperties = null;
+	private final java.util.Vector repositoryVector = new java.util.Vector();
 
-    // threaded federated search support
+	// threaded federated search support
 	private ThreadGroup mSearchThreadGroup;
-	private java.util.Vector assetIteratorVector = new java.util.Vector();
+	private final java.util.Vector assetIteratorVector = new java.util.Vector();
 	private int searchCount = 0;
 	private int searchTimeout = 0;
-	
+
     public org.osid.OsidContext getOsidContext()
 		throws org.osid.repository.RepositoryException
     {
@@ -268,7 +268,7 @@ implements org.osid.repository.RepositoryManager
 			// allow for overrides through configuration
 			if (searchTimeout < 1) searchTimeout = 120;
 			int maxChecks = 10;
-			long sleep = (searchTimeout * 100);
+			long sleep = (searchTimeout * 100L);
 			int checkCount = 0;
 			
 			while (checkCount++ <= maxChecks) {
@@ -324,9 +324,9 @@ implements org.osid.repository.RepositoryManager
     private  class SearchThread extends Thread 
 	{
         private final org.osid.repository.Repository mRepository;
-        private java.io.Serializable mSearchCriteria;
-        private org.osid.shared.Type mSearchType;
-        private org.osid.shared.Properties mSearchProperties;
+        private final java.io.Serializable mSearchCriteria;
+        private final org.osid.shared.Type mSearchType;
+        private final org.osid.shared.Properties mSearchProperties;
         
         public SearchThread(org.osid.repository.Repository r,
 							java.io.Serializable searchCriteria,
@@ -373,10 +373,7 @@ implements org.osid.repository.RepositoryManager
         }
                 
         private boolean stopped() {
-            if (isInterrupted()) {
-                return true;
-            } else
-                return false;
+            return isInterrupted();
         }
 	}
         

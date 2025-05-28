@@ -17,13 +17,15 @@ package edu.tufts.osidimpl.repository.sakai;
 public class Utilities
 {
 	private static org.osid.id.IdManager idManager = null;
-    private static org.osid.logging.WritableLog log = null;
+	private static org.osid.logging.WritableLog log = null;
 	private static org.osid.OsidContext context = null;
 	private static org.osid.authentication.AuthenticationManager authenticationManager = null;
-	private static org.osid.shared.Type authenticationType = new Type("sakaiproject.org","authentication","sakai");
-    private static org.osid.shared.Type collectionAssetType = new Type("sakaiproject.org","asset","siteCollection");
-    private static org.osid.shared.Type resourceAssetType =  new Type("sakaiproject.org","asset","resource");
-	private static java.util.Map sessionIdMap = new java.util.HashMap();
+	private static final org.osid.shared.Type authenticationType = new Type("sakaiproject.org", "authentication",
+			"sakai");
+	private static final org.osid.shared.Type collectionAssetType = new Type("sakaiproject.org", "asset",
+			"siteCollection");
+	private static final org.osid.shared.Type resourceAssetType = new Type("sakaiproject.org", "asset", "resource");
+	private static final java.util.Map sessionIdMap = new java.util.HashMap();
 	private static org.osid.shared.Id repositoryId = null;
 	private static String endpoint = null;
 	private static String address = null;

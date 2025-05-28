@@ -17,9 +17,9 @@ package edu.tufts.osidimpl.repository.localfiles;
 
 public class QueryAdjuster implements edu.tufts.vue.fsm.QueryAdjuster
 {
-	private org.osid.shared.Type keywordSearchType = new Type("mit.edu","search","keyword");
-	private org.osid.shared.Type titleSearchType = new Type("mit.edu","search","title");
-		
+	private final org.osid.shared.Type keywordSearchType = new Type("mit.edu", "search", "keyword");
+	private final org.osid.shared.Type titleSearchType = new Type("mit.edu", "search", "title");
+
 	public edu.tufts.vue.fsm.Query adjustQuery(org.osid.repository.Repository repository,
 											   java.io.Serializable searchCriteria,
 											   org.osid.shared.Type searchType,

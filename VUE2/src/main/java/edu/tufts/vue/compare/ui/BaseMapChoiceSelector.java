@@ -62,7 +62,7 @@ public class BaseMapChoiceSelector extends javax.swing.JComboBox {
         //private int selectedIndex = 0;
         private Object selectedItem = SELECT_STRING;
         
-        private java.util.List<ListDataListener> listeners = new java.util.ArrayList<>();
+        private final java.util.List<ListDataListener> listeners = new java.util.ArrayList<>();
         
         public Object getSelectedItem()
         {
@@ -120,10 +120,7 @@ public class BaseMapChoiceSelector extends javax.swing.JComboBox {
         private boolean isBaseMapSelected()
         {
             if(!(getSelectedItem().equals(SELECT_STRING)))
-                if(getSelectedItem().equals(OTHER_STRING) && userSelectedMap == null)
-                  return false;
-                else
-                  return true;
+                return !getSelectedItem().equals(OTHER_STRING) || userSelectedMap != null;
             else
                 return false;
         }

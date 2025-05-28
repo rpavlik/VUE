@@ -37,7 +37,7 @@ implements org.osid.repository.AssetIterator
     throws org.osid.repository.RepositoryException
     {
 		try {
-			return (org.osid.repository.Asset)iterator.next();
+			return iterator.next();
 		} catch (Throwable t) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NO_MORE_ITERATOR_ELEMENTS);
 		}

@@ -21,12 +21,12 @@ implements org.osid.repository.RepositoryManager
     private org.osid.OsidContext context = null;
     private java.util.Properties configuration = null;
     private org.osid.repository.Repository repository = null;
-	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Id repositoryId = null;
-    private java.util.Vector repositoryVector = new java.util.Vector();
-    private java.util.Vector searchTypeVector = new java.util.Vector();
-	private boolean firstTime = true;
-	
+    private org.osid.shared.Type repositoryType = null;
+    private org.osid.shared.Id repositoryId = null;
+    private final java.util.Vector repositoryVector = new java.util.Vector();
+    private final java.util.Vector searchTypeVector = new java.util.Vector();
+    private boolean firstTime = true;
+
     public void osidVersion_2_0()
 		throws org.osid.repository.RepositoryException
     {
@@ -273,7 +273,7 @@ implements org.osid.repository.RepositoryManager
                 org.osid.shared.LongValueIterator longValueIterator = nextRepository.getAssetDates(assetId);
                 while (longValueIterator.hasNextLongValue())
                 {
-                    result.addElement(new Long(longValueIterator.nextLongValue()));
+                    result.addElement(longValueIterator.nextLongValue());
                 }
             }
             return new LongValueIterator(result);

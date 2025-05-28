@@ -17,16 +17,16 @@ package edu.tufts.osidimpl.repository.sakai;
 public class RecordStructure
 implements org.osid.repository.RecordStructure
 {
-    private String idString = "Sakai.RecordStructureId";
-    private String displayName = "Sakai Content Hosting";
-    private String description = "Holds Sakai Site Collection or Resource Metadata";
-    private String format = "";
-    private String schema = "";
-    private org.osid.shared.Type type = new Type("sakaiproject.org","recordStructure","contentHosting");
-    private boolean repeatable = false;
-	private static RecordStructure recordStructure = new RecordStructure();
+    private final String idString = "Sakai.RecordStructureId";
+    private final String displayName = "Sakai Content Hosting";
+    private final String description = "Holds Sakai Site Collection or Resource Metadata";
+    private final String format = "";
+    private final String schema = "";
+    private final org.osid.shared.Type type = new Type("sakaiproject.org", "recordStructure", "contentHosting");
+    private final boolean repeatable = false;
+    private static final RecordStructure recordStructure = new RecordStructure();
     private org.osid.shared.Id id = null;
-	
+
 	protected static RecordStructure getInstance()
 	{
 		return recordStructure;

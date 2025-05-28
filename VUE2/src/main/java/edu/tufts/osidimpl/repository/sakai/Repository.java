@@ -21,18 +21,18 @@ import javax.xml.namespace.QName;
 public class Repository
 implements org.osid.repository.Repository
 {
-    private java.util.Vector<org.osid.shared.Type> assetTypeVector = new java.util.Vector<org.osid.shared.Type>();
-    private java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<org.osid.shared.Type>();
-	private org.osid.shared.Id repositoryId = null;
-	private String repositoryIdPrefixString = "E89F7F92-8C23-481B-AF8C-7AE169699F34-2595-000008D778AFEB53";
-	private org.osid.shared.Type repositoryType = new Type("sakaiproject.org","repository","contentHosting");
-	private org.osid.shared.Type keywordSearchType = new Type("mit.edu","search","keyword");
-	private org.osid.shared.Type titleSearchType = new Type("mit.edu","search","title");
-	private String displayName = null;
-	private String key = null;
-	private String sessionId = null;
-	private RepositoryManager manager = null;
- 
+    private final java.util.Vector<org.osid.shared.Type> assetTypeVector = new java.util.Vector<org.osid.shared.Type>();
+    private final java.util.Vector<org.osid.shared.Type> searchTypeVector = new java.util.Vector<org.osid.shared.Type>();
+    private org.osid.shared.Id repositoryId = null;
+    private final String repositoryIdPrefixString = "E89F7F92-8C23-481B-AF8C-7AE169699F34-2595-000008D778AFEB53";
+    private final org.osid.shared.Type repositoryType = new Type("sakaiproject.org", "repository", "contentHosting");
+    private final org.osid.shared.Type keywordSearchType = new Type("mit.edu", "search", "keyword");
+    private final org.osid.shared.Type titleSearchType = new Type("mit.edu", "search", "title");
+    private String displayName = null;
+    private String key = null;
+    private String sessionId = null;
+    private RepositoryManager manager = null;
+
     protected Repository(String displayName, String key, RepositoryManager manager)
 		    throws org.osid.repository.RepositoryException
     {
@@ -328,7 +328,7 @@ implements org.osid.repository.Repository
 		java.util.Vector result = new java.util.Vector();
 		boolean knownType = false;
 		for (int i=0, size = this.searchTypeVector.size(); i < size; i++) {
-			if (searchType.isEqual((org.osid.shared.Type)this.searchTypeVector.elementAt(i))) {
+			if (searchType.isEqual(this.searchTypeVector.elementAt(i))) {
 				knownType = true;
 			}
 		}

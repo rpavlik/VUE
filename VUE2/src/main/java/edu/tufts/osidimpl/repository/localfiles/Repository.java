@@ -26,12 +26,12 @@ public class Repository
 implements org.osid.repository.Repository
 {
     private org.osid.shared.Id repositoryId = null;
-	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Type assetType = new Type("edu.tufts","asset","file");
+    private org.osid.shared.Type repositoryType = null;
+    private final org.osid.shared.Type assetType = new Type("edu.tufts", "asset", "file");
     private String displayName = null;
     private String description = null;
     private java.util.Vector searchTypeVector = null;
-	
+
     protected Repository(String displayName,
 						 String description,
 						 org.osid.shared.Id repositoryId,
@@ -154,7 +154,7 @@ implements org.osid.repository.Repository
                     added++;
                 }
             }
-			if (added == 0 || tufts.Util.isWindowsPlatform() == false) {
+			if (added == 0 || !tufts.Util.isWindowsPlatform()) {
                             Resource r = Resource.getFactory().get(new LocalCabinet(home.getPath(), agent, null));
                             String title = "Home";
                             String user = VUE.getSystemProperty("user.name");

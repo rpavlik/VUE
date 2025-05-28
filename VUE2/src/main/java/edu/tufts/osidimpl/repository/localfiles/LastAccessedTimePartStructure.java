@@ -19,14 +19,15 @@ public class LastAccessedTimePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id lastAccessedTimerPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","lastAccessedTime","LastAccessedTime");
-    private String displayName = "LastAccessedTime";
-    private String description = "Last time entry was accessed.";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static LastAccessedTimePartStructure lastAccessedTimePartStructure = new LastAccessedTimePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "lastAccessedTime",
+            "LastAccessedTime");
+    private final String displayName = "LastAccessedTime";
+    private final String description = "Last time entry was accessed.";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final LastAccessedTimePartStructure lastAccessedTimePartStructure = new LastAccessedTimePartStructure();
+
 	protected static LastAccessedTimePartStructure getInstance()
 	{
 		return lastAccessedTimePartStructure;

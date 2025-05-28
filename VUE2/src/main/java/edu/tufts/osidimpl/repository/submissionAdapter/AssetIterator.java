@@ -37,7 +37,7 @@ implements org.osid.repository.AssetIterator
     {
         if (iterator.hasNext())
         {
-            return (org.osid.repository.Asset)iterator.next();
+            return iterator.next();
         }
         else
         {

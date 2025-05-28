@@ -21,16 +21,16 @@ import javax.xml.namespace.QName;
 public class RepositoryManager
 implements org.osid.repository.RepositoryManager
 {
-    private org.osid.OsidContext context = null;
-    private java.util.Properties configuration = null;
+	private org.osid.OsidContext context = null;
+	private java.util.Properties configuration = null;
 
-    private org.osid.authentication.AuthenticationManager authenticationManager = null;
-	private org.osid.repository.Repository repository = null;
+	private org.osid.authentication.AuthenticationManager authenticationManager = null;
+	private final org.osid.repository.Repository repository = null;
 	private org.osid.shared.Type repositoryType = null;
-	private org.osid.shared.Id repositoryId = null;
-    private java.util.Vector repositoryVector = new java.util.Vector();
-    private java.util.Vector searchTypeVector = new java.util.Vector();
-	private String displayName = null;
+	private final org.osid.shared.Id repositoryId = null;
+	private final java.util.Vector repositoryVector = new java.util.Vector();
+	private final java.util.Vector searchTypeVector = new java.util.Vector();
+	private final String displayName = null;
 	private String key = null;
 
     public void osidVersion_2_0()

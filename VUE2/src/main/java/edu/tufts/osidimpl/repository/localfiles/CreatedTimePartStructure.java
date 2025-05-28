@@ -19,14 +19,14 @@ public class CreatedTimePartStructure
 implements org.osid.repository.PartStructure
 {
     private org.osid.shared.Id createdTimerPartStructureId = null;
-    private org.osid.shared.Type type = new Type("mit.edu","partStructure","createdTime","Created Time");
-    private String displayName = "Created Time";
-    private String description = "Time the entity was created.";
-    private boolean mandatory = false;
-    private boolean populatedByRepository = true;
-    private boolean repeatable = false;
-	private static CreatedTimePartStructure createdTimePartStructure = new CreatedTimePartStructure();
-	
+    private final org.osid.shared.Type type = new Type("mit.edu", "partStructure", "createdTime", "Created Time");
+    private final String displayName = "Created Time";
+    private final String description = "Time the entity was created.";
+    private final boolean mandatory = false;
+    private final boolean populatedByRepository = true;
+    private final boolean repeatable = false;
+    private static final CreatedTimePartStructure createdTimePartStructure = new CreatedTimePartStructure();
+
 	protected static CreatedTimePartStructure getInstance()
 	{
 		return createdTimePartStructure;
