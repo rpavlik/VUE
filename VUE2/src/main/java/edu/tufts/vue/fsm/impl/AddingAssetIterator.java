@@ -21,7 +21,7 @@ package edu.tufts.vue.fsm.impl;
 public class AddingAssetIterator
 implements org.osid.repository.AssetIterator
 {
-	private java.util.Vector iteratorVector = new java.util.Vector();
+	private final java.util.Vector iteratorVector = new java.util.Vector();
 	private int iteratorIndex = 0;
 	
 	protected AddingAssetIterator()

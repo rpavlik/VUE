@@ -26,7 +26,7 @@ implements org.osid.repository.AssetIterator
             throw new org.osid.repository.RepositoryException(
                 org.osid.shared.SharedException.NO_MORE_ITERATOR_ELEMENTS);
         }
-        return (org.osid.repository.Asset)vector.elementAt(i++);
+        return vector.elementAt(i++);
     }
 /**
 <p>MIT O.K.I&#46; SID Implementation License.

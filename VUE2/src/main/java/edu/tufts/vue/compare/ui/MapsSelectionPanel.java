@@ -69,7 +69,7 @@ public class MapsSelectionPanel extends JPanel  {
     // probably should save settings when load LWMergeMap
     // so perhaps a second instance is warranted depending on 
     // currently active map.
-    private static MapsSelectionPanel singleton = new MapsSelectionPanel();
+    private static final MapsSelectionPanel singleton = new MapsSelectionPanel();
     
     public static MapsSelectionPanel getMapSelectionPanel()
     {
@@ -88,22 +88,23 @@ public class MapsSelectionPanel extends JPanel  {
     public String excluePrimaryMapNodesMessage = VueResources.local("dialog.selectionpane.excluePrimaryMapNodesMessage");
     
     public String filterOnBaseMapMessageString = VueResources.local("dialog.selectionpane.filterOnBaseMapMessageString");
-    
-    private String AddMaps = VueResources.local("dialog.selectionpane.AddMaps");
-    
-    private String MergeProrerty = VueResources.local("dialog.selectionpane.MergeProrerty");
-    private JScrollPane scroll;
-    private JTable maps;
-    //private JTextField fileNameField;
-    private JButton browseButton;
-    
-    //private JPanel bottomPanel;
-    
-    private String[] mapFilterChoices = {showAllMessage,filterOnPrimaryMapMessage,excluePrimaryMapNodesMessage};
-    private JComboBox mapFilterChoice;
-    
-    private JCheckBox filterOnBaseMap;
-    
+
+    private final String AddMaps = VueResources.local("dialog.selectionpane.AddMaps");
+
+    private final String MergeProrerty = VueResources.local("dialog.selectionpane.MergeProrerty");
+    private final JScrollPane scroll;
+    private final JTable maps;
+    // private JTextField fileNameField;
+    private final JButton browseButton;
+
+    // private JPanel bottomPanel;
+
+    private final String[] mapFilterChoices = { showAllMessage, filterOnPrimaryMapMessage,
+            excluePrimaryMapNodesMessage };
+    private final JComboBox mapFilterChoice;
+
+    private final JCheckBox filterOnBaseMap;
+
     private boolean deleteDown = false;
     
     private File lastDirectory = null;
@@ -140,10 +141,7 @@ public class MapsSelectionPanel extends JPanel  {
                   {
                       public boolean accept(File file)
                       {
-                          if(file.getName().substring(file.getName().lastIndexOf(".")+1,file.getName().length()).equals("vue"))
-                            return true;
-                          else 
-                            return false;
+                          return file.getName().substring(file.getName().lastIndexOf(".") + 1).equals("vue");
                       }
                       
                       public String getDescription()
@@ -364,23 +362,13 @@ public class MapsSelectionPanel extends JPanel  {
             //System.out.println("MSP mouse pressed, row column: " + maps.getSelectedRow() + "," + maps.getSelectedColumn());
             if(maps.getSelectedColumn() == 0)
             {
-                if(model.isSelected(maps.getSelectedRow()))
-                    model.setSelected(false,maps.getSelectedRow());
-                else
-                    model.setSelected(true,maps.getSelectedRow());
+                model.setSelected(!model.isSelected(maps.getSelectedRow()),maps.getSelectedRow());
             }
             if(maps.getSelectedColumn() == 2)
             {
                 model.setBaseMapIndex(maps.getSelectedRow());
             }
-            if(maps.getSelectedColumn() == 3)
-            {
-                deleteDown = true;
-            }
-            else
-            {
-                deleteDown = false;
-            }
+              deleteDown = maps.getSelectedColumn() == 3;
             repaint();
             
           }
@@ -406,7 +394,7 @@ public class MapsSelectionPanel extends JPanel  {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.anchor = GridBagConstraints.NORTH;
-        gridBagConstraints.fill = gridBagConstraints.BOTH;
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
         scroll = new JScrollPane(maps);
         //scroll.setViewportBorder(BorderFactory.createEmptyBorder(0,5,0,5));
         //gridBag.setConstraints(scroll,gridBagConstraints);
@@ -471,7 +459,7 @@ public class MapsSelectionPanel extends JPanel  {
                 {
                   //file = new File((String)model.getValueAt(i,1));
                   //file = new File((String)model.localFiles.get(i));
-                  String fileName ="file:///" + (String)model.localFiles.get(i);
+                  String fileName ="file:///" + model.localFiles.get(i);
                   map = ActionUtil.unmarshallMap(new java.net.URL(fileName));
                 }
                 catch(java.io.IOException exc)
@@ -549,18 +537,12 @@ public class MapsSelectionPanel extends JPanel  {
     public boolean getFilterOnBaseMap()
     {
         //if(filterOnBaseMap.isSelected())
-        if(mapFilterChoice.getSelectedItem().equals(filterOnPrimaryMapMessage))
-            return true;
-        else
-            return false;
+        return mapFilterChoice.getSelectedItem().equals(filterOnPrimaryMapMessage);
     }
     
     public boolean getExcludeNodesFromBaseMap()
     {
-        if(mapFilterChoice.getSelectedItem().equals(excluePrimaryMapNodesMessage))
-            return true;
-        else
-            return false;
+        return mapFilterChoice.getSelectedItem().equals(excluePrimaryMapNodesMessage);
     }
     
     public static String getShortNameForFile(String absolutePath)
@@ -588,9 +570,9 @@ public class MapsSelectionPanel extends JPanel  {
     
     class MapTableModel implements TableModel
     {
-       private ArrayList localFiles = new ArrayList(); 
-       private ArrayList localFileSelectionStates = new ArrayList();
-       private HashMap openMapSelections = new HashMap();
+       private final ArrayList localFiles = new ArrayList();
+       private final ArrayList localFileSelectionStates = new ArrayList();
+       private final HashMap openMapSelections = new HashMap();
        private int baseMapIndex = 0;
        
        /**
@@ -673,22 +655,12 @@ public class MapsSelectionPanel extends JPanel  {
                {
                    return false;
                }
-               
-               if(selected == null || selected.equals("Selected"))
-                   return true;
-               else
-                 return false;
+
+               return selected == null || selected.equals("Selected");
            }
            else
            {
-               if(localFileSelectionStates.get(row).equals("Selected"))
-               {
-                   return true;
-               }
-               else
-               {
-                   return false;
-               }
+               return localFileSelectionStates.get(row).equals("Selected");
            }
            
            //return true;
@@ -860,14 +832,14 @@ public class MapsSelectionPanel extends JPanel  {
     
     class MapTableCellRenderer extends DefaultTableCellRenderer
     {
-        private JCheckBox checkBox = new JCheckBox();
-        private JPanel checkBoxPanel = new JPanel(new BorderLayout());
-        private JLabel label = new JLabel();
-        private JRadioButton button = new JRadioButton();
-        private JPanel baseButtonPanel = new JPanel(new BorderLayout());
-        private JPanel deletePanel = new JPanel(new BorderLayout());
-        private JLabel imageLabel = new JLabel();
-        private JLabel typeLabel = new JLabel();
+        private final JCheckBox checkBox = new JCheckBox();
+        private final JPanel checkBoxPanel = new JPanel(new BorderLayout());
+        private final JLabel label = new JLabel();
+        private final JRadioButton button = new JRadioButton();
+        private final JPanel baseButtonPanel = new JPanel(new BorderLayout());
+        private final JPanel deletePanel = new JPanel(new BorderLayout());
+        private final JLabel imageLabel = new JLabel();
+        private final JLabel typeLabel = new JLabel();
         
         public Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row,int col)
         {
@@ -877,10 +849,7 @@ public class MapsSelectionPanel extends JPanel  {
             {
                 checkBox.setBackground(Color.WHITE);
                 checkBoxPanel.setBackground(Color.WHITE);
-                if(model.isSelected(row))
-                    checkBox.setSelected(true);
-                else
-                    checkBox.setSelected(false);
+                checkBox.setSelected(model.isSelected(row));
                 checkBoxPanel.add(checkBox);
                 checkBoxPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,new Color(229,229,229)));
                 return checkBoxPanel;
@@ -896,14 +865,7 @@ public class MapsSelectionPanel extends JPanel  {
             {
                 baseButtonPanel.setBackground(Color.WHITE);
                 button.setBackground(Color.WHITE);
-                if(model.getBaseMapIndex() == row)
-                {
-                    button.setSelected(true);
-                }
-                else
-                {
-                    button.setSelected(false);
-                }
+                button.setSelected(model.getBaseMapIndex() == row);
                 baseButtonPanel.add(button,BorderLayout.WEST);
                 baseButtonPanel.setBorder(BorderFactory.createMatteBorder(0,0,1,0,new Color(229,229,229)));
                 return baseButtonPanel;

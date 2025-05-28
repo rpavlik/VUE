@@ -17,7 +17,7 @@ package edu.tufts.vue.dsm.impl;
 public class VueOsidLocalInstaller
 implements edu.tufts.vue.dsm.OsidLocalInstaller
 {
-	private static edu.tufts.vue.dsm.OsidLocalInstaller installer = new VueOsidLocalInstaller();
+	private static final edu.tufts.vue.dsm.OsidLocalInstaller installer = new VueOsidLocalInstaller();
 
 	public static edu.tufts.vue.dsm.OsidLocalInstaller getInstance() {
 		return installer;

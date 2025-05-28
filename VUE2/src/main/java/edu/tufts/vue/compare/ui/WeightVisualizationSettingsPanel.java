@@ -72,14 +72,14 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     private IntervalListModel nodeModel;
     private IntervalListModel linkModel;
     private JTable intervalList;
-    
-    private LWMap map = null;
-    
-    private ArrayList<Style> nodeStyles = new ArrayList<>();
-    private ArrayList<Style> linkStyles = new ArrayList<>();
-    
-    private JLabel parameterChoiceMessage;
-    
+
+    private final LWMap map = null;
+
+    private final ArrayList<Style> nodeStyles = new ArrayList<>();
+    private final ArrayList<Style> linkStyles = new ArrayList<>();
+
+    private final JLabel parameterChoiceMessage;
+
     //private static WeightVisualizationSettingsPanel panel = new WeightVisualizationSettingsPanel();
     
     private int nodePaletteChoice = 0;
@@ -87,7 +87,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     
     private boolean skipPaletteApplication = false;
     
-    private boolean parameterChoiceDisplayedInOtherPanel;
+    private final boolean parameterChoiceDisplayedInOtherPanel;
     
     /*public static WeightVisualizationSettingsPanel getSharedPanel()
     {
@@ -322,11 +322,11 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         // setIntervalBoundaries as defaults
         ArrayList<Double> boundaries = new ArrayList<>();
         
-        boundaries.add(new Double((double)0.0 + (double)0.5));
+        boundaries.add(0.0 + 0.5);
         for(int i=0;i<nodeModel.getRowCount();i++)
         {
             PercentageInterval pi = (PercentageInterval)(nodeModel.getValueAt(i,0));
-            boundaries.add(new Double((double)pi.getEnd()+(double)0.5));
+            boundaries.add((double) pi.getEnd() + 0.5);
         }
         
         if(DEBUG_LOCAL)
@@ -345,11 +345,11 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         // setIntervalBoundaries as defaults
         ArrayList<Double> boundaries = new ArrayList<>();
         
-        boundaries.add(new Double((double)0.0 + (double).5));
+        boundaries.add(0.0 + .5);
         for(int i=0;i<linkModel.getRowCount();i++)
         {
             PercentageInterval pi = (PercentageInterval)(linkModel.getValueAt(i,0));
-            boundaries.add(new Double((double)pi.getEnd())+(double).5);
+            boundaries.add((double) pi.getEnd() + .5);
         }
         
         if(DEBUG_LOCAL)
@@ -465,7 +465,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
                 java.awt.Color color = colors.next();
                 
                 Style s = StyleMap.getStyle(nodeOrLink+".w" + (i++));
-                s.setAttribute("background",Style.colorToHex(color).toString());
+                s.setAttribute("background", Style.colorToHex(color));
                 if(percentage >= .8) {
                     //System.out.println("setting foreground color to white? " + count);
                     s.setAttribute("font-color",Style.colorToHex(Color.WHITE));
@@ -474,7 +474,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
                 // change model
                 IntervalStylePreview isp = (IntervalStylePreview)intervalList.getModel().getValueAt(count-1,1);
                 isp.setBackground(color);
-                ((IntervalListModel)(intervalList.getModel())).setValueAt(isp,count-1,1);
+                intervalList.getModel().setValueAt(isp,count-1,1);
                     
                     
                 
@@ -500,8 +500,8 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     }
     
     class PercentageInterval {
-        private int start;
-        private int end;
+        private final int start;
+        private final int end;
         
         public PercentageInterval(int start,int end) {
             this.start = start;
@@ -545,11 +545,11 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     }
     
     class PercentageIntervalRenderer extends JPanel implements TableCellRenderer {
-        private JTextField startField = new JTextField(3);
-        private JLabel startLabel = new JLabel();
-        private JLabel toLabel = new JLabel(VueResources.getString("jlabel.to"));
-        private JTextField endField = new JTextField(3);
-        private JLabel percentageLabel = new JLabel(VueResources.getString("jlabel.percentage"));
+        private final JTextField startField = new JTextField(3);
+        private final JLabel startLabel = new JLabel();
+        private final JLabel toLabel = new JLabel(VueResources.getString("jlabel.to"));
+        private final JTextField endField = new JTextField(3);
+        private final JLabel percentageLabel = new JLabel(VueResources.getString("jlabel.percentage"));
         
         public java.awt.Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row, int col) {
             // these intial values are not likely to be seen (unless wrong class used for value)
@@ -576,10 +576,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
             if(EDITABLE_INTERVALS)
             {
               startField.setEnabled(false);
-               if(row == 4)
-                endField.setEnabled(false);
-               else
-                endField.setEnabled(true);
+                endField.setEnabled(row != 4);
             }
             else
             {
@@ -592,11 +589,11 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     
     class PercentageIntervalEditor extends javax.swing.AbstractCellEditor implements TableCellEditor {
         
-        private JTextField startField = new JTextField(3);
-        private JTextField endField = new JTextField(3);
-        private JLabel toLabel = new JLabel(VueResources.getString("jlabel.to"));
-        private JLabel percentageLabel = new JLabel(VueResources.getString("jlabel.percentage"));
-        private JPanel panel = new JPanel();
+        private final JTextField startField = new JTextField(3);
+        private final JTextField endField = new JTextField(3);
+        private final JLabel toLabel = new JLabel(VueResources.getString("jlabel.to"));
+        private final JLabel percentageLabel = new JLabel(VueResources.getString("jlabel.percentage"));
+        private final JPanel panel = new JPanel();
         
         private int currentRow = 0;
         
@@ -730,10 +727,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
                 startField.setText(pi.getStart()+"");
                 startField.setEnabled(false);
                 endField.setText(pi.getEnd()+"");
-                if(row == 4)
-                    endField.setEnabled(false);
-                else
-                    endField.setEnabled(true);
+                endField.setEnabled(row != 4);
             } else {
                 startField.setText("0");
                 endField.setText("0");
@@ -824,10 +818,10 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         Color textColor = Color.BLACK;
         Color backColor = Color.WHITE;
         
-        private JLabel buttonImage;
+        private final JLabel buttonImage;
         // private JLabel hotSpot;
-        private javax.swing.JPanel hotSpot;
-        private JPanel panel = new JPanel();
+        private final javax.swing.JPanel hotSpot;
+        private final JPanel panel = new JPanel();
         //private IntervalStylePreview current;
         private int currentRow = 0;
         
@@ -878,7 +872,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
                     
                     IntervalStylePreview isp = (IntervalStylePreview)intervalList.getModel().getValueAt(currentRow,1);
                     isp.setBackground(chooser.getColor());
-                    ((IntervalListModel)(intervalList.getModel())).setValueAt(isp,currentRow,1);
+                    intervalList.getModel().setValueAt(isp,currentRow,1);
                     
                     panel.repaint();
                 }
@@ -928,8 +922,8 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
     
     class IntervalListModel extends javax.swing.table.DefaultTableModel {//implements TableModel {
         
-        private List<PercentageInterval> piList = new ArrayList<>();
-        private List<IntervalStylePreview> ispList = new ArrayList<>();
+        private final List<PercentageInterval> piList = new ArrayList<>();
+        private final List<IntervalStylePreview> ispList = new ArrayList<>();
         
         public void addRow(int startPercentage,int endPercentage,Color backColor,Color foreColor) {
             piList.add(new PercentageInterval(startPercentage,endPercentage));
@@ -987,11 +981,8 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         public boolean isCellEditable(int row,int col) {
             
             if(!EDITABLE_INTERVALS)
-            {    
-              if(col == 1)
-                return true;
-              else
-                return false;
+            {
+                return col == 1;
             }
             return true;
         }

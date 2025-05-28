@@ -38,13 +38,13 @@ public class MergeMapsControlPanel extends JPanel /* implements ActiveListener<L
     private static final boolean DynamicImpl = VueResources.getBool("merge.view.settings.dynamic");
 
     private static final boolean DEBUG_LOCAL = false;
-    
-    private MapsSelectionPanel mapSelectionPanel;
-    private VisualizationSettingsPanel visualizationSettingsPanel;
-    private JButton closeButton;
-    private JButton generateButton;
-    
-    private DockWindow dw;
+
+    private final MapsSelectionPanel mapSelectionPanel;
+    private final VisualizationSettingsPanel visualizationSettingsPanel;
+    private final JButton closeButton;
+    private final JButton generateButton;
+
+    private final DockWindow dw;
 
     private boolean stopWasPressed;
     
@@ -181,12 +181,9 @@ public class MergeMapsControlPanel extends JPanel /* implements ActiveListener<L
         // label starts probably makes sense to check in the thread anyway in case someday are
         // merging from networks/etc.  except.. the new getNumberOfSelections method seems to
         // be fast enough -- so use this for now (approaching 2.1 build rapidly..)
-        boolean noMapsSelected = false;
-                        
-        if (mapSelectionPanel.getNumberOfSelections() == 0) {
-            // todo: also, if for all the selected maps, map.hasContent() == false
-            noMapsSelected = true;
-        }
+        boolean noMapsSelected = mapSelectionPanel.getNumberOfSelections() == 0;
+
+        // todo: also, if for all the selected maps, map.hasContent() == false
 
         final JPanel loadingLabel = new JPanel();
         final JLabel progressLabel = new JLabel();

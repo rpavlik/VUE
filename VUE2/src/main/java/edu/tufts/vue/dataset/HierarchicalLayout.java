@@ -56,20 +56,20 @@ public class HierarchicalLayout extends AbstractLayout{
             if(!nodeMap.containsKey(node1Label)) {
                 node1 = new LWNode(node1Label);
                 nodeMap.put(node1Label,node1);
-                repeatMap.put(node1Label, new Integer(1));
+                repeatMap.put(node1Label, 1);
                 count++;
                 node1.setLocation(MAP_SIZE/2,count*40);
                 map.add(node1);
             } else {
                 node1 = nodeMap.get(node1Label);
                 int nc= repeatMap.get(node1Label);
-                repeatMap.put(node1Label,new Integer(nc+1));
+                repeatMap.put(node1Label, nc + 1);
                 Point2D p = node1.getLocation();
                 node1.setLocation(p.getX()-40,p.getY());
             }
             if(!nodeMap.containsKey(node2Label)) {
                 node2 = new LWNode(node2Label);
-                repeatMap.put(node2Label, new Integer(1));
+                repeatMap.put(node2Label, 1);
                 nodeMap.put(node2Label,node2);
                 count++;
                 node2.setLocation(MAP_SIZE/2,count*40+20);
@@ -79,7 +79,7 @@ public class HierarchicalLayout extends AbstractLayout{
                 int nc= repeatMap.get(node2Label);
                 Point2D p = node2.getLocation();
                 node2.setLocation(p.getX()-40,p.getY());
-                repeatMap.put(node2Label,new Integer(nc+1));
+                repeatMap.put(node2Label, nc + 1);
             }
             LWLink link = new LWLink(node1,node2);
             map.add(link);

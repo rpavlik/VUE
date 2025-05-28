@@ -31,17 +31,18 @@ import tufts.vue.VueResources;
 
 public class VoteVisualizationSettingsPanel extends JPanel {
     
-    public final static String defineThresholdMessage = VueResources.getString("dialog.visualizationsettings.definethreshold");
-    
+    public final static String defineThresholdMessage = VueResources
+            .getString("dialog.visualizationsettings.definethreshold");
+
     private JCheckBox filterChoice;
-    private JSlider nodeThresholdSlider;
+    private final JSlider nodeThresholdSlider;
     private boolean mousePressed;
-    private JLabel percentageDisplay;
-    private JSlider linkThresholdSlider;
-    private JLabel linkPercentageDisplay;
-    
-    private static VoteVisualizationSettingsPanel panel = new VoteVisualizationSettingsPanel();
-    
+    private final JLabel percentageDisplay;
+    private final JSlider linkThresholdSlider;
+    private final JLabel linkPercentageDisplay;
+
+    private static final VoteVisualizationSettingsPanel panel = new VoteVisualizationSettingsPanel();
+
     public static VoteVisualizationSettingsPanel getSharedPanel()
     {
         return panel;

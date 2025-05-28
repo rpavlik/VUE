@@ -41,24 +41,25 @@ public class VisualizationSettingsPanel extends JPanel implements ActionListener
 	// visualization types
     public final static int VOTE = 1;
     public final static int WEIGHT = 0;
-    
-    private String SetParamaterFor = VueResources.getString("dialog.visualizationsettings.SetParamaterFor");
-    private String VOTE_STRING = VueResources.getString("dialog.visualizationsettings.vote");
-    private String WEIGHT_STRING = VueResources.getString("dialog.visualizationsettings.weight");
-    private String visualizationSettingsChoiceMessage = VueResources.getString("dialog.visualizationsettings.ChoiceMessage");
+
+    private final String SetParamaterFor = VueResources.getString("dialog.visualizationsettings.SetParamaterFor");
+    private final String VOTE_STRING = VueResources.getString("dialog.visualizationsettings.vote");
+    private final String WEIGHT_STRING = VueResources.getString("dialog.visualizationsettings.weight");
+    private final String visualizationSettingsChoiceMessage = VueResources
+            .getString("dialog.visualizationsettings.ChoiceMessage");
     //moving to Select Maps Panel (and changing to "layout")
     //public final static String filterOnBaseMapMessageString = "Only include items found on the guide map";
     
-    private JComboBox visualizationChoice;
-    
-    private GridBagLayout gridBag;
-    private GridBagConstraints gridBagConstraints;
-    
-    private VoteVisualizationSettingsPanel votePanel = VoteVisualizationSettingsPanel.getSharedPanel();
-    private WeightVisualizationSettingsPanel weightPanel;// = WeightVisualizationSettingsPanel.getSharedPanel();
-    
-    private JComboBox weightParameterChoice;
-    
+    private final JComboBox visualizationChoice;
+
+    private final GridBagLayout gridBag;
+    private final GridBagConstraints gridBagConstraints;
+
+    private final VoteVisualizationSettingsPanel votePanel = VoteVisualizationSettingsPanel.getSharedPanel();
+    private final WeightVisualizationSettingsPanel weightPanel;// = WeightVisualizationSettingsPanel.getSharedPanel();
+
+    private final JComboBox weightParameterChoice;
+
     private JLabel weightParameterChoiceLabel;
     
     // see below -- next variable is for VUE-607 (todo: use an ItemListener on the combo box instead)

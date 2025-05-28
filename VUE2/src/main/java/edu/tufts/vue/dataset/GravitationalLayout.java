@@ -56,22 +56,22 @@ public class GravitationalLayout extends AbstractLayout{
             if(!nodeMap.containsKey(node1Label)) {
                 node1 = new LWNode(node1Label);
                 nodeMap.put(node1Label,node1);
-                repeatMap.put(node1Label, new Integer(1));
+                repeatMap.put(node1Label, 1);
                 map.add(node1);
             } else {
                 node1 = nodeMap.get(node1Label);
                 int nc= repeatMap.get(node1Label);
-                repeatMap.put(node1Label,new Integer(nc+1));
+                repeatMap.put(node1Label, nc + 1);
             }
             if(!nodeMap.containsKey(node2Label)) {
                 node2 = new LWNode(node2Label);
                 map.add(node2);
-                repeatMap.put(node2Label, new Integer(1));
+                repeatMap.put(node2Label, 1);
                 nodeMap.put(node2Label,node2);
             } else {
                 node2 = nodeMap.get(node2Label);
                 int nc= repeatMap.get(node2Label);
-                repeatMap.put(node2Label,new Integer(nc+1));
+                repeatMap.put(node2Label, nc + 1);
             }
             LWLink link = new LWLink(node1,node2);
             map.add(link);

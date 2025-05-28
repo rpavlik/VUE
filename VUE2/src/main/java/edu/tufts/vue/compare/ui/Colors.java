@@ -45,10 +45,10 @@ import tufts.vue.VueResources;
 public class Colors {
     
     public static final int DEFAULT_INTERVAL_COUNT = 6;
-    
-    private List<Color> colors;
-    private String name;  
-    
+
+    private final List<Color> colors;
+    private final String name;
+
    /* public static final Colors one = new Colors("BuGn #5",
                                                 new Color(237,248,251),
                                                 new Color(178,226,226),
@@ -109,11 +109,8 @@ public class Colors {
         
         //System.out.println("merge.weight.colors." + intervals + "." + numColors + "." + scheme);
         Color[] arr = VueResources.getColorArray("merge.weight.colors." + intervals + "." + numColors + "." + scheme);
-        
-        for(int i=0;i<intervals;i++)
-        {
-            colors.add(arr[i]);
-        }
+
+        colors.addAll(Arrays.asList(arr).subList(0, intervals));
     }
     
     public Colors(String name,List<Color> colors)

@@ -83,11 +83,11 @@ public abstract class  AbstractLayout  extends VueAction {
     /* creates name for map from file name
      */
     
-    private  String getMapName(String fileName) {
-        String mapName = fileName.substring(fileName.lastIndexOf(File.separator)+1,fileName.length());
-        if(mapName.lastIndexOf(".")>0)
-            mapName = mapName.substring(0,mapName.lastIndexOf("."));
-        if(mapName.length() == 0)
+    private String getMapName(String fileName) {
+        String mapName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
+        if (mapName.lastIndexOf(".") > 0)
+            mapName = mapName.substring(0, mapName.lastIndexOf("."));
+        if (mapName.length() == 0)
             mapName = "Text Import";
         return mapName;
     }

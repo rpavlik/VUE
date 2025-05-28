@@ -35,7 +35,7 @@ public class VueOsidFactory
     private static org.osid.OsidContext osidContext = new org.osid.OsidContext();
     private static java.util.Properties properties = new java.util.Properties();
     private static org.osid.id.IdManager idManager = null;
-    private static org.osid.registry.RegistryManager registryManager = null;
+    private static final org.osid.registry.RegistryManager registryManager = null;
     private static final java.util.Vector keyVector = new java.util.Vector();
     private static final java.util.Vector managerVector = new java.util.Vector();
 	
@@ -116,7 +116,7 @@ public class VueOsidFactory
 
         final String PCM_package;
 
-        if (true || tufts.Util.isMacPlatform()) {
+        if (true) {
             // Technically, we shouldn't need our VuePCM override class on
             // non-mac platforms, but we're leaving it in for its additional
             // diagnostics.

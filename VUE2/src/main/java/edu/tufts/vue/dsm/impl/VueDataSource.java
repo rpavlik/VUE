@@ -33,7 +33,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     private org.osid.shared.Id dataSourceId = null;
     private String osidLoadKey = null;
     private String providerIdString = null; // to support loading datasource from castor
-    private String dataSourceIdString = null; // to support loading datasource from castor
+    private final String dataSourceIdString = null; // to support loading datasource from castor
     // from Provider OSID implementation
     private String osidName = null;
     private String osidBindingVersion = null;
@@ -44,11 +44,11 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     private java.util.Date releaseDate = null;
     private String license = null;
     private boolean requestsLicenseAcknowledgement = false;
-    private org.osid.shared.Type[] rightTypes = null;
+    private final org.osid.shared.Type[] rightTypes = null;
     private java.awt.Image icon16x16 = null;
     private boolean isConfigured = false;
     private String configurationUIHints = null;
-    private boolean done = true; // dummy variable for castor.
+    private final boolean done = true; // dummy variable for castor.
     
     // from Manager loaded via Provider
     private org.osid.repository.RepositoryManager repositoryManager = null;
@@ -402,19 +402,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     
     public boolean isOnline() {
 
-        if (repositoryDisplayName == null || repositoryDisplayName.trim().length() < 1) {
-            return false;
-        } else {
-            return true;
-        }
-
-//         try {
-//             this.repository.getDisplayName();
-//             return true;
-//         } catch (Throwable t) {
-//             // ignore since we are going to return false for any failure
-//         }
-//        return false;
+        return repositoryDisplayName != null && repositoryDisplayName.trim().length() >= 1;
         
     }
     

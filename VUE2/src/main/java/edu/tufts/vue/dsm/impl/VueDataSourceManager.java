@@ -120,7 +120,7 @@ public class VueDataSourceManager
         // why do we notify on save? keeping this only in case something is
         // currently depending on this...
         notifyDataSourceListeners(DS_SAVING); 
-        marshall(new File(this.xmlFilename));
+        marshall(new File(xmlFilename));
     }
 
     
@@ -205,7 +205,7 @@ public class VueDataSourceManager
             new java.util.concurrent.atomic.AtomicInteger(dataSources.length);
 
         for (final edu.tufts.vue.dsm.DataSource ds : dataSources) {
-            if (ds instanceof VueDataSource == false) {
+            if (!(ds instanceof VueDataSource)) {
                 Log.warn("unhandled DataSource impl, cannot configure: " + Util.tags(ds));
                 RunCount.decrementAndGet();
             }
@@ -213,7 +213,7 @@ public class VueDataSourceManager
             
         for (final edu.tufts.vue.dsm.DataSource ds : dataSources) {
 
-            if (ds instanceof VueDataSource == false)
+            if (!(ds instanceof VueDataSource))
                 continue;
             
             Log.debug("configuring " + ds);
@@ -548,7 +548,7 @@ public class VueDataSourceManager
         try {
             vdsm = unmarshalWithEncoding(file, null);
         } catch (MarshalException e) {
-            Log.error(e.toString() + "; " + file);
+            Log.error(e + "; " + file);
             
             if (e.getCause() instanceof org.xml.sax.SAXParseException &&
                 e.getMessage() != null &&

@@ -29,7 +29,7 @@ implements Runnable
     private org.osid.shared.Properties searchProperties = null;
     private int searchIndex = -1;
     private long startTime = 0;
-	private edu.tufts.vue.fsm.SearchEngine searchEngine = VueSearchEngine.getInstance();
+	private final edu.tufts.vue.fsm.SearchEngine searchEngine = VueSearchEngine.getInstance();
 
     public SearchThread(String foreignIdString,
 						org.osid.repository.Repository repository,
