@@ -47,6 +47,9 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.text.SimpleAttributeSet;
 
 /**
@@ -267,8 +270,15 @@ public class GUI
         if (false)
             installUIDefaults();
 
-        if (VUE.isApplet() || Util.isUnixPlatform())
-        {
+        if (!VUE.isApplet() && Util.isUnixPlatform()) {
+            try {
+                FlatLightLaf.setup();
+                // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+
+            } catch (Exception e) {
+                Log.error("Couldn't load Flatlaf look and feel");
+            }
+        } else if (VUE.isApplet() || Util.isUnixPlatform()) {
            try {
                  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 

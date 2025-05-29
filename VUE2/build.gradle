@@ -209,6 +209,7 @@ dependencies {
     // implementation 'org.netbeans.external:jakarta-oro-2.0.8:RELEASE69'
     implementation 'org.twitter4j:twitter4j-core:2.1.+'
     implementation 'urbanophile:java-getopt:1.0.9'
+    implementation 'com.formdev:flatlaf:3.6'
 
     // TODO upgrade to https://mvnrepository.com/artifact/com.rometools/rome
     implementation 'rome:rome:0.9'
