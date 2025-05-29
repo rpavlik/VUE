@@ -2801,6 +2801,7 @@ public class LWComponent
      * left in for (possible future) backward file compatibility
      * do nothing with this data anymore for now.
      **/
+    @Deprecated
     public synchronized NodeFilter getNodeFilter() {
         // if the double-checked locking idiom was reliable in java, we'd use it here, but
         // since it's not, we synchronize this whole method.
@@ -2812,11 +2813,13 @@ public class LWComponent
     }
 
     /** @deprecated -- for persistance */
+    @Deprecated
     public void setXMLnodeFilter(NodeFilter nodeFilter) {
         this.nodeFilter = nodeFilter;
     }
 
     /** @deprecated -- return null if the node filter is empty, so we don't bother with entry in the save file */
+    @Deprecated
     public NodeFilter getXMLnodeFilter() {
         if (mXMLRestoreUnderway) {
             // in case validation is on:
@@ -3722,6 +3725,7 @@ public class LWComponent
     }
 
     /** @deprecated - use getChildren */
+    @Deprecated
     public java.util.List<LWComponent> getChildList()
     {
         return NO_CHILDREN;
@@ -7442,6 +7446,7 @@ public class LWComponent
 
 
     /** @deprecated -- use hasDraws() */
+    @Deprecated
     public final boolean isDrawn() {
         return hasDraws();
     }

@@ -230,7 +230,7 @@ public class Util
 
     public static String formatLines(String target, int maxLength)
     {
-        Locale currentLocale = new Locale ("en","US");
+        Locale currentLocale = Locale.US;
 
     	return formatLines(target,maxLength,currentLocale);
     }
@@ -345,6 +345,7 @@ public class Util
      * -- this named method kept for backward compatability
      * @deprecated
      */
+    @Deprecated
     public static boolean isMacLeopard() {
         return OSisMacLeopard;
     }
@@ -423,6 +424,7 @@ public class Util
     }
 
     private static final String PC_OPENURL_CMD = "rundll32 url.dll,FileProtocolHandler";
+    @SuppressWarnings("deprecation")
     private static void openURL_Windows(String url, boolean isLocalFile, boolean isMailTo)
         throws java.io.IOException
     {
@@ -859,7 +861,7 @@ public class Util
 
     private static void execMacOpenURL(String url)
     {
-        if (isMacLeopard()) {
+        if (isMacLeopardOrLater()) {
             final String cmd = "/usr/bin/open";
             try {
                 if (DEBUG) System.err.println("    Leopard: " + cmd + " " + url);
@@ -910,6 +912,7 @@ public class Util
     private static boolean HasGnomeOpen = false;
     private static boolean GnomeOpenSet = false;
 
+    @SuppressWarnings("deprecation")
     private static void openURL_Unix(String url, boolean isLocalFile, boolean isMailTo)
         throws java.io.IOException
     {
@@ -2758,6 +2761,7 @@ public class Util
 
     
     /** @deprecated -- very old -- use String.format with width specifiers instead */
+    @Deprecated
     public static String pad(char c, int wide, String s, boolean alignRight) {
         if (s.length() >= wide)
             return s;

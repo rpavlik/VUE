@@ -116,6 +116,7 @@ public abstract class LWContainer extends LWComponent
 
     /** @deprecated - use getChildren */
     @Override
+    @Deprecated
     public java.util.List<LWComponent> getChildList()
     {
         return getChildren();
