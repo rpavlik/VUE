@@ -48,6 +48,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.swing.text.SimpleAttributeSet;
@@ -272,9 +273,8 @@ public class GUI
 
         if (!VUE.isApplet() && Util.isUnixPlatform()) {
             try {
+                FlatLaf.registerCustomDefaultsSource("tufts.vue");
                 FlatLightLaf.setup();
-                // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
             } catch (Exception e) {
                 Log.error("Couldn't load Flatlaf look and feel");
             }
