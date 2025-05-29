@@ -1721,7 +1721,7 @@ public class Actions implements VueConstants
         
         		for (LWContainer parent : sel.getParents()) 
         		{
-                      if (DEBUG.Enabled) info("deleting for parent " + parent);
+                       if (DEBUG.Enabled) info("deleting for parent " + parent);
                        parent.deleteChildrenPermanently(sel);
 
                        // someday: would be nice if this could simply be
