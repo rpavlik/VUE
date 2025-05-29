@@ -61,15 +61,6 @@ public class DataSetViewer extends ContentViewer {
 //		editInfoDockWindow.setLocation(DSB.dockWindow.getX() + DSB.dockWindow.getWidth(), DSB.dockWindow.getY());
 	}
 
-
-	public void finalize() {
-		DSB = null;
-		browserDS = null;
-		dataSourceList = null;
-		super.finalize();
-	}
-
-
 	protected void loadDataSets() {
 		File file = new File(VueUtil.getDefaultUserFolder().getAbsolutePath()+File.separatorChar+VueResources.getString("save.datasources"));
 

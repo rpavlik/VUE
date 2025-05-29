@@ -332,31 +332,6 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		setVisible(true);
 	}
 
-
-	protected void finalize() {
-		fadeSlider = null;
-		zoomSelButton = null;
-		zoomMapButton = null;
-		zoomLockCheckBox = null;
-		incomingLinksCheckBox = null;
-		outgoingLinksCheckBox = null;
-		linksLabel = null;
-		zoomSelLabel = null;
-		zoomMapLabel = null;
-		fadePanel = null;
-		fadeInnerPanel = null;
-		depthPanel = null;
-		depthInnerPanel = null;
-		linkDirectionPanel = null;
-		zoomPanel = null;
-		zoomInnerPanel = null;
-		linePanel = null;
-		depthSpacerPanel = null;
-		zoomSpacerPanel = null;
-		widgetStack = null;
-	}
-
-
 	protected void zoomIfLocked() {
 		if (zoomLockCheckBox.isSelected()) {
 			zoom();

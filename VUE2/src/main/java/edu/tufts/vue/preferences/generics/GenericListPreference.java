@@ -48,21 +48,6 @@ public abstract class GenericListPreference extends BasePref implements ListSele
 	public GenericListPreference() {
 	}
 
-	protected void finalize() throws Throwable {
-		try {
-			panel = null;
-			titleLabel = null;
-			messageArea = null;
-			list = null;
-			scrollPane = null;
-			previousValue = null;
-			loadList = null;
-		}
-		finally {
-			super.finalize();
-		}
-	}
-
 	public Object getPreviousValue() {
 		return (previousValue != null ? previousValue : getDefaultValue());
 	}

@@ -137,7 +137,7 @@ public class IMSCP {
     }
     
     protected void finalize() throws Throwable{
-        super.finalize();
         close();
+        super.finalize();
     }
 }

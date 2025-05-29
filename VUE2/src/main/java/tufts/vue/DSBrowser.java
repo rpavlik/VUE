@@ -73,14 +73,6 @@ public class DSBrowser extends ContentBrowser {
 		return dataSetViewer;
 	}
 
-	protected void finalize() {
-		librariesPane = null;
-		associationsPane = null;
-		browsePane = null;
-		dataSetViewer = null;
-	}
-
-
 	public DataSource addDataset() {
 		XmlDataSource	ds = new XmlDataSource("", null);
 

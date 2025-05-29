@@ -131,19 +131,6 @@ public class LanguagePreference extends edu.tufts.vue.preferences.generics.Gener
         };
 	}
 
-	protected void finalize() throws Throwable {
-		try {
-			category = null;
-			key = null;
-			name = null;
-			description = null;
-			defaultValue = null;
-		}
-		finally {
-			super.finalize();
-		}
-	}
-
 	public void setLocalizedStringsAndRegister() {
 		// An instance of this class is created by VueResources to get the VUE-specific preferred language.
 		// At the time of its creation the title and description can't be set because they are localized and

@@ -66,12 +66,6 @@ public abstract class ContentViewer extends JPanel {
 		super(layout, isDoubleBuffered);
 	}
 
-
-	protected void finalize() {
-		browserDS = null;
-	}
-
-
 	static {
 		GUI.apply(GUI.StatusFace, StatusLabel);
 		StatusLabel.setAlignmentX(0.5f);

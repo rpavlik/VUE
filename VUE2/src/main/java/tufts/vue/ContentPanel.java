@@ -53,14 +53,6 @@ public class ContentPanel extends JPanel {
 		if (DEBUG.Enabled) tabbedPane.setSelectedIndex(1);
 	}
 
-
-	protected void finalize() {
-		resources = null;
-		datasets = null;
-		ontologies = null;
-		tabbedPane = null;
-	}
-
 	protected void addBrowser(String title, JPanel browser) {
 		JScrollPane scrollPane = new JScrollPane(null, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		JViewport	viewport = scrollPane.getViewport();

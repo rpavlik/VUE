@@ -241,23 +241,6 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 		setVisible(true);
 	}
 
-	protected void finalize() {
-		fadeSlider = null;
-		zoomSelButton = null;
-		zoomMapButton = null;
-		zoomLockCheckBox = null;
-		fadeLabel = null;
-		depthLabel = null;
-		zoomSelLabel = null;
-		zoomMapLabel = null;
-		fadePanel = null;
-		fadeInnerPanel = null;
-		zoomPanel = null;
-		zoomInnerPanel = null;
-		linePanel = null;
-		widgetStack = null;
-}
-
 	public static void zoomIfLocked() {
 		if (zoomLockCheckBox.isSelected()) {
 			zoom();
