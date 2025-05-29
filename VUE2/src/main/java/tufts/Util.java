@@ -2400,25 +2400,22 @@ public class Util
     /** encode the given String in some charset into easily persistable UTF-8 8-bit format */
     public static String encodeUTF(String s) {
         if (s == null) return null;
-        String encoded = new String(s.getBytes(StandardCharsets.UTF_8));
         //System.out.println("ENCODED [" + encoded + "]");
-        return encoded;
+        return new String(s.getBytes(StandardCharsets.UTF_8));
     }
 
     public static String encodeASCII(String s) {
         if (s == null) return null;
         // unfortunately, this doesn't encode non-ascii chars as % codes, only '?'
-        String encoded = new String(s.getBytes(StandardCharsets.US_ASCII));
-        return encoded;
+        return new String(s.getBytes(StandardCharsets.US_ASCII));
     }
     
     /** decode the given String in 8-bit UTF-8 to the default java 16-bit unicode format
         (the platform default, which varies) for display */
     public static String decodeUTF(String s) {
         if (s == null) return null;
-        String decoded = new String(s.getBytes(), StandardCharsets.UTF_8);
         //System.out.println("DECODED [" + decoded + "]");
-        return decoded;
+        return new String(s.getBytes(), StandardCharsets.UTF_8);
     }
 
     private final static String NO_CLASS_FILTER = "";
@@ -2785,7 +2782,7 @@ public class Util
 
     @SuppressWarnings("PointlessBitwiseExpression")
     public static String toBase2(byte b) {
-        String buf = String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
+        return String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
                 ((b & (1 << 6)) == 0 ? '0' : '1') +
                 ((b & (1 << 5)) == 0 ? '0' : '1') +
                 ((b & (1 << 4)) == 0 ? '0' : '1') +
@@ -2793,7 +2790,6 @@ public class Util
                 ((b & (1 << 2)) == 0 ? '0' : '1') +
                 ((b & (1 << 1)) == 0 ? '0' : '1') +
                 ((b & (1 << 0)) == 0 ? '0' : '1');
-	return buf;
     }
     
     

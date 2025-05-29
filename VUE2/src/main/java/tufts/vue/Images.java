@@ -316,7 +316,7 @@ public class Images
         }
 
         CacheEntry(Image image, File cacheFile) {
-            this(image, cacheFile, Collections.<String, Object>emptyMap());
+            this(image, cacheFile, Collections.emptyMap());
         }
         
         CacheEntry(Handle handle, File cacheFile) {
@@ -326,7 +326,7 @@ public class Images
         // for startup disk entries: note that props can't change (is final), so this
         // entry must be replaced once the image is loaded.
         CacheEntry(File cacheFile) {
-            this(null, cacheFile, Collections.<String, Object>emptyMap());
+            this(null, cacheFile, Collections.emptyMap());
         }
         
 
@@ -2350,7 +2350,7 @@ public class Images
             DocDump.dump(meta_data.getAsTree(PNG_META_DATA));
         }
         
-        final IIOImage io_image = new IIOImage(image, Collections.<BufferedImage>emptyList(), meta_data);
+        final IIOImage io_image = new IIOImage(image, Collections.emptyList(), meta_data);
 
         final ImageOutputStream output = ImageIO.createImageOutputStream(file);
 
@@ -2812,7 +2812,7 @@ public class Images
             this.data = data;
         }
         Handle(Image i) {
-            this(i, Collections.<String, Object>emptyMap());
+            this(i, Collections.emptyMap());
         }
 
         private Handle() {

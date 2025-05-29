@@ -421,9 +421,8 @@ public class ConfigurationUI extends javax.swing.JPanel {
                         break;
                     case BOOLEAN_CONTROL:
                         String[] items = new String[2];
-                        boolean b = (defaultValue != null)
-                                ? Boolean.parseBoolean(defaultValue) // validated earlier
-                                : true;
+                        // validated earlier
+                        boolean b = defaultValue == null || Boolean.parseBoolean(defaultValue);
                         items[0] = Boolean.toString(b);
                         items[1] = Boolean.toString(!b);
 
