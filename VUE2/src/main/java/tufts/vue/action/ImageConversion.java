@@ -80,8 +80,7 @@ public class ImageConversion extends VueAction {
         // http://www.universalwebservices.net/web-programming-resources/java/adjust-jpeg-image-compression-quality-when-saving-images-in-java
     	BufferedImage bi = VUE.getActiveMap().getAsImage(zoomFactor);
     	convert(bi, location, JPEG);
-    	 Dimension d = new Dimension(bi.getWidth(),bi.getHeight());
-         return d;
+        return new Dimension(bi.getWidth(),bi.getHeight());
     }
     
     /**A method which sets up for converting the active viewer to a Jpeg file*/
@@ -89,15 +88,13 @@ public class ImageConversion extends VueAction {
     {
     	BufferedImage bi = VUE.getActiveMap().getAsImage(zoomFactor);
         convert(bi, location, PNG);
-        Dimension d = new Dimension(bi.getWidth(),bi.getHeight());
-        return d;
+        return new Dimension(bi.getWidth(),bi.getHeight());
     }
     public static Dimension createActiveMapPng(File location,LWMap map,double zoomFactor)
     {
     	BufferedImage bi = map.getAsImage(zoomFactor);
         convert(bi, location, PNG);
-        Dimension d = new Dimension(bi.getWidth(),bi.getHeight());
-        return d;
+        return new Dimension(bi.getWidth(),bi.getHeight());
     }
     
     public void act() {

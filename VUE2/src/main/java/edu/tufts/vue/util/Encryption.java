@@ -46,8 +46,7 @@ public class Encryption {
             cipher.init(Cipher.ENCRYPT_MODE, getKey());
             byte[] inputBytes = input.getBytes();
             byte[] outputBytes = cipher.doFinal(inputBytes);
-            String output  = new String(hex.encode(outputBytes));
-            return output;
+            return new String(hex.encode(outputBytes));
         }catch(Exception ex) {
             ex.printStackTrace();
             return input ;
@@ -61,8 +60,7 @@ public class Encryption {
             cipher.init(Cipher.DECRYPT_MODE, getKey());
             byte[] encryptedBytes = hex.decode(encrypted.getBytes());
             byte[] recoveredBytes =  cipher.doFinal(encryptedBytes);
-            String recovered = new String(recoveredBytes);
-            return recovered;
+            return new String(recoveredBytes);
         } catch (Exception ex) {
             ex.printStackTrace();
             return encrypted;

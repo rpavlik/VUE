@@ -1024,8 +1024,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
        	{	if (DEBUG.TEXT)
        			out("got style");
        		int diff =0;
-       		Integer i = Integer.valueOf(a.toString());
-       		diff = i;
+       		diff = Integer.valueOf(a.toString());
        		//minS.height = minS.height - diff;
        		if (VUE.getActiveViewer() !=null)
        		{
@@ -1196,8 +1195,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     	{	if (DEBUG.TEXT)
     			out("got style");
     		int diff =0;
-    		Integer i = Integer.valueOf(a.toString());
-    		diff = i;
+    		diff = Integer.valueOf(a.toString());
     		if (VUE.getActiveViewer()!=null)
     		{
     			  java.awt.Container parent = getParent();    			      			  
@@ -1583,10 +1581,7 @@ return super.viewToModel(new Point(alloc));
   
         // Replace all occurrences of pattern in input
         Matcher matcher = pattern.matcher(html);
-        String output = matcher.replaceAll(replacementStr);
-       
-    	return output;
-    //	return html;
+        return matcher.replaceAll(replacementStr);
     }
     
     public String getText()

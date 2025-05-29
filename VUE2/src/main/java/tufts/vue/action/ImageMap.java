@@ -218,21 +218,20 @@ public class ImageMap extends VueAction {
 			//	LWComponent.ChildKind.PROPER).iterator();
 
             for (LWComponent lwComponent : layer.getAllDescendents(ChildKind.PROPER, new ArrayList<>(), Order.DEPTH)) {
-                LWComponent comp = lwComponent;
 
                 String type = "node";
                 if (container instanceof LWGroup)
                     type = "group";
 
-                if (!(comp instanceof LWNode) && !(comp instanceof LWGroup))
+                if (!(lwComponent instanceof LWNode) && !(lwComponent instanceof LWGroup))
                     continue;
 
                 String href = null;
                 String altLabel = null;
                 Resource res = null;
-                if (comp instanceof LWNode) {
-                    if (comp.getResource() != null) {
-                        res = comp.getResource();
+                if (lwComponent instanceof LWNode) {
+                    if (lwComponent.getResource() != null) {
+                        res = lwComponent.getResource();
                         //res = resource.toString();
                         altLabel = res.getSpec();
 
@@ -251,7 +250,7 @@ public class ImageMap extends VueAction {
 
                 String notes = "";
 
-                notes = comp.getNotes();
+                notes = lwComponent.getNotes();
 
                 if (notes == null)
                     notes = "";
@@ -259,12 +258,12 @@ public class ImageMap extends VueAction {
                     notes = VueUtil.formatLines(notes, 20);
                     notes = "class=\"tooltip\" title=\"" + notes + "\" ";
                 }
-                if (!comp.hasChildren()) {
+                if (!lwComponent.hasChildren()) {
                     arrayList.add(" <area " + href + " " + notes + " id=\"" + type
                             + (nodeCounter++) + "\" shape=\"rect\" coords=\""
-                            + getRectCoords(getRectNode(comp), zoom) + "\"></area>\n");
+                            + getRectCoords(getRectNode(lwComponent), zoom) + "\"></area>\n");
                 } else {
-                    Collection<LWComponent> children = comp.getAllDescendents();
+                    Collection<LWComponent> children = lwComponent.getAllDescendents();
                     LWComponent[] array = new LWComponent[children.size()];
                     children.toArray(array);
                     for (int i = array.length - 1; i >= 0; i--) {
@@ -288,7 +287,7 @@ public class ImageMap extends VueAction {
 
                     arrayList.add(" <area " + href + " " + notes + " id=\"" + type
                             + (nodeCounter++) + "\" shape=\"rect\" coords=\""
-                            + getRectCoords(getRectNode(comp), zoom) + "\"></area>\n");
+                            + getRectCoords(getRectNode(lwComponent), zoom) + "\"></area>\n");
 
                     //if (comp instanceof LWGroup) {
                     //	String groupOutput = writeMapforContainer((LWGroup) comp,map,zoom);

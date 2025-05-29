@@ -224,20 +224,19 @@ public abstract class ContentViewer extends JPanel {
 			exception = new Exception("no viewer available");
 
 		if (exception != null) {
-			final Throwable t = exception;
 
-			Log.error(ds + "; getResourceViewer:", t);
+			Log.error(ds + "; getResourceViewer:", exception);
 
 			String txt = ds.getTypeName() + " unavailable:";
 
-			if (t instanceof DataSourceException) {
-				if (t.getMessage() != null)
-					txt += " " + t.getMessage();
+			if (exception instanceof DataSourceException) {
+				if (exception.getMessage() != null)
+					txt += " " + exception.getMessage();
 			} else
-				txt += "\n\nError: " + prettyException(t);
+				txt += "\n\nError: " + prettyException(exception);
 
-			if (t.getCause() != null) {
-				Throwable c = t.getCause();
+			if (exception.getCause() != null) {
+				Throwable c = exception.getCause();
 				Log.error("FULL CAUSE:", c);
 				txt += "\n\nCause: " + prettyException(c);
 			}

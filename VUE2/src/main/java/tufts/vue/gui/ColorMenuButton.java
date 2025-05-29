@@ -539,9 +539,8 @@ public class ColorMenuButton extends JButton
     protected Object runCustomChooser() {
     	if (tufts.Util.isWindowsPlatform())
     		popupWindow.setAlwaysOnTop(false);
-        Color c =  tufts.vue.VueUtil.runColorChooser("Select Custom Color", getColor(), this);
-        
-        return c;
+
+        return tufts.vue.VueUtil.runColorChooser("Select Custom Color", getColor(), this);
         // todo: set up own listeners for color change in chooser
         // --that way way can actually tweak color on map as they play
         // with it in the chooser

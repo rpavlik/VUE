@@ -134,8 +134,7 @@ public class FedoraUtils {
     
     
     public static String getSaveFileName(osid.shared.Id objectId,osid.shared.Id behaviorId,osid.shared.Id disseminationId) throws osid.OsidException {
-        String saveFileName = processId(objectId.getIdString()+"-"+behaviorId.getIdString()+"-"+disseminationId.getIdString());
-        return saveFileName;
+        return processId(objectId.getIdString()+"-"+behaviorId.getIdString()+"-"+disseminationId.getIdString());
     }
     
     
@@ -144,7 +143,8 @@ public class FedoraUtils {
         final InfoRecord mInfoRecord = (InfoRecord)infoRecord;
         
         try {
-            AbstractAction fedoraAction = new AbstractAction(infoRecord.getId().getIdString()) {
+            //String fedoraUrl = mDR.getFedoraProperties().getProperty("url.fedora.get","http://vue-dl.tccs..tufts.edu:8080/fedora/get");
+            return new AbstractAction(infoRecord.getId().getIdString()) {
                 public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
                     try {
                         //String fedoraUrl = mDR.getFedoraProperties().getProperty("url.fedora.get","http://vue-dl.tccs..tufts.edu:8080/fedora/get");
@@ -152,13 +152,12 @@ public class FedoraUtils {
                         URL url = new URL(fedoraUrl);
                         URLConnection connection = url.openConnection();
                         System.out.println("FEDORA ACTION: Content-type:"+connection.getContentType()+" for url :"+fedoraUrl);
-                        
+
                         tufts.Util.openURL(fedoraUrl);
                     } catch(Exception ex) {  }
                 }
-                
+
             };
-            return fedoraAction;
         } catch(Exception ex) {
             throw new osid.dr.DigitalRepositoryException("FedoraUtils.getFedoraAction "+ex.getMessage());
         }

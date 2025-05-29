@@ -119,9 +119,8 @@ implements org.osid.repository.AssetIterator
 			Unmarshaller unmarshaller = getUnmarshaller();
 			unmarshaller.setValidation(false);
 			URL url = new URL(query);
-                        InputStream stream = url.openStream();
-			ArtifactResult artifactResult = (ArtifactResult) unmarshaller.unmarshal(new InputSource(stream));
-			return artifactResult;			
+			InputStream stream = url.openStream();
+			return (ArtifactResult) unmarshaller.unmarshal(new InputSource(stream));
 		} catch (Exception ex) {
 			Utilities.log(ex);
 		}

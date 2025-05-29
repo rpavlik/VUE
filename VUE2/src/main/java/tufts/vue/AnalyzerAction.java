@@ -430,9 +430,8 @@ public class AnalyzerAction extends Actions.LWCAction {
                     for (LWNode lwNode : categoryChildren.keySet()) {
 
                         subCatcomps.clear();
-                        LWNode joinNode = lwNode;
 
-                        Collection subCategories = categoryChildren.get(joinNode);
+                        Collection subCategories = categoryChildren.get(lwNode);
 
                         for (Object subCategory : subCategories) {
                             AnalyzerResult res = (AnalyzerResult) subCategory;
@@ -465,8 +464,8 @@ public class AnalyzerAction extends Actions.LWCAction {
                                     }
                                 }
 
-                                LWLink link = new LWLink(joinNode, node);
-                                node.setLocation(joinNode.getLocation());
+                                LWLink link = new LWLink(lwNode, node);
+                                node.setLocation(lwNode.getLocation());
                                 node.setFillColor(leafNodeColor);
                                 Font f = node.getFont();
                                 Font derive = f.deriveFont(((float) (10 + res.getCount())));
@@ -483,8 +482,8 @@ public class AnalyzerAction extends Actions.LWCAction {
                                 LWNode subtypeNode = newTypeHash.get(subtypeStr);
                                 if (subtypeNode == null) {
                                     subtypeNode = new LWNode(subtypeStr);
-                                    subtypeNode.setLocation(joinNode.getLocation());
-                                    LWLink link = new LWLink(joinNode, subtypeNode);
+                                    subtypeNode.setLocation(lwNode.getLocation());
+                                    LWLink link = new LWLink(lwNode, subtypeNode);
                                     subCatcomps.add(subtypeNode);
                                     subCatcomps.add(link);
                                     newTypeHash.put(subtypeStr, subtypeNode);

@@ -187,8 +187,7 @@ public class MetadataSchemaPreference extends BasePref implements ItemListener
 
 	public Object getValue(String prefName) {
 		Preferences p = Preferences.userNodeForPackage(getPrefRoot());
-		Boolean b = p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName));
-		return b;
+		return p.getBoolean(getPrefName(prefName), (Boolean) getDefaultValue(prefName));
 	}
 
 	public Object getPreviousValue(String prefName) {

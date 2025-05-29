@@ -2122,8 +2122,6 @@ public class LWComponent
         if (mDataMap == null)
             return null;
 
-        String fieldName = mDataMap.getString(EnumeratedValueKey);
-
 //         //-----------------------------------------------------------------------------
 //         // backward compat before @schema.field stored, and
 //         // only @schema was stored.  The first entry should always be
@@ -2134,7 +2132,7 @@ public class LWComponent
 //         }
 //         //-----------------------------------------------------------------------------
 
-        return fieldName;
+        return mDataMap.getString(EnumeratedValueKey);
     }
 
     /** @return the Field if this a single-value field node, null otherwise */

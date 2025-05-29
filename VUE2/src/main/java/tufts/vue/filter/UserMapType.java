@@ -217,9 +217,8 @@ public class UserMapType {
 	 **/
 	public UserProperty createUserProperty( String pName) {
 		String id = makeUserPropertyID( pName);
-		
-		UserProperty prop = new UserProperty( id, pName);
-		return prop;	
+
+		return new UserProperty(id, pName);
 	}
 	
 	
@@ -259,17 +258,16 @@ public class UserMapType {
 		if( pName == null) {
 			pName = "mapType";
 			}
-		UserMapType [] types = pTypes;
 		String id = pName.trim();
 		boolean done = false;
 		String root = pName;
-		if( types != null) {
+		if (pTypes != null) {
 			int suffix = 0;
 			while( !done) {
 				boolean alreadyExists = false;
-				for(int i=0; (!alreadyExists) && (i < types.length); i++) {
-					alreadyExists = id.equals( types[i].getID() );
-					}
+				for (int i = 0; (!alreadyExists) && (i < pTypes.length); i++) {
+					alreadyExists = id.equals(pTypes[i].getID());
+				}
 				if( !alreadyExists ) {
 					done = true;
 					}

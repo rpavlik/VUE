@@ -242,8 +242,7 @@ public class LocalFileDataSource extends BrowseDataSource implements Publishable
 
         
     public int[] getPublishableModes() {
-        int[] modes = {Publishable.PUBLISH_MAP,Publishable.PUBLISH_CMAP,Publishable.PUBLISH_ZIP};
-        return modes;
+        return new int[]{PUBLISH_MAP, PUBLISH_CMAP, PUBLISH_ZIP};
     }
     
     public boolean supportsMode(int mode) {

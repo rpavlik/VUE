@@ -279,8 +279,7 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
      *  @return The property set of the Properties object associated with this cabinet as a Map.
      */
     public java.util.Map getProperties() throws osid.filing.FilingException {
-        HashMap map = properties.getPropertySet();
-        return map;
+        return properties.getPropertySet();
     }
     
     /**
@@ -445,8 +444,8 @@ public class RemoteCabinet extends RemoteCabinetEntry implements osid.filing.Cab
         //  Change the name of the Cabinet.
         updateDisplayName(newName);
     }
+
     public String getUrl() {
-        String url = "ftp://"+rc.getUserName()+":"+rc.getPassword()+"@"+ rc.getServerName() + this.getFullName();
-        //System.out.println("CABINET URL:"+ url);
-        return url;    }
+        return "ftp://" + rc.getUserName() + ":" + rc.getPassword() + "@" + rc.getServerName() + this.getFullName();
+    }
 }

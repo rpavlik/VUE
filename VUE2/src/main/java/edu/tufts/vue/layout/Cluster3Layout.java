@@ -45,8 +45,7 @@ public class Cluster3Layout extends Layout {
 
 	public LWMap createMap(Dataset ds, String mapName) throws Exception {
 
-		LWMap map = new LWMap(mapName);
-		return map;
+		return new LWMap(mapName);
 	}
 
 	public void layout(LWSelection selection) {

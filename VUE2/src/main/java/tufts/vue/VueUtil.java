@@ -680,7 +680,7 @@ public class VueUtil extends tufts.Util
     
     @SuppressWarnings("PointlessBitwiseExpression")
     public static String toBinary(byte b) {
-        String buf = String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
+        return String.valueOf((b & (1 << 7)) == 0 ? '0' : '1') +
                 ((b & (1 << 6)) == 0 ? '0' : '1') +
                 ((b & (1 << 5)) == 0 ? '0' : '1') +
                 ((b & (1 << 4)) == 0 ? '0' : '1') +
@@ -688,7 +688,6 @@ public class VueUtil extends tufts.Util
                 ((b & (1 << 2)) == 0 ? '0' : '1') +
                 ((b & (1 << 1)) == 0 ? '0' : '1') +
                 ((b & (1 << 0)) == 0 ? '0' : '1');
-	return buf;
     }
     
     public static void dumpString(String s) {
@@ -1023,8 +1022,7 @@ public class VueUtil extends tufts.Util
 	
     public static boolean checkCollision(LWComponent c1, LWComponent c2)
     {
-        boolean collide = c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
-        return collide;
+        return c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
     }    
 
     

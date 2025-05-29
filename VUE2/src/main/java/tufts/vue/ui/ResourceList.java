@@ -621,8 +621,7 @@ public class ResourceList extends JList
 	}
 	
 	public static boolean checkCollision(LWComponent c1, LWComponent c2) {
-		boolean collide = c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
-        return collide;
+        return c2.getX() >= c1.getX() && c2.getX() <= c1.getX() + c1.getWidth() && c2.getY() >= c1.getY() && c2.getY() <= c1.getY() + c2.getHeight();
 	}
 }
 

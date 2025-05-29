@@ -393,9 +393,8 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
      */
     public osid.shared.ByteValueIterator read(java.util.Calendar version) throws osid.filing.FilingException {
         byte[] buf = getBytes();
-        
-        osid.shared.ByteValueIterator it = new ByteValueIterator(buf);
-        return it;
+
+        return new ByteValueIterator(buf);
     }
     
     /**
@@ -486,9 +485,8 @@ public class RemoteByteStore extends RemoteCabinetEntry implements osid.filing.B
         
         return fn.toString();
     }
-     public String getUrl() {
-       String url = "ftp://"+rc.getUserName()+":"+rc.getPassword()+"@"+ rc.getServerName() + this.getFullName();
-       //System.out.println("URL:"+ url);
-        return url;
+
+    public String getUrl() {
+        return "ftp://" + rc.getUserName() + ":" + rc.getPassword() + "@" + rc.getServerName() + this.getFullName();
     }
 }

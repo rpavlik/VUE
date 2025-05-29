@@ -40,8 +40,7 @@ public class ForceLayout extends Layout {
     public ForceLayout() {
     }
     public   LWMap createMap(Dataset ds,String mapName) throws Exception {
-        LWMap map = new LWMap(mapName);
-        return map;
+        return new LWMap(mapName);
     }
     
     public   void layout(LWSelection selection) throws Exception {
@@ -93,12 +92,10 @@ public class ForceLayout extends Layout {
             }
         }
         if(applyLayout) {
-            double x = minX;
-            double y = minY;
             double size = Math.sqrt(total)* nodeSize;
             double radius = size/2;
-            double centerX = x+radius;
-            double centerY = y+radius;
+            double centerX = minX +radius;
+            double centerY = minY +radius;
             i = selection.iterator();
             while (i.hasNext()) {
                 LWComponent c = i.next();

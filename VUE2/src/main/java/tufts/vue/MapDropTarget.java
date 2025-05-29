@@ -877,8 +877,7 @@ public class MapDropTarget
                 Collection bag = (Collection) foundData;
                 size = " (Collection size " + bag.size() + ")";
                 if (!bag.isEmpty()) {
-                    final Object o = bag.iterator().next();
-                    firstInBag = o;
+                    firstInBag = bag.iterator().next();
                     bagEntry0 =  "\n\tdata[0]: " + Util.tags(firstInBag);
                 }
             }
@@ -1815,16 +1814,12 @@ public class MapDropTarget
     
     private Point2D.Float dropToFocalLocation(int x, int y)
     {
-        final Point2D.Float mapLoc = mViewer.screenToFocalPoint(x, y);
-        //if (DEBUG.DND) out("dropToMapLocation " + x + "," + y + " = " + mapLoc);
-        return mapLoc;
+        return mViewer.screenToFocalPoint(x, y);
     }
 
     private Point2D.Float dropToMapLocation(Point p)
     {
-        final Point2D.Float mapLoc =  mViewer.screenToMapPoint(p.x, p.y);
-        //if (DEBUG.DND) out("dropToMapLocation " + x + "," + y + " = " + mapLoc);
-        return mapLoc;
+        return mViewer.screenToMapPoint(p.x, p.y);
     }
     
 

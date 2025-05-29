@@ -65,8 +65,7 @@ public class Properties implements org.osid.shared.Properties {
         Set set = map.keySet();
         Vector map_vector = new Vector(100);
         map_vector.addAll(set);
-        ObjectIterator it = new ObjectIterator(map_vector);
-        return it;
+        return new ObjectIterator(map_vector);
     }
     
     /**

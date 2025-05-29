@@ -192,10 +192,9 @@ public class AgentManager implements org.osid.agent.AgentManager {
         /*  Create  type vector from the type set.  */
         Vector type_vector = new Vector (type_set.size());
         type_vector.addAll (type_set);
-        
+
         /*  Create and return a TypeIterator for the list of unique types.  */
-        org.osid.shared.TypeIterator it = new tufts.oki.shared2.TypeIterator(type_vector);
-        return it;
+        return new tufts.oki.shared2.TypeIterator(type_vector);
     }
     
     /**
@@ -206,8 +205,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An AgentIterator which will interate over all known agents.
      */
     public org.osid.agent.AgentIterator getAgents() {
-        AgentIterator it = new AgentIterator (agents);
-        return it;
+        return new AgentIterator(agents);
     }
     
     /**
@@ -234,8 +232,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
         agent_vector.addAll (agent_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
-        AgentIterator it = new AgentIterator(agent_vector);
-        return it;
+        return new AgentIterator(agent_vector);
     }
     
      /**
@@ -282,11 +279,10 @@ public class AgentManager implements org.osid.agent.AgentManager {
         
         /*  Create  type vector from the type set.  */
         Vector type_vector = new Vector (type_set.size());
-        type_vector.addAll (type_set);
-        
-        /*  Create and return a TypeIterator for the list of unique types.  */
-        org.osid.shared.TypeIterator it = new tufts.oki.shared2.TypeIterator(type_vector);
-        return it;
+        type_vector.addAll(type_set);
+
+        /* Create and return a TypeIterator for the list of unique types. */
+        return new tufts.oki.shared2.TypeIterator(type_vector);
     }
     
     /**
@@ -296,9 +292,8 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *
      *  @return An AgentIterator which will interate over all known groups.
      */
-   public org.osid.agent.AgentIterator getGroups() throws org.osid.agent.AgentException {
-        AgentIterator it = new AgentIterator (groups);
-        return it;
+    public org.osid.agent.AgentIterator getGroups() throws org.osid.agent.AgentException {
+        return new AgentIterator(groups);
     }
     
     /**
@@ -323,8 +318,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
         group_vector.addAll (group_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
-        AgentIterator it = new AgentIterator(group_vector);
-        return it;    
+        return new AgentIterator(group_vector);
     }
 	
 	public org.osid.agent.AgentIterator getAgentsBySearch(java.io.Serializable criteria, org.osid.shared.Type type) throws org.osid.agent.AgentException

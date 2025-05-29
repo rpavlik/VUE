@@ -227,8 +227,7 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
         wTree = new JTree(getWorkSpaceTreeModel(selectedDataSource));
         wTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         wTree.addTreeSelectionListener(tse -> {
-            TreePath tp = tse.getNewLeadSelectionPath();
-            _tp = tp;
+            _tp = tse.getNewLeadSelectionPath();
         });
         JScrollPane wPane = new JScrollPane(wTree);
         JPanel scrollPanel = new JPanel(new BorderLayout());

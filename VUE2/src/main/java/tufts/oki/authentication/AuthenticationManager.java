@@ -214,8 +214,7 @@ public class AuthenticationManager extends OsidManager implements osid.authentic
      *  @return TypeIterator which lists each known authentication type.
      */
     public osid.shared.TypeIterator getAuthenticationTypes() {
-        tufts.oki.shared.TypeIterator it = new tufts.oki.shared.TypeIterator (am_types);
-        return it;
+        return new TypeIterator (am_types);
     }
     
     /**
@@ -292,10 +291,9 @@ public class AuthenticationManager extends OsidManager implements osid.authentic
      *  @return True if the type passed is a valid authentication type.
      */
     private boolean isValidAuthNType (osid.shared.Type authNType) {
-        boolean val = authNType.isEqual(new AuthenticationLDAP());
-        
+
         //  Check authNType against all known authorization types.
-        return val;
+        return authNType.isEqual(new AuthenticationLDAP());
    }
     
     /**

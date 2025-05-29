@@ -582,8 +582,7 @@ lwtext.richLabelBox.applyAttributes(set, false);
                     mUnderlineButton.setEnabled(enabled);
                 }
 				public void displayValue(String propertyValue) {
-					 final String style = propertyValue;
-                    mUnderlineButton.setSelected(style.equals("underline"));
+					mUnderlineButton.setSelected(propertyValue.equals("underline"));
 					
 				}
         };

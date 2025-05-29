@@ -219,8 +219,7 @@ public class FedoraPublisher {
         }
         xml.append(getOjectDSXML(p,comp,cModel,file));
         xml.append("</foxml:digitalObject>");
-        String objXML = xml.toString();
-        return objXML;
+        return xml.toString();
     }
     
     private static String getOjectDSXML(Properties p,LWComponent comp,String cModel, File file) throws Exception {
@@ -256,26 +255,24 @@ public class FedoraPublisher {
     }
     
     public static String getDSXML(String controlGroup,String dsName,String dateString,String label, String uploadId,String contentLocationType, String mimeType) {
-        String xml = "<foxml:datastream CONTROL_GROUP=\"" + controlGroup + "\" ID=\"" + dsName + "\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+        return "<foxml:datastream CONTROL_GROUP=\"" + controlGroup + "\" ID=\"" + dsName + "\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
                 "<foxml:datastreamVersion CREATED=\"" + dateString + "\" FORMAT_URI=\"http://vue.tufts.edu/docs/vueformat/\"" +
                 " ID=\"" + dsName + ".0\" LABEL=\"" + label + "\" MIMETYPE=\"" + mimeType + "\">\n" +
                 "<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n" +
                 "<foxml:contentLocation  REF=\"" + uploadId + "\" TYPE=\"" + contentLocationType + "\"/>\n" +
                 "</foxml:datastreamVersion></foxml:datastream>\n";
-        return xml;
     }
     
     
     
     private static String getDCXML(LWComponent comp) {
         String dateString = getDateString();
-        String xml = "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"DC\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+        return "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"DC\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
                 "<foxml:datastreamVersion CREATED=\"" + dateString + "\" ID=\"DC1.0\" LABEL=\"Dublin Core Metadata\" MIMETYPE=\"text/xml\">\n" +
                 "<foxml:contentDigest DIGEST=\"none\" TYPE=\"DISABLED\"/>\n" +
                 " <foxml:xmlContent>\n" +
                 getDC(comp, comp.getLabel(), getFedoraPid(comp)) +
                 "</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>\n";
-        return xml;
     }
     
     private static String getDC(LWComponent c,String title,String identifier) {
@@ -300,12 +297,11 @@ public class FedoraPublisher {
     
     private static String getRelsXML(LWComponent comp,LWMap map) throws Exception  {
         String dateString = getDateString();
-        String xml = "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"RELS-EXT\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
+        return "<foxml:datastream CONTROL_GROUP=\"X\" ID=\"RELS-EXT\" STATE=\"A\" VERSIONABLE=\"true\">\n" +
                 "<foxml:datastreamVersion CREATED=\"" + dateString + "\" ID=\"RELS-EXT.0\" LABEL=\"Relationships to other objects\" MIMETYPE=\"text/xml\">\n" +
                 "<foxml:xmlContent>\n" +
                 getRDFDescriptionForLWComponent(comp, map) +
                 "</foxml:xmlContent></foxml:datastreamVersion></foxml:datastream>";
-        return xml;
         
     }
     

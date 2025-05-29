@@ -1510,8 +1510,7 @@ public class MetadataSearchMainGUI extends JPanel
         }
 
         public Object getCellEditorValue() {
-            Object obj = super.getCellEditorValue();            
-            return obj;
+            return super.getCellEditorValue();
         }
 
         public boolean stopCellEditing() {            

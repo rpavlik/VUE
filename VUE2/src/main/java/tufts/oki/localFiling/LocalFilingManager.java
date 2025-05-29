@@ -286,8 +286,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
         Vector vect = new Vector(10);
         SortedSet set = new TreeSet();
         //vect.add (root);
-        osid.filing.CabinetEntryIterator it = new LocalCabinetEntryIterator(set);
-        return it;
+        return new LocalCabinetEntryIterator(set);
     }
     public osid.filing.CabinetEntryIterator listRoots() throws osid.filing.FilingException {
         return new LocalCabinetEntryIterator (rootCabinets);
@@ -689,8 +688,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
      *  Get the rootBase.
      */
     public String getRootbase() {
-        String rootBase = cwd.getRootBase();
-        return rootBase;
+        return cwd.getRootBase();
     }
     
     /**

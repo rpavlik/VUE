@@ -102,11 +102,10 @@ public class DSBrowser extends ContentBrowser {
 				// Cancelled
 				ds = null;
 			} else {
-				java.util.Properties	p = cui.getProperties();
-				BrowseDataSource		bds = ds;
+				java.util.Properties p = cui.getProperties();
 
-				bds.setDisplayName(p.getProperty("name"));
-				bds.setAddress(p.getProperty("address"));
+				ds.setDisplayName(p.getProperty("name"));
+				ds.setAddress(p.getProperty("address"));
 				ds.setMatrixField(p.getProperty("matrix"));								
 				
 			}

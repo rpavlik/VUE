@@ -60,9 +60,8 @@ public class DoubleCircularLayout extends AbstractLayout{
             LWNode node2;
             if(!node1Map.containsKey(node1Label)) {
                 n1Counter++;
-                String label1 = node1Label;
-                
-                node1 = new LWNode(label1);
+
+                node1 = new LWNode(node1Label);
                  double x = (n1Counter%4)*Q_SIZE-Q_SIZE/2;
                 double y = (n1Counter/4)*Q_SIZE-Q_SIZE/2;
                 node1Map.put(node1Label,node1);
@@ -71,9 +70,8 @@ public class DoubleCircularLayout extends AbstractLayout{
             } else {
                 node1 = node1Map.get(node1Label);
             }
-            String label2 = node2Label;
-             
-            node2 = new LWNode(label2);
+
+            node2 = new LWNode(node2Label);
             node2.setFillColor(Color.LIGHT_GRAY) ;
             map.add(node2);
             double angle = Math.random()*Math.PI*4;

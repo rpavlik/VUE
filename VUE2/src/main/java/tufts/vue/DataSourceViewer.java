@@ -252,7 +252,6 @@ public class DataSourceViewer extends ContentViewer
             VUE.diagPush("UI");
             
             for (int i = 0; i < dataSources.length; i++) {
-                final int index = i;
                 final edu.tufts.vue.dsm.DataSource ds = dataSources[i];
                 if (DEBUG.DR) Log.info("  add to UI: " + ds);
                 dataSourceList.addOrdered(ds);

@@ -642,8 +642,7 @@ public class CategoryEditor extends JPanel
             }
             if(col == 0 && row < vueCategoryModel.getCustomOntology().getOntTypes().size())
             {
-              OntType category = vueCategoryModel.getCustomOntology().getOntTypes().get(row);
-              return category;
+                return vueCategoryModel.getCustomOntology().getOntTypes().get(row);
             }
             else
             if(col == 0 && row == vueCategoryModel.getCustomOntology().getOntTypes().size())

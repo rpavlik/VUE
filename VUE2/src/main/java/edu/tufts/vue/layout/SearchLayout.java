@@ -40,8 +40,7 @@ public class SearchLayout extends Layout {
     public static final double MIN_AVOID_DIST = VueResources.getDouble("layout.avoid_distance");
     public static final double RIPPLE_RANGE = VueResources.getDouble("layout.ripple_range");
     public LWMap createMap(Dataset ds, String mapName) throws Exception {
-        LWMap map = new LWMap(mapName);
-        return map;
+        return new LWMap(mapName);
     }
 
     public void layout(LWSelection selection) {

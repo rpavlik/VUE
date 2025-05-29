@@ -240,9 +240,7 @@ public class PresentationTool extends VueTool
         }
 
         boolean contains(MouseEvent e) {
-            boolean hit = contains(e.getX(), e.getY());
-            //if (DEBUG.PRESENT) out(this + " contains=" + hit + "; " + e);
-            return hit;
+            return contains(e.getX(), e.getY());
         }
         
         private boolean contains(int x, int y) {

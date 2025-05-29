@@ -1076,14 +1076,13 @@ public class GUI
     
     public static JFrame createFrame(String title)
     {
-        JFrame newFrame = new JFrame(title);
         /*
         if (isMacAqua()) {
             JMenuBar menu = new VueMenuBar();
             newFrame.setJMenuBar(menu);
         }
         */
-        return newFrame;
+        return new JFrame(title);
     }
 
     

@@ -420,8 +420,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     }
     // See OntologicalMembershipPane
     /*public*/ public VueMetadataElement getOntologyListElement(int i) {
-        CategoryFirstList cf = dataList;
-        int index = i + cf.getCategoryEndIndex();
+        int index = i + dataList.getCategoryEndIndex();
         try
         {        
           if(getOntologyListSize() > 0 && index < dataList.size())
@@ -450,8 +449,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
     }
     /*hide*/ private void setOntologyListElement(int i,VueMetadataElement ele)
     {
-        CategoryFirstList cf = dataList;
-        int index = i+cf.getCategoryEndIndex();
+        int index = i+ dataList.getCategoryEndIndex();
         try {
             if (getOntologyListSize() > 0 && index < dataList.size())
                 dataList.set(index, ele);

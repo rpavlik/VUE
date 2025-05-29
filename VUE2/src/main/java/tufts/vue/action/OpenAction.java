@@ -115,8 +115,7 @@ public class OpenAction extends VueAction
     public static LWMap loadMap(java.net.URL url) {
         try {
             if (DEBUG.CASTOR) Log.debug("Unmarshalling from " + url);
-            LWMap map = ActionUtil.unmarshallMap(url);
-            return map;
+            return ActionUtil.unmarshallMap(url);
         } catch (Exception e) {
             Log.error("loadMap " + tufts.Util.tags(url), e);
             VueUtil.alert(null, VueResources.getString("openaction.mapopen.error"),VueResources.getString("openaction.mapopen.title"));

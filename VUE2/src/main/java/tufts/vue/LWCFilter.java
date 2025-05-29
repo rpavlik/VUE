@@ -484,9 +484,8 @@ public class LWCFilter {
         }
         
         private boolean matchUserMapType( LWComponent pLWC) {
-            boolean state = false;
-            
-            return state;
+
+            return false;
         }
         
         

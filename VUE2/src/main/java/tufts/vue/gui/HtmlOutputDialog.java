@@ -118,10 +118,8 @@ htmloutput.pixels=Pixels
 	{
 		String wText = widthField.getText();
 		Double w = new Double(wText);
-		
-		double ratio = w /width;
-		
-		return ratio;
+
+		return w / width;
 	}
 	
 	public static void main(String[] args)

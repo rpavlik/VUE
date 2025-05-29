@@ -136,21 +136,19 @@ public class AssetResource extends URLResource {
         final tufts.oki.dr.fedora.InfoRecord mInfoRecord = (tufts.oki.dr.fedora.InfoRecord)infoRecord;
         
         try {
-            AbstractAction fedoraAction = new AbstractAction(infoRecord.getId().getIdString()) {
+            return new AbstractAction(infoRecord.getId().getIdString()) {
                 public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
                     try {
-                        //String fedoraUrl = mDR.getFedoraProperties().getProperty("url.fedora.get","http://vue-dl.tccs..tufts.edu:8080/fedora/get");
                         String fedoraUrl = mInfoRecord.getInfoField(new PID(FedoraUtils.getFedoraProperty(mDR, "DisseminationURLInfoPartId"))).getValue().toString();
                         URL url = new URL(fedoraUrl);
                         URLConnection connection = url.openConnection();
                         System.out.println("FEDORA ACTION: Content-type:"+connection.getContentType()+" for url :"+fedoraUrl);
-                        
+
                         VueUtil.openURL(fedoraUrl);
                     } catch(Exception ex) {  }
                 }
-                
+
             };
-            return fedoraAction;
         } catch(Exception ex) {
             throw new osid.dr.DigitalRepositoryException("FedoraUtils.getFedoraAction "+ex.getMessage());
         }

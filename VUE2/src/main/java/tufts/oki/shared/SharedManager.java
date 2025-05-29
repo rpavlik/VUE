@@ -203,8 +203,7 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
         type_vector.addAll (type_set);
         
         /*  Create and return a TypeIterator for the list of unique types.  */
-        TypeIterator it = new TypeIterator(type_vector);
-        return it;
+        return new TypeIterator(type_vector);
     }
     
     /**
@@ -215,8 +214,7 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
      *  @return An AgentIterator which will interate over all known agents.
      */
     public osid.shared.AgentIterator getAgents() {
-        AgentIterator it = new AgentIterator (agents);
-        return it;
+        return new AgentIterator (agents);
     }
     
     /**
@@ -243,8 +241,7 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
         agent_vector.addAll (agent_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
-        AgentIterator it = new AgentIterator(agent_vector);
-        return it;
+        return new AgentIterator(agent_vector);
     }
     
      /**
@@ -287,8 +284,7 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
         type_vector.addAll (type_set);
         
         /*  Create and return a TypeIterator for the list of unique types.  */
-        TypeIterator it = new TypeIterator(type_vector);
-        return it;
+        return new TypeIterator(type_vector);
     }
     
     /**
@@ -298,9 +294,8 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
      *
      *  @return An AgentIterator which will interate over all known groups.
      */
-   public osid.shared.AgentIterator getGroups() throws osid.shared.SharedException {
-        AgentIterator it = new AgentIterator (groups);
-        return it;
+    public osid.shared.AgentIterator getGroups() throws osid.shared.SharedException {
+        return new AgentIterator(groups);
     }
     
     /**
@@ -325,8 +320,7 @@ public class SharedManager extends OsidManager implements osid.shared.SharedMana
         group_vector.addAll (group_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
-        AgentIterator it = new AgentIterator(group_vector);
-        return it;    
+        return new AgentIterator(group_vector);
     }
 
     /**

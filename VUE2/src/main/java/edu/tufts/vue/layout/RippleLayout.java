@@ -65,8 +65,7 @@ public class RippleLayout extends Layout {
     }
     
     public   LWMap createMap(Dataset ds,String mapName) throws Exception {
-        LWMap map = new LWMap(mapName);
-        return map;
+        return new LWMap(mapName);
     }
     
 }

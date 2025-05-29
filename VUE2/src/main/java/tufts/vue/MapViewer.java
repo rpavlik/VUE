@@ -1203,7 +1203,6 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
     
     private final static float SelectionStrokeMargin = SelectionStrokeWidth/2;
     public Rectangle2D.Float getContentBounds() {
-        //Rectangle2D.Float r = (Rectangle2D.Float) mFocal.getBounds().clone();
         Rectangle2D.Float r = (Rectangle2D.Float) getFocalBounds().clone();
         // because the selection stroke is rendered at scale (gets bigger
         // as we zoom in) we account for it here in the total bounds
@@ -1214,9 +1213,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             r.width += SelectionStrokeWidth;
             r.height += SelectionStrokeWidth;
         }
-        Rectangle2D.Float rr = growForSelection(r); // now grow it for the selection handles
-        //if (DEBUG.SCROLL) out("getContentBounds " + rr);
-        return rr;
+        // now grow it for the selection handles
+        return growForSelection(r);
     }
     
     @Override

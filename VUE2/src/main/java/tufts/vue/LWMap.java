@@ -1614,8 +1614,6 @@ public class LWMap extends LWContainer
         protected Resource postProcess(Resource r, Object source) {
             Log.info("created: " + r + " from " + Util.tags(source));
 
-            final Resource using = trackNew(r);
-
             // Of course, do NOT want to call dataHasChanged here, as it will use-up the
             // update.  Since newly dropped objects get auto-selected, our auto-update
             // code should automatically run for now -- when dropping single objects
@@ -1634,7 +1632,7 @@ public class LWMap extends LWContainer
             
             // if (using != r && using.dataHasChanged()) Log.info("DO AN UPDATE");
             
-            return using;
+            return trackNew(r);
         }
 
 // not turned on yet -- see if can move to Resource.java if we keep.

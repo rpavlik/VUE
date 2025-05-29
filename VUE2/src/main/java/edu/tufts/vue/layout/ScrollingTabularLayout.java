@@ -43,8 +43,7 @@ public class ScrollingTabularLayout extends Layout {
     }
 
     public LWMap createMap(Dataset ds, String mapName) throws Exception {
-        LWMap map = new LWMap(mapName);
-        return map;
+        return new LWMap(mapName);
     }
 
     public static void useStrictRowCount(boolean count)

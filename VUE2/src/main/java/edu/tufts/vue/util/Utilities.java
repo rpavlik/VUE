@@ -29,10 +29,10 @@ public class Utilities
 		try {
 			int index = loadKey.indexOf("@");
 			//String managerString = loadKey.substring(0,index);
-			String repositoryString = loadKey.substring(index+1);
-			org.osid.id.IdManager idManager = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance().getIdManagerInstance();
-			org.osid.shared.Id repositoryId = idManager.getId(repositoryString);
-			return repositoryId;
+			String repositoryString = loadKey.substring(index + 1);
+			org.osid.id.IdManager idManager = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance()
+					.getIdManagerInstance();
+			return idManager.getId(repositoryString);
 		} catch (Throwable t) {
 			edu.tufts.vue.util.Logger.log(t,"Trying to parse key " + loadKey);
 		}
@@ -42,8 +42,7 @@ public class Utilities
 	public static String getManagerStringFromLoadKey(String loadKey) {
 		try {
 			int index = loadKey.indexOf("@");
-			String managerString = loadKey.substring(0,index);
-			return managerString;
+			return loadKey.substring(0, index);
 		} catch (Throwable t) {
 			edu.tufts.vue.util.Logger.log(t,"Trying to parse key " + loadKey);
 		}

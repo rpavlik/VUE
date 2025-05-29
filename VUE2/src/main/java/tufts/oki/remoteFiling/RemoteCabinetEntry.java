@@ -153,8 +153,7 @@ public class RemoteCabinetEntry implements osid.filing.CabinetEntry {
      *  @return A CalendarIterator which lists all times this entry was modified.
      */
     public osid.shared.CalendarIterator getAllModifiedTimes() throws osid.filing.FilingException {
-        CalendarIterator it = new CalendarIterator(modified_times);
-        return it;
+        return new CalendarIterator(modified_times);
     }
     
     /**

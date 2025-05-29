@@ -90,10 +90,8 @@ public class IntegerPreference extends BasePref
 			return previousValue;
 	}
 
-	public Integer getValue(){
-		Integer i = (p.getInt(getPrefName(), getDefaultValue()));
-		return i;
-	
+	public Integer getValue() {
+		return p.getInt(getPrefName(), getDefaultValue());
 	}
 
 	public void setValue(Object o)

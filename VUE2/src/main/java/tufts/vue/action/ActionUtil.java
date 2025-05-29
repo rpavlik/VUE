@@ -878,8 +878,8 @@ public class ActionUtil
                 // No local file was found: it must have been a remote URL
             
                 if (allowRedirects) {
-                    final URL redirectURL = tufts.vue.UrlAuthentication.getRedirectedUrl(url, 10); // number of redirects to follow
-                    url = redirectURL;
+                    // number of redirects to follow
+                    url = UrlAuthentication.getRedirectedUrl(url, 10);
                      file = new File(url.getFile());
                     // AK: Thanks for leaving the comments. 
                     // we need to open the redirect url

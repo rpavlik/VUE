@@ -2317,8 +2317,7 @@ public class VUE
         }
      
         //final JComponent searchField = new SearchTextField();
-        final JComponent searchField = mSearchTextField;
-        
+
         // final javax.swing.ImageIcon searchTigerImg = VueResources.getImageIcon("search.tiger.searchicon");
         // searchPanelGBC.gridx = 0;
         // searchPanelGBC.weightx = 1;
@@ -2330,7 +2329,7 @@ public class VUE
         searchPanelGBC.anchor = GridBagConstraints.EAST;
         searchPanelGBC.fill = GridBagConstraints.HORIZONTAL;
         searchPanelGBC.weightx = 1.0;
-        searchPanel.add(searchField, searchPanelGBC);
+        searchPanel.add(mSearchTextField, searchPanelGBC);
 
         if (!VUE.isApplet()) {
             gBC.fill = GridBagConstraints.HORIZONTAL;			

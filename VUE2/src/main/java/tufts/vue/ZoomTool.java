@@ -717,8 +717,6 @@ public class ZoomTool extends VueTool
             return;
         
         final int frames = 4;
-        final int framesOut = frames / 2;
-        final int framesIn = framesOut;
 
         // will paint (frame - 1) intermediate frames: the last frame is left so the caller
         // can establish the exact final display coordinate

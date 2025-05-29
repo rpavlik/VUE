@@ -1449,10 +1449,9 @@ public class DataTree extends javax.swing.JTree
         //if (true) return s;
         //b.append("<html>");
         // we add space before and after to widen the painted background selection around the text a bit
-        String b = "<html>&nbsp;" +
+        return "<html>&nbsp;" +
                 s +
                 "&nbsp;";
-        return b;
     }
 
     private static int sortPriority(Field f) {

@@ -165,10 +165,8 @@ public class StringPreference extends BasePref implements ActionListener
 			return previousValue;
 	}
 
-	public Object getValue(){
-		String s = p.get(getPrefName(), (String)getDefaultValue());
-		return s;
-	
+	public Object getValue() {
+		return p.get(getPrefName(), (String) getDefaultValue());
 	}
 
 	public void setValue(Object s)

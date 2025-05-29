@@ -76,13 +76,12 @@ public class SearchResultTableModel extends AbstractTableModel {
 		}
 	}
 
-	public SearchData getData(int row) {		
-		SearchData data = searchResultArrLst.get(row);			
-		return data;
+	public SearchData getData(int row) {
+		return searchResultArrLst.get(row);
 	}
-	public SearchData getSearchData(int row) {		
-		SearchData data = searchResultArrLst.get(row);		
-		return data;
+
+	public SearchData getSearchData(int row) {
+		return searchResultArrLst.get(row);
 	}
 	public List getData(){
 		return searchResultArrLst;

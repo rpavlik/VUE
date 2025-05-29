@@ -527,9 +527,8 @@ public class SearchTextField extends JTextField implements FocusListener {
 
         popup = new JPopupMenu();
         final ActionListener actionListener = new PopupActionListener();
-        final ActionListener al = actionListener;
 
-        popAdd(al, "search.popup.search").setEnabled(false);
+        popAdd(actionListener, "search.popup.search").setEnabled(false);
 
         searcheveryWhereMenuItem.addActionListener(actionListener);
         labelMenuItem.addActionListener(actionListener);
@@ -550,14 +549,14 @@ public class SearchTextField extends JTextField implements FocusListener {
 
         if (!isWindows) {
             popup.addSeparator();
-            popAdd(al, "search.popup.clear");
-            popAdd(al, "search.popup.reset");
-            popAdd(al, "search.popup.select.all");
-            popAdd(al, "search.popup.cut");
+            popAdd(actionListener, "search.popup.clear");
+            popAdd(actionListener, "search.popup.reset");
+            popAdd(actionListener, "search.popup.select.all");
+            popAdd(actionListener, "search.popup.cut");
             // cutMenuItem.setActionCommand(DefaultEditorKit.cutAction);
-            popAdd(al, "search.popup.copy");
+            popAdd(actionListener, "search.popup.copy");
             // copyMenuItem.setActionCommand(DefaultEditorKit.copyAction);
-            popAdd(al, "search.popup.paste");
+            popAdd(actionListener, "search.popup.paste");
             // pasteMenuItem.setActionCommand(DefaultEditorKit.pasteAction);
         }
     }

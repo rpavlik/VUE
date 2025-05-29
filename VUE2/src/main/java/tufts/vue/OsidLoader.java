@@ -174,18 +174,17 @@ public class OsidLoader implements java.io.Serializable {
         try {
             if ((null != context) && (null != osidPackageManagerName) &&
                     (null != implPackageName)) {
-                String osidInterfaceName = osidPackageManagerName;
                 String className = makeClassName(osidPackageManagerName);
                 String managerClassName = makeFullyQualifiedClassName(implPackageName,
                         className);
 
-                Class osidInterface = Class.forName(osidInterfaceName);
+                Class osidInterface = Class.forName(osidPackageManagerName);
 
                 if (null != osidInterface) {
                     Class managerClass = Class.forName(managerClassName);
 
                     if (null != managerClass) {
-System.out.println("oin " + osidInterfaceName);
+System.out.println("oin " + osidPackageManagerName);
 System.out.println("mcn " + managerClassName);
                         if (osidInterface.isAssignableFrom(managerClass)) {
                             org.osid.OsidManager manager = (org.osid.OsidManager) managerClass.newInstance();

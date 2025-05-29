@@ -440,14 +440,13 @@ public class Actions implements VueConstants
     public static final Action HierarchyView =
     new LWCAction(VueResources.local("action.hierarchyview")) {
         public void act(LWNode n) {
-            LWNode rootNode = n;
-            String name = rootNode.getLabel() + "'s Hierarchy View";
-            String description = "Hierarchy view model of " + rootNode.getLabel();
+            String name = n.getLabel() + "'s Hierarchy View";
+            String description = "Hierarchy view model of " + n.getLabel();
             
             LWHierarchyMap hierarchyMap = new LWHierarchyMap(name);
             
             tufts.oki.hierarchy.HierarchyViewHierarchyModel model =
-            new tufts.oki.hierarchy.HierarchyViewHierarchyModel(rootNode, hierarchyMap, name, description);
+            new tufts.oki.hierarchy.HierarchyViewHierarchyModel(n, hierarchyMap, name, description);
             
             hierarchyMap.setHierarchyModel(model);
             hierarchyMap.addAllComponents();

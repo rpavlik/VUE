@@ -96,9 +96,7 @@ public class ColorPreference extends BasePref
             hex = hex.substring(1);
         boolean hasAlpha = hex.length() > 6;
         int bits = Long.valueOf(hex, 16).intValue();
-        Color c = new Color(bits, hasAlpha);
-        //System.out.println("From " + hex + " made " + c + " alpha=" + c.getAlpha());
-        return c;
+        return new Color(bits, hasAlpha);
     }
 
 	private static Color convertStringToColor(String s)

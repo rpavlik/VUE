@@ -191,8 +191,7 @@ implements org.osid.repository.RepositoryManager
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
                 try
                 {
-                    org.osid.repository.Asset asset = nextRepository.getAsset(assetId);
-                    return asset;
+                    return nextRepository.getAsset(assetId);
                 }
                 catch (Throwable t) {}
             }
@@ -221,8 +220,7 @@ implements org.osid.repository.RepositoryManager
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
                 try
                 {
-                    org.osid.repository.Asset asset = nextRepository.getAssetByDate(assetId,date);
-                    return asset;
+                    return nextRepository.getAssetByDate(assetId,date);
                 }
                 catch (Throwable t) {}
             }

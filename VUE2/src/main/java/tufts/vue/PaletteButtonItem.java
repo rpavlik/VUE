@@ -194,10 +194,8 @@ public class PaletteButtonItem extends JMenuItem
      **/
     public Dimension getPreferredSize() {
         Icon icon = getIcon();
-        Dimension d = new Dimension( icon.getIconWidth(), icon.getIconHeight() );
-		
-        //d = super.getPreferredSize();
-        return d;
+
+        return new Dimension( icon.getIconWidth(), icon.getIconHeight() );
     }
 	
     /**

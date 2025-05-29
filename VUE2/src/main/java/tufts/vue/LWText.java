@@ -297,8 +297,7 @@ public class LWText extends LWComponent {
 	       	if ((o.toString().equals("font-size")) ||(o.toString().equals("size")))
 	       	{
 
-	       		int i = Integer.parseInt(paragraphAttributeSet.getAttribute(o).toString());
-        		return i;
+	       		return Integer.parseInt(paragraphAttributeSet.getAttribute(o).toString());
 	       	
 	       	}
 	        			
@@ -313,8 +312,7 @@ public class LWText extends LWComponent {
 	    
 	      	if ((o.toString().equals("font-size")) ||(o.toString().equals("size")))
         	{
-        		int i = Integer.parseInt(charSet.getAttribute(o).toString());
-        		return i;
+        		return Integer.parseInt(charSet.getAttribute(o).toString());
         	}        		
 	        			
 	    }//done looking at character attributes	        	   	        	        	      

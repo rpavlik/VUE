@@ -525,10 +525,9 @@ public class SakaiPublisher {
 	 * @param fileName is the name of the VUE map file
 	 * @return name of Sakai folder to publish map into
 	 */
-	public static String makeSakaiFolderFromVueMap( String fileName ) 
+	public static String makeSakaiFolderFromVueMap( String fileName )
 	{
-		String sakaiFolder = fileName.replaceAll("\\.vue$", VUE_MAP_FOLDER_SUFFIX );
-		return sakaiFolder;
+		return fileName.replaceAll("\\.vue$", VUE_MAP_FOLDER_SUFFIX);
 	}
         
         private static String getMimeType(File file) {

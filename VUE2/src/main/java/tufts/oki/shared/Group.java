@@ -148,8 +148,7 @@ public class Group extends Agent implements osid.shared.Group {
             if (includeSubgroups)
                 sub.makeGroupsVector (temp, includeSubgroups);
         }
-        AgentIterator it = new AgentIterator(temp);
-        return it;
+        return new AgentIterator(temp);
     }
     
     /*  makeGroupsWithAgentVedctor
@@ -181,8 +180,7 @@ public class Group extends Agent implements osid.shared.Group {
                 temp.add (sub);
             sub.makeGroupsWithAgentVector (member, temp);
         }
-       AgentIterator it = new AgentIterator(temp);
-       return it;
+        return new AgentIterator(temp);
     }
     
     /**
@@ -223,8 +221,7 @@ public class Group extends Agent implements osid.shared.Group {
      */
     public osid.shared.AgentIterator getMembers(boolean includeSubgroups) {
         Vector temp = (Vector) agents.clone();
-        AgentIterator it = new AgentIterator(temp);
-        return it;
+        return new AgentIterator(temp);
     }
     
     /**

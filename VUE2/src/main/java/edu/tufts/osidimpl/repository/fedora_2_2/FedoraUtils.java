@@ -116,8 +116,7 @@ public class FedoraUtils {
     
     
     public static String getSaveFileName(org.osid.shared.Id objectId,org.osid.shared.Id behaviorId,org.osid.shared.Id disseminationId) throws org.osid.OsidException {
-        String saveFileName = processId(objectId.getIdString()+"-"+behaviorId.getIdString()+"-"+disseminationId.getIdString());
-        return saveFileName;
+        return processId(objectId.getIdString()+"-"+behaviorId.getIdString()+"-"+disseminationId.getIdString());
     }
     
     
@@ -126,7 +125,7 @@ public class FedoraUtils {
         final Record mRecord = (Record)record;
         
         try {
-            AbstractAction fedoraAction = new AbstractAction(record.getId().getIdString()) {
+            return new AbstractAction(record.getId().getIdString()) {
                 public void actionPerformed(java.awt.event.ActionEvent actionEvent) {
                     try {
                         org.osid.shared.Id id = new PID(getFedoraProperty(mRepository, "DisseminationURLInfoPartId"));
@@ -138,12 +137,11 @@ public class FedoraUtils {
                             URLConnection connection = url.openConnection();
                             tufts.Util.openURL(fedoraUrl);
                             break;
-                            
+
                         }
                     } catch(Throwable t) {  }
                 }
             };
-            return fedoraAction;
         } catch(Throwable t) {
             throw new org.osid.repository.RepositoryException("FedoraUtils.getFedoraAction "+t.getMessage());
         }

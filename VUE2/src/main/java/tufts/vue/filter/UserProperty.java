@@ -193,15 +193,14 @@ public class UserProperty {
 		return retValue;
 			}
 
-	static public int findTypeByName( String pName) {
-		int type = STRING;
-		if( pName != null) {
+	static public int findTypeByName(String pName) {
+		if (pName != null) {
 			for( int i=0; i< sPropertyTypeNames.length; i++) {
 				if( pName.equals( sPropertyTypeNames[i]) )
 					return i;
 				}
 			}
-		return type;
+		return STRING;
 	}
 	
 	public String toString() {

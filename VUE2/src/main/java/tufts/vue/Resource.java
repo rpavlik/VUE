@@ -1244,8 +1244,7 @@ public abstract class Resource implements Cloneable
     protected static String decodeURI(String s)
         throws java.io.UnsupportedEncodingException
     {
-        String decoded = java.net.URLDecoder.decode(s, StandardCharsets.UTF_8);
-        return decoded;
+        return java.net.URLDecoder.decode(s, StandardCharsets.UTF_8);
     }
     
     protected static String decodeForURL(String s)

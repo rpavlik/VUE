@@ -597,15 +597,14 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
                     final String guid = possibleMatch.getSchema().getGUID();
                     //Log.debug("Checking GUID " + guid);
                     if (ref.schemaGuid.equals(guid)) {
-                        final Field match = possibleMatch;
-                        if (match.getSchema().isDiscarded()) {
-                            Log.debug("ignoring association match for discarded schema: " + match);
+                        if (possibleMatch.getSchema().isDiscarded()) {
+                            Log.debug("ignoring association match for discarded schema: " + possibleMatch);
                         } else {
-                            Log.debug("found live field to match ref: " + ref + " = " + Util.tags(match));
+                            Log.debug("found live field to match ref: " + ref + " = " + Util.tags(possibleMatch));
                             //tufts.vue.gui.GUI.invokeOnEDT(new Runnable() { public void run() {
                                 // safest to ensure all this happs on the AWT thread, so later association data
                                 // fetches (data search & filter actions) don't need synchronized read access
-                                Association.add(field, match);
+                                Association.add(field, possibleMatch);
                                 // }});
                         }
                     }

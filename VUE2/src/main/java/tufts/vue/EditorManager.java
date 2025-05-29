@@ -458,8 +458,7 @@ public class EditorManager
     {
 
         final LWSelection selection = VUE.getSelection();
-        final Collection<LWComponent> components = selection;
-        
+
         if (EditorLoadingUnderway) {
             if (DEBUG.TOOL) out("applySinglePropertyChange: " + key + " " + newValue + " (skipping)");
             return;
@@ -467,14 +466,14 @@ public class EditorManager
         
         if (DEBUG.TOOL||DEBUG.STYLE) out("applySinglePropertyChange: " + key + " " + newValue);
         
-        if (!components.isEmpty()) {
+        if (!selection.isEmpty()) {
             consumeFreeProperties();
             // As setting these properties in the model will trigger notify events from the selected objects
             // back up to the tools, we want to ignore those events while this is underway -- the tools
             // already have their state set to this.
             PropertySettingUnderway = true;
             try {
-                for (tufts.vue.LWComponent c : components)
+                for (tufts.vue.LWComponent c : selection)
                     applyPropertyValue(source, key, newValue, c);
             } finally {
                 PropertySettingUnderway = false;

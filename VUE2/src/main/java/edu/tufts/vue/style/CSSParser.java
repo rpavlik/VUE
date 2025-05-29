@@ -392,7 +392,6 @@ public class CSSParser {
         int escapeCount = 0;
         int escapeChar = 0;
         int nextChar;
-        int intStopChar = stopChar;
         // 1 for '\', 2 for valid escape char [0-9a-fA-F], 3 for
         // stop character (white space, ()[]{}) 0 otherwise
         short type;
@@ -485,7 +484,7 @@ public class CSSParser {
                     }
                 } else {
                     append((char)nextChar);
-                    if (nextChar == intStopChar) {
+                    if (nextChar == (int) stopChar) {
                         done = true;
                     }
                 }
@@ -504,7 +503,6 @@ public class CSSParser {
         int escapeChar = 0;
         int nextChar;
         boolean done = false;
-        int intStopChar = stopChar;
         // 1 for '\', 2 for valid escape char [0-9a-fA-F], 0 otherwise
         short type;
         int escapeOffset = 0;
@@ -557,7 +555,7 @@ public class CSSParser {
                             lastWasEscape = true;
                             escapeChar = escapeCount = 0;
                         } else {
-                            if (nextChar == intStopChar) {
+                            if (nextChar == (int) stopChar) {
                                 done = true;
                             }
                             append((char)nextChar);
@@ -572,7 +570,7 @@ public class CSSParser {
                 lastWasEscape = true;
                 escapeChar = escapeCount = 0;
             } else {
-                if (nextChar == intStopChar) {
+                if (nextChar == (int) stopChar) {
                     done = true;
                 }
                 append((char)nextChar);

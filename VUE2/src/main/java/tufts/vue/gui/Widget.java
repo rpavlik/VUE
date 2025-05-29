@@ -67,8 +67,7 @@ public class Widget extends javax.swing.JPanel
     public static boolean isHidden(JComponent c)
     {
     	Boolean currentProp = (Boolean)c.getClientProperty(HIDDEN_KEY);
-    	boolean current = currentProp != null && currentProp;
-    	return current;
+    	return currentProp != null && currentProp;
     }
     /** Hide the entire widget, including it's title.  Do not affect expansion state. */
     public static void setHidden(JComponent c, boolean hidden) {
@@ -115,8 +114,7 @@ public class Widget extends javax.swing.JPanel
     public static boolean isExpanded(JComponent c)
     {
     	Boolean currentProp = (Boolean)c.getClientProperty(EXPANSION_KEY);
-    	boolean current = currentProp != null && currentProp;
-    	return current;
+    	return currentProp != null && currentProp;
     }
     protected static void setExpandedImpl(JComponent c, boolean expand) {
         if (DEBUG.WIDGET) System.out.println(GUI.name(c) + " Widget.setExpanded " + expand);
@@ -248,8 +246,7 @@ public class Widget extends javax.swing.JPanel
     public static boolean isLoading(JComponent c)
     {
     	Boolean currentProp = (Boolean)c.getClientProperty(LOADING_KEY);
-    	boolean current = currentProp != null && currentProp;
-    	return current;
+    	return currentProp != null && currentProp;
     }
 
     public static void setLoading(JComponent c, boolean loading) {

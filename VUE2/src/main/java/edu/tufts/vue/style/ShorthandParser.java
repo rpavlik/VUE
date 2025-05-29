@@ -34,10 +34,9 @@ public class ShorthandParser {
      * The method returns the float value of font size defined in css file.
      */
     public static Float parseFontSize(String value){
-        float fv = DEFAULT_FONT_SIZE;
-         Float f = parseSize(value);
+        Float f = parseSize(value);
 
-        return Objects.requireNonNullElse(f, fv);
+        return Objects.requireNonNullElse(f, DEFAULT_FONT_SIZE);
     }
     
     /*
@@ -70,7 +69,6 @@ public class ShorthandParser {
         } else  {
             fv = Float.parseFloat(value);
         }
-        Float f = fv;
-        return f;
+        return fv;
     }
 }

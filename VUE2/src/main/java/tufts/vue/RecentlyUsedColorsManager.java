@@ -84,9 +84,7 @@ public class RecentlyUsedColorsManager
 	
 	public List getRecentlyUsedColors()
 	{
-		List l = list.subList(1, list.size());
-	
-		return l;
+		return list.subList(1, list.size());
 	}
 	
 	public void updateRecentlyUsedColors(String s)

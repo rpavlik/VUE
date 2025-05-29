@@ -152,8 +152,7 @@ public class RepositoryManager
             while (repositoryIterator.hasNextRepository()) {
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
                 try {
-                    org.osid.repository.Asset asset = nextRepository.getAsset(assetId);
-                    return asset;
+                    return nextRepository.getAsset(assetId);
                 } catch (Throwable t) {}
             }
         } catch (Throwable t) {
@@ -174,8 +173,7 @@ public class RepositoryManager
             while (repositoryIterator.hasNextRepository()) {
                 org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
                 try {
-                    org.osid.repository.Asset asset = nextRepository.getAssetByDate(assetId,date);
-                    return asset;
+                    return nextRepository.getAssetByDate(assetId,date);
                 } catch (Throwable t) {}
             }
         } catch (Throwable t) {

@@ -73,9 +73,8 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
         {
             //this only works if the hierarchy is a single root structure
             osid.hierarchy.NodeIterator i = getRootNodes();
-            HierarchyNode rootNode = (HierarchyNode)i.next();
-        
-            return rootNode;
+
+            return (HierarchyNode)i.next();
         }
         
         catch (osid.hierarchy.HierarchyException he)
@@ -309,8 +308,7 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
     {
         try
         {
-            osid.hierarchy.Node node = (osid.hierarchy.Node)map.get(nodeId.getIdString());
-            return node;
+            return (osid.hierarchy.Node)map.get(nodeId.getIdString());
         }
         
         catch (osid.shared.SharedException se)
@@ -440,9 +438,8 @@ public class HierarchyModel implements osid.hierarchy.Hierarchy
                 traversalInfoList = reverseVector;
             }
         }
-        
-        HierarchyTraversalInfoIterator iterator = new HierarchyTraversalInfoIterator(traversalInfoList);
-        return iterator;
+
+        return new HierarchyTraversalInfoIterator(traversalInfoList);
     }
      
     /*

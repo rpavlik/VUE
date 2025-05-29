@@ -49,9 +49,7 @@ implements org.osid.repository.AssetIterator
 
 		try {
 			factory = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance();
-			String path = factory.getResourcePath("google.xml");
-                        
-                        String urlString = path;
+			String urlString = factory.getResourcePath("google.xml");
                         
                         // Windows requires extra "/" for start of path
                         // see for example: http://blogs.msdn.com/ie/archive/2006/12/06/file-uris-in-windows.aspx
@@ -149,8 +147,7 @@ implements org.osid.repository.AssetIterator
 		try {
 			Unmarshaller unmarshaller = getUnmarshaller();
 			unmarshaller.setValidation(false);
-			GSP gsp = (GSP) unmarshaller.unmarshal(new InputSource(new FileReader(filename)));
-			return gsp;
+			return (GSP) unmarshaller.unmarshal(new InputSource(new FileReader(filename)));
 		} catch (Exception e) {
 			System.out.println("loadGSP[" + filename + "]: " + e);
 			e.printStackTrace();
@@ -169,8 +166,7 @@ implements org.osid.repository.AssetIterator
 			
 			Unmarshaller unmarshaller = getUnmarshaller();
 			unmarshaller.setValidation(false);
-			GSP gsp = (GSP) unmarshaller.unmarshal(new InputSource());
-			return gsp;
+			return (GSP) unmarshaller.unmarshal(new InputSource());
 		} catch (Exception e) {
 			System.out.println("loadGSP " + e);
 			e.printStackTrace();

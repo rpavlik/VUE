@@ -299,8 +299,7 @@ public class LocalByteStore extends LocalCabinetEntry implements osid.filing.Byt
         byte[] buf = getBytes();
 
         //  Create an iterator over the buffer.
-        osid.shared.ByteValueIterator it = new ByteValueIterator(buf);
-        return it;
+        return new ByteValueIterator(buf);
     }
     
     /**

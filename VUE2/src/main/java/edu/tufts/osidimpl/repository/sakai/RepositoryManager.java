@@ -242,8 +242,7 @@ implements org.osid.repository.RepositoryManager
 			while (repositoryIterator.hasNextRepository()) {
 			org.osid.repository.Repository nextRepository = repositoryIterator.nextRepository();
 			try {
-				org.osid.repository.Asset asset = nextRepository.getAsset(assetId);
-				return asset;
+				return nextRepository.getAsset(assetId);
 			} catch (Throwable t) {}
 			}
 		} catch (Throwable t) {

@@ -732,8 +732,7 @@ public class VueResources
         int value = pDefault;
         String s = getString(key);
         if (s != null) {
-            Integer i = Integer.valueOf(s);
-            value = i;
+            value = Integer.valueOf(s);
         }
 	return value;
     }
@@ -912,9 +911,7 @@ public class VueResources
             bits |= (separateAlpha << 24);
         }
 
-        final Color c = new Color(bits, hasCombinedAlpha);
-        //Log.debug(String.format("From [%s] (%s) made bits=%X, sepAlpha=%d, netAlpha=%d, %s", _hex, hex, bits, separateAlpha, c.getAlpha(), c));
-        return c;
+        return new Color(bits, hasCombinedAlpha);
     }
 
     static public Color getColor(String key) {
