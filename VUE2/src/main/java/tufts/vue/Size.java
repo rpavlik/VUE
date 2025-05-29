@@ -91,7 +91,7 @@ public final class Size extends java.awt.geom.Dimension2D {
     }
 
     public boolean equals(float w, float h) {
-        return w == width && height == height;
+        return w == width && h == height;
     }
 
     public void fit(Size s) {
