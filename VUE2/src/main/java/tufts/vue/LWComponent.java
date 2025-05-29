@@ -1055,7 +1055,7 @@ public class LWComponent
             }
 
             if (LWComponent.this.mFontUnderline.get().equals("underline"))
-            	strStyle = strStyle.concat("underline");
+            	strStyle = strStyle + "underline";
             return font.getName() + "-" + strStyle + "-" + font.getSize();
         }
     }
