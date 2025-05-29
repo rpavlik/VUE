@@ -4586,7 +4586,7 @@ public class LWComponent
             out("takeLocation " + x + "," + y);
             //if (DEBUG.META) tufts.Util.printStackTrace("takeLocation");
         }
-        if (x != x || y != y) { // checking for Float.NaN
+        if (Float.isNaN(x) || Float.isNaN(y)) { // checking for Float.NaN
             String msg = "bad location: " + x + "," + y + " for " + this;
             if (DEBUG.Enabled) {
                 Log.warn(msg, new Throwable("HERE"));
@@ -4594,9 +4594,9 @@ public class LWComponent
             } else {
                 Log.warn(msg);
             }
-            if (x == x)
+            if (!Float.isNaN(x))
                 this.x = x;
-            if (y == y)
+            if (!Float.isNaN(y))
                 this.y = y;
         } else {
             this.x = x;
