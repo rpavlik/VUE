@@ -19,6 +19,7 @@ import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
+import java.util.Arrays;
 
 import static tufts.vue.ImageRep.UNAVAILABLE;
 
@@ -451,7 +452,7 @@ public class ImageRef
     private static final boolean ENABLE_IMMEDIATE_SIZES = true; // turn off for debugging undo of delayed size reports/layouts
 
     public void notifyRepHasProgress(final ImageRep rep, final float pct) {
-        if (ENABLE_IMMEDIATE_SIZES && _aspect == 0 && rep == _full && rep.size() != ZERO_SIZE) {
+        if (ENABLE_IMMEDIATE_SIZES && _aspect == 0 && rep == _full && !Arrays.equals(rep.size(), ZERO_SIZE)) {
             _aspect = rep.aspect();
             _repainter.imageRefUpdate(GOT_SIZE);
         } else {
@@ -478,7 +479,7 @@ public class ImageRef
             } // else _icon left as ImageRep.UNAVAILABLE
              
         }
-        else if (freshRep == _icon && (_full == UNAVAILABLE || _full.size() == ZERO_SIZE)) {
+        else if (freshRep == _icon && (_full == UNAVAILABLE || Arrays.equals(_full.size(), ZERO_SIZE))) {
             // We don't have a full rep loaded -- pull it from meta-data stored with the icon.
             // There are several reasons this is important: (1) We may need to know the full
             // pixel size before the full representation is available (e.g., set to natural size).

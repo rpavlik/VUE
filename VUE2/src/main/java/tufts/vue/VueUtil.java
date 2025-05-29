@@ -494,7 +494,7 @@ public class VueUtil extends tufts.Util
 
         boolean overlap = false;
 
-        if (intersection_at_1 == NoIntersection) {
+        if (Arrays.equals(intersection_at_1, NoIntersection)) {
             // default to center of component 1
             result.x1 = headX;
             result.y1 = headY;
@@ -507,7 +507,7 @@ public class VueUtil extends tufts.Util
         // compute intersection at tail shape of line from prior intersection to center of tail shape
         final float[] intersection_at_2 = computeIntersection(result.x1, result.y1, tailX, tailY, tail);
 
-        if (intersection_at_2 == NoIntersection) {
+        if (Arrays.equals(intersection_at_2, NoIntersection)) {
             // default to center of component 2
             result.x2 = tailX;
             result.y2 = tailY;

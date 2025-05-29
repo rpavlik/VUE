@@ -2407,7 +2407,7 @@ public class LWLink extends LWComponent
             final float[] result =
                 VueUtil.computeIntersection(head.x, head.y, srcX, srcY, headShape, headTransform, intersection, 1);
             // If intersection fails for any reason, leave endpoint as center of object at the head.
-            if (result != VueUtil.NoIntersection) {
+            if (!Arrays.equals(result, VueUtil.NoIntersection)) {
                  head.x = intersection[0];
                  head.y = intersection[1];
             }
@@ -2443,7 +2443,7 @@ public class LWLink extends LWComponent
             final float[] result =
                 VueUtil.computeIntersection(srcX, srcY, tail.x, tail.y, tailShape, tailTransform, intersection, 1);
             // If intersection fails for any reason, leave endpoint as center of object at tail.
-            if (result != VueUtil.NoIntersection) {
+            if (!Arrays.equals(result, VueUtil.NoIntersection)) {
                  tail.x = intersection[0];
                  tail.y = intersection[1];
             }

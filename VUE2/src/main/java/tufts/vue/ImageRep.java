@@ -21,6 +21,7 @@ import java.lang.ref.*;
 import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import java.util.Arrays;
 
 import tufts.vue.Images.Handle;
 
@@ -136,7 +137,7 @@ public abstract class ImageRep implements /*ImageRef.Rep,*/ Images.Listener
             Log.warn("bad size " + w + "x" + h);
             _size = ZERO_SIZE;
         } else {
-            if (_size == ZERO_SIZE || w != _size[0] || h != _size[1]) {
+            if (Arrays.equals(_size, ZERO_SIZE) || w != _size[0] || h != _size[1]) {
                 final int[] size = new int[2];
                 size[0] = w;
                 size[1] = h;

@@ -23,6 +23,7 @@ import java.awt.Shape;
 import java.awt.BasicStroke;
 import java.awt.geom.*;
 import java.awt.AlphaComposite;
+import java.util.Arrays;
 
 /**
  * Handle the presentation of an image resource, allowing resize.
@@ -200,7 +201,7 @@ public class LWImage extends LWComponent
         // note: we used to do this via aspect, not full pixel size (which is much safer), tho that
         // means we can no longer adjust the icon size until we have the full pixel size loaded.
 
-        if (rawPixels == ImageRep.ZERO_SIZE) {
+        if (Arrays.equals(rawPixels, ImageRep.ZERO_SIZE)) {
             Log.warn("setMaxDimension: image rep has unset size; " + ref());
         } else {
             Size newSize = Images.fitInto(max, rawPixels);
@@ -374,7 +375,7 @@ public class LWImage extends LWComponent
         // ++ PLUS POSSIBLE COMBINATIONS OF THE ABOVE (!)
         //---------------------------------------------------------------------------------------------------
 
-        if (hasFlag(Flag.UNSIZED) && ref().fullPixelSize() != ImageRef.ZERO_SIZE) {
+        if (hasFlag(Flag.UNSIZED) && !Arrays.equals(ref().fullPixelSize(), ImageRef.ZERO_SIZE)) {
 
             syncFurtherEventsToLastMark();
 
@@ -441,7 +442,7 @@ public class LWImage extends LWComponent
     private int[] getFullPixelSize() {
         int[] size = ref().fullPixelSize();
         
-        if (size == ImageRep.ZERO_SIZE && hasResource()) {
+        if (Arrays.equals(size, ImageRep.ZERO_SIZE) && hasResource()) {
 
             // It's possible to have only the icon loaded, and not the full representation, and
             // thus not immediately know the size of the full representation.
@@ -489,7 +490,7 @@ public class LWImage extends LWComponent
     }
 
     private void setSize(int[] size) {
-        if (size == ImageRep.ZERO_SIZE) {
+        if (Arrays.equals(size, ImageRep.ZERO_SIZE)) {
             Log.warn("skipping setSize of ZERO_SIZE; " + this);
         } else {
             setSize(size[0], size[1]);
@@ -673,7 +674,7 @@ public class LWImage extends LWComponent
 
         Size guess = null;
 
-        if (fullSize != ImageRef.ZERO_SIZE) {
+        if (!Arrays.equals(fullSize, ImageRef.ZERO_SIZE)) {
             if (isNodeIcon()) {
                 guess = Images.fitInto(DefaultIconMaxSide, fullSize);
             } else if (hasFlag(Flag.SLIDE_STYLE)) {
