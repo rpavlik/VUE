@@ -119,6 +119,7 @@ public class BaseMapChoiceSelector extends javax.swing.JComboBox {
         
         private boolean isBaseMapSelected()
         {
+            assert getSelectedItem() != null;
             if(!(getSelectedItem().equals(SELECT_STRING)))
                 return !getSelectedItem().equals(OTHER_STRING) || userSelectedMap != null;
             else
@@ -129,6 +130,7 @@ public class BaseMapChoiceSelector extends javax.swing.JComboBox {
         {
             if(isBaseMapSelected())
             {
+                assert getSelectedItem() != null;
                 if(getSelectedItem().equals(OTHER_STRING))
                     return userSelectedMap;
                 else

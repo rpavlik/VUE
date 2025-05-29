@@ -1177,7 +1177,10 @@ public class LWComponent
 
         @Override
         void take(Color c) {
-            if (fixedAlpha < NO_ALPHA_SET && (c == null || c.getAlpha() != 0xFF))
+            if (fixedAlpha < NO_ALPHA_SET && c == null)
+                throw new PropertyValueVeto(key + "; null color not allowed on " + LWComponent.this);
+
+            if (fixedAlpha < NO_ALPHA_SET && c.getAlpha() != 0xFF)
                 throw new PropertyValueVeto(key + "; color with translucence: "
                                             + c
                                             + " alpha=" + c.getAlpha()

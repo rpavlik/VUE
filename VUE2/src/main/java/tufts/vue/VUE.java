@@ -189,9 +189,7 @@ public class VUE
     	outlineDock = null;
     	floatingZoomDock = null;
     	layersDock = null;
-    	metadataSearchMainPanel = null;
-    	mergeMapsControlPanel = null;
-    	interactionToolsPanel = null;
+        interactionToolsPanel = null;
     	contentPanel = null;
     //	EditorManager.destroy();
    // 	VueToolbarController.destroyController();
