@@ -744,7 +744,7 @@ public class DockWindow
         } else if (key.equals("TITLE-ITEM")) {
             
             String auxTitle = auxTitle = (String) e.getNewValue();
-            if (auxTitle != null && auxTitle.length() > 0)
+            if (auxTitle != null && !auxTitle.isEmpty())
                 setAuxTitle(": " + auxTitle);
             else
                 setTitle(mBaseTitle, "");
@@ -4576,7 +4576,7 @@ public class DockWindow
              final String helpTextFooter = VueResources.getString("dockWindow.helpTextFooter");
              final String helpText = helpTextHeader + "No help for " + getName() + "." + helpTextFooter;
 
-             if (helpText != null && helpText.length() > 0) {
+             if (helpText != null && !helpText.isEmpty()) {
              
                  if (false) {
 

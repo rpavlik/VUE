@@ -539,7 +539,7 @@ public abstract class Resource implements Cloneable
     /** @return some kind of reliable name: e.g., title if there is one, spec if not */
     public String getName() {
         final String title = getTitle();
-        if (title == null || title.trim().length() < 1)
+        if (title == null || title.trim().isEmpty())
             return getSpec();
         else
             return title;
@@ -646,9 +646,9 @@ public abstract class Resource implements Cloneable
         else
             ext = extractExtension();
             
-        if (ext == null || ext == NO_EXTENSION || ext.length() == 0) {
+        if (ext == null || ext == NO_EXTENSION || ext.isEmpty()) {
             final String spec = getSpec();
-            if (spec == null || spec == SPEC_UNSET || spec.trim().length() < 1)
+            if (spec == null || spec == SPEC_UNSET || spec.trim().isEmpty())
                 ext = EXTENSION_UNKNOWN;
             else if (spec.startsWith("http:") || spec.startsWith("https:")) 
                 ext = EXTENSION_HTTP;
@@ -686,7 +686,7 @@ public abstract class Resource implements Cloneable
         
         final char lastChar;
 
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             lastChar = 0;
         else
             lastChar = s.charAt(s.length()-1);
@@ -962,7 +962,7 @@ public abstract class Resource implements Cloneable
      */
     public static boolean looksLikeImageFile(String path) {
         if (DEBUG.WORK) Log.debug("looksLikeImageFile [" + path + "]");
-        if (path == null || path.length() == 0)
+        if (path == null || path.isEmpty())
             return false;
         String s = path.toLowerCase();
         return s.endsWith(".gif")
@@ -980,7 +980,7 @@ public abstract class Resource implements Cloneable
     //public static boolean isLikelyURLorFile(String s) {
     public static boolean looksLikeURLorFile(String s) {
 
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return false;
 
         final char c0 = s.charAt(0);
@@ -1004,7 +1004,7 @@ public abstract class Resource implements Cloneable
         if (s == null)
             return false;
 
-        final char c0 = s.length() > 0 ? s.charAt(0) : 0;
+        final char c0 = !s.isEmpty() ? s.charAt(0) : 0;
 
         if (Util.isWindowsPlatform()) {
         
@@ -1373,7 +1373,7 @@ public abstract class Resource implements Cloneable
         
     public static URI makeURI(String s)
     {
-        final char c0 = s.length() > 0 ? s.charAt(0) : 0;
+        final char c0 = !s.isEmpty() ? s.charAt(0) : 0;
         final char c1 = s.length() > 1 ? s.charAt(1) : 0;
         final String txt;
         
@@ -1645,7 +1645,7 @@ public abstract class Resource implements Cloneable
 
 
     private static void writeField(PrintWriter w, String label, Object value) {
-        if (value != null && !(value instanceof String && value.toString().length() == 0))
+        if (value != null && !(value instanceof String && value.toString().isEmpty()))
             w.printf("\n%20s: %s", label, value);
         //System.out.format("%20s: %s\n", label, value);
     }

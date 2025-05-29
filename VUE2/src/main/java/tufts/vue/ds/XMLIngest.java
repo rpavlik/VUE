@@ -84,7 +84,7 @@ public class XMLIngest {
         {
             super.setResource(source);
             this.itemPath = itemPath;
-            if (itemPath == null || itemPath.length() == 0)
+            if (itemPath == null || itemPath.isEmpty())
                 itemPathLen = 0;
             else
                 itemPathLen = itemPath.length() + 1; // add one for dot
@@ -361,7 +361,7 @@ public class XMLIngest {
 
         if (value != null) {
             outputValue = value.trim();
-            if (outputValue.length() > 0) {
+            if (!outputValue.isEmpty()) {
                 schema.trackFieldValuePair(fullName, outputValue);
             } else
                 outputValue = null;
@@ -377,7 +377,7 @@ public class XMLIngest {
             if (!node.hasChildNodes()) {
                 DO_TAG = false;
             }
-            else DO_TAG = children.getLength() != 1 || !isText(firstChild) || firstChild.getNodeValue().trim().length() != 0;
+            else DO_TAG = children.getLength() != 1 || !isText(firstChild) || !firstChild.getNodeValue().trim().isEmpty();
             
             // if (!DO_TAG) ioutln("<!-- empty: " + nodeName + " -->");
         }

@@ -346,7 +346,7 @@ public final class Association
 
         if (DEBUG.Enabled) {
             final Object gots;
-            if (got.size() == 0)
+            if (got.isEmpty())
                 gots = null;
             else if (got.size() == 1)
                 gots = Util.getFirst(got);

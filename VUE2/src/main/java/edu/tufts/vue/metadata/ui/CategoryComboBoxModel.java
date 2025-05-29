@@ -59,7 +59,7 @@ public class CategoryComboBoxModel extends AbstractListModel implements ComboBox
         list.clear();
         for (Ontology ont : VUE_Ontologies) {
             if (DEBUG.PAIN) list.add("[" + ont.getLabel() + "]" + ont.getBase());
-            if (ont.getOntTypes().size() > 0) {
+            if (!ont.getOntTypes().isEmpty()) {
                 for (OntType ot : ont.getOntTypes())
                     list.add(ot);
                 list.add(SEPARATOR);

@@ -429,7 +429,7 @@ public abstract class BrowseDataSource implements DataSource
                 if (charsetIndex >= 0) {
                     encoding = ct.substring(charsetIndex + 8);
                     Log.debug("charset[" + encoding + "]");
-                    if (encoding.length() < 1)
+                    if (encoding.isEmpty())
                         encoding = null;
                     
                 }

@@ -1181,7 +1181,7 @@ public class MetadataEditor extends JPanel
             //----------------------------------------------------------------------------------------
         
             if (source_VME == InputVME) {
-                if (trimText.length() == 0) {
+                if (trimText.isEmpty()) {
                     // if (DEBUG.PAIN) Log.debug("do nothing, no new text");
                     model.clearBulge("nothing to do, no new text");
                     flush_UI_text(); // don't allow re-use
@@ -1505,7 +1505,7 @@ public class MetadataEditor extends JPanel
                     final List<VueMetadataElement> md = c.getMetadataList().getAll(); // could use subesetlist?
                     if (md.remove(vme)) {
                         if (DEBUG.Enabled) Log.debug("multiple deleted " + vme + "; " + c.getDiagnosticLabel());
-                        if (md.size() == 0) 
+                        if (md.isEmpty())
                             c.layout(); // no more meta-data: icon display may change
                     } else {
                         Log.warn("multiple failed to remove " + vme + "; " + c.getDiagnosticLabel());

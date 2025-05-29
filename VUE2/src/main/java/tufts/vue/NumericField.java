@@ -137,7 +137,7 @@ public class NumericField  extends JTextField  {
 		
 		String val = getText();
 		
-		if (val == null || val.length() == 0)  {
+		if (val == null || val.isEmpty())  {
 			return 0.0;
 			}
 		return Double.parseDouble(val);

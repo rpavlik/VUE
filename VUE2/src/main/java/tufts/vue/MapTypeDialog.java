@@ -186,7 +186,7 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 		mainPanel.add( BorderLayout.CENTER, propPanel);
 		add( BorderLayout.CENTER, mainPanel);
 		
-		if( mListModel.size() > 0 ) {
+		if(!mListModel.isEmpty()) {
 			mTypeList.setSelectedIndex( 0);
 			}
 	}
@@ -282,7 +282,7 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 			int index = mTypeList.getSelectedIndex();
 			UserMapType type = (UserMapType) obj;
 			mListModel.removeElement( type);
-			if( mListModel.size() > 0 ) {
+			if(!mListModel.isEmpty()) {
 				if( index > 0)
 					index--;			
 				mTypeList.setSelectedIndex( index);

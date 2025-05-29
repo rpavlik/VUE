@@ -79,7 +79,7 @@ public class Asset implements org.osid.repository.Asset {
                         getDisplayName(),
                         getId().getIdString()));
            
-            } else if(repository.getConfiguration() != null && repository.getConfiguration().getProperty("thumbnailSuffix")!=null && repository.getConfiguration().getProperty("thumbnailSuffix").length() >0) {
+            } else if(repository.getConfiguration() != null && repository.getConfiguration().getProperty("thumbnailSuffix")!=null && !repository.getConfiguration().getProperty("thumbnailSuffix").isEmpty()) {
                ImageRecordStructure imageRecordStructure = (ImageRecordStructure)((FedoraObjectAssetType) assetType).getImageRecordStructure();
                Record record  = new Record(pid,imageRecordStructure );
                record.createPart(imageRecordStructure.getThumbnailPartStructure().getId(), Utilities.formatObjectUrl(pid.getIdString(), repository.getConfiguration().getProperty("thumbnailSuffix"), repository));

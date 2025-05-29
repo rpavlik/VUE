@@ -74,9 +74,9 @@ public class PropertyMap extends java.util.HashMap<String,Object> implements Tab
 
         if (v == null)
             return false;
-        else if (v.getClass() == String.class && v.toString().length() == 0)
+        else if (v.getClass() == String.class && v.toString().isEmpty())
             return false;
-        else return !(v instanceof Collection) || ((Collection) v).size() != 0;
+        else return !(v instanceof Collection) || !((Collection) v).isEmpty();
 
     }
 
@@ -229,7 +229,7 @@ public class PropertyMap extends java.util.HashMap<String,Object> implements Tab
     
     public synchronized void notifyListeners()
     {
-        if (listeners != null && listeners.size() > 0) {
+        if (listeners != null && !listeners.isEmpty()) {
             notifyCount++;
             if (DEBUG.RESOURCE || DEBUG.THREAD) out("notifyListeners " + listeners.size() + " of " + super.toString());
             for (Object listener : listeners) {

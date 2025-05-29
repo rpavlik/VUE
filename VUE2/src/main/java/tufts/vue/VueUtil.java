@@ -165,7 +165,7 @@ public class VueUtil extends tufts.Util
         {
         	String userHomeString = System.getenv("VUEUSERHOME");
         	
-        	if (userHomeString ==null || (userHomeString !=null && userHomeString.length() <1))
+        	if (userHomeString ==null || (userHomeString !=null && userHomeString.isEmpty()))
             	userHome = new File(VUE.getSystemProperty("user.home"));
         	else
         		userHome = new File(userHomeString);

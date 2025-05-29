@@ -84,14 +84,14 @@ implements org.osid.repository.AssetIterator
 				record.createPart(ArtifactPartStructure.getInstance().getId(),hit.getArtifact());
 				record.createPart(ThumbnailPartStructure.getInstance().getId(),hit.getThumb());
 				record.createPart(LargeImagePartStructure.getInstance().getId(),hit.getFullImage());
-				if(hit.artistList != null && hit.artistList.size() > 0) {
+				if(hit.artistList != null && !hit.artistList.isEmpty()) {
 					for(String artist: hit.getArtistList()) {
 						record.createPart(ArtistPartStructure.getInstance().getId(),artist);
 					}
 				}
 				record.createPart(CulturePartStructure.getInstance().getId(),hit.culture);
 				record.createPart(CurrentLocationPartStructure.getInstance().getId(),hit.currentLocation);
-				if(hit.materialList != null && hit.materialList.size() >0 ){
+				if(hit.materialList != null && !hit.materialList.isEmpty()){
 					for(String material: hit.materialList) {
 						record.createPart(MaterialPartStructure.getInstance().getId(),material);
 					}

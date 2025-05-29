@@ -205,7 +205,7 @@ public class LWPathway extends LWContainer
             node.removeEntryRef(this);
             node.removeLWCListener(pathway);
 
-            if (node instanceof LWPortal && node.getEntries().size() == 0) {
+            if (node instanceof LWPortal && node.getEntries().isEmpty()) {
                 // if this portal has no other entries, remove it
                 node.getParent().deleteChildPermanently(node);
             }
@@ -437,7 +437,7 @@ public class LWPathway extends LWContainer
         }
 
         public boolean hasNotes() {
-            return notes != null && notes.length() > 0;
+            return notes != null && !notes.isEmpty();
         }
 
         public String getNotes() {
@@ -621,11 +621,11 @@ public class LWPathway extends LWContainer
     }
 
     public Entry getFirst() {
-        return mEntries.size() > 0 ? mEntries.get(0) : null;
+        return !mEntries.isEmpty() ? mEntries.get(0) : null;
     }
     
     public Entry getLast() {
-        return mEntries.size() > 0 ? mEntries.get(mEntries.size()-1) : null;
+        return !mEntries.isEmpty() ? mEntries.get(mEntries.size()-1) : null;
     }
 
     /**
@@ -655,7 +655,7 @@ public class LWPathway extends LWContainer
     }
     
     @Override public boolean hasDraws() {
-        return isVisible() && mEntries.size() > 0;
+        return isVisible() && !mEntries.isEmpty();
     }
     
 //     @Override public boolean isDrawn() {
@@ -1451,7 +1451,7 @@ public class LWPathway extends LWContainer
     /** changes in semantics from LWComponent: count entries IN this pathway, not pathways we're a member of */
     @Override
     public boolean hasEntries() {
-        return mEntries.size() > 0;
+        return !mEntries.isEmpty();
     }
     
     @Override
@@ -1528,7 +1528,7 @@ public class LWPathway extends LWContainer
 
         // This is for backward compat with older save files where
         // Pathway elements were stored only by ID
-        if (mOldStyleMemberIDList.size() > 0) {
+        if (!mOldStyleMemberIDList.isEmpty()) {
             final Collection<LWComponent> allRestored = map.getAllDescendents(ChildKind.ANY);
             for (String id : mOldStyleMemberIDList) {
                 LWComponent c = map.findByID(allRestored, id);

@@ -301,7 +301,7 @@ public class ConnectivityMatrix
                 if (key != null) {
                     if (LABELS_TOP_CHAR) {
                         final String txt = key.toString().trim();
-                        b.append(txt.length() > 0 ? txt.charAt(0) : '?');
+                        b.append(!txt.isEmpty() ? txt.charAt(0) : '?');
                         b.append(' ');
                     } else {
                         final String txt = key.toString().replace('\n', ' ').trim();

@@ -238,7 +238,7 @@ public class MetadataSearchMainGUI extends JPanel
              null, JOptionPane.PLAIN_MESSAGE, null,
              (VueResources.local("searchgui.search") + " "+ (rowCount+1)));
         
-        if (inputValue != null && inputValue.trim().length() == 0) {
+        if (inputValue != null && inputValue.trim().isEmpty()) {
             inputValue = VueResources.local("searchgui.search") + " "+ (rowCount+1);
         }
         return inputValue;
@@ -867,7 +867,7 @@ public class MetadataSearchMainGUI extends JPanel
         
 
         public int getRowCount() {            
-            if (searchTerms.size() > 0)
+            if (!searchTerms.isEmpty())
                 return searchTerms.size();
             else
                 return 1;
@@ -888,7 +888,7 @@ public class MetadataSearchMainGUI extends JPanel
         }
 
         public Object getValueAt(int row, int col) {            
-            if (row == 0 && searchTerms.size() == 0) {
+            if (row == 0 && searchTerms.isEmpty()) {
                 VueMetadataElement vme = new VueMetadataElement();                
                 String[] statementObject = {
                     edu.tufts.vue.rdf.RDFIndex.VueTermOntologyNone,

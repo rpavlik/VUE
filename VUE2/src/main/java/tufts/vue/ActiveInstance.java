@@ -255,9 +255,9 @@ public class ActiveInstance<T>
         inNotify = true;
         try {
             depth++;
-            if (mListeners.size() > 0)
+            if (!mListeners.isEmpty())
                 notifyListenerList(this, e, mListeners);
-            if (ListenersForAllActiveEvents.size() > 0)
+            if (!ListenersForAllActiveEvents.isEmpty())
                 notifyListenerList(this, e, ListenersForAllActiveEvents);
         } finally {
             depth--;

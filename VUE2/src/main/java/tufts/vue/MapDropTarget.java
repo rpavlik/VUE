@@ -876,7 +876,7 @@ public class MapDropTarget
             if (foundData instanceof Collection) {
                 Collection bag = (Collection) foundData;
                 size = " (Collection size " + bag.size() + ")";
-                if (bag.size() > 0) {
+                if (!bag.isEmpty()) {
                     final Object o = bag.iterator().next();
                     firstInBag = o;
                     bagEntry0 =  "\n\tdata[0]: " + Util.tags(firstInBag);
@@ -961,13 +961,13 @@ public class MapDropTarget
     }
 
     public static void completeDrop(DropContext drop) {
-        if (drop.items != null && drop.items.size() > 0) {
+        if (drop.items != null && !drop.items.isEmpty()) {
             // Must make sure the selection is owned
             // by this map before we try and change it.
             // TODO: SlideViewer currently not handling this properly...
             drop.viewer.grabVueApplicationFocus("drop", null);
         }
-        if (drop.select != null && drop.select.size() > 0) {
+        if (drop.select != null && !drop.select.isEmpty()) {
             drop.viewer.selectionSet(drop.select); // VUE-978: selection focal should also be set
         }
         //             if (drop.select.size() > 0) {

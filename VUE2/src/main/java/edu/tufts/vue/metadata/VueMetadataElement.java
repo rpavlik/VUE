@@ -101,7 +101,7 @@ public class VueMetadataElement implements tufts.vue.XMLUnmarshalListener
     public String getValue() { return value; }
     public Object getObject() { return obj; }
 
-    public boolean hasValue() { return value != null && value.length() > 0; }
+    public boolean hasValue() { return value != null && !value.isEmpty(); }
     public boolean isEmpty() { return key == ONTOLOGY_NONE && !hasValue(); }
     public boolean isKeyNone() { return key == ONTOLOGY_NONE; }
 
@@ -120,7 +120,7 @@ public class VueMetadataElement implements tufts.vue.XMLUnmarshalListener
         // This is marked as a type java.lang.String in mapping file so we have a real Object we
         // deal with, which we need in order to return null in the getter to remove from future
         // save files.
-        if (t == null || t.length() < 1) {
+        if (t == null || t.isEmpty()) {
             if (DEBUG.Enabled) Log.debug("empty type in old save file: " + Util.tags(t));
             this.type = 0;
         } else {

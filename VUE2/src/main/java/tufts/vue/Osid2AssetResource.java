@@ -100,20 +100,20 @@ public class Osid2AssetResource extends URLResource
     }
     
     private static String quoteF(String s) {
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return "";
         else
             return "\"" + s + "\" ";
     }
     private static String quoteL(String s) {
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return "";
         else
             return " \"" + s + "\"";
     }
 
     private static String name(String s) {
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return "()";
         else
             return "(" + s + ")";
@@ -188,7 +188,7 @@ public class Osid2AssetResource extends URLResource
 					
                     String key;
 					
-                    if (description != null && description.trim().length() > 0) {
+                    if (description != null && !description.trim().isEmpty()) {
                         key = description;
                         //if (DEBUG.DR) key += "|d";
                     } else {
@@ -225,7 +225,7 @@ public class Osid2AssetResource extends URLResource
                         if (s.startsWith("<p>") && s.endsWith("</p>")) {
                             // Ignore empty HTML paragraphs
                             String body = s.substring(3, s.length()-4);
-                            if (body.trim().length() == 0) {
+                            if (body.trim().isEmpty()) {
                                 if (DEBUG.DR)
                                     value = "[empty <p></p> ignored]";
                                 else

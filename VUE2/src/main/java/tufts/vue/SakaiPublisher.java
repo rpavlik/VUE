@@ -495,7 +495,7 @@ public class SakaiPublisher {
 			// add http if it is not present
 			hostUrl = "http://" + hostUrl;
 		}
-		if( port != null && port.length() > 0 )
+		if( port != null && !port.isEmpty())
 		{
 			hostUrl = hostUrl + ":" + port;
 		}

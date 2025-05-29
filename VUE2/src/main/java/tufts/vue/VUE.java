@@ -1028,7 +1028,7 @@ public class VUE
         }
 
         for (String arg : args) {
-            if (arg == null || arg.length() < 1 || arg.charAt(0) == '-')
+            if (arg == null || arg.isEmpty() || arg.charAt(0) == '-')
                 continue;
             if (DEBUG.INIT) out("command-line file to open " + arg);
             VUE.FilesToOpen.add(arg);
@@ -1349,7 +1349,7 @@ public class VUE
     {
         boolean openedUserMap = false;
 
-        if (FilesToOpen.size() > 0) {
+        if (!FilesToOpen.isEmpty()) {
             Log.info("outstanding file open requests: " + Util.tags(FilesToOpen));
             if (DEBUG.Enabled) Util.dump(FilesToOpen);
             
@@ -1723,7 +1723,7 @@ public class VUE
         	}
         	 */
 
-        	if (FilesToOpen.size() == 0)
+        	if (FilesToOpen.isEmpty())
         		VUE.displayMap(new LWMap(VueResources.getString("vue.main.newmap")));
 
         	// Generally, we need to wait until java 1.5 JSplitPane's have been validated to
@@ -2424,14 +2424,14 @@ public class VUE
 
     		      return;
 
-    		    if (textField.getText().trim().length() == 0 ){
+    		    if (textField.getText().trim().isEmpty()){
 
     		      if ( textField.getText().length() == tabStop){
     		       
 
     		      } else {
 
-    		        if (textField.getText().trim().length() == 0 && offset <= tabStop) {
+    		        if (textField.getText().trim().isEmpty() && offset <= tabStop) {
 
     		          str = tabStopString() + str;
 
@@ -2441,7 +2441,7 @@ public class VUE
 
     		    }      		 
 
-    		    if (textField.getText().trim().length() != 0 && offset <= tabStop) {
+    		    if (!textField.getText().trim().isEmpty() && offset <= tabStop) {
 
     		      return;
 

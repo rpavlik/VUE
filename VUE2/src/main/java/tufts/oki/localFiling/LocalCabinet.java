@@ -513,7 +513,7 @@ public class LocalCabinet extends LocalCabinetEntry implements osid.filing.Cabin
     public boolean isEmpty() {
         if (children == null)
             return true;
-        return children.size() == 0;
+        return children.isEmpty();
     }
     
     /**

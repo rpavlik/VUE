@@ -235,7 +235,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
         if (mTitle == null) {
             // still true?: for some reason, if we don't always have a title set, tooltips break.  SMF 2008-04-13
             String name = file.getName();
-            if (name.length() == 0) {
+            if (name.isEmpty()) {
                 // Files that are the root of a filesystem, such "C:\" will have an empty name
                 // (Presumably also true for "/")
                 setTitle(file.toString()); 
@@ -1792,7 +1792,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
                 // if previously determined (e.g., was persisted), don't bother to look-up again
                 String type =  getProperty(CONTENT_TYPE); 
             
-                if (type == null || type.length() < 1) {
+                if (type == null || type.isEmpty()) {
 
                     try {
                         final URL url = (mURL != null ? mURL : new URL(getSpec()));
@@ -1816,7 +1816,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
                             out("got contentType " + url + " [" + type + "]");
                             //Util.printStackTrace("GOT CONTENT TYPE");
                         }
-                        if (type != null && type.length() > 0)
+                        if (type != null && !type.isEmpty())
                             setProperty(CONTENT_TYPE, type);
                         
                     } catch (Throwable t) {
@@ -2155,7 +2155,7 @@ public class URLResource extends Resource implements XMLUnmarshalListener
         if (DEBUG.Enabled) System.out.println("*** Got meta-data " + metaData);
         markAccessSuccess();
         String title = metaData.getProperty("title");
-        if (title != null && title.length() > 0) {
+        if (title != null && !title.isEmpty()) {
             setProperty("title", title);
             title = title.replace('\n', ' ').trim();
             setTitle(title);

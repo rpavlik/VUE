@@ -235,7 +235,7 @@ public class ClusterLayout extends Layout {
 			if (c instanceof LWNode) {	
 				LWNode node = (LWNode) c;
 				total++;
-				if(clusterMap.get(node) != null && clusterMap.get(node).size() >0) {
+				if(clusterMap.get(node) != null && !clusterMap.get(node).isEmpty()) {
 					double radius = Math.sqrt(FACTOR * clusterMap.get(node).size()* meanNodeWidth * meanNodeHeight / Math.PI);				
 					int countLinked = 0;
 					for (LWComponent linkedNode : clusterMap.get(node)) {

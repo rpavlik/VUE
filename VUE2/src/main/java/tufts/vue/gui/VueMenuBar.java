@@ -419,12 +419,12 @@ public class VueMenuBar extends javax.swing.JMenuBar
 
                 publishMenu.removeAll();
 
-                if (typeActions.size() > 0) {
+                if (!typeActions.isEmpty()) {
 
                     for (Action a : typeActions)
                         publishMenu.add(a);
 
-                    if (publishActions.size() > 0) {
+                    if (!publishActions.isEmpty()) {
                         publishMenu.addSeparator();
                         for (Action a : publishActions)
                             publishMenu.add(a);

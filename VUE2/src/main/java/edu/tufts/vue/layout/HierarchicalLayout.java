@@ -65,7 +65,7 @@ public class HierarchicalLayout extends Layout {
 		List<LWNode> relatedNodes = getRelated(currentNode, processedNodes);
 //		System.out.println("Applying Layout to: "+currentNode.getLabel()+" parent:"+parentNode.getLabel()+" size:"+size+" related:"+relatedNodes.size());
 		
-		if (relatedNodes.size() < 1)
+		if (relatedNodes.isEmpty())
 			return;
 
 		double radius = relatedNodes.size()
@@ -83,7 +83,7 @@ public class HierarchicalLayout extends Layout {
 				related.setLocation(centerX + radius * Math.cos(angle)
 						- related.getWidth() / 2, centerY + radius
 						* Math.sin(angle) - related.getHeight() / 2);
-				if(relatedNodes.size()>0) {
+				if(!relatedNodes.isEmpty()) {
 				layoutChildren(currentNode, related, relatedNodes.size(),
 						processedNodes);
 				}
@@ -115,7 +115,7 @@ public class HierarchicalLayout extends Layout {
 				related.setLocation(centerX + radius * Math.cos(childAngle)
 						- related.getWidth() / 2, centerY + radius
 						* Math.sin(childAngle) - related.getHeight() / 2);		
-				if(relatedNodes.size()>0) {
+				if(!relatedNodes.isEmpty()) {
 					layoutChildren(currentNode, related, relatedNodes.size(),processedNodes);
 				}
 			 

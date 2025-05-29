@@ -139,7 +139,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
 
         if (tufts.Util.isWindowsPlatform()) {
 
-        	if (rootCabinets.size() == 0) {
+        	if (rootCabinets.isEmpty()) {
                     File[] f = File.listRoots();
                     for (int i=0;i<f.length;i++) {
                         File file = f[i];
@@ -153,7 +153,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
                 
         } else {
         		
-        	if (rootCabinets.size() == 0) {
+        	if (rootCabinets.isEmpty()) {
 
                 for (String drive : drives) {
 
@@ -197,7 +197,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
         // a symlink to /, named as whatever the user wanted to name their hard-drive
         // (e.g., "Macintosh HD")
         
-        if (rootCabinets.size() == 0) {
+        if (rootCabinets.isEmpty()) {
             File file = new File ("/");
             if (file.exists()) {
                 rootCabinets.add (new LocalCabinet ("/", agent, null));
@@ -205,7 +205,7 @@ public class LocalFilingManager extends tufts.oki.OsidManager implements osid.fi
         }
         
         //  If the current working directory has not been set, set it to the first root.
-        if ((cwd == null) && rootCabinets.size() > 0)
+        if ((cwd == null) && !rootCabinets.isEmpty())
             cwd = (LocalCabinet) rootCabinets.first();
 
         if (Log.isDebugEnabled()) Log.debug("initializeRoots; in " + tufts.Util.tags(this) + ": completed.");

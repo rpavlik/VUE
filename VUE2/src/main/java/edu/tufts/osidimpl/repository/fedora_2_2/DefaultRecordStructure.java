@@ -152,7 +152,7 @@ public class DefaultRecordStructure
                 record.createPart(recordStructure.getURLPartStructure().getId(), Utilities.formatObjectUrl(objectId.getIdString(), DEFAULT_MAP_DS, repository));
             }  else if(dataStreams.contains(DEFAULT_RESOURCE_DS)) {
                 record.createPart(recordStructure.getURLPartStructure().getId(), Utilities.formatObjectUrl(objectId.getIdString(), DEFAULT_RESOURCE_DS, repository));  
-            }else if(repository.getConfiguration() != null && repository.getConfiguration().getProperty("linkSuffix")!=null && repository.getConfiguration().getProperty("linkSuffix").length() >0) {
+            }else if(repository.getConfiguration() != null && repository.getConfiguration().getProperty("linkSuffix")!=null && !repository.getConfiguration().getProperty("linkSuffix").isEmpty()) {
                 record.createPart(recordStructure.getURLPartStructure().getId(), Utilities.formatObjectUrl(objectId.getIdString(), repository.getConfiguration().getProperty("linkSuffix"), repository));  
             } else {
                 record.createPart(recordStructure.getURLPartStructure().getId(), Utilities.formatObjectUrl(objectId.getIdString(),"",repository));

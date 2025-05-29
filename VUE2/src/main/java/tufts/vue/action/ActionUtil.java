@@ -202,12 +202,12 @@ public class ActionUtil
 		String baseName = null;
 		String extension = ((VueFileFilter)saveChooser.getFileFilter()).getExtensions()[0];  
 						
-		if (name == null || (name !=null && name.length() <1))
+		if (name == null || (name !=null && name.isEmpty()))
 			baseName = VUE.getActiveMap().getLabel();
 		else
 	       baseName = name;
 
-		if (name == null || (name !=null && name.length() <1))
+		if (name == null || (name !=null && name.isEmpty()))
 		{
 			if (baseName.lastIndexOf(".") > 0)
 				baseName = VUE.getActiveMap().getLabel().substring(0, baseName.lastIndexOf("."));

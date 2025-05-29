@@ -454,7 +454,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
 
             if (key == VueTermOntologyNone) { // also check #TAG so we don't have to encode that?
                 // This is just an optimization, so checking object identity is okay (should be used that way)
-                if (value != null && value.length() > 0) {
+                if (value != null && !value.isEmpty()) {
                     // Optimization: this being a "none" term (no keyword), don't bother with empty values
                     addStatement(createStatement(r, _propertyNone, value));
                 }
@@ -464,7 +464,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
             else if (key == null) {
                 Log.warn(r + ": null key: " + vme);
             }
-            else if (key.length() == 0) {
+            else if (key.isEmpty()) {
                 Log.warn(r + ": empty key: " + vme);
             }
             else if (value == null) {

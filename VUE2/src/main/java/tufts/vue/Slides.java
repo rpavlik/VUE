@@ -130,7 +130,7 @@ class Slides {
                     txt = imageNode.getLabel();
                 else
                     txt = i.getLabel();
-                if (txt == null || txt.length() == 0)
+                if (txt == null || txt.isEmpty())
                     txt = "Image";
                 title = new LWNode(txt);
                 title.setAsTextNode(true);
@@ -204,7 +204,7 @@ class Slides {
         // TODO: if the source node is an image node, need to make sure
         // it's image gets added (is filtered by getContentToCopy)
         if (LWNode.isImageNode(entry.node)) {
-            if (images.size() == 0)
+            if (images.isEmpty())
                 images.add(new TitledImage((LWComponent)null, ((LWNode)entry.node).getImage().duplicate(cc)));
             else
                 images.add(new TitledImage(entry.node, ((LWNode)entry.node).getImage().duplicate(cc)));
@@ -264,7 +264,7 @@ class Slides {
 
         // TODO: on restore, traverse all children (cept thru groups) and set slide-style bits
 
-        if (images.size() > 0)
+        if (!images.isEmpty())
             layoutImages(slide, images);
 
         slide.takeScale(SlideIconScale);
@@ -473,7 +473,7 @@ class Slides {
                 added.add(newNode);
             }
 
-            if (added.size() > 0) {
+            if (!added.isEmpty()) {
 
                 LWSelection s = new LWSelection(added);
                 

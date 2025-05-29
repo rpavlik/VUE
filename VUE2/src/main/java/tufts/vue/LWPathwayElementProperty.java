@@ -72,14 +72,14 @@ public class LWPathwayElementProperty
     
     public String getElementNotes()
     {
-        if (notes != null && notes.length() < 1)
+        if (notes != null && notes.isEmpty())
             this.notes = null;
         return notes;
     }
 
     public void setElementNotes(String notes)
     {
-        if (notes != null && notes.trim().length() < 1)
+        if (notes != null && notes.trim().isEmpty())
             this.notes = null;
         else
             this.notes = notes;

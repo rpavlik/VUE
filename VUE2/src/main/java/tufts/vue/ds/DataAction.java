@@ -87,10 +87,10 @@ public final class DataAction
 
         }
 
-        if (unpositioned.size() > 0)
+        if (!unpositioned.isEmpty())
             tufts.vue.LayoutAction.filledCircle.act(unpositioned, DataDropHandler.AUTO_FIT);
 
-        if (deformMap && pushers.size() > 0) {
+        if (deformMap && !pushers.isEmpty()) {
             // we push everything last, so even the newly added nodes will be pushed
             for (LWComponent node : pushers) {
                 tufts.vue.Actions.projectNodes(toPush, node, 12);
@@ -173,7 +173,7 @@ public final class DataAction
          final Collection<? extends LWComponent> linkTargets,
          final Multiset<LWComponent> targetsUsed)
     {
-        if (linkTargets.size() > 0) {
+        if (!linkTargets.isEmpty()) {
             return makeLinks(linkTargets, node, node.getDataValueField(), targetsUsed); // seems wrong to be providing this last argumen
         } else {
             return Collections.emptyList();
@@ -207,7 +207,7 @@ public final class DataAction
         final Multiset<LWComponent> targetsUsed = com.google.common.collect.HashMultiset.create();
         final List<LWLink> links = makeDataLinksForNodes(map, nodes, field, targetsUsed);
 
-        if (links.size() > 0)
+        if (!links.isEmpty())
             map.getInternalLayer("*Data Links*").addChildren(links);
 
         Object[] result = new Object[2];
@@ -229,7 +229,7 @@ public final class DataAction
         
         List<LWLink> links = Collections.emptyList();
         
-        if (linkTargets.size() > 0) {
+        if (!linkTargets.isEmpty()) {
             links = new ArrayList<>();
             for (LWComponent newNode : nodes) {
                 links.addAll(makeLinks(linkTargets, newNode, field, targetsUsed));
@@ -446,7 +446,7 @@ public final class DataAction
                     final List<LWLink> valueLinks
                         = makeValueNodeLinks(singletonTargetList, target, singleValueField, null); // do NOT accrue reverse targets!
                     //= makeValueNodeLinks(singletonTargetList, target, singleValueField, targetsUsed);
-                    if (valueLinks.size() > 0) {
+                    if (!valueLinks.isEmpty()) {
                         targetsUsed.add(target);
                         if (valueLinks.size() > 1)
                             Log.warn("more than 1 link added for single value node: " + Util.tags(valueLinks), new Throwable("HERE"));

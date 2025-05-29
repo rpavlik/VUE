@@ -394,7 +394,7 @@ public class AuthenticationManager extends OsidManager implements osid.authentic
         java.util.Properties props = new java.util.Properties();
         
         //  Check username and password.  Username and password are not allowed to be null.  Password may not be blank.
-        if ((am_username == null) || (am_password == null) || (am_password.trim().length() == 0)) {
+        if ((am_username == null) || (am_password == null) || (am_password.trim().isEmpty())) {
             throw new osid.authentication.AuthenticationException (osid.authentication.AuthenticationException.OPERATION_FAILED);
         }
 

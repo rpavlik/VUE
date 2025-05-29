@@ -124,7 +124,7 @@ public class LWCEvent
 
     public LWComponent getComponent()
     {
-        if (component == null && components != null && components.size() > 0) {
+        if (component == null && components != null && !components.isEmpty()) {
             if (DEBUG.Enabled && components.size() > 1) {
                 tufts.Util.printStackTrace(this + "RETURNING FIRST ONLY WHEN IT CONTAINS "
                                            + components.size() + "\n" + components + "\n");

@@ -170,7 +170,7 @@ public abstract class Style {
     public static Color stringToColor(String str) {
         Color color = null;
         
-        if (str.length() == 0)
+        if (str.isEmpty())
             color = Color.black;
         else if (str.startsWith("rgb(")) {
             color = parseRGB(str);

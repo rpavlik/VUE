@@ -1191,7 +1191,7 @@ public class LWMap extends LWContainer
 
         boolean addedLayers = false;
 
-        if (mLayers.size() > 0) {
+        if (!mLayers.isEmpty()) {
 
             if (DEBUG.Enabled) Log.debug("restoring: found existing layers in " + this);
 

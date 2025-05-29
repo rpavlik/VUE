@@ -170,7 +170,7 @@ public class Field implements tufts.vue.XMLUnmarshalListener
             for (Field f : Association.getPairedFields(this)) {
                 persists.add(new PersistRef(f));
             }
-            if (DEBUG.SCHEMA && persists.size() > 0) {
+            if (DEBUG.SCHEMA && !persists.isEmpty()) {
                 Log.debug(this + ": GOT RELATED FIELDS: " + Util.tags(persists));
             }
             return persists;
@@ -186,7 +186,7 @@ public class Field implements tufts.vue.XMLUnmarshalListener
     /** interface {@link XMLUnmarshalListener} -- track us */
     public void XML_completed(Object context) {
         mXMLRestoreUnderway = false;
-        if (mRelatedFields.size() > 0) {
+        if (!mRelatedFields.isEmpty()) {
             if (DEBUG.Enabled) {
                 Log.debug("GOT RELATED FIELDS for " + this);
                 Util.dump(mRelatedFields);

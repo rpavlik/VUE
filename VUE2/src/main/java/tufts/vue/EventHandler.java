@@ -132,7 +132,7 @@ public class EventHandler<E>
     }
 
     public boolean hasListeners() {
-        return mListeners.size() > 0;
+        return !mListeners.isEmpty();
     }
 
     public synchronized void redeliver() {
@@ -171,7 +171,7 @@ public class EventHandler<E>
         _inNotify = true;
         try {
             ActiveInstance.depth++;
-            if (mListeners.size() > 0)
+            if (!mListeners.isEmpty())
                 notifyListenerList(source, event, mListeners);
 //             if (ListenersForAllEvents.size() > 0)
 //                 notifyListenerList(this, source, event, ListenersForAllEvents);

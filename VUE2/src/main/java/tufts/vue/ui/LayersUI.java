@@ -924,7 +924,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         //final LWContainer parent0 = parents.isEmpty() ? null : parents.iterator().next();
 
         boolean disable =
-            s.size() < 1
+                s.isEmpty()
             || s.only() instanceof Layer;
 
         // todo: to be more precise, could always accumme related parets
@@ -1666,7 +1666,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
 //                     grab.putClientProperty("JButton.sizeVariant", "tiny");
                 
                 grab.addActionListener(e -> {
-                    if (VUE.getSelection().size() > 0) {
+                    if (!VUE.getSelection().isEmpty()) {
                         grabFromSelection((Layer)layer);
                         VUE.getUndoManager().mark("Move To Layer " + Util.quote(layer.getLabel()));
                     }
@@ -1702,7 +1702,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
                         if (allChildren != nChild)
                             counts += "/" + allChildren;
 
-                        if(counts.length()==0){
+                        if(counts.isEmpty()){
                             info.setText("");
                         }else{
                             info.setText("("+counts+")");

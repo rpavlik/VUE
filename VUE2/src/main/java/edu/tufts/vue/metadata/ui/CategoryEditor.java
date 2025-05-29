@@ -618,7 +618,7 @@ public class CategoryEditor extends JPanel
         {          
             Ontology customOntology = vueCategoryModel.getCustomOntology();
             
-            if(customOntology == null || vueCategoryModel.getCustomOntology().getOntTypes().size() ==0)
+            if(customOntology == null || vueCategoryModel.getCustomOntology().getOntTypes().isEmpty())
             {
                 newCategoryRequested = true;
                 return 1;

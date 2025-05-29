@@ -257,7 +257,7 @@ public class OntologyChooser extends javax.swing.JDialog implements java.awt.eve
                           System.out.println("OntologyChooser: File also produced Malformed URL " + mue2);
                       }
                    }
-               if(!(typeURLField.getText().trim().length()==0))
+               if(!(typeURLField.getText().trim().isEmpty()))
                {
                    fromURL = true;
                    try

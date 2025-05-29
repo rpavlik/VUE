@@ -1313,7 +1313,7 @@ public class PathwayPanel extends JPanel
             removeDone = true;
         }
             
-        if (selection.size() > 0 && !(selection.first() instanceof LWPathway)) {
+        if (!selection.isEmpty() && !(selection.first() instanceof LWPathway)) {
             
             // Above instanceof check: pathways are single-select
             // only, so if it's in the selection, it should be first,

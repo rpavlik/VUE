@@ -56,7 +56,7 @@ public abstract class LWContainer extends LWComponent
      */
     @Override
     public boolean hasChildren() {
-        return mChildren.size() > 0;
+        return !mChildren.isEmpty();
     }
     @Override
     public int numChildren() {
@@ -88,7 +88,7 @@ public abstract class LWContainer extends LWComponent
     /** @return true if we have any children */
     @Override
     public boolean hasContent() {
-        return mChildren.size() > 0;
+        return !mChildren.isEmpty();
     }
     
     /**
@@ -292,7 +292,7 @@ public abstract class LWContainer extends LWComponent
 
         // the default is to replicate the existing z-order sort
 
-        if (toAdd.size() == 0)
+        if (toAdd.isEmpty())
             return Collections.emptyList();
 
         Collection<? extends LWComponent> sorted;
@@ -393,7 +393,7 @@ public abstract class LWContainer extends LWComponent
 
         //if (toAdd.size() == 1) Util.printStackTrace("ADDONE");
         
-        if (toAdd == null || toAdd.size() < 1)
+        if (toAdd == null || toAdd.isEmpty())
             return;
         
         notify(LWKey.HierarchyChanging);
@@ -690,7 +690,7 @@ public abstract class LWContainer extends LWComponent
                 Log.error(this + " asked to de-parent child it doesn't own: " + c);
             }
         }
-        if (removedChildren.size() > 0) {
+        if (!removedChildren.isEmpty()) {
             notify(LWKey.ChildrenRemoved, removedChildren);
             layout();
         }

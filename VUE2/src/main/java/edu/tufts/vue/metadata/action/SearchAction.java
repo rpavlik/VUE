@@ -484,7 +484,7 @@ public class SearchAction extends AbstractAction
             
             if (actualCriteriaAdded) {
                 // This code path appears only to be traveled when we NOT searching for "everything"
-                if (textToFind.size() > 0) Log.error("CRITERIA + TEXT-TO-FIND! " + Util.tags(textToFind));
+                if (!textToFind.isEmpty()) Log.error("CRITERIA + TEXT-TO-FIND! " + Util.tags(textToFind));
                 if (DEBUG.SEARCH) Log.debug("Query objects were used, operator=" + crossTermOperator);
                 if (crossTermOperator == Operator.AND) {
                     // In this case, the AND is built into the query via multiple SPARQL sub-statements:
@@ -499,14 +499,14 @@ public class SearchAction extends AbstractAction
                 }
             }
 
-            if (actualCriteriaAdded && textToFind.size() > 0)
+            if (actualCriteriaAdded && !textToFind.isEmpty())
                 throw new Error("I THOUGHT ACTUAL QUERY & TEXT-TO-FIND WERE EXCLUSIVE CASES");
 
             boolean firstTerm = true;
             for (String textInput : textToFind) {
                 final String textTerm = textInput.trim();
                 if (DEBUG.SEARCH) Log.debug("textToFind has " + Util.tags(textTerm));
-                if (textTerm.length() > 0) {
+                if (!textTerm.isEmpty()) {
                     if (firstTerm || crossTermOperator == Operator.OR)
                         results.addAll(index.searchAllValues(textTerm));
                     else if (crossTermOperator == Operator.AND)
@@ -850,7 +850,7 @@ public class SearchAction extends AbstractAction
                 newComps.add(newLink);
             }
 
-            if (selectedNodes.size() > 0) { // wierd test, given knowns, but used ot exist for the doClusterAction call
+            if (!selectedNodes.isEmpty()) { // wierd test, given knowns, but used ot exist for the doClusterAction call
                 final Rectangle2D selectionBounds = selection.getBounds();
                 final UndoManager undoManager = map.getUndoManager();
                 final MapViewer activeViewer = VUE.getActiveViewer();

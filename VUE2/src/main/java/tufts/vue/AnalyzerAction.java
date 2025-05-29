@@ -408,7 +408,7 @@ public class AnalyzerAction extends Actions.LWCAction {
 			    		node.setLocation(c.getLocation());
 			    		tufts.vue.LWLink link = new tufts.vue.LWLink(c,node);
 			    		
-			    		if (al.size() > 0)
+			    		if (!al.isEmpty())
 			    		{
 			    		//	node.setFillColor(new Color())
 			    			node.setFillColor(joinNodeColor);

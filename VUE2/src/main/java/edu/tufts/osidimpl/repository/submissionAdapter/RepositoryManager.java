@@ -116,7 +116,7 @@ implements org.osid.repository.RepositoryManager
 					result.addElement(repository);
 				}
 			}
-			if (result.size() > 0) {
+			if (!result.isEmpty()) {
 				return new RepositoryIterator(result);
 			}
 		} catch (Throwable t) {

@@ -322,7 +322,7 @@ public final class Relation {
 
         }
 
-        return results.size() > 0 ? results.values() : Collections.emptyList();
+        return !results.isEmpty() ? results.values() : Collections.emptyList();
     }
 
     /** @return passed in results for convenience */

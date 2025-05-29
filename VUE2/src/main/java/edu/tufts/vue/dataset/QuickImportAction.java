@@ -150,7 +150,7 @@ public class QuickImportAction extends VueAction{
 			fileTextField.addActionListener(this);
 			fileTextField.addKeyListener(new KeyAdapter() {
 				public void keyReleased(KeyEvent event){
-					addButton.setEnabled(fileTextField.getText().length() > 0);
+					addButton.setEnabled(!fileTextField.getText().isEmpty());
 				}
 			});
 			addToGridBag(selectFilePanel, fileTextField, 0, 0, 1, 1,

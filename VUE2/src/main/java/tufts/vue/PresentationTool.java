@@ -2120,7 +2120,7 @@ public class PresentationTool extends VueTool
             } else {
                 loadPathway(null);
                 //mPathwayIndex = 0;
-                if (selection.size() > 0)
+                if (!selection.isEmpty())
                     setPage(VUE.getSelection().first());
                 //             else if (mCurrentPage != NO_PAGE) // won't have any effect!
                 //                 setPage(mCurrentPage);

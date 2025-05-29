@@ -77,7 +77,7 @@ public class DefaultType implements tufts.vue.filter.Type {
     /** first operator is the default operator.  This can be changed later.
      */
     public Operator getDefaultOperator() {
-        if(operatorList.size() > 0)
+        if(!operatorList.isEmpty())
             return (Operator) operatorList.get(0);
         else 
             throw new RuntimeException(displayName+": Type has no operators");

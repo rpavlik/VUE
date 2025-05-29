@@ -40,7 +40,7 @@ class VueHeavyweightPopup extends Popup {
         }
         VueHeavyweightPopup result;
         synchronized (cache) {
-            if (cache.size() > 0) {
+            if (!cache.isEmpty()) {
                 result = (VueHeavyweightPopup) cache.get(0);
                 cache.remove(0);
             } else {

@@ -1533,7 +1533,7 @@ lwtext.richLabelBox.applyAttributes(set, false);
 		SHTMLDocument doc = (SHTMLDocument)editorPane.getDocument();
 	      Element e = doc.getCharacterElement(editorPane.getSelectionStart());
 	      StyleSheet s = doc.getStyleSheet();
-	      if(elemName != null && elemName.length() > 0) {
+	      if(elemName != null && !elemName.isEmpty()) {
 	          e = Util.findElementUp(elemName, e);
 	          return SHTMLPanelImpl.getMaxAttributes(e, s);
 	      }

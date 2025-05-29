@@ -150,7 +150,7 @@ public class DataTree extends javax.swing.JTree
 
             if (DEBUG.ANNOTATE) Log.debug("kicking off annotations for: " + Util.tags(ActiveTrees));
 
-            if (ActiveTrees.size() > 0) {
+            if (!ActiveTrees.isEmpty()) {
                 loadGlobalDataForAnnotations();
                 for (DataTree tree : ActiveTrees)
                     tree.kickAnnotate();
@@ -161,7 +161,7 @@ public class DataTree extends javax.swing.JTree
 
 			if (selection.isEmpty())
 			{
-				if (ActiveTrees.size() > 0) {
+				if (!ActiveTrees.isEmpty()) {
 					for (DataTree tree : ActiveTrees)
 						tree.setSelectionPath(null);
             	}
@@ -384,7 +384,7 @@ public class DataTree extends javax.swing.JTree
         		                		//System.out.println("Add Link 2 : " + link2.toString() + " :: " + call + " :: " + newNode.toString() + " ::: " + hit.toString());
         		                	}
         		                	
-        		                	if (hit.hasMultipleLinksTo(newNode) && VUE.getSelection().size() >0)
+        		                	if (hit.hasMultipleLinksTo(newNode) && !VUE.getSelection().isEmpty())
         		                		tufts.vue.Actions.LinkMakeQuadCurved.act();
         		                	
         		                }
@@ -994,12 +994,12 @@ public class DataTree extends javax.swing.JTree
                 
             final Collection<Collection<Criteria>> keyBasedCriteria;
 
-            if (criteriaByKey.size() > 0)
+            if (!criteriaByKey.isEmpty())
                 keyBasedCriteria = criteriaByKey.asMap().values();
             else
                 keyBasedCriteria = null;
 
-            if (globalBooleanOr.size() > 0) {
+            if (!globalBooleanOr.isEmpty()) {
                 // search method 1: includes the global OR tests
                 for (LWComponent c : searchSet) {
                     if (anyCriteriaMatches(c, globalBooleanOr))
@@ -1786,7 +1786,7 @@ public class DataTree extends javax.swing.JTree
             Util.dump(entries);
         }
 	        
-        if (newRowNodes.size() > 0) {
+        if (!newRowNodes.isEmpty()) {
 
             // we cannot run setXYByClustering before adding to the map w/out refactoring projectNodes
             // (or for that matter, centroidCluster, which also uses projectNodes).  E.g. -- we
@@ -1809,7 +1809,7 @@ public class DataTree extends javax.swing.JTree
 	
             if (newRowNodes.size() > NEW_ROW_NODE_MAP_REORG_THRESHOLD) {
 
-                if (targetsUsed.size() > 0) { // Note: won't currently trigger for cross-schema joins, as targesUsed aren't reported
+                if (!targetsUsed.isEmpty()) { // Note: won't currently trigger for cross-schema joins, as targesUsed aren't reported
 
                     //-------------------------------------------------------
                     // RE-CLUSTER THE ENTIRE MAP
@@ -1870,7 +1870,7 @@ public class DataTree extends javax.swing.JTree
 
         String label = field.toString();
             
-        if (values.size() == 0) {
+        if (values.isEmpty()) {
 
             if (field.getMaxValueLength() == 0) {
                 //label = String.format("<html><b><font color=gray>%s", field.getName());
@@ -1969,7 +1969,7 @@ public class DataTree extends javax.swing.JTree
 
         void setPostfix(String s) {
             //Log.debug("postfix " + this + " with [" + s + "]");
-            if (s == null || s.length() == 0) {
+            if (s == null || s.isEmpty()) {
                 setUserObject(display);
             } else {
                 setUserObject(display + " " + s);
@@ -1979,7 +1979,7 @@ public class DataTree extends javax.swing.JTree
 
         void setPrefix(String s) {
             //Log.debug("prefix " + this + " with [" + s + "]");
-            if (s == null || s.length() == 0) {
+            if (s == null || s.isEmpty()) {
                 setUserObject(display);
             } else {
                 //final String cs = (String) getUserObject();

@@ -206,7 +206,7 @@ implements org.osid.repository.RepositoryManager
             Utilities.log(t.getMessage());
             throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
         }
-		if (repositoryIdString.length() == 0) {
+		if (repositoryIdString.isEmpty()) {
 			throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
 		}
 		

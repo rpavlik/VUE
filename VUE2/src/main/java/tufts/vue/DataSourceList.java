@@ -122,7 +122,7 @@ public class DataSourceList extends JList implements DropTargetListener
         DefaultListModel model = (DefaultListModel)getModel();
         int size = model.size();
         if (o instanceof edu.tufts.vue.dsm.DataSource) {
-            if ( ((edu.tufts.vue.dsm.DataSource)o).getRepositoryDisplayName().trim().length() == 0 ) {
+            if (((edu.tufts.vue.dsm.DataSource) o).getRepositoryDisplayName().trim().isEmpty()) {
                 Log.debug("ignoring repository with empty display name: " + Util.tags(o));
                 return;
             }

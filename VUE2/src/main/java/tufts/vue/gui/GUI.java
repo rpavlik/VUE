@@ -2679,16 +2679,16 @@ public class GUI
         String name = "";
         if ((dropAction & DnDConstants.ACTION_COPY) != 0) name += "COPY";
         if ((dropAction & DnDConstants.ACTION_MOVE) != 0) {
-            if (name.length() > 0)
+            if (!name.isEmpty())
                 name += "+";
             name += "MOVE";
         }
         if ((dropAction & DnDConstants.ACTION_LINK) != 0) {
-            if (name.length() > 0)
+            if (!name.isEmpty())
                 name += "+";
             name += "LINK";
         }
-        if (name.length() < 1)
+        if (name.isEmpty())
             name = "NONE";
         //name += "(0x" + Integer.toHexString(dropAction) + ")";
         return name;

@@ -193,7 +193,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     }
     
     private void copyStyles(Schema s) {
-        if (s.mPersistFields.size() > 0) {
+        if (!s.mPersistFields.isEmpty()) {
             if (DEBUG.SCHEMA) Log.debug("copyStyles; from persisted handles:"
                                         + "\n\tsource: " + s
                                         + "\n\ttarget: " + this);
@@ -738,7 +738,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
 
     /** @return true if this Schema contains data.  Persisted Schema's are just references and do not contain data */
     public synchronized boolean isLoaded() {
-        return mRows.size() > 0;
+        return !mRows.isEmpty();
     }
     
     /** only debug during castor deserialization */
@@ -1007,7 +1007,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
     /** will quietly return null if not found */
     public synchronized Field findField(String name) {
         Field f = mFields.get(name);
-        if (f == null && name != null && name.length() > 0 && Character.isUpperCase(name.charAt(0))) {
+        if (f == null && name != null && !name.isEmpty() && Character.isUpperCase(name.charAt(0))) {
             f = mFields.get(name.toLowerCase());
             if (DEBUG.SCHEMA && f != null) Log.debug("found lowerized [" + name + "]");
         }
@@ -1142,7 +1142,7 @@ public class Schema implements tufts.vue.XMLUnmarshalListener {
             if (field.isPossibleKeyField())
                 possibleKeyFields.add(field.getName());
 
-        if (possibleKeyFields.size() == 0) {
+        if (possibleKeyFields.isEmpty()) {
             // add them all: some data rows are probably duplicates, and we can't
             // identify a key field
             for (Field field : getFields())
@@ -1667,7 +1667,7 @@ final class DataRow implements Relation.Scannable{
 //             Log.debug("ROW SUB-KEY COLLISION " + f);
         //super.put(f.getName(), value);
         
-        if (value.length() == 0)
+        if (value.isEmpty())
             value = Field.EMPTY_VALUE;
         mmap.put(f.getName(), value);
         return value;

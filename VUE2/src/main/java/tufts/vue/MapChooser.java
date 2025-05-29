@@ -310,7 +310,7 @@ public class MapChooser extends JDialog implements ActionListener{
                     
                     System.out.println("mc: categories " + categories );
                     
-                    if(categories.length() > 0)
+                    if(!categories.isEmpty())
                     {
                       File temp2 = File.createTempFile("MetadataCategoriesTemp",".txt");
                       String fileName2 = temp2.getAbsolutePath();
@@ -337,7 +337,7 @@ public class MapChooser extends JDialog implements ActionListener{
                             md += System.getProperty("line.separator");
                     }
                     
-                    if(md.length() > 0)
+                    if(!md.isEmpty())
                     {
                       File temp3 = File.createTempFile("MetadataValueTemp",".txt");
                       String fileName3 = temp3.getAbsolutePath();

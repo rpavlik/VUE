@@ -329,7 +329,7 @@ public class VueDragTree extends JTree
         menuItem = new JMenuItem(VueResources.getString("vuedragtree.menu.openresource"));
         menuItem.addActionListener(this);
         popup.add(menuItem);
-        if (mResources.size() > 0) {
+        if (!mResources.isEmpty()) {
             menuItem = new JMenuItem(VueResources.getString("vuedragtree.menu.addalltomap"));
             menuItem.addActionListener(e -> {
                 VUE.getActiveViewer().getMapDropTarget()
@@ -478,7 +478,7 @@ class ResourceNode extends DefaultMutableTreeNode {
     
     public String toString() {
         String title = resource.getTitle();
-        if (title == null || title.length() == 0)
+        if (title == null || title.isEmpty())
             return resource.getSpec();
         else
             return title;

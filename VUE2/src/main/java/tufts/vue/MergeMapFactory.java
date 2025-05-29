@@ -169,7 +169,7 @@ public class MergeMapFactory {
      * Note that the baseMap is not special in this regard: in can be inactive and not in this list.*/
     private List<LWMap> computeActiveMaps()
     {
-        if (activeStatus == null || activeStatus.size() == 0) {
+        if (activeStatus == null || activeStatus.isEmpty()) {
             // no status list specified, thus, all maps are active:
             return mapList;
         }

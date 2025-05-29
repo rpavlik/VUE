@@ -617,7 +617,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
                 haveKey.add(md);
             }
         }
-        if (haveKey.size() == 1 && haveOnlyValue.size() == 0) {
+        if (haveKey.size() == 1 && haveOnlyValue.isEmpty()) {
             // If single key & value, display it specially.  We may want to reserve this for
             // the @ValueOf cases (enumerated values from a Schema), but we just do it for
             // everything now.
@@ -629,7 +629,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
             return;
         }
         
-        if (haveKey.size() > 0) {
+        if (!haveKey.isEmpty()) {
             b.append("<b>");
             for (VueMetadataElement md : haveKey) {
                 if (DEBUG.Enabled) b.append(NEWLINE); // newline for debugging -- watch whitespace impact
@@ -642,7 +642,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
             b.append("</b>");
         }
         
-        if (haveOnlyValue.size() > 0) {
+        if (!haveOnlyValue.isEmpty()) {
             for (VueMetadataElement md : haveOnlyValue) {
                 if (DEBUG.Enabled) b.append(NEWLINE); // newline for debugging -- watch whitespace impact
                 b.append("&nbsp;&thinsp;&bull; ");
@@ -774,7 +774,7 @@ public class MetadataList implements tufts.vue.XMLUnmarshalListener
                 continue;
             }
                 
-            if (value.length() > 0) {    
+            if (!value.isEmpty()) {
                 b.append("<br>");
                 if (type == VueMetadataElement.ONTO_TYPE) {
                     final int nameLocation = value.indexOf(VueMetadataElement.ONT_SEPARATOR);

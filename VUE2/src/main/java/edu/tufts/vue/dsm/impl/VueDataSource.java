@@ -390,7 +390,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     }
     
     public String getRepositoryDisplayName() {
-        if (this.repositoryDisplayName == null || this.repositoryDisplayName.trim().length() < 1) {
+        if (this.repositoryDisplayName == null || this.repositoryDisplayName.trim().isEmpty()) {
             if (this.providerDisplayName == null) {
                 return "(repository-name-unknown)";
             } else
@@ -402,7 +402,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     
     public boolean isOnline() {
 
-        return repositoryDisplayName != null && repositoryDisplayName.trim().length() >= 1;
+        return repositoryDisplayName != null && !repositoryDisplayName.trim().isEmpty();
         
     }
     

@@ -55,7 +55,7 @@ public class FolderDataset  extends Dataset {
             String nodeLabel = child.getName();
 
 //               node.setLabel(nodeLabel);
-            String key = ((getHeading() == null) || getHeading().size() < 1) ? DEFAULT_METADATA_LABEL : getHeading().get(1);
+            String key = ((getHeading() == null) || getHeading().isEmpty()) ? DEFAULT_METADATA_LABEL : getHeading().get(1);
 
 
             Resource resource = map.getResourceFactory().get(child);

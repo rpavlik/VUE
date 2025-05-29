@@ -249,7 +249,7 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
     public void addNotify()
     {
         if (TestDebug||DEBUG.TEXT) out("*** ADDNOTIFY ***");
-        if (getText().length() < 1)
+        if (getText().isEmpty())
             setText("<label>");
         keyWasPressed = false;
         //Dimension size = getPreferredSize();

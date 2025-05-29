@@ -112,7 +112,7 @@ public class TextOpenAction  extends VueAction {
         String mapName = fileName.substring(fileName.lastIndexOf("/")+1);
         if(mapName.lastIndexOf(".")>0)
             mapName = mapName.substring(0,mapName.lastIndexOf("."));
-        if(mapName.length() == 0)
+        if(mapName.isEmpty())
             mapName = "Text Import";
         LWMap map = new LWMap(mapName);
         BufferedReader reader = new BufferedReader(new FileReader(fileName));

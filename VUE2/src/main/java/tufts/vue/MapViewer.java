@@ -4381,14 +4381,14 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         {
         	activeRichTextEdit = ((LWText)lwc).getRichLabelBox();
         	activeRichTextEdit.saveCurrentText();
-        	if (activeRichTextEdit.getText().length() < 1)
+        	if (activeRichTextEdit.getText().isEmpty())
                     activeRichTextEdit.setText(VueResources.getString("mapviewer.label.tooltip"));
         }
         else
         {
         	activeTextEdit = lwc.getLabelBox();
         	activeTextEdit.saveCurrentText();
-        	if (activeTextEdit.getText().length() < 1)
+        	if (activeTextEdit.getText().isEmpty())
         		activeTextEdit.setText(VueResources.getString("mapviewer.label.tooltip"));
         }
         
@@ -5924,7 +5924,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
         //if (s.only() instanceof LWSlide) s.clear(); // okay, this stopped us from picking up the slide, but too soon: can't change BG color
         if (isAnimating) {
             if (DEBUG.Enabled) Util.printStackTrace("drag not allowed: animating");
-        } if (s.size() > 0 && s.first().isMoveable() && activeTool.supportsDrag(null) && s.first() != mFocal) {
+        } if (!s.isEmpty() && s.first().isMoveable() && activeTool.supportsDrag(null) && s.first() != mFocal) {
             if (DEBUG.WORK) out("set to drag " + s);
             draggedSelectionGroup.useSelection(s);
             setDragger(draggedSelectionGroup);
@@ -8091,7 +8091,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
 
         boolean moved = false;
             
-        if (moveList.size() > 0) {
+        if (!moveList.isEmpty()) {
             
             // What we need to do is tell the parent we're moving from to remove them
             // all at once -- the problem is our selection could contain components of

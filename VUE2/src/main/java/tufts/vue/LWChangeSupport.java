@@ -242,7 +242,7 @@ public class LWChangeSupport
         if (DEBUG.EVENTS && (DEBUG.META || e.isUndoable()) && (DEBUG.META || listeners != null))  {
             final String ldesc = (listeners == null
                                   ? " -> <no listeners>"
-                                  : ((listeners.size()>0?TERM_GREEN:"") + " => (" + listeners.size() + " listeners)" + TERM_CLEAR
+                                  : ((!listeners.isEmpty() ?TERM_GREEN:"") + " => (" + listeners.size() + " listeners)" + TERM_CLEAR
                                      //+ " " + Arrays.asList(listeners)
                                      ));
                                 //: (DELIVERY_ARROW + "(" + listeners.size() + " listeners)"));a
@@ -252,7 +252,7 @@ public class LWChangeSupport
                 eoutln(e + ldesc);
         }
         
-        if (listeners != null && listeners.size() > 0) {
+        if (listeners != null && !listeners.isEmpty()) {
             if (DEBUG.EVENTS && DEBUG.META) eoutln(e + " dispatching for client " + client + " to listeners " + List.of(listeners));
             dispatchLWCEvent(client, listeners, e);
         } else {
@@ -275,7 +275,7 @@ public class LWChangeSupport
             }
             client.getParent().broadcastChildEvent(e);
         } else if (client.isOrphan() && !client.permitZombieEvent(e)) {
-            if (listeners != null && listeners.size() > 0) {
+            if (listeners != null && !listeners.isEmpty()) {
                 Log.info("ORPHAN NODE w/LISTENERS DELIVERED EVENTS:"
                          + "\n\torphan=" + client
                          + "\n\tevent=" + e

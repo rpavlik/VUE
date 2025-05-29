@@ -556,7 +556,7 @@ public class JavaAnalysisPanel extends JPanel implements ActionListener {
 
 		activeMap.addChildren(newComps);
 
-		if (allNodes.size() > 0) {
+		if (!allNodes.isEmpty()) {
 			LayoutAction.circle.act(allNodes);
 			LayoutAction.hierarchical3.act(allNodes);
 		}

@@ -144,7 +144,7 @@ public class SearchTextField extends JTextField implements FocusListener {
     }
 
     public boolean hasInput() {
-        return getForeground().equals(Color.black) && getText().length() > 0;
+        return getForeground().equals(Color.black) && !getText().isEmpty();
     }
 
     private String getRawText() {

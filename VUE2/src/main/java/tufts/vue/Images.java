@@ -1466,9 +1466,9 @@ public class Images
 
             // Ideally, we would mark Tasks as RUNNING right here -- as soon as it's de-queued.
                 
-            if (q1.size() > 0)
+            if (!q1.isEmpty())
                 return q1.removeFirst(); // pop front (was inserted FIFO)
-            else if (q2.size() > 0)
+            else if (!q2.isEmpty())
                 return q2.removeFirst(); // pop front (was inserted LIFO)
             else 
                 return q3.poll(); // pop front (was inserted FIFO), but return null if empty
@@ -2534,7 +2534,7 @@ public class Images
                 else if (t instanceof ThreadDeath) {
                     msg = "interrupted";
                 }
-                else if (t.getMessage() != null && t.getMessage().length() > 0) {
+                else if (t.getMessage() != null && !t.getMessage().isEmpty()) {
                     msg = t.getMessage();
                     dumpTrace = true;
                 }

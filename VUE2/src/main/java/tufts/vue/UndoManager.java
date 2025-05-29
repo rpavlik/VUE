@@ -246,7 +246,7 @@ public class UndoManager
             String[] words = uName.split("\\.");
             for (int i = 0; i < words.length; i++) {
                 final String word = words[i];
-                if (word.length() == 0)
+                if (word.isEmpty())
                     return null; // if seen multiple dots in a row, presume pre-formatted
                 if (Character.isLowerCase(word.charAt(0)))
                     words[i] = Character.toUpperCase(word.charAt(0)) + word.substring(1);
@@ -555,11 +555,11 @@ public class UndoManager
 
             parent.layout();
             // issue synthesized ChildrenAddded and/or ChildrenRemoved events
-            if (childrenAdded.size() > 0) {
+            if (!childrenAdded.isEmpty()) {
                 if (DEBUG.UNDO) Log.debug("Synthetic event " + LWKey.ChildrenAdded + " " + childrenAdded);
                 parent.notify(LWKey.ChildrenAdded, childrenAdded);
             }
-            if (childrenRemoved.size() > 0) {
+            if (!childrenRemoved.isEmpty()) {
                 if (DEBUG.UNDO) Log.debug("Synthetic event " + LWKey.ChildrenRemoved + " " + childrenRemoved);
                 parent.notify(LWKey.ChildrenRemoved, childrenRemoved);
             }
@@ -837,7 +837,7 @@ public class UndoManager
     }
     
     public boolean hasCleanupTasks() {
-        return mCleanupTasks.size() > 0 || mLastTasks.size() > 0;
+        return !mCleanupTasks.isEmpty() || !mLastTasks.isEmpty();
     }
 
     void dumpCleanupTasks() {
@@ -952,11 +952,11 @@ public class UndoManager
         do {
             if (debug && recurseCount > 0)
                 System.out.println(TERM_RED + "CLEANUP TASKS: extra model cleanup pass #" + recurseCount + TERM_CLEAR);
-            if (mCleanupTasks.size() > 0)
+            if (!mCleanupTasks.isEmpty())
                 runCleanupTasks(debug, mCleanupTasks);
-            if (mLastTasks.size() > 0)
+            if (!mLastTasks.isEmpty())
                 runCleanupTasks(debug, mLastTasks);
-        } while (++recurseCount < MaxRecurse && (mCleanupTasks.size() > 0 || mLastTasks.size() > 0));
+        } while (++recurseCount < MaxRecurse && (!mCleanupTasks.isEmpty() || !mLastTasks.isEmpty()));
 
         if (recurseCount > 1) {
             if (recurseCount >= MaxRecurse)
@@ -1014,7 +1014,7 @@ public class UndoManager
         }
 
         if (debug) {
-            if (taskMap.size() > 0) coutln(TERM_RED, "CASCADED TASKS: " + taskMap);
+            if (!taskMap.isEmpty()) coutln(TERM_RED, "CASCADED TASKS: " + taskMap);
             coutln(TERM_CYAN, "COMPLETED " + count + " " + taskMap.type + " TASKS.");
         }
         
@@ -1036,7 +1036,7 @@ public class UndoManager
                 // where only the last one actually had anything, and we DON'T want to run
                 // the cleanup tasks till then?
                 
-                if (mCleanupTasks.size() > 0 || mLastTasks.size() > 0)
+                if (!mCleanupTasks.isEmpty() || !mLastTasks.isEmpty())
                     runCleanupTaskPhase(false);
             }
         }
@@ -1320,7 +1320,7 @@ public class UndoManager
             
             if (DEBUG.UNDO) Log.debug(this + " " + e);
             
-            if (mCurrentUndo.size() == 0 && mCleanupTasks.size() > 0 && mEventsSeenSinceLastMark <= 0) {
+            if (mCurrentUndo.size() == 0 && !mCleanupTasks.isEmpty() && mEventsSeenSinceLastMark <= 0) {
 
                 // This can happen if a task is adding during a new user action,
                 // and we've seen events, but none of them have had an old value
@@ -1389,7 +1389,7 @@ public class UndoManager
             perComponentChanges = null; // we can live w/out "compression" for changes on UndoableThread's
             if (DEBUG.UNDO || DEBUG.THREAD) System.out.println("\n" + thread + " initiating change in " + relevantUndoAction);
 
-        } else if (mThreadsWithMark.size() > 0 && mThreadsWithMark.containsKey(thread)) {
+        } else if (!mThreadsWithMark.isEmpty() && mThreadsWithMark.containsKey(thread)) {
 
             //-----------------------------------------------------------------------------
             // NOTE: this will no longer work except for network-IO image threads, as

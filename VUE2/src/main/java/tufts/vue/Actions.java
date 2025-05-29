@@ -320,7 +320,7 @@ public class Actions implements VueConstants
                 
     public static final Action DeselectAll =
     new LWCAction(VueResources.local("menu.edit.deselectall"), keyStroke(KeyEvent.VK_A, SHIFT+COMMAND)) {
-        boolean enabledFor(LWSelection s) { return s.size() > 0; }
+        boolean enabledFor(LWSelection s) { return !s.isEmpty(); }
         public void act() {
             selection().clear();
         }
@@ -339,7 +339,7 @@ public class Actions implements VueConstants
             	VUE.getInteractionToolsPanel().doExpand();
             }
             boolean enabledFor(LWSelection s) {
-                return s.size() > 0 && VUE.getInteractionToolsPanel().canExpand();
+                return !s.isEmpty() && VUE.getInteractionToolsPanel().canExpand();
             }
         };
 
@@ -349,7 +349,7 @@ public class Actions implements VueConstants
             	VUE.getInteractionToolsPanel().doShrink();
             }
             boolean enabledFor(LWSelection s) {
-                return s.size() > 0 && VUE.getInteractionToolsPanel().canShrink();
+                return !s.isEmpty() && VUE.getInteractionToolsPanel().canShrink();
             }
         };
 
@@ -373,7 +373,7 @@ public class Actions implements VueConstants
 //         }
         boolean enabledFor(LWSelection s) {
             // items can be added to pathway as many times as you want
-            return VUE.getActivePathway() != null && s.size() > 0;
+            return VUE.getActivePathway() != null && !s.isEmpty();
         }
     };
     
@@ -384,7 +384,7 @@ public class Actions implements VueConstants
         }
         boolean enabledFor(LWSelection s) {
             LWPathway p = VUE.getActivePathway();
-            return p != null && s.size() > 0 && (s.size() > 1 || p.contains(s.first()));
+            return p != null && !s.isEmpty() && (s.size() > 1 || p.contains(s.first()));
         }
     };
     
@@ -687,7 +687,7 @@ public class Actions implements VueConstants
                         keyStroke(KeyEvent.VK_R, ALT + SHIFT)/* , VueResources.getIcon("outlineIcon.link") */) {
                     boolean enabledFor(LWSelection s) {
 
-                        if (s.size() >= 1) {
+                        if (!s.isEmpty()) {
                             for (LWComponent c : s) {
                                 if (!(c instanceof LWNode)) {
                                     return false;
@@ -992,7 +992,7 @@ public class Actions implements VueConstants
                         pasteToNewLocations.add(c);
                     }
                 }
-                if (pasteToNewLocations.size() > 0)
+                if (!pasteToNewLocations.isEmpty())
                     MapDropTarget.setCenterAt(pasteToNewLocations, pasteLocation);
             } else {
                 MapDropTarget.setCenterAt(pasted, pasteLocation); // note: this method only works on un-parented nodes
@@ -1137,7 +1137,7 @@ public class Actions implements VueConstants
     
     public static final LWCAction PasteStyle =
     new LWCAction(VueResources.local("menu.format.applystyle"), keyStroke(KeyEvent.VK_V, COMMAND+SHIFT)) {
-        boolean enabledFor(LWSelection s) { return s.size() > 0 && StyleBuffer != null; }
+        boolean enabledFor(LWSelection s) { return !s.isEmpty() && StyleBuffer != null; }
         void act(LWComponent c) {
             c.copyStyle(StyleBuffer);
         }
@@ -1862,7 +1862,7 @@ public class Actions implements VueConstants
                     degroup(s, toSelect);
                 }
                 
-                if (toSelect.size() > 0)
+                if (!toSelect.isEmpty())
                     VUE.getSelection().setTo(toSelect);
                 else
                     VUE.getSelection().clear();
@@ -1886,7 +1886,7 @@ public class Actions implements VueConstants
                 // This action only enabled if all the selected components have
                 // exactly the same parent group.
                 
-                if (removing.size() > 0) {
+                if (!removing.isEmpty()) {
                     final LWComponent first = removing.get(0);
                     final LWGroup group = (LWGroup) first.getParent(); // the group losing children
                     final LWContainer newParent = group.getParent();
@@ -2311,7 +2311,7 @@ public class Actions implements VueConstants
             // (possibly if it's a child of anything?)
             //-----------------------------------------------------------------------------
             
-            if (toReparent.size() > 0) {
+            if (!toReparent.isEmpty()) {
                 if (toReparent.contains(commonParent)) {
                     // TOFIX: if we attempt to cluster a child node linked to it's parent, we get this:
                     throw new Error("clusterNodesAbout: setup failure, toReparent contains commonParent");
@@ -2517,7 +2517,7 @@ public class Actions implements VueConstants
         }
 
         public static boolean enabledOn(LWSelection s) {
-            return s.size() > 0
+            return !s.isEmpty()
                 && s.first().isMoveable()
                 && VUE.getActiveViewer().isFocusOwner()
                 && !(VUE.getActiveSubTool() instanceof tufts.vue.SelectionTool.Browse)
@@ -2593,7 +2593,7 @@ public class Actions implements VueConstants
         
         boolean enabledFor(LWSelection s) {
         //   return enabledForPushPull(s);
-        	return s.size()>=1;
+        	return !s.isEmpty();
         }
         @Override void act(LWSelection s) {
         	if(s.size()==1) {
@@ -2653,7 +2653,7 @@ public class Actions implements VueConstants
         if (pushKey == PUSH_LINKED && pushing.hasLinks())
             toPush = pushing.getLinked();
 
-        if (toPush == null || toPush.size() == 0) {
+        if (toPush == null || toPush.isEmpty()) {
             // ideally, this would push all the top level children in the current FOCAL
             toPush = pushing.getMap().getTopLevelItems(ChildKind.EDITABLE);
         }
@@ -3003,7 +3003,7 @@ public class Actions implements VueConstants
     public static abstract class ClusterAction extends ArrangeAction {
         
         boolean supportsSingleMover() { return false; }
-        boolean enabledFor(LWSelection s) { return s.size() > 0; }
+        boolean enabledFor(LWSelection s) { return !s.isEmpty(); }
 
         ClusterAction(String labelKey, KeyStroke stroke) {
             super(VueResources.local(labelKey), stroke);
@@ -3039,7 +3039,7 @@ public class Actions implements VueConstants
                         toReparent.add(c);
                 }
 
-                if (toReparent.size() > 0)
+                if (!toReparent.isEmpty())
                     center.getParent().addChildren(toReparent, LWComponent.ADD_CHILD_TO_SIBLING);
 
                 doClusterAction(center, linked);
@@ -3966,7 +3966,7 @@ public class Actions implements VueConstants
 
         	boolean filtered = areLinksFiltered();
     		LWSelection s = VUE.getSelection();
-        	if (s.size() > 0) {
+        	if (!s.isEmpty()) {
         		Iterator it = s.iterator();
         		for (LWComponent c : s) {
     				if (c instanceof LWLink) {
@@ -3985,7 +3985,7 @@ public class Actions implements VueConstants
         static Boolean areLinksFiltered()
         {
         	LWSelection s = VUE.getSelection();
-        	if (s.size() > 0) {
+        	if (!s.isEmpty()) {
         		Iterator it = s.iterator();
         		for (LWComponent c : s) {
     				if (c instanceof LWLink) {
@@ -4141,7 +4141,7 @@ public class Actions implements VueConstants
                 }
                 boolean enabledFor(LWSelection s) {
                     // items can be added to pathway as many times as you want
-                    return VUE.getActivePathway() != null && s.size() > 0;
+                    return VUE.getActivePathway() != null && !s.isEmpty();
                 }            
      };
      
@@ -4154,7 +4154,7 @@ public class Actions implements VueConstants
          }
          boolean enabledFor(LWSelection s) {
              // items can be added to pathway as many times as you want
-             return VUE.getActivePathway() != null && s.size() > 0;
+             return VUE.getActivePathway() != null && !s.isEmpty();
          }            
 };
 
@@ -4365,7 +4365,7 @@ public class Actions implements VueConstants
         
         /** Is this action enabled given this selection? */
         @Override
-        boolean enabledFor(LWSelection s) { return s.size() > 0; }
+        boolean enabledFor(LWSelection s) { return !s.isEmpty(); }
         
         /** mayModifySelection: the action may result in an event that
          * has the viewer change what's in the current selection

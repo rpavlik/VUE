@@ -84,7 +84,7 @@ public class SaveVueJTree {
                     } else {
                         // this just in case it was a URLResource, not a CabinetResource (todo: should handle elsewhere commonly)
                         String title = resource.getTitle();
-                        if (title == null || title.length() == 0) {
+                        if (title == null || title.isEmpty()) {
                             if (resource instanceof URLResource) {
                                 // this is a total hack just to fix this crazy stuff up for now
                                 // (we're editing the resource when it's restored!)

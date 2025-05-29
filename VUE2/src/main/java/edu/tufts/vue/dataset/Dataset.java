@@ -194,7 +194,7 @@ public class Dataset {
         String mapName = fileName.substring(fileName.lastIndexOf(File.separator) + 1);
         if (mapName.lastIndexOf(".") > 0)
             mapName = mapName.substring(0, mapName.lastIndexOf("."));
-        if (mapName.length() == 0)
+        if (mapName.isEmpty())
             mapName = "Text Import";
         return mapName;
     }

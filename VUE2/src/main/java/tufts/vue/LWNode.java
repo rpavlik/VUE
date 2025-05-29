@@ -1000,7 +1000,7 @@ public class LWNode extends LWContainer
                     final String description = partStructure.getDescription();
                     java.io.Serializable value = part.getValue();
                     String key;
-                    if (description != null && description.trim().length() > 0) {
+                    if (description != null && !description.trim().isEmpty()) {
                         key = description;
                     } else {
                         key = partStructureType.getKeyword();
@@ -1023,7 +1023,7 @@ public class LWNode extends LWContainer
                         if (s.startsWith("<p>") && s.endsWith("</p>")) {
                             // Ignore empty HTML paragraphs
                             String body = s.substring(3, s.length()-4);
-                            if (body.trim().length() == 0) {
+                            if (body.trim().isEmpty()) {
                                 if (DEBUG.DR)
                                     value = "[empty <p></p> ignored]";
                                 else

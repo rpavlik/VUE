@@ -366,7 +366,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
                                                defaultValue,
                                                key,
                                                extraValues == null ? "<null>" : extraValues));
-                        if (extraValues != null && extraValues.size() > 0) {
+                        if (extraValues != null && !extraValues.isEmpty()) {
                             comboBox = new javax.swing.JComboBox(extraValues);
                         } else {
                             comboBox = new javax.swing.JComboBox();

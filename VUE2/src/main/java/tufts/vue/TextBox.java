@@ -246,7 +246,7 @@ public class TextBox extends JTextPane
     public void addNotify()
     {
         if (TestDebug||DEBUG.TEXT) out("*** ADDNOTIFY ***");
-        if (getText().length() < 1)
+        if (getText().isEmpty())
             setText("<label>");
         keyWasPressed = false;
         Dimension size = getSize();
@@ -510,7 +510,7 @@ public class TextBox extends JTextPane
     private static final int BigWordLen = 9;
     private float maxWordWidth(Font font, String text) {
 
-        if (text == null || text.length() == 0)
+        if (text == null || text.isEmpty())
             return mMaxCharWidth;
 
         if (text.length() > 512) // provide a rough figure if string is long

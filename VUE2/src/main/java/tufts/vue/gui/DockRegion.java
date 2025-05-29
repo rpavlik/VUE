@@ -56,7 +56,7 @@ class DockRegion
     }
 
     public boolean isEmpty() {
-        return mDockedWindows.size() == 0;
+        return mDockedWindows.isEmpty();
     }
 
     void moveToY(int y) {

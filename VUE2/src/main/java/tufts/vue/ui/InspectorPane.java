@@ -369,7 +369,7 @@ public class InspectorPane extends WidgetStack
 
         displayHold();
         
-        if (s.size() == 0) {
+        if (s.isEmpty()) {
             
             hideAll();
             mSelectionInfo.setText(VueResources.getString("inspectionpane.nothingselected.tooltip"));
@@ -806,7 +806,7 @@ public class InspectorPane extends WidgetStack
         if (desc != null || r == null) {
             
             summary = buildSummaryWithDescription(r, data, desc);
-            if (summary == null || summary.length() == 0)
+            if (summary == null || summary.isEmpty())
                 return null;
                 //htmlText.setText("No Description");// todo: should just hide panel
             else
@@ -1065,7 +1065,7 @@ public class InspectorPane extends WidgetStack
                 
         boolean hasDesc = false;
 
-        if (desc != null && desc.length() > 0 && !desc.equals(title)) {
+        if (desc != null && !desc.isEmpty() && !desc.equals(title)) {
             // some OSID's create with spec same as title (!?) e.g., NCBI
             // (URL property is set, but the spec is not)
 
@@ -1328,7 +1328,7 @@ public class InspectorPane extends WidgetStack
 
             //mPreviewPane.setVisible(false);
             
-            if (title == null || title.length() < 1) {
+            if (title == null || title.isEmpty()) {
                 mTitleField.setVisible(false);
                 return;
             }
@@ -1542,7 +1542,7 @@ public class InspectorPane extends WidgetStack
                     
                     super.applyText(text);
                     
-                    if (selection != null && text != null && text.trim().length() > 0) {
+                    if (selection != null && text != null && !text.trim().isEmpty()) {
                         Log.debug("LabelPane: manually applying to " + selection);
                         for (LWComponent c : selection) {
                             c.setLabel(text);
@@ -1946,7 +1946,7 @@ public class InspectorPane extends WidgetStack
 //         if ((VUE.getSelection().size() > 0) && (VUE.getResourceSelection().get() == null))
 //             return;
         
-        if (VUE.getSelection().size() > 0 && VUE.getActiveResource() == null)
+        if (!VUE.getSelection().isEmpty() && VUE.getActiveResource() == null)
             return;
 
         showNodePanes(false);

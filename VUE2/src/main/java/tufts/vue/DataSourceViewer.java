@@ -1029,7 +1029,7 @@ public class DataSourceViewer extends ContentViewer
             // must call revalidate because we're coming from another thread:
             //mResultPane.revalidate();
 
-            if (mMapBasedSearchThreads.size() == 0) {
+            if (mMapBasedSearchThreads.isEmpty()) {
             	listOfLists.clear();
             	  GUI.clearWaitCursor();
                 // If we were stopped, the DefaultQueryEditor will have handled
@@ -1132,7 +1132,7 @@ public class DataSourceViewer extends ContentViewer
                         }
                     }
                 } catch (Throwable t) {
-                    if (resourceList.size() < 1) {
+                    if (resourceList.isEmpty()) {
                         if (t instanceof RepositoryException)
                             throw (RepositoryException) t;
                         else
@@ -1154,7 +1154,7 @@ public class DataSourceViewer extends ContentViewer
                 Log.debug(name + "; " + resourceList.size() + " results");
             }
             
-            if (resourceList.size() > 0)
+            if (!resourceList.isEmpty())
                 name += " (" + resourceList.size() + ")";
             
             if (stopped())
@@ -1163,7 +1163,7 @@ public class DataSourceViewer extends ContentViewer
             final String title = name;
             final JComponent results;
             
-            if (resourceList.size() == 0) {
+            if (resourceList.isEmpty()) {
                 if (assetIterator == null)
                     results = new StatusLabel("Empty results for " + mSearchString);
                 else
@@ -1194,7 +1194,7 @@ public class DataSourceViewer extends ContentViewer
                 mResultPane.setTitle(title);
                 mResultPane.removeAll();
                 mResultPane.add(results);
-                if (resourceList.size() > 0)
+                if (!resourceList.isEmpty())
                 	AnalyzerAction.addResultsToMap(resourceList,mCenterComponent,mMapBasedSearchThreads.size());
             });
         }
@@ -1379,7 +1379,7 @@ public class DataSourceViewer extends ContentViewer
         
         try {
             String s = r.getDisplayName();
-            if (s == null || s.trim().length() < 1) {
+            if (s == null || s.trim().isEmpty()) {
 //                 if (r.getId() != null)
 //                     return "Unknown Name: Repository " + r.getId().getIdString();
 //                 else
@@ -1503,7 +1503,7 @@ public class DataSourceViewer extends ContentViewer
             // must call revalidate because we're coming from another thread:
             //mResultPane.revalidate();
 
-            if (mSearchThreads.size() == 0) {
+            if (mSearchThreads.isEmpty()) {
                 // If we were stopped, the DefaultQueryEditor will have handled
                 // calling completeSearch to restore the state of the "Search" button.
             	
@@ -1603,7 +1603,7 @@ public class DataSourceViewer extends ContentViewer
                         }
                     }
                 } catch (Throwable t) {
-                    if (resourceList.size() < 1) {
+                    if (resourceList.isEmpty()) {
                         if (t instanceof RepositoryException)
                             throw (RepositoryException) t;
                         else
@@ -1625,7 +1625,7 @@ public class DataSourceViewer extends ContentViewer
                 Log.debug(name + "; " + resourceList.size() + " results");
             }
             
-            if (resourceList.size() > 0)
+            if (!resourceList.isEmpty())
                 name += " (" + resourceList.size() + ")";
             
             if (stopped())
@@ -1634,7 +1634,7 @@ public class DataSourceViewer extends ContentViewer
             final String title = name;
             final JComponent results;
             
-            if (resourceList.size() == 0) {
+            if (resourceList.isEmpty()) {
                 if (assetIterator == null)
                     results = new StatusLabel("Empty results for " + mSearchString);
                 else

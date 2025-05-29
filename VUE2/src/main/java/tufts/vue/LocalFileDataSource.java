@@ -86,7 +86,7 @@ public class LocalFileDataSource extends BrowseDataSource implements Publishable
             if (DEBUG.Enabled) out("installDesktopFolders: " + cabVector);
         }
 
-        if (this.getAddress().length() > 0) {
+        if (!this.getAddress().isEmpty()) {
             osid.shared.Agent agent = null; //  This may cause problems later.
             LocalCabinet rootNode = LocalCabinet.instance(this.getAddress(),agent,null);
             CabinetResource res = CabinetResource.create(rootNode);

@@ -595,7 +595,7 @@ public class LWText extends LWComponent {
 	            return;
 	        if (this.label != null && this.label.equals(newLabel))
 	            return;
-	        if (newLabel == null || newLabel.length() == 0) {
+	        if (newLabel == null || newLabel.isEmpty()) {
 	            this.label = null;
 	            if (richLabelBox != null)
 	                richLabelBox.setText("");

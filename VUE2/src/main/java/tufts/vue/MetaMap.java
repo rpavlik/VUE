@@ -242,9 +242,9 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
     private static boolean isEmpty(Object v) {
         if (v == null)
             return true;
-        else if (v.getClass() == String.class && v.toString().length() == 0)
+        else if (v.getClass() == String.class && v.toString().isEmpty())
             return true;
-        else return v instanceof Collection && ((Collection) v).size() == 0;
+        else return v instanceof Collection && ((Collection) v).isEmpty();
     }
     
     /** add the given key/value, only if the value is considered "non-empty"
@@ -427,7 +427,7 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
         if (mPersistEntries == null)
             mPersistEntries = new ArrayList<>();
         
-        if (mData.size() > 0) {
+        if (!mData.isEmpty()) {
             mPersistEntries.clear();
             if (DEBUG.XML) Log.debug("LOADING ENTRIES n=" + mData.size() + "; in " + Util.tag(this));
 
@@ -632,7 +632,7 @@ public class MetaMap implements TableBag, XMLUnmarshalListener, tufts.vue.ds.Rel
     
     public synchronized void notifyListeners()
     {
-        if (listeners != null && listeners.size() > 0) {
+        if (listeners != null && !listeners.isEmpty()) {
             notifyCount++;
             if (DEBUG.RESOURCE || DEBUG.THREAD) out("notifyListeners " + listeners.size() + " of " + super.toString());
             for (Listener l : listeners) {

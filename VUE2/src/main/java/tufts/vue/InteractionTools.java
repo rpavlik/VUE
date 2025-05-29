@@ -342,7 +342,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 	protected void zoom() {
 		LWSelection	selection = VUE.getSelection();
 
-		if (selection.size() == 0) {
+		if (selection.isEmpty()) {
 			ZoomTool.setZoomFit();
 		} else {
 			ZoomTool.setZoomFitRegion(VUE.getActiveViewer(), selection.getBounds(), 32, false);
@@ -351,7 +351,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 
 
 	public double getAlpha() {
-		return (VUE.getSelection().size() == 0 ? 1.0 : ((double)fadeSlider.getValue()) / 100.0);
+		return (VUE.getSelection().isEmpty() ? 1.0 : ((double)fadeSlider.getValue()) / 100.0);
 	}
 
 
@@ -538,7 +538,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 					GUI.invokeAfterAWT(selectionChanged);
 				}
 				else {
-					zoomSelButton.setEnabled(selection.size() > 0);
+					zoomSelButton.setEnabled(!selection.isEmpty());
 					zoomIfLocked();
 				}				
 			}
@@ -618,7 +618,7 @@ userSelection.remove(lwComponent);
                     guiSelection.add(deepSelection);
                 }
 
-                zoomSelButton.setEnabled(guiSelection.size() > 0);
+                zoomSelButton.setEnabled(!guiSelection.isEmpty());
                 zoomIfLocked();
             }
             catch (Exception ex) {

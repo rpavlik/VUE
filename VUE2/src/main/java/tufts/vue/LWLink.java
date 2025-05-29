@@ -796,7 +796,7 @@ public class LWLink extends LWComponent
         if (tail.hasNode() && !tail.isPruning())
             bag.add(tail.node);
 
-        if (links.size() > 0)
+        if (!links.isEmpty())
             bag.addAll(links);
         
         return bag;

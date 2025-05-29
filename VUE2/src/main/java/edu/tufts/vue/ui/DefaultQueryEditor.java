@@ -787,7 +787,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?><criteria>");
 		for (int i =0; i < advancedFields.length; i++) {
 			String value = advancedFields[i].getText();
-			if (value.trim().length() > 0) {
+			if (!value.trim().isEmpty()) {
 				buffer.append("<field><type>");
 				
 				// determine type

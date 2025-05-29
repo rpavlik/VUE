@@ -129,7 +129,7 @@ public class RSSDataSource extends BrowseDataSource
         
         Log.debug("item count: " + mItems.size());
 
-        if (mItems.size() == 0)
+        if (mItems.isEmpty())
             throw new DataSourceException("[Empty RSS feed]");
 
         final Resource fr = Resource.instance(feed.getLink());

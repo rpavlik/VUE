@@ -233,7 +233,7 @@ public class EditorManager
     {
         
         //out("ACTIVE TOOL temp=" + tool.isTemporary() + " " + tool);
-        if (tool == null || VUE.getSelection().size() > 0 || tool.isTemporary()) {
+        if (tool == null || !VUE.getSelection().isEmpty() || tool.isTemporary()) {
             if (tool == null)
                 CurrentToolStyle = null;
             return;

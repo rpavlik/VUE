@@ -100,7 +100,7 @@ public class LanguagePreference extends edu.tufts.vue.preferences.generics.Gener
                             String	foundLanguage = foundLocale.getLanguage(),
                                     localizedDisplayName = fixCaps(foundLocale.getDisplayName(new Locale(foundLanguage)));
 
-                            if (localizedDisplayName.length() > 0) {
+                            if (!localizedDisplayName.isEmpty()) {
                                 // TreeSet is used to collect found locales because it doesn't add duplicates, and
                                 // it automatically orders its members.
                                 String	foundCountry = foundLocale.getCountry();

@@ -131,7 +131,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
         	mRow.add(blankArea,1);
         }
         */
-        if (checklist.size() == 0 || checklist.size() <= index)
+        if (checklist.isEmpty() || checklist.size() <= index)
         	checklist.add(index, Boolean.FALSE);
         
         if ((Boolean) checklist.get(index) && mRow.getComponent(1) != waitLabel)

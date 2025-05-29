@@ -1216,7 +1216,7 @@ public class LWComponent
 
     public static Color StringToColor(final String s)
     {
-        if (s.trim().length() < 1)
+        if (s.trim().isEmpty())
             return null;
 
         Color c = null;
@@ -1561,7 +1561,7 @@ public class LWComponent
 
         if (o == null) {
             mClientData.remove(key);
-            if (mClientData.size() == 0)
+            if (mClientData.isEmpty())
                 mClientData = null;
         } else {
             mClientData.put(key, o);
@@ -1587,7 +1587,7 @@ public class LWComponent
 
     public void flushAllClientData() {
         if (mClientData != null) {
-            if (DEBUG.DATA && mClientData.size() > 0) {
+            if (DEBUG.DATA && !mClientData.isEmpty()) {
                 Log.debug("flushing all client data;");
                 Util.dump(mClientData);
             }
@@ -2464,7 +2464,7 @@ public class LWComponent
 
         Object old = this.label;
 
-        if (newLabel == null || newLabel.length() == 0) {
+        if (newLabel == null || newLabel.isEmpty()) {
             this.label = null;
             if (labelBox != null)
                 labelBox.setText("");
@@ -2604,7 +2604,7 @@ public class LWComponent
             this.notes = null;
         } else {
             String trimmed = pNotes.trim();
-            if (trimmed.length() > 0)
+            if (!trimmed.isEmpty())
                 this.notes = pNotes;
             else
                 this.notes = null;
@@ -2873,19 +2873,19 @@ public class LWComponent
     }
 
     public boolean hasLabel() {
-        return this.label != null && this.label.length() > 0;
+        return this.label != null && !this.label.isEmpty();
     }
     public String getNotes() {
         return this.notes;
     }
     public boolean hasNotes() {
-        return this.notes != null && this.notes.length() > 0;
+        return this.notes != null && !this.notes.isEmpty();
     }
     public boolean hasResource() {
         return this.resource != null;
     }
     public boolean hasLinks() {
-        return mLinks != null && mLinks.size() > 0;
+        return mLinks != null && !mLinks.isEmpty();
     }
     /*
     public String getMetaData()
@@ -2899,7 +2899,7 @@ public class LWComponent
     */
     public boolean inPathway()
     {
-        return mPathways != null && mPathways.size() > 0;
+        return mPathways != null && !mPathways.isEmpty();
     }
 
     public boolean inVisiblePathway()
@@ -2967,7 +2967,7 @@ public class LWComponent
     }
 
     public boolean hasEntries() {
-        return mEntries != null && mEntries.size() > 0;
+        return mEntries != null && !mEntries.isEmpty();
     }
 
     public int numEntries() {
@@ -4736,7 +4736,7 @@ public class LWComponent
     {
         //if (!linkNotificationDisabled) // todo: if still end up using this feature, need to pass this bit on down to children
         if (updatingLinks())
-            if (mLinks != null && mLinks.size() > 0)
+            if (mLinks != null && !mLinks.isEmpty())
                 for (LWLink link : mLinks)
                     link.notifyEndpointMoved(movingSrc, this);
     }
@@ -4762,7 +4762,7 @@ public class LWComponent
 
     /** A notification to the component that it or some ancestor changed parentage */
     public void notifyHierarchyChanged() {
-        if (mLinks != null && mLinks.size() > 0)
+        if (mLinks != null && !mLinks.isEmpty())
             for (LWLink link : mLinks)
                 link.notifyEndpointHierarchyChanged(this);
 
@@ -6352,7 +6352,7 @@ public class LWComponent
         dc.g.setStroke(STROKE_ONE);
         dc.g.draw(new Line2D.Float(new Point2D.Float(getWidth()/2, getHeight()/2), getZeroSouthEastCorner()));
 
-        if (DEBUG.LINK && isSelected() && getLinks().size() > 0) {
+        if (DEBUG.LINK && isSelected() && !getLinks().isEmpty()) {
             final Rectangle2D.Float pureFan = getFanBounds();
             final Rectangle2D.Float fan = getCenteredFanBounds();
             final float cx = getMapCenterX();
@@ -7342,7 +7342,7 @@ public class LWComponent
         if (mHideBits != 0)
             s += getDescriptionOfSetBits(HideCause.class, mHideBits);
         if (mFlags != 0) {
-            if (s.length() > 0)
+            if (!s.isEmpty())
                 s += "; ";
             s += getDescriptionOfSetBits(Flag.class, mFlags);
         }

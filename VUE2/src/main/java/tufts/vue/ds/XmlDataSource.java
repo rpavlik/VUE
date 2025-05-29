@@ -278,7 +278,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setKeyField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 keyField = null;
             else
                 keyField = k;
@@ -291,7 +291,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setEncodingField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 encodingField = null;
             else
                 encodingField = k;
@@ -305,7 +305,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixField = null;
             else
                 matrixField = k;
@@ -319,7 +319,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixColField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixColField = null;
             else
                 matrixColField = k;
@@ -334,7 +334,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixRelProcessField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixRelProcessField = null;
             else
                 matrixRelProcessField = k;
@@ -349,7 +349,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixFormatField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixFormatField = null;
             else
                 matrixFormatField = k;
@@ -365,7 +365,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixIgnoreField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixIgnoreField = null;
             else
                 matrixIgnoreField = k;
@@ -381,7 +381,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixFormatField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixPivotField = null;
             else
                 matrixPivotField = k;
@@ -396,7 +396,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixSizeField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixSizeField = null;
             else
                 matrixSizeField = k;
@@ -411,7 +411,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixStartRowField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixStartRowField = null;
             else
                 matrixStartRowField = k;
@@ -427,7 +427,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixRelField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixRelField = null;
             else
                 matrixRelField = k;
@@ -442,7 +442,7 @@ public class XmlDataSource extends BrowseDataSource
         if (DEBUG.DR) Log.debug("setMatrixRowField[" + k + "]");
         if (k != null) {
             k = k.trim();
-            if (k.length() < 1)
+            if (k.isEmpty())
                 matrixRowField = null;
             else
                 matrixRowField = k;
@@ -564,7 +564,7 @@ public class XmlDataSource extends BrowseDataSource
         for (int i = 0; i < values.length; i++) {
             // fixup for au.com.bytecode.opencsv.CSVReader, which leaves whitespace & quotes in the values!
             String v = values[i].trim();
-            if (v.length() > 0 && v.charAt(0) == '"')
+            if (!v.isEmpty() && v.charAt(0) == '"')
                 v = v.substring(1);
             values[i] = v;
         }
@@ -1088,7 +1088,7 @@ public class XmlDataSource extends BrowseDataSource
         //schema.dumpSchema(new PrintWriter(debug));
         //top.setProperty("Description", "<pre>" + debug.toString());
 
-        if (mItems.size() == 0)
+        if (mItems.isEmpty())
             throw new DataSourceException("[Empty XML feed]");
 
         

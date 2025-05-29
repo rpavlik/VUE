@@ -70,7 +70,7 @@ public class AuthenticationTest {
             System.out.print ("User name: ");
             username = readline();
             
-            if (username.length() == 0)
+            if (username.isEmpty())
                 System.exit(0);
             else {
                 sm.setUsername(username);

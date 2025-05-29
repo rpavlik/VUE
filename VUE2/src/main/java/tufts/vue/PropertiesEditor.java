@@ -261,7 +261,7 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
                 m_conditions.add(cond);
             }
 
-            if (isEditable() && m_conditions.size() == 0)
+            if (isEditable() && m_conditions.isEmpty())
                 addProperty(DC_FIELDS[0], PROPERTY_NOT_SET);
 
             fireTableDataChanged();

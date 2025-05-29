@@ -94,7 +94,7 @@ public class LWPathwayList implements LWComponent.Listener, Iterable<LWPathway>
             p.completeXMLRestore(getMap());
             p.addLWCListener(this);
         }
-        if (mActive == null && mPathways.size() > 0)
+        if (mActive == null && !mPathways.isEmpty())
             setActivePathway(getFirst());
         mInRestore = false;
         setRevealerIndex(mRevealerIndex);

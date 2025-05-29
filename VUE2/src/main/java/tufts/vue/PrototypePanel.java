@@ -250,7 +250,7 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 	public static void zoom() {
 		LWSelection	selection = VUE.getSelection();
 
-		if (selection.size() == 0) {
+		if (selection.isEmpty()) {
 			ZoomTool.setZoomFit();
 		} else {
 			ZoomTool.setZoomFitRegion(VUE.getActiveViewer(), selection.getBounds(), 16, false);
@@ -258,7 +258,7 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 	}
 
 	public static double getAlpha() {
-		return (VUE.getSelection().size() == 0 ? 1.0 : ((double)fadeSlider.getValue()) / 100.0);
+		return (VUE.getSelection().isEmpty() ? 1.0 : ((double)fadeSlider.getValue()) / 100.0);
 	}
 
 	/* ActionListener method -- button has been clicked */

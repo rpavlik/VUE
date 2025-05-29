@@ -2023,7 +2023,7 @@ public class Util
     }
 
     public static String upCaseInitial(String s) {
-        if (s == null || s.length() < 1)
+        if (s == null || s.isEmpty())
             return s;
         final char c0 = s.charAt(0);
         if (Character.isUpperCase(c0))
@@ -2042,7 +2042,7 @@ public class Util
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             //if (DEBUG) out("word" + i + "["+word+"]");
-            if (word.length() < 1)
+            if (word.isEmpty())
                 continue;
             if (Character.isLowerCase(word.charAt(0))) {
                 result.append(Character.toUpperCase(word.charAt(0)));
@@ -2526,7 +2526,7 @@ public class Util
         if (where.startsWith("tufts.Util.print")) // hardcoded
             return false;
         
-        if (prefix == null || prefix.length() == 0)
+        if (prefix == null || prefix.isEmpty())
             return true;
         
         boolean matchIsIncluded = true;
@@ -2605,7 +2605,7 @@ public class Util
     
     public static String color(String s, String color) {
 
-        if (s == null || s.length() == 0)
+        if (s == null || s.isEmpty())
             return s;
         
         final StringBuilder buf = new StringBuilder(s.length() + 16);
@@ -2731,7 +2731,7 @@ public class Util
         }
 
         final String s;
-        if (txt.length() > 0) {
+        if (!txt.isEmpty()) {
             if (txt.length() > 2 && txt.charAt(0) == '[' && txt.charAt(txt.length() - 1) == ']') {
                 // skip redundant brackets
                 s = String.format("%s@%08x%s", type, ident, txt);

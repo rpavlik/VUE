@@ -113,7 +113,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
             // note: clusteringTargets will always be empty here
         }
 
-        if (newNodes == null || newNodes.size() == 0)
+        if (newNodes == null || newNodes.isEmpty())
             return false;
 
 // We might as well run in right in the drop action and at least get a chance at having the drop cursor:
@@ -122,7 +122,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
 //             try {
                 Log.info("servicing the drop: " + drop);
                 serviceDrop(DataDropHandler.this, drop, newNodes, clusteringTargets);
-                if (drop.items != null && drop.items.size() > 0)
+                if (drop.items != null && !drop.items.isEmpty())
                     MapDropTarget.addNodesToMap(drop);
                 MapDropTarget.completeDrop(drop);
                 String undoName = "Data Drop";
@@ -191,7 +191,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
 
         final DataNode droppingDataItem = handler.droppingDataItem; // todo: need to refactor these methods to all be statics
             
-        if (clusteringTargets.size() > 0) {
+        if (!clusteringTargets.isEmpty()) {
 
             if (DEBUG.Enabled) Log.debug("SELECTING based on both new nodes and clustering targets " + Util.tags(clusteringTargets));
             s.add(new Util.GroupIterator<>(newNodes, clusteringTargets));
@@ -399,7 +399,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
             //Util.dump(targetsUsed.entrySet());
         }
 
-        if (clusteringTargets.size() > 0) {
+        if (!clusteringTargets.isEmpty()) {
             //tufts.vue.Actions.MakeCluster.doClusterAction(clusterNode, newNodes);                
             for (LWComponent center : clusteringTargets) {
                 tufts.vue.Actions.MakeCluster.doClusterAction(center, center.getClustered());
@@ -412,7 +412,7 @@ class DataDropHandler extends MapDropTarget.DropHandler
         else {
 
             // TODO: pass isLinkAction to clusterNodes and sort out there 
-            zoomFit = clusterNodes(drop, newNodes, linksAdded.size() > 0);
+            zoomFit = clusterNodes(drop, newNodes, !linksAdded.isEmpty());
 
         }
 

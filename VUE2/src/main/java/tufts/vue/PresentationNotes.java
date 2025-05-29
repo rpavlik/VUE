@@ -1048,7 +1048,7 @@ public class PresentationNotes {
 			document.add(p1);
 			
 			String n2 =VUE.getActiveMap().getNotes();
-			if (n2 != null && n2.length() > 0)
+			if (n2 != null && !n2.isEmpty())
 			{
 				Paragraph p2 = new Paragraph(n2);
 				p2.setIndentationLeft(30.0f);
@@ -1086,10 +1086,10 @@ public class PresentationNotes {
 	                String notes = l.getNotes();
 	                String linkLabel = l.getLabel();
 	                
-	                if ((notes == null || notes.length() == 0) && (linkLabel == null || linkLabel.length() ==0))
+	                if ((notes == null || notes.isEmpty()) && (linkLabel == null || linkLabel.isEmpty()))
 	                	continue;
 	                
-	                if (linkLabel == null || linkLabel.length()==0)
+	                if (linkLabel == null || linkLabel.isEmpty())
 	                	linkLabel = "Link";
 	                
 	                Paragraph p = new Paragraph(entryCount + ".  " + linkLabel.replaceAll("\\n",""));
@@ -1153,7 +1153,7 @@ public class PresentationNotes {
 		String notes = n.getNotes();
         String nodeLabel = n.getLabel();
         
-        if (nodeLabel == null || nodeLabel.length()==0)
+        if (nodeLabel == null || nodeLabel.isEmpty())
         	nodeLabel = "Node";
         
         Paragraph p = new Paragraph(entryCount + ".  " + n.getLabel().replaceAll("\\n",""));

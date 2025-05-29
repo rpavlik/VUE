@@ -146,7 +146,7 @@ public class VueButton extends JButton
             // from an action init w/no action command
             if (b.getName() == null)
                 b.setName(b.getText());
-            if (b.getToolTipText() == null || b.getToolTipText().length() < 1) {
+            if (b.getToolTipText() == null || b.getToolTipText().isEmpty()) {
                 b.setToolTipText(b.getText()); 
                if (DEBUG.Enabled) System.out.println(GUI.name(b) + " lazy setToolTipText " + b.getText());
             }
