@@ -141,14 +141,15 @@ public class OpenAction extends VueAction
             map = LWMap.create(filename);
         } catch (Throwable t) {
             // out of the Open File dialog box.
-            Log.error("loadMap " + Util.tags(filename), t);
-            if (t.getCause() != null)
-                t = t.getCause();
+            Throwable t1 = t;
+            Log.error("loadMap " + Util.tags(filename), t1);
+            if (t1.getCause() != null)
+                t1 = t1.getCause();
             final String message;
             final String exception;
-            if (t instanceof EmptyFileException) {
+            if (t1 instanceof EmptyFileException) {
                 message = "There is no data in file \"%s\"\n\n%s";
-                exception = t.getMessage();
+                exception = t1.getMessage();
                 // special case: create a new map with the empty file name
                 map = LWMap.create(filename); 
             } else {
@@ -157,7 +158,7 @@ public class OpenAction extends VueAction
                 // this message is inappropriate for generic exceptions
                 //message = "\"%s\" cannot be opened in this version of VUE.\n\nProblem:\n%s";
                 message = "\"%s\" cannot be opened in VUE.\n\nProblem:\n%s";
-                exception = t.toString();
+                exception = t1.toString();
             }
             
             VueUtil.alert(String.format(message, filename, Util.formatLines(exception, 80)),

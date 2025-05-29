@@ -505,12 +505,13 @@ public class ActionUtil
             if (DEBUG.IO) Log.debug("created new tmp file " + tmpFile);
             doMarshallMap(targetFile, tmpFile, map);
         } catch (Throwable t) {
-            if (t instanceof WrappedMarshallException)
-                t = t.getCause();
-            Log.error("marshalling: " + map + "; to " + tmpFile + "; destination: " + targetFile, t);
+            Throwable t1 = t;
+            if (t1 instanceof WrappedMarshallException)
+                t1 = t1.getCause();
+            Log.error("marshalling: " + map + "; to " + tmpFile + "; destination: " + targetFile, t1);
             // until everyone has chance to update their code
             // to handle the exceptions, wrap this in a runtime exception.
-            throw new RuntimeException(t);
+            throw new RuntimeException(t1);
         }
         //if (DEBUG.EnableD) Log.debug("
 
