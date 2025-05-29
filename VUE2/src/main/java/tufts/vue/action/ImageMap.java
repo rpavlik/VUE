@@ -217,7 +217,7 @@ public class ImageMap extends VueAction {
 			//container.getAllDescendents(
 			//	LWComponent.ChildKind.PROPER).iterator();
 
-            for (LWComponent lwComponent : (Iterable<LWComponent>) layer.getAllDescendents(ChildKind.PROPER, new ArrayList<>(), Order.DEPTH)) {
+            for (LWComponent lwComponent : layer.getAllDescendents(ChildKind.PROPER, new ArrayList<>(), Order.DEPTH)) {
                 LWComponent comp = lwComponent;
 
                 String type = "node";

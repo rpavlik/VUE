@@ -257,7 +257,7 @@ java.awt.event.ActionListener
         }
         
         public Object getValueAt(int row, int col) {
-            Condition cond=(Condition) m_conditions.get(row);
+            Condition cond= m_conditions.get(row);
             if (col==0) {
                 return cond.getProperty();
             } else if (col==1) {
@@ -282,7 +282,7 @@ java.awt.event.ActionListener
             if(row == -1)
                 cond  = new Condition();
             else
-                cond = (Condition) m_conditions.get(row);
+                cond = m_conditions.get(row);
             if(col == 0)
                 cond.setProperty((String)value);
 			/*
