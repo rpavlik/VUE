@@ -63,7 +63,7 @@ public class HTMLConversion extends AbstractAction
         //ActionUtil.marshallMap(new File(xmlFileName));
         
         File result = ActionUtil.selectFile("Save As HTML", "html");
-        if(!result.equals(null)) convert(result);
+        if(result != null) convert(result);
     }
     
     public void convert(File result){
