@@ -1143,8 +1143,6 @@ public class PresentationNotes {
     				entryCount++;
     				iterateChildren(d,indentation+10,(LWNode)o,1);
     			}
-    			else
-    				continue;
     		}
     	}
 	}

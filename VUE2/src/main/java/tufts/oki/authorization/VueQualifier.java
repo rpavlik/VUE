@@ -224,8 +224,7 @@ public class VueQualifier implements osid.authorization.Qualifier {
      */
     private void removeChild (osid.shared.Id childQualifierId) {
         VueQualifier qual = (VueQualifier) azMgr.getQualifier (childQualifierId);
-        if (this.children.contains(qual))
-            this.children.remove(qual);
+        this.children.remove(qual);
     }
     
     /**

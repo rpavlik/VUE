@@ -503,7 +503,7 @@ public class DR implements osid.dr.DigitalRepository {
         int BUFFER_SIZE = 10240;
         StringBuilder sb = new StringBuilder();
         String s = "";
-        BufferedInputStream fis = new BufferedInputStream(new FileInputStream(new File(getResource(templateFileName).getFile().replaceAll("%20"," "))));
+        BufferedInputStream fis = new BufferedInputStream(new FileInputStream(getResource(templateFileName).getFile().replaceAll("%20"," ")));
         //FileInputStream fis = new FileInputStream(new File(templateFileName));
         //DataInputStream in = new DataInputStream(fis);
         byte[] buf = new byte[BUFFER_SIZE];

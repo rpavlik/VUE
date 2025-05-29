@@ -675,7 +675,7 @@ public class RDFIndex extends com.hp.hpl.jena.rdf.model.impl.ModelCom
         final int ontEnd = key.indexOf(ONT_SEPARATOR);
         if (ontEnd != -1) {
             final String prefix = key.substring(0, ontEnd + 1);
-            final String name = key.substring(ontEnd + 1, key.length());
+            final String name = key.substring(ontEnd + 1);
             final String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8);
             if (name != encodedName) {
                 encodedKey = prefix + encodedName;

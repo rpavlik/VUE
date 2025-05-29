@@ -726,7 +726,7 @@ public class ConfigurationUI extends javax.swing.JPanel {
         }
         try {
             String filename = args[0];
-            java.io.InputStream stream = new java.io.FileInputStream(new java.io.File(filename));
+            java.io.InputStream stream = new java.io.FileInputStream(filename);
             javax.swing.JFrame frame = new javax.swing.JFrame();
             
             ConfigurationUI cui = new ConfigurationUI(stream);

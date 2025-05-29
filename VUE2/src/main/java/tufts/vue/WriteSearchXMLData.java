@@ -156,7 +156,7 @@ public class WriteSearchXMLData {
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 
 			final FileOutputStream fileOutputStream = new FileOutputStream(
-					new File("Search.xml"));
+					"Search.xml");
 			final StreamResult streamResult = new StreamResult(fileOutputStream);
 			transformer.transform(new DOMSource(dom), streamResult);
 

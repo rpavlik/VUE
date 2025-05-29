@@ -99,7 +99,7 @@ public class Export {
 	    LWMap map = OpenAction.loadMap(mapFile);
 		RDFIndex index = new  RDFIndex();
 		index.indexMap(map);
-		FileWriter writer = new FileWriter(new File(outputFile));
+		FileWriter writer = new FileWriter(outputFile);
         index.write(writer);
         writer.close();
 	}
