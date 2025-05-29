@@ -2958,7 +2958,7 @@ public class GUI
     public static class DragSourceAdapter implements DragSourceListener {
     
         public void dragOver(DragSourceDragEvent dsde) {
-            if (DEBUG.DND & DEBUG.META) out("dragOver: " + dragName(dsde) + " " + dragSource(dsde));
+            if (DEBUG.DND && DEBUG.META) out("dragOver: " + dragName(dsde) + " " + dragSource(dsde));
         }
         
         public void dragEnter(DragSourceDragEvent dsde) {

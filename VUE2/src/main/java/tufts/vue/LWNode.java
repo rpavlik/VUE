@@ -1629,16 +1629,16 @@ public class LWNode extends LWContainer
             //return shape.contains(this);
             boolean fit = true;
             copyTranslate(rLabel, checker, x, y);
-            fit &= shape.contains(checker);
+            fit = fit && shape.contains(checker);
             //System.out.println(this + " checked " + VueUtil.out(shape) + " for label " + VueUtil.out(rLabel) + " RESULT=" + fit);
             if (rIcons != null) {
                 copyTranslate(rIcons, checker, x, y);
-                fit &= shape.contains(checker);
+                fit = fit && shape.contains(checker);
                 //System.out.println("Contains    icons: " + fit);
             }
             if (rChildren != null) {
                 copyTranslate(rChildren, checker, x, y);
-                fit &= shape.contains(checker);
+                fit = fit && shape.contains(checker);
                 //System.out.println("Contains children: " + fit);
             }
             return fit;

@@ -2809,7 +2809,7 @@ public class DockWindow
             
         for (int i = 0; i < stickyEdges.length; i++) {
 
-            hitResult |= mergeWithResult(stickyEdges.array[i], movingEdge, result);
+            hitResult = hitResult || mergeWithResult(stickyEdges.array[i], movingEdge, result);
 
             /*
             Edge edge = stickyEdges.array[i];

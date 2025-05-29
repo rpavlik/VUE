@@ -307,7 +307,7 @@ public class LWCFilter {
     
     private boolean matchStatementComponent(Statement statement, LWComponent pLWC) {
         if(statement.getKey().getKey().toString().equals("Anywhere"))
-            return matchLabel(statement, pLWC) | matchNotes(statement, pLWC);
+            return matchLabel(statement, pLWC) || matchNotes(statement, pLWC);
         else if(statement.getKey().getKey().toString().equals("Label")) {
             return  matchLabel(statement, pLWC);
         }  else if(statement.getKey().getKey().toString().equals("Notes")) {

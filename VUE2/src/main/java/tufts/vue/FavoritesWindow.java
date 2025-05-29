@@ -198,7 +198,7 @@ public class FavoritesWindow extends JPanel implements ActionListener, ItemListe
             } else{
                 resNode = (ResourceNode)tp.getLastPathComponent();
             }
-            if (e.getActionCommand().equals(REMOVE_RESOURCE) | e.getActionCommand().equals(REMOVE_FAVORITES)) {
+            if (e.getActionCommand().equals(REMOVE_RESOURCE) || e.getActionCommand().equals(REMOVE_FAVORITES)) {
                 if (!resNode.isRoot()) {
                     if(VueUtil.confirm(this,CONFIRM_DEL_RESOURCE,TITLE_DEL_RESOURCE) == JOptionPane.OK_OPTION) {
                         TreePath parent = tp.getParentPath();
