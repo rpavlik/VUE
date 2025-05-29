@@ -1704,8 +1704,7 @@ public class Actions implements VueConstants
         	final LWSelection sel = new LWSelection();
         	Resource resource = c.getResource();
         	//sel.clear();
-        	URLResource nullResource = null;
-        	c.setResource(nullResource);            
+        	c.setResource((Resource) null);
         	
         	if (c.hasChildren())
         	{
@@ -1734,12 +1733,11 @@ public class Actions implements VueConstants
         }
     };
     
-    public static final LWCAction RemoveResourceKeepImageAction = new LWCAction(VueResources.local("mapViewer.componentMenu.removeResourceKeepImage.label")) {
-        public void act(LWComponent c) 
-        {        	    
-       
-        	URLResource nullResource = null;
-        	c.setResource(nullResource);                  
+    public static final LWCAction RemoveResourceKeepImageAction = new LWCAction(
+            VueResources.local("mapViewer.componentMenu.removeResourceKeepImage.label")) {
+        public void act(LWComponent c) {
+
+            c.setResource((Resource) null);
         }
     };
 
