@@ -738,12 +738,12 @@ public class DockWindow
                 
         } else if (key.equals("TITLE-INFO")) {
             
-            String auxTitle = auxTitle = (String) e.getNewValue();
+            String auxTitle = (String) e.getNewValue();
             setAuxTitle(" (" + auxTitle + ")");
             
         } else if (key.equals("TITLE-ITEM")) {
             
-            String auxTitle = auxTitle = (String) e.getNewValue();
+            String auxTitle = (String) e.getNewValue();
             if (auxTitle != null && !auxTitle.isEmpty())
                 setAuxTitle(": " + auxTitle);
             else

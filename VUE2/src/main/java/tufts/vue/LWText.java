@@ -61,8 +61,7 @@ public class LWText extends LWComponent {
            	setLocation(p.x, p.y);
         }
         // end VUE-747 mods
-             
-        super.label = label; // make sure label initially set for debugging
+
         initText();
 	}
 	

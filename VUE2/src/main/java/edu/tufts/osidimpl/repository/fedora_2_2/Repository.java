@@ -74,7 +74,6 @@ public class Repository implements org.osid.repository.Repository {
         try {
             this.id = new PID(id);
 			this.displayName = displayName;
-			this.description = description;
 			setAddress(address);
 			this.port = Integer.parseInt(port);
 			this.userName = userName;
@@ -475,7 +474,7 @@ public class Repository implements org.osid.repository.Repository {
     public String getPassword() {
         return this.password;
     }
-    public void setPassword() {
+    public void setPassword(String password) {
         this.password = password;
     }
     public String getConf() {
