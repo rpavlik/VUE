@@ -3512,7 +3512,7 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
             if (inScrollPane)
                 adjustCanvasSize(); // need for intial scroll-bar sizes if bigger than viewport on startup
             // todo: do we really want this running the first the the full-screen window appears?
-            VUE.invokeAfterAWT(() -> ensureMapVisible());
+            VUE.invokeAfterAWT(this::ensureMapVisible);
             //trackViewChanges("first-paint");
         }
 

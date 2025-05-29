@@ -407,7 +407,7 @@ public class VUE
                 
             } finally {
 
-                GUI.invokeAfterAWT(() -> VUE.clearWaitCursor());
+                GUI.invokeAfterAWT(VUE::clearWaitCursor);
 
             }
 

@@ -207,7 +207,7 @@ public class MetadataEditor extends JPanel
         }
         
         public void repaintLater() {
-            GUI.invokeAfterAWT(() -> repaint());
+            GUI.invokeAfterAWT(this::repaint);
         }
                 
         @Override public String getToolTipText(MouseEvent me) {

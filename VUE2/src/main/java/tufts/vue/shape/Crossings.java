@@ -16,6 +16,7 @@
 package tufts.vue.shape;
 
 import java.awt.geom.PathIterator;
+import java.util.Iterator;
 import java.util.Vector;
 import java.util.Enumeration;
 
@@ -72,9 +73,9 @@ public abstract class Crossings {
 					  double xhi, double yhi)
     {
 	Crossings cross = new EvenOdd(xlo, ylo, xhi, yhi);
-	Enumeration en = curves.elements();
-	while (en.hasMoreElements()) {
-	    Curve c = (Curve) en.nextElement();
+        Iterator iterator = curves.iterator();
+	while (iterator.hasNext()) {
+	    Curve c = (Curve) iterator.next();
 	    if (c.accumulateCrossings(cross)) {
 		return null;
 	    }
@@ -248,9 +249,9 @@ public abstract class Crossings {
 	    return false;
 	}
 	Curve.insertQuad(tmp, x0, y0, coords);
-	Enumeration en = tmp.elements();
-	while (en.hasMoreElements()) {
-	    Curve c = (Curve) en.nextElement();
+        Iterator iterator = tmp.iterator();
+	while (iterator.hasNext()) {
+	    Curve c = (Curve) iterator.next();
 	    if (c.accumulateCrossings(this)) {
 		return true;
 	    }
@@ -286,9 +287,9 @@ public abstract class Crossings {
 	    return false;
 	}
 	Curve.insertCubic(tmp, x0, y0, coords);
-	Enumeration en = tmp.elements();
-	while (en.hasMoreElements()) {
-	    Curve c = (Curve) en.nextElement();
+        Iterator iterator = tmp.iterator();
+	while (iterator.hasNext()) {
+	    Curve c = (Curve) iterator.next();
 	    if (c.accumulateCrossings(this)) {
 		return true;
 	    }

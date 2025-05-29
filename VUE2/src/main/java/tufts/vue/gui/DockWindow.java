@@ -1481,7 +1481,7 @@ public class DockWindow
 
     private void raiseChildrenLater() {
         // apparently, sometimes, we must raise the children later for toFront to work
-        GUI.invokeAfterAWT(() -> raiseChildren());
+        GUI.invokeAfterAWT(this::raiseChildren);
     }
     
     protected void setVisible(boolean show, boolean autoUnrollOnShow)
@@ -3893,7 +3893,7 @@ public class DockWindow
         }
         
         if (isMac && MacWindowShadowEnabled)
-            GUI.invokeAfterAWT(() -> updateWindowShadow());
+            GUI.invokeAfterAWT(this::updateWindowShadow);
 
         StackDepth--;
     }

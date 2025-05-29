@@ -143,7 +143,7 @@ public class EditorManager
         // make sure it runs in AWT, as will be scanning AWT heirarchy, and may be
         // interrogating java.awt.Components
         Log.debug("install...");
-        tufts.vue.gui.GUI.invokeOnEDT(() -> _install());
+        tufts.vue.gui.GUI.invokeOnEDT(EditorManager::_install);
     }
     
     /*

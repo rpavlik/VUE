@@ -175,7 +175,7 @@ public abstract class ComboBoxMenuButton<T> extends JComboBox
             
        
             
-        this.addItemListener(e -> handleMenuSelection(e));
+        this.addItemListener(this::handleMenuSelection);
         for (Object value : values) {
             // JMenuItem item;
             // T value;

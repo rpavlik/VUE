@@ -62,10 +62,10 @@ public class LinkTool extends VueTool
      * LinkTools */
     public Action[] getSetterActions() {
         Action[] actions = new Action[getSubToolIDs().size()];
-        Enumeration e = getSubToolIDs().elements();
+        Iterator iterator = getSubToolIDs().iterator();
         int i = 0;
-        while (e.hasMoreElements()) {
-            String id = (String) e.nextElement();
+        while (iterator.hasNext()) {
+            String id = (String) iterator.next();
             LinkTool.SubTool nt = (LinkTool.SubTool) getSubTool(id);
             actions[i++] = nt.getSetterAction();
         }

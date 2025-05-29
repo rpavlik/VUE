@@ -274,10 +274,10 @@ public class NodeTool extends VueTool
      * LWNodes */
     public Action[] getShapeSetterActions() {
         Action[] actions = new Action[getSubToolIDs().size()];
-        Enumeration e = getSubToolIDs().elements();
+        Iterator iterator = getSubToolIDs().iterator();
         int i = 0;
-        while (e.hasMoreElements()) {
-            String id = (String) e.nextElement();
+        while (iterator.hasNext()) {
+            String id = (String) iterator.next();
             NodeTool.SubTool nt = (NodeTool.SubTool) getSubTool(id);
             actions[i++] = nt.getShapeSetterAction();
         }
@@ -287,10 +287,10 @@ public class NodeTool extends VueTool
     /** @return an array of standard supported shapes for nodes */
     public Object[] getAllShapeValues() {
         Object[] values = new Object[getSubToolIDs().size()];
-        Enumeration e = getSubToolIDs().elements();
+        Iterator iterator = getSubToolIDs().iterator();
         int i = 0;
-        while (e.hasMoreElements()) {
-            String id = (String) e.nextElement();
+        while (iterator.hasNext()) {
+            String id = (String) iterator.next();
             NodeTool.SubTool nt = (NodeTool.SubTool) getSubTool(id);
             values[i++] = nt.getShape();
         }

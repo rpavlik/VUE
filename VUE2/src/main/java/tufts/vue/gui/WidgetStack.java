@@ -798,7 +798,7 @@ public class WidgetStack extends Widget
         }
 
         private void updateLockingStateLater() {
-            GUI.invokeAfterAWT(() -> updateLockingState());
+            GUI.invokeAfterAWT(WidgetStack.this::updateLockingState);
         }
 
         private void setWidgetHidden(boolean hide) {

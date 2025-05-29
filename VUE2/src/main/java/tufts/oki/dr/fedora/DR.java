@@ -596,9 +596,9 @@ public class DR implements osid.dr.DigitalRepository {
     }
     public static String getMetadataString(Properties dcFields) {
         String metadata = "";
-        Enumeration e = dcFields.keys();
-        while(e.hasMoreElements()) {
-            String field = (String)e.nextElement();
+        Iterator iterator = dcFields.keySet().iterator();
+        while(iterator.hasNext()) {
+            String field = (String) iterator.next();
             if(isSupportedMetadataField(field))
                 metadata += "<"+DC_NAMESPACE+field+">"+dcFields.getProperty(field)+"</"+DC_NAMESPACE+field+">";
         }

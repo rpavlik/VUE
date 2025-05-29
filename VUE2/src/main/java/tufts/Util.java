@@ -2972,9 +2972,9 @@ public class Util
                 
         } else {
             Hashtable props = System.getProperties();
-            Enumeration e = props.keys();
-            while (e.hasMoreElements()) {
-                Object key = e.nextElement();
+            Iterator iterator = props.keySet().iterator();
+            while (iterator.hasNext()) {
+                Object key = iterator.next();
                 //System.out.println("[1;36m" + key + "[m=" + props.get(key));
                 System.out.println(TERM_PURPLE + key + TERM_CLEAR + " " + props.get(key));
             }

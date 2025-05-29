@@ -147,7 +147,7 @@ public class PresentationTool extends VueTool
     			//VueToolbarController.getController().setSelectedTool(presTool);
     			VUE.setActive(VueTool.class, this, presTool);
     		}});
-    		GUI.invokeAfterAWT(() -> presTool.startPresentation());
+    		GUI.invokeAfterAWT(presTool::startPresentation);
             //VUE.setActive(VueTool.class, , VueTool.getInstance(SelectionTool.class));
         	
         }
@@ -2824,7 +2824,7 @@ public class PresentationTool extends VueTool
         // the current slide.  We'd really need a separate Images API entry point for
         // caching to specity low-priority tasks for this to work perfectly.
         
-        GUI.invokeAfterAWT(() -> attemptPathwayLocalPreCaching());
+        GUI.invokeAfterAWT(this::attemptPathwayLocalPreCaching);
             
     }
 
@@ -2889,7 +2889,7 @@ public class PresentationTool extends VueTool
                 // this may be helpful, as even images we've already seen may have, of
                 // course, been GC'd, and re-requesting them to be cached is releveant.
                     
-                GUI.invokeAfterAWT(() -> focal.preCacheContent());
+                GUI.invokeAfterAWT(focal::preCacheContent);
             }
         }
     }
@@ -3117,7 +3117,7 @@ public class PresentationTool extends VueTool
     public static void fadeUpLater() {
         if (Util.isMacCocoaSupported() && VUE.inNativeFullScreen()) {
             if (DEBUG.PRESENT) Log.debug("requesting fadeUp");
-            VUE.invokeAfterAWT(() -> fadeUp());
+            VUE.invokeAfterAWT(PresentationTool::fadeUp);
         }
     }
 

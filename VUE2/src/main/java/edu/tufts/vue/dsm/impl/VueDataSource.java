@@ -507,9 +507,9 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
         _propertyList  = new Vector<>();
         if (this.repositoryManager != null) {
             try {
-                Enumeration keys = properties.keys();
-                while(keys.hasMoreElements()) {
-                    String key = (String)keys.nextElement();
+                Iterator iterator = properties.keySet().iterator();
+                while(iterator.hasNext()) {
+                    String key = (String) iterator.next();
                     tufts.vue.PropertyEntry pe = new tufts.vue.PropertyEntry();
                     pe.setEntryKey(key);
                     pe.setEntryValue(properties.getProperty(key));

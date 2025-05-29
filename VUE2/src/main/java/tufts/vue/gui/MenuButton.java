@@ -259,7 +259,7 @@ public abstract class MenuButton<T> extends JButton
         //final String valueKey = getPropertyName() + ".value"; // propertyName usually not set at this point!
             
         final ActionListener menuItemAction =
-                e -> handleMenuSelection(e);
+                this::handleMenuSelection;
             
         for (int i = 0; i < values.length; i++) {
             JMenuItem item;

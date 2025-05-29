@@ -60,6 +60,7 @@ import tufts.vue.action.OpenAction;
 import tufts.vue.action.OpenURLAction;
 import tufts.vue.ds.DataAction;
 import tufts.vue.ds.XmlDataSource;
+import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.VueMenuBar;
 
@@ -206,7 +207,7 @@ public class VueApplet extends JApplet {
 	}
 	
 	public void ToggleAllVisible() {
-		SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.ToggleAllVisible());
+		SwingUtilities.invokeLater(DockWindow::ToggleAllVisible);
 		
 	}
 	
@@ -218,11 +219,11 @@ public class VueApplet extends JApplet {
 	}
 	public void ShowPreviouslyHiddenWindows()
 	{
-		SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.ShowPreviouslyHiddenWindows());
+		SwingUtilities.invokeLater(DockWindow::ShowPreviouslyHiddenWindows);
 		
 	}
 	public void HideAllDockWindows()
-	{	SwingUtilities.invokeLater(() -> tufts.vue.gui.DockWindow.HideAllWindows());
+	{	SwingUtilities.invokeLater(DockWindow::HideAllWindows);
 	}
 	
 	public void stop() 

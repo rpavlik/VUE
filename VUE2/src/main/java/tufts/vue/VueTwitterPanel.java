@@ -631,7 +631,7 @@ clusterLayout.layout(select);
                            e.printStackTrace();
                        }
 
-                       SwingUtilities.invokeLater(() -> ZoomTool.setZoomFit());
+                       SwingUtilities.invokeLater(ZoomTool::setZoomFit);
                    });
 	   			
 	   		}

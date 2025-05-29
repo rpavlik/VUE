@@ -1357,7 +1357,7 @@ public class GUI
     public static synchronized void clearWaitCursor() {
         //tufts.Util.printStackTrace("CLEAR WAIT-CURSOR");
         if (DEBUG.FOCUS) Log.info("CLEAR WAIT CURSOR SCHEDULED");
-        VUE.invokeAfterAWT(() -> clearAllWaitCursors());
+        VUE.invokeAfterAWT(GUI::clearAllWaitCursors);
     }
     
     private static synchronized void clearAllWaitCursors() {

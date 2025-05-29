@@ -1164,7 +1164,7 @@ public class PathwayTable extends JTable
                 //VueToolbarController.getController().setSelectedTool(presTool);
                 VUE.setActive(VueTool.class, this, presTool);
             }});
-            GUI.invokeAfterAWT(() -> presTool.startPresentation());
+            GUI.invokeAfterAWT(presTool::startPresentation);
 		}
 		else if (e.getSource().equals(masterSlidePresentation))
 		{	

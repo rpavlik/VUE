@@ -296,7 +296,7 @@ public class FullScreen
             isHidden = false;
             if (Util.isMacCocoaSupported()) {
                 if (DEBUG.Enabled) Log.debug("requesting fadeup");
-                GUI.invokeAfterAWT(() -> doFadeUp());
+                GUI.invokeAfterAWT(this::doFadeUp);
             }
         }
         
@@ -720,11 +720,9 @@ public class FullScreen
         });
 
         if (wentBlack) {
-            GUI.invokeAfterAWT(() -> {
-                // shouldn't ever be able to see this happen, as the native full-screen should be
-                // on top of us, but just in case we make sure to clear it out behind us...
-                goClear();
-            });
+            // shouldn't ever be able to see this happen, as the native full-screen should be
+            // on top of us, but just in case we make sure to clear it out behind us...
+            GUI.invokeAfterAWT(FullScreen::goClear);
         }
 
         GUI.invokeAfterAWT(() -> {
