@@ -23,22 +23,13 @@ import tufts.vue.gui.formattingpalette.ButtonlessComboBoxUI;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.plaf.TreeUI;
-import javax.swing.table.*;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.html.CSS;
-import javax.swing.text.html.HTML;
 import javax.swing.border.*;
 
 import edu.tufts.vue.preferences.implementations.ShowAgainDialog;
-import edu.tufts.vue.preferences.ui.tree.VueTreeUI;
 
-/**
+ /**
  * Provides a panel that displays the PathwayTable with note panel
  * editable view of currently selected pathway or item on pathway, as
  * well as controls for navigating through the pathway, and

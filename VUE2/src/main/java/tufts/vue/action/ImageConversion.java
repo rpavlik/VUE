@@ -15,12 +15,10 @@
 
 package tufts.vue.action;
 
-import javax.imageio.*;
 import java.awt.image.*;
 import java.io.*;
 import java.awt.*;
-import java.awt.geom.*;
-import javax.swing.*;
+
 import tufts.vue.*;
 
 import java.util.Iterator;

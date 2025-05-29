@@ -15,17 +15,12 @@
 
 package tufts.vue;
 
-import java.util.List;
 import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.Vector;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.table.*;
 
-import tufts.vue.LWPathway.Entry;
-
-/**
+ /**
  * PathwayTableModel.java
  *
  * Provides a view of the currently active LWPathwayList (from the currently active map).

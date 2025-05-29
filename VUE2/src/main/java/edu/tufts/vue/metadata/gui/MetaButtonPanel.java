@@ -16,8 +16,6 @@
 
 package edu.tufts.vue.metadata.gui;
 
-import tufts.vue.DEBUG;
-
 /**
  * @author dhelle01
  * @deprecated -- functionality moved to MetaButton.java

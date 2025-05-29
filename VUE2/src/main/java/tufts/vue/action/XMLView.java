@@ -32,17 +32,14 @@ import java.io.*;
 import java.util.regex.*;
 import java.util.ArrayList;
 import java.awt.Font;
-import java.awt.Color;
+
 import javax.swing.text.StyledDocument;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.Transformer;
-import org.w3c.dom.Document;
 
 import javax.xml.transform.dom.DOMSource;
 

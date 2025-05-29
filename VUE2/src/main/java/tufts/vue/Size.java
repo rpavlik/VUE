@@ -15,8 +15,6 @@
 
 package tufts.vue;
 
-import tufts.Util;
-import static tufts.Util.*;
 import java.awt.Dimension;
 import java.awt.geom.RectangularShape;
 import java.awt.geom.Rectangle2D;

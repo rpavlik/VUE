@@ -24,7 +24,6 @@
  */
 package edu.tufts.vue.dataset;
 
-import java.io.*;
 import java.util.*;
 
 public class LayoutFactory {

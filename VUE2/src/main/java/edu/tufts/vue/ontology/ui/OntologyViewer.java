@@ -20,14 +20,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.*;
-
 import edu.tufts.vue.ontology.Ontology;
 
-import tufts.vue.DEBUG;
-import tufts.vue.DataSource;
 import tufts.vue.VueToolbarController;
-import tufts.vue.gui.GUI;
 import tufts.vue.gui.Widget;
 
 

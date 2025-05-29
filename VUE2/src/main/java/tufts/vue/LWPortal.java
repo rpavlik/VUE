@@ -15,8 +15,6 @@
 
 package tufts.vue;
 
-import tufts.Util;
-
 import java.awt.Color;
 import java.awt.AlphaComposite;
 import java.awt.geom.AffineTransform;

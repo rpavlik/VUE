@@ -30,11 +30,9 @@ import java.awt.*;
 import java.io.*;
 import java.net.*;
 import java.awt.event.*;
-import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 import java.util.*;
 import javax.swing.event.*;
-import osid.dr.*;
 
 import osid.filing.*;
 import tufts.oki.remoteFiling.*;
@@ -42,7 +40,6 @@ import tufts.oki.localFiling.*;
 
 
 import javax.swing.tree.*;
-import java.util.Iterator;
 
 /**
  *

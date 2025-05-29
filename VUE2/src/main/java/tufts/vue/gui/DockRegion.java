@@ -20,7 +20,6 @@ import tufts.vue.DEBUG;
 
 import java.awt.Window;
 import java.util.Comparator;
-import java.util.Iterator;
 
 /**
  * A "loose" grouping of DockWindow's: membership is assinged

@@ -26,7 +26,6 @@ package tufts.vue.filter;
  * @author  akumar03
  */
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Vector;
 public class TypeFactory {
 

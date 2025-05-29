@@ -15,10 +15,6 @@
 
 package tufts.vue;
 
-import java.beans.PropertyChangeListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Helper class for creating an LWPropertyProducer.
  * Handles an action-event, & firing a property change event with

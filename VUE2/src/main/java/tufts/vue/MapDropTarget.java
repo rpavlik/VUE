@@ -24,11 +24,8 @@ import java.awt.dnd.*;
 import java.awt.datatransfer.*;
 
 import java.awt.geom.Point2D;
-import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.Shape;
 import java.awt.Point;
-import java.awt.Image;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -36,7 +33,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.regex.*;
 

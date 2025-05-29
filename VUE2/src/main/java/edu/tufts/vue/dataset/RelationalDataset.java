@@ -24,18 +24,13 @@
  */
 package edu.tufts.vue.dataset;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 import tufts.vue.DataSetViewer;
 import tufts.vue.DataSourceViewer;
 import tufts.vue.LWComponent;
-import tufts.vue.LWLink;
 import tufts.vue.LWMap;
-import tufts.vue.LWNode;
 import tufts.vue.LWSelection;
 import tufts.vue.LayoutAction;
 import tufts.vue.VUE;

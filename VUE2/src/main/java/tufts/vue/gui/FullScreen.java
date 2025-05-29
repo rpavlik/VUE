@@ -27,11 +27,8 @@ import tufts.vue.ZoomTool;
 import tufts.macosx.MacOSX;
 
 import java.awt.*;
-import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 
-import javax.swing.JFrame;
-import javax.swing.JWindow;
 import org.apache.log4j.NDC;
 
 /**

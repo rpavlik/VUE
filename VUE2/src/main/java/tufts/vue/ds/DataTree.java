@@ -31,7 +31,6 @@ import tufts.vue.LWLink;
 import tufts.vue.LWMap;
 import tufts.vue.LWKey;
 import tufts.vue.gui.GUI;
-import tufts.vue.gui.Widget;
 import tufts.Util;
 import tufts.vue.VueConstants;
 
@@ -39,13 +38,10 @@ import java.util.List;
 import java.util.*;
 import java.net.URL;
 import java.awt.*;
-import java.awt.event.*;
 import java.awt.dnd.*;
-import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 import javax.swing.tree.*;
 
 import com.google.common.collect.*;

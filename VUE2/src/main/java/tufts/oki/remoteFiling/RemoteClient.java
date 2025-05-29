@@ -22,7 +22,6 @@
 package tufts.oki.remoteFiling;
 import org.apache.commons.net.ftp.*;
 import java.io.*;
-import java.util.*;
 
 import osid.filing.FilingException;
 

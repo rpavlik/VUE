@@ -25,9 +25,6 @@ package tufts.vue;
  *
  * @author Daisuke Fujiwara
  */
-import java.util.*;
-import java.awt.geom.Line2D;
-import java.awt.geom.Point2D;
 
 /**a class which creates a hierarchy view of a map from a given node*/
 public class LWHierarchyMap extends LWMap

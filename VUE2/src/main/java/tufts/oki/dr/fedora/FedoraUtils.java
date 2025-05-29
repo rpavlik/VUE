@@ -29,7 +29,7 @@ package tufts.oki.dr.fedora;
 import java.io.*;
 import java.net.*;
 import java.util.prefs.Preferences;
-import java.util.ResourceBundle;
+
 import javax.swing.AbstractAction;
 
 public class FedoraUtils {

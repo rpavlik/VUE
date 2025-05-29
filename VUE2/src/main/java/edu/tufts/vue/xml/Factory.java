@@ -2,7 +2,7 @@ package edu.tufts.vue.xml;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
+
 /**
  * A Utility class for creating instances of classes via reflection.
  * @author Aneliya Ticheva

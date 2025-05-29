@@ -17,26 +17,18 @@
 package edu.tufts.vue.ontology.ui;
 
 import edu.tufts.vue.metadata.*;
-import edu.tufts.vue.rdf.*;
 import edu.tufts.vue.style.*;
 import edu.tufts.vue.ontology.*;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Point;
-import java.awt.datatransfer.*;
-import java.awt.geom.Rectangle2D;
-import java.awt.dnd.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
-import java.util.Iterator;
 import java.util.List;
 //import javax.swing.DefaultListModel;
 import javax.swing.BorderFactory;
@@ -48,11 +40,9 @@ import javax.swing.JPopupMenu;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
-import javax.swing.event.ListSelectionEvent;
 
 import tufts.vue.*;
 import tufts.vue.gui.*;
-import tufts.vue.ui.ResourceIcon;
 
 /*
  * TypeList.java

@@ -30,11 +30,9 @@ package tufts.vue.action;
  * @author  dhelle01
  */
 import java.io.*;
-import java.net.*;
-import java.util.zip.*;
 import java.util.*;
 import java.awt.event.*;
-import javax.swing.*;
+
 import tufts.vue.*;
  
 public class TextOpenAction  extends VueAction {

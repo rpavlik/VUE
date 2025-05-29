@@ -17,16 +17,13 @@ package tufts.vue.gui;
 
 import tufts.vue.DEBUG;
 import tufts.vue.VueAction;
-import tufts.vue.LWComponent;
 import tufts.vue.LWPropertyChangeEvent;
 
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.border.*;
 
 /**
  * @version $Revision: 1.14 $ / $Date: 2010-02-03 19:15:46 $ / $Author: mike $

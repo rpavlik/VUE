@@ -22,7 +22,6 @@
  */
 package edu.tufts.vue.style;
 
-import java.awt.*;
 import java.awt.font.*;
 import java.util.Objects;
 

@@ -18,8 +18,6 @@ package tufts.vue;
 import tufts.Util;
 import static tufts.Util.*;
 
-import edu.tufts.vue.preferences.implementations.BooleanPreference;
-
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.Graphics;

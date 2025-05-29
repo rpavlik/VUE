@@ -16,7 +16,6 @@ package tufts.vue.gui;
 
 import tufts.Util;
 import tufts.vue.DEBUG;
-import tufts.vue.SearchTextField;
 import tufts.vue.VUE;
 
 import java.awt.Window;

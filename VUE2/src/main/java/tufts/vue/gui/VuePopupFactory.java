@@ -16,14 +16,9 @@ package tufts.vue.gui;
 
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.Window;
 
-import javax.swing.JPopupMenu;
-import javax.swing.JWindow;
-import javax.swing.MenuElement;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
-import javax.swing.SwingUtilities;
 
 public class VuePopupFactory extends PopupFactory {
     private static final int offset = 5;

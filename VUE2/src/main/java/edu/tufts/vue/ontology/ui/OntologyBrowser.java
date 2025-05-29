@@ -22,12 +22,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-import tufts.Util;
+import javax.swing.*;
+
 import tufts.vue.*;
 import tufts.vue.gui.*;
 

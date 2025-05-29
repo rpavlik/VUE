@@ -19,8 +19,6 @@ import tufts.vue.NodeTool.NodeModeTool;
 import static tufts.vue.LWSlide.*;
 
 import java.util.*;
-import java.awt.Color;
-
 
 
 /**

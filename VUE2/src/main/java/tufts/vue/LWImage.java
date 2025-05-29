@@ -18,10 +18,7 @@ package tufts.vue;
 
 import tufts.Util;
 
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Shape;
 import java.awt.BasicStroke;
 import java.awt.geom.*;

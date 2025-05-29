@@ -23,7 +23,6 @@ package tufts.oki.shared;
 import tufts.oki.*;
 import java.util.*;
 import java.io.*;
-import osid.shared.SharedException;
 
 /**
  *  The Shared Manager allows creation and manipulation of Id, Agent, and Group objects.

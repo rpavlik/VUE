@@ -36,8 +36,6 @@ import java.awt.geom.Rectangle2D;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import edu.tufts.vue.metadata.action.SearchAction;
-
 
 /**
  * @version $Revision: 1.84 $ / $Date: 2010-02-03 19:16:31 $ / $Author: mike $

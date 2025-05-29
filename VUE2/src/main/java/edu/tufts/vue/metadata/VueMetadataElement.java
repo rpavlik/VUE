@@ -20,8 +20,6 @@ import edu.tufts.vue.ontology.*;
 import tufts.Util;
 import tufts.vue.DEBUG;
 
-import java.net.*;
-
 /*
  * VueMetadataElement.java
  *

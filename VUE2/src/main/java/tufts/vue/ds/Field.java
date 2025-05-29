@@ -21,7 +21,7 @@ import java.util.*;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
-import java.text.DecimalFormat;
+
 import tufts.vue.LWComponent;
 import tufts.vue.DEBUG;
 

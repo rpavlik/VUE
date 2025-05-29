@@ -24,14 +24,10 @@ import tufts.vue.ds.Schema;
 
 import java.net.URI;
 import java.util.*;
-import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.AffineTransform;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.print.Printable;
-import java.awt.print.PageFormat;
 import java.io.File;
 
 /**

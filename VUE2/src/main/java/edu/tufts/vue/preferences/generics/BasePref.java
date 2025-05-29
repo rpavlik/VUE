@@ -15,12 +15,10 @@
 package edu.tufts.vue.preferences.generics;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import edu.tufts.vue.preferences.VuePrefEvent;
 import edu.tufts.vue.preferences.VuePrefListener;
-import edu.tufts.vue.preferences.implementations.AutoZoomPreference;
 import edu.tufts.vue.preferences.interfaces.VuePreference;
 
 public abstract class BasePref<T> implements VuePreference<T> {

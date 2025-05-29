@@ -22,16 +22,10 @@
 
 package tufts.vue;
 
-import osid.filing.*;
-import java.util.*;
 import java.io.*;
-import java.net.*;
+
 import tufts.oki.remoteFiling.*;
 import tufts.oki.localFiling.*;
-import tufts.vue.gui.GUI;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  *  A wrapper for CabinetEntry objects which can be used as the user object in a 

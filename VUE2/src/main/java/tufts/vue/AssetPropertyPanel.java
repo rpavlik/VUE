@@ -22,15 +22,12 @@
 package tufts.vue;
 
 
-import java.io.*;
-
 import java.awt.*;
-import java.awt.event.*;
+
 import javax.swing.*;
-import javax.swing.border.*;
 
 
-	/**
+/**
 	 * AssetPropertyPanel
 	 * This is the panel for displaying Resource info
 	 *

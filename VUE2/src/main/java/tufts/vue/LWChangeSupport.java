@@ -15,13 +15,9 @@
 
 package tufts.vue;
 
-import tufts.Util;
 import static tufts.Util.*;
 
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Handle dispatching of LWCEvents, mainly for LWComponents, but any client

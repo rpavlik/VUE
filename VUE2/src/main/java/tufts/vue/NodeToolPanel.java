@@ -19,23 +19,18 @@ import tufts.vue.gui.*;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.geom.RectangularShape;
-import javax.swing.AbstractButton;
+
 import javax.swing.JLabel;
 import javax.swing.Icon;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JList;
-import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
-import javax.swing.border.*;
 
-/**
+ /**
  * This creates an editor panel for LWNode's
  *
  * @version $Revision: 1.63 $ / $Date: 2010-02-03 19:17:41 $ / $Author: mike $

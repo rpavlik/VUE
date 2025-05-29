@@ -20,7 +20,6 @@ import java.util.prefs.Preferences;
 import javax.swing.JComponent;
 
 import edu.tufts.vue.preferences.generics.BasePref;
-import edu.tufts.vue.preferences.interfaces.VuePreference;
 
 public class ColorPreference extends BasePref
 {

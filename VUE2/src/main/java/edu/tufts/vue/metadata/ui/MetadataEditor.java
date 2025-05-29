@@ -20,7 +20,6 @@ import java.util.*;
 import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.*;
 
 import javax.swing.BorderFactory;
@@ -35,8 +34,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
-import javax.swing.ComboBoxModel;
 import javax.swing.border.Border;
 import javax.swing.table.*;
 
@@ -54,7 +51,6 @@ import edu.tufts.vue.metadata.CategoryModel;
 import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
 import edu.tufts.vue.ontology.OntType;
-import edu.tufts.vue.rdf.RDFIndex;
 
 /*
  * MetadataEditor.java

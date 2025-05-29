@@ -22,18 +22,12 @@
  */
 package edu.tufts.vue.layout;
 
-import java.io.*;
-import java.net.*;
 import java.util.*;
 import java.util.List;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+
 import tufts.vue.*;
 import tufts.vue.ds.DataAction;
 import tufts.vue.ds.XmlDataSource;
-import edu.tufts.vue.metadata.MetadataList;
-import edu.tufts.vue.metadata.VueMetadataElement;
 import edu.tufts.vue.dataset.*;
 
 /* ListRandomLaout - This layout scatters all the nodes at random in a square

@@ -29,8 +29,6 @@ import java.util.prefs.Preferences;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 
-import tufts.vue.LWComponent;
-import tufts.vue.VUE;
 import tufts.vue.VueResources;
 
 /**

@@ -18,7 +18,6 @@ package tufts.vue.gui;
 import tufts.vue.DEBUG;
 
 import javax.swing.Icon;
-import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 

@@ -19,7 +19,6 @@ package tufts.vue.gui;
 import tufts.Util;
 import tufts.macosx.MacOSX;
 
-import tufts.vue.SearchTextField;
 import tufts.vue.VUE;
 import tufts.vue.DEBUG;
 import tufts.vue.VueUtil;
@@ -28,13 +27,11 @@ import tufts.vue.VueResources;
 
 import tufts.vue.gui.Screen;
 
-import java.lang.reflect.Field;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 
 import edu.tufts.vue.preferences.implementations.WindowPropertiesPreference;

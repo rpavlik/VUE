@@ -23,7 +23,6 @@ import java.util.Properties;
 
 import org.osid.*;
 import org.osid.provider.*;
-import org.osid.shared.*;
 
 import tufts.vue.VueResources;
 

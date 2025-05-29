@@ -28,9 +28,7 @@ import java.util.*;
 import javax.swing.*;
 
 import tufts.vue.*;
-import tufts.vue.LWComponent.HideCause;
 import tufts.vue.LWComponent.Flag;
-import tufts.vue.LWMap.Layer;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.GUI.ComboKey;
 import tufts.Util;

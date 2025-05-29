@@ -44,7 +44,7 @@ import tufts.Util;
 import tufts.vue.gui.GUI;
 import edu.tufts.vue.metadata.VueMetadataElement;
 import edu.tufts.vue.metadata.action.SearchAction;
-import edu.tufts.vue.metadata.action.SearchAction.SearchType;
+
 import static edu.tufts.vue.metadata.action.SearchAction.*;
 
 // TODO: THIS SHOULD IGNORE SEARCH-PANEL SEARCH DOMAIN -- always do current map

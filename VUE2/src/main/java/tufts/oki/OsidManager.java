@@ -20,7 +20,6 @@
  */
 
 package tufts.oki;
-import osid.OsidOwner;
 
 /**
  *

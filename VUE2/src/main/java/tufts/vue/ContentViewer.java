@@ -35,7 +35,6 @@ import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
 import org.xml.sax.InputSource;
 
-import tufts.Util;
 import tufts.vue.gui.GUI;
 
 public abstract class ContentViewer extends JPanel {

@@ -23,7 +23,7 @@ package tufts.vue.action;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.*;
+
 import tufts.vue.*;
 
 /**

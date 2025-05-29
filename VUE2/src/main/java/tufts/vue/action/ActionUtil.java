@@ -30,36 +30,19 @@ import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.MarshalListener;
 import org.exolab.castor.xml.Unmarshaller;
 import org.exolab.castor.xml.UnmarshalListener;
-import org.exolab.castor.xml.MarshalException;
-import org.exolab.castor.xml.ValidationException;
 
 import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
 
 import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
-import edu.tufts.vue.preferences.PreferencesManager;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-import javax.swing.plaf.FileChooserUI;
-import javax.swing.plaf.basic.BasicFileChooserUI;
 
-import java.net.URL;
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Locale;
 import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.net.*;
 import java.util.Objects;

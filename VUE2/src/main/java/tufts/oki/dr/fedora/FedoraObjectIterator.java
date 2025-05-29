@@ -23,7 +23,7 @@ package tufts.oki.dr.fedora;
 
  
 import osid.dr.*;
-import java.util.Iterator;
+
 /**
  *
  * @author  akumar03

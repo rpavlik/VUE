@@ -14,9 +14,7 @@
  */
 package tufts.vue.gui;
 
-import tufts.vue.VUE;
 import tufts.vue.VueConstants; // todo: rename GUI constants & move to GUI
-import tufts.vue.DEBUG;
 
 import java.awt.*;
 import javax.swing.*;

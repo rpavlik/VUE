@@ -17,7 +17,6 @@ package tufts.vue;
 
 import tufts.vue.gui.GUI;
 
-import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.event.*;
 

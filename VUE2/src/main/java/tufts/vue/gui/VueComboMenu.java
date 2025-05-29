@@ -15,14 +15,6 @@
 
 package tufts.vue.gui;
 
-import tufts.vue.DEBUG;
-import tufts.vue.NodeTool;
-
-import javax.swing.Icon;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-
 /**
  * 
  * TODO: should probably be merged with ComboBoxMenuButton

@@ -18,12 +18,8 @@ package edu.tufts.vue.compare.ui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+
 import javax.swing.*;
-import javax.swing.event.*;
 
 import tufts.Util;
 import tufts.vue.*;

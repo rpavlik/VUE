@@ -18,7 +18,6 @@ package tufts.vue;
 import tufts.vue.gui.*;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Vector;
 
 import javax.swing.*;

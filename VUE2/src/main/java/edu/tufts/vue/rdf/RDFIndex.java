@@ -28,13 +28,8 @@ import tufts.vue.LWSlide;
 import tufts.vue.VueResources;
 import tufts.Util;
 import tufts.vue.VueUtil;
-import edu.tufts.vue.metadata.*;
 
-import edu.tufts.vue.ontology.*;
 import edu.tufts.vue.metadata.*;
-import com.hp.hpl.jena.rdf.model.impl.*;
-import com.hp.hpl.jena.sparql.core.*;
-import com.hp.hpl.jena.graph.*;
 
 /** "ARQ - A query engine for Jena, implementing SPARQL" */
 import com.hp.hpl.jena.query.*;

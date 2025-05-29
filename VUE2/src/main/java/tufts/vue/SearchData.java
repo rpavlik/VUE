@@ -22,7 +22,6 @@ import edu.tufts.vue.metadata.VueMetadataElement;
 import edu.tufts.vue.metadata.action.SearchAction;
 import edu.tufts.vue.metadata.action.SearchAction.ResultOp;
 import edu.tufts.vue.metadata.action.SearchAction.Operator;
-import tufts.vue.gui.GUI;
 
 /**
  * For saving and restoring searches.  Also used a runtime as a reference to the

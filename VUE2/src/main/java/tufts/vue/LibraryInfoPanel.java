@@ -25,9 +25,6 @@ package tufts.vue;
  * @author  akumar03
  */
 import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
-import java.awt.*;
 
 public class LibraryInfoPanel extends JPanel
 {

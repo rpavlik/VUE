@@ -25,8 +25,6 @@ package tufts.oki.localFiling;
 import java.io.*;
 import java.util.*;
 
-import javax.swing.filechooser.FileSystemView;
-
 import osid.OsidException;
 import tufts.oki.shared.*;
 

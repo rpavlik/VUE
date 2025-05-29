@@ -25,7 +25,6 @@ package edu.tufts.vue.dataset;
 import java.util.*;
 import java.io.*;
 import tufts.vue.*;
-import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
 
 

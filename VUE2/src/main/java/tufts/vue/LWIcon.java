@@ -21,22 +21,15 @@ import tufts.vue.ui.ResourceIcon;
 import java.awt.*;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 import com.lowagie.text.pdf.PdfGraphics2D;
 
-import edu.tufts.vue.preferences.PreferencesManager;
-
 import java.util.Iterator;
-import edu.tufts.vue.preferences.PreferencesManager;
-import edu.tufts.vue.preferences.VuePrefEvent;
-import edu.tufts.vue.preferences.VuePrefListener;
+
 import edu.tufts.vue.preferences.implementations.BooleanPreference;
 import edu.tufts.vue.preferences.implementations.ShowIconsPreference;
-import edu.tufts.vue.preferences.interfaces.VuePreference;
 
 /**
  * Icon's for displaying on LWComponents.

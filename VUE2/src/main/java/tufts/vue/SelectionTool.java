@@ -15,11 +15,6 @@
 
 package tufts.vue;
 
-import java.lang.*;
-import java.util.*;
-import javax.swing.*;
-import java.awt.*;
-
 // TODO: move as much of the functionality currently in MapViewer into this class -- it
 // will make for much cleaner code & architecture, and should make MapViewer much easier
 // to maintain.  Lots of refactoring will be needed to do this, including probably a

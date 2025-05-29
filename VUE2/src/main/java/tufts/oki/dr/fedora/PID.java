@@ -23,8 +23,6 @@ package tufts.oki.dr.fedora;
  
  
 
-import osid.shared.Id;
-import osid.shared.SharedException;
 import java.util.StringTokenizer;
 
 /**

@@ -19,17 +19,10 @@
  */
 package edu.tufts.vue.ontology;
 
-import edu.tufts.vue.style.*;
-
-import java.util.*;
 import java.net.*;
 
 import com.hp.hpl.jena.rdf.model.*;
 import com.hp.hpl.jena.ontology.*;
-import com.hp.hpl.jena.util.iterator.*;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.shared.PrefixMapping;
-import com.hp.hpl.jena.util.iterator.Filter;
 
 
 public class RDFSOntology extends Ontology{

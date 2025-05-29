@@ -21,8 +21,6 @@
 
 package tufts.oki.authorization;
 import java.util.*;
-import osid.shared.*;
-import osid.authorization.*;
 
 /**
  *  VueQualifier implements osid.authorization.Qualifier.  Qualifiers are the "what"

@@ -21,9 +21,7 @@
 
 package tufts.oki.dr.fedora;
 
-import java.io.*;
 import java.util.*;
-import java.util.prefs.Preferences;
 
 /**
  *

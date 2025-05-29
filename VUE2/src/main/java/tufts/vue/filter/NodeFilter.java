@@ -30,7 +30,7 @@ package tufts.vue.filter;
 
 import java.util.*;
 import javax.swing.table.*;
-import javax.swing.event.*;
+
 public class NodeFilter extends AbstractTableModel  {
     public static final int KEY_COL = 0;
     //public static final int OPERATOR_COL = 1;

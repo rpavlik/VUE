@@ -23,7 +23,6 @@
 package tufts.oki.localFiling;
 import java.util.*;
 import tufts.oki.shared.*;
-import osid.OsidException;
 
 /**
  *  Cabinet Entires are the superclass of Cabinet and ByteStore.  Entries contain

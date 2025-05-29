@@ -27,7 +27,7 @@ package tufts.vue.filter;
  */
 import java.util.List;
 import java.util.Vector;
-import java.util.Iterator;
+
 public class DefaultType implements tufts.vue.filter.Type {
     
     /** Creates a new instance of DefaultType */

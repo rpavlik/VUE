@@ -20,18 +20,12 @@ import tufts.vue.gui.*;
 import tufts.vue.ui.MetaDataPane;
 import tufts.vue.ui.ResourceList;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 import java.awt.*;
-import java.awt.List;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Vector;
 import java.io.*;
 import java.util.*;
 
-import org.osid.repository.Asset;
 import org.osid.repository.AssetIterator;
 import org.osid.repository.RepositoryException;
 

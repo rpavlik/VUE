@@ -15,11 +15,8 @@
 package tufts.vue;
 
 import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
-import java.awt.*;
+
 import tufts.vue.gui.*;
-import tufts.vue.gui.FocusManager;
 
 public class SakaiCollectionDialog extends SizeRestrictedDialog implements javax.swing.event.TreeSelectionListener
 {

@@ -14,8 +14,6 @@
  */
 package edu.tufts.vue.preferences.implementations;
 
-import edu.tufts.vue.preferences.interfaces.VuePreference;
-
 public class BooleanPreference extends edu.tufts.vue.preferences.generics.GenericBooleanPreference
 {
 

@@ -14,18 +14,6 @@
  */
 package tufts.vue;
 
-import static tufts.Util.grow;
-
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Point;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.html.CSS;
-import javax.swing.text.html.HTML;
-
 import tufts.vue.NodeTool.NodeModeTool;
 
 // import java.util.*;

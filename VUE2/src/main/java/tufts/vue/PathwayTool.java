@@ -17,15 +17,10 @@ package tufts.vue;
 
 import tufts.vue.gui.GUI;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.border.*;
-import java.util.Iterator;
 
-/**
+ /**
  * MapViewer tool functionality plus pathway contextual toolbar tool.
  * The contextual toolbar maintains a JComboBox that stays synchronized
  * with whatever is in the LWPathwayList of the current map, as well

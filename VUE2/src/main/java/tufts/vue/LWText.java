@@ -16,8 +16,6 @@ package tufts.vue;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 import java.awt.geom.RectangularShape;
@@ -27,8 +25,6 @@ import java.util.Enumeration;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.Element;
-import javax.swing.text.Style;
-import javax.swing.text.html.CSS;
 
 import com.lightdev.app.shtm.SHTMLDocument;
 import com.lightdev.app.shtm.VueStyleSheet;

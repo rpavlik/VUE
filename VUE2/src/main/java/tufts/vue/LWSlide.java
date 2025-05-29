@@ -16,13 +16,9 @@
 package tufts.vue;
 
 import tufts.Util;
-import tufts.vue.gui.GUI;
-import tufts.vue.NodeTool.NodeModeTool;
 
 import java.util.*;
 import java.awt.Color;
-import java.awt.Composite;
-import java.awt.BasicStroke;
 import java.awt.geom.*;
 
 /**

@@ -1,7 +1,6 @@
 package edu.tufts.vue.mbs;
 
 import java.util.List;
-import java.util.Properties;
 
 import com.google.common.collect.Multimap;
 

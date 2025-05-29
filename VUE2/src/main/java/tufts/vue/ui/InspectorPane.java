@@ -18,17 +18,14 @@ package tufts.vue.ui;
 import tufts.Util;
 import tufts.vue.*;
 import tufts.vue.gui.*;
-import tufts.vue.NotePanel;
 //import tufts.vue.filter.NodeFilterEditor;
 import tufts.vue.ActiveEvent;
 
 import java.util.*;
-import java.io.*;
 import java.awt.*;
-import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.text.*;
-import javax.swing.table.*;
 import javax.swing.event.*;
 import javax.swing.border.*;
 

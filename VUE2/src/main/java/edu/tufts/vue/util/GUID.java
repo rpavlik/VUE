@@ -22,8 +22,7 @@ package edu.tufts.vue.util;
 import java.io.*;
 import java.net.*;
 import java.security.*;
-import java.util.Arrays;
- 
+
 /** a globally unique 32-byte number (allegedly) */
 public class GUID implements Serializable
 {

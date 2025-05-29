@@ -16,13 +16,11 @@ package edu.tufts.vue.dsm.impl;
 
 import java.io.*;
 import java.util.*;
-import java.net.*;
 
 import tufts.Util;
 
 import org.osid.repository.Repository;
 import edu.tufts.vue.dsm.DataSource;
-import edu.tufts.vue.dsm.DataSourceListener;
 
 //classes to support marshalling and unmarshalling
 import org.exolab.castor.xml.Marshaller;

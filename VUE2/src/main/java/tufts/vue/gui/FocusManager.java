@@ -20,13 +20,11 @@ import static tufts.Util.*;
 
 import tufts.vue.VUE;
 import tufts.vue.DEBUG;
-import tufts.vue.VueUtil;
 import tufts.vue.EventHandler;
 
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Window;
-import java.awt.Frame;
 import java.awt.Dialog;
 import java.awt.AWTEvent;
 import java.awt.KeyboardFocusManager;
@@ -36,19 +34,12 @@ import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.PaintEvent;
 import java.awt.event.HierarchyEvent;
 
-import javax.swing.SwingUtilities;
-
 import java.util.logging.*;
 
-import javax.swing.JPanel;      // for test harness
-import javax.swing.JLabel;      // for test harness
-import javax.swing.JButton;     // for test harness
-import javax.swing.JTextField;  // for test harness
 
 // Note: issues with FOCUS: If a Window has setFocusableState(false), it won't take
 // focus, thus leaving main application Frame's ACTIVATED, and you can click on buttons

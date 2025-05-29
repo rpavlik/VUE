@@ -15,7 +15,6 @@
 
 package tufts.vue;
 
-import static tufts.vue.VueConstants.*;
 import static tufts.vue.LWPathway.Entry;
 import static tufts.vue.MapViewer.*;
 
@@ -29,14 +28,9 @@ import java.util.*;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.AlphaComposite;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.awt.geom.RectangularShape;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.event.*;
 import javax.swing.*;
 

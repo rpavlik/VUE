@@ -17,7 +17,6 @@ package tufts.vue;
 
 import tufts.vue.gui.GUI;
 
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 

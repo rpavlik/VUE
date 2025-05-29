@@ -22,11 +22,6 @@
  */
 package edu.tufts.vue.layout;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.awt.event.*;
-import javax.swing.*;
 import tufts.vue.*;
 import edu.tufts.vue.dataset.*;
 

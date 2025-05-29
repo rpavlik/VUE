@@ -20,12 +20,9 @@
  */
 
 package tufts.oki.remoteFiling;
-import tufts.oki.shared.*;
 import org.apache.commons.net.ftp.*;
 
-import java.io.*;
 import java.util.*;
-import osid.OsidException;
 
 /**
  *  RemoteCabinet is a implementation of osid.filing.Cabinet which models a remote

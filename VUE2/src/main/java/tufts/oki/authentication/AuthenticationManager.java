@@ -23,7 +23,7 @@ package tufts.oki.authentication;
 import java.util.*;
 import tufts.oki.OsidManager;
 import tufts.oki.shared.*;
-import osid.authentication.*;
+
 import javax.naming.*;
 import javax.naming.directory.*;
 

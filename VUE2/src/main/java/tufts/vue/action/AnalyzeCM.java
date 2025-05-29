@@ -17,12 +17,7 @@
 package tufts.vue.action;
 
 import tufts.vue.*;
-import edu.tufts.vue.compare.*;
 
-import java.io.*;
-import java.util.*;
-
-import javax.swing.*;
 import java.awt.event.*;
 
 

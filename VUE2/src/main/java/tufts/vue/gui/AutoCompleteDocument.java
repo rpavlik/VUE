@@ -18,13 +18,10 @@ package tufts.vue.gui;
 import javax.swing.text.*;
 import javax.swing.*;
 
-import tufts.vue.RecentlyOpenedUrlManager;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
- 
+
 public class AutoCompleteDocument extends PlainDocument {
  
     /**

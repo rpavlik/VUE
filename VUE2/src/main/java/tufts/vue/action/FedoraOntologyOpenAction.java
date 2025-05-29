@@ -19,7 +19,6 @@ package tufts.vue.action;
 import edu.tufts.vue.ontology.ui.TypeList;
 
 import tufts.vue.*;
-import tufts.vue.gui.DockWindow;
 
 /*
  * FedoraOntologyOpenAction.java

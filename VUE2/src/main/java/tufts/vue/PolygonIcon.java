@@ -23,9 +23,8 @@ package tufts.vue;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.geom.Rectangle2D;
 
-/**
+ /**
  *
  * @author  akumar03
  */

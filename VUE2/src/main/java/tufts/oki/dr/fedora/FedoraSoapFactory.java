@@ -26,24 +26,20 @@ package tufts.oki.dr.fedora;
  * @author  akumar03
  */
 import osid.dr.*;
-import java.net.*;
-import java.io.*;
+
 import java.util.Vector;
 
 import javax.xml.namespace.QName;
 
 import fedora.server.types.gen.*;
-import fedora.server.utilities.DateUtility;
 
 //axis files
 import org.apache.axis.encoding.ser.*;
 import java.net.*;
-import java.io.*;
+
 import org.apache.axis.types.NonNegativeInteger;
 import org.apache.axis.client.Service;
 import org.apache.axis.client.Call;
-import javax.xml.rpc.ServiceException;
-import java.rmi.RemoteException ;
 
 public class FedoraSoapFactory {
     // preferences for Fedora

@@ -4,13 +4,9 @@ import java.awt.*;
 import java.awt.datatransfer.*;
 import java.awt.dnd.*;
 import java.awt.event.*;
-import java.awt.geom.*;
 import java.awt.image.*;
-import java.beans.*;
-import javax.activation.*;
+
 import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.*;
 
 
 public class DnDTabbedPane extends JTabbedPane {

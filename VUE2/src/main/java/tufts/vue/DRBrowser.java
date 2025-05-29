@@ -21,7 +21,6 @@ import tufts.vue.gui.*;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 /**
  * Digital Repository Browser

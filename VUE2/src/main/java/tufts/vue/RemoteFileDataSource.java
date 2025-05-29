@@ -21,19 +21,10 @@ package tufts.vue;
  */
 
 import javax.swing.*;
-import java.util.Vector;
+
 import java.util.*;
-import java.awt.*;
 
-import javax.swing.border.*;
-
-import java.io.*;
-
-import osid.filing.*;
 import tufts.oki.remoteFiling.*;
-import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
-
 
 
 /**

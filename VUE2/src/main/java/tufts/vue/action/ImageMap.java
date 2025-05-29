@@ -20,13 +20,8 @@ import static tufts.Util.reverse;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.awt.*;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 
 import tufts.vue.*;
 import tufts.vue.LWComponent.ChildKind;

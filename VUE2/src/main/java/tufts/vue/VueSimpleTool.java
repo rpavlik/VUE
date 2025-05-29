@@ -15,11 +15,7 @@
 
 package tufts.vue;
 
-import java.lang.*;
-import java.util.*;
-import javax.swing.*;
-
-public class VueSimpleTool extends VueTool
+ public class VueSimpleTool extends VueTool
 {
     public VueSimpleTool() {
         super();

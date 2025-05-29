@@ -51,7 +51,6 @@ import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import tufts.vue.ds.XmlDataSource;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.SizeRestrictedDialog;
 import tufts.vue.gui.VueLabel;

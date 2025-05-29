@@ -26,7 +26,6 @@ import tufts.oki.shared.*;
 import org.apache.commons.net.ftp.*;
 
 import java.io.*;
-import java.lang.*;
 import java.util.*;
 
 /**

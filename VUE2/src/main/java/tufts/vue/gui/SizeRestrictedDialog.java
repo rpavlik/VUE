@@ -18,8 +18,6 @@ import java.awt.Frame;
 import java.awt.event.*;
 import javax.swing.*;
 
-import tufts.vue.VUE;
-
 public class SizeRestrictedDialog extends JDialog 
 {
 	private static final long serialVersionUID = -1569884045611370290L;

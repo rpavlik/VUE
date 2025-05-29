@@ -26,9 +26,7 @@ package tufts.vue;
  */
 
 import java.util.Vector;
-import javax.swing.tree.*;
-import javax.swing.*;
-import java.io.*;
+
 import java.util.Enumeration;
 
 public class SaveNode {

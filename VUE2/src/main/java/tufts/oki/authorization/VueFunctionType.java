@@ -20,7 +20,6 @@
  */
 
 package tufts.oki.authorization;
-import osid.shared.*;
 import java.util.*;
 
 /**

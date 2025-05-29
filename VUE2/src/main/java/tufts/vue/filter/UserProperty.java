@@ -16,8 +16,6 @@
 package tufts.vue.filter;
 
 
-import java.lang.*;
-import java.io.*;
 import java.awt.*;
 
 public class UserProperty {

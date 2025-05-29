@@ -17,8 +17,6 @@ package tufts.vue.ds;
 
 import tufts.Util;
 import tufts.vue.DEBUG;
-import tufts.vue.MetaMap;
-import tufts.vue.MetaMap.*;
 
 import java.util.*;
 import java.io.*;
@@ -27,7 +25,6 @@ import java.net.*;
 import javax.xml.xpath.*;
 import javax.xml.parsers.*;
 
-import org.w3c.dom.Node;
 import org.w3c.dom.*;
 import org.xml.sax.*;
 

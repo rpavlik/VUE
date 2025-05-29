@@ -16,8 +16,6 @@
 
 package edu.tufts.vue.metadata.gui;
 
-import edu.tufts.vue.metadata.VueMetadataElement;
-
 import tufts.vue.DEBUG;
 import tufts.Util;
 import tufts.vue.VUE;

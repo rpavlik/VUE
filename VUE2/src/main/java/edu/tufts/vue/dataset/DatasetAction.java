@@ -24,12 +24,11 @@
 package edu.tufts.vue.dataset;
 
 
-import java.util.*;
 import java.io.*;
 
 
 import javax.swing.*;
-import java.awt.*;
+
 import java.awt.event.*;
 import tufts.vue.*;
 import tufts.vue.gui.VueFileChooser;

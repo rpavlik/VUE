@@ -35,17 +35,12 @@ import javax.xml.transform.TransformerFactory;
 
 import java.io.FileInputStream;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.StringWriter;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import java.awt.event.ActionEvent;
-
-import tufts.vue.*;
 
 public class HTMLConversion extends AbstractAction
 {   

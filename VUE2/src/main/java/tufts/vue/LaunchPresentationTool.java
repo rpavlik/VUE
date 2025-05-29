@@ -14,15 +14,8 @@
  */
 package tufts.vue;
 
-import tufts.vue.gui.GUI;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.*;
-import javax.swing.border.*;
-import java.util.Iterator;
-import java.util.Map;
 
 public class LaunchPresentationTool extends VueSimpleTool
 {

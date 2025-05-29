@@ -15,7 +15,6 @@
 
 package tufts.vue;
 
-import tufts.vue.LWComponent.Key;
 import tufts.vue.gui.ColorMenuButton;
 import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.GUI;
@@ -31,7 +30,6 @@ import java.awt.BasicStroke;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 import java.awt.event.ActionEvent;

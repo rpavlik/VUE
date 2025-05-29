@@ -32,7 +32,6 @@ package tufts.vue;
 import tufts.vue.filter.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
 import java.awt.event.*;

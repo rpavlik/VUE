@@ -15,16 +15,6 @@
 
 package tufts.vue.gui;
 
-import tufts.vue.Actions;
-import tufts.vue.LWKey;
-import tufts.vue.LWPropertyHandler;
-import tufts.vue.LWLink;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-import java.beans.*;
 import javax.swing.*;
 
 

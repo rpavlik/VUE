@@ -43,7 +43,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
-import javax.swing.event.*;
 import javax.swing.border.*;
 
 import edu.tufts.vue.metadata.MetadataList;

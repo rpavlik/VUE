@@ -20,10 +20,8 @@
  */
 
 package tufts.oki.shared;
-import osid.*;
-import osid.shared.SharedException;
+
 import java.util.*;
-import java.io.*;
 
 
 /**

@@ -40,7 +40,6 @@ import java.awt.dnd.DropTargetListener;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.awt.event.*;
 import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.plaf.TableUI;
@@ -48,9 +47,7 @@ import javax.swing.table.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 
-import osid.dr.Asset;
-
-/**
+ /**
  * A JTable that displays all of the pathways that exists in a given map,
  * and provides user interaction with the list of pathways.  Relies
  * on PathwayTableModel to produce a view of all the pathways that allows

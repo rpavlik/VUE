@@ -34,7 +34,6 @@ import java.net.MalformedURLException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -47,8 +46,6 @@ import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import org.apache.axis.encoding.*;
 import org.apache.log4j.Logger;
-
-import org.jdom.*;
 
 import edu.tufts.vue.dsm.DataSource;
 

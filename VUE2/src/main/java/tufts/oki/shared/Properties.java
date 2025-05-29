@@ -21,7 +21,6 @@
 
 package tufts.oki.shared;
 import java.util.*;
-import osid.shared.SharedException;
 
 /**
  *  Properties implement a means to collect key / value pairs together into a typed

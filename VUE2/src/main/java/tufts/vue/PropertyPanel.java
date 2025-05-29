@@ -15,17 +15,13 @@
 
 package tufts.vue;
 
-import java.lang.*;
-import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
 import tufts.vue.gui.ColorMenuButton;
 
-import java.beans.*;
-
-public class PropertyPanel extends JPanel {
+ public class PropertyPanel extends JPanel {
     
     /////////////
     // Fields

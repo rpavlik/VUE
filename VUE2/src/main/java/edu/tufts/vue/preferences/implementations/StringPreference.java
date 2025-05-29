@@ -21,28 +21,18 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
 import tufts.vue.VueResources;
-import tufts.vue.VueUtil;
 
 import edu.tufts.vue.preferences.generics.BasePref;
-import edu.tufts.vue.preferences.interfaces.VuePreference;
-import edu.tufts.vue.preferences.ui.PreferencesDialog;
 
 public class StringPreference extends BasePref implements ActionListener
 {

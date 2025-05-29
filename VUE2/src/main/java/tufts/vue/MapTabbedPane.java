@@ -16,7 +16,6 @@
 package tufts.vue;
 
 import tufts.Util;
-import tufts.vue.gui.DnDTabbedPane;
 import tufts.vue.gui.GUI;
 import java.awt.*;
 import java.awt.event.*;

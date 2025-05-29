@@ -26,7 +26,7 @@ package  tufts.vue;
  * @author  akumar03
  */
 import java.net.URL;
-import osid.dr.*;
+
 import tufts.oki.dr.fedora.*;
 public class CastorDR {
     DR dr;

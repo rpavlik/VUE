@@ -15,10 +15,6 @@
 
 package edu.tufts.vue.preferences;
 
-import java.util.Vector;
-
-import tufts.vue.VueResources;
-
 /**
  * @author Mike Korcynski
  *

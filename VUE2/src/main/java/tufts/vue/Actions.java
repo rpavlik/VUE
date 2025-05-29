@@ -15,7 +15,6 @@
 
 package tufts.vue;
 
-import java.awt.Component;
 import java.awt.Color;
 import java.awt.Event;
 import java.awt.Font;

@@ -21,16 +21,10 @@ package  tufts.vue;
  * @author  akumar03
  */
 
-import java.util.Vector;
-import java.util.Iterator;
 import java.io.*;
 import java.net.*;
-import org.apache.commons.net.ftp.*;
 import java.util.*;
-import java.util.zip.*;
 
-import fedora.server.management.FedoraAPIM;
-import fedora.server.utilities.StreamUtility;
 //import fedora.client.ingest.AutoIngestor;
 
 import tufts.vue.action.*;

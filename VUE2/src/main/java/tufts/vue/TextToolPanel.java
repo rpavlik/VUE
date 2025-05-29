@@ -16,14 +16,9 @@
 
 package tufts.vue;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 
-import tufts.vue.gui.ColorMenuButton;
-import tufts.vue.gui.GUI;
-
-/**
+ /**
  * TextToolPanel
  */
  

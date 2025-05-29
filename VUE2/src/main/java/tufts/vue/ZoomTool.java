@@ -15,10 +15,6 @@
 
 package tufts.vue;
 
-import tufts.Util;
-import java.awt.Container;
-import java.awt.Point;
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Color;
 import java.awt.event.KeyEvent;

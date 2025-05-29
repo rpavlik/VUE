@@ -1,14 +1,10 @@
 package edu.tufts.vue.preferences.implementations;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,15 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import tufts.vue.DEBUG;
-import tufts.vue.LWPathway;
-import tufts.vue.MasterSlide;
-import tufts.vue.PathwayTableModel;
-import tufts.vue.VUE;
 import tufts.vue.VueResources;
 import tufts.vue.VueUtil;
 

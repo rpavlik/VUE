@@ -17,8 +17,6 @@
 package edu.tufts.vue.metadata.ui;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -37,7 +35,6 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import tufts.vue.VueResources;
-import tufts.vue.VueUtil;
 import tufts.vue.gui.GUI;
 import edu.tufts.vue.metadata.CategoryModel;
 import edu.tufts.vue.ontology.OntType;

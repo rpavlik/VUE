@@ -26,7 +26,6 @@ import tufts.vue.VueResources;
 import tufts.vue.Resource;
 import tufts.vue.MetaMap;
 
-import static tufts.vue.ds.Schema.*;
 import static tufts.vue.ds.Relation.*;
 
 import static tufts.vue.LWComponent.Flag;

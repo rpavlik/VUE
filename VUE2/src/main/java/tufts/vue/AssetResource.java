@@ -29,11 +29,10 @@ package tufts.vue;
 import osid.dr.*;
 import tufts.oki.dr.fedora.*;
 import org.w3c.dom.Document;
-import org.w3c.dom.Text;
 import org.w3c.dom.NodeList;
-import javax.xml.parsers.DocumentBuilder;
+
 import javax.xml.parsers.DocumentBuilderFactory;
-import fedora.server.types.gen.*;
+
 import java.io.*;
 import java.net.*;
 

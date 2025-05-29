@@ -26,12 +26,6 @@ import java.awt.geom.PathIterator;
 import javax.swing.*;
 import javax.swing.border.*;
 
-import javax.swing.JColorChooser;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
 import tufts.vue.LWComponent.ChildKind;

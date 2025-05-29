@@ -17,7 +17,6 @@ package tufts.vue.shape;
 
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.PathIterator;
-import java.util.Vector;
 
 final class Order0 extends Curve {
     private final double x;

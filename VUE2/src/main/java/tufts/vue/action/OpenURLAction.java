@@ -27,11 +27,7 @@ package tufts.vue.action;
  */
 import java.io.*;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.event.*;
 import javax.swing.*;
 

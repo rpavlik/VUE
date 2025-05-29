@@ -15,9 +15,6 @@
 
 package tufts.vue;
 
-import tufts.Util;
-
-import java.lang.ref.*;
 import java.awt.Image;
 import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;

@@ -21,12 +21,10 @@
 package edu.tufts.vue.util;
 
 import javax.crypto.Cipher;
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
-import javax.crypto.spec.SecretKeySpec;
+
 import java.security.Key;
-import java.security.InvalidKeyException;
+
 import org.apache.commons.codec.binary.Hex;
 
 import tufts.vue.*;

@@ -24,18 +24,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.tree.*;
-import java.util.*;
+
 import java.io.*;
 // castor classes
 import org.exolab.castor.xml.Marshaller;
 import org.exolab.castor.xml.Unmarshaller;
-import org.exolab.castor.xml.MarshalException;
-import org.exolab.castor.xml.ValidationException;
 
 import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
 import org.xml.sax.InputSource;
-import osid.dr.*;
+
 /**
  *
  * @author  Ranjani Saigal

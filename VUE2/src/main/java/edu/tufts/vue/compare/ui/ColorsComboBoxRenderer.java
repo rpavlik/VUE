@@ -27,7 +27,6 @@ package edu.tufts.vue.compare.ui;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;

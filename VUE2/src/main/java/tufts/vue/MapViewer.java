@@ -20,7 +20,6 @@ import static tufts.Util.*;
 
 
 import tufts.vue.LinkTool.ComboModeTool;
-import tufts.vue.NodeTool.NodeModeTool;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.FocusManager;
@@ -31,13 +30,8 @@ import tufts.vue.gui.WindowDisplayAction;
 import static tufts.vue.MapDropTarget.*;
 import tufts.vue.NodeTool;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 import java.util.Timer;
-import java.util.TimerTask;
-import java.lang.Math;
 import java.awt.*;
 import java.awt.event.*;
 import static java.awt.event.KeyEvent.*;
@@ -46,20 +40,11 @@ import java.awt.geom.*;
 import java.util.*;
 
 import javax.swing.*;
-import javax.swing.UIDefaults.LazyInputMap;
 import javax.swing.border.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
 
 import edu.tufts.vue.metadata.action.SearchAction;
-import edu.tufts.vue.ontology.ui.TypeList;
 import edu.tufts.vue.preferences.implementations.BooleanPreference;
-import edu.tufts.vue.preferences.PreferencesManager;
-import edu.tufts.vue.preferences.VuePrefEvent;
-import edu.tufts.vue.preferences.VuePrefListener;
-import edu.tufts.vue.preferences.implementations.ColorPreference;
 
-import tufts.oki.dr.fedora.*;
 import tufts.vue.shape.*;
 
 import osid.dr.*;

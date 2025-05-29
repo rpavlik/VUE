@@ -22,7 +22,6 @@ import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.io.IOException;
 
-import javax.swing.JComponent;
 import javax.swing.Timer;
 
 

@@ -16,9 +16,6 @@
 
 package tufts.vue;
 
-import tufts.vue.shape.*;
-
-import java.lang.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;

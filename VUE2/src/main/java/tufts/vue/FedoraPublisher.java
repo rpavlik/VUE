@@ -20,9 +20,7 @@
 package tufts.vue;
 
 
-import java.security.interfaces.DSAKey;
 import java.util.*;
-import java.net.*;
 import java.io.*;
 
 import java.text.SimpleDateFormat;
@@ -36,7 +34,6 @@ import edu.tufts.vue.metadata.VueMetadataElement;
 import fedora.client.FedoraClient;
 import fedora.client.utility.ingest.AutoIngestor;
 import fedora.client.utility.AutoFinder;
-import fedora.server.types.gen.Datastream;
 import fedora.server.types.gen.FieldSearchResult;
 import fedora.server.types.gen.FieldSearchQuery;
 import fedora.client.Uploader;

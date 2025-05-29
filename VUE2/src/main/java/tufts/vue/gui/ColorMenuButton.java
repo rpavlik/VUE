@@ -18,7 +18,6 @@ package tufts.vue.gui;
 import tufts.vue.DEBUG;
 import tufts.vue.LWPropertyChangeEvent;
 import tufts.vue.RecentlyUsedColorsManager;
-import tufts.vue.RichTextBox;
 import tufts.vue.VueResources;
 
 import java.awt.BorderLayout;

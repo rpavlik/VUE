@@ -15,8 +15,6 @@
 
 package tufts.vue;
 
-import tufts.vue.gui.GUI;
-
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.JViewport;

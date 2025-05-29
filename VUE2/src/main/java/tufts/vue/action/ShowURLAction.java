@@ -16,7 +16,7 @@ package tufts.vue.action;
 
 import tufts.vue.VueUtil;
 import tufts.vue.DEBUG;
-import tufts.vue.VUE;
+
 import java.net.URL;
 import java.io.File;
 

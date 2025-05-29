@@ -28,10 +28,8 @@ import javax.swing.tree.*;
 
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.event.*;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.Level;
 
 import org.osid.repository.RepositoryException;
 import org.osid.shared.SharedException;

@@ -21,7 +21,7 @@ import tufts.vue.MapViewer;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.*;
+
 import javax.swing.BorderFactory;
 
 /**

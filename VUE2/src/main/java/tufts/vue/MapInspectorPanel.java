@@ -16,19 +16,15 @@
 package tufts.vue;
 
 import java.io.*;
-import java.util.*;
 import java.awt.*;
 import java.beans.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 
 import edu.tufts.vue.metadata.ui.MetadataEditor;
-import edu.tufts.vue.preferences.implementations.BooleanPreference;
 
 import tufts.vue.VueResources;
-import tufts.vue.filter.*;
 import tufts.vue.gui.*;
 
 /**

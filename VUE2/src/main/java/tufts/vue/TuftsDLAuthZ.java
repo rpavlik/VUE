@@ -25,7 +25,6 @@ import java.util.*;
 import java.io.*;
 import java.net.*;
 import osid.shared.*;
-import osid.authentication.*;
 import osid.authorization.*;
 import tufts.oki.shared.*;
 import tufts.oki.authentication.*;

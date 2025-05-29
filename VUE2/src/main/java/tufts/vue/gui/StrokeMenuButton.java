@@ -17,7 +17,6 @@ package tufts.vue.gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.util.Objects;
 
 import javax.swing.BorderFactory;
@@ -25,8 +24,6 @@ import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-
-import tufts.vue.LWComponent;
 
 
 /**

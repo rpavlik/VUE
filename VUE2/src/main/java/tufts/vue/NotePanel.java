@@ -21,12 +21,10 @@
 
 package tufts.vue;
 
-import tufts.Util;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.VueTextPane;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.*;
 

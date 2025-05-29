@@ -25,7 +25,6 @@ import java.lang.ref.Reference;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import com.google.common.collect.Iterators;
 
 
 /**

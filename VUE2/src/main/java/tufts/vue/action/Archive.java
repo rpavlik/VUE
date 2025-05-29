@@ -29,7 +29,6 @@ import tufts.vue.VUE;
 import tufts.vue.Resource;
 import tufts.vue.PropertyEntry;
 import tufts.vue.URLResource;
-import tufts.vue.Images;
 import tufts.vue.IMSCP;
 import tufts.vue.LWComponent;
 import tufts.vue.LWMap;

@@ -17,16 +17,13 @@ package tufts.vue;
 
 import tufts.vue.gui.GUI;
 
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import javax.swing.border.*;
 
 
-
-/**
+ /**
  * PaletteButtonItem class is used for displaying and controlling tool bar
  * buttons that have a palette of options available.  For example, the node tool 
  * can contain a set of shapes that are used when creating a node.  The zoom tool has two

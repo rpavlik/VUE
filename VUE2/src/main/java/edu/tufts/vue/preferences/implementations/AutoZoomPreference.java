@@ -15,18 +15,8 @@
 
 package edu.tufts.vue.preferences.implementations;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-
-import tufts.vue.MapViewer;
-
 import edu.tufts.vue.preferences.PreferenceConstants;
-import edu.tufts.vue.preferences.VuePrefListener;
 import edu.tufts.vue.preferences.generics.GenericBooleanPreference;
-
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.prefs.*;
 
 /**
  * @author Mike Korcynski

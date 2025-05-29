@@ -24,7 +24,6 @@ package tufts.vue;
 import javax.swing.tree.*;
 import javax.swing.*;
 import java.util.Vector;
-import java.util.Enumeration;
 import java.io.*;
 /**
  *

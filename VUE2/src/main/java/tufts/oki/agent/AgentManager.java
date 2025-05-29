@@ -20,10 +20,8 @@
  */
 
 package tufts.oki.agent;
-import tufts.oki.*;
 import java.util.*;
 import java.io.*;
-import org.osid.shared.SharedException;
 
 /**
  *  The Agent Manager allows creation and manipulation of Agent, and Group objects.

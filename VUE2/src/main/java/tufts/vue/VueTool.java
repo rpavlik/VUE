@@ -15,14 +15,10 @@
 
 package tufts.vue;
 
-import tufts.vue.gui.*;
-
-import tufts.Util;
-
 import java.util.*;
-import java.lang.*;
+
 import javax.swing.*;
-import javax.swing.border.*;
+
 import java.awt.*;
 import java.awt.event.*;
 

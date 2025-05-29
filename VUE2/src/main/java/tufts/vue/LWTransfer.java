@@ -15,11 +15,7 @@
 
 package tufts.vue;
 
-import tufts.Util;
-
-import java.awt.dnd.*;
 import java.awt.datatransfer.*;
-import java.awt.Dimension;
 
 import tufts.vue.MapDropTarget.DropHandler;
 

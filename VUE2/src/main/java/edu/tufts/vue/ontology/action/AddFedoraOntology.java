@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.net.URL;
 
 import edu.tufts.vue.ontology.ui.OntologyBrowser;
-import edu.tufts.vue.ontology.ui.OntologyChooser2;
 import edu.tufts.vue.ontology.ui.TypeList;
 
 import tufts.vue.VueAction;

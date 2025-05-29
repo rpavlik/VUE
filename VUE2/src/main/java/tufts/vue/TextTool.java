@@ -19,9 +19,8 @@ package tufts.vue;
 
 // import java.util.*;
 // import javax.swing.*;
-import tufts.vue.NodeTool.NodeModeTool;
 
-public class TextTool extends VueTool
+ public class TextTool extends VueTool
 {
     public TextTool() {}
 

@@ -14,16 +14,13 @@
  */
 package tufts.vue.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.SystemColor;
 import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.StringTokenizer;
@@ -36,22 +33,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableModel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
-import javax.swing.text.View;
 
 import tufts.Util;
 import tufts.vue.DEBUG;
 import tufts.vue.TableBag;
 import tufts.vue.Resource;
-import tufts.vue.VUE;
 import tufts.vue.MetaMap;
 import tufts.vue.gui.GUI;
 
-import javax.swing.JButton;
 /**
 *
 * This works somewhat analogous to a JTable, except that the renderer's are persistent.

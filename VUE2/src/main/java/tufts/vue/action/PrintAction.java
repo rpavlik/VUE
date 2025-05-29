@@ -17,8 +17,6 @@ package tufts.vue.action;
 
 import tufts.vue.*;
 
-import javax.swing.Action;
-import javax.swing.AbstractAction;
 import java.awt.*;
 import java.awt.print.*;
 import java.awt.geom.Point2D;

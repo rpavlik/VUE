@@ -26,14 +26,12 @@ import tufts.vue.LWLink;
 import tufts.vue.LWMap;
 import tufts.vue.MapDropTarget;
 import static tufts.vue.MapDropTarget.*;
-import tufts.vue.ds.DataTree.Criteria;
+
 import tufts.vue.ds.DataTree.DataNode;
 import tufts.vue.ds.DataTree.RowNode;
 import tufts.vue.ds.DataTree.AllRowsNode;
-import tufts.vue.ds.DataTree.SmartSearch;
 
 import java.util.List;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.ArrayList;
     

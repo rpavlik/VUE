@@ -16,15 +16,10 @@
 
 package tufts.vue.gui;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 import tufts.vue.DEBUG;
-import tufts.vue.DRBrowser;
-import tufts.vue.VUE;
 
-import javax.swing.Icon;
 import javax.swing.JComponent;
 
 //import com.sun.xml.rpc.processor.modeler.j2ee.xml.javaXmlTypeMappingType;

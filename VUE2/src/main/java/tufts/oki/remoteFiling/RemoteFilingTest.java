@@ -21,7 +21,6 @@
 
 package tufts.oki.remoteFiling;
 import java.io.*;
-import org.apache.commons.net.ftp.*;
 
 /**
  *

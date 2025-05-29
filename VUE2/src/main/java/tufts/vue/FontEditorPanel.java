@@ -16,14 +16,12 @@
 package tufts.vue;
 
 import tufts.vue.gui.*;
-import tufts.vue.gui.formattingpalette.AlignmentDropDown;
+
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.font.TextAttribute;
 import java.util.*;
 import java.beans.*;
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AttributeSet;

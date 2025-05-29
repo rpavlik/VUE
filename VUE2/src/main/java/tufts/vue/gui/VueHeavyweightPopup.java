@@ -16,10 +16,8 @@ package tufts.vue.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Frame;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Point;
 import java.awt.Window;
 import java.util.*;

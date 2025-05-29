@@ -25,8 +25,7 @@ package tufts.vue;
  * @author  akumar03
  */
 import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
+
 import java.awt.*;
 
 public class GetLibraryInfoDialog extends JDialog implements java.awt.event.ActionListener {

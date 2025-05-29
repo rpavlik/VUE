@@ -16,23 +16,13 @@
 package tufts.vue;
 
 import tufts.Util;
-import static tufts.Util.fmt;
 import tufts.vue.shape.RectangularPoly2D;
-                       
-import edu.tufts.vue.preferences.PreferencesManager;
-import edu.tufts.vue.preferences.VuePrefEvent;
-import edu.tufts.vue.preferences.VuePrefListener;
-import edu.tufts.vue.preferences.implementations.ShowIconsPreference;
-import edu.tufts.vue.preferences.interfaces.VuePreference;
-    
-import java.util.Iterator;
+
 import java.util.Collection;
 import java.util.List;
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.Objects;
-
-import javax.swing.ImageIcon;
 
 /**
  *

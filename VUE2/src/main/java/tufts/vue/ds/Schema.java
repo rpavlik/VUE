@@ -21,12 +21,9 @@ import tufts.vue.MetaMap;
 
 import java.util.*;
 import java.io.*;
-import java.net.URL;
 
 import tufts.vue.Resource;
 import tufts.vue.LWComponent;
-
-import org.xml.sax.InputSource;
 
 import bsh.EvalError;
 import bsh.Interpreter;

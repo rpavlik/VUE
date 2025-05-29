@@ -18,31 +18,14 @@ package tufts.vue;
 import tufts.vue.gui.*;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.geom.RectangularShape;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.AbstractButton;
 import javax.swing.JLabel;
 import javax.swing.Icon;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JList;
-import javax.swing.JSeparator;
-import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
-import javax.swing.border.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import edu.tufts.vue.preferences.implementations.ColorPreference;
 

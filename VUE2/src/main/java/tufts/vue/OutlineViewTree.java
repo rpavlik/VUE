@@ -24,7 +24,6 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.BoxLayout;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.JViewport;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
@@ -34,7 +33,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.ImageIcon;
-import java.util.Iterator;
+
 import java.util.ArrayList;
 
 /**

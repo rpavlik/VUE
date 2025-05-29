@@ -16,7 +16,7 @@
 package tufts.vue;
 
 import tufts.Util;
-import static tufts.Util.fmt;
+
 import static tufts.Util.grow;
 
 import java.util.*;
@@ -28,10 +28,7 @@ import java.awt.Graphics2D;
 import java.awt.BasicStroke;
 import java.awt.Composite;
 import java.awt.AlphaComposite;
-import java.awt.font.*;
 import java.awt.geom.*;
-
-import javax.swing.JTextArea;
 
 /**
  * Draws a view of a Link on a java.awt.Graphics2D context,

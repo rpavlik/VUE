@@ -18,15 +18,9 @@ package edu.tufts.vue.preferences.ui;
 import java.util.*;
 import tufts.vue.gui.DockWindow;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.*;
-import javax.swing.plaf.basic.BasicTreeUI;
-import javax.swing.plaf.metal.MetalTreeUI;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.tree.*;
-import java.awt.Component;
-import edu.tufts.vue.preferences.PreferenceConstants;
+
 import edu.tufts.vue.preferences.PreferencesManager;
 import edu.tufts.vue.preferences.interfaces.VuePreference;
 import edu.tufts.vue.preferences.ui.tree.PrefCategoryTreeNode;
@@ -35,23 +29,16 @@ import edu.tufts.vue.preferences.ui.tree.VuePrefRenderer;
 import edu.tufts.vue.preferences.ui.tree.VueTreeUI;
 import tufts.Util;
 import tufts.vue.VueResources;
-import tufts.vue.gui.GUI;
+
 import java.util.prefs.*;
-import java.util.List;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.URL;
-import java.net.URLDecoder;
-import javax.swing.JDialog;
 
 /**
  * @author Mike Korcynski

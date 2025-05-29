@@ -24,12 +24,9 @@
  */
 package edu.tufts.vue.dataset;
 
-import java.io.*;
-import java.net.*;
 import java.util.*;
-import java.awt.event.*;
 import java.awt.*;
-import javax.swing.*;
+
 import tufts.vue.*;
 import java.awt.geom.*;
 

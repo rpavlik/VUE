@@ -22,7 +22,6 @@ package edu.tufts.vue.metadata.ui;
 import java.util.*;
 import javax.swing.*;
 
-import tufts.Util;
 import tufts.vue.DEBUG;
 
 import edu.tufts.vue.metadata.*;

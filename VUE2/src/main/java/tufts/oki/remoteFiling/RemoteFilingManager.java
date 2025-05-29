@@ -25,9 +25,7 @@ package tufts.oki.remoteFiling;
 import org.apache.commons.net.ftp.*;
 
 import osid.OsidException;
-import tufts.oki.shared.*;
-import tufts.oki.OsidManager;
-import java.io.*;
+
 import java.util.*;
 
 /**

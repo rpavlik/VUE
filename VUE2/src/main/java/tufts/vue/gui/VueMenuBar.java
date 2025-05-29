@@ -47,7 +47,6 @@ import tufts.vue.Images;
 import tufts.vue.JavaAnalysisPanel;
 import tufts.vue.LWComponent;
 import tufts.vue.LWImage;
-import tufts.vue.LWLink;
 import tufts.vue.LWMap;
 import tufts.vue.LWNode;
 import tufts.vue.LWPathway;
@@ -58,15 +57,12 @@ import tufts.vue.LWText;
 import tufts.vue.LayoutAction;
 import tufts.vue.MapTabbedPane;
 import tufts.vue.MapViewer;
-import tufts.vue.PresentationTool;
 import tufts.vue.RecentlyOpenedFilesManager;
 import tufts.vue.Resource;
 import tufts.vue.VUE;
 import tufts.vue.VueAction;
-import tufts.vue.VueApplet;
 import tufts.vue.VueConstants;
 import tufts.vue.VueResources;
-import tufts.vue.VueTool;
 import tufts.vue.VueToolbarController;
 import tufts.vue.VueUtil;
 import tufts.vue.action.AboutAction;
@@ -82,11 +78,6 @@ import tufts.vue.action.ShortcutsAction;
 import tufts.vue.action.ShowURLAction;
 import edu.tufts.vue.dataset.QuickImportAction;
 import edu.tufts.vue.dsm.impl.VueDataSourceManager;
-import edu.tufts.vue.ontology.action.OntologyControlsOpenAction;
-import edu.tufts.vue.ontology.ui.OntologyBrowser;
-import edu.tufts.vue.preferences.VuePrefEvent;
-import edu.tufts.vue.preferences.VuePrefListener;
-import edu.tufts.vue.preferences.implementations.BooleanPreference;
 
 /**
  * The main VUE application menu bar.

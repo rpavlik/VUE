@@ -20,7 +20,6 @@
  */
 
 package tufts.oki.authentication;
-import java.util.*;
 import javax.naming.*;
 import javax.naming.directory.*;
 /**

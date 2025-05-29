@@ -27,9 +27,6 @@ import java.util.prefs.Preferences;
 
 import javax.swing.*;
 
-import edu.tufts.vue.preferences.PreferenceConstants;
-import edu.tufts.vue.preferences.interfaces.VuePreference;
-
 /**
  * @author Mike Korcynski
  *

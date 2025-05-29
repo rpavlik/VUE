@@ -26,7 +26,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.*;
 
-import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import edu.tufts.vue.preferences.implementations.WindowPropertiesPreference;

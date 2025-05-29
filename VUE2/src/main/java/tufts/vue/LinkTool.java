@@ -21,7 +21,6 @@ import javax.swing.*;
 
 import edu.tufts.vue.ontology.ui.OntologySelectionEvent;
 import tufts.vue.NodeTool.NodeModeTool;
-import java.awt.geom.Point2D;
 //import tufts.vue.beans.VueBeanState;
 
 /**

@@ -22,8 +22,6 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Window;
 import java.awt.Frame;
-import javax.swing.JComponent;
-import javax.swing.JMenu;
 
 /**
  *

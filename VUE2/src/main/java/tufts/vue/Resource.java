@@ -24,9 +24,9 @@ import java.net.URI;
 import java.net.URL;
 import java.awt.Image;
 import java.nio.charset.StandardCharsets;
-import java.util.Properties;
+
 import tufts.vue.ui.ResourceIcon;
-import javax.swing.JComponent;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 

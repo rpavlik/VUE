@@ -15,8 +15,6 @@
 
 package tufts.vue.filter;
 
-import java.lang.*;
-import java.io.*;
 import java.util.*;
 import tufts.vue.*;
 

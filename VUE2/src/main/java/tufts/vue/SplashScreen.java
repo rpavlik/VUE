@@ -20,7 +20,7 @@ import tufts.vue.gui.GUI;
 import tufts.macosx.MacOSX;
 
 import java.awt.*;
-import java.util.*;
+
 import javax.swing.*;
 
 /**

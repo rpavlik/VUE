@@ -28,21 +28,9 @@ package tufts.vue.action;
 import javax.swing.*;
 import java.awt.event.*;
 // castor classes
-import org.exolab.castor.xml.Marshaller;
-import org.exolab.castor.xml.Unmarshaller;
-import org.exolab.castor.xml.MarshalException;
-import org.exolab.castor.xml.ValidationException;
 
-import org.exolab.castor.mapping.Mapping;
-import org.exolab.castor.mapping.MappingException;
-import org.xml.sax.InputSource;
-import javax.swing.JTree.*;
-import javax.swing.tree.*;
 import java.io.*;
 import tufts.vue.*;
-import tufts.vue.Actions.LWCAction;
-
-import java.util.Vector;
 
 
 public class ExitAction extends AbstractAction

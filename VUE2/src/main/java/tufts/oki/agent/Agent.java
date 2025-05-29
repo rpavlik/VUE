@@ -20,9 +20,7 @@
  */
 
 package tufts.oki.agent;
-import org.osid.*;
 import java.util.*;
-import java.io.*;
 
 
 /**

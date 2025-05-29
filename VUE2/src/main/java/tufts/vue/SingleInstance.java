@@ -18,8 +18,6 @@ package tufts.vue;
 import java.net.*;
 import java.io.*;
 
-import tufts.vue.gui.VueFrame;
-
 /**
  *
  * @author  akumar03

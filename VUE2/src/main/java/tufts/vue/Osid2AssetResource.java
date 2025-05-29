@@ -22,7 +22,6 @@
 
 package tufts.vue;
 
-import java.net.URL;
 import tufts.Util;
 
 

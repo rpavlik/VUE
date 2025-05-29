@@ -17,25 +17,18 @@ package tufts.vue;
 
 import osid.filing.CabinetEntry;
 import tufts.Util;
-import tufts.vue.gui.*;
 
 import java.awt.*;
 import java.awt.dnd.*;
 import java.awt.datatransfer.*;
-import osid.dr.*;
 
 import java.util.*;
 
 import java.io.*;
-import java.io.IOException;
-import java.net.URL;
-import java.util.regex.*;
 
 import javax.swing.*;
-import java.awt.event.*;
 
 import javax.swing.tree.*;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 
 import tufts.oki.remoteFiling.*;

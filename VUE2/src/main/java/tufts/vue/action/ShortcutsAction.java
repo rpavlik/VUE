@@ -29,9 +29,6 @@ import tufts.vue.gui.DockWindow;
 
 import java.awt.Event;
 import java.awt.event.*;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import javax.swing.Action;
 import javax.swing.AbstractButton;

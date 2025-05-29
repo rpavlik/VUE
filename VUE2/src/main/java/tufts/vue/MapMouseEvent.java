@@ -18,7 +18,6 @@ package tufts.vue;
 import tufts.Util;
 
 import java.awt.Rectangle;
-import java.awt.event.InputEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.Point2D;
 import java.awt.event.*;

@@ -20,9 +20,7 @@
  */
 
 package tufts.oki.localFiling;
-import java.lang.*;
 import java.io.*;
-import tufts.oki.shared.*;
 
 /**
  *  Implements a set of tests on the LocalFilingManager and related classes.  These tests

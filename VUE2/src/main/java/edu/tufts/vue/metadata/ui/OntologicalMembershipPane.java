@@ -16,10 +16,7 @@
 
 package edu.tufts.vue.metadata.ui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -31,7 +28,6 @@ import tufts.vue.*;
 import tufts.vue.gui.Widget;
 
 import edu.tufts.vue.metadata.*;
-import edu.tufts.vue.ontology.*;
 import edu.tufts.vue.ontology.ui.*;
 
 /*

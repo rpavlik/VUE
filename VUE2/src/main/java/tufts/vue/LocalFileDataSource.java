@@ -17,19 +17,15 @@ package tufts.vue;
 // $Header: /home/svn/cvs2svn-2.1.1/at-cvs-repo/VUE2/src/tufts/vue/LocalFileDataSource.java,v 1.35 2010-02-03 19:17:40 mike Exp $
 
 import javax.swing.*;
-import java.util.Vector;
-import java.util.*;
-import java.awt.*;
 
-import javax.swing.border.*;
+import java.util.*;
+
 import javax.swing.filechooser.FileSystemView;
 
 import java.io.*;
 
 import osid.filing.*;
-import tufts.oki.remoteFiling.*;
 import tufts.oki.localFiling.*;
-import tufts.oki.shared.*;
 import tufts.vue.action.*;
 import tufts.Util;
 

@@ -20,8 +20,6 @@
  */
 
 package tufts.oki.authorization;
-import tufts.oki.shared.*;
-import osid.shared.*;
 
 /**
  *  A function is some operation that can be performed in an application or service.

@@ -21,13 +21,11 @@ package tufts.vue.action;
  * Created on June 3, 2003, 3:29 PM
  */
 
-import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import javax.swing.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
-import org.apache.xerces.dom.*;
 import org.apache.batik.dom.GenericDOMImplementation;
 import org.apache.batik.svggen.*;
 import org.w3c.dom.*;

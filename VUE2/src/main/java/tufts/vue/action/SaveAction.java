@@ -25,10 +25,7 @@ package tufts.vue.action;
 import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
-import java.net.URI;
-import java.net.URL;
 import java.util.*;
-import java.util.zip.*;
 
 import tufts.vue.*;
 import tufts.Util;
@@ -36,8 +33,6 @@ import tufts.vue.gui.GUI;
 import tufts.vue.gui.HtmlOutputDialog;
 import tufts.vue.gui.VueFrame;
 
-import static tufts.vue.Resource.*;
-    
 /**
  * Save the currently active map.
  *

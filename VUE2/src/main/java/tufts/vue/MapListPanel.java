@@ -26,10 +26,8 @@ package tufts.vue;
 
 import java.awt.*;
 import java.io.File;
-import java.util.Iterator;
-import javax.swing.*;
 
-import tufts.vue.action.ActionUtil;
+import javax.swing.*;
 
 public class MapListPanel extends JPanel implements Scrollable {
     

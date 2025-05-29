@@ -21,22 +21,12 @@
 
 package tufts.vue;
 
-import javax.swing.JFrame;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import javax.swing.Action;
-import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractButton;
+
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.*;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 

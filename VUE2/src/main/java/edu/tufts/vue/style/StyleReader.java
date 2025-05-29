@@ -21,9 +21,6 @@
 package edu.tufts.vue.style;
 
 
-import javax.swing.text.*;
-import javax.swing.text.html.*;
-import java.util.*;
 import java.net.*;
 
 public class StyleReader {

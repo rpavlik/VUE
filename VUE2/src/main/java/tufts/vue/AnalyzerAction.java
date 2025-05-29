@@ -28,28 +28,19 @@ import javax.swing.KeyStroke;
 
 import edu.tufts.vue.mbs.AlchemyAnalyzer;
 
-import edu.tufts.vue.layout.*;
 import edu.tufts.vue.mbs.AnalyzerResult;
 import edu.tufts.vue.mbs.LWComponentAnalyzer;
 import edu.tufts.vue.mbs.OpenCalaisAnalyzer;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.*;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
 
 import javax.swing.Action;
 
@@ -60,17 +51,12 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.osid.repository.Asset;
-import org.osid.repository.AssetIterator;
-import org.osid.repository.RepositoryException;
 
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 
 import tufts.Util;
 import tufts.vue.Actions.LWCAction;
 import tufts.vue.gui.GUI;
-import tufts.vue.gui.Widget;
 
 import tufts.vue.VueUtil;
 
