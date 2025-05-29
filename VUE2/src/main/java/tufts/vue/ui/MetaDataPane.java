@@ -555,10 +555,7 @@ public class MetaDataPane extends tufts.vue.gui.Widget
         } else {
             // prior to java 1.6, GridBag has serious bug in that it completely fails
             // if more than 512 items are loaded into it.
-            if (rows > 512)
-                maxRow = 512;
-            else
-                maxRow = rows;
+            maxRow = Math.min(rows, 512);
         }
 
         int rowIdx = 0;

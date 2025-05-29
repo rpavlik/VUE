@@ -725,12 +725,9 @@ public class LWText extends LWComponent {
 			// we always compute the minimum size, and
 			// never let us get smaller than that -- so
 			// only use given size if bigger than min size.
-			if (request.width > min.width)
-				newWidth = request.width;
-			else
-				newWidth = min.width;
-			
-			//MK
+			newWidth = Math.max(request.width, min.width);
+
+			// MK
 			newHeight = Math.max(min.height,request.height);
 				
 			this.getRichLabelBox();

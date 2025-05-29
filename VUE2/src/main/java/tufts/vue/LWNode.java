@@ -1219,14 +1219,8 @@ public class LWNode extends LWContainer
                 newHeight = fittedSize.height;
 
             } else {
-                if (request.width > min.width)
-                    newWidth = request.width;
-                else
-                    newWidth = min.width;
-                if (request.height > min.height)
-                    newHeight = request.height;
-                else
-                    newHeight = min.height;
+                newWidth = Math.max(request.width, min.width);
+                newHeight = Math.max(request.height, min.height);
             }
         }
 

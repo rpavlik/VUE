@@ -1878,7 +1878,7 @@ public class Util
         final int g = c.getGreen();
         final int b = c.getBlue();
 
-        int max = (r > g) ? r : g;
+        int max = Math.max(r, g);
         if (b > max) max = b;
             
         return ((float) max) / 255f;

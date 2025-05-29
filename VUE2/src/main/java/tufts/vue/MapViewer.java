@@ -6153,9 +6153,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 case KeyEvent.VK_LEFT:
                 case KeyEvent.VK_RIGHT:
 
-                    if (!getSelection().isEmpty() 
-                    		&& getSelection().size() == 1
-                    		&& activeTool.supportsSelection()
+                    if (getSelection().size() == 1
+                            && activeTool.supportsSelection()
                     	)
                     {
                 		final LWComponent selected = getSelection().first();
@@ -6994,8 +6993,8 @@ public class MapViewer extends TimedASComponent//javax.swing.JComponent
                 repaintRect = draggedSelectorBox;
             
             // Set the current selection box
-            int sx = dragStart.x < screenX ? dragStart.x : screenX;
-            int sy = dragStart.y < screenY ? dragStart.y : screenY;
+            int sx = Math.min(dragStart.x, screenX);
+            int sy = Math.min(dragStart.y, screenY);
             draggedSelectorBox = new Rectangle(sx, sy,
             Math.abs(dragStart.x - screenX),
             Math.abs(dragStart.y - screenY));

@@ -62,7 +62,7 @@ public class ClusterLayout extends Layout {
 		// set map size of the map
 		double rowCount = ds.getRowList().size();
 		double goodSize = (int) Math.sqrt(rowCount) * 100;
-		MAP_SIZE = MAP_SIZE > goodSize ? MAP_SIZE : goodSize;
+		MAP_SIZE = Math.max(MAP_SIZE, goodSize);
 
 		for (ArrayList<String> row : ds.getRowList()) {
 			String node1Label = row.get(0);
@@ -188,10 +188,8 @@ public class ClusterLayout extends Layout {
 			LWComponent c = iter.next();
 			if (c instanceof LWNode) {
 				LWNode node = (LWNode) c;
-				minX = node.getLocation().getX() < minX ? node.getLocation()
-						.getX() : minX;
-				minY = node.getLocation().getY() < minY ? node.getLocation()
-						.getY() : minY;
+				minX = Math.min(node.getLocation().getX(), minX);
+				minY = Math.min(node.getLocation().getY(), minY);
 				total++;
 				maxNodeWidth = maxNodeWidth > c.getWidth() ? maxNodeWidth : c
 						.getWidth();

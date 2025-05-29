@@ -104,10 +104,10 @@ public class ListRandomLayout extends Layout {
             LWComponent c = i.next();
             if (c instanceof LWNode) {
                 LWNode node = (LWNode) c;
-                minX = node.getLocation().getX() < minX ? node.getLocation().getX() : minX;
-                minY = node.getLocation().getY() < minY ? node.getLocation().getY() : minY;
-                maxX = node.getLocation().getX() > maxX ? node.getLocation().getX() : maxX;
-                maxY = node.getLocation().getY() > maxY ? node.getLocation().getY() : maxY;
+                minX = Math.min(node.getLocation().getX(), minX);
+                minY = Math.min(node.getLocation().getY(), minY);
+                maxX = Math.max(node.getLocation().getX(), maxX);
+                maxY = Math.max(node.getLocation().getY(), maxY);
                 xAdd = xAdd > node.getWidth() ? xAdd : node.getWidth();
                 yAdd = yAdd > node.getHeight() ? yAdd : node.getHeight();
                 total++;

@@ -64,8 +64,8 @@ public class ForceLayout extends Layout {
                 continue; 
             if(c instanceof LWNode) {
                 LWNode node = (LWNode) c;
-                minX = node.getLocation().getX() < minX ? node.getLocation().getX() : minX;
-                minY = node.getLocation().getY() < minY ? node.getLocation().getY() : minY;
+                minX = Math.min(node.getLocation().getX(), minX);
+                minY = Math.min(node.getLocation().getY(), minY);
                 if (!repeatMap.containsKey(node))
                     repeatMap.put(node, 0);
                 total++;

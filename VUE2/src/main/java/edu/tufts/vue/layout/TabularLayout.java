@@ -107,8 +107,8 @@ public class TabularLayout extends Layout {
                 }
             else
                 {
-                    minX = node.getLocation().getX() < minX ? node.getLocation().getX() : minX;
-                    minY = node.getLocation().getY() < minY ? node.getLocation().getY() : minY;
+                    minX = Math.min(node.getLocation().getX(), minX);
+                    minY = Math.min(node.getLocation().getY(), minY);
                 }
                 
             xAdd = xAdd > node.getWidth() ? xAdd : node.getWidth();

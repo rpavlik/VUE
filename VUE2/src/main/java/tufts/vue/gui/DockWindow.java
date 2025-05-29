@@ -1765,11 +1765,8 @@ public class DockWindow
 
         if (absoluteMin < TitleHeight + ResizeCornerSize)
             absoluteMin = TitleHeight + ResizeCornerSize;
-        
-        if (height < absoluteMin)
-            return absoluteMin;
-        else
-            return height;
+
+        return Math.max(height, absoluteMin);
     }
 
     private int minUnrolledWidth(int requestedWidth)
@@ -1785,11 +1782,8 @@ public class DockWindow
             if (absoluteMin < stackTop.getWidth())
                 absoluteMin = stackTop.getWidth();
         }
-        
-        if (requestedWidth < absoluteMin)
-            return absoluteMin;
-        else
-            return requestedWidth;
+
+        return Math.max(requestedWidth, absoluteMin);
     }
     
     public void setBounds(Rectangle r) {
@@ -1958,7 +1952,7 @@ public class DockWindow
         final int parentWidth = mParent == null ? 0 : mParent.getWidth();
         final int childWidth = mChild == null ? 0 : mChild.getWidth();
         
-        return parentWidth > childWidth ? parentWidth : childWidth;
+        return Math.max(parentWidth, childWidth);
     }
     
     

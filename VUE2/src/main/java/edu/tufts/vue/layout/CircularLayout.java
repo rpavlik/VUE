@@ -64,10 +64,10 @@ public class CircularLayout extends Layout {
             if (c.isManagedLocation())
                 continue; 
             if(c instanceof LWNode ) {
-                minX = c.getLocation().getX()<minX?c.getLocation().getX():minX;
-                minY =c.getLocation().getY()<minY?c.getLocation().getY():minY;
-                maxX = c.getLocation().getX() > maxX ? c.getLocation().getX() : maxX;
-                maxY = c.getLocation().getY() > maxY ? c.getLocation().getY() : maxY;               
+                minX = Math.min(c.getLocation().getX(), minX);
+                minY = Math.min(c.getLocation().getY(), minY);
+                maxX = Math.max(c.getLocation().getX(), maxX);
+                maxY = Math.max(c.getLocation().getY(), maxY);
                 xAdd = xAdd > c.getWidth() ? xAdd : c.getWidth();
                 yAdd = yAdd > c.getHeight() ? yAdd : c.getHeight();
                 total++;

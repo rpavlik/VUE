@@ -568,7 +568,7 @@ public class TextBox extends JTextPane
             if (wordWidth > maxWidth) {
                 if (c == 0 && curRunIdx == 0) {
                     // If no whitespace in the whole thing, allow some breaking (should never happen currently)
-                    return wordWidth < mMaxCharWidth * BigWordLen ? wordWidth : mMaxCharWidth * BigWordLen;
+                    return Math.min(wordWidth, mMaxCharWidth * BigWordLen);
                 } else {
                     maxWidth = wordWidth;
                     maxRunIdx = curRunIdx;

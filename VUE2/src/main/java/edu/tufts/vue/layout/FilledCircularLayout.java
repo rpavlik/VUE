@@ -58,8 +58,8 @@ public class FilledCircularLayout extends Layout {
                 continue; 
             if (c instanceof LWNode) {
                 LWNode node = (LWNode) c;
-                minX = node.getLocation().getX() < minX ? node.getLocation().getX() : minX;
-                minY = node.getLocation().getY() < minY ? node.getLocation().getY() : minY;
+                minX = Math.min(node.getLocation().getX(), minX);
+                minY = Math.min(node.getLocation().getY(), minY);
                 xAdd = xAdd > node.getWidth() ? xAdd : node.getWidth();
                 yAdd = yAdd > node.getHeight() ? yAdd : node.getHeight();
 

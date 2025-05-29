@@ -313,7 +313,7 @@ public class ResourceIcon
             Rectangle2D imageBounds;
             if (CropToSquare) {
                 // square off image, then fit in icon (todo: better; crop to icon)
-                int smallestAxis = mImageWidth > mImageHeight ? mImageHeight : mImageWidth;
+                int smallestAxis = Math.min(mImageWidth, mImageHeight);
                 imageBounds = new Rectangle2D.Float(0, 0, smallestAxis, smallestAxis);
             } else {
                 // fit entire image in icon

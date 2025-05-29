@@ -1050,7 +1050,7 @@ public class ZoomTool extends VueTool
                       
         //return newZoom < ZoomDefaults[0] ? ZoomDefaults[0] : newZoom; // never let us be less than min-zoom
         
-        return newZoom < ZoomDefaults[0] ? ZoomDefaults[0] : newZoom; // never let us be less than min-zoom
+        return Math.max(newZoom, ZoomDefaults[0]); // never let us be less than min-zoom
     }
 
 

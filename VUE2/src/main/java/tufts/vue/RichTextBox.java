@@ -1051,12 +1051,12 @@ public class RichTextBox extends com.lightdev.app.shtm.SHTMLEditorPane
         		
         		float minSpan = ui.getMinimumSpan(View.X_AXIS);
         		float mins2 = Math.max(minSpan,(float)position.getX());
-        		s = new Dimension((int)(mBounds.width > mins2 ? mBounds.width : mins2), height);
+        		s = new Dimension((int)(Math.max(mBounds.width, mins2)), height);
         	}
         	else
         	{
         		float minSpan = ui.getMinimumSpan(View.X_AXIS);
-        		s = new Dimension((int)(mBounds.width > minSpan ? mBounds.width : minSpan), height);
+        		s = new Dimension((int)(Math.max(mBounds.width, minSpan)), height);
         	}
         	//float widthRatio = ((float)s.width /(float)lwc.width);
        	//	float heightRatio =((float)s.height/(float)lwc.height);
