@@ -58,8 +58,6 @@ import tufts.Util;
 import tufts.vue.Actions.LWCAction;
 import tufts.vue.gui.GUI;
 
-import tufts.vue.VueUtil;
-
 import edu.tufts.vue.ontology.OntType;
 
 import edu.tufts.vue.metadata.MetadataList;

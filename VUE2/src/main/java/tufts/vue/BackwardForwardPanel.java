@@ -23,7 +23,6 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JPanel;
 
-import tufts.vue.Actions;
 import tufts.vue.gui.VueButton;
 import tufts.vue.gui.VueButtonIcon;
 

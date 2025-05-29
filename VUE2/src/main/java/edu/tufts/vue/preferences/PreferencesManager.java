@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Vector;
 import java.util.prefs.*;
 
-import edu.tufts.vue.preferences.PreferenceConstants;
 import edu.tufts.vue.preferences.implementations.AlchemyAPIPreference;
 import edu.tufts.vue.preferences.interfaces.VuePreference;
 

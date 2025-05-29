@@ -28,7 +28,6 @@ import javax.swing.JList;
 import javax.swing.JPopupMenu;
 
 import tufts.Util;
-import tufts.vue.DataSource;
 import tufts.vue.ds.XmlDataSource;
 import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.GUI;

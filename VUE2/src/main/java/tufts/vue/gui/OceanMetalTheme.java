@@ -1,7 +1,5 @@
 package tufts.vue.gui;
 
-import tufts.vue.gui.GUI;
-
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;

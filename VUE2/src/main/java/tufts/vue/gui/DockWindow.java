@@ -25,8 +25,6 @@ import tufts.vue.VueUtil;
 import tufts.vue.EventRaiser;
 import tufts.vue.VueResources;
 
-import tufts.vue.gui.Screen;
-
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;

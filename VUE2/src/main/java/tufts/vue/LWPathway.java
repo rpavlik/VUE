@@ -16,7 +16,6 @@
 package tufts.vue;
 
 import tufts.Util;
-import tufts.vue.DEBUG;
 import tufts.vue.NodeTool.NodeModeTool;
 
 import edu.tufts.vue.preferences.implementations.BooleanPreference;

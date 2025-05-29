@@ -28,7 +28,6 @@ import tufts.vue.gui.TimedASComponent;
 import tufts.vue.gui.VuePopupFactory;
 import tufts.vue.gui.WindowDisplayAction;
 import static tufts.vue.MapDropTarget.*;
-import tufts.vue.NodeTool;
 
 import java.util.List;
 import java.util.Timer;

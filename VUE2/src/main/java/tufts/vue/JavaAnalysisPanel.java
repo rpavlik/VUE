@@ -37,14 +37,6 @@ import javax.swing.JTextArea;
 
 import edu.tufts.vue.metadata.MetadataList;
 
-import tufts.vue.LWComponent;
-import tufts.vue.LWLink;
-import tufts.vue.LWMap;
-import tufts.vue.LWNode;
-import tufts.vue.LayoutAction;
-import tufts.vue.VUE;
-import tufts.vue.VueResources;
-import tufts.vue.VueUtil;
 import tufts.vue.gui.DockWindow;
 import tufts.vue.gui.GUI;
 import tufts.vue.gui.VueFileChooser;

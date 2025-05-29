@@ -24,7 +24,6 @@ import javax.swing.*;
 
 import edu.tufts.vue.metadata.ui.MetadataEditor;
 
-import tufts.vue.VueResources;
 import tufts.vue.gui.*;
 
 /**
