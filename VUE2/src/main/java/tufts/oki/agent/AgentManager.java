@@ -137,6 +137,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An agent who's id is equal to the one passed.
      */
     public org.osid.agent.Agent getAgent(org.osid.shared.Id id) throws org.osid.agent.AgentException {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
         try
 		{
 			for (int i=0; i < ids.size(); i++) {
@@ -181,16 +182,17 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An iterator which walks a list of unique agent types.
      */
     public org.osid.shared.TypeIterator getAgentTypes() throws org.osid.agent.AgentException {  
-        /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet type_set = new HashSet();
-        for (int i=0; i < ids.size(); i++) {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
+        /* Iterate over all agents, extract type, and add to a HashSet. */
+        HashSet<org.osid.shared.Type> type_set = new HashSet<>();
+        for (int i = 0; i < ids.size(); i++) {
             Agent agent = (Agent) agents.elementAt (i);
             org.osid.shared.Type type = agent.getType();
             type_set.add(type);
         }
         
         /*  Create  type vector from the type set.  */
-        Vector type_vector = new Vector (type_set.size());
+        Vector<org.osid.shared.Type> type_vector = new Vector<> (type_set.size());
         type_vector.addAll (type_set);
 
         /*  Create and return a TypeIterator for the list of unique types.  */
@@ -218,8 +220,9 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An AgentIterator which lists out all agents of the type given.
      */
     public org.osid.agent.AgentIterator getAgentsByType(org.osid.shared.Type agentType) throws org.osid.agent.AgentException {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
         /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet agent_set = new HashSet();
+        HashSet<Agent> agent_set = new HashSet<>();
         for (int i=0; i < ids.size(); i++) {
             Agent agent = (Agent) agents.elementAt (i);
             org.osid.shared.Type type = agent.getType();
@@ -228,7 +231,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
         }
         
         /*  Create  type vector from the agent set.  */
-        Vector agent_vector = new Vector (agent_set.size());
+        Vector<Agent> agent_vector = new Vector<> (agent_set.size());
         agent_vector.addAll (agent_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
@@ -243,6 +246,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
       *  @return A group who's id is equal to the one passed.
       */
     public org.osid.agent.Group getGroup(org.osid.shared.Id id) throws org.osid.agent.AgentException {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
         try
 		{
 			for (int i=0; i < ids.size(); i++) {
@@ -269,8 +273,9 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An iterator which walks a list of unique group types.
      */
    public org.osid.shared.TypeIterator getGroupTypes() throws org.osid.agent.AgentException {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
         /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet type_set = new HashSet();
+        HashSet<org.osid.shared.Type> type_set = new HashSet<>();
         for (int i=0; i < ids.size(); i++) {
             Group group = (Group) groups.elementAt (i);
             org.osid.shared.Type type = group.getType();
@@ -278,7 +283,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
         }
         
         /*  Create  type vector from the type set.  */
-        Vector type_vector = new Vector (type_set.size());
+        Vector<org.osid.shared.Type> type_vector = new Vector<> (type_set.size());
         type_vector.addAll(type_set);
 
         /* Create and return a TypeIterator for the list of unique types. */
@@ -304,8 +309,9 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An AgentIterator which lists out all groups of the type given.
      */
     public org.osid.agent.AgentIterator getGroupsByType(org.osid.shared.Type groupType) throws org.osid.agent.AgentException {
+        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
         /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet group_set = new HashSet();
+        HashSet<Group> group_set = new HashSet<>();
         for (int i=0; i < ids.size(); i++) {
             Group group = (Group) groups.elementAt (i);
             org.osid.shared.Type type = group.getType();
@@ -314,7 +320,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
         }
         
         /*  Create  type vector from the agent set.  */
-        Vector group_vector = new Vector (group_set.size());
+        Vector<Group> group_vector = new Vector<> (group_set.size());
         group_vector.addAll (group_set);
         
         /*  Create and return an AgentIterator for the list of agents of this type.  */
