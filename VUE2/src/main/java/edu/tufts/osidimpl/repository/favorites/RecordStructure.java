@@ -97,14 +97,6 @@ implements org.osid.repository.RecordStructure
     throws org.osid.repository.RepositoryException
     {
         java.util.Vector<org.osid.repository.PartStructure> results = new java.util.Vector<>();
-        try
-        { 
-        
-        }
-        catch (Throwable t)
-        {
-            throw new org.osid.repository.RepositoryException(org.osid.OsidException.OPERATION_FAILED);
-        }
         return new PartStructureIterator(results);
     }
 
