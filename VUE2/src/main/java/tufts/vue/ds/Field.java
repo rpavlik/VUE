@@ -193,7 +193,7 @@ public class Field implements tufts.vue.XMLUnmarshalListener
             }
             // todo: later, process to re-construct associations
         } else
-            mRelatedFields = Collections.EMPTY_LIST;
+            mRelatedFields = Collections.emptyList();
     }
     
     /** Wrapper for display of special values: e.g., EMPTY_VALUE ("") to "(no value)" */

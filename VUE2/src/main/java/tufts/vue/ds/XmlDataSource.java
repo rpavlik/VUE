@@ -849,7 +849,7 @@ public class XmlDataSource extends BrowseDataSource
     private static class UIParams {
         String xml;
         // possible enumerated types, indexed by key field
-        Map<String,Vector> extraValuesByKey = Collections.EMPTY_MAP;
+        Map<String,Vector> extraValuesByKey = Collections.emptyMap();
     }
     
     private java.util.List<ConfigField> getWideMatrixConfigurationUIFields(String[] values) {

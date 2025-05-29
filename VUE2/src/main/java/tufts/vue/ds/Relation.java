@@ -211,7 +211,7 @@ public final class Relation {
 
         if (rowData == null) {
             //Util.printStackTrace("NULL ROW DATA AGAINST FIELD: " + field);
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
         
         //-----------------------------------------------------------------------------
@@ -262,7 +262,7 @@ public final class Relation {
                 if (DEBUG.SCHEMA || DEBUG.WORK)
                     Log.debug("JOIN: same schema, no joins possible for " + quoteKey(field) + "<=>" + rowData);
                          //new Throwable("HERE"));
-                return Collections.EMPTY_LIST;
+                return Collections.emptyList();
             }
                 
             final Field indexKey = rowSchema.getField(fieldName);
@@ -322,7 +322,7 @@ public final class Relation {
 
         }
 
-        return results.size() > 0 ? results.values() : Collections.EMPTY_LIST;
+        return results.size() > 0 ? results.values() : Collections.emptyList();
     }
 
     /** @return passed in results for convenience */

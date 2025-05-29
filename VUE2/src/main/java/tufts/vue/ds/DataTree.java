@@ -90,7 +90,7 @@ public class DataTree extends javax.swing.JTree
     private static volatile LWMap mActiveMap;
     
     private static volatile MapViewer mActiveViewer;
-    private static volatile Collection<LWComponent> ActiveMapDataNodes = Collections.EMPTY_LIST;
+    private static volatile Collection<LWComponent> ActiveMapDataNodes = Collections.emptyList();
     
     
     public static final class MapListener implements LWComponent.Listener, LWSelection.Listener {
@@ -198,7 +198,7 @@ public class DataTree extends javax.swing.JTree
             ActiveMapDataNodes = dataNodes;
             
         } else {
-            ActiveMapDataNodes = Collections.EMPTY_LIST;
+            ActiveMapDataNodes = Collections.emptyList();
         }
         
     }
@@ -1771,7 +1771,7 @@ public class DataTree extends javax.swing.JTree
         final List<LWComponent> newRowNodes = DataAction.makeRowNodes(mSchema, newRows);
 
         Multiset<LWComponent> targetsUsed = null;
-        List<LWLink> linksAdded = Collections.EMPTY_LIST;
+        List<LWLink> linksAdded = Collections.emptyList();
 	
         try {
             final Object[] result

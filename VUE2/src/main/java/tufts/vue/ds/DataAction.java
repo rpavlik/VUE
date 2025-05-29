@@ -177,7 +177,7 @@ public final class DataAction
         if (linkTargets.size() > 0) {
             return makeLinks(linkTargets, node, node.getDataValueField(), targetsUsed); // seems wrong to be providing this last argumen
         } else {
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         }
 
     }
@@ -228,7 +228,7 @@ public final class DataAction
 
         Log.debug("LINK-TARGETS: " + Util.tags(linkTargets));
         
-        List<LWLink> links = Collections.EMPTY_LIST;
+        List<LWLink> links = Collections.emptyList();
         
         if (linkTargets.size() > 0) {
             links = new ArrayList<>();
@@ -696,7 +696,7 @@ public final class DataAction
          final Collection<DataRow> rows)
     {
         if (rows.isEmpty())
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
 
         if (schema.getRowNodeStyle() == null) {
             schema.setRowNodeStyle(makeStyleNode(schema));

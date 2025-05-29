@@ -473,7 +473,7 @@ public class UndoManager
             final List childrenRemoved;
                 
             if (newChildList == LWComponent.NO_CHILDREN) {
-                childrenAdded = Collections.EMPTY_LIST;
+                childrenAdded = Collections.emptyList();
             } else {
                 childrenAdded = new ArrayList(newChildList);
                 if (oldChildList != LWComponent.NO_CHILDREN)
@@ -481,7 +481,7 @@ public class UndoManager
             }
 
             if (oldChildList == LWComponent.NO_CHILDREN) {
-                childrenRemoved = Collections.EMPTY_LIST;
+                childrenRemoved = Collections.emptyList();
             } else {
                 childrenRemoved = new ArrayList(oldChildList);
                 if (newChildList != LWComponent.NO_CHILDREN)

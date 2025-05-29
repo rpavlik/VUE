@@ -318,7 +318,7 @@ public class Images
         }
 
         CacheEntry(Image image, File cacheFile) {
-            this(image, cacheFile, Collections.EMPTY_MAP);
+            this(image, cacheFile, Collections.<String, Object>emptyMap());
         }
         
         CacheEntry(Handle handle, File cacheFile) {
@@ -328,7 +328,7 @@ public class Images
         // for startup disk entries: note that props can't change (is final), so this
         // entry must be replaced once the image is loaded.
         CacheEntry(File cacheFile) {
-            this(null, cacheFile, Collections.EMPTY_MAP); 
+            this(null, cacheFile, Collections.<String, Object>emptyMap());
         }
         
 
@@ -2352,7 +2352,7 @@ public class Images
             DocDump.dump(meta_data.getAsTree(PNG_META_DATA));
         }
         
-        final IIOImage io_image = new IIOImage(image, Collections.EMPTY_LIST, meta_data);
+        final IIOImage io_image = new IIOImage(image, Collections.<BufferedImage>emptyList(), meta_data);
 
         final ImageOutputStream output = ImageIO.createImageOutputStream(file);
 
@@ -2429,7 +2429,7 @@ public class Images
 
     private static Map<String,Object> extractVueImageMetaData(IIOMetadataNode metaTree)
     {
-        Map result = Collections.EMPTY_MAP;
+        Map result = Collections.emptyMap();
         for (org.w3c.dom.Node n : Util.iterable(metaTree.getElementsByTagName("TextEntry"))) {
             //Log.debug("FOUND TEXT NODE " + Util.tags(n) + " " + Util.tags(n.getAttributes()));
             if (DEBUG.IO && DEBUG.DATA) Log.debug("FOUND TEXT NODE " + Util.tags(n));
@@ -2814,12 +2814,12 @@ public class Images
             this.data = data;
         }
         Handle(Image i) {
-            this(i, Collections.EMPTY_MAP);
+            this(i, Collections.<String, Object>emptyMap());
         }
 
         private Handle() {
             image = null;
-            data = Collections.EMPTY_MAP;
+            data = Collections.emptyMap();
         }
 
         public static Handle emptyInstance() {
@@ -3054,7 +3054,7 @@ public class Images
         if (DEBUG.IMAGE || DEBUG.IO) out("reading " + imageSRC + "; " + reader + "...");
         
         Image image = null;
-        Map<String,Object> imageData = Collections.EMPTY_MAP;
+        Map<String,Object> imageData = Collections.emptyMap();
         Throwable exception = null;
 
         try {

@@ -2947,7 +2947,7 @@ public class LWComponent
 
 
     public List<LWPathway> getPathways() {
-        return mPathways == null ? java.util.Collections.EMPTY_LIST : mPathways;
+        return mPathways == null ? Collections.emptyList() : mPathways;
     }
 
     /**
@@ -3887,7 +3887,7 @@ public class LWComponent
         // Default is only CHILD_PROPER, and by definition,
         // LWComponents have no proper children.
         // return getAllDescendents(CHILD_PROPER);
-        return java.util.Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
 
@@ -3895,7 +3895,7 @@ public class LWComponent
 
     public Collection<LWComponent> getAllDescendents(final ChildKind kind) {
         if (kind == ChildKind.PROPER)
-            return java.util.Collections.EMPTY_LIST;
+            return Collections.emptyList();
         else
             return getAllDescendents(kind, new java.util.ArrayList<>(), Order.TREE);
     }
@@ -3956,7 +3956,7 @@ public class LWComponent
 
     /** @return us all the links who have us as one of their endpoints */
     public List<LWLink> getLinks(){
-        return mLinks == null ? Collections.EMPTY_LIST : mLinks;
+        return mLinks == null ? Collections.emptyList() : mLinks;
     }
 
     public List<LWLink> getIncomingLinks(){

@@ -1310,7 +1310,7 @@ public class MapDropTarget
     }
 
     private LWComponent createNode(DropContext drop, Resource resource, Point2D where) {
-        return createNode(drop, resource, Collections.EMPTY_MAP, where, false);
+        return createNode(drop, resource, Collections.emptyMap(), where, false);
     }
     
     private static final int MaxNodeTitleLen = VueResources.getInt("node.title.maxDefaultChars", 50);
@@ -1324,7 +1324,7 @@ public class MapDropTarget
         if (DEBUG.DND) Log.debug(drop + "; createNode " + resource + " " + properties + " where=" + where);
 
         if (properties == null)
-            properties = Collections.EMPTY_MAP;
+            properties = Collections.emptyMap();
 
         final boolean dropImagesAsNodes =
             DropImagesAsNodes

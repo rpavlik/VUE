@@ -757,7 +757,7 @@ public class LWLink extends LWComponent
     private Collection<LWComponent> getEndpointChain(LWComponent endpoint) {
 
         if (endpoint == null)
-            return Collections.EMPTY_LIST;
+            return Collections.emptyList();
         
         final HashSet set = new HashSet();
         // pre-add us to the set, so we can't back up through our other endpoint:

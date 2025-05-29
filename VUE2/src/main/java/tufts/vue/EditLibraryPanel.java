@@ -66,7 +66,7 @@ public class EditLibraryPanel extends JPanel implements ActionListener
     private static class UIParams {
         String xml;
         // possible enumerated types, indexed by key field
-        Map<String,Vector> extraValuesByKey = Collections.EMPTY_MAP;
+        Map<String,Vector> extraValuesByKey = Collections.emptyMap();
     }
     
     public EditLibraryPanel(ContentViewer dsv, tufts.vue.DataSource dataSource)

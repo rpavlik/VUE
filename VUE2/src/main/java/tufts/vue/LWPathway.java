@@ -1383,9 +1383,9 @@ public class LWPathway extends LWContainer
         @Override
         public List<LWComponent> getPickList(PickContext pc, List<LWComponent> stored) { return stored; }
         @Override
-        public java.util.List<LWComponent> getChildList() { return java.util.Collections.EMPTY_LIST; }
+        public java.util.List<LWComponent> getChildList() { return Collections.emptyList(); }
         @Override
-        public java.util.List<LWComponent> getChildren() { return java.util.Collections.EMPTY_LIST; }
+        public java.util.List<LWComponent> getChildren() { return Collections.emptyList(); }
         @Override
         protected LWComponent pickChild(PickContext pc, LWComponent c) { return this; }
 
@@ -1425,14 +1425,14 @@ public class LWPathway extends LWContainer
     @Override
     public java.util.List<LWComponent> getChildList() {
         if (DEBUG.XML || DEBUG.PATHWAY) out("getChildList returning EMPTY, as always");
-        return java.util.Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
 
     /** @return Collections.EMPTY_LIST -- the children of pathways are non-proper, and can't be accessed this way */
     @Override
     public java.util.List<LWComponent> getChildren() {
         if (DEBUG.XML || DEBUG.PATHWAY) out("getChildren returning EMPTY, as always");
-        return Collections.EMPTY_LIST;
+        return Collections.emptyList();
     }
     
 
