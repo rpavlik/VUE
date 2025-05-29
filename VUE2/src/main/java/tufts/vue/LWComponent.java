@@ -15,8 +15,16 @@
 
 package tufts.vue;
 
+import edu.tufts.vue.rdf.RDFIndex;
+import edu.tufts.vue.style.Style;
+import edu.tufts.vue.style.StyleMap;
+import edu.tufts.vue.style.StyleReader;
 import tufts.Util;
 import static tufts.Util.*;
+
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.log4j.Logger;
+
 import tufts.vue.ds.Schema;
 import tufts.vue.ds.Field;
 
@@ -28,23 +36,28 @@ import java.awt.BasicStroke;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.AlphaComposite;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.geom.*;
 import java.awt.image.BufferedImage;
 import java.awt.Transparency;
 
+import java.io.File;
 import java.util.*;
 import java.util.regex.*;
 import java.net.*;
 
 //import tufts.vue.beans.UserMapType; // remove: old SB stuff we never used
+import javax.swing.SwingUtilities;
+
 import tufts.vue.filter.*;
 
 import edu.tufts.vue.metadata.MetadataList;
 import edu.tufts.vue.metadata.VueMetadataElement;
+import tufts.vue.gui.GUI;
 
 /**
  * VUE base class for all components to be rendered and edited in the MapViewer.
- *
+ * <p>
  * This class is way too big.  A bunch of inner classes could be separated out (e.g., Key, maybe
  * Property, property event change raising (notify), etc).  Beyond that, it could use a major separation of
  * concerns (e.g., rendering, persistance, "dataSet" meta-data?).
@@ -61,7 +74,7 @@ import edu.tufts.vue.metadata.VueMetadataElement;
 public class LWComponent
     implements VueConstants, XMLUnmarshalListener
 {
-    protected static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(LWComponent.class);
+    protected static final Logger Log = Logger.getLogger(LWComponent.class);
 
     public enum ChildKind {
 
@@ -238,13 +251,13 @@ public class LWComponent
 
     //Static { for (Hide reason : Hide.values()) { System.out.println(reason + " bit=" + reason.bit); } }
 
-    public static final java.awt.datatransfer.DataFlavor DataFlavor =
-        tufts.vue.gui.GUI.makeDataFlavor(LWComponent.class);
+    public static final DataFlavor DataFlavor =
+        GUI.makeDataFlavor(LWComponent.class);
 
     public static final int MIN_SIZE = 10;
     public static final Size MinSize = new Size(MIN_SIZE, MIN_SIZE);
     public static final float NEEDS_DEFAULT = Float.MIN_VALUE;
-    public static final java.util.List<LWComponent> NO_CHILDREN = Collections.emptyList();
+    public static final List<LWComponent> NO_CHILDREN = Collections.emptyList();
 
     public static final boolean COLLAPSE_IS_GLOBAL = true;
 
@@ -256,7 +269,7 @@ public class LWComponent
         isGlobalCollapsed = !isGlobalCollapsed;
     }
 
-    public interface Listener extends java.util.EventListener {
+    public interface Listener extends EventListener {
         void LWCChanged(LWCEvent e);
     }
 
@@ -364,7 +377,7 @@ public class LWComponent
         mSupportedPropertyKeys = Key.PropertyMaskForClass(getClass());
         if (mSupportedPropertyKeys == 0) {
             // this can happen during init before circular dependencies are resolved
-            if (DEBUG.INIT || DEBUG.STYLE) Util.printStackTrace("ZERO PROPERTY BITS IN " + Util.tag(this));
+            if (DEBUG.INIT || DEBUG.STYLE) printStackTrace("ZERO PROPERTY BITS IN " + Util.tag(this));
         } else {
             // not on by default:
             disableProperty(KEY_Alignment);
@@ -424,7 +437,7 @@ public class LWComponent
 
     public void copyStyle(LWComponent styleSource, long permittedPropertyBits) {
         if (DEBUG.STYLE || styleSource == null) {
-            System.out.println("COPY STYLE of " + Util.tags(styleSource) + " ==>> " + Util.tags(this) + " permitBits=" + Long.bitCount(permittedPropertyBits));
+            System.out.println("COPY STYLE of " + tags(styleSource) + " ==>> " + tags(this) + " permitBits=" + Long.bitCount(permittedPropertyBits));
         }
         if (styleSource == null)
             return;
@@ -442,7 +455,7 @@ public class LWComponent
     }
 
 
-    public void applyCSS(edu.tufts.vue.style.Style cssStyle)
+    public void applyCSS(Style cssStyle)
     {
         System.out.println("Applying CSS style " + cssStyle.getName() + ":");
         for (Map.Entry<String,String> se : cssStyle.getAttributes().entrySet()) {
@@ -536,10 +549,10 @@ public class LWComponent
         /* True this property is a sub-part of some other property */
         //public final boolean isSubProperty;
 
-        public static final java.util.List<Key> AllKeys = new java.util.ArrayList<>();
+        public static final List<Key> AllKeys = new ArrayList<>();
 
         private static int InstanceCount; // increment for each key instance, to establish the appropriate bit
-        private static final java.util.Map<Class,Long> ClassProperties = new java.util.HashMap<>();
+        private static final Map<Class,Long> ClassProperties = new HashMap<>();
 
         /** Get the supported property bit mask for the given class in the LWComponent inheritance tree
          * This will only return accurate results after all Key's in the codebase have been initialized. */
@@ -594,7 +607,7 @@ public class LWComponent
             this.isColor = name.endsWith("color"); // todo: hack -- make more explicit
             if (InstanceCount >= Long.SIZE) {
                 this.bit = 0;
-                tufts.Util.printStackTrace(Key.class + ": " + InstanceCount + "th key created -- need to re-implement (try BitSet)");
+                printStackTrace(Key.class + ": " + InstanceCount + "th key created -- need to re-implement (try BitSet)");
             } else
                 this.bit = 1L << InstanceCount;
             AllKeys.add(this);
@@ -668,7 +681,7 @@ public class LWComponent
                     return (TValue) propertySlot.get();
             } catch (Throwable t) {
                 if (DEBUG.META)
-                    tufts.Util.printStackTrace(new Throwable(t), this + ": property slot get() failed " + propertySlot);
+                    printStackTrace(new Throwable(t), this + ": property slot get() failed " + propertySlot);
                 else
                     Log.warn(this + ": property slot get() failed " + propertySlot + " " + t);
                 return DEBUG.Enabled ? (TValue) "<unsupported for this object>" : null;
@@ -721,7 +734,7 @@ public class LWComponent
                 Log.warn(msg + "; " + e);
                 return null;
             } catch (Throwable t) {
-                tufts.Util.printStackTrace(new Throwable(t), this + ": bad slot? unimplemented get/setValue?");
+                printStackTrace(new Throwable(t), this + ": bad slot? unimplemented get/setValue?");
                 return null;
             }
             //if (slot == NO_SLOT_PROVIDED) tufts.Util.printStackTrace(this + ": no slot provided");
@@ -742,7 +755,7 @@ public class LWComponent
                 } catch (ClassCastException e) {
                     final String msg = "Property not supported(getStringValue): " + this + " on\t" + c;
                     if (DEBUG.META)
-                        tufts.Util.printStackTrace(e, msg);
+                        printStackTrace(e, msg);
                     else
                         Log.warn(msg + "; " + e);
                     return DEBUG.Enabled ? "<unsupported for this object>" : null;
@@ -794,7 +807,7 @@ public class LWComponent
                 return true;
             } catch (Throwable t) {
                 System.err.println();
-                tufts.Util.printStackTrace(new Throwable(t), "failed to apply CSS key/value " + cssName + "=" + cssValue);
+                printStackTrace(new Throwable(t), "failed to apply CSS key/value " + cssName + "=" + cssValue);
             }
             return false;
         }
@@ -827,7 +840,7 @@ public class LWComponent
                                                        this.name,
                                                        TERM_CLEAR,
                                                        //"(" + newValue + ")",
-                                                       Util.tags(getStringValue(source)),
+                                                       tags(getStringValue(source)),
                                                        target,
                                                        oldValue);
                     setValueWithContext(target, newValue, PROPERTY_SET_DEFAULT); // may want a specific context here, e.g., PROPERTY_COPY
@@ -956,7 +969,7 @@ public class LWComponent
     }
 
     private static final String _DefaultString = "";
-    public class StringProperty extends Property<java.lang.String> {
+    public class StringProperty extends Property<String> {
         StringProperty(Key key) {
             super(key);
             value = _DefaultString;
@@ -964,7 +977,7 @@ public class LWComponent
         void setBy(String s) { set(s); }
     }
 
-    public class BooleanProperty extends Property<java.lang.Boolean> {
+    public class BooleanProperty extends Property<Boolean> {
         BooleanProperty(Key key, Boolean defaultValue) {
             super(key);
             value = defaultValue;
@@ -1000,7 +1013,7 @@ public class LWComponent
 
     private static final Integer _DefaultInteger = 0;
 
-    public class IntProperty extends NumberProperty<java.lang.Integer> {
+    public class IntProperty extends NumberProperty<Integer> {
         IntProperty(Key key, Integer defaultValue) {
             super(key);
             value = defaultValue;
@@ -1013,7 +1026,7 @@ public class LWComponent
     }
 
     private static final Float _DefaultFloat = 0f;
-    public class FloatProperty extends NumberProperty<java.lang.Float> {
+    public class FloatProperty extends NumberProperty<Float> {
         FloatProperty(Key key) {
             super(key);
             value = _DefaultFloat;
@@ -1021,7 +1034,7 @@ public class LWComponent
         void setBy(String s) { set(Float.valueOf(s)); }
     }
 
-    public class FontProperty extends Property<java.awt.Font> {
+    public class FontProperty extends Property<Font> {
         FontProperty(Key key) {
             super(key);
             value = VueConstants.FONT_DEFAULT;
@@ -1070,9 +1083,9 @@ public class LWComponent
         void setFromCSS(String cssKey, String value) {
             // todo: this ignoring the key, which will permit non-confomant CSS
             if ("italic".equalsIgnoreCase(value))
-                set(java.awt.Font.ITALIC);
+                set(Font.ITALIC);
             else if ("bold".equalsIgnoreCase(value))
-                set(java.awt.Font.BOLD);
+                set(Font.BOLD);
             else
                 set(0);
         }
@@ -1104,7 +1117,7 @@ public class LWComponent
 
 
 
-    public class ColorProperty extends Property<java.awt.Color> {
+    public class ColorProperty extends Property<Color> {
         private static final short ALPHA_NOT_PERMITTED = Short.MIN_VALUE;
         private static final short NO_ALPHA_SET = -1;
         private short fixedAlpha = NO_ALPHA_SET;
@@ -1223,7 +1236,7 @@ public class LWComponent
         try {
             c = VueResources.parseColor(s);
         } catch (NumberFormatException e) {
-            tufts.Util.printStackTrace(new Throwable(e), "LWComponent.StringToColor[" + s + "]");
+            printStackTrace(new Throwable(e), "LWComponent.StringToColor[" + s + "]");
         }
         return c;
     }
@@ -1345,14 +1358,14 @@ public class LWComponent
 
 
     public final ColorProperty mFillColor = new ColorProperty(KEY_FillColor);
-    public final ColorProperty mTextColor = new ColorProperty(KEY_TextColor, java.awt.Color.black) {
+    public final ColorProperty mTextColor = new ColorProperty(KEY_TextColor, Color.black) {
             //{ color = java.awt.Color.black; } // default value
             void onChange() {
                 if (labelBox != null)
                     labelBox.copyStyle(LWComponent.this); // todo better: handle thru style.textColor notification?
             }
         };
-    public final ColorProperty mStrokeColor = new ColorProperty(KEY_StrokeColor, java.awt.Color.darkGray);
+    public final ColorProperty mStrokeColor = new ColorProperty(KEY_StrokeColor, Color.darkGray);
     public final FloatProperty mStrokeWidth = new FloatProperty(KEY_StrokeWidth) { void onChange() { rebuildStroke(); }};
     public final EnumProperty<Alignment> mAlignment = new EnumProperty<>(KEY_Alignment, Alignment.LEFT) {
         void onChange() {
@@ -1555,8 +1568,8 @@ public class LWComponent
         }
 
         if (DEBUG.DATA) {
-            String keyName = key instanceof Class ? key.toString() : Util.tags(key);
-            out("setClientData: " + keyName + "=" + Util.tags(o));
+            String keyName = key instanceof Class ? key.toString() : tags(key);
+            out("setClientData: " + keyName + "=" + tags(o));
         }
 
         if (o == null) {
@@ -1589,7 +1602,7 @@ public class LWComponent
         if (mClientData != null) {
             if (DEBUG.DATA && !mClientData.isEmpty()) {
                 Log.debug("flushing all client data;");
-                Util.dump(mClientData);
+                dump(mClientData);
             }
             mClientData = null;
         }
@@ -1635,7 +1648,7 @@ public class LWComponent
             } catch (ClassCastException e) {
                 String msg = "Property not supported(getPropertyValue): " + key + " on " + this + " (returned null)";
                 if (DEBUG.META)
-                    tufts.Util.printStackTrace(e, msg);
+                    printStackTrace(e, msg);
                 else
                     Log.warn(msg + "; " + e);
                 return null;
@@ -1649,7 +1662,7 @@ public class LWComponent
         if (key == LWKey.Hidden)        return isHidden() ? Boolean.TRUE : Boolean.FALSE;
 
         Log.warn(this + " getPropertyValue; unsupported property [" + key + "] (returning null)");
-        if (key == null) Util.printStackTrace("key was null");
+        if (key == null) printStackTrace("key was null");
         //throw new RuntimeException("Unknown property key[" + key + "]");
         return null;
     }
@@ -1708,7 +1721,7 @@ public class LWComponent
 //         }
         else {
             //out("setProperty: unknown key [" + key + "] with value [" + val + "]");
-            tufts.Util.printStackTrace("FYI: Unhandled Property key: " + key.getClass() + "[" + key + "] with value [" + val + "]");
+            printStackTrace("FYI: Unhandled Property key: " + key.getClass() + "[" + key + "] with value [" + val + "]");
         }
     }
 
@@ -1720,8 +1733,8 @@ public class LWComponent
      * passing flags into the dupe context.
      */
     public static class LinkPatcher {
-        private final java.util.Map<LWComponent,LWComponent> mCopies = new java.util.IdentityHashMap<>();
-        private final java.util.Map<LWComponent,LWComponent> mOriginals = new java.util.IdentityHashMap<>();
+        private final Map<LWComponent,LWComponent> mCopies = new IdentityHashMap<>();
+        private final Map<LWComponent,LWComponent> mOriginals = new IdentityHashMap<>();
 
         public LinkPatcher() {
             if (DEBUG.DND) Log.debug("LinkPatcher: created");
@@ -1812,10 +1825,9 @@ public class LWComponent
      * just sit in a scratch buffer and used as a down-stream duplicating source
      * for pasting, and never be added to the model anywhere.
      *
-     * @param CopyContext may be null.  If not, it's used when duplicating group's of
+     * @param cc may be null.  If not, it's used when duplicating group's of
      * objects containing links that need to be reconnected at the end of the duplicate.
      */
-
     public LWComponent duplicate(CopyContext cc)
     {
         final LWComponent c;
@@ -1987,7 +1999,7 @@ public class LWComponent
 
                 boolean debug = DEBUG.WORK || DEBUG.UNDO;
                 if (isDeleted()) {
-                    Util.printStackTrace("warning: adding cleanup task when deleted");
+                    printStackTrace("warning: adding cleanup task when deleted");
                     debug = true;
                 }
 
@@ -2009,7 +2021,7 @@ public class LWComponent
     public static final String EnumeratedValueKey = "@ValueOf";
 
     //public void setDataInstanceValue(String key, Object value) {
-    public void setDataInstanceValue(tufts.vue.ds.Field field, Object value) {
+    public void setDataInstanceValue(Field field, Object value) {
         //getMetadataList().add(key, value.toString());
         final String key = field.getName();
         getMetadataList().add(key, value.toString());
@@ -2215,7 +2227,7 @@ public class LWComponent
      * map.  If this was only declared in the mapping file as an LWMap persistance item,
      * it would persist after all LWComponent mappings (LWMap subclasses LWComponent).
      */
-    public Collection<tufts.vue.ds.Schema> getIncludedSchemas() {
+    public Collection<Schema> getIncludedSchemas() {
         return null;
     }
 
@@ -2273,10 +2285,10 @@ public class LWComponent
        // return ( (metadataList != null) && (getMetaDataAsHTML().length() > 0) );
     }
     public boolean hasMetaData() {
-        return hasMetaData(edu.tufts.vue.metadata.VueMetadataElement.CATEGORY);
+        return hasMetaData(VueMetadataElement.CATEGORY);
     }
     public String getMetaDataAsHTML() {
-        return getMetaDataAsHTML(edu.tufts.vue.metadata.VueMetadataElement.CATEGORY);
+        return getMetaDataAsHTML(VueMetadataElement.CATEGORY);
     }
     /** see edu.tufts.vue.metadata.VueMetadataElement for metadata types */
     public String getMetaDataAsHTML(int type) {
@@ -2427,7 +2439,7 @@ public class LWComponent
      * so we don't attempt to re-update the TextBox, which has just been
      * updated.
      *
-     * @param allowFillData -- called with allowFillData=false if we don't
+     * @param allowDataFill -- called with allowDataFill=false if we don't
      * want to actually do a data-fill and just want to leave the
      * label as the actual format (e.g.  we just computed filled data
      * and now want to set the label for real, or this is an undo).
@@ -2437,7 +2449,7 @@ public class LWComponent
          final boolean setDocument,
          final boolean allowDataFill)
     {
-        if (DEBUG.TEXT || DEBUG.DATA) out("setLabelImpl " + Util.tags(newLabel) + " setDoc=" + setDocument + " allowDataFill=" + allowDataFill);
+        if (DEBUG.TEXT || DEBUG.DATA) out("setLabelImpl " + tags(newLabel) + " setDoc=" + setDocument + " allowDataFill=" + allowDataFill);
         newLabel = cleanControlChars(newLabel);
 
         if (!mXMLRestoreUnderway && allowDataFill && !isStyling(LWKey.Label)) {
@@ -2470,7 +2482,7 @@ public class LWComponent
                 labelBox.setText("");
         } else {
             this.label = newLabel;
-            if (DEBUG.TEXT || DEBUG.DATA) out("setLabelImpl textSet " + Util.tags(newLabel));
+            if (DEBUG.TEXT || DEBUG.DATA) out("setLabelImpl textSet " + tags(newLabel));
             // todo opt: only need to do this if node or link (LWImage?)
             // Handle this more completely -- shouldn't need to create
             // label box at all -- why can't do entirely lazily?
@@ -2482,7 +2494,7 @@ public class LWComponent
                     // note: this needs to happen before the call to layout below
                     getLabelBox().setText(newLabel);
                 } catch (Throwable t) {
-                    Log.error(String.format("failed to set label '%s' on %s in %s", newLabel, Util.tags(getLabelBox()), this), t);
+                    Log.error(String.format("failed to set label '%s' on %s in %s", newLabel, tags(getLabelBox()), this), t);
                 }
             }
         }
@@ -2493,9 +2505,9 @@ public class LWComponent
 
     public void wrapLabelToWidth(final int charWidth) {
         final String existingLabel = getLabel();
-        final String wrappedLabel = Util.formatLines(existingLabel, charWidth);
+        final String wrappedLabel = formatLines(existingLabel, charWidth);
         if (wrappedLabel != existingLabel) {
-            if (DEBUG.Enabled) Log.debug(this + " wrapped to: " + Util.tags(wrappedLabel));
+            if (DEBUG.Enabled) Log.debug(this + " wrapped to: " + tags(wrappedLabel));
             setLabelImpl(wrappedLabel, true, false);
         }
     }
@@ -2527,7 +2539,7 @@ public class LWComponent
                         //Log.debug("got value[" + value + "]");
 
                         // replace ${someDataKey} with the value found
-                        buf.append(org.apache.commons.lang.StringEscapeUtils.unescapeHtml(value));
+                        buf.append(StringEscapeUtils.unescapeHtml(value));
 
                         // include untouched any/all text found after the '}'
                         buf.append(s, braceClose + 1, s.length());
@@ -2537,7 +2549,7 @@ public class LWComponent
                     }
                 }
             } catch (Throwable t) {
-                Log.error("exception processing replacement braces " + Util.tags(s) + " in format " + Util.tags(fmt) + " for " + this, t);
+                Log.error("exception processing replacement braces " + tags(s) + " in format " + tags(fmt) + " for " + this, t);
             }
 
             if (noValueFound) {
@@ -2551,13 +2563,13 @@ public class LWComponent
 
         if (DEBUG.TEXT || DEBUG.DATA) {
             if (anyReplacement)
-                Log.debug(this + " FILL made from " + Util.tags(fmt) + "->" + Util.tags(buf.toString()));
+                Log.debug(this + " FILL made from " + tags(fmt) + "->" + tags(buf.toString()));
             else
-                Log.debug(this + " FILL; NO REPLACEMENTS MADE in " + Util.tags(fmt));
+                Log.debug(this + " FILL; NO REPLACEMENTS MADE in " + tags(fmt));
         }
 
         return anyReplacement
-            ? Util.formatLines(buf.toString(), MaxLabelLineLength)
+            ? formatLines(buf.toString(), MaxLabelLineLength)
             : fmt;
     }
 
@@ -2573,18 +2585,18 @@ public class LWComponent
             value = (vme == null ? null : vme.getValue());
         }
 
-        return tufts.vue.ds.Field.valueText(value);
+        return Field.valueText(value);
     }
 
 
 
-    protected tufts.vue.TextBox getLabelBox()
+    protected TextBox getLabelBox()
     {
         try {
             if (this.labelBox == null) {
                 synchronized (this) {
                     if (this.labelBox == null)
-                        this.labelBox = new tufts.vue.TextBox(this, this.label);
+                        this.labelBox = new TextBox(this, this.label);
                 }
             }
         } catch (Throwable t) {
@@ -2675,15 +2687,15 @@ public class LWComponent
         setResource(getResourceFactory().get(spec));
     }
     /** convenience delegate to resource factory */
-    public void setResource(java.net.URL url) {
+    public void setResource(URL url) {
         setResource(getResourceFactory().get(url));
     }
     /** convenience delegate to resource factory */
-    public void setResource(java.net.URI uri) {
+    public void setResource(URI uri) {
         setResource(getResourceFactory().get(uri));
     }
     /** convenience delegate to resource factory */
-    public void setResource(java.io.File file) {
+    public void setResource(File file) {
         setResource(getResourceFactory().get(file));
     }
 
@@ -2994,11 +3006,11 @@ public class LWComponent
 
     protected void removeEntryRef(LWPathway.Entry e) {
         if (mEntries == null) {
-            Util.printStackTrace(this + "; no entries! can't remove: " + e);
+            printStackTrace(this + "; no entries! can't remove: " + e);
             return;
         }
         if (!mEntries.remove(e))
-            Util.printStackTrace(this + "; Warning: didn't contain entry " + e);
+            printStackTrace(this + "; Warning: didn't contain entry " + e);
         removePathwayRef(e.pathway);
     }
 
@@ -3021,7 +3033,7 @@ public class LWComponent
     private void removePathwayRef(LWPathway p)
     {
         if (mPathways == null) {
-            if (DEBUG.META) tufts.Util.printStackTrace("attempt to remove non-existent pathwayRef to " + p + " in " + this);
+            if (DEBUG.META) printStackTrace("attempt to remove non-existent pathwayRef to " + p + " in " + this);
             return;
         }
         mPathways.remove(p);
@@ -3041,7 +3053,7 @@ public class LWComponent
 
 
     /** @deprecated - not really deprecated, but intended for persistance only */
-    public java.awt.Dimension getXMLtextBox() {
+    public Dimension getXMLtextBox() {
         return null;
         // NOT CURRENTLY USED
         /*
@@ -3053,7 +3065,7 @@ public class LWComponent
     }
 
     /** @deprecated - not really deprecated, intended for persistance only */
-    public void setXMLtextBox(java.awt.Dimension d) {
+    public void setXMLtextBox(Dimension d) {
         //this.textSize = d;
     }
 
@@ -3455,7 +3467,7 @@ public class LWComponent
         }
 
         if (newParent.hasAncestor(this)) {
-            Util.printStackTrace("ATTEMPTED PARENT LOOP " + this + " can't make a child our parent: " + newParent);
+            printStackTrace("ATTEMPTED PARENT LOOP " + this + " can't make a child our parent: " + newParent);
             return;
         }
 
@@ -3707,7 +3719,7 @@ public class LWComponent
      * calls this, it's a no-op, and a diagnostic stack trace is dumped to the console.
      */
     public void addChildren(Collection<? extends LWComponent> children, Object context) {
-        Util.printStackTrace(this + ": can't take children; ignored: " + Util.tags(children) + "; context=" + context);
+        printStackTrace(this + ": can't take children; ignored: " + tags(children) + "; context=" + context);
     }
 
     /** return true if this component is only a "virtual" member of the map:
@@ -3726,12 +3738,12 @@ public class LWComponent
 
     /** @deprecated - use getChildren */
     @Deprecated
-    public java.util.List<LWComponent> getChildList()
+    public List<LWComponent> getChildList()
     {
         return NO_CHILDREN;
     }
 
-    public java.util.List<LWComponent> getChildren()
+    public List<LWComponent> getChildren()
     {
         return NO_CHILDREN;
     }
@@ -3800,7 +3812,7 @@ public class LWComponent
             final boolean t = (nextSlide != null);
             //out("hasNext " + t);
             if (nextIndex > 100) {
-                Util.printStackTrace("loop");
+                printStackTrace("loop");
                 return false;
             }
             return t;
@@ -3809,7 +3821,7 @@ public class LWComponent
 
         public LWSlide next() {
             if (nextSlide == null) {
-                if (DEBUG.Enabled) Util.printStackTrace(this + "; next at end of SlideIconIter; entries=" + mEntries);
+                if (DEBUG.Enabled) printStackTrace(this + "; next at end of SlideIconIter; entries=" + mEntries);
                 return null;
             }
             final LWSlide s = nextSlide;
@@ -3847,9 +3859,9 @@ public class LWComponent
         if (mEntries.size() == 1) {
             final LWPathway.Entry e = mEntries.get(0);
             if (e.hasVisibleSlide())
-                return Util.iterable(e.getSlide());
+                return iterable(e.getSlide());
             else
-                return Util.EmptyIterable;
+                return EmptyIterable;
         } else {
             mVisibleSlideIconIterator.dc = dc;
             return mVisibleSlideIconIterator;
@@ -3865,7 +3877,7 @@ public class LWComponent
     public List<LWComponent> getPickList(PickContext pc, List<LWComponent> stored)
     {
         Iterable<LWSlide> seenSlides = null;
-        if (pc.root != this && hasEntries() && (seenSlides = seenSlideIcons(pc.dc)) != Util.EmptyIterable) {
+        if (pc.root != this && hasEntries() && (seenSlides = seenSlideIcons(pc.dc)) != EmptyIterable) {
             // todo performance: see LWTraversal for comments: change impl to return a ReverseListIterator, etc.a
             stored.clear();
             if (!isCollapsed())
@@ -3879,7 +3891,7 @@ public class LWComponent
 
 
 
-    public java.util.Iterator<? extends LWComponent> getChildIterator() {
+    public Iterator<? extends LWComponent> getChildIterator() {
         return EmptyIterator;
     }
 
@@ -3901,7 +3913,7 @@ public class LWComponent
         if (kind == ChildKind.PROPER)
             return Collections.emptyList();
         else
-            return getAllDescendents(kind, new java.util.ArrayList<>(), Order.TREE);
+            return getAllDescendents(kind, new ArrayList<>(), Order.TREE);
     }
 
     public final Collection<LWComponent> getAllDescendents(final ChildKind kind, final Collection<LWComponent> bag) {
@@ -4820,7 +4832,7 @@ public class LWComponent
     }
 
     /** set component to this many pixels in size
-     * @param intetrnal -- if true, the event is not undoable
+     * @param internal -- if true, the event is not undoable
      */
     protected void setSizeImpl(float w, float h, boolean internal)
     {
@@ -4834,7 +4846,7 @@ public class LWComponent
         //final boolean skipUndo = internal;
 
         final boolean skipUndo;
-        if (!internal && !javax.swing.SwingUtilities.isEventDispatchThread()) {
+        if (!internal && !SwingUtilities.isEventDispatchThread()) {
             // There was a reason this was important to do -- I think in some cases this could
             // leave undoable state in the undo queue after sizes changes that were really from
             // initializations, and we do NOT want to allow any undo back to a random pre-init
@@ -4999,7 +5011,7 @@ public class LWComponent
             return getY();
         } else {
             if (parent == this) { // DEBUG
-                Util.printStackTrace("PARENT LOOP " + this);
+                printStackTrace("PARENT LOOP " + this);
                 return getY();
             }
             return parent.getMapYPrecise() + getY() * parent.getMapScale();
@@ -5053,7 +5065,7 @@ public class LWComponent
         if (relative == this) {
 
             if (DEBUG.Enabled)
-                Util.printStackTrace("debug: " + this + " is computing link connetion center relative to itself");
+                printStackTrace("debug: " + this + " is computing link connetion center relative to itself");
             //final float scale = getMapScaleF();
 
             point.x = getZeroCenterX();
@@ -5126,7 +5138,7 @@ public class LWComponent
                         //String msg = "debug: " + this + " is computing link connetion center relative to a non-ancestor: " + relative;
                         String msg = "non-ancestor: " + relative + " used as parent-relative of " + this;
                         if (DEBUG.META)
-                            Util.printStackTrace(msg);
+                            printStackTrace(msg);
                         else
                             Log.debug(msg);
                     }
@@ -5163,7 +5175,7 @@ public class LWComponent
         if (ancestor == parent) // quick check for the common case
             return getX();
         else if (parent == null) {
-             Util.printStackTrace("didn't find ancestor " + ancestor + " for " + this);
+             printStackTrace("didn't find ancestor " + ancestor + " for " + this);
              return getX();
         } else
             return parent.getAncestorX(ancestor) + getX() * parent.getMapScale();
@@ -5173,7 +5185,7 @@ public class LWComponent
         if (ancestor == parent) // quick check for the common case
             return getY();
         else if (parent == null) {
-             Util.printStackTrace("didn't find ancestor " + ancestor + " for " + this);
+             printStackTrace("didn't find ancestor " + ancestor + " for " + this);
              return getY();
         } else
             return parent.getAncestorY(ancestor) + getY() * parent.getMapScale();
@@ -5205,13 +5217,13 @@ public class LWComponent
      * not, this is kind of overkill for simple runtime unique indexing string lookups. These *are* persisted in
      * in save files, tho I'm not sure if there's any point in doing so.
      */
-    public java.net.URI getURI() {
+    public URI getURI() {
         //if (isStyle) return null;
         if (uri == null) {
             try {
-                uri = new URI(edu.tufts.vue.rdf.RDFIndex.getUniqueId());
+                uri = new URI(RDFIndex.getUniqueId());
             } catch (Throwable t) {
-                tufts.Util.printStackTrace(t, "Failed to create an uri for  "+label);
+                printStackTrace(t, "Failed to create an uri for  "+label);
             }
         }
         return uri;
@@ -5238,7 +5250,7 @@ public class LWComponent
             uri = new URI(URIString);
             //edu.tufts.vue.rdf.VueIndexedObjectsMap.setID(uri,this);
         } catch (Throwable t) {
-            tufts.Util.printStackTrace(t, "Failed to set an uri for  "+label);
+            printStackTrace(t, "Failed to set an uri for  "+label);
         }
 
     }
@@ -5760,8 +5772,8 @@ public class LWComponent
 
         try {
             getZeroTransform().inverseTransform(mapPoint, zeroPoint);
-        } catch (java.awt.geom.NoninvertibleTransformException e) {
-            Util.printStackTrace(e);
+        } catch (NoninvertibleTransformException e) {
+            printStackTrace(e);
         }
         return zeroPoint;
     }
@@ -5783,7 +5795,6 @@ public class LWComponent
 
     /**
      * @param mapRect -- incoming rectangle to transform to be relative to 0,0 of this component
-     * @param zeroRect -- result is placed here -- will be created if is null
      * @return zeroRect
      *
      * E.g., if the incoming mapRect was from map coords 100,100->120,120, and this component was at 100,100,
@@ -5846,8 +5857,8 @@ public class LWComponent
         points[3] = points[1] + mapRect.getHeight();
         try {
             tx.inverseTransform(points, 0, points, 0, 2);
-        } catch (java.awt.geom.NoninvertibleTransformException e) {
-            Util.printStackTrace(e);
+        } catch (NoninvertibleTransformException e) {
+            printStackTrace(e);
         }
 
         zeroRect.setRect(points[0],
@@ -6440,7 +6451,7 @@ public class LWComponent
                 dc.g.setColor(Color.red);
                 dc.g.fill(getZeroShape());
             } catch (Throwable t) {
-                Util.printStackTrace(t);
+                printStackTrace(t);
             } finally {
                 throw e;
             }
@@ -6809,10 +6820,10 @@ public class LWComponent
         mChangeSupport.addListener(listener, null);
     }
 
-    public synchronized void addLWCListener(Listener listener, LWComponent.Key singleEventKey) {
+    public synchronized void addLWCListener(Listener listener, Key singleEventKey) {
         mChangeSupport.addListener(listener, singleEventKey);
     }
-    /** @param eventMask is a string constant (from LWKey) or an array of such. If one
+    /** @param eventsDesired is a string constant (from LWKey) or an array of such. If one
      of these non-null values, only events matching those keys will be delievered */
     public synchronized void addLWCListener(Listener listener, Object... eventsDesired) {
         mChangeSupport.addListener(listener, eventsDesired);
@@ -6955,7 +6966,7 @@ public class LWComponent
         // components "listening" to this style (pointing to it), and copy over
         // the value that just changed on the style object.
 
-        if (DEBUG.Enabled) out("\nSTYLE OBJECT UPDATING STYLED CHILDREN with " + key + "; value " + Util.tags(e.getOldValue()));
+        if (DEBUG.Enabled) out("\nSTYLE OBJECT UPDATING STYLED CHILDREN with " + key + "; value " + tags(e.getOldValue()));
         //final LWPathway path = ((MasterSlide)getParent()).mOwner;
 
         // We can traverse all objects in the system, looking for folks who
@@ -6976,14 +6987,14 @@ public class LWComponent
                             key.copyValue(this, dest);
                         } else if (DEBUG.STYLE) {
                             System.err.println(" SKIP-USER-SET: " + dest
-                                               + "; target has user-override value: " + Util.tags(key.getValue(dest)));
+                                               + "; target has user-override value: " + tags(key.getValue(dest)));
                         }
                     } else {
                         if (DEBUG.STYLE) Log.debug("DATA-STYLE COPY " + key + " -> " + dest);
                         key.copyValue(this, dest);
                     }
                 } catch (Throwable t) {
-                    tufts.Util.printStackTrace(t, "Failed to copy value from " + e + " old=" + e.getOldValue());
+                    printStackTrace(t, "Failed to copy value from " + e + " old=" + e.getOldValue());
                 }
             }
         }
@@ -7629,7 +7640,7 @@ public class LWComponent
 
     /** interface {@link XMLUnmarshalListener} */
     public void XML_addNotify(Object context, String name, Object parent) {
-        if (DEBUG.XML && DEBUG.META) tufts.Util.printClassTrace("tufts.vue", "XML_addNotify; name=" + name
+        if (DEBUG.XML && DEBUG.META) printClassTrace("tufts.vue", "XML_addNotify; name=" + name
                                                   + "\n\tparent: " + parent
                                                   + "\n\t child: " + this
                                                   + "\n");
@@ -7812,7 +7823,7 @@ public class LWComponent
         final int height = imageSize.pixelHeight();
 
         if (width >= 512 || height >= 512)
-            Log.info("creating large image: " + imageSize + " = approx " + Util.abbrevBytes((long) width * height * 4));
+            Log.info("creating large image: " + imageSize + " = approx " + abbrevBytes((long) width * height * 4));
 
         try {
             Log.info(this + "; createImage:"
@@ -7850,12 +7861,12 @@ public class LWComponent
 
                 // TODO: manage this in a separate cache -- not one per node
 
-                mImageBuffer = tufts.vue.gui.GUI.getDeviceConfigForWindow(null)
+                mImageBuffer = GUI.getDeviceConfigForWindow(null)
                     .createCompatibleImage(width, height, transparency);
 
             } catch (Throwable t) {
                 Log.error("creating image", t);
-                Log.error("creating image: failing node: " + Util.tags(this));
+                Log.error("creating image: failing node: " + tags(this));
                 return null;
             }
 
@@ -8067,7 +8078,7 @@ public class LWComponent
         String label = "";
         String s;
         if (getLabel() != null) {
-            label = " " + Util.tags(getDisplayLabel());
+            label = " " + tags(getDisplayLabel());
 //             if (true||isAutoSized())
 //                 label = " \"" + getDisplayLabel() + "\"";
 //             else
@@ -8136,23 +8147,23 @@ public class LWComponent
 
         VueToolbarController.getController(); // make sure the tools are initialized
 
-        edu.tufts.vue.style.StyleReader.readStyles("compare.weight.css");
+        StyleReader.readStyles("compare.weight.css");
 
-        java.util.Set<String> sortedKeys = new java.util.TreeSet<String>(edu.tufts.vue.style.StyleMap.keySet());
+        Set<String> sortedKeys = new TreeSet<String>(StyleMap.keySet());
 
         for (String key : sortedKeys) {
-            final Object style = edu.tufts.vue.style.StyleMap.getStyle(key);
+            final Object style = StyleMap.getStyle(key);
             System.out.println("Found CSS style key; " + key + ": " + style);
             //System.out.println("Style key: " + se.getKey() + ": " + se.getValue());
         }
 
-        new LWNode().applyCSS(edu.tufts.vue.style.StyleMap.getStyle("node.w1"));
-        new LWLink().applyCSS(edu.tufts.vue.style.StyleMap.getStyle("link.w1"));
+        new LWNode().applyCSS(StyleMap.getStyle("node.w1"));
+        new LWLink().applyCSS(StyleMap.getStyle("link.w1"));
 
     }
 
 
-    protected static final org.apache.log4j.Logger LWLog = org.apache.log4j.Logger.getLogger(LW.class);
+    protected static final Logger LWLog = Logger.getLogger(LW.class);
 
 }
 
