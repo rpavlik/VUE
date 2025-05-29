@@ -2100,18 +2100,18 @@ public class Util
      * it's important to exclude bad Rectangle's from all manner of bounds computation
      * or drawing code. */
     public static boolean isBadRect(Rectangle2D.Float r) {
-        return r.x != r.x
-            || r.y != r.y
-            || r.width != r.width
-            || r.height != r.height;
+        return Float.isNaN(r.x)
+                || Float.isNaN(r.y)
+                || Float.isNaN(r.width)
+                || Float.isNaN(r.height);
     }
-    
+
     /** @return true if any value (x,y,width,height) is Double.NaN */
     public static boolean isBadRect(Rectangle2D.Double r) {
-        return r.x != r.x
-            || r.y != r.y
-            || r.width != r.width
-            || r.height != r.height;
+        return Double.isNaN(r.x)
+                || Double.isNaN(r.y)
+                || Double.isNaN(r.width)
+                || Double.isNaN(r.height);
     }
     
     /** @return true if any value (x,y,width,height) is Double.NaN */
@@ -2131,14 +2131,14 @@ public class Util
     
     /** @return true if either value is Float.NaN */
     public static boolean isBadPoint(Point2D.Float p) {
-        return p.x != p.x
-            || p.y != p.y;
+        return Float.isNaN(p.x)
+                || Float.isNaN(p.y);
     }
-    
+
     /** @return true if either value is Double.NaN */
     public static boolean isBadPoint(Point2D.Double p) {
-        return p.x != p.x
-            || p.y != p.y;
+        return Double.isNaN(p.x)
+                || Double.isNaN(p.y);
     }
 
     public static String fmt(final Shape shape) {
