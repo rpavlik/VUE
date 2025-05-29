@@ -20,8 +20,11 @@
  */
 
 package tufts.oki.agent;
+
+import org.osid.shared.SharedException;
 import java.util.*;
 import java.io.*;
+import java.util.stream.Collectors;
 
 /**
  *  The Agent Manager allows creation and manipulation of Agent, and Group objects.
@@ -37,9 +40,8 @@ import java.io.*;
 
 public class AgentManager implements org.osid.agent.AgentManager {
     public static final String SERIALIZED_FILE_NAME = "c:/java/serialized/org_osid_agent_manager.sid";
-    private final Vector ids = null;
-    private Vector agents = null;
-    private Vector groups = null;
+    private Vector<Agent> agents = null;
+    private Vector<Group> groups = null;
 	private org.osid.OsidContext context = null;
     
     //  This private flag is used to keep track of the persistance state.
@@ -70,8 +72,8 @@ public class AgentManager implements org.osid.agent.AgentManager {
     
 	public AgentManager() {
         super();
-        agents = new Vector(100);
-        groups = new Vector(100);
+        agents = new Vector<>(100);
+        groups = new Vector<>(100);
     }
     
     
@@ -84,7 +86,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
      */
     public org.osid.agent.Agent createAgent(String name, org.osid.shared.Type agentType, org.osid.shared.Properties props) throws org.osid.agent.AgentException {
         org.osid.agent.Agent agent = new Agent (name, agentType);
-        agents.add (agent);     //  Add it to the SharedManager agents list.
+        agents.add ((Agent) agent);     //  Add it to the SharedManager agents list.
         return agent;          
     }
     
@@ -97,7 +99,7 @@ public class AgentManager implements org.osid.agent.AgentManager {
      */
     public org.osid.agent.Group createGroup(String name, org.osid.shared.Type groupType, String description, org.osid.shared.Properties props) throws org.osid.agent.AgentException {
         org.osid.agent.Group group = new Group (name, groupType, description);
-        groups.add (group);     //  Add it to the SharedManager agents list.
+        groups.add ((Group) group);     //  Add it to the SharedManager agents list.
         return group;          
     }
     
@@ -137,19 +139,17 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An agent who's id is equal to the one passed.
      */
     public org.osid.agent.Agent getAgent(org.osid.shared.Id id) throws org.osid.agent.AgentException {
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        try
-		{
-			for (int i=0; i < ids.size(); i++) {
-				org.osid.agent.Agent agent = (Agent) agents.elementAt (i);
-				if ((agent.getId()).isEqual (id))
-					return agent;
-			}
-		}
-		catch (Throwable t)
-		{
-			throw new org.osid.agent.AgentException(t.getMessage());
-		}
+        Optional<Agent> found = agents.stream()
+                .filter(agent -> {
+                    try {
+                        return agent.getId().isEqual(id);
+                    } catch (SharedException e) {
+                        return false;
+                    }
+                }).findFirst();
+        if (found.isPresent()) {
+            return found.get();
+        }
         throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID);
     }
     
@@ -162,10 +162,11 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An agent who's display name is equal to the one passed.
      */
     public org.osid.agent.Agent getAgent(String name) throws org.osid.agent.AgentException {
-        for (int i=0; i < agents.size(); i++) {
-            org.osid.agent.Agent agent = (Agent) agents.elementAt (i);
-            if (agent.getDisplayName().compareTo(name) == 0)
-                return agent;
+        Optional<Agent> found = agents.stream()
+                .filter(agent -> agent.getDisplayName().compareTo(name) == 0)
+                .findFirst();
+        if (found.isPresent()) {
+            return found.get();
         }
         throw new org.osid.agent.AgentException ("Unknown Name");
     }
@@ -182,19 +183,10 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An iterator which walks a list of unique agent types.
      */
     public org.osid.shared.TypeIterator getAgentTypes() throws org.osid.agent.AgentException {  
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        /* Iterate over all agents, extract type, and add to a HashSet. */
-        HashSet<org.osid.shared.Type> type_set = new HashSet<>();
-        for (int i = 0; i < ids.size(); i++) {
-            Agent agent = (Agent) agents.elementAt (i);
-            org.osid.shared.Type type = agent.getType();
-            type_set.add(type);
-        }
-        
-        /*  Create  type vector from the type set.  */
-        Vector<org.osid.shared.Type> type_vector = new Vector<> (type_set.size());
-        type_vector.addAll (type_set);
-
+        Vector<org.osid.shared.Type> type_vector = agents.stream()
+                .map(Agent::getType)
+                .distinct()
+                .collect(Collectors.toCollection(Vector::new));
         /*  Create and return a TypeIterator for the list of unique types.  */
         return new tufts.oki.shared2.TypeIterator(type_vector);
     }
@@ -220,20 +212,11 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An AgentIterator which lists out all agents of the type given.
      */
     public org.osid.agent.AgentIterator getAgentsByType(org.osid.shared.Type agentType) throws org.osid.agent.AgentException {
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet<Agent> agent_set = new HashSet<>();
-        for (int i=0; i < ids.size(); i++) {
-            Agent agent = (Agent) agents.elementAt (i);
-            org.osid.shared.Type type = agent.getType();
-            if (type.isEqual(agentType))
-                agent_set.add(agent);
-        }
-        
-        /*  Create  type vector from the agent set.  */
-        Vector<Agent> agent_vector = new Vector<> (agent_set.size());
-        agent_vector.addAll (agent_set);
-        
+        Vector<Agent> agent_vector = agents.stream()
+                .filter(agent -> ((Agent) agent).getType().isEqual(agentType))
+                .distinct() // this might be unneeded? used to use HashSet
+                .collect(Collectors.toCollection(Vector::new));
+
         /*  Create and return an AgentIterator for the list of agents of this type.  */
         return new AgentIterator(agent_vector);
     }
@@ -246,19 +229,17 @@ public class AgentManager implements org.osid.agent.AgentManager {
       *  @return A group who's id is equal to the one passed.
       */
     public org.osid.agent.Group getGroup(org.osid.shared.Id id) throws org.osid.agent.AgentException {
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        try
-		{
-			for (int i=0; i < ids.size(); i++) {
-				org.osid.agent.Group group = (Group) groups.elementAt (i);
-				if ((group.getId()).isEqual (id))
-					return group;
-			}
-		}
-		catch (Throwable t)
-		{
-			throw new org.osid.agent.AgentException(t.getMessage());
-		}
+        Optional<Group> found = groups.stream()
+                .filter(group -> {
+                    try {
+                        return ((Group) group).getId().isEqual(id);
+                    } catch (SharedException e) {
+                        return false;
+                    }
+                }).findFirst();
+        if (found.isPresent()) {
+            return found.get();
+        }
         throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID);
     }
     
@@ -273,18 +254,10 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An iterator which walks a list of unique group types.
      */
    public org.osid.shared.TypeIterator getGroupTypes() throws org.osid.agent.AgentException {
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet<org.osid.shared.Type> type_set = new HashSet<>();
-        for (int i=0; i < ids.size(); i++) {
-            Group group = (Group) groups.elementAt (i);
-            org.osid.shared.Type type = group.getType();
-            type_set.add(type);
-        }
-        
-        /*  Create  type vector from the type set.  */
-        Vector<org.osid.shared.Type> type_vector = new Vector<> (type_set.size());
-        type_vector.addAll(type_set);
+       Vector<org.osid.shared.Type> type_vector = groups.stream()
+               .map(Group::getType)
+               .distinct()
+               .collect(Collectors.toCollection(Vector::new));
 
         /* Create and return a TypeIterator for the list of unique types. */
         return new tufts.oki.shared2.TypeIterator(type_vector);
@@ -309,20 +282,11 @@ public class AgentManager implements org.osid.agent.AgentManager {
      *  @return An AgentIterator which lists out all groups of the type given.
      */
     public org.osid.agent.AgentIterator getGroupsByType(org.osid.shared.Type groupType) throws org.osid.agent.AgentException {
-        if (ids == null) { throw new org.osid.agent.AgentException (osid.shared.SharedException.UNKNOWN_ID); }
-        /*  Iterate over all agents, extract type, and add to a HashSet.  */
-        HashSet<Group> group_set = new HashSet<>();
-        for (int i=0; i < ids.size(); i++) {
-            Group group = (Group) groups.elementAt (i);
-            org.osid.shared.Type type = group.getType();
-            if (type.isEqual(groupType))
-                group_set.add(group);
-        }
-        
-        /*  Create  type vector from the agent set.  */
-        Vector<Group> group_vector = new Vector<> (group_set.size());
-        group_vector.addAll (group_set);
-        
+        Vector<Group> group_vector = groups.stream()
+                .filter(group -> group.getType().isEqual(groupType))
+                .distinct() // this might be unneeded? used to use HashSet
+                .collect(Collectors.toCollection(Vector::new));
+
         /*  Create and return an AgentIterator for the list of agents of this type.  */
         return new AgentIterator(group_vector);
     }
@@ -413,8 +377,8 @@ public class AgentManager implements org.osid.agent.AgentManager {
                 ObjectInputStream oin = new ObjectInputStream (fin);
 
                 //  Read the persistent data and cast it to objects.
-                agents = (Vector)oin.readObject();
-                groups = (Vector)oin.readObject();
+                agents = (Vector<Agent>)oin.readObject();
+                groups = (Vector<Group>)oin.readObject();
                 
                 // Close in input stream.
                 oin.close();
