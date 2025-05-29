@@ -22,6 +22,8 @@
 package tufts.oki.id;
 
 
+import org.osid.OsidException;
+
 /**
  *  This is a complete implementation of the osid.shared.Id object.  It uses a constant
  *  called IdSource to hold a string which idenfies this particular source of Identifiers.
@@ -62,7 +64,7 @@ public class Id implements org.osid.shared.Id {
      */
     public Id(String idString) throws org.osid.shared.SharedException {
         if (idString == null) {
-            throw new org.osid.shared.SharedException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.shared.SharedException(OsidException.NULL_ARGUMENT);
         }
 
         this.id_str = idString;

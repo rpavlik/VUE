@@ -638,8 +638,8 @@ class LWCInspector extends javax.swing.JPanel
             ActiveInstance.addAllActiveListener(this);
             textArea.setFont(VueConstants.LargeFixedFont);
             add(new JScrollPane(textArea,
-                                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED
                                 ));
         }
 

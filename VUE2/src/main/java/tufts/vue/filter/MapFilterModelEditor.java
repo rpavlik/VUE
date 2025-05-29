@@ -49,6 +49,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -65,7 +66,7 @@ public class MapFilterModelEditor extends JPanel {
     boolean editable = false;
     JButton addButton=new tufts.vue.gui.VueButton(VueResources.getString("button.add.label"));
     JButton deleteButton=new tufts.vue.gui.VueButton(VueResources.getString("button.delete.label"));
-    JLabel questionLabel = new JLabel(tufts.vue.VueResources.getImageIcon("smallInfo"), JLabel.LEFT);
+    JLabel questionLabel = new JLabel(tufts.vue.VueResources.getImageIcon("smallInfo"), SwingConstants.LEFT);
 
     /** Creates a new instance of MapFilterModelEditor */
     public MapFilterModelEditor(MapFilterModel mapFilterModel) {

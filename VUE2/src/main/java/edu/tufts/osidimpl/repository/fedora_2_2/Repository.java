@@ -27,6 +27,8 @@ package  edu.tufts.osidimpl.repository.fedora_2_2;
 
 
 import org.osid.repository.*;
+import org.osid.shared.SharedException;
+
 import java.util.prefs.Preferences;
 import java.util.*;
 import fedora.server.types.gen.*;
@@ -402,7 +404,7 @@ public class Repository implements org.osid.repository.Repository {
         if(mAssetIterator.hasNextAsset())
             return  mAssetIterator.nextAsset();
         else
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.UNKNOWN_ID);
+            throw new org.osid.repository.RepositoryException(SharedException.UNKNOWN_ID);
         
     }
     
@@ -431,7 +433,7 @@ public class Repository implements org.osid.repository.Repository {
 			 (searchType.isEqual(keywordSearchType) || searchType.isEqual(multiFieldSearchType)) ) {
 			return new AssetIterator(this, searchCriteria, searchType);
 		} else {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.UNKNOWN_TYPE);
+            throw new org.osid.repository.RepositoryException(SharedException.UNKNOWN_TYPE);
 		}		
     }
     

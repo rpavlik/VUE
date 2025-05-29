@@ -85,7 +85,7 @@ public class DataSourceList extends JList implements DropTargetListener
     public DataSourceList(ContentViewer dsViewer) {
         super(new DefaultListModel());
         this.dsViewer = dsViewer;
-        this.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.setFixedCellHeight(-1);
         
         // TODO: create a generic resource drop handler from MapDropTarget to use

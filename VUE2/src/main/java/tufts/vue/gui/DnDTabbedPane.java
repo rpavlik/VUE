@@ -127,7 +127,7 @@ public class DnDTabbedPane extends JTabbedPane {
         private Point pt_ = new Point();
         public void dragOver(final DropTargetDragEvent e) {
             Point pt = e.getLocation();
-            if(getTabPlacement()==JTabbedPane.TOP || getTabPlacement()==JTabbedPane.BOTTOM) {
+            if(getTabPlacement()== SwingConstants.TOP || getTabPlacement()== SwingConstants.BOTTOM) {
                 initTargetLeftRightLine(getTargetTabIndex(pt));
             }else{
                 initTargetTopBottomLine(getTargetTabIndex(pt));
@@ -180,7 +180,7 @@ public class DnDTabbedPane extends JTabbedPane {
 
     private int getTargetTabIndex(Point glassPt) {
         Point tabPt = SwingUtilities.convertPoint(glassPane, glassPt, DnDTabbedPane.this);
-        boolean isTB = getTabPlacement()==JTabbedPane.TOP || getTabPlacement()==JTabbedPane.BOTTOM;
+        boolean isTB = getTabPlacement()== SwingConstants.TOP || getTabPlacement()== SwingConstants.BOTTOM;
         for(int i=0;i<getTabCount();i++) {
             Rectangle r = getBoundsAt(i);
             if(isTB) r.setRect(r.x-r.width/2, r.y,  r.width, r.height);

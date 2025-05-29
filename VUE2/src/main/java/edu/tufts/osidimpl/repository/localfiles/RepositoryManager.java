@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.localfiles;
 
+import org.osid.OsidException;
+
 public class RepositoryManager
 implements org.osid.repository.RepositoryManager
 {
@@ -110,7 +112,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (repositoryId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -126,7 +128,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (repositoryType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         java.util.Vector result = new java.util.Vector();
         org.osid.repository.RepositoryIterator repositoryIterator = getRepositories();
@@ -146,7 +148,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (repositoryId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -173,7 +175,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -203,7 +205,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -232,7 +234,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         java.util.Vector result = new java.util.Vector();
         try
@@ -264,7 +266,7 @@ implements org.osid.repository.RepositoryManager
     {
         if (repositories == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -297,7 +299,7 @@ implements org.osid.repository.RepositoryManager
     {
         if ((repository == null) || (assetId == null))
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }

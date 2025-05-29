@@ -237,7 +237,7 @@ public class EditLibraryPanel extends JPanel implements ActionListener
         final JComponent fill;
 
         if (DEBUG.BOXES) {
-            fill = new JLabel(VueResources.getString("jlabel.fill"), JLabel.CENTER);
+            fill = new JLabel(VueResources.getString("jlabel.fill"), SwingConstants.CENTER);
             fill.setBackground(Color.gray);
             fill.setOpaque(true);
         } else {

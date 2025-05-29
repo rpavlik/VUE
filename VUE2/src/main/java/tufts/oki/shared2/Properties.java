@@ -20,6 +20,8 @@
  */
 
 package tufts.oki.shared2;
+import org.osid.OsidException;
+
 import java.util.*;
 
 /**
@@ -47,7 +49,7 @@ public class Properties implements org.osid.shared.Properties {
      */
     public Properties(org.osid.shared.Type type) throws org.osid.shared.SharedException {
         if (type == null)
-            throw new org.osid.shared.SharedException (org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.shared.SharedException (OsidException.NULL_ARGUMENT);
         map = new HashMap (100);
         prop_type = type;
     }

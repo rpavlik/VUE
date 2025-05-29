@@ -17,6 +17,7 @@ package tufts.vue;
 
 import java.awt.Rectangle;
 import java.awt.Color;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -114,7 +115,7 @@ public class ZoomTool extends VueTool
         // zoom out on a particular region.
         // Need to recognize button 1 on a drag, where getButton=0, or a release, where modifiers 0 but getButton=1
         return !isZoomOutMode() &&
-            (e.getButton() == MouseEvent.BUTTON1 || (e.getModifiersEx() & MouseEvent.BUTTON1_DOWN_MASK) != 0);
+            (e.getButton() == MouseEvent.BUTTON1 || (e.getModifiersEx() & InputEvent.BUTTON1_DOWN_MASK) != 0);
     }
     
     private LWComponent zoomedTo;

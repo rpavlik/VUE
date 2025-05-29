@@ -20,6 +20,8 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.table.*;
 
+import tufts.Util;
+
  /**
  * PathwayTableModel.java
  *
@@ -145,7 +147,7 @@ public class PathwayTableModel extends DefaultTableModel
         return mMap == null ? null : mMap.getPathwayList();
     }
     Iterator<LWPathway> getPathwayIterator() {
-        return mMap == null ? VueUtil.EmptyIterator : mMap.getPathwayList().iterator();
+        return mMap == null ? Util.EmptyIterator : mMap.getPathwayList().iterator();
     }
     public void moveRow(int start,int end, int to, LWPathway pathway)
     {

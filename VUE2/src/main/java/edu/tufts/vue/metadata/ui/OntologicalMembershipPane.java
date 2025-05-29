@@ -23,6 +23,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import tufts.vue.*;
 import tufts.vue.gui.Widget;
@@ -58,7 +59,7 @@ public class OntologicalMembershipPane extends javax.swing.JPanel implements Act
         
         //todo: adjust font (html handles the text wrapping)
         //JLabel label = new JLabel("<html>Ontological Terms associated with this node:</html>");
-        JLabel label = new JLabel(VueResources.getString("ontologicalmembership.association"),JLabel.LEFT);
+        JLabel label = new JLabel(VueResources.getString("ontologicalmembership.association"), SwingConstants.LEFT);
         label.setFont(tufts.vue.gui.GUI.LabelFace);
         label.setBorder(javax.swing.BorderFactory.createEmptyBorder(5,5,5,5));
         

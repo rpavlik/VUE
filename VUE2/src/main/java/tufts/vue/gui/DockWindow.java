@@ -4244,8 +4244,8 @@ public class DockWindow
 
             if (scrolled && mScroller == null) {
                 mScroller = new JScrollPane(null,
-                                            scrollAlways ? JScrollPane.VERTICAL_SCROLLBAR_ALWAYS : JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                                            scrollAlways ? ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS : ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 mScroller.setOpaque(false);
                 mScroller.getViewport().setOpaque(false);
                 mScroller.setBorder(null);

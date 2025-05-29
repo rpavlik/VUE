@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -53,7 +54,7 @@ htmloutput.pixels=Pixels
 		 buildUI();
 		 setModal(true);
          setResizable(false);  
-         setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
          width = VUE.getActiveMap().getPaintBounds().getWidth();
          height = VUE.getActiveMap().getPaintBounds().getHeight();
          widthField.setText((Integer.valueOf((int) width)).toString());

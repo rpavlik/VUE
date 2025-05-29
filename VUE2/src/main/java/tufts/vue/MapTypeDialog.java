@@ -147,8 +147,8 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 		//mTypeList.setModel( mListModel);
 		
 		JScrollPane listScroll = new JScrollPane();
-		listScroll.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		listScroll.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		listScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		listScroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		listScroll.getViewport().add(  mTypeList);
 		listPanel.add( BorderLayout.CENTER, listScroll);
 		listPanel.add( BorderLayout.NORTH, listTitle);
@@ -170,8 +170,8 @@ public class MapTypeDialog extends JPanel  implements ActionListener, ListSelect
 		
 		initPropertyTable();
 		JScrollPane tablePanel = new JScrollPane( mTable);
-		tablePanel.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		tablePanel.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		tablePanel.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		tablePanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		propPanel.add( BorderLayout.NORTH, propTitle);
 		propPanel.add( BorderLayout.EAST, propControls);

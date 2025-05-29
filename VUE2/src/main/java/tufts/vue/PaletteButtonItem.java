@@ -164,17 +164,17 @@ public class PaletteButtonItem extends JMenuItem
         int id = pEvent.getID() ;
         int x = pEvent.getX() ;
         int y = pEvent.getY() ;
-        if( id == MenuDragMouseEvent.MOUSE_ENTERED  ) {
+        if( id == MouseEvent.MOUSE_ENTERED) {
             debug("processMenuDragMouseEvent - MOUSE_ENTERED");
             mCurrentIcon = getMenuItemSelectedIcon();
         }
         else
-            if( id == MenuDragMouseEvent.MOUSE_EXITED) {
+            if( id == MouseEvent.MOUSE_EXITED) {
                 debug("processMenuDragMouseEvent - MOUSE_EXITED");
                 mCurrentIcon = getMenuItemIcon();
             }
             else
-                if ( id == MenuDragMouseEvent.MOUSE_MOVED ) {
+                if ( id == MouseEvent.MOUSE_MOVED) {
                     debug(" processMenuDragEvent MOUSE_MOVED "+x+", "+y);
                     if( this.contains(x,y) ) {
                         mCurrentIcon = getMenuItemSelectedIcon();

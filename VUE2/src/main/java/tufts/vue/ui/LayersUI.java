@@ -390,7 +390,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         add(mToolbar, BorderLayout.NORTH);
         if (SCROLLABLE) {        	
             JScrollPane sp = new JScrollPane(mRowList);
-            sp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             //sp.setBorder(null);
             add(sp, BorderLayout.CENTER);
             sp.addMouseListener(RowMouseEnterExitTracker); // doesn't always work
@@ -530,7 +530,7 @@ public class LayersUI extends tufts.vue.gui.Widget implements LWComponent.Listen
         	//b.setMinimumSize(new Dimension(90,30));
         	b.setRolloverIcon(VueResources.getImageIcon("metadata.editor.add.down"));
         	b.setBorder(BorderFactory.createEmptyBorder(2,5,2,2));        	
-        	b.setHorizontalAlignment(JButton.LEADING); // optional
+        	b.setHorizontalAlignment(SwingConstants.LEADING); // optional
         	b.setBorderPainted(false);
         	b.setContentAreaFilled(false);
         	gBC.weightx = 0.5;

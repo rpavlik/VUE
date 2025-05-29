@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.submissionAdapter;
 
+import org.osid.OsidException;
+
 public class RepositoryManager
 implements org.osid.repository.RepositoryManager
 {
@@ -105,7 +107,7 @@ implements org.osid.repository.RepositoryManager
 		throws org.osid.repository.RepositoryException
     {
         if (repositoryType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		try {
 			java.util.Vector result = new java.util.Vector();

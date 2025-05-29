@@ -894,7 +894,7 @@ public class PathwayTable extends JTable
             		
                     setBorder(iconBorder);
                     setIcon(bool ? lockIcon : lockOpenIcon);
-                    this.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+                    this.setAlignmentY(Component.CENTER_ALIGNMENT);
                     if (entry.node == VUE.getActivePathway() && entry.pathway.getCurrentEntry() == entry)
                         setBackground(selectedColor(entry));
                     else
@@ -1295,7 +1295,7 @@ public class PathwayTable extends JTable
             return;
         }
 	
-    	if ((e.getModifiers() & MouseEvent.BUTTON3_MASK )!=0)
+    	if ((e.getModifiers() & InputEvent.BUTTON3_MASK)!=0)
             return;
         
         int row = getSelectedRow();

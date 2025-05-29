@@ -21,6 +21,7 @@
 package tufts.oki.authorization;
 import java.util.*;
 
+import osid.OsidException;
 import osid.authorization.AuthorizationException;
 import osid.shared.*;
 
@@ -242,7 +243,7 @@ public class AuthorizationManager extends tufts.oki.OsidManager implements osid.
      */
     public void deleteQualifier(osid.shared.Id qualifierId) throws osid.authorization.AuthorizationException {
         //  Trees need to be repaired if qualifiers are deleted.
-        throw new osid.authorization.AuthorizationException (osid.authorization.AuthorizationException.UNIMPLEMENTED);
+        throw new osid.authorization.AuthorizationException (OsidException.UNIMPLEMENTED);
     }
     
     /**

@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.google.local;
 
+import org.osid.OsidException;
+
 public class Part
         implements org.osid.repository.Part {
     private org.osid.repository.PartStructure partStructure = null;
@@ -52,7 +54,7 @@ public class Part
         catch (Throwable t)
         {
             Utilities.log(t);
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
     }
 

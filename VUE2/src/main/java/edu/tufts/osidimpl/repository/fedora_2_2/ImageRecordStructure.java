@@ -14,6 +14,8 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
+
 public class ImageRecordStructure
 		implements org.osid.repository.RecordStructure {
 	public static final String MEDIUM_RES = "bdef:TuftsImage/getMediumRes/";
@@ -115,7 +117,7 @@ public class ImageRecordStructure
     public org.osid.repository.PartStructure getThumbnailPartStructure()
     throws org.osid.repository.RepositoryException {
         if (this.sThumbnailPartStructure == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.sThumbnailPartStructure;
     }
@@ -123,7 +125,7 @@ public class ImageRecordStructure
     public org.osid.repository.PartStructure getURLPartStructure()
     throws org.osid.repository.RepositoryException {
         if (this.sURLPartStructure == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.sURLPartStructure;
     }
@@ -131,7 +133,7 @@ public class ImageRecordStructure
     public org.osid.repository.PartStructure getMediumImagePartStructure()
     throws org.osid.repository.RepositoryException {
         if (this.sThumbnailPartStructure == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.sMediumImagePartStructure;
     }

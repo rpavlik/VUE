@@ -21,6 +21,7 @@ import java.util.prefs.Preferences;
 
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 
 import tufts.vue.VueResources;
@@ -51,7 +52,7 @@ public class ImageSizePreference extends GenericSliderPreference {
 	{
 		super();
 		JSlider slider = getSlider();
-		slider.setOrientation(JSlider.VERTICAL);        
+		slider.setOrientation(SwingConstants.VERTICAL);
         slider.setMajorTickSpacing(TICK_SPACING);
         slider.setPaintTicks(true);        
         slider.setSnapToTicks(true);

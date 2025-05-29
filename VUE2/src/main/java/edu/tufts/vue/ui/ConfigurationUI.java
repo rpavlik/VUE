@@ -21,6 +21,7 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 import tufts.vue.VueResources;
@@ -482,8 +483,8 @@ public class ConfigurationUI extends javax.swing.JPanel {
                             VueFileChooser fileChooser = VueFileChooser.getVueFileChooser();
                             fileChooser.setCurrentDirectory(new java.io.File("."));
                             fileChooser.setDialogTitle(VueResources.getString("resourceInstallation.chooserTitle"));
-                            fileChooser.setFileSelectionMode(VueFileChooser.FILES_AND_DIRECTORIES);
-                            if (fileChooser.showOpenDialog(chooser) == VueFileChooser.APPROVE_OPTION) {
+                            fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+                            if (fileChooser.showOpenDialog(chooser) == JFileChooser.APPROVE_OPTION) {
                                 textField8.setText(fileChooser.getSelectedFile().toString());
                             }
                         };

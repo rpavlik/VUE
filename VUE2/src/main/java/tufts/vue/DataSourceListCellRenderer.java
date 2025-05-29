@@ -34,8 +34,8 @@ public class DataSourceListCellRenderer extends DefaultListCellRenderer //implem
     private edu.tufts.vue.dsm.DataSource infoDataSource;
     private final static String OFFLINE = "offline";
     private final static String ONLINE = "";
-    private final JLabel offlineLabel = new JLabel(OFFLINE, JLabel.RIGHT);
-    private final JLabel onlineLabel = new JLabel(ONLINE, JLabel.RIGHT);
+    private final JLabel offlineLabel = new JLabel(OFFLINE, SwingConstants.RIGHT);
+    private final JLabel onlineLabel = new JLabel(ONLINE, SwingConstants.RIGHT);
 
     private final JPanel mRow = new JPanel();
     private final JLabel mLabel = new DefaultListCellRenderer();

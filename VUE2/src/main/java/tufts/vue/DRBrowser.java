@@ -158,7 +158,7 @@ public class DRBrowser extends ContentBrowser
         //-----------------------------------------------------------------------------
 
         searchPane.setBackground(Color.white);
-        JLabel please = new JLabel(VueResources.getString("jlabel.searchableresource"), JLabel.CENTER);
+        JLabel please = new JLabel(VueResources.getString("jlabel.searchableresource"), SwingConstants.CENTER);
         GUI.apply(GUI.StatusFace, please);
         searchPane.add(please, SEARCH_EDITOR);
 

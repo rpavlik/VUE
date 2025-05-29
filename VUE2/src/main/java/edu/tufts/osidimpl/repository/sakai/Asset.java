@@ -18,6 +18,7 @@ import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
 import javax.xml.namespace.QName;
 import org.apache.axis.encoding.Base64;
+import org.osid.OsidException;
 
 public class Asset
 implements org.osid.repository.Asset
@@ -130,7 +131,7 @@ implements org.osid.repository.Asset
     {
         if (displayName == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -146,7 +147,7 @@ implements org.osid.repository.Asset
     {
         if (description == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -197,7 +198,7 @@ implements org.osid.repository.Asset
     throws org.osid.repository.RepositoryException
     {
 		if (content == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
 		}
 		if (!(this.assetType.isEqual(Utilities.getCollectionAssetType()))) {
 			System.out.println("Not a collection type " + Utilities.typeToString(this.assetType));
@@ -278,7 +279,7 @@ implements org.osid.repository.Asset
     {
         if (assetType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		if (!this.assetType.isEqual(Utilities.getCollectionAssetType())) {
 			throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.UNKNOWN_TYPE);
@@ -291,7 +292,7 @@ implements org.osid.repository.Asset
     {
         if (recordStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		try {
 			if (recordStructureId.isEqual(this.recordStructureId)) {
@@ -322,7 +323,7 @@ implements org.osid.repository.Asset
     {
         if (recordId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -340,7 +341,7 @@ implements org.osid.repository.Asset
     {
         if (recordStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		try {
 			if (recordStructureId.isEqual(this.recordStructureId)) {
@@ -374,7 +375,7 @@ implements org.osid.repository.Asset
     {
         if (recordId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -384,7 +385,7 @@ implements org.osid.repository.Asset
     {
         if (partId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -400,7 +401,7 @@ implements org.osid.repository.Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		return new PartIterator(new java.util.Vector());    
     }
@@ -444,7 +445,7 @@ implements org.osid.repository.Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		try {
 			return new ObjectIterator(new java.util.Vector());
@@ -458,7 +459,7 @@ implements org.osid.repository.Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		return new PartIterator(new java.util.Vector());            
     }
@@ -468,7 +469,7 @@ implements org.osid.repository.Asset
     {
         if (recordStructureType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new RecordIterator(new java.util.Vector());
     }

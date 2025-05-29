@@ -27,6 +27,7 @@ package tufts.oki.dr.fedora;
  */
 
 
+import osid.OsidException;
 import osid.dr.*;
 import tufts.oki.shared.TypeIterator;
 
@@ -464,7 +465,7 @@ public class DR implements osid.dr.DigitalRepository {
     }
     
     public osid.shared.Type getType() throws osid.dr.DigitalRepositoryException {
-        throw new osid.dr.DigitalRepositoryException(osid.dr.DigitalRepositoryException.UNIMPLEMENTED);
+        throw new osid.dr.DigitalRepositoryException(OsidException.UNIMPLEMENTED);
     }
     
     public osid.dr.Asset getAssetByDate(osid.shared.Id id, java.util.Calendar calendar) throws osid.dr.DigitalRepositoryException {

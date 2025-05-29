@@ -19,6 +19,7 @@ package tufts.vue.gui;
 import tufts.Util;
 import tufts.vue.Resource;
 import tufts.vue.EventRaiser;
+import tufts.vue.VueConstants;
 import tufts.vue.VueUtil;
 import tufts.vue.VUE;
 import tufts.vue.VueResources;
@@ -677,7 +678,7 @@ public class GUI
             else
                 Log.error(msg);
         }
-        return font.getStringBounds(s, GUI.DefaultFontContext).getWidth();
+        return font.getStringBounds(s, VueConstants.DefaultFontContext).getWidth();
     }
 
 //     /** VUE specific threshold for configuring UI */
@@ -2341,7 +2342,7 @@ public class GUI
         private final Dimension mSize;
 	private final char icon;
         public IconicLabel(char iconChar, int pointSize, Color color, int width, int height) {
-            super(String.valueOf(iconChar), JLabel.CENTER);
+            super(String.valueOf(iconChar), SwingConstants.CENTER);
 	    icon = iconChar;
             setFont(getUnicodeGlyphFont(pointSize));
             

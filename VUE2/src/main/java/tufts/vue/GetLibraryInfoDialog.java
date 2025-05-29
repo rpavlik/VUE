@@ -62,8 +62,8 @@ public class GetLibraryInfoDialog extends JDialog implements java.awt.event.Acti
 
 			javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(getLibraryInfoPanel);
 			jsp.setPreferredSize(new java.awt.Dimension(600,500));
-			jsp.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			jsp.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS); 
+			jsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			jsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 						
 			getContentPane().add(jsp,BorderLayout.WEST);
 			pack();

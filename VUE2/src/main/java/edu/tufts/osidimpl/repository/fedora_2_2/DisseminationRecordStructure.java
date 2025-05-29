@@ -14,6 +14,8 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
+
 public class DisseminationRecordStructure
         implements org.osid.repository.RecordStructure {
     private final java.util.Vector<org.osid.repository.PartStructure> partsVector = new java.util.Vector<>();
@@ -114,7 +116,7 @@ public class DisseminationRecordStructure
     {
         if (this.BDEFPartStructure == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.BDEFPartStructure;
     }
@@ -124,7 +126,7 @@ public class DisseminationRecordStructure
     {
         if (this.disseminationURLPartStructure == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.disseminationURLPartStructure;
     }
@@ -134,7 +136,7 @@ public class DisseminationRecordStructure
     {
         if (this.thumbnailPartStructure == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.thumbnailPartStructure;
     }
@@ -143,7 +145,7 @@ public class DisseminationRecordStructure
     {
         if (this.parameterPartStructure == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.parameterPartStructure;
     }

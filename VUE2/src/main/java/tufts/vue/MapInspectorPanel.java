@@ -569,8 +569,8 @@ public class MapInspectorPanel extends JPanel
             mPathDisplay = new PathwayPanel(VUE.getDialogParentAsFrame());
             
             mPathScrollPane = new JScrollPane();
-            mPathScrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            mPathScrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            mPathScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            mPathScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             mPathScrollPane.setLocation(new Point(8, 9));
             mPathScrollPane.setVisible(true);
             mPathScrollPane.getViewport().add( mPathDisplay);

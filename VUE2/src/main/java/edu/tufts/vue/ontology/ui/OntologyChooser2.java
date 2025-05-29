@@ -26,6 +26,7 @@ import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -660,7 +661,7 @@ public class OntologyChooser2 extends javax.swing.JDialog implements java.awt.ev
             }
             int success = ontChooser.showOpenDialog(tufts.vue.VUE.getDialogParentAsFrame());
             File ontSelectedFile = null;
-            if(success == VueFileChooser.APPROVE_OPTION)
+            if(success == JFileChooser.APPROVE_OPTION)
             {    
               ontSelectedFile = ontChooser.getSelectedFile();
             }
@@ -692,7 +693,7 @@ public class OntologyChooser2 extends javax.swing.JDialog implements java.awt.ev
             }
             int success = cssChooser.showOpenDialog(tufts.vue.VUE.getDialogParentAsFrame());
             File cssSelectedFile = null; 
-            if(success == VueFileChooser.APPROVE_OPTION)
+            if(success == JFileChooser.APPROVE_OPTION)
             {
               cssSelectedFile = cssChooser.getSelectedFile();
             }

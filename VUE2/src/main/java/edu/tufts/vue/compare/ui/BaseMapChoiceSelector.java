@@ -99,7 +99,7 @@ public class BaseMapChoiceSelector extends javax.swing.JComboBox {
             return getMaps().size() + 2;
         }
         
-        private int indexOf(Object obj)
+        private int indexOf(LWMap obj)
         {
             return getMaps().indexOf(obj) + 1;
         }

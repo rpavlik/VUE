@@ -124,9 +124,9 @@ public class MapsSelectionPanel extends JPanel  {
                    choose.setCurrentDirectory(lastDirectory);
                VueFileFilter vff = new VueFileFilter(VueFileFilter.VUE_DESCRIPTION);
                choose.setFileFilter(vff);
-               choose.setFileSelectionMode(VueFileChooser.FILES_AND_DIRECTORIES);
+               choose.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
                int cancel = choose.showOpenDialog(MapsSelectionPanel.this);
-               if(cancel == VueFileChooser.CANCEL_OPTION)
+               if(cancel == JFileChooser.CANCEL_OPTION)
                    return;
                File choice = choose.getSelectedFile();
                if(choose.getSelectedFile().getParentFile().isDirectory())

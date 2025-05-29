@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.favorites;
 
+import org.osid.OsidException;
+
 import java.util.*;
 
 public class Repository
@@ -76,7 +78,7 @@ public class Repository
             , org.osid.shared.Type assetType)
             throws org.osid.repository.RepositoryException {
         if ( (displayName == null ) || (description == null) || (assetType == null) ) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (!assetType.isEqual(this.assetType)) {
             throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.UNKNOWN_TYPE);
@@ -93,7 +95,7 @@ public class Repository
     public void deleteAsset(org.osid.shared.Id assetId)
     throws org.osid.repository.RepositoryException {
         if (assetId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -131,7 +133,7 @@ public class Repository
     public org.osid.repository.RecordStructureIterator getMandatoryRecordStructures(org.osid.shared.Type assetType)
     throws org.osid.repository.RepositoryException {
         if (assetType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (assetType.isEqual(this.assetType)) {
             java.util.Vector<org.osid.repository.RecordStructure> results = new java.util.Vector<>();
@@ -181,7 +183,7 @@ public class Repository
     public org.osid.repository.Asset getAsset(org.osid.shared.Id assetId)
     throws org.osid.repository.RepositoryException {
         if (assetId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -202,10 +204,10 @@ public class Repository
             , org.osid.shared.Properties searchProperties)
             throws org.osid.repository.RepositoryException {
         if (searchCriteria == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (searchType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (!(searchCriteria instanceof String)) {
             // maybe change this to a new exception message
@@ -251,7 +253,7 @@ public class Repository
     public org.osid.repository.RecordStructureIterator getRecordStructuresByType(org.osid.shared.Type recordStructureType)
     throws org.osid.repository.RepositoryException {
         if (recordStructureType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (recordStructureType.isEqual(new Type("edu.tufts","recordStructure","artifact"))) {
             java.util.Vector<RecordStructure> results = new java.util.Vector<>();
@@ -274,7 +276,7 @@ public class Repository
     public org.osid.shared.Properties getPropertiesByType(org.osid.shared.Type propertiesType)
     throws org.osid.repository.RepositoryException {
         if (propertiesType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new Properties();
     }
@@ -292,7 +294,7 @@ public class Repository
     protected void addAsset(org.osid.repository.Asset asset)
     throws org.osid.repository.RepositoryException {
         if (asset == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }

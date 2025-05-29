@@ -43,7 +43,7 @@ public class FilterEditor extends JPanel  {
     public static final Key keyAnywhere = new Key("Anywhere", TypeFactory.getStringType());
     public static final Key keyNotes = new Key("Notes", TypeFactory.getStringType());
     public static final JLabel triangleLabel = new JLabel(VueResources.getImageIcon("triangleDownIcon"));
-    JLabel questionLabel = new JLabel(tufts.vue.VueResources.getImageIcon("smallInfo"), JLabel.LEFT);
+    JLabel questionLabel = new JLabel(tufts.vue.VueResources.getImageIcon("smallInfo"), SwingConstants.LEFT);
     public static final String FILTER_INFO = tufts.vue.VueResources.getString("info.filter.create");
     JButton addButton=new tufts.vue.gui.VueButton(VueResources.getString("button.add.label"));
     JButton deleteButton=new tufts.vue.gui.VueButton(VueResources.getString("button.delete.label"));

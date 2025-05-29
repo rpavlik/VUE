@@ -14,6 +14,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import tufts.vue.DEBUG;
 import tufts.vue.VueResources;
@@ -31,7 +32,7 @@ public class ShowAgainDialog  extends JDialog implements ActionListener, KeyList
     public ShowAgainDialog(Frame parentFrame, String prefName, String title, String okLabel, String cancelLabel)
     {
     	super(parentFrame, title, true);
-    	this.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+    	this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     	showAgainPref = BooleanPreference.create(
     		edu.tufts.vue.preferences.PreferenceConstants.INTERACTIONS_CATEGORY,
     		prefName, 

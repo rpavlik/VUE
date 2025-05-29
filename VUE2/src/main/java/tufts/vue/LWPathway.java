@@ -1436,7 +1436,7 @@ public class LWPathway extends LWContainer
     /** hide children from hierarchy as per getChildList */
     @Override
     public Iterator<LWComponent> getChildIterator() {
-        return VueUtil.EmptyIterator;
+        return Util.EmptyIterator;
     }
     
     /** return a read-only list of our Entries */

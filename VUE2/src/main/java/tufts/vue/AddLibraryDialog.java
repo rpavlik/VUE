@@ -46,6 +46,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
@@ -122,7 +124,7 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
             
         	getContentPane().setLayout(new GridBagLayout());
             addLibraryList = new JList(listModel);
-            addLibraryList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+            addLibraryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             addLibraryList.addListSelectionListener(this);
             addLibraryList.setFixedCellHeight(25);
             addLibraryList.addListSelectionListener(arg0 -> {
@@ -150,14 +152,14 @@ public class AddLibraryDialog extends SizeRestrictedDialog implements ListSelect
             descriptionTextArea.setWrapStyleWord(true);                              
                         
             listJsp = new JScrollPane(addLibraryList);
-            listJsp.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            listJsp.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            listJsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            listJsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             listJsp.setPreferredSize(new Dimension(300,180));
             
             descriptionTextArea.setText(VueResources.getString("addLibraryDailog.textarea"));
             descriptionJsp = new JScrollPane(descriptionTextArea);
-            descriptionJsp.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            descriptionJsp.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            descriptionJsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            descriptionJsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             descriptionJsp.setPreferredSize(new Dimension(300,180));
             
             addLibraryPanel.setBackground(VueResources.getColor("White"));

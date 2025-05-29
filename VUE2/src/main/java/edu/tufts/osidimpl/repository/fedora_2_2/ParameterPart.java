@@ -14,6 +14,8 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
+
 public class ParameterPart
         implements org.osid.repository.Part {
     private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
@@ -52,7 +54,7 @@ public class ParameterPart
     {
         if ( (partStructureId == null) || (value == null) )
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
@@ -63,7 +65,7 @@ public class ParameterPart
     {
         if (partId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);

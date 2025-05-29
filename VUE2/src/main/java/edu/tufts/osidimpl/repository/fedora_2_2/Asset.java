@@ -26,6 +26,7 @@
 
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
 import org.osid.repository.*;
 
 
@@ -248,7 +249,7 @@ public class Asset implements org.osid.repository.Asset {
      */
     public org.osid.repository.RecordIterator getRecords(org.osid.shared.Id recordStructureId) throws org.osid.repository.RepositoryException {
         if (recordStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         
         java.util.Vector result = new java.util.Vector();
@@ -260,7 +261,7 @@ public class Asset implements org.osid.repository.Asset {
                     result.addElement(record);
                 }
             } catch (org.osid.OsidException oex) {
-                throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+                throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
             }
         }
         

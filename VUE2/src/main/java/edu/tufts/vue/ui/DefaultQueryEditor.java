@@ -17,6 +17,7 @@ package edu.tufts.vue.ui;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
+import javax.swing.SwingConstants;
 
 import tufts.vue.LWSelection;
 import tufts.vue.VUE;
@@ -52,7 +53,7 @@ implements edu.tufts.vue.fsm.QueryEditor, java.awt.event.ActionListener, LWSelec
 	
 	private static final String SELECT_A_LIBRARY = VueResources.getString("defaultqueryeditor.pleaseselect");
 	//private static final String NO_MESSAGE = "";
-    private final javax.swing.JLabel selectMessage = new javax.swing.JLabel(SELECT_A_LIBRARY, javax.swing.JLabel.CENTER);
+    private final javax.swing.JLabel selectMessage = new javax.swing.JLabel(SELECT_A_LIBRARY, SwingConstants.CENTER);
 	
 	private final javax.swing.JButton moreOptionsButton = new tufts.vue.gui.VueButton("advancedSearchMore");
 	//private static final String MORE_OPTIONS = "";

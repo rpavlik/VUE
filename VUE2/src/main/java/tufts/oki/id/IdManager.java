@@ -14,6 +14,8 @@
  */
 package tufts.oki.id;
 
+import org.osid.OsidException;
+
 public class IdManager
 implements org.osid.id.IdManager
 {
@@ -56,7 +58,7 @@ implements org.osid.id.IdManager
     {
         if (idString == null)
         {
-            throw new org.osid.id.IdException(org.osid.id.IdException.NULL_ARGUMENT);    
+            throw new org.osid.id.IdException(OsidException.NULL_ARGUMENT);
         }
         try
         {

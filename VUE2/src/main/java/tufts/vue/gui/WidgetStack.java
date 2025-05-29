@@ -90,7 +90,7 @@ public class WidgetStack extends Widget
         if (DEBUG.BOXES) {
             mDefaultExpander.setOpaque(true);
             mDefaultExpander.setBackground(Color.darkGray);
-            JLabel l = new JLabel(VueResources.getString("jlabel.widgetstack"), JLabel.CENTER);
+            JLabel l = new JLabel(VueResources.getString("jlabel.widgetstack"), SwingConstants.CENTER);
             l.setForeground(Color.white);
             mDefaultExpander.add(l);
         }
@@ -190,8 +190,8 @@ public class WidgetStack extends Widget
                 // widget for property changes: e.g. hidden would
                 // need to hide the scroller, not the widget.
                 JScrollPane scroller = new JScrollPane(widget,
-                                                       JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                                                       JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+                        ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                        ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 mGridBag.add(scroller, _gbc);
             } else {
                 mGridBag.add(widget, _gbc);

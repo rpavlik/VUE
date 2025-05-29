@@ -43,6 +43,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
@@ -101,7 +102,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         //int b = mmc.TAB_BORDER_SIZE;
         setBorder(javax.swing.BorderFactory.createEmptyBorder(5,5,5,5));
         
-        parameterChoiceMessage = new JLabel(parameterChoiceMessageString,JLabel.RIGHT) {
+        parameterChoiceMessage = new JLabel(parameterChoiceMessageString, SwingConstants.RIGHT) {
             public java.awt.Dimension getPreferredSize() {
                 //if(mmc!=null)
                 //  return mmc.getVizLabelPreferredSize();
@@ -160,7 +161,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
                 }                
             }
         };
-        JLabel intervalNumberChoiceMessage = new JLabel(intervalChoiceMessageString,JLabel.RIGHT);
+        JLabel intervalNumberChoiceMessage = new JLabel(intervalChoiceMessageString, SwingConstants.RIGHT);
         Integer[] intervalNumberChoices = {3,4,5,6,7,8,9,10};
         intervalNumberChoice = new JComboBox(intervalNumberChoices) {
             public java.awt.Dimension getPreferredSize() {
@@ -168,7 +169,7 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
             }
         };
         intervalNumberChoice.setSelectedItem(5);
-        JLabel paletteChoiceMessage = new JLabel(paletteChoiceMessageString,JLabel.RIGHT);
+        JLabel paletteChoiceMessage = new JLabel(paletteChoiceMessageString, SwingConstants.RIGHT);
         paletteChoiceMessage.setFont(tufts.vue.gui.GUI.LabelFace);
         Colors[] colors = {Colors.one,Colors.two,Colors.three,Colors.four,Colors.five,Colors.six};
         paletteChoice = new JComboBox(colors);
@@ -595,8 +596,8 @@ public class WeightVisualizationSettingsPanel extends JPanel implements ActionLi
         private int currentRow = 0;
         
         public PercentageIntervalEditor() {
-            startField.setHorizontalAlignment(JTextField.LEFT);
-            endField.setHorizontalAlignment(JTextField.LEFT);
+            startField.setHorizontalAlignment(SwingConstants.LEFT);
+            endField.setHorizontalAlignment(SwingConstants.LEFT);
             panel.add(startField);
             panel.add(toLabel);
             panel.add(endField);

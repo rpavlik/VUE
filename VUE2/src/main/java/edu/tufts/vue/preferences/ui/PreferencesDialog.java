@@ -83,7 +83,7 @@ public class PreferencesDialog extends JDialog {
                 } catch (Throwable t) {
                     t.printStackTrace();
                 }
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		prefTree.setSelectionRow(1);
 
 		if (tufts.Util.isUnixPlatform() || tufts.Util.isMacPlatform())

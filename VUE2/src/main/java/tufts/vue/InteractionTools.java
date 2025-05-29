@@ -95,7 +95,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		fadeInnerPanel = new JPanel();
 		fadeInnerPanel.setLayout(new GridBagLayout());
 
-		fadeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+		fadeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 100);
 
 		JLabel						label100 = new JLabel(ONE_HUNDRED_PERCENT),
 									label80 = new JLabel(EIGHTY_PERCENT),
@@ -133,7 +133,7 @@ public class InteractionTools extends JPanel implements ActionListener, ItemList
 		depthInnerPanel = new JPanel();
 		depthInnerPanel.setLayout(new GridBagLayout());
 
-		depthSlider = new JSlider(JSlider.HORIZONTAL, DEPTH_SLIDER_MIN, DEPTH_SLIDER_MAX, DEPTH_SLIDER_MIN);
+		depthSlider = new JSlider(SwingConstants.HORIZONTAL, DEPTH_SLIDER_MIN, DEPTH_SLIDER_MAX, DEPTH_SLIDER_MIN);
 
 		JLabel						labelOff = new JLabel(OFF),
 									label1 = new JLabel(ONE),

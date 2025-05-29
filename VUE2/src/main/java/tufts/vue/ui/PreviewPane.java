@@ -48,7 +48,7 @@ public class PreviewPane extends JPanel
     private int mImageHeight;
     private boolean isLoading = false;
 
-    private final JLabel StatusLabel = new JLabel(VueResources.getString("jlabel.status"), JLabel.CENTER);
+    private final JLabel StatusLabel = new JLabel(VueResources.getString("jlabel.status"), SwingConstants.CENTER);
 
     private final int MinHeight = 128;
     private final int MaxHeight = 1024;

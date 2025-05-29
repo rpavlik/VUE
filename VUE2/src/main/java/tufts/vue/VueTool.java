@@ -22,7 +22,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-/**
+import tufts.vue.gui.VueButtonIcon;
+
+ /**
  * Base class for a VUE tool, that may have sub-tools.
  *
  * Sub-classes AbstractAction for addActionListener, although
@@ -754,13 +756,13 @@ public abstract class VueTool extends AbstractAction
     public void setGeneratedIcons(Icon pIcon) {
         //System.out.println(this + " generating icons from " + pIcon);
         mRawIcon = pIcon;
-        setIcon(new ToolIcon(mRawIcon, ToolIcon.UP));
-        setDownIcon(new ToolIcon(mRawIcon, ToolIcon.PRESSED));
-        setSelectedIcon(new ToolIcon(mRawIcon, ToolIcon.SELECTED));
-        setDisabledIcon(new ToolIcon(mRawIcon, ToolIcon.DISABLED));
-        setRolloverIcon(new ToolIcon(mRawIcon, ToolIcon.ROLLOVER));
-        setMenuItemIcon(new ToolIcon(mRawIcon, ToolIcon.MENU));
-        setMenuItemSelectedIcon(new ToolIcon(mRawIcon, ToolIcon.MENU_SELECTED));
+        setIcon(new ToolIcon(mRawIcon, VueButtonIcon.UP));
+        setDownIcon(new ToolIcon(mRawIcon, VueButtonIcon.PRESSED));
+        setSelectedIcon(new ToolIcon(mRawIcon, VueButtonIcon.SELECTED));
+        setDisabledIcon(new ToolIcon(mRawIcon, VueButtonIcon.DISABLED));
+        setRolloverIcon(new ToolIcon(mRawIcon, VueButtonIcon.ROLLOVER));
+        setMenuItemIcon(new ToolIcon(mRawIcon, VueButtonIcon.MENU));
+        setMenuItemSelectedIcon(new ToolIcon(mRawIcon, VueButtonIcon.MENU_SELECTED));
     }
 
     public void out(String s) {

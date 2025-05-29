@@ -17,6 +17,8 @@ package edu.tufts.osidimpl.repository.google.global;
 
 import com.google.soap.search.*;
 
+import org.osid.OsidException;
+
 public class Repository
         implements org.osid.repository.Repository {
     private org.osid.shared.Id repositoryId = null;
@@ -90,7 +92,7 @@ public class Repository
     {
         if ( (displayName == null ) || (description == null) || (assetType == null) )
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (!assetType.isEqual(this.assetType))
         {
@@ -104,7 +106,7 @@ public class Repository
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -150,7 +152,7 @@ public class Repository
     {
         if (assetType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (assetType.isEqual(this.assetType))
         {
@@ -214,7 +216,7 @@ public class Repository
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -239,11 +241,11 @@ public class Repository
     {
         if (searchCriteria == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (searchType == null) 
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (!(searchCriteria instanceof String))
         {
@@ -305,7 +307,7 @@ public class Repository
     {
         if (recordStructureType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (recordStructureType.isEqual(new Type("edu.tufts","recordStructure","artifact")))
         {
@@ -335,7 +337,7 @@ public class Repository
     {
         if (propertiesType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new Properties();
     }
@@ -359,7 +361,7 @@ public class Repository
     {
         if (asset == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);    
 	}

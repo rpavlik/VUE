@@ -14,6 +14,9 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
+import org.osid.shared.SharedException;
+
 public class Record  implements org.osid.repository.Record {
     private org.osid.shared.Id id = null;
     private final java.io.Serializable value = null;
@@ -44,7 +47,7 @@ public class Record  implements org.osid.repository.Record {
             throws org.osid.repository.RepositoryException {
         
         if ( (partStructureId == null) || (value == null) ) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         
         org.osid.repository.PartStructureIterator psi = recordStructure.getPartStructures();
@@ -58,15 +61,15 @@ public class Record  implements org.osid.repository.Record {
                     return part;
                 }
             } catch (org.osid.OsidException oex) {
-                throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+                throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
             }
         }
-        throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.UNKNOWN_ID);
+        throw new org.osid.repository.RepositoryException(SharedException.UNKNOWN_ID);
     }
     
     public void deletePart(org.osid.shared.Id partId) throws org.osid.repository.RepositoryException {
         if (partId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);

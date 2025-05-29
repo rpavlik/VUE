@@ -311,7 +311,7 @@ public class Publisher extends JDialog implements ActionListener,tufts.vue.Dubli
     
     
     private void  setUpPublishPanel() {
-        JLabel pLabel = new JLabel(VueResources.getString("jlabel.publishingto")+((edu.tufts.vue.dsm.DataSource)repList.getSelectedValue()).getRepositoryDisplayName(),VueResources.getImageIcon("dsv.statuspanel.waitIcon"),JLabel.CENTER);
+        JLabel pLabel = new JLabel(VueResources.getString("jlabel.publishingto")+((edu.tufts.vue.dsm.DataSource)repList.getSelectedValue()).getRepositoryDisplayName(),VueResources.getImageIcon("dsv.statuspanel.waitIcon"), SwingConstants.CENTER);
         pLabel.setBorder(BorderFactory.createEmptyBorder(10,10,0,0));
         pPanel.add(pLabel);
         buttonPanel.remove(publishButton);

@@ -14,6 +14,7 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -101,7 +102,7 @@ public class VUERecordStructure   implements org.osid.repository.RecordStructure
     public org.osid.repository.PartStructure getVUEDefaultViewPartStructure()
     throws org.osid.repository.RepositoryException {
         if (this.sVUEDefaultViewPartStructure == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
         return this.sVUEDefaultViewPartStructure;
     }
@@ -118,7 +119,7 @@ public class VUERecordStructure   implements org.osid.repository.RecordStructure
         } catch (Throwable t) {
             t.printStackTrace();
         }
-        throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+        throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
     }
     
     public static Record createVUERecord(String pid

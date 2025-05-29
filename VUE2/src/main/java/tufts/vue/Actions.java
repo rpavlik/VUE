@@ -39,6 +39,7 @@ import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.Icon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
@@ -124,7 +125,7 @@ public class Actions implements VueConstants
 		
 		chooser.setSelectedFile(new File(baseName));
         int option = chooser.showSaveDialog(tufts.vue.VUE.getDialogParent());
-        if (option == VueFileChooser.APPROVE_OPTION) 
+        if (option == JFileChooser.APPROVE_OPTION)
         {
             pdfFileName = chooser.getSelectedFile();
 
@@ -171,7 +172,7 @@ public class Actions implements VueConstants
 		chooser.setSelectedFile(new File(baseName));
 		chooser.setDialogTitle(VueResources.local("dialog.title.saveaspdf"));
         int option = chooser.showSaveDialog(tufts.vue.VUE.getDialogParent());
-        if (option == VueFileChooser.APPROVE_OPTION) 
+        if (option == JFileChooser.APPROVE_OPTION)
         {
             pdfFileName = chooser.getSelectedFile();
 
@@ -1212,7 +1213,7 @@ public class Actions implements VueConstants
     		File fileName = null;
     		
             int option = chooser.showOpenDialog(tufts.vue.VUE.getDialogParent());
-            if (option == VueFileChooser.APPROVE_OPTION) 
+            if (option == JFileChooser.APPROVE_OPTION)
             {
                 fileName = chooser.getSelectedFile();
                 

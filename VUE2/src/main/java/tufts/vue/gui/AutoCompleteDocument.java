@@ -79,7 +79,7 @@ public class AutoCompleteDocument extends PlainDocument {
 	public static void main(String[] args)
 	{
         javax.swing.JFrame frame = new javax.swing.JFrame("foo");
-        frame.setDefaultCloseOperation( javax.swing.JFrame.EXIT_ON_CLOSE );
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         String[] dict = { "Team", "meeting", "project", "review","client","call","orginization","team" };           
         JTextField field = AutoCompleteDocument.createAutoCompleteTextField( dict );
         BoxLayout layout = new BoxLayout( frame.getContentPane(),BoxLayout.X_AXIS );

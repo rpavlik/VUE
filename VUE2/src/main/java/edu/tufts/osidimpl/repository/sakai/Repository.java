@@ -16,6 +16,8 @@ package edu.tufts.osidimpl.repository.sakai;
 
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
+import org.osid.OsidException;
+
 import javax.xml.namespace.QName;
 
 public class Repository
@@ -63,7 +65,7 @@ implements org.osid.repository.Repository
     {
         if (displayName == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -79,7 +81,7 @@ implements org.osid.repository.Repository
     {
         if (description == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -103,7 +105,7 @@ implements org.osid.repository.Repository
     {
         if ( (displayName == null ) || (description == null) || (assetType == null) )
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -113,7 +115,7 @@ implements org.osid.repository.Repository
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -159,7 +161,7 @@ implements org.osid.repository.Repository
     {
         if (assetType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		if ( !(assetType.isEqual(Utilities.getCollectionAssetType()) ||
 			   assetType.isEqual(Utilities.getResourceAssetType())) )
@@ -209,7 +211,7 @@ implements org.osid.repository.Repository
     {
         if (assetType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 //		if (assetType.isEqual(this.categoryAssetType))
         {
@@ -271,7 +273,7 @@ implements org.osid.repository.Repository
     {
         if (assetId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 		try {
 			String endpoint = Utilities.getEndpoint();
@@ -313,11 +315,11 @@ implements org.osid.repository.Repository
     {
         if (searchCriteria == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (searchType == null) 
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         if (!(searchCriteria instanceof String))
         {
@@ -384,7 +386,7 @@ implements org.osid.repository.Repository
     {
         if (recordStructureType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -408,7 +410,7 @@ implements org.osid.repository.Repository
     {
         if (propertiesType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new Properties();
     }

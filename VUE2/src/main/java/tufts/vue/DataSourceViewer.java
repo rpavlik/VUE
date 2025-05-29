@@ -26,6 +26,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.*;
 
+import org.osid.OsidException;
 import org.osid.repository.AssetIterator;
 import org.osid.repository.RepositoryException;
 
@@ -1044,13 +1045,13 @@ public class DataSourceViewer extends ContentViewer
         {
         	String s;
             switch (msg) {
-                case RepositoryException.OPERATION_FAILED:
+                case OsidException.OPERATION_FAILED:
                     s = VueResources.getString("repositoryexception.operationfailed");
                     break;
-                case RepositoryException.PERMISSION_DENIED:
+                case OsidException.PERMISSION_DENIED:
                     s = VueResources.getString("repositoryexception.permissiondenied");
                     break;
-                case RepositoryException.CONFIGURATION_ERROR:
+                case OsidException.CONFIGURATION_ERROR:
                     s = VueResources.getString("repositoryexception.configurationerror");
                     break;
                 default:
@@ -1517,13 +1518,13 @@ public class DataSourceViewer extends ContentViewer
         {
         	String s;
             switch (msg) {
-                case RepositoryException.OPERATION_FAILED:
+                case OsidException.OPERATION_FAILED:
                     s = VueResources.getString("repositoryexception.operationfailed");
                     break;
-                case RepositoryException.PERMISSION_DENIED:
+                case OsidException.PERMISSION_DENIED:
                     s = VueResources.getString("repositoryexception.permissiondenied");
                     break;
-                case RepositoryException.CONFIGURATION_ERROR:
+                case OsidException.CONFIGURATION_ERROR:
                     s = VueResources.getString("repositoryexception.configurationerror");
                     break;
                 default:
@@ -1882,7 +1883,7 @@ public class DataSourceViewer extends ContentViewer
     }
 
     private static WidgetStack editInfoStack; // static hack: is needed before this class is constructed
-    private static final JLabel NoConfig = new JLabel(VueResources.getString("jlabel.noconfig"), JLabel.CENTER);
+    private static final JLabel NoConfig = new JLabel(VueResources.getString("jlabel.noconfig"), SwingConstants.CENTER);
     
     private final MetaDataPane configMetaData = new MetaDataPane("Config Properties", true);
     private Object loadedDataSource;
@@ -2014,7 +2015,7 @@ public class DataSourceViewer extends ContentViewer
         	c.fill = GridBagConstraints.BOTH;
             //c.anchor = GridBagConstraints.NORTH;
             c.weighty = 0.01;           
-            JLabel label = new JLabel(VueResources.getString("jlabel.widgetstack"),JLabel.CENTER);
+            JLabel label = new JLabel(VueResources.getString("jlabel.widgetstack"), SwingConstants.CENTER);
             if (DEBUG.BOXES) {            	
             	dummyPanel.setOpaque(true);
             	dummyPanel.setBackground(Color.darkGray);            	

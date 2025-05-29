@@ -14,6 +14,8 @@
  */
 package edu.tufts.osidimpl.repository.sakai;
 
+import org.osid.OsidException;
+
 public class Part
 implements org.osid.repository.Part
 {
@@ -53,7 +55,7 @@ implements org.osid.repository.Part
         catch (Throwable t)
         {
             Utilities.log(t.getMessage());
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
 
     }

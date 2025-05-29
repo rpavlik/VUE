@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.favorites;
 
+import org.osid.OsidException;
+
 import java.io.Serializable;
 
 public class Asset
@@ -102,7 +104,7 @@ public class Asset
     public org.osid.repository.AssetIterator getAssetsByType(org.osid.shared.Type assetType)
     throws org.osid.repository.RepositoryException {
         if (assetType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new AssetIterator(new java.util.Vector<Asset>());
     }
@@ -110,7 +112,7 @@ public class Asset
     public org.osid.repository.Record createRecord(org.osid.shared.Id recordStructureId)
     throws org.osid.repository.RepositoryException {
         if (recordStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             org.osid.repository.Record record = new Record(recordStructureId);
@@ -137,7 +139,7 @@ public class Asset
     public void deleteRecord(org.osid.shared.Id recordId)
     throws org.osid.repository.RepositoryException {
         if (recordId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
@@ -162,7 +164,7 @@ public class Asset
     public org.osid.repository.RecordIterator getRecordsByRecordStructure(org.osid.shared.Id recordStructureId)
     throws org.osid.repository.RepositoryException {
         if (recordStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             return new RecordIterator(this.recordVector);
@@ -192,7 +194,7 @@ public class Asset
     public org.osid.repository.Record getRecord(org.osid.shared.Id recordId)
     throws org.osid.repository.RepositoryException {
         if (recordId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
@@ -211,7 +213,7 @@ public class Asset
     public org.osid.repository.Part getPart(org.osid.shared.Id partId)
     throws org.osid.repository.RepositoryException {
         if (partId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             for (int i=0, size = this.recordVector.size(); i < size; i++) {
@@ -240,7 +242,7 @@ public class Asset
     public org.osid.repository.PartIterator getPartByPart(org.osid.shared.Id partStructureId)
     throws org.osid.repository.RepositoryException {
         if (partStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
@@ -299,7 +301,7 @@ public class Asset
     public org.osid.shared.ObjectIterator getPartValuesByPartStructure(org.osid.shared.Id partStructureId)
     throws org.osid.repository.RepositoryException {
         if (partStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             java.util.Vector<Serializable> results = new java.util.Vector<>();
@@ -318,7 +320,7 @@ public class Asset
     public org.osid.repository.PartIterator getPartsByPartStructure(org.osid.shared.Id partStructureId)
     throws org.osid.repository.RepositoryException {
         if (partStructureId == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try {
             java.util.Vector<org.osid.repository.Part> results = new java.util.Vector<>();
@@ -343,7 +345,7 @@ public class Asset
     public org.osid.repository.RecordIterator getRecordsByRecordStructureType(org.osid.shared.Type recordStructureType)
     throws org.osid.repository.RepositoryException {
         if (recordStructureType == null) {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         
         

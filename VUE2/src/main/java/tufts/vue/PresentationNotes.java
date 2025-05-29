@@ -885,7 +885,7 @@ public class PresentationNotes {
                     f.setSize(8.0f);
                     p.setFont(f);
                     cell = new PdfPCell(phrase);
-                    cell.setVerticalAlignment(PdfPCell.ALIGN_MIDDLE);
+                    cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                     cell.setBorder(0);
 
                     PdfPCell i2 = new PdfPCell();

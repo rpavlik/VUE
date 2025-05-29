@@ -13,6 +13,9 @@
  * permissions and limitations under the License.
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
+
+import org.osid.shared.SharedException;
+
 public class RepositoryIterator
 implements org.osid.repository.RepositoryIterator
 {
@@ -36,7 +39,7 @@ implements org.osid.repository.RepositoryIterator
     {
         if (i >= vector.size())
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NO_MORE_ITERATOR_ELEMENTS);
+            throw new org.osid.repository.RepositoryException(SharedException.NO_MORE_ITERATOR_ELEMENTS);
         }
         return (org.osid.repository.Repository)vector.elementAt(i++);
     }

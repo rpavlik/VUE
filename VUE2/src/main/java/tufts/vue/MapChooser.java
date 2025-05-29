@@ -54,6 +54,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class MapChooser extends JDialog implements ActionListener{
     
@@ -124,8 +125,8 @@ public class MapChooser extends JDialog implements ActionListener{
         VueLabel info = new VueLabel();
         info.setIcon(VueResources.getIcon("helpIcon.raw"));
         info.setToolTipText(VueResources.getString("ConnectivityMatrix.helpText"));
-        JLabel chooseLabel = new JLabel(generateMessage,JLabel.RIGHT);
-        browseLabel = new JLabel(browseMessage,JLabel.CENTER);
+        JLabel chooseLabel = new JLabel(generateMessage, SwingConstants.RIGHT);
+        browseLabel = new JLabel(browseMessage, SwingConstants.CENTER);
         String[] choices = {VueResources.getString("dialog.connanalysis.activemap"),VueResources.getString("dialog.connanalysis.mapinfolder")};
         choice = new JComboBox(choices);
         file = new JTextField(2);

@@ -75,7 +75,7 @@ public class InspectorPane extends WidgetStack
     private final Widget mDescription = new Widget("contentInfo"); // for GUI.init property applicaton (use same as meta-data pane)
     private final Preview mPreview = new Preview();
     
-    private final JLabel mSelectionInfo = new JLabel("", JLabel.CENTER);
+    private final JLabel mSelectionInfo = new JLabel("", SwingConstants.CENTER);
     
     private final WidgetStack stack;
     
@@ -1302,7 +1302,7 @@ public class InspectorPane extends WidgetStack
             //mTitleField.setStyledDocument(doc);
             //mTitleField.setEditable(false);
 
-            mTitleField = new JLabel("", JLabel.CENTER);
+            mTitleField = new JLabel("", SwingConstants.CENTER);
 
             //-------------------------------------------------------
 
@@ -1662,8 +1662,8 @@ public class InspectorPane extends WidgetStack
             
             labelValue.setBorder(null);
             JScrollPane labelScroller = new JScrollPane(labelValue,
-                                                        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                                        JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+                    ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                    ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
                                                         );
             int lineHeight = labelValue.getFontMetrics(labelValue.getFont()).getHeight(); 
             labelScroller.setMinimumSize(new Dimension(70, (lineHeight*3)+5));

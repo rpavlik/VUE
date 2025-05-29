@@ -73,7 +73,7 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 		fadeLabel.setFont(tufts.vue.gui.GUI.LabelFace);
 		addToGridBag(fadeInnerPanel, fadeLabel, 0, 0, 1, 1, GridBagConstraints.LINE_END, halfGutterInsets);
 
-		fadeSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, 100);
+		fadeSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 100, 100);
 
 		JLabel						label100 = new JLabel("100%");
 		JLabel						label80 = new JLabel("80%");
@@ -107,7 +107,7 @@ public class PrototypePanel extends JPanel implements ActionListener, ChangeList
 		depthLabel.setFont(tufts.vue.gui.GUI.LabelFace);
 		addToGridBag(fadeInnerPanel, depthLabel, 0, 1, 1, 1, GridBagConstraints.LINE_END, halfGutterInsets);
 
-		depthSlider = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
+		depthSlider = new JSlider(SwingConstants.HORIZONTAL, 0, 5, 0);
 
 		JLabel						label1 = new JLabel("1");
         JLabel						label2 = new JLabel("2");

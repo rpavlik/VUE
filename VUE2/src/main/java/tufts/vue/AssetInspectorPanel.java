@@ -48,8 +48,8 @@ import javax.swing.border.*;
 			mAssetBox.add( new JLabel( VueResources.getString("jlabel.assetdisplayoffline")) );
 			
 			mAssetScrollPane = new JScrollPane();
-			mAssetScrollPane.setVerticalScrollBarPolicy( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-			mAssetScrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			mAssetScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+			mAssetScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 			mAssetScrollPane.setLocation(new Point(8, 9));
 			mAssetScrollPane.setVisible(true);
 			mAssetScrollPane.getViewport().add( mAssetBox);

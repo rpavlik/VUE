@@ -35,6 +35,7 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * Produce a shortcuts window.
@@ -453,8 +454,8 @@ public class ShortcutsAction extends tufts.vue.VueAction
         //t.setFocusable(false);
        
         return new JScrollPane(t,
-                               JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                               JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER
                                );
         
     }

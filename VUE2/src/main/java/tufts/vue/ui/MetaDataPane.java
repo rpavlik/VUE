@@ -32,6 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.TableModel;
@@ -96,8 +97,8 @@ public class MetaDataPane extends tufts.vue.gui.Widget
         if (inOwnedScroll) {
             mScrollPane = new JScrollPane();
             mScrollPane.setViewportView(mGridBag);
-            mScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-            mScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+            mScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            mScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
             mScrollPane.setOpaque(false);
             mScrollPane.getViewport().setOpaque(false);
             //scrollPane.setBorder(null); // no focus border

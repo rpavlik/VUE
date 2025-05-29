@@ -37,6 +37,7 @@ import org.xml.sax.InputSource;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 
@@ -151,7 +152,7 @@ public class ActionUtil
         adjustExtension();
         int option = saveChooser.showSaveDialog(VUE.getDialogParentAsFrame());//, VueResources.getString("dialog.save.title"));
         
-        if (option == VueFileChooser.APPROVE_OPTION) 
+        if (option == JFileChooser.APPROVE_OPTION)
         {
             picked = saveChooser.getSelectedFile();
             
@@ -244,7 +245,7 @@ public class ActionUtil
 
         int option = chooser.showOpenDialog(VUE.getDialogParent());
         
-        if (option == VueFileChooser.APPROVE_OPTION) {
+        if (option == JFileChooser.APPROVE_OPTION) {
             final File chooserFile = chooser.getSelectedFile();
             if (chooserFile == null)
                 return null;
@@ -294,7 +295,7 @@ public class ActionUtil
      
     	int option = chooser.showOpenDialog(VUE.getDialogParent());
      
-    	if (option == VueFileChooser.APPROVE_OPTION) {
+    	if (option == JFileChooser.APPROVE_OPTION) {
          final File[] chooserFile = chooser.getSelectedFiles();
          if (chooserFile == null)
              return null;

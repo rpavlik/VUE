@@ -45,6 +45,7 @@ import tufts.vue.LWComponent;
 import tufts.vue.LWGroup;
 import tufts.vue.LWSelection;
 import tufts.vue.VUE;
+import tufts.vue.VueConstants;
 import tufts.vue.VueResources;
 import tufts.vue.gui.GUI;
 import edu.tufts.vue.metadata.CategoryModel;
@@ -253,7 +254,7 @@ public class MetadataEditor extends JPanel
         
         autoTagButton.setAction(tufts.vue.AnalyzerAction.calaisAutoTagger);
      // autoTagButton.setLabel(VueResources.getString("keywordPanel.autotag"));
-        autoTagButton.setFont(tufts.vue.gui.GUI.SmallFont);
+        autoTagButton.setFont(VueConstants.SmallFont);
         
         this.single = oneOff; // rare usage
         
@@ -386,7 +387,7 @@ public class MetadataEditor extends JPanel
         //back to "assign categories" as per VUE-953
         //final JLabel optionsLabel = new JLabel("Use full metadata schema");
         final JLabel optionsLabel = new JLabel(VueResources.getString("jlabel.assigncategory"));
-        optionsLabel.setFont(GUI.SmallFont);
+        optionsLabel.setFont(VueConstants.SmallFont);
         //final JButton advancedSearch = new JButton(new ImageIcon(VueResources.getURL("advancedSearchMore.raw")));//tufts.vue.gui.VueButton("advancedSearchMore");
         final JCheckBox advancedSearch = new JCheckBox();
         //advancedSearch.setBorder(BorderFactory.createEmptyBorder(0,0,15,0));

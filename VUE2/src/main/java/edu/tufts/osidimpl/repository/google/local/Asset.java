@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.google.local;
 
+import org.osid.OsidException;
+
 public class Asset
         implements org.osid.repository.Asset {
     private final org.osid.shared.Type assetType = new Type("edu.tufts", "asset", "googleResult", "Result from Google");
@@ -122,7 +124,7 @@ public class Asset
     {
         if (assetType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         return new AssetIterator(new java.util.Vector<>());
     }
@@ -132,7 +134,7 @@ public class Asset
     {
         if (recordStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -166,7 +168,7 @@ public class Asset
     {
         if (recordId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -199,7 +201,7 @@ public class Asset
     {
         if (recordStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -237,7 +239,7 @@ public class Asset
     {
         if (recordId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -263,7 +265,7 @@ public class Asset
     {
         if (partId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -301,7 +303,7 @@ public class Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -377,7 +379,7 @@ public class Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -402,7 +404,7 @@ public class Asset
     {
         if (partStructureId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         try
         {
@@ -435,7 +437,7 @@ public class Asset
     {
         if (recordStructureType == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.shared.SharedException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 
         if (!recordStructureType.isEqual(this.recordStructureType))

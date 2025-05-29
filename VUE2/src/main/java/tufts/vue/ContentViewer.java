@@ -29,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import org.exolab.castor.xml.Marshaller;
@@ -42,7 +43,7 @@ public abstract class ContentViewer extends JPanel {
 	private static final org.apache.log4j.Logger Log = org.apache.log4j.Logger.getLogger(ContentViewer.class);
 
 	protected static int				vCount = 0;
-	protected static final JLabel		StatusLabel = new JLabel(VueResources.getString("addLibrary.loading.label"), JLabel.CENTER);
+	protected static final JLabel		StatusLabel = new JLabel(VueResources.getString("addLibrary.loading.label"), SwingConstants.CENTER);
 	protected static final JComponent	Status;
 
 	protected BrowseDataSource			browserDS = null;

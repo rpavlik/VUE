@@ -16,6 +16,7 @@
 package tufts.vue;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Label;
@@ -37,6 +38,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -64,7 +66,7 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
     DeletePropertiesButtonListener deletePropertiesButtonListener;
     JButton addPropertyButton=new VueButton(VueResources.getString("button.add.label"));
     JButton deletePropertyButton=new VueButton(VueResources.getString("button.delete.label"));
-    JLabel questionLabel = new JLabel(VueResources.getImageIcon("smallInfo"), JLabel.LEFT);
+    JLabel questionLabel = new JLabel(VueResources.getImageIcon("smallInfo"), SwingConstants.LEFT);
         
     
     /** Creates a new instance of ResourcePropertiesEditor */
@@ -126,7 +128,7 @@ public class PropertiesEditor extends JPanel implements DublinCoreConstants {
         JPanel labelPanel=new JPanel(new BorderLayout());
         //labelPanel.setBorder(BorderFactory.createEmptyBorder(3,6,3,6));
         JLabel label = new JLabel(VueResources.getString("jlabel.resourcemetadata"));
-        label.setAlignmentX(Label.LEFT_ALIGNMENT);
+        label.setAlignmentX(Component.LEFT_ALIGNMENT);
         labelPanel.add(label,BorderLayout.WEST);
         JPanel topPanel=new JPanel(new FlowLayout(FlowLayout.RIGHT,2,0));
         //topPanel.setBorder(BorderFactory.createEmptyBorder(3,6,3,6));

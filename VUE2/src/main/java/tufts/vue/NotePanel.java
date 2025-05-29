@@ -26,6 +26,7 @@ import tufts.vue.gui.VueTextPane;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.*;
 
 import java.awt.*;
@@ -59,7 +60,7 @@ public class NotePanel extends tufts.vue.gui.Widget
             JScrollPane scrollPane = new JScrollPane();
             
             //scrollPane.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             //scrollPane.setLocation(new Point(8, 9));
             scrollPane.getViewport().add(mTextPane);
             add(BorderLayout.CENTER, scrollPane);

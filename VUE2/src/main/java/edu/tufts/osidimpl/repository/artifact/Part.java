@@ -15,6 +15,8 @@
 
 package edu.tufts.osidimpl.repository.artifact;
 
+import org.osid.OsidException;
+
 public class Part
 implements org.osid.repository.Part
 {
@@ -77,7 +79,7 @@ implements org.osid.repository.Part
         catch (Throwable t)
         {
             Utilities.log(t);
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+            throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
         }
     }
 

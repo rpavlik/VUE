@@ -83,7 +83,7 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
             
             getContentPane().setLayout(new GridBagLayout());
             addLibraryList = new JList(listModel);
-            addLibraryList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+            addLibraryList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             addLibraryList.addListSelectionListener(this);
             addLibraryList.setFixedCellHeight(25);
             
@@ -99,14 +99,14 @@ public class UpdateLibraryDialog extends JDialog implements ListSelectionListene
             populate();
             
             listJsp = new JScrollPane(addLibraryList);
-            listJsp.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-            listJsp.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            listJsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+            listJsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             listJsp.setPreferredSize(new Dimension(300,180));
             
             descriptionTextArea.setText(VueResources.getString("addLibraryDailog.textarea"));
             descriptionJsp = new JScrollPane(descriptionTextArea);
-            descriptionJsp.setVerticalScrollBarPolicy(javax.swing.JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-            descriptionJsp.setHorizontalScrollBarPolicy(javax.swing.JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            descriptionJsp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+            descriptionJsp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             descriptionJsp.setPreferredSize(new Dimension(300,180));
             
             addLibraryPanel.setBackground(VueResources.getColor("White"));

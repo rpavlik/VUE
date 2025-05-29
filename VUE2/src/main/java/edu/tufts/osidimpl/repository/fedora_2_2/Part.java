@@ -14,6 +14,9 @@
  */
 package  edu.tufts.osidimpl.repository.fedora_2_2;
 
+import org.osid.OsidException;
+import org.osid.shared.SharedException;
+
 public class Part
         implements org.osid.repository.Part {
     private final java.util.Vector<org.osid.repository.Part> partVector = new java.util.Vector<>();
@@ -58,7 +61,7 @@ public class Part
     {
         if ( (partStructureId == null) || (value == null) )
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
 
         org.osid.repository.PartStructureIterator psi = recordStructure.getPartStructures();
@@ -78,10 +81,10 @@ public class Part
             } 
             catch (org.osid.OsidException oex) 
             {
-                throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.OPERATION_FAILED);
+                throw new org.osid.repository.RepositoryException(OsidException.OPERATION_FAILED);
             }
         }
-        throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.UNKNOWN_ID);
+        throw new org.osid.repository.RepositoryException(SharedException.UNKNOWN_ID);
     }
 
     public void deletePart(org.osid.shared.Id partId)
@@ -89,7 +92,7 @@ public class Part
     {
         if (partId == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         throw new org.osid.repository.RepositoryException(org.osid.OsidException.UNIMPLEMENTED);
     }
@@ -111,7 +114,7 @@ public class Part
     {
         if (value == null)
         {
-            throw new org.osid.repository.RepositoryException(org.osid.repository.RepositoryException.NULL_ARGUMENT);
+            throw new org.osid.repository.RepositoryException(OsidException.NULL_ARGUMENT);
         }
         this.value = value;
     }
