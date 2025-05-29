@@ -359,12 +359,12 @@ public class Asset implements org.osid.repository.Asset {
             org.osid.repository.PartIterator partIterator = record.getParts();
             while (partIterator.hasNextPart()) {
                 org.osid.repository.Part part = partIterator.nextPart();
-//                try {
-//                    if(part.getId().isEqual(id))
-                return part;
-//                } catch (org.osid.shared.SharedException ex) {
-//                    throw new org.osid.repository.RepositoryException(ex.getMessage());
-//                }
+                try {
+                    if (part.getId().isEqual(id))
+                        return part;
+                } catch (org.osid.shared.SharedException ex) {
+                    throw new org.osid.repository.RepositoryException(ex.getMessage());
+                }
             }
         }
         return null;
