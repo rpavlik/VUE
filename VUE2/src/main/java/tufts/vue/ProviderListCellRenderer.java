@@ -18,6 +18,7 @@ package tufts.vue;
 import tufts.vue.gui.*;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.Vector;
 
 import javax.swing.*;
@@ -242,7 +243,7 @@ public class ProviderListCellRenderer extends DefaultListCellRenderer
     
     public void clearAllChecked()
     {
-        checklist.replaceAll(ignored -> Boolean.FALSE);
+        Collections.fill(checklist, Boolean.FALSE);
     }
     
 }
