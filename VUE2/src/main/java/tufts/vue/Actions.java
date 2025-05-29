@@ -36,6 +36,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import javax.swing.Action;
 import javax.swing.Icon;
@@ -3642,13 +3643,13 @@ public class Actions implements VueConstants
     public static final Action Undo =
     new VueAction(VueResources.local("action.undo"), keyStroke(KeyEvent.VK_Z, COMMAND), ":general/Undo") {
         boolean undoable() { return false; }
-        public void act() { VUE.getUndoManager().undo(); }
+        public void act() { Objects.requireNonNull(VUE.getUndoManager()).undo(); }
         
     };
     public static final Action Redo =
     new VueAction(VueResources.local("action.redo"), keyStroke(KeyEvent.VK_Z, COMMAND+SHIFT), ":general/Redo") {
         boolean undoable() { return false; }
-        public void act() { VUE.getUndoManager().redo(); }
+        public void act() { Objects.requireNonNull(VUE.getUndoManager()).redo(); }
     };
     
     
@@ -3907,7 +3908,7 @@ public class Actions implements VueConstants
                 // This won't do anything if something deeper in the map is the focal
                 //VUE.getActiveMap().notify(this, LWKey.Repaint);
                 
-                VUE.getActiveFocal().notify(this, LWKey.Repaint);
+                Objects.requireNonNull(VUE.getActiveFocal()).notify(this, LWKey.Repaint);
                 
 //                 if (VUE.getActivePathway() != null) {
 //                     //VUE.getActivePathway().notify("pathway.showSlides");
